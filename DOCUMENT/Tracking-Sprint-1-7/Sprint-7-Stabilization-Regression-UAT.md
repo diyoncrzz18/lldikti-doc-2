@@ -76,7 +76,7 @@ Prioritas P1:
 | 7.2-5 | ✅ Selesai PR #166 — Hari Libur web membaca database melalui Action/FormRequest dengan audit resmi, filter, pencarian, dan paginasi server-side | Sprint 1 #10 | Jordan |
 | 7.2-6 | ✅ Selesai PR #140 — validasi lintas tahun kalender berlaku untuk semua jenis cuti pada submit dan resubmit | Sprint 4 #30 | Jordan |
 | 7.2-7 | Amankan logout: hapus route GET `/logout` yang memutasi session tanpa CSRF | Sprint 1 #3 | Adriel |
-| 7.2-8 | Import manual column mapping + warning kolom tak dikenal + FormRequest validate/execute (sisa terakhir Sprint 3 #21; rencana rinci sudah ada). Sekalian putuskan nasib jalur "skip NIP duplikat" yang dead code (rule `unique` menangkap lebih dulu) — hidupkan atau revisi AC US-3.3 | Sprint 3 #21 | Grantly (BE) + Adithian (UI) |
+| 7.2-8 | ⚠️ Sebagian tertutup — mapping kolom manual + warning kolom tak dikenal selesai PR #183; jalur "skip NIP duplikat" dihidupkan PR #172 dan diverifikasi browser + dikunci lifecycle lock melalui PR #182 (`ff0e9e1`, 14 Agustus). **Sisa:** migrasi FormRequest untuk tahap validate/execute (saat ini masih validasi inline di controller) | Sprint 3 #21 | Grantly (BE) + Adithian (UI) |
 | 7.2-9 | ⚠️ Sebagian — PR #176 menyelesaikan event wajib US-7.1 AC-1 dan audit strict pada mutasi yang disentuh; CRUD pegawai/import, kebijakan fail-closed, dan test rollback menyeluruh masih terbuka | Sprint 1 #5 | Jordan |
 | 7.2-10 | ✅ Selesai pada source — dashboard, laporan/export, dan reference tables Sprint 6 telah direkonsiliasi; formal regression/UAT tetap dilaksanakan pada Slice 7.3 | Sprint 6 #39–#46 | sesuai pembagian Sprint 6 |
 
@@ -112,6 +112,7 @@ Prioritas P2 & dokumen:
 
 | Tanggal | Perubahan |
 |---|---|
+| 14 Agustus 2026 | PR #182 (`ff0e9e1`) merge: BUG-04 tertutup — NIP yang sudah terdaftar di database menjadi SKIP pada wizard import dengan bukti browser Playwright (0 valid, 1 skip, 0 error), lifecycle lock bersama untuk aksi validasi/antrean/mapping, dan regression test kondisi balapan. Task 7.2-8 turun menjadi sisa migrasi FormRequest validate/execute. PR #181, #198, dan #202 yang masuk pada rentang yang sama belum direkonsiliasi ke dokumen ini. |
 | 10 Agustus 2026 | Sinkronisasi terhadap `development` @ `ff260a5`: PR #179 menutup Issue #178 dan menyelesaikan hardening 7.2-13 pada source. Browser QA 7.1-4, hardening audit menyeluruh 7.2-9, full regression, UAT, dan release gate tetap terbuka. |
 | 10 Agustus 2026 | Sinkronisasi terhadap `development` @ `1fd99cb`: 7.1-1, 7.2-1, dan 7.2-2 selesai melalui PR #174; 7.2-4 melalui PR #173; 7.2-5 melalui PR #166; 7.2-6 melalui PR #140; carry-over Sprint 6 selesai pada source; dan US-4.10 AC-2 selesai melalui PR #177. Task 7.1-4 tetap terbuka untuk browser QA/evidence final dan 7.2-9 masih sebagian. Issue #178 tetap open sebagai hardening follow-up terpisah. |
 | 26 Juli 2026 | File dibuat pra-sprint. Status awal: #45 ✅, #48 ✅, #50 ⚠️ (perlu test formal), #47 ⚠️ (pagination server + masking), #52 ❌. Daftar task disusun dari Issues #45–#52 + backlog terverifikasi Sprint 1–6; item EWS ditandai "verifikasi dulu" karena PR #127 kemungkinan sudah menutup sebagian. |
