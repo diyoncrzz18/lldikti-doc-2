@@ -106,3 +106,38 @@ Batas yang eksplisit dalam PRD diterapkan sebagai aturan server-side yang berbas
 - Kode tidak boleh memperkenalkan login manual produksi, mutasi saldo tanpa audit, atau akses saldo Pegawai lain dari endpoint Pegawai.
 - Pengurangan saldo tahunan hanya terjadi setelah final `Disetujui`; keputusan lain tidak mengurangi saldo final.
 - Keputusan ini melengkapi PRD/User Stories untuk area yang sebelumnya ambigu. Jika ada konflik baru, keputusan produk berikutnya harus dicatat sebelum implementasi dilanjutkan.
+
+
+
+---
+
+## K-CUT-04 — Pendataan saldo dari cuti yang telah dipakai
+
+> **Status:** Disetujui melalui [Keputusan Evaluasi Meeting LLDIKTI](Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md), 15 Agustus 2026. Ketentuan ini menggantikan frasa terdahulu yang memperlakukan saldo/sisa sebagai input utama setup awal.
+
+### Keputusan
+
+1. Setiap tahun memberikan hak dasar 12 hari kerja. Untuk migrasi dan rekonsiliasi, Admin Kepegawaian memasukkan **jumlah cuti tahunan yang telah dipakai/diklaim** per tahun, bukan saldo yang tersisa.
+2. Sistem menghitung sisa tahun tersebut, carry-over N-1 maksimal 6 hari, dan total hak tahun berjalan secara berjenjang dari pemakaian N-2, N-1, dan tahun berjalan.
+3. Hak tahun berjalan menjadi 24 hari hanya bila pemakaian pada N-2 dan N-1 sama dengan nol. Jika terdapat pemakaian pada salah satu dari dua tahun tersebut, total maksimum adalah 18 hari.
+4. Koreksi dilakukan dengan memperbaiki data pemakaian atau entri cuti manual dan menjalankan hitung ulang. Saldo sisa bukan nilai administratif yang ditulis bebas sebagai sumber kebenaran.
+
+### Alasan
+
+Penggunaan yang telah diklaim dapat direkonsiliasi dan divalidasi secara berjenjang, sedangkan input saldo sisa membuat asal-usul perhitungan rollover sulit dibuktikan.
+
+## K-CUT-05 — Input cuti manual yang telah disetujui di luar SIMPEG
+
+> **Status:** Disetujui melalui [Keputusan Evaluasi Meeting LLDIKTI](Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md), 15 Agustus 2026.
+
+### Keputusan
+
+1. Admin Kepegawaian secara eksklusif dapat mencatat cuti yang telah disetujui dan dijalankan di luar SIMPEG: cuti historis, cuti pada tahun berjalan sebelum go-live, atau cuti saat layanan tidak tersedia.
+2. Dokumen pendukung wajib diunggah. Entri mencatat pegawai, jenis cuti, periode, jumlah hari kerja, dan keterangan administratif.
+3. Entri tersebut langsung menjadi catatan cuti yang telah disetujui di luar SIMPEG; sistem tidak membuat usulan baru dan tidak menjalankan approval chain ulang.
+4. Untuk cuti tahunan, entri manual membentuk pemakaian final yang diaudit dan ikut menghitung saldo serta rollover. Ia bukan reservasi aktif K-CUT-01.
+5. Koreksi entry wajib atomik, menyimpan alasan serta nilai sebelum/sesudah, dan menghitung ulang saldo terkait.
+
+### Batas
+
+Jalur ini tidak boleh dipakai untuk mempercepat pengajuan baru yang belum memperoleh persetujuan di luar SIMPEG.

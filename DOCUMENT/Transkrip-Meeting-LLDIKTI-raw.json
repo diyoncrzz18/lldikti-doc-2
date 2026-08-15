@@ -1,0 +1,8911 @@
+{
+  "source": "C:\\Users\\Asus\\Downloads\\videoplayback.mp4",
+  "generated_at": "2026-08-14T20:21:15.341325+08:00",
+  "engine": "faster-whisper",
+  "model": "small",
+  "device": "cpu",
+  "compute_type": "int8",
+  "language": "id",
+  "language_probability": 1,
+  "duration_seconds": 4655.69,
+  "segments": [
+    {
+      "id": 1,
+      "start": 2.74,
+      "end": 14.74,
+      "text": "Selamat siang, adek-adek magang ini kelabat sekalian. Terima kasih sudah menghadiri evaluasi rutin kita untuk progres pengembangan aplikasi."
+    },
+    {
+      "id": 2,
+      "start": 14.74,
+      "end": 39.7,
+      "text": "Jadi hari ini sebelum kita mulai, mari kita panjatkan doa menurut keyakinan kita masing-masing berdoa di mulai, berdoa selesai."
+    },
+    {
+      "id": 3,
+      "start": 39.7,
+      "end": 52.7,
+      "text": "Baik, jadi kurang lebih kita sudah hampir sebulan yang lalu ya pertemuan terakhir. Jadi kali ini saya ingin ngecek progres untuk sejauh ini sudah sampai di mana."
+    },
+    {
+      "id": 4,
+      "start": 52.7,
+      "end": 61.7,
+      "text": "Jadi mungkin kita bisa langsung saja. Kita ingin ngeliat dan mungkin ngasih sedikit evaluasi barang kali ada. Jadi siapa yang akan presentasi dari Dion nya?"
+    },
+    {
+      "id": 5,
+      "start": 61.7,
+      "end": 64.54,
+      "text": "Ya, nanti."
+    },
+    {
+      "id": 6,
+      "start": 64.54,
+      "end": 72.54,
+      "text": "Baik, jadi untuk lagi-lain kali ini, seserahkan ke Dion, silahkan Dion dipersentasikan dan didemokkan apa yang sudah dilakukan sejauh ini."
+    },
+    {
+      "id": 7,
+      "start": 72.54,
+      "end": 77.01,
+      "text": "Oke, sebentar saya."
+    },
+    {
+      "id": 8,
+      "start": 78.01,
+      "end": 81.13,
+      "text": "Terima kasih."
+    },
+    {
+      "id": 9,
+      "start": 138.49,
+      "end": 157.16,
+      "text": "Oke Pak, jadi untuk sistem kami saat ini, untuk progresnya kurang lebih sudah 90 persen."
+    },
+    {
+      "id": 10,
+      "start": 157.16,
+      "end": 170.6,
+      "text": "Dan untuk screen 6 itu sudah selesai. Nah kami di screen 7 ini fokus di pool testing dengan fixbox."
+    },
+    {
+      "id": 11,
+      "start": 170.6,
+      "end": 185.56,
+      "text": "Jadi fokus di screen 7 untuk testing. Jadi yang pertama itu di bagian dashboard seperti ini sudah menggunakan real data yang diambil"
+    },
+    {
+      "id": 12,
+      "start": 185.56,
+      "end": 197.69,
+      "text": "dari kenaikan pangkat, posisi pegawai, status duty, ini ada distribusi golongan juga, daftar OS aktif, trend pegawai dengan aktivitas terkini."
+    },
+    {
+      "id": 13,
+      "start": 197.69,
+      "end": 209.1,
+      "text": "Nah yang pertama itu di data pegawai. Nah untuk data pegawai ini untuk menampakan dia ada dua."
+    },
+    {
+      "id": 14,
+      "start": 209.1,
+      "end": 219.99,
+      "text": "Yang pertama itu tambah manual. Nah tambah manual dengan ada tambah menggunakan import."
+    },
+    {
+      "id": 15,
+      "start": 219.99,
+      "end": 230.69,
+      "text": "Nah kalau yang untuk import itu, dia di sini sudah kami sediakan template dan mentuk Excel."
+    },
+    {
+      "id": 16,
+      "start": 230.69,
+      "end": 244.44,
+      "text": "Jadi bisa langsung di download di sini. Nah untuk template-nya itu kurang lebih seperti yang Bapak kirimkan terakhir."
+    },
+    {
+      "id": 17,
+      "start": 244.44,
+      "end": 252.72,
+      "text": "Nah kami mengikuti template itu. Nah ini kurang lebih seperti template-nya."
+    },
+    {
+      "id": 18,
+      "start": 253.72,
+      "end": 273.58,
+      "text": "Nah kemudian dia ketika di upload. Nah kurang lebih seperti ini."
+    },
+    {
+      "id": 19,
+      "start": 273.58,
+      "end": 283.41,
+      "text": "Oke kita lanjut validasi. Nah di sini saya sengaja tambahkan satu data yang sudah ada."
+    },
+    {
+      "id": 20,
+      "start": 283.41,
+      "end": 290.41,
+      "text": "Nah jadi ini ada error karena email ini sudah ada sebelumnya. Jadi perlu di validasi ulang."
+    },
+    {
+      "id": 21,
+      "start": 292.05,
+      "end": 303.78,
+      "text": "Itu data yang sudah ada. Nah ini status-nya masih skip karena di data ini ada yang name yang terduplikat."
+    },
+    {
+      "id": 22,
+      "start": 303.78,
+      "end": 317.82,
+      "text": "Jadi kalau kita ubah, status-nya sudah siap, siap di import."
+    },
+    {
+      "id": 23,
+      "start": 317.82,
+      "end": 325.69,
+      "text": "Ini proses import-nya apa? Pake job yang di belakang?"
+    },
+    {
+      "id": 24,
+      "start": 325.69,
+      "end": 344.06,
+      "text": "Iya Pak. Oke ini adaptanya sudah berhasil di import."
+    },
+    {
+      "id": 25,
+      "start": 346.5,
+      "end": 365.39,
+      "text": "Kemudian di bagian detail pegawai lebih seperti ini. Jadi setiap pegawai itu nanti bisa ditaruh di sini untuk kepala bagiannya."
+    },
+    {
+      "id": 26,
+      "start": 365.39,
+      "end": 377.46,
+      "text": "Dan juga untuk edit pegawai. Nah untuk edit profile itu dia di sini."
+    },
+    {
+      "id": 27,
+      "start": 378.46,
+      "end": 388.31,
+      "text": "Nah ini ada data kelengkap, kemudian ada data kontak dan berkas."
+    },
+    {
+      "id": 28,
+      "start": 388.31,
+      "end": 395.31,
+      "text": "KSK pengekat, job, jabatan, KGB dengan pengekatan."
+    },
+    {
+      "id": 29,
+      "start": 395.31,
+      "end": 403.31,
+      "text": "Nah ini juga sudah drop-down. Nah ini semua bisa di custom sendiri dari Datamaster."
+    },
+    {
+      "id": 30,
+      "start": 403.31,
+      "end": 411.41,
+      "text": "Jadi sudah kami buat flexible untuk jabatan juga."
+    },
+    {
+      "id": 31,
+      "start": 411.41,
+      "end": 419.2,
+      "text": "Unus jabatan. Ini SLON juga sudah ada. Nah contohnya itu super high note."
+    },
+    {
+      "id": 32,
+      "start": 419.2,
+      "end": 438.11,
+      "text": "Untuk pegawai yang sudah lengkap. Oke ini boleh tambahkan keluarga."
+    },
+    {
+      "id": 33,
+      "start": 438.11,
+      "end": 445.52,
+      "text": "Kemudian ini ada kepangkatan, jabatan."
+    },
+    {
+      "id": 34,
+      "start": 445.52,
+      "end": 450.81,
+      "text": "Kemudian ada KGB, ukuman disiplin, pendidikan."
+    },
+    {
+      "id": 35,
+      "start": 450.81,
+      "end": 457.94,
+      "text": "Nah ini pengangkatan dengan ini dokumen SK dari pegawai ini."
+    },
+    {
+      "id": 36,
+      "start": 457.94,
+      "end": 467.93,
+      "text": "Dokumen SK itu bisa ditambahkan sendiri ya?"
+    },
+    {
+      "id": 37,
+      "start": 467.93,
+      "end": 470.02,
+      "text": "Iya bisa bisa."
+    },
+    {
+      "id": 38,
+      "start": 470.02,
+      "end": 472.02,
+      "text": "Dia ada nanya sendiri atau dari profilnya?"
+    },
+    {
+      "id": 39,
+      "start": 472.02,
+      "end": 480.79,
+      "text": "Untuk dokumen SK itu sendiri dia di edit pegawai sini."
+    },
+    {
+      "id": 40,
+      "start": 480.79,
+      "end": 486.21,
+      "text": "Itu hanya admin yang bisa menamakan. Nah ini dokumen SK."
+    },
+    {
+      "id": 41,
+      "start": 486.21,
+      "end": 492.01,
+      "text": "SK pangkat, SK jabatan, SK KGB dengan pengangkatan."
+    },
+    {
+      "id": 42,
+      "start": 492.01,
+      "end": 495.01,
+      "text": "Berarti ya pod filenya cuma sebatas itu atau?"
+    },
+    {
+      "id": 43,
+      "start": 495.01,
+      "end": 504.32,
+      "text": "Nah sebenarnya ada satu lagi. Cuman belum ditambahkan itu dokumen lainnya."
+    },
+    {
+      "id": 44,
+      "start": 506.5,
+      "end": 508.79,
+      "text": "Disini?"
+    },
+    {
+      "id": 45,
+      "start": 508.79,
+      "end": 515.58,
+      "text": "Belum ditambahkan dokumen ini."
+    },
+    {
+      "id": 46,
+      "start": 516.58,
+      "end": 524.92,
+      "text": "Nah disini ada jasa, KTP atau dokumen lainnya bisa ditambahkan."
+    },
+    {
+      "id": 47,
+      "start": 524.92,
+      "end": 530.58,
+      "text": "Nah ini rcp dokumen."
+    },
+    {
+      "id": 48,
+      "start": 530.58,
+      "end": 534.97,
+      "text": "Kemudian untuk statusnya."
+    },
+    {
+      "id": 49,
+      "start": 534.97,
+      "end": 540.32,
+      "text": "Nah kalau sudah lengkap, lebih sure ini bisa langsung di cek juga."
+    },
+    {
+      "id": 50,
+      "start": 542.54,
+      "end": 558.02,
+      "text": "Nah ini track yang di bagian ekspor pegawai sudah dibuat flexible juga."
+    },
+    {
+      "id": 51,
+      "start": 558.02,
+      "end": 560.02,
+      "text": "Jadi bisa di custom."
+    },
+    {
+      "id": 52,
+      "start": 560.02,
+      "end": 563.02,
+      "text": "Nah sebenarnya dari data pegawai ini sudah bisa di export."
+    },
+    {
+      "id": 53,
+      "start": 563.02,
+      "end": 571.28,
+      "text": "Cuman yang di export itu data yang sudah di data default."
+    },
+    {
+      "id": 54,
+      "start": 571.28,
+      "end": 574.86,
+      "text": "Nah dia hasilnya sekurang lebih sure ini."
+    },
+    {
+      "id": 55,
+      "start": 574.86,
+      "end": 580.86,
+      "text": "Kalau yang dari data pegawai, cuman kalau mau di custom juga bisa."
+    },
+    {
+      "id": 56,
+      "start": 580.86,
+      "end": 589.13,
+      "text": "Di custom hanya mau ambil nip nama pegawai golongan buat batan."
+    },
+    {
+      "id": 57,
+      "start": 589.13,
+      "end": 592.19,
+      "text": "Nah previewnya ada di bawah sini."
+    },
+    {
+      "id": 58,
+      "start": 592.19,
+      "end": 598.46,
+      "text": "Nah ini boleh PDF dan boleh Excel."
+    },
+    {
+      "id": 59,
+      "start": 598.46,
+      "end": 602.48,
+      "text": "Punggung lebih, perlininya salah banget."
+    },
+    {
+      "id": 60,
+      "start": 602.48,
+      "end": 607.85,
+      "text": "Punggung seperti ini untuk export."
+    },
+    {
+      "id": 61,
+      "start": 607.85,
+      "end": 624.16,
+      "text": "Terus kita lanjut di flow pengajuan tutuan."
+    },
+    {
+      "id": 62,
+      "start": 624.16,
+      "end": 630.48,
+      "text": "Jadi disini saya sudah buka 5 role di 5 browser beda."
+    },
+    {
+      "id": 63,
+      "start": 630.48,
+      "end": 636.51,
+      "text": "Ayo untuk profile."
+    },
+    {
+      "id": 64,
+      "start": 636.51,
+      "end": 642.54,
+      "text": "Nah jadi untuk sekarang yang kita buat, pegawai itu belum bisa update profile."
+    },
+    {
+      "id": 65,
+      "start": 642.54,
+      "end": 653.7,
+      "text": "Jadi yang di fase satu itu untuk edit profile pegawai kepangkatan itu semua dari admin."
+    },
+    {
+      "id": 66,
+      "start": 653.7,
+      "end": 659.54,
+      "text": "Jadi yang boleh itu admin kepegawain dengan super admin."
+    },
+    {
+      "id": 67,
+      "start": 659.54,
+      "end": 666.58,
+      "text": "Nah jadi mau coba flow cuci dulu."
+    },
+    {
+      "id": 68,
+      "start": 666.58,
+      "end": 675.56,
+      "text": "Nah flow pertama itu dari cuci yang kita harus input ini dulu."
+    },
+    {
+      "id": 69,
+      "start": 675.56,
+      "end": 682.73,
+      "text": "Administrasi saldo awal."
+    },
+    {
+      "id": 70,
+      "start": 682.73,
+      "end": 691.4,
+      "text": "Nah jadi untuk yang berasaran meeting kemarin ada pendaftaran saldo awal."
+    },
+    {
+      "id": 71,
+      "start": 691.4,
+      "end": 693.4,
+      "text": "N2 itu maksimal 6."
+    },
+    {
+      "id": 72,
+      "start": 693.4,
+      "end": 699.65,
+      "text": "Ini 6 kalau yang tahun saat ini maksimal 12 ya lah."
+    },
+    {
+      "id": 73,
+      "start": 699.65,
+      "end": 701.65,
+      "text": "Ya betul."
+    },
+    {
+      "id": 74,
+      "start": 702.97,
+      "end": 717.71,
+      "text": "Untuk pegawai."
+    },
+    {
+      "id": 75,
+      "start": 717.71,
+      "end": 730.54,
+      "text": "Nah untuk pegawai disini ketika dia ajukan cuci."
+    },
+    {
+      "id": 76,
+      "start": 730.54,
+      "end": 737.0,
+      "text": "Dan sini sudah ada dia punya saldo tersedia."
+    },
+    {
+      "id": 77,
+      "start": 737.0,
+      "end": 746.66,
+      "text": "Nah untuk cuci sendiri berdasarkan dari hasil meeting terakhir itu"
+    },
+    {
+      "id": 78,
+      "start": 746.66,
+      "end": 754.52,
+      "text": "untuk saldo cuci ini yang dipotong di cuci tahunan."
+    },
+    {
+      "id": 79,
+      "start": 754.52,
+      "end": 759.97,
+      "text": "Di cuci tahunan untuk yang saldo cuci."
+    },
+    {
+      "id": 80,
+      "start": 759.97,
+      "end": 771.63,
+      "text": "Nah untuk flow cuci sakit atau melahirkan itu dia mau di verifikasi lagi dari"
+    },
+    {
+      "id": 81,
+      "start": 771.63,
+      "end": 776.73,
+      "text": "untuk sistemnya seperti apa."
+    },
+    {
+      "id": 82,
+      "start": 776.73,
+      "end": 778.73,
+      "text": "Apakah nanti dia akan dipotong juga?"
+    },
+    {
+      "id": 83,
+      "start": 778.73,
+      "end": 784.37,
+      "text": "Ada saldo tersendiri?"
+    },
+    {
+      "id": 84,
+      "start": 784.37,
+      "end": 790.75,
+      "text": "Engga-engga kalau saldo itu cuma untuk cuci tahunan kalau yang cuci sakit,"
+    },
+    {
+      "id": 85,
+      "start": 790.75,
+      "end": 793.75,
+      "text": "cuci melahirkan, cuci alasan benda itu enggak mau motong saldo cuci."
+    },
+    {
+      "id": 86,
+      "start": 793.75,
+      "end": 794.75,
+      "text": "Oh iya."
+    },
+    {
+      "id": 87,
+      "start": 794.75,
+      "end": 797.75,
+      "text": "Jadi sudah sesuai flow yang saat ini."
+    },
+    {
+      "id": 88,
+      "start": 797.75,
+      "end": 801.75,
+      "text": "Jadi cuma cuci tahunan saja yang pakai potongan saldo."
+    },
+    {
+      "id": 89,
+      "start": 801.75,
+      "end": 807.74,
+      "text": "Nah untuk cuci sendiri dia ketika pegawai mengajukan cuci"
+    },
+    {
+      "id": 90,
+      "start": 807.74,
+      "end": 813.78,
+      "text": "kemudian dia ada di hari libur itu enggak akan terpotong di ini."
+    },
+    {
+      "id": 91,
+      "start": 813.78,
+      "end": 817.78,
+      "text": "Iya enggak akan terpotong karena cuci itu potongannya di hari kerjato."
+    },
+    {
+      "id": 92,
+      "start": 817.78,
+      "end": 821.78,
+      "text": "Jadi kalau misalnya dia ngambil cuci-nya rabuk-krabuk berarti satu minggungnya enggak masuk."
+    },
+    {
+      "id": 93,
+      "start": 821.78,
+      "end": 825.28,
+      "text": "Ya betul."
+    },
+    {
+      "id": 94,
+      "start": 825.28,
+      "end": 828.28,
+      "text": "Ini testing dari sini."
+    },
+    {
+      "id": 95,
+      "start": 844.31,
+      "end": 846.47,
+      "text": "Oh iya sudah tengah 17."
+    },
+    {
+      "id": 96,
+      "start": 846.47,
+      "end": 848.47,
+      "text": "Tapi ini sudah menghitung hari libur juga enggak?"
+    },
+    {
+      "id": 97,
+      "start": 848.47,
+      "end": 850.57,
+      "text": "Iya sudah sudah."
+    },
+    {
+      "id": 98,
+      "start": 850.57,
+      "end": 851.57,
+      "text": "Sudah ya."
+    },
+    {
+      "id": 99,
+      "start": 851.57,
+      "end": 853.57,
+      "text": "Ada tabel masternya juga kan hari liburnya kemarin."
+    },
+    {
+      "id": 100,
+      "start": 853.57,
+      "end": 855.57,
+      "text": "Hari libur sudah sudah."
+    },
+    {
+      "id": 101,
+      "start": 855.57,
+      "end": 868.76,
+      "text": "Sudah ada tabel master."
+    },
+    {
+      "id": 102,
+      "start": 868.76,
+      "end": 871.76,
+      "text": "Nah ini untuk pilampir ini dibuat optional ya."
+    },
+    {
+      "id": 103,
+      "start": 871.76,
+      "end": 874.08,
+      "text": "Iya optional."
+    },
+    {
+      "id": 104,
+      "start": 874.08,
+      "end": 887.78,
+      "text": "Nah ini untuk proses persetujuannya itu di konfigurasi dulu."
+    },
+    {
+      "id": 105,
+      "start": 887.78,
+      "end": 891.78,
+      "text": "Nah ini belum bisa mengajukan cuci karena data temen-temen pengangkatan"
+    },
+    {
+      "id": 106,
+      "start": 891.78,
+      "end": 901.98,
+      "text": "pegawai ini belum ditambahkan untuk pegawai itu sendiri."
+    },
+    {
+      "id": 107,
+      "start": 913.83,
+      "end": 920.83,
+      "text": "Nah di sini untuk konfigurasi ada konfigurasi profile cuci ini juga harus di set-up di awal."
+    },
+    {
+      "id": 108,
+      "start": 920.83,
+      "end": 924.93,
+      "text": "Cuma yang sebelumnya itu sudah saya set-up."
+    },
+    {
+      "id": 109,
+      "start": 924.93,
+      "end": 932.06,
+      "text": "Jadi PBMC itu bisa ditambahkan di sini."
+    },
+    {
+      "id": 110,
+      "start": 932.06,
+      "end": 936.06,
+      "text": "Nah itu bisa di apply ke global."
+    },
+    {
+      "id": 111,
+      "start": 936.06,
+      "end": 940.06,
+      "text": "Jadi PBMC misalnya Pak Alem."
+    },
+    {
+      "id": 112,
+      "start": 940.06,
+      "end": 953.13,
+      "text": "Nah di sini."
+    },
+    {
+      "id": 113,
+      "start": 964.18,
+      "end": 971.78,
+      "text": "Nah jadi semua perubahan di sini ada yang tercatat di perubahan konfigurasi."
+    },
+    {
+      "id": 114,
+      "start": 971.78,
+      "end": 974.9,
+      "text": "Oke ini sudah berhasil."
+    },
+    {
+      "id": 115,
+      "start": 974.9,
+      "end": 984.15,
+      "text": "Nah sekarang cari main yang pegawai yang tadi."
+    },
+    {
+      "id": 116,
+      "start": 984.15,
+      "end": 994.78,
+      "text": "Nah untuk pegawai ini dia kepala bagiannya sudah ditetapkan."
+    },
+    {
+      "id": 117,
+      "start": 994.78,
+      "end": 997.9,
+      "text": "Nah kalau belum bisa ditambahkan dari sini juga."
+    },
+    {
+      "id": 118,
+      "start": 997.9,
+      "end": 1001.22,
+      "text": "Untuk kepala bagiannya sih itu siapa?"
+    },
+    {
+      "id": 119,
+      "start": 1001.22,
+      "end": 1002.22,
+      "text": "Siapa?"
+    },
+    {
+      "id": 120,
+      "start": 1002.22,
+      "end": 1007.66,
+      "text": "Kalau masalah yang kepala bagian ini diset-nya pas di profile tadi ya?"
+    },
+    {
+      "id": 121,
+      "start": 1007.66,
+      "end": 1009.66,
+      "text": "Iya di profile."
+    },
+    {
+      "id": 122,
+      "start": 1009.66,
+      "end": 1020.3,
+      "text": "Jadi untuk user yang sudah ada kepala bagian ketika di backfill dia akan muncul."
+    },
+    {
+      "id": 123,
+      "start": 1020.3,
+      "end": 1025.39,
+      "text": "Kalau diubah lagi di sini berarti dia pengaruh lagi yang di profile ya?"
+    },
+    {
+      "id": 124,
+      "start": 1025.39,
+      "end": 1028.39,
+      "text": "Ya di profile juga akan ikut terubah."
+    },
+    {
+      "id": 125,
+      "start": 1028.39,
+      "end": 1032.16,
+      "text": "Cuma kalau misalnya di profile sudah ada."
+    },
+    {
+      "id": 126,
+      "start": 1032.16,
+      "end": 1037.16,
+      "text": "Di sini dia sudah ada nanti seperti ini."
+    },
+    {
+      "id": 127,
+      "start": 1037.16,
+      "end": 1039.22,
+      "text": "Jadi sudah tidak perlu diubah lagi."
+    },
+    {
+      "id": 128,
+      "start": 1039.22,
+      "end": 1048.25,
+      "text": "Nah ini kepala bagiannya."
+    },
+    {
+      "id": 129,
+      "start": 1048.25,
+      "end": 1053.25,
+      "text": "Kemudian bisa juga ditambahkan verifikator."
+    },
+    {
+      "id": 130,
+      "start": 1053.25,
+      "end": 1059.66,
+      "text": "Mungkin dari tim di kepagawain."
+    },
+    {
+      "id": 131,
+      "start": 1059.66,
+      "end": 1065.1,
+      "text": "Nah ini bisa ditambahkan tim unit kerja."
+    },
+    {
+      "id": 132,
+      "start": 1065.1,
+      "end": 1071.62,
+      "text": "Kemudian kalau misalnya tidak mau ditambahkan dia langsung ke PBMC."
+    },
+    {
+      "id": 133,
+      "start": 1071.62,
+      "end": 1075.51,
+      "text": "Bisa digunakan PBMC global."
+    },
+    {
+      "id": 134,
+      "start": 1075.51,
+      "end": 1077.51,
+      "text": "Itu Pak Kalem itu sendiri."
+    },
+    {
+      "id": 135,
+      "start": 1077.51,
+      "end": 1090.4,
+      "text": "Kalau backfill chain itu apa?"
+    },
+    {
+      "id": 136,
+      "start": 1090.4,
+      "end": 1102.94,
+      "text": "Nah kalau backfill chain itu Joran untuk bagian backfill chain."
+    },
+    {
+      "id": 137,
+      "start": 1102.94,
+      "end": 1109.94,
+      "text": "Kalau yang ke kepala bagian itu itu yang kepala bagian kain apa?"
+    },
+    {
+      "id": 138,
+      "start": 1109.94,
+      "end": 1114.94,
+      "text": "Jadi kalau kepala bagian sudah di set di profile tadi."
+    },
+    {
+      "id": 139,
+      "start": 1114.94,
+      "end": 1118.98,
+      "text": "Di bagian cuti ketika jalankan backfill chain."
+    },
+    {
+      "id": 140,
+      "start": 1118.98,
+      "end": 1124.98,
+      "text": "Dia langsung mengambil kepala bagian dari masing-masing pegawain sudah di set."
+    },
+    {
+      "id": 141,
+      "start": 1124.98,
+      "end": 1128.98,
+      "text": "Terus langsung masukkan ke chain of profile pegawain."
+    },
+    {
+      "id": 142,
+      "start": 1128.98,
+      "end": 1132.46,
+      "text": "Pegawain yang chain of profile cuti."
+    },
+    {
+      "id": 143,
+      "start": 1132.46,
+      "end": 1137.46,
+      "text": "Jadi sudah manual seksual satu per satu."
+    },
+    {
+      "id": 144,
+      "start": 1137.46,
+      "end": 1139.46,
+      "text": "Jadi otomatis."
+    },
+    {
+      "id": 145,
+      "start": 1139.46,
+      "end": 1142.46,
+      "text": "Langsung di ibaranya seperti di import otomatis."
+    },
+    {
+      "id": 146,
+      "start": 1142.46,
+      "end": 1145.29,
+      "text": "Siapa verifikatornya gitu?"
+    },
+    {
+      "id": 147,
+      "start": 1145.29,
+      "end": 1147.29,
+      "text": "Kalau verifikatornya itu ditambah manual."
+    },
+    {
+      "id": 148,
+      "start": 1147.29,
+      "end": 1152.61,
+      "text": "Sama yang diambil itu kepala bagian yang masing-masing pegawain."
+    },
+    {
+      "id": 149,
+      "start": 1152.61,
+      "end": 1156.25,
+      "text": "Yang sudah di set di profile di awal."
+    },
+    {
+      "id": 150,
+      "start": 1156.25,
+      "end": 1162.38,
+      "text": "Berarti nanti perantai approvalnya ini kepala bagian."
+    },
+    {
+      "id": 151,
+      "start": 1162.38,
+      "end": 1166.11,
+      "text": "Verifikator dulu baru kepala bagian kan?"
+    },
+    {
+      "id": 152,
+      "start": 1166.11,
+      "end": 1170.21,
+      "text": "Ya kalau ini kepala bagian terus ke verifikator."
+    },
+    {
+      "id": 153,
+      "start": 1171.21,
+      "end": 1186.65,
+      "text": "Oke."
+    },
+    {
+      "id": 154,
+      "start": 1193.54,
+      "end": 1197.54,
+      "text": "Tapi kalau misalnya dia tidak tambah verifikator lagi."
+    },
+    {
+      "id": 155,
+      "start": 1197.54,
+      "end": 1202.08,
+      "text": "Itu otomatis langsung ke kepala bagian."
+    },
+    {
+      "id": 156,
+      "start": 1202.08,
+      "end": 1206.08,
+      "text": "Kalau tidak tambah verifikator langsung ke kepala bagian."
+    },
+    {
+      "id": 157,
+      "start": 1206.08,
+      "end": 1209.4,
+      "text": "Tapi flow-nya gini nih."
+    },
+    {
+      "id": 158,
+      "start": 1209.4,
+      "end": 1213.4,
+      "text": "Kalau misalnya ada yang mau ngajuin cuti itu kan."
+    },
+    {
+      "id": 159,
+      "start": 1213.4,
+      "end": 1216.4,
+      "text": "Flow-nya masuknya ke kepagawain dulu."
+    },
+    {
+      "id": 160,
+      "start": 1216.4,
+      "end": 1217.4,
+      "text": "Baru ke kepala bagian."
+    },
+    {
+      "id": 161,
+      "start": 1217.4,
+      "end": 1222.5,
+      "text": "Ke kepala bagian itu kan biasanya ke kepala bagian umum itu"
+    },
+    {
+      "id": 162,
+      "start": 1222.5,
+      "end": 1225.5,
+      "text": "biasanya sebelum pakalem."
+    },
+    {
+      "id": 163,
+      "start": 1225.5,
+      "end": 1229.9,
+      "text": "Nah kepala bagian juga ini ada dua kategori ini."
+    },
+    {
+      "id": 164,
+      "start": 1229.9,
+      "end": 1231.9,
+      "text": "Ada yang masuknya ketua tim kerja."
+    },
+    {
+      "id": 165,
+      "start": 1231.9,
+      "end": 1234.9,
+      "text": "Tapi kalau ketua tim kerja harus masuk verifikator biasa gak apa-apa."
+    },
+    {
+      "id": 166,
+      "start": 1234.9,
+      "end": 1239.9,
+      "text": "Tapi tetap kalau kepala bagian itu harus setingkat dibawa dari pakalem."
+    },
+    {
+      "id": 167,
+      "start": 1239.9,
+      "end": 1242.9,
+      "text": "Kalau dari alurnya sekarang kan diusulkan."
+    },
+    {
+      "id": 168,
+      "start": 1242.9,
+      "end": 1245.9,
+      "text": "Kepala bagian validasi dulu terus verifikator kan."
+    },
+    {
+      "id": 169,
+      "start": 1245.9,
+      "end": 1250.9,
+      "text": "Kalau posisinya verifikatornya kepegawain kan di baratnya gak bertingkat jadinya."
+    },
+    {
+      "id": 170,
+      "start": 1250.9,
+      "end": 1254.9,
+      "text": "Jadi udah naik ke kepala bagian ke bossnya tapi turun lagi ke pegawain gitu kan."
+    },
+    {
+      "id": 171,
+      "start": 1254.9,
+      "end": 1256.9,
+      "text": "Padahal sebenarnya dibalik gitu."
+    },
+    {
+      "id": 172,
+      "start": 1256.9,
+      "end": 1259.9,
+      "text": "Harusnya dari stuck dulu yang ditentukan entah itu kepegawain"
+    },
+    {
+      "id": 173,
+      "start": 1259.9,
+      "end": 1263.9,
+      "text": "ke ketua timnya baru ke kepala bagian."
+    },
+    {
+      "id": 174,
+      "start": 1263.9,
+      "end": 1266.9,
+      "text": "Karena kepala bagian itu tingkatannya dibawa dari kepala lembaga gitu."
+    },
+    {
+      "id": 175,
+      "start": 1266.9,
+      "end": 1271.98,
+      "text": "Berarti flow-nya ke verifikator dulu ya."
+    },
+    {
+      "id": 176,
+      "start": 1271.98,
+      "end": 1272.98,
+      "text": "Ya betul."
+    },
+    {
+      "id": 177,
+      "start": 1272.98,
+      "end": 1276.98,
+      "text": "Verifikator dulu karena kan nanti meskipun nanti ada"
+    },
+    {
+      "id": 178,
+      "start": 1276.98,
+      "end": 1281.98,
+      "text": "deset-desetnya ketua tim kerja itu kan kalau posisinya di balik"
+    },
+    {
+      "id": 179,
+      "start": 1281.98,
+      "end": 1283.98,
+      "text": "tinggal ditambahin aja di bagian verifikator gitu kan."
+    },
+    {
+      "id": 180,
+      "start": 1283.98,
+      "end": 1288.98,
+      "text": "Tetap pun jujunya kalau udah valid pasti maksudnya ke kepala bagian gitu kan."
+    },
+    {
+      "id": 181,
+      "start": 1288.98,
+      "end": 1295.54,
+      "text": "Oke lanjut."
+    },
+    {
+      "id": 182,
+      "start": 1295.54,
+      "end": 1300.54,
+      "text": "Flow-nya di balik ya dari verifikator dulu baru ke kepala bagian."
+    },
+    {
+      "id": 183,
+      "start": 1300.54,
+      "end": 1303.54,
+      "text": "Verifikator dulu karena verifikator ini kan dinamis dia sifatnya."
+    },
+    {
+      "id": 184,
+      "start": 1303.54,
+      "end": 1305.54,
+      "text": "Itu verifikator itu penjaga gerbang awal gitu."
+    },
+    {
+      "id": 185,
+      "start": 1305.54,
+      "end": 1307.54,
+      "text": "Ke kepala bagian itu udah hampir pasti lah."
+    },
+    {
+      "id": 186,
+      "start": 1307.54,
+      "end": 1310.7,
+      "text": "Barannya atasannya pegawai itu."
+    },
+    {
+      "id": 187,
+      "start": 1310.7,
+      "end": 1318.89,
+      "text": "Ya berarti."
+    },
+    {
+      "id": 188,
+      "start": 1318.89,
+      "end": 1328.63,
+      "text": "Nah untuk flow- cuti kita coba dengan cuti."
+    },
+    {
+      "id": 189,
+      "start": 1328.63,
+      "end": 1330.95,
+      "text": "Kalau tim itu kita saja."
+    },
+    {
+      "id": 190,
+      "start": 1330.95,
+      "end": 1342.37,
+      "text": "Di bagian yang sudah ada."
+    },
+    {
+      "id": 191,
+      "start": 1342.37,
+      "end": 1354.33,
+      "text": "Oh yang untuk flow- cuti begini."
+    },
+    {
+      "id": 192,
+      "start": 1354.33,
+      "end": 1356.65,
+      "text": "Sebenarnya sudah dibuat sih."
+    },
+    {
+      "id": 193,
+      "start": 1356.65,
+      "end": 1369.47,
+      "text": "Ini saja dia nanti di simpaknya itu kalau yang misalnya rolinya sebagai super admin"
+    },
+    {
+      "id": 194,
+      "start": 1369.47,
+      "end": 1373.47,
+      "text": "itu ditambahin fitur ini aja fitur change roll."
+    },
+    {
+      "id": 195,
+      "start": 1373.47,
+      "end": 1377.47,
+      "text": "Jadi ditambah user-nya itu ditambahin kolom temporary user"
+    },
+    {
+      "id": 196,
+      "start": 1377.47,
+      "end": 1380.47,
+      "text": "sama temporary permission gitu kan."
+    },
+    {
+      "id": 197,
+      "start": 1380.47,
+      "end": 1382.47,
+      "text": "Temporary roll menurutnya."
+    },
+    {
+      "id": 198,
+      "start": 1382.47,
+      "end": 1385.47,
+      "text": "Jadinya kalau misalnya itu memudahkan buat demo-demo juga"
+    },
+    {
+      "id": 199,
+      "start": 1385.47,
+      "end": 1388.47,
+      "text": "atau mengetes fitur gitu kan jadinya dari super admin itu"
+    },
+    {
+      "id": 200,
+      "start": 1388.47,
+      "end": 1390.47,
+      "text": "tinggal ganti-ganti roll aja dari satu menu gitu."
+    },
+    {
+      "id": 201,
+      "start": 1390.47,
+      "end": 1394.47,
+      "text": "Jadi di menu drop-down user itu tinggal pilih ganti roll."
+    },
+    {
+      "id": 202,
+      "start": 1394.47,
+      "end": 1399.47,
+      "text": "Nah itu dia bakal ngisi di bagian kolom temporary roll"
+    },
+    {
+      "id": 203,
+      "start": 1399.47,
+      "end": 1402.54,
+      "text": "sama temporary permission gitu."
+    },
+    {
+      "id": 204,
+      "start": 1402.54,
+      "end": 1406.54,
+      "text": "Jadinya nanti kalau misalnya mau refer-troll-nya lagi"
+    },
+    {
+      "id": 205,
+      "start": 1406.54,
+      "end": 1408.54,
+      "text": "atau mau di-set ke dev-out ke roll bawahannya itu"
+    },
+    {
+      "id": 206,
+      "start": 1408.54,
+      "end": 1411.18,
+      "text": "nggak bakal mengganggu gitu."
+    },
+    {
+      "id": 207,
+      "start": 1411.18,
+      "end": 1415.18,
+      "text": "Kalau sekarang kan cas-nya dia 5 akun terpisah."
+    },
+    {
+      "id": 208,
+      "start": 1415.18,
+      "end": 1417.18,
+      "text": "Iya 5 akun terpisah."
+    },
+    {
+      "id": 209,
+      "start": 1417.18,
+      "end": 1419.18,
+      "text": "Dia kan agak bingung kalau di demo."
+    },
+    {
+      "id": 210,
+      "start": 1419.18,
+      "end": 1422.18,
+      "text": "Kalau misalnya mau di-testing juga kan harus log-in"
+    },
+    {
+      "id": 211,
+      "start": 1422.18,
+      "end": 1424.18,
+      "text": "log-out log-in log-out lagi gitu kan."
+    },
+    {
+      "id": 212,
+      "start": 1424.18,
+      "end": 1427.18,
+      "text": "Nah nanti kalau buat di user-nya itu"
+    },
+    {
+      "id": 213,
+      "start": 1427.18,
+      "end": 1430.18,
+      "text": "ditambahin aja fitur ini fitur switch roll."
+    },
+    {
+      "id": 214,
+      "start": 1430.18,
+      "end": 1433.18,
+      "text": "Jadi switch roll-nya itu nanti logikannya dia"
+    },
+    {
+      "id": 215,
+      "start": 1433.18,
+      "end": 1435.18,
+      "text": "kalau misalnya dia ganti roll itu nanti"
+    },
+    {
+      "id": 216,
+      "start": 1435.18,
+      "end": 1439.18,
+      "text": "otomatis dia bakal pre-fill ke kolom temporary roll"
+    },
+    {
+      "id": 217,
+      "start": 1439.18,
+      "end": 1440.18,
+      "text": "sama temporary user."
+    },
+    {
+      "id": 218,
+      "start": 1440.18,
+      "end": 1442.18,
+      "text": "Jadi sekalipun dia log-out dia log-in lagi"
+    },
+    {
+      "id": 219,
+      "start": 1442.18,
+      "end": 1444.18,
+      "text": "roll-nya masih sama gitu tapi dia bisa di-revert."
+    },
+    {
+      "id": 220,
+      "start": 1444.18,
+      "end": 1446.18,
+      "text": "Kalau misalnya dia roll-nya di-revert"
+    },
+    {
+      "id": 221,
+      "start": 1446.18,
+      "end": 1448.18,
+      "text": "itu bakal dikosongin temporary roll"
+    },
+    {
+      "id": 222,
+      "start": 1448.18,
+      "end": 1450.18,
+      "text": "sama temporary permission gitu."
+    },
+    {
+      "id": 223,
+      "start": 1450.18,
+      "end": 1452.18,
+      "text": "Nanti dia bakal nge-check kan."
+    },
+    {
+      "id": 224,
+      "start": 1452.18,
+      "end": 1455.94,
+      "text": "Untuk develop-ment ya pak?"
+    },
+    {
+      "id": 225,
+      "start": 1455.94,
+      "end": 1457.94,
+      "text": "Ya development sama production juga"
+    },
+    {
+      "id": 226,
+      "start": 1457.94,
+      "end": 1460.94,
+      "text": "karena kan misalnya nih kalau"
+    },
+    {
+      "id": 227,
+      "start": 1460.94,
+      "end": 1462.94,
+      "text": "pegawai ngelaporin bak eh ini kan"
+    },
+    {
+      "id": 228,
+      "start": 1462.94,
+      "end": 1465.94,
+      "text": "di perspektif mereka di perspektif pegawai gitu kan."
+    },
+    {
+      "id": 229,
+      "start": 1465.94,
+      "end": 1467.94,
+      "text": "Kan agak ribet juga minta eh coba kirimin"
+    },
+    {
+      "id": 230,
+      "start": 1467.94,
+      "end": 1469.94,
+      "text": "user-nya password gitu kan."
+    },
+    {
+      "id": 231,
+      "start": 1469.94,
+      "end": 1471.94,
+      "text": "Nah kalau misalnya dari super admin ada switch roll-nya kan"
+    },
+    {
+      "id": 232,
+      "start": 1471.94,
+      "end": 1473.94,
+      "text": "bisa memposisikan diri dia itu sebagai"
+    },
+    {
+      "id": 233,
+      "start": 1473.94,
+      "end": 1476.14,
+      "text": "pegawai gitu kan."
+    },
+    {
+      "id": 234,
+      "start": 1476.14,
+      "end": 1478.14,
+      "text": "Dia bisa langsung nge-check gitu."
+    },
+    {
+      "id": 235,
+      "start": 1480.22,
+      "end": 1483.08,
+      "text": "Oke pak."
+    },
+    {
+      "id": 236,
+      "start": 1483.08,
+      "end": 1485.11,
+      "text": "Pakai lanjut di"
+    },
+    {
+      "id": 237,
+      "start": 1485.11,
+      "end": 1487.11,
+      "text": "flow-lajuan cuci."
+    },
+    {
+      "id": 238,
+      "start": 1487.11,
+      "end": 1491.0,
+      "text": "Nah ini untuk flow-nya"
+    },
+    {
+      "id": 239,
+      "start": 1491.0,
+      "end": 1493.0,
+      "text": "yang kami sudah buat seperti ini"
+    },
+    {
+      "id": 240,
+      "start": 1493.0,
+      "end": 1495.06,
+      "text": "di cuci tahunan"
+    },
+    {
+      "id": 241,
+      "start": 1495.06,
+      "end": 1523.59,
+      "text": "setelah berhasil ini"
+    },
+    {
+      "id": 242,
+      "start": 1523.59,
+      "end": 1525.69,
+      "text": "dari"
+    },
+    {
+      "id": 243,
+      "start": 1525.69,
+      "end": 1527.69,
+      "text": "kepala bagian yang"
+    },
+    {
+      "id": 244,
+      "start": 1527.69,
+      "end": 1531.32,
+      "text": "menyetujui."
+    },
+    {
+      "id": 245,
+      "start": 1531.32,
+      "end": 1538.31,
+      "text": "Ini sudah berat."
+    },
+    {
+      "id": 246,
+      "start": 1538.31,
+      "end": 1541.69,
+      "text": "Nah ini kemudian"
+    },
+    {
+      "id": 247,
+      "start": 1541.69,
+      "end": 1543.69,
+      "text": "di fase dua dari"
+    },
+    {
+      "id": 248,
+      "start": 1543.69,
+      "end": 1553.21,
+      "text": "PEBMC."
+    },
+    {
+      "id": 249,
+      "start": 1553.21,
+      "end": 1555.21,
+      "text": "Untuk PEBMC itu cuman"
+    },
+    {
+      "id": 250,
+      "start": 1555.21,
+      "end": 1558.97,
+      "text": "itu ya Pak?"
+    },
+    {
+      "id": 251,
+      "start": 1558.97,
+      "end": 1560.97,
+      "text": "Nah iya itu biasanya pimpinan tertinggi."
+    },
+    {
+      "id": 252,
+      "start": 1560.97,
+      "end": 1593.88,
+      "text": "Oh iya."
+    },
+    {
+      "id": 253,
+      "start": 1593.88,
+      "end": 1598.41,
+      "text": "Ini berhasil."
+    },
+    {
+      "id": 254,
+      "start": 1598.41,
+      "end": 1600.54,
+      "text": "Jadi setelah"
+    },
+    {
+      "id": 255,
+      "start": 1600.54,
+      "end": 1604.05,
+      "text": "dua tahap ini disetujui"
+    },
+    {
+      "id": 256,
+      "start": 1604.05,
+      "end": 1612.81,
+      "text": "seluruhnya otomatis akan terpotong."
+    },
+    {
+      "id": 257,
+      "start": 1612.81,
+      "end": 1620.12,
+      "text": "Oke kalau bisa seperti ini."
+    },
+    {
+      "id": 258,
+      "start": 1620.12,
+      "end": 1622.5,
+      "text": "Kemudian"
+    },
+    {
+      "id": 259,
+      "start": 1622.5,
+      "end": 1624.5,
+      "text": "untuk"
+    },
+    {
+      "id": 260,
+      "start": 1624.5,
+      "end": 1627.24,
+      "text": "EWS sendiri sudah"
+    },
+    {
+      "id": 261,
+      "start": 1627.24,
+      "end": 1630.24,
+      "text": "Nah EWS sendiri kalau yang kami buat sekarang"
+    },
+    {
+      "id": 262,
+      "start": 1630.24,
+      "end": 1632.24,
+      "text": "dia masih"
+    },
+    {
+      "id": 263,
+      "start": 1632.24,
+      "end": 1635.62,
+      "text": "ini ya dari notif"
+    },
+    {
+      "id": 264,
+      "start": 1635.62,
+      "end": 1637.62,
+      "text": "dari notif via app."
+    },
+    {
+      "id": 265,
+      "start": 1637.62,
+      "end": 1639.62,
+      "text": "Nah untuk yang dari e-mail"
+    },
+    {
+      "id": 266,
+      "start": 1639.62,
+      "end": 1640.62,
+      "text": "itu belum"
+    },
+    {
+      "id": 267,
+      "start": 1640.62,
+      "end": 1642.62,
+      "text": "kenal rencana di akhirnya."
+    },
+    {
+      "id": 268,
+      "start": 1642.62,
+      "end": 1646.7,
+      "text": "Nah untuk EWS ini bisa di"
+    },
+    {
+      "id": 269,
+      "start": 1646.7,
+      "end": 1649.7,
+      "text": "setting di konfigurasi EWS."
+    },
+    {
+      "id": 270,
+      "start": 1649.7,
+      "end": 1652.02,
+      "text": "Nah jadi ada untuk"
+    },
+    {
+      "id": 271,
+      "start": 1652.02,
+      "end": 1654.02,
+      "text": "kenakan pangkat KGB"
+    },
+    {
+      "id": 272,
+      "start": 1654.02,
+      "end": 1656.02,
+      "text": "BUP Pensin Global"
+    },
+    {
+      "id": 273,
+      "start": 1656.02,
+      "end": 1658.02,
+      "text": "masa pungkat PPK dengan"
+    },
+    {
+      "id": 274,
+      "start": 1658.02,
+      "end": 1660.02,
+      "text": "milestone set challenge cana."
+    },
+    {
+      "id": 275,
+      "start": 1660.02,
+      "end": 1663.5,
+      "text": "Nah ini bisa untuk"
+    },
+    {
+      "id": 276,
+      "start": 1663.5,
+      "end": 1665.5,
+      "text": "peringatannya dia"
+    },
+    {
+      "id": 277,
+      "start": 1665.5,
+      "end": 1667.5,
+      "text": "bisa di setting Amin 3"
+    },
+    {
+      "id": 278,
+      "start": 1667.5,
+      "end": 1670.5,
+      "text": "Amin 2 atau Amin 1"
+    },
+    {
+      "id": 279,
+      "start": 1670.5,
+      "end": 1672.5,
+      "text": "itu dari setting ini untuk"
+    },
+    {
+      "id": 280,
+      "start": 1672.5,
+      "end": 1680.8,
+      "text": "EWS."
+    },
+    {
+      "id": 281,
+      "start": 1680.8,
+      "end": 1682.8,
+      "text": "Nah ini EWS yang masuk"
+    },
+    {
+      "id": 282,
+      "start": 1682.8,
+      "end": 1685.86,
+      "text": "nanti akan masuk di"
+    },
+    {
+      "id": 283,
+      "start": 1685.86,
+      "end": 1688.43,
+      "text": "alaman EWS active."
+    },
+    {
+      "id": 284,
+      "start": 1688.43,
+      "end": 1692.32,
+      "text": "Kemudian"
+    },
+    {
+      "id": 285,
+      "start": 1692.32,
+      "end": 1696.85,
+      "text": "data masterna yang ini"
+    },
+    {
+      "id": 286,
+      "start": 1696.85,
+      "end": 1699.85,
+      "text": "yang sudah kami buat"
+    },
+    {
+      "id": 287,
+      "start": 1699.85,
+      "end": 1702.17,
+      "text": "untuk data master dari"
+    },
+    {
+      "id": 288,
+      "start": 1702.17,
+      "end": 1704.58,
+      "text": "golongan pangkat."
+    },
+    {
+      "id": 289,
+      "start": 1704.58,
+      "end": 1706.58,
+      "text": "Ini boleh mau tambah atau mau di update."
+    },
+    {
+      "id": 290,
+      "start": 1706.58,
+      "end": 1707.71,
+      "text": "Boleh."
+    },
+    {
+      "id": 291,
+      "start": 1707.71,
+      "end": 1711.89,
+      "text": "Dan di sejabatan"
+    },
+    {
+      "id": 292,
+      "start": 1711.89,
+      "end": 1713.89,
+      "text": "yang sejabatan itu sendiri"
+    },
+    {
+      "id": 293,
+      "start": 1713.89,
+      "end": 1717.46,
+      "text": "eselon"
+    },
+    {
+      "id": 294,
+      "start": 1717.46,
+      "end": 1719.46,
+      "text": "dia ada status"
+    },
+    {
+      "id": 295,
+      "start": 1719.46,
+      "end": 1722.67,
+      "text": "status pegawai"
+    },
+    {
+      "id": 296,
+      "start": 1722.67,
+      "end": 1724.67,
+      "text": "ini bisa di custom sini"
+    },
+    {
+      "id": 297,
+      "start": 1724.67,
+      "end": 1727.63,
+      "text": "dan jenis duty"
+    },
+    {
+      "id": 298,
+      "start": 1727.63,
+      "end": 1732.74,
+      "text": "agama"
+    },
+    {
+      "id": 299,
+      "start": 1732.74,
+      "end": 1734.74,
+      "text": "ini ada juga jajang pedidikan"
+    },
+    {
+      "id": 300,
+      "start": 1734.74,
+      "end": 1736.74,
+      "text": "unit kerja dengan"
+    },
+    {
+      "id": 301,
+      "start": 1736.74,
+      "end": 1738.77,
+      "text": "hari ligut"
+    },
+    {
+      "id": 302,
+      "start": 1738.77,
+      "end": 1747.23,
+      "text": "data master."
+    },
+    {
+      "id": 303,
+      "start": 1747.23,
+      "end": 1748.23,
+      "text": "Dia"
+    },
+    {
+      "id": 304,
+      "start": 1748.23,
+      "end": 1753.4,
+      "text": "beda menu hari ligut yang di"
+    },
+    {
+      "id": 305,
+      "start": 1753.4,
+      "end": 1755.4,
+      "text": "referensi dengan yang di"
+    },
+    {
+      "id": 306,
+      "start": 1755.4,
+      "end": 1758.46,
+      "text": "sebelah kiri itu apa?"
+    },
+    {
+      "id": 307,
+      "start": 1758.46,
+      "end": 1761.0,
+      "text": "Yang di sini Pak."
+    },
+    {
+      "id": 308,
+      "start": 1761.0,
+      "end": 1763.1,
+      "text": "Nah yang di sini"
+    },
+    {
+      "id": 309,
+      "start": 1772.52,
+      "end": 1774.52,
+      "text": "di sini dia"
+    },
+    {
+      "id": 310,
+      "start": 1774.52,
+      "end": 1776.52,
+      "text": "hari libur yang sudah ada sebelumnya"
+    },
+    {
+      "id": 311,
+      "start": 1776.52,
+      "end": 1778.52,
+      "text": "dari"
+    },
+    {
+      "id": 312,
+      "start": 1778.52,
+      "end": 1780.52,
+      "text": "dari misalnya untuk"
+    },
+    {
+      "id": 313,
+      "start": 1780.52,
+      "end": 1782.58,
+      "text": "sebenarnya ini"
+    },
+    {
+      "id": 314,
+      "start": 1782.58,
+      "end": 1784.58,
+      "text": "kepercanaannya mau dibikin dia"
+    },
+    {
+      "id": 315,
+      "start": 1784.58,
+      "end": 1786.58,
+      "text": "kayak table calendars gitu Pak."
+    },
+    {
+      "id": 316,
+      "start": 1786.58,
+      "end": 1789.0,
+      "text": "Tungan"
+    },
+    {
+      "id": 317,
+      "start": 1789.0,
+      "end": 1791.0,
+      "text": "yang awal"
+    },
+    {
+      "id": 318,
+      "start": 1791.0,
+      "end": 1793.0,
+      "text": "ini masih yang awal kami terapkan sebetulnya."
+    },
+    {
+      "id": 319,
+      "start": 1793.0,
+      "end": 1795.0,
+      "text": "Dia bersama kayak yang di data master."
+    },
+    {
+      "id": 320,
+      "start": 1795.0,
+      "end": 1797.06,
+      "text": "Kayak"
+    },
+    {
+      "id": 321,
+      "start": 1797.06,
+      "end": 1800.41,
+      "text": "tampilanannya saja."
+    },
+    {
+      "id": 322,
+      "start": 1800.41,
+      "end": 1802.41,
+      "text": "Berarti dia sama aja ini ya?"
+    },
+    {
+      "id": 323,
+      "start": 1802.41,
+      "end": 1804.41,
+      "text": "Ini yang mau di hapus status dari data master"
+    },
+    {
+      "id": 324,
+      "start": 1804.41,
+      "end": 1806.41,
+      "text": "yang mau di pindah ke sini atau bagaimana?"
+    },
+    {
+      "id": 325,
+      "start": 1806.41,
+      "end": 1809.69,
+      "text": "Yang dari data master"
+    },
+    {
+      "id": 326,
+      "start": 1809.69,
+      "end": 1811.69,
+      "text": "nanti ketika di update"
+    },
+    {
+      "id": 327,
+      "start": 1811.69,
+      "end": 1819.03,
+      "text": "dia akan masuk di hari libur ini."
+    },
+    {
+      "id": 328,
+      "start": 1819.03,
+      "end": 1821.03,
+      "text": "Oh ini aja di"
+    },
+    {
+      "id": 329,
+      "start": 1821.03,
+      "end": 1823.03,
+      "text": "hari libur itu di lepas dari data"
+    },
+    {
+      "id": 330,
+      "start": 1823.03,
+      "end": 1825.03,
+      "text": "masternya, di taruh di hari libur"
+    },
+    {
+      "id": 331,
+      "start": 1825.03,
+      "end": 1827.03,
+      "text": "di bagian atasnya itu"
+    },
+    {
+      "id": 332,
+      "start": 1827.03,
+      "end": 1829.03,
+      "text": "bikin modelan calendar"
+    },
+    {
+      "id": 333,
+      "start": 1829.03,
+      "end": 1831.03,
+      "text": "di bawahnya tabelnya gitu."
+    },
+    {
+      "id": 334,
+      "start": 1831.03,
+      "end": 1835.4,
+      "text": "Jadi kan lebih informatif."
+    },
+    {
+      "id": 335,
+      "start": 1835.4,
+      "end": 1837.4,
+      "text": "Oke"
+    },
+    {
+      "id": 336,
+      "start": 1837.4,
+      "end": 1842.89,
+      "text": "Modian"
+    },
+    {
+      "id": 337,
+      "start": 1845.11,
+      "end": 1853.38,
+      "text": "Ini untuk"
+    },
+    {
+      "id": 338,
+      "start": 1853.38,
+      "end": 1856.57,
+      "text": "keloal access user"
+    },
+    {
+      "id": 339,
+      "start": 1856.57,
+      "end": 1858.89,
+      "text": "ini untuk"
+    },
+    {
+      "id": 340,
+      "start": 1858.89,
+      "end": 1860.89,
+      "text": "keloak ID nya tercatat"
+    },
+    {
+      "id": 341,
+      "start": 1860.89,
+      "end": 1863.62,
+      "text": "di sini."
+    },
+    {
+      "id": 342,
+      "start": 1863.62,
+      "end": 1870.1,
+      "text": "Nah untuk e-mail"
+    },
+    {
+      "id": 343,
+      "start": 1870.1,
+      "end": 1872.1,
+      "text": "pilihan"
+    },
+    {
+      "id": 344,
+      "start": 1872.1,
+      "end": 1874.2,
+      "text": "pilihan"
+    },
+    {
+      "id": 345,
+      "start": 1874.2,
+      "end": 1878.47,
+      "text": "Pilihan"
+    },
+    {
+      "id": 346,
+      "start": 1878.47,
+      "end": 1881.53,
+      "text": "Pilihan"
+    },
+    {
+      "id": 347,
+      "start": 1881.53,
+      "end": 1883.53,
+      "text": "Pilihan"
+    },
+    {
+      "id": 348,
+      "start": 1883.53,
+      "end": 1885.53,
+      "text": "Nah untuk e-mail"
+    },
+    {
+      "id": 349,
+      "start": 1885.53,
+      "end": 1887.53,
+      "text": "dari Gren"
+    },
+    {
+      "id": 350,
+      "start": 1887.53,
+      "end": 1895.1,
+      "text": "Yang ingin"
+    },
+    {
+      "id": 351,
+      "start": 1895.1,
+      "end": 1897.1,
+      "text": "confirmasi lebih langsung"
+    },
+    {
+      "id": 352,
+      "start": 1897.1,
+      "end": 1899.1,
+      "text": "bagian"
+    },
+    {
+      "id": 353,
+      "start": 1899.1,
+      "end": 1901.1,
+      "text": "SSO kan"
+    },
+    {
+      "id": 354,
+      "start": 1901.1,
+      "end": 1903.1,
+      "text": "yang diminta kan nanti"
+    },
+    {
+      "id": 355,
+      "start": 1903.1,
+      "end": 1905.1,
+      "text": "SSO nya itu kan di mapping"
+    },
+    {
+      "id": 356,
+      "start": 1905.1,
+      "end": 1907.13,
+      "text": "berdasarkan e-mail nya."
+    },
+    {
+      "id": 357,
+      "start": 1907.13,
+      "end": 1909.51,
+      "text": "Nah"
+    },
+    {
+      "id": 358,
+      "start": 1909.51,
+      "end": 1911.61,
+      "text": "berarti"
+    },
+    {
+      "id": 359,
+      "start": 1911.61,
+      "end": 1913.96,
+      "text": "di SSO menurut"
+    },
+    {
+      "id": 360,
+      "start": 1913.96,
+      "end": 1915.96,
+      "text": "dari pandangan kami di SSO nya"
+    },
+    {
+      "id": 361,
+      "start": 1915.96,
+      "end": 1917.96,
+      "text": "di itu ada e-mail."
+    },
+    {
+      "id": 362,
+      "start": 1917.96,
+      "end": 1919.96,
+      "text": "Nah kami"
+    },
+    {
+      "id": 363,
+      "start": 1919.96,
+      "end": 1922.5,
+      "text": "saat ini belum bisa"
+    },
+    {
+      "id": 364,
+      "start": 1922.5,
+      "end": 1924.5,
+      "text": "implementasikan full"
+    },
+    {
+      "id": 365,
+      "start": 1924.5,
+      "end": 1926.89,
+      "text": "untuk SSO nya karena"
+    },
+    {
+      "id": 366,
+      "start": 1926.89,
+      "end": 1928.89,
+      "text": "di akun yang"
+    },
+    {
+      "id": 367,
+      "start": 1928.89,
+      "end": 1930.89,
+      "text": "diberikan kepada kami itu belum punya e-mail"
+    },
+    {
+      "id": 368,
+      "start": 1930.89,
+      "end": 1932.89,
+      "text": "di SSO."
+    },
+    {
+      "id": 369,
+      "start": 1932.89,
+      "end": 1934.89,
+      "text": "Nah ini butuh confirmasi ulang ke"
+    },
+    {
+      "id": 370,
+      "start": 1934.89,
+      "end": 1936.89,
+      "text": "apakah"
+    },
+    {
+      "id": 371,
+      "start": 1936.89,
+      "end": 1938.89,
+      "text": "kami butuh e-mail yang"
+    },
+    {
+      "id": 372,
+      "start": 1938.89,
+      "end": 1940.89,
+      "text": "di akun kami ini butuh"
+    },
+    {
+      "id": 373,
+      "start": 1940.89,
+      "end": 1942.89,
+      "text": "e-mail yang sudah terdaftar"
+    },
+    {
+      "id": 374,
+      "start": 1942.89,
+      "end": 1944.89,
+      "text": "SSO untuk nanti"
+    },
+    {
+      "id": 375,
+      "start": 1944.89,
+      "end": 1946.89,
+      "text": "kami tes full untuk login dan"
+    },
+    {
+      "id": 376,
+      "start": 1946.89,
+      "end": 1950.1,
+      "text": "akan dimaping otomatis."
+    },
+    {
+      "id": 377,
+      "start": 1950.1,
+      "end": 1952.1,
+      "text": "Boleh-boleh nanti di e-mail nya"
+    },
+    {
+      "id": 378,
+      "start": 1952.1,
+      "end": 1954.1,
+      "text": "dikirim aja nanti"
+    },
+    {
+      "id": 379,
+      "start": 1954.1,
+      "end": 1956.1,
+      "text": "saya isi dari SSO nya"
+    },
+    {
+      "id": 380,
+      "start": 1956.1,
+      "end": 1958.1,
+      "text": "e-mail nya sekalian"
+    },
+    {
+      "id": 381,
+      "start": 1958.1,
+      "end": 1960.1,
+      "text": "nama ini daftar, daftar roll nya"
+    },
+    {
+      "id": 382,
+      "start": 1960.1,
+      "end": 1962.1,
+      "text": "soalnya kan nanti pun di mapping juga kan roll nya"
+    },
+    {
+      "id": 383,
+      "start": 1962.1,
+      "end": 1964.1,
+      "text": "jadi roll default nya pegawai itu kan"
+    },
+    {
+      "id": 384,
+      "start": 1964.1,
+      "end": 1966.1,
+      "text": "mau di set langsung dari SSO gitu kalau"
+    },
+    {
+      "id": 385,
+      "start": 1966.1,
+      "end": 1968.1,
+      "text": "misalnya dia pegawai nanti"
+    },
+    {
+      "id": 386,
+      "start": 1968.1,
+      "end": 1970.1,
+      "text": "biar pas di login kan dia langsung"
+    },
+    {
+      "id": 387,
+      "start": 1970.1,
+      "end": 1972.1,
+      "text": "otomatis mapping gitu kan"
+    },
+    {
+      "id": 388,
+      "start": 1972.1,
+      "end": 1974.46,
+      "text": "selain e-mail apalagi"
+    },
+    {
+      "id": 389,
+      "start": 1974.46,
+      "end": 1977.03,
+      "text": "apa mungkin nomor HP gitu ya"
+    },
+    {
+      "id": 390,
+      "start": 1977.03,
+      "end": 1979.03,
+      "text": "nomor HP"
+    },
+    {
+      "id": 391,
+      "start": 1979.03,
+      "end": 1981.03,
+      "text": "kalau di SSO"
+    },
+    {
+      "id": 392,
+      "start": 1981.03,
+      "end": 1983.03,
+      "text": "itu punya datang"
+    },
+    {
+      "id": 393,
+      "start": 1983.03,
+      "end": 1985.03,
+      "text": "untuk nomor HP mimpan"
+    },
+    {
+      "id": 394,
+      "start": 1985.03,
+      "end": 1987.03,
+      "text": "itu ada cuman dia"
+    },
+    {
+      "id": 395,
+      "start": 1987.03,
+      "end": 1989.03,
+      "text": "jadi custom attribute"
+    },
+    {
+      "id": 396,
+      "start": 1989.03,
+      "end": 1991.03,
+      "text": "jadinya kalau misalnya sudah saya"
+    },
+    {
+      "id": 397,
+      "start": 1991.03,
+      "end": 1993.03,
+      "text": "tambahkan misalnya itu nanti"
+    },
+    {
+      "id": 398,
+      "start": 1993.03,
+      "end": 1995.03,
+      "text": "sebelum login itu kan bisa"
+    },
+    {
+      "id": 399,
+      "start": 1995.03,
+      "end": 1997.03,
+      "text": "di capture dulu kan"
+    },
+    {
+      "id": 400,
+      "start": 1997.03,
+      "end": 1999.03,
+      "text": "respon yang dikasih sama dari"
+    },
+    {
+      "id": 401,
+      "start": 1999.03,
+      "end": 2001.03,
+      "text": "SSO nya, nanti kalian bisa mapping aja"
+    },
+    {
+      "id": 402,
+      "start": 2001.03,
+      "end": 2003.03,
+      "text": "dari situ, udah tanya"
+    },
+    {
+      "id": 403,
+      "start": 2003.03,
+      "end": 2005.19,
+      "text": "nanti bisa kelihatan kalau"
+    },
+    {
+      "id": 404,
+      "start": 2005.19,
+      "end": 2007.19,
+      "text": "misalnya dia ada nomor HP nya"
+    },
+    {
+      "id": 405,
+      "start": 2007.19,
+      "end": 2009.19,
+      "text": "itu masuknya di objek mana gitu"
+    },
+    {
+      "id": 406,
+      "start": 2009.19,
+      "end": 2011.19,
+      "text": "objeknya apa kayaknya apa gitu"
+    },
+    {
+      "id": 407,
+      "start": 2016.02,
+      "end": 2018.02,
+      "text": "terus untuk yang apa"
+    },
+    {
+      "id": 408,
+      "start": 2018.02,
+      "end": 2020.02,
+      "text": "ini kan nanti mau sekalian"
+    },
+    {
+      "id": 409,
+      "start": 2020.02,
+      "end": 2022.02,
+      "text": "diintegrasikan dengan"
+    },
+    {
+      "id": 410,
+      "start": 2022.02,
+      "end": 2024.02,
+      "text": "Whatsapp business juga"
+    },
+    {
+      "id": 411,
+      "start": 2024.02,
+      "end": 2026.02,
+      "text": "nah di Whatsapp business itu kenapa saya"
+    },
+    {
+      "id": 412,
+      "start": 2026.02,
+      "end": 2028.02,
+      "text": "minta undur di terakhir itu karena"
+    },
+    {
+      "id": 413,
+      "start": 2028.02,
+      "end": 2030.02,
+      "text": "harus dibikin template dulu"
+    },
+    {
+      "id": 414,
+      "start": 2030.02,
+      "end": 2032.02,
+      "text": "jadi template nya itu, template pesan yang mau dikirim"
+    },
+    {
+      "id": 415,
+      "start": 2032.02,
+      "end": 2034.02,
+      "text": "itu kan mau butuh di approve"
+    },
+    {
+      "id": 416,
+      "start": 2034.02,
+      "end": 2036.02,
+      "text": "dari pihak meta langsung gitu ya"
+    },
+    {
+      "id": 417,
+      "start": 2036.02,
+      "end": 2038.02,
+      "text": "nah nanti kalian kalau misalnya mau dibikin"
+    },
+    {
+      "id": 418,
+      "start": 2038.02,
+      "end": 2040.02,
+      "text": "template"
+    },
+    {
+      "id": 419,
+      "start": 2040.02,
+      "end": 2042.02,
+      "text": "bikin notifikasi buat WA"
+    },
+    {
+      "id": 420,
+      "start": 2042.02,
+      "end": 2044.02,
+      "text": "itu disediakan juga ini ya"
+    },
+    {
+      "id": 421,
+      "start": 2044.02,
+      "end": 2046.02,
+      "text": "dalam bentuk dokumen aja misalnya"
+    },
+    {
+      "id": 422,
+      "start": 2046.02,
+      "end": 2048.02,
+      "text": "model pesan WA"
+    },
+    {
+      "id": 423,
+      "start": 2048.02,
+      "end": 2050.02,
+      "text": "itu seperti apa sekaligus"
+    },
+    {
+      "id": 424,
+      "start": 2050.02,
+      "end": 2052.02,
+      "text": "variable nya gitu"
+    },
+    {
+      "id": 425,
+      "start": 2052.02,
+      "end": 2054.02,
+      "text": "karena itu mau diinputkan nanti"
+    },
+    {
+      "id": 426,
+      "start": 2054.02,
+      "end": 2056.02,
+      "text": "ke pengusulan template pesannya"
+    },
+    {
+      "id": 427,
+      "start": 2056.02,
+      "end": 2058.02,
+      "text": "nanti kalau integrasi ke WA nya itu dia bukan"
+    },
+    {
+      "id": 428,
+      "start": 2058.02,
+      "end": 2060.02,
+      "text": "bukan kita ngisi"
+    },
+    {
+      "id": 429,
+      "start": 2060.02,
+      "end": 2062.02,
+      "text": "pesan biasa tapi lebih kayak kita"
+    },
+    {
+      "id": 430,
+      "start": 2062.02,
+      "end": 2064.02,
+      "text": "ngarahin ke template mana variable apa yang kita"
+    },
+    {
+      "id": 431,
+      "start": 2064.02,
+      "end": 2067.37,
+      "text": "lempar gitu"
+    },
+    {
+      "id": 432,
+      "start": 2067.37,
+      "end": 2070.49,
+      "text": "jadi nanti kalau misalnya sudah ada"
+    },
+    {
+      "id": 433,
+      "start": 2070.49,
+      "end": 2072.49,
+      "text": "gambaran notifikasi"
+    },
+    {
+      "id": 434,
+      "start": 2072.49,
+      "end": 2074.49,
+      "text": "Whatsapp nya pesannya seperti apa"
+    },
+    {
+      "id": 435,
+      "start": 2074.49,
+      "end": 2076.49,
+      "text": "itu nanti dikirim saja entah itu dalam"
+    },
+    {
+      "id": 436,
+      "start": 2076.49,
+      "end": 2078.49,
+      "text": "bentuk PDF atau apa biar nanti saya"
+    },
+    {
+      "id": 437,
+      "start": 2078.49,
+      "end": 2080.49,
+      "text": "buatkan template nya nanti saya"
+    },
+    {
+      "id": 438,
+      "start": 2080.49,
+      "end": 2082.49,
+      "text": "kirim balik ininya"
+    },
+    {
+      "id": 439,
+      "start": 2082.49,
+      "end": 2085.29,
+      "text": "template ID nya"
+    },
+    {
+      "id": 440,
+      "start": 2085.29,
+      "end": 2087.29,
+      "text": "dengan gimana cara"
+    },
+    {
+      "id": 441,
+      "start": 2087.29,
+      "end": 2089.29,
+      "text": "pasang nya gitu biar nanti kalian bisa"
+    },
+    {
+      "id": 442,
+      "start": 2089.29,
+      "end": 2091.29,
+      "text": "testing-testing gitu yang penting"
+    },
+    {
+      "id": 443,
+      "start": 2091.29,
+      "end": 2093.29,
+      "text": "template nya ada dulu gitu template bakunya"
+    },
+    {
+      "id": 444,
+      "start": 2093.29,
+      "end": 2095.29,
+      "text": "barang kali misalnya dia ada"
+    },
+    {
+      "id": 445,
+      "start": 2095.29,
+      "end": 2097.29,
+      "text": "3 model pesan 4 model pesan itu gak apa-apa"
+    },
+    {
+      "id": 446,
+      "start": 2097.29,
+      "end": 2099.29,
+      "text": "karena perlu saya ajukan"
+    },
+    {
+      "id": 447,
+      "start": 2099.29,
+      "end": 2101.29,
+      "text": "dulu kan dia sistemnya template"
+    },
+    {
+      "id": 448,
+      "start": 2101.29,
+      "end": 2103.29,
+      "text": "jadi gak sebatas"
+    },
+    {
+      "id": 449,
+      "start": 2103.29,
+      "end": 2105.29,
+      "text": "kita kirim pesan terus langsung"
+    },
+    {
+      "id": 450,
+      "start": 2105.29,
+      "end": 2107.29,
+      "text": "dari WA nya ngirim gak itu lebih"
+    },
+    {
+      "id": 451,
+      "start": 2107.29,
+      "end": 2109.29,
+      "text": "kayak template dulu yang diterima dari"
+    },
+    {
+      "id": 452,
+      "start": 2109.29,
+      "end": 2111.29,
+      "text": "WA nya itu cuman variable-variable"
+    },
+    {
+      "id": 453,
+      "start": 2111.29,
+      "end": 2113.9,
+      "text": "variable dari"
+    },
+    {
+      "id": 454,
+      "start": 2113.9,
+      "end": 2118.49,
+      "text": "template nya gitu"
+    },
+    {
+      "id": 455,
+      "start": 2118.49,
+      "end": 2131.46,
+      "text": "jika memakan 3"
+    },
+    {
+      "id": 456,
+      "start": 2131.46,
+      "end": 2135.54,
+      "text": "okay, next apa lagi"
+    },
+    {
+      "id": 457,
+      "start": 2135.54,
+      "end": 2137.54,
+      "text": "selanjutnya"
+    },
+    {
+      "id": 458,
+      "start": 2145.88,
+      "end": 2147.98,
+      "text": "terus untuk pengajuan cuti itu"
+    },
+    {
+      "id": 459,
+      "start": 2147.98,
+      "end": 2149.98,
+      "text": "tadi coba bukan menurut pengajuan cuti"
+    },
+    {
+      "id": 460,
+      "start": 2149.98,
+      "end": 2151.98,
+      "text": "dia"
+    },
+    {
+      "id": 461,
+      "start": 2151.98,
+      "end": 2154.01,
+      "text": "oh yang pengajuan cuti"
+    },
+    {
+      "id": 462,
+      "start": 2154.01,
+      "end": 2156.74,
+      "text": "nah"
+    },
+    {
+      "id": 463,
+      "start": 2156.74,
+      "end": 2158.74,
+      "text": "ini coba ajukan cuti baru"
+    },
+    {
+      "id": 464,
+      "start": 2158.74,
+      "end": 2161.48,
+      "text": "ini tadi"
+    },
+    {
+      "id": 465,
+      "start": 2161.48,
+      "end": 2163.48,
+      "text": "katanya ada palidasi ya kalau misalnya"
+    },
+    {
+      "id": 466,
+      "start": 2163.48,
+      "end": 2165.48,
+      "text": "saldo nya belum di"
+    },
+    {
+      "id": 467,
+      "start": 2165.48,
+      "end": 2167.48,
+      "text": "ini belum diisi"
+    },
+    {
+      "id": 468,
+      "start": 2167.48,
+      "end": 2169.51,
+      "text": "oh ada"
+    },
+    {
+      "id": 469,
+      "start": 2169.51,
+      "end": 2186.78,
+      "text": "nggak"
+    },
+    {
+      "id": 470,
+      "start": 2186.78,
+      "end": 2224.2,
+      "text": "bawa"
+    },
+    {
+      "id": 471,
+      "start": 2224.2,
+      "end": 2226.2,
+      "text": "ini yang di palidasi"
+    },
+    {
+      "id": 472,
+      "start": 2226.2,
+      "end": 2228.94,
+      "text": "kalau misalnya"
+    },
+    {
+      "id": 473,
+      "start": 2228.94,
+      "end": 2230.94,
+      "text": "saldo cuti nya sudah lewat"
+    },
+    {
+      "id": 474,
+      "start": 2230.94,
+      "end": 2232.94,
+      "text": "dengan yang di"
+    },
+    {
+      "id": 475,
+      "start": 2232.94,
+      "end": 2235.13,
+      "text": "lintas tahun"
+    },
+    {
+      "id": 476,
+      "start": 2235.13,
+      "end": 2238.15,
+      "text": "nah untuk cuti lintas tahun itu juga"
+    },
+    {
+      "id": 477,
+      "start": 2238.15,
+      "end": 2240.15,
+      "text": "gak bisa ya"
+    },
+    {
+      "id": 478,
+      "start": 2240.15,
+      "end": 2248.23,
+      "text": "dibuat"
+    },
+    {
+      "id": 479,
+      "start": 2248.23,
+      "end": 2252.18,
+      "text": "ya"
+    },
+    {
+      "id": 480,
+      "start": 2252.18,
+      "end": 2255.98,
+      "text": "di december"
+    },
+    {
+      "id": 481,
+      "start": 2255.98,
+      "end": 2269.88,
+      "text": "nah ini"
+    },
+    {
+      "id": 482,
+      "start": 2269.88,
+      "end": 2271.88,
+      "text": "nah ini dia"
+    },
+    {
+      "id": 483,
+      "start": 2273.91,
+      "end": 2275.91,
+      "text": "tahun kalender"
+    },
+    {
+      "id": 484,
+      "start": 2275.91,
+      "end": 2278.23,
+      "text": "jadi harus dibuat"
+    },
+    {
+      "id": 485,
+      "start": 2278.23,
+      "end": 2282.5,
+      "text": "cuti terpisah"
+    },
+    {
+      "id": 486,
+      "start": 2282.5,
+      "end": 2298.17,
+      "text": "terima kasih"
+    },
+    {
+      "id": 487,
+      "start": 2298.17,
+      "end": 2301.03,
+      "text": "terima kasih"
+    },
+    {
+      "id": 488,
+      "start": 2301.03,
+      "end": 2303.03,
+      "text": "terima kasih"
+    },
+    {
+      "id": 489,
+      "start": 2303.03,
+      "end": 2312.94,
+      "text": "terima kasih"
+    },
+    {
+      "id": 490,
+      "start": 2312.94,
+      "end": 2342.2,
+      "text": "ini belum ada tem-t"
+    },
+    {
+      "id": 491,
+      "start": 2342.2,
+      "end": 2344.2,
+      "text": "terima kasih"
+    },
+    {
+      "id": 492,
+      "start": 2344.2,
+      "end": 2346.68,
+      "text": "tem-t"
+    },
+    {
+      "id": 493,
+      "start": 2346.68,
+      "end": 2348.68,
+      "text": "terima kasih"
+    },
+    {
+      "id": 494,
+      "start": 2398.58,
+      "end": 2400.58,
+      "text": "nah terus ini"
+    },
+    {
+      "id": 495,
+      "start": 2400.58,
+      "end": 2402.87,
+      "text": "perhitungan cutinya"
+    },
+    {
+      "id": 496,
+      "start": 2402.87,
+      "end": 2404.87,
+      "text": "ini kenapa bisa sampai 20 hari itu"
+    },
+    {
+      "id": 497,
+      "start": 2404.87,
+      "end": 2408.95,
+      "text": "nah yang 20 hari ini"
+    },
+    {
+      "id": 498,
+      "start": 2408.95,
+      "end": 2410.95,
+      "text": "dia akan"
+    },
+    {
+      "id": 499,
+      "start": 2410.95,
+      "end": 2412.95,
+      "text": "terpotong dari"
+    },
+    {
+      "id": 500,
+      "start": 2412.95,
+      "end": 2415.62,
+      "text": "yang n2 dulu"
+    },
+    {
+      "id": 501,
+      "start": 2415.62,
+      "end": 2417.75,
+      "text": "n2 kan tadi"
+    },
+    {
+      "id": 502,
+      "start": 2417.75,
+      "end": 2419.75,
+      "text": "n1"
+    },
+    {
+      "id": 503,
+      "start": 2419.75,
+      "end": 2421.75,
+      "text": "n6"
+    },
+    {
+      "id": 504,
+      "start": 2421.75,
+      "end": 2423.75,
+      "text": "yang"
+    },
+    {
+      "id": 505,
+      "start": 2423.75,
+      "end": 2425.75,
+      "text": "tahun saat ini yang n itu dia"
+    },
+    {
+      "id": 506,
+      "start": 2425.75,
+      "end": 2427.75,
+      "text": "8"
+    },
+    {
+      "id": 507,
+      "start": 2427.75,
+      "end": 2429.75,
+      "text": "jadi totalnya 20"
+    },
+    {
+      "id": 508,
+      "start": 2429.75,
+      "end": 2431.75,
+      "text": "jadi maksimal"
+    },
+    {
+      "id": 509,
+      "start": 2431.75,
+      "end": 2433.85,
+      "text": "cuti tahunan itu dia"
+    },
+    {
+      "id": 510,
+      "start": 2433.85,
+      "end": 2435.85,
+      "text": "24"
+    },
+    {
+      "id": 511,
+      "start": 2435.85,
+      "end": 2437.85,
+      "text": "dari tahun n2 yang 1"
+    },
+    {
+      "id": 512,
+      "start": 2437.85,
+      "end": 2440.2,
+      "text": "dengan tahun saat ini"
+    },
+    {
+      "id": 513,
+      "start": 2440.2,
+      "end": 2442.2,
+      "text": "tapi kaya n2 nya dia ada"
+    },
+    {
+      "id": 514,
+      "start": 2442.2,
+      "end": 2444.2,
+      "text": "misalnya n2 nya itu dia ada sisa cutinya"
+    },
+    {
+      "id": 515,
+      "start": 2444.2,
+      "end": 2447.8,
+      "text": "berapa gitu"
+    },
+    {
+      "id": 516,
+      "start": 2447.8,
+      "end": 2449.8,
+      "text": "coba lihat menu"
+    },
+    {
+      "id": 517,
+      "start": 2449.8,
+      "end": 2451.8,
+      "text": "menu administratif kota cuti dulu deh"
+    },
+    {
+      "id": 518,
+      "start": 2451.8,
+      "end": 2455.05,
+      "text": "saldo cuti"
+    },
+    {
+      "id": 519,
+      "start": 2455.05,
+      "end": 2458.33,
+      "text": "nah coba set"
+    },
+    {
+      "id": 520,
+      "start": 2458.33,
+      "end": 2463.14,
+      "text": "satu pegawai"
+    },
+    {
+      "id": 521,
+      "start": 2468.52,
+      "end": 2474.23,
+      "text": "yang sebenernya"
+    },
+    {
+      "id": 522,
+      "start": 2474.23,
+      "end": 2476.55,
+      "text": "nah yang ini"
+    },
+    {
+      "id": 523,
+      "start": 2476.55,
+      "end": 2483.9,
+      "text": "yang"
+    },
+    {
+      "id": 524,
+      "start": 2483.9,
+      "end": 2509.42,
+      "text": "jadi dia"
+    },
+    {
+      "id": 525,
+      "start": 2509.42,
+      "end": 2511.42,
+      "text": "yang kami buat itu dia"
+    },
+    {
+      "id": 526,
+      "start": 2511.42,
+      "end": 2513.42,
+      "text": "untuk"
+    },
+    {
+      "id": 527,
+      "start": 2513.42,
+      "end": 2515.42,
+      "text": "pemutungannya nanti"
+    },
+    {
+      "id": 528,
+      "start": 2515.42,
+      "end": 2517.42,
+      "text": "akan diambil dari yang n2 dulu"
+    },
+    {
+      "id": 529,
+      "start": 2517.42,
+      "end": 2519.42,
+      "text": "dia dari"
+    },
+    {
+      "id": 530,
+      "start": 2519.42,
+      "end": 2521.9,
+      "text": "belakang ke depan"
+    },
+    {
+      "id": 531,
+      "start": 2521.9,
+      "end": 2523.9,
+      "text": "yang n2 setelah yang ini"
+    },
+    {
+      "id": 532,
+      "start": 2523.9,
+      "end": 2525.9,
+      "text": "sudah habis"
+    },
+    {
+      "id": 533,
+      "start": 2525.9,
+      "end": 2527.9,
+      "text": "baru akan dipotong dari yang n1"
+    },
+    {
+      "id": 534,
+      "start": 2527.9,
+      "end": 2530.95,
+      "text": "baru yang tahun sekarang"
+    },
+    {
+      "id": 535,
+      "start": 2530.95,
+      "end": 2532.95,
+      "text": "bentar-bentar"
+    },
+    {
+      "id": 536,
+      "start": 2532.95,
+      "end": 2534.95,
+      "text": "ini gimana"
+    },
+    {
+      "id": 537,
+      "start": 2534.95,
+      "end": 2536.98,
+      "text": "saya bacanya ini"
+    },
+    {
+      "id": 538,
+      "start": 2536.98,
+      "end": 2538.98,
+      "text": "saya lihat sisa"
+    },
+    {
+      "id": 539,
+      "start": 2538.98,
+      "end": 2541.27,
+      "text": "kota cutinya itu dimana"
+    },
+    {
+      "id": 540,
+      "start": 2541.27,
+      "end": 2544.74,
+      "text": "kalau di menu sini"
+    },
+    {
+      "id": 541,
+      "start": 2544.74,
+      "end": 2546.74,
+      "text": "nah kalau yang di sini"
+    },
+    {
+      "id": 542,
+      "start": 2546.74,
+      "end": 2550.12,
+      "text": "itu belum ada ya"
+    },
+    {
+      "id": 543,
+      "start": 2550.12,
+      "end": 2553.27,
+      "text": "dari sini"
+    },
+    {
+      "id": 544,
+      "start": 2553.27,
+      "end": 2555.27,
+      "text": "yang itu"
+    },
+    {
+      "id": 545,
+      "start": 2555.27,
+      "end": 2557.27,
+      "text": "mungkin nanti akan ditambahkan"
+    },
+    {
+      "id": 546,
+      "start": 2557.27,
+      "end": 2559.27,
+      "text": "nah ini berarti angka-angka yang ditaruh disini"
+    },
+    {
+      "id": 547,
+      "start": 2559.27,
+      "end": 2561.27,
+      "text": "apakah kota cuti yang terpakai"
+    },
+    {
+      "id": 548,
+      "start": 2561.27,
+      "end": 2563.27,
+      "text": "atau sisa kota cuti"
+    },
+    {
+      "id": 549,
+      "start": 2563.27,
+      "end": 2565.72,
+      "text": "ini"
+    },
+    {
+      "id": 550,
+      "start": 2567.72,
+      "end": 2569.72,
+      "text": "konfigurasi cuti awal"
+    },
+    {
+      "id": 551,
+      "start": 2572.62,
+      "end": 2574.62,
+      "text": "untuk saldo awal"
+    },
+    {
+      "id": 552,
+      "start": 2574.62,
+      "end": 2576.84,
+      "text": "saldo awal"
+    },
+    {
+      "id": 553,
+      "start": 2576.84,
+      "end": 2578.84,
+      "text": "berarti dia dapatnya di 2024"
+    },
+    {
+      "id": 554,
+      "start": 2578.84,
+      "end": 2580.84,
+      "text": "sisa 6 gitu"
+    },
+    {
+      "id": 555,
+      "start": 2580.84,
+      "end": 2582.94,
+      "text": "karena"
+    },
+    {
+      "id": 556,
+      "start": 2582.94,
+      "end": 2584.94,
+      "text": "nanti untuk"
+    },
+    {
+      "id": 557,
+      "start": 2584.94,
+      "end": 2586.94,
+      "text": "setiap pegawai akan diinputkan untuk"
+    },
+    {
+      "id": 558,
+      "start": 2586.94,
+      "end": 2590.44,
+      "text": "saldo awalnya"
+    },
+    {
+      "id": 559,
+      "start": 2590.44,
+      "end": 2592.98,
+      "text": "jadi"
+    },
+    {
+      "id": 560,
+      "start": 2592.98,
+      "end": 2595.14,
+      "text": "untuk cuti ini"
+    },
+    {
+      "id": 561,
+      "start": 2595.14,
+      "end": 2597.14,
+      "text": "dia memang peritungannya agak tricky"
+    },
+    {
+      "id": 562,
+      "start": 2597.14,
+      "end": 2599.14,
+      "text": "tadi kan kota cutinya bisa sampai"
+    },
+    {
+      "id": 563,
+      "start": 2599.14,
+      "end": 2601.14,
+      "text": "20 kan itu sebenarnya"
+    },
+    {
+      "id": 564,
+      "start": 2601.14,
+      "end": 2603.14,
+      "text": "tidak lajim itu"
+    },
+    {
+      "id": 565,
+      "start": 2603.14,
+      "end": 2605.14,
+      "text": "jadi misalnya kalau dia"
+    },
+    {
+      "id": 566,
+      "start": 2605.14,
+      "end": 2607.14,
+      "text": "kalau di posisi UI nya yang sekarang ya"
+    },
+    {
+      "id": 567,
+      "start": 2607.14,
+      "end": 2609.27,
+      "text": "dia sisa cuti kan"
+    },
+    {
+      "id": 568,
+      "start": 2609.27,
+      "end": 2611.27,
+      "text": "2024, 6 nih"
+    },
+    {
+      "id": 569,
+      "start": 2611.27,
+      "end": 2613.27,
+      "text": "2025, 6"
+    },
+    {
+      "id": 570,
+      "start": 2613.27,
+      "end": 2615.27,
+      "text": "nah besi selain tahun berjalan ini"
+    },
+    {
+      "id": 571,
+      "start": 2615.27,
+      "end": 2617.27,
+      "text": "angka dari mana di input sendiri apa"
+    },
+    {
+      "id": 572,
+      "start": 2617.27,
+      "end": 2622.89,
+      "text": "pertungan atau gimana"
+    },
+    {
+      "id": 573,
+      "start": 2622.89,
+      "end": 2624.89,
+      "text": "nah kalau yang besi selain tahun berjalan"
+    },
+    {
+      "id": 574,
+      "start": 2624.89,
+      "end": 2627.34,
+      "text": "dia"
+    },
+    {
+      "id": 575,
+      "start": 2627.34,
+      "end": 2629.34,
+      "text": "setiap tahun itu"
+    },
+    {
+      "id": 576,
+      "start": 2629.34,
+      "end": 2631.34,
+      "text": "akan diambil otomatis 12"
+    },
+    {
+      "id": 577,
+      "start": 2631.34,
+      "end": 2635.61,
+      "text": "nah jadi dia"
+    },
+    {
+      "id": 578,
+      "start": 2635.61,
+      "end": 2637.61,
+      "text": "setiap masuk ke tahun baru"
+    },
+    {
+      "id": 579,
+      "start": 2637.61,
+      "end": 2639.64,
+      "text": "di januari awal"
+    },
+    {
+      "id": 580,
+      "start": 2639.64,
+      "end": 2641.86,
+      "text": "nah dia untuk"
+    },
+    {
+      "id": 581,
+      "start": 2641.86,
+      "end": 2643.86,
+      "text": "cutinya itu otomatis"
+    },
+    {
+      "id": 582,
+      "start": 2643.86,
+      "end": 2645.86,
+      "text": "akan 12"
+    },
+    {
+      "id": 583,
+      "start": 2645.86,
+      "end": 2647.86,
+      "text": "cuman kalau yang untuk"
+    },
+    {
+      "id": 584,
+      "start": 2647.86,
+      "end": 2649.86,
+      "text": "konfigurasi awal karena ini sudah"
+    },
+    {
+      "id": 585,
+      "start": 2649.86,
+      "end": 2651.86,
+      "text": "masuk di pertengganan tahun"
+    },
+    {
+      "id": 586,
+      "start": 2651.86,
+      "end": 2653.86,
+      "text": "akan di inputkan untuk sisa saldo yang tahun ini"
+    },
+    {
+      "id": 587,
+      "start": 2653.86,
+      "end": 2655.86,
+      "text": "karena akan ditambahkan"
+    },
+    {
+      "id": 588,
+      "start": 2655.86,
+      "end": 2657.86,
+      "text": "untuk pendaftaran saldo awal"
+    },
+    {
+      "id": 589,
+      "start": 2657.86,
+      "end": 2659.86,
+      "text": "di besi selain tahun saat imbul"
+    },
+    {
+      "id": 590,
+      "start": 2659.86,
+      "end": 2665.19,
+      "text": "tapi nanti untuk yang"
+    },
+    {
+      "id": 591,
+      "start": 2665.19,
+      "end": 2667.19,
+      "text": "di tahun 2027"
+    },
+    {
+      "id": 592,
+      "start": 2667.19,
+      "end": 2669.19,
+      "text": "januari itu"
+    },
+    {
+      "id": 593,
+      "start": 2669.19,
+      "end": 2671.19,
+      "text": "saldo nya akan otomatis"
+    },
+    {
+      "id": 594,
+      "start": 2671.19,
+      "end": 2673.19,
+      "text": "di update jadi"
+    },
+    {
+      "id": 595,
+      "start": 2673.19,
+      "end": 2680.95,
+      "text": "maksimal dolas"
+    },
+    {
+      "id": 596,
+      "start": 2680.95,
+      "end": 2683.69,
+      "text": "bentar ya"
+    },
+    {
+      "id": 597,
+      "start": 2683.69,
+      "end": 2692.73,
+      "text": "jadi ini"
+    },
+    {
+      "id": 598,
+      "start": 2692.73,
+      "end": 2695.24,
+      "text": "logikanya"
+    },
+    {
+      "id": 599,
+      "start": 2695.24,
+      "end": 2697.24,
+      "text": "setiap tahun kan"
+    },
+    {
+      "id": 600,
+      "start": 2697.24,
+      "end": 2699.24,
+      "text": "kalau gawa itu pasti dapat"
+    },
+    {
+      "id": 601,
+      "start": 2699.24,
+      "end": 2701.3,
+      "text": "jata cuti 12 kan"
+    },
+    {
+      "id": 602,
+      "start": 2701.3,
+      "end": 2703.3,
+      "text": "dari baik dari"
+    },
+    {
+      "id": 603,
+      "start": 2703.3,
+      "end": 2705.3,
+      "text": "2024-2025"
+    },
+    {
+      "id": 604,
+      "start": 2705.3,
+      "end": 2707.59,
+      "text": "2026"
+    },
+    {
+      "id": 605,
+      "start": 2707.59,
+      "end": 2709.59,
+      "text": "nah kalau dia"
+    },
+    {
+      "id": 606,
+      "start": 2709.59,
+      "end": 2711.59,
+      "text": "2 tahun berturut-turut di 2024-2025"
+    },
+    {
+      "id": 607,
+      "start": 2711.59,
+      "end": 2713.59,
+      "text": "dia yang gak ambil cuti itu kan"
+    },
+    {
+      "id": 608,
+      "start": 2713.59,
+      "end": 2715.59,
+      "text": "logikanya dia dapat 24"
+    },
+    {
+      "id": 609,
+      "start": 2715.59,
+      "end": 2717.59,
+      "text": "kalau ditambah dengan tahun sekarang"
+    },
+    {
+      "id": 610,
+      "start": 2717.59,
+      "end": 2719.59,
+      "text": "kota cutinya berarti berapa 36 kan"
+    },
+    {
+      "id": 611,
+      "start": 2719.59,
+      "end": 2721.59,
+      "text": "nah tapi"
+    },
+    {
+      "id": 612,
+      "start": 2721.59,
+      "end": 2723.59,
+      "text": "kota cuti itu di aturnya cuman"
+    },
+    {
+      "id": 613,
+      "start": 2723.59,
+      "end": 2725.59,
+      "text": "maksimal 24"
+    },
+    {
+      "id": 614,
+      "start": 2725.59,
+      "end": 2727.59,
+      "text": "kalau di 2024"
+    },
+    {
+      "id": 615,
+      "start": 2727.59,
+      "end": 2729.59,
+      "text": "dengan 2025 itu dia"
+    },
+    {
+      "id": 616,
+      "start": 2729.59,
+      "end": 2731.59,
+      "text": "tidak pernah ambil cuti sama sekali"
+    },
+    {
+      "id": 617,
+      "start": 2731.59,
+      "end": 2733.59,
+      "text": "nah posisinya kan ini"
+    },
+    {
+      "id": 618,
+      "start": 2733.59,
+      "end": 2735.59,
+      "text": "besi selain yang 2024 itu kan udah 6"
+    },
+    {
+      "id": 619,
+      "start": 2735.59,
+      "end": 2737.59,
+      "text": "ya kan"
+    },
+    {
+      "id": 620,
+      "start": 2737.59,
+      "end": 2739.59,
+      "text": "berarti tangannya kan"
+    },
+    {
+      "id": 621,
+      "start": 2739.59,
+      "end": 2741.59,
+      "text": "dia udah ambil cuti 6 hari dong"
+    },
+    {
+      "id": 622,
+      "start": 2741.59,
+      "end": 2743.94,
+      "text": "karena sisanya 6"
+    },
+    {
+      "id": 623,
+      "start": 2743.94,
+      "end": 2745.94,
+      "text": "nah itu dia berarti di tahun"
+    },
+    {
+      "id": 624,
+      "start": 2745.94,
+      "end": 2747.94,
+      "text": "2026 nya dia cuman bisa"
+    },
+    {
+      "id": 625,
+      "start": 2747.94,
+      "end": 2749.94,
+      "text": "climb 6 dari tahun sebelumnya"
+    },
+    {
+      "id": 626,
+      "start": 2749.94,
+      "end": 2751.94,
+      "text": "tapi bukan tahun-tahun sebelumnya"
+    },
+    {
+      "id": 627,
+      "start": 2751.94,
+      "end": 2753.94,
+      "text": "tapi cuman tahun sebelumnya"
+    },
+    {
+      "id": 628,
+      "start": 2753.94,
+      "end": 2755.94,
+      "text": "jadi dia rollovernya"
+    },
+    {
+      "id": 629,
+      "start": 2755.94,
+      "end": 2757.94,
+      "text": "kalau misalnya dia udah ambil 6"
+    },
+    {
+      "id": 630,
+      "start": 2757.94,
+      "end": 2759.94,
+      "text": "di 2024 berarti"
+    },
+    {
+      "id": 631,
+      "start": 2759.94,
+      "end": 2761.94,
+      "text": "kota cuti dia di 2025"
+    },
+    {
+      "id": 632,
+      "start": 2761.94,
+      "end": 2762.94,
+      "text": "itu kan dia dapet"
+    },
+    {
+      "id": 633,
+      "start": 2762.94,
+      "end": 2764.94,
+      "text": "besi selainnya 12 ya kan"
+    },
+    {
+      "id": 634,
+      "start": 2764.94,
+      "end": 2767.04,
+      "text": "ditambah 6"
+    },
+    {
+      "id": 635,
+      "start": 2767.04,
+      "end": 2769.04,
+      "text": "nah itu kalau kota rollovernya"
+    },
+    {
+      "id": 636,
+      "start": 2769.04,
+      "end": 2771.04,
+      "text": "maksimalnya itu cuman bisa 18 hari"
+    },
+    {
+      "id": 637,
+      "start": 2771.04,
+      "end": 2773.04,
+      "text": "di climb jadi meskipun dia di besi selainnya"
+    },
+    {
+      "id": 638,
+      "start": 2773.04,
+      "end": 2775.04,
+      "text": "itu dia nyesaknya 8 hari"
+    },
+    {
+      "id": 639,
+      "start": 2775.04,
+      "end": 2777.04,
+      "text": "di 2025-nya itu"
+    },
+    {
+      "id": 640,
+      "start": 2777.04,
+      "end": 2779.04,
+      "text": "karena yang di rollovernya cuman 6"
+    },
+    {
+      "id": 641,
+      "start": 2779.04,
+      "end": 2781.04,
+      "text": "berarti yang ke bawah yang 3"
+    },
+    {
+      "id": 642,
+      "start": 2781.04,
+      "end": 2783.04,
+      "text": "kalau dia sisanya 8 berarti 2-nya"
+    },
+    {
+      "id": 643,
+      "start": 2783.04,
+      "end": 2784.04,
+      "text": "nggak ke bawah gitu kan"
+    },
+    {
+      "id": 644,
+      "start": 2784.04,
+      "end": 2786.04,
+      "text": "karena yang bisa di climb cuman 2"
+    },
+    {
+      "id": 645,
+      "start": 2786.04,
+      "end": 2788.04,
+      "text": "jadi perhitungan di tahun 2025"
+    },
+    {
+      "id": 646,
+      "start": 2788.04,
+      "end": 2789.04,
+      "text": "pasti 12 tambah"
+    },
+    {
+      "id": 647,
+      "start": 2789.04,
+      "end": 2791.04,
+      "text": "sisak kota rollovernya di tahun kemarin"
+    },
+    {
+      "id": 648,
+      "start": 2791.04,
+      "end": 2793.04,
+      "text": "jadi kalau misalnya"
+    },
+    {
+      "id": 649,
+      "start": 2793.04,
+      "end": 2795.04,
+      "text": "tahun kemarinya itu dia sisanya 4"
+    },
+    {
+      "id": 650,
+      "start": 2795.04,
+      "end": 2797.04,
+      "text": "itu berarti di rollovernya di 2025"
+    },
+    {
+      "id": 651,
+      "start": 2797.04,
+      "end": 2801.73,
+      "text": "itu jadi berapa"
+    },
+    {
+      "id": 652,
+      "start": 2801.73,
+      "end": 2802.73,
+      "text": "jadi berapa"
+    },
+    {
+      "id": 653,
+      "start": 2802.73,
+      "end": 2806.52,
+      "text": "jadi di kota 2024"
+    },
+    {
+      "id": 654,
+      "start": 2806.52,
+      "end": 2808.52,
+      "text": "dia sisak cutinya itu 4"
+    },
+    {
+      "id": 655,
+      "start": 2808.52,
+      "end": 2810.52,
+      "text": "di 2025"
+    },
+    {
+      "id": 656,
+      "start": 2810.52,
+      "end": 2816.46,
+      "text": "total cutinya berapa berarti"
+    },
+    {
+      "id": 657,
+      "start": 2816.46,
+      "end": 2818.46,
+      "text": "16"
+    },
+    {
+      "id": 658,
+      "start": 2818.46,
+      "end": 2820.46,
+      "text": "karena yang ke bawah 4"
+    },
+    {
+      "id": 659,
+      "start": 2820.46,
+      "end": 2822.46,
+      "text": "kalau misalnya 2024"
+    },
+    {
+      "id": 660,
+      "start": 2822.46,
+      "end": 2824.46,
+      "text": "dia sisak cuti"
+    },
+    {
+      "id": 661,
+      "start": 2824.46,
+      "end": 2827.46,
+      "text": "12 misalnya dia nggak ngambil sama sekali"
+    },
+    {
+      "id": 662,
+      "start": 2827.46,
+      "end": 2829.46,
+      "text": "di 2025 berarti kuota cutinya berapa"
+    },
+    {
+      "id": 663,
+      "start": 2829.46,
+      "end": 2833.18,
+      "text": "18"
+    },
+    {
+      "id": 664,
+      "start": 2833.18,
+      "end": 2835.53,
+      "text": "berapa?"
+    },
+    {
+      "id": 665,
+      "start": 2835.53,
+      "end": 2836.53,
+      "text": "18"
+    },
+    {
+      "id": 666,
+      "start": 2836.53,
+      "end": 2838.53,
+      "text": "nah 18"
+    },
+    {
+      "id": 667,
+      "start": 2838.53,
+      "end": 2840.53,
+      "text": "nah dia berarti kuota cutinya kan 18"
+    },
+    {
+      "id": 668,
+      "start": 2840.53,
+      "end": 2842.53,
+      "text": "kalau dia nggak ngambil cuti lagi"
+    },
+    {
+      "id": 669,
+      "start": 2842.53,
+      "end": 2844.53,
+      "text": "di 2025 misalnya"
+    },
+    {
+      "id": 670,
+      "start": 2844.53,
+      "end": 2846.53,
+      "text": "tapi di 2024 kan dia sudah ngambil"
+    },
+    {
+      "id": 671,
+      "start": 2846.53,
+      "end": 2848.53,
+      "text": "cuti 6"
+    },
+    {
+      "id": 672,
+      "start": 2848.53,
+      "end": 2850.53,
+      "text": "jadi 2024 itu sisak kuota hanya 6"
+    },
+    {
+      "id": 673,
+      "start": 2850.53,
+      "end": 2852.53,
+      "text": "di 2025 itu karena 18"
+    },
+    {
+      "id": 674,
+      "start": 2852.53,
+      "end": 2854.53,
+      "text": "dia nggak ngambil cuti sama sekali"
+    },
+    {
+      "id": 675,
+      "start": 2854.53,
+      "end": 2856.53,
+      "text": "jadi kuota cutinya di 2025"
+    },
+    {
+      "id": 676,
+      "start": 2856.53,
+      "end": 2857.53,
+      "text": "tetap 18"
+    },
+    {
+      "id": 677,
+      "start": 2857.53,
+      "end": 2859.53,
+      "text": "di 2026 berarti kuota cutinya berapa"
+    },
+    {
+      "id": 678,
+      "start": 2859.53,
+      "end": 2864.92,
+      "text": "jadi"
+    },
+    {
+      "id": 679,
+      "start": 2864.92,
+      "end": 2866.92,
+      "text": "26"
+    },
+    {
+      "id": 680,
+      "start": 2866.92,
+      "end": 2867.92,
+      "text": "24"
+    },
+    {
+      "id": 681,
+      "start": 2867.92,
+      "end": 2868.92,
+      "text": "24"
+    },
+    {
+      "id": 682,
+      "start": 2868.92,
+      "end": 2869.98,
+      "text": "24"
+    },
+    {
+      "id": 683,
+      "start": 2869.98,
+      "end": 2870.98,
+      "text": "24"
+    },
+    {
+      "id": 684,
+      "start": 2870.98,
+      "end": 2871.98,
+      "text": "24"
+    },
+    {
+      "id": 685,
+      "start": 2871.98,
+      "end": 2872.98,
+      "text": "24"
+    },
+    {
+      "id": 686,
+      "start": 2872.98,
+      "end": 2873.98,
+      "text": "23"
+    },
+    {
+      "id": 687,
+      "start": 2873.98,
+      "end": 2874.98,
+      "text": "24"
+    },
+    {
+      "id": 688,
+      "start": 2874.98,
+      "end": 2875.98,
+      "text": "18"
+    },
+    {
+      "id": 689,
+      "start": 2875.98,
+      "end": 2876.98,
+      "text": "20"
+    },
+    {
+      "id": 690,
+      "start": 2876.98,
+      "end": 2877.98,
+      "text": "20"
+    },
+    {
+      "id": 691,
+      "start": 2877.98,
+      "end": 2879.05,
+      "text": "30"
+    },
+    {
+      "id": 692,
+      "start": 2879.05,
+      "end": 2880.05,
+      "text": "10"
+    },
+    {
+      "id": 693,
+      "start": 2880.05,
+      "end": 2881.05,
+      "text": "10"
+    },
+    {
+      "id": 694,
+      "start": 2881.05,
+      "end": 2882.05,
+      "text": "10"
+    },
+    {
+      "id": 695,
+      "start": 2882.05,
+      "end": 2883.05,
+      "text": "10"
+    },
+    {
+      "id": 696,
+      "start": 2883.05,
+      "end": 2888.08,
+      "text": "10"
+    },
+    {
+      "id": 697,
+      "start": 2888.08,
+      "end": 2889.11,
+      "text": "10"
+    },
+    {
+      "id": 698,
+      "start": 2889.11,
+      "end": 2892.11,
+      "text": "berarti tetap maksimalnya di 24 ya Pak"
+    },
+    {
+      "id": 699,
+      "start": 2892.11,
+      "end": 2893.4,
+      "text": "enggak"
+    },
+    {
+      "id": 700,
+      "start": 2893.4,
+      "end": 2896.4,
+      "text": "di 2026-nya berarti dia 18"
+    },
+    {
+      "id": 701,
+      "start": 2896.4,
+      "end": 2900.2,
+      "text": "karena dia udah ngambil cuti di nmin2 kan"
+    },
+    {
+      "id": 702,
+      "start": 2900.2,
+      "end": 2902.2,
+      "text": "2024 dia sisak cutinya 6"
+    },
+    {
+      "id": 703,
+      "start": 2902.2,
+      "end": 2904.2,
+      "text": "di 2025 dia"
+    },
+    {
+      "id": 704,
+      "start": 2904.2,
+      "end": 2906.2,
+      "text": "sisanya kan masih 12"
+    },
+    {
+      "id": 705,
+      "start": 2906.2,
+      "end": 2909.2,
+      "text": "ditambah 6 yang rollovertang sebenarnya kan 18"
+    },
+    {
+      "id": 706,
+      "start": 2909.2,
+      "end": 2912.2,
+      "text": "nah di 2026 dia kan memang dapatnya 12"
+    },
+    {
+      "id": 707,
+      "start": 2912.2,
+      "end": 2913.2,
+      "text": "ya kan"
+    },
+    {
+      "id": 708,
+      "start": 2913.2,
+      "end": 2916.2,
+      "text": "tapi kan karena dia sudah pernah ambil cuti"
+    },
+    {
+      "id": 709,
+      "start": 2916.2,
+      "end": 2917.2,
+      "text": "di nmin2"
+    },
+    {
+      "id": 710,
+      "start": 2917.2,
+      "end": 2918.2,
+      "text": "karena sisanya 6"
+    },
+    {
+      "id": 711,
+      "start": 2918.2,
+      "end": 2919.2,
+      "text": "jadi meskipun"
+    },
+    {
+      "id": 712,
+      "start": 2919.2,
+      "end": 2921.2,
+      "text": "sisanya di tahun sebelumnya 18"
+    },
+    {
+      "id": 713,
+      "start": 2921.2,
+      "end": 2922.2,
+      "text": "di tahun 2026"
+    },
+    {
+      "id": 714,
+      "start": 2922.2,
+      "end": 2924.2,
+      "text": "kuota cutinya tetap 18 lagi"
+    },
+    {
+      "id": 715,
+      "start": 2924.2,
+      "end": 2926.46,
+      "text": "dia baru 2024"
+    },
+    {
+      "id": 716,
+      "start": 2926.46,
+      "end": 2927.46,
+      "text": "kalau memang di 2024"
+    },
+    {
+      "id": 717,
+      "start": 2927.46,
+      "end": 2929.46,
+      "text": "dia kok sisak kuota cutinya 12"
+    },
+    {
+      "id": 718,
+      "start": 2929.46,
+      "end": 2930.46,
+      "text": "di 2025 dia"
+    },
+    {
+      "id": 719,
+      "start": 2930.46,
+      "end": 2932.46,
+      "text": "sisak kuota cutinya 12 juga"
+    },
+    {
+      "id": 720,
+      "start": 2932.46,
+      "end": 2933.46,
+      "text": "dia nggak ngambil kan"
+    },
+    {
+      "id": 721,
+      "start": 2933.46,
+      "end": 2934.46,
+      "text": "baru di 2026"
+    },
+    {
+      "id": 722,
+      "start": 2934.46,
+      "end": 2935.46,
+      "text": "dia dapat 24"
+    },
+    {
+      "id": 723,
+      "start": 2939.98,
+      "end": 2941.98,
+      "text": "berarti dia 24 itu"
+    },
+    {
+      "id": 724,
+      "start": 2941.98,
+      "end": 2943.98,
+      "text": "ketika yang n2 dengan n1"
+    },
+    {
+      "id": 725,
+      "start": 2943.98,
+      "end": 2944.98,
+      "text": "dia nggak ngambil sama sekali ya"
+    },
+    {
+      "id": 726,
+      "start": 2944.98,
+      "end": 2945.98,
+      "text": "iya betul"
+    },
+    {
+      "id": 727,
+      "start": 2945.98,
+      "end": 2946.98,
+      "text": "kalau misalnya"
+    },
+    {
+      "id": 728,
+      "start": 2946.98,
+      "end": 2947.98,
+      "text": "dia cuma ngambil 1 hari aja"
+    },
+    {
+      "id": 729,
+      "start": 2947.98,
+      "end": 2949.98,
+      "text": "itu tetap rollovert"
+    },
+    {
+      "id": 730,
+      "start": 2949.98,
+      "end": 2951.98,
+      "text": "di n2 n1"
+    },
+    {
+      "id": 731,
+      "start": 2951.98,
+      "end": 2953.98,
+      "text": "itu tetap di 2026 sekarang"
+    },
+    {
+      "id": 732,
+      "start": 2953.98,
+      "end": 2955.98,
+      "text": "18 gitu"
+    },
+    {
+      "id": 733,
+      "start": 2955.98,
+      "end": 2957.98,
+      "text": "oh 18 tetap"
+    },
+    {
+      "id": 734,
+      "start": 2962.75,
+      "end": 2964.75,
+      "text": "nah itu baiknya ditampilin aja"
+    },
+    {
+      "id": 735,
+      "start": 2964.75,
+      "end": 2966.75,
+      "text": "di pendataan saldo awal ini"
+    },
+    {
+      "id": 736,
+      "start": 2966.75,
+      "end": 2967.75,
+      "text": "jadi"
+    },
+    {
+      "id": 737,
+      "start": 2967.75,
+      "end": 2969.75,
+      "text": "pas dia nginput"
+    },
+    {
+      "id": 738,
+      "start": 2969.75,
+      "end": 2971.75,
+      "text": "misalnya biasanya kuota di 2024"
+    },
+    {
+      "id": 739,
+      "start": 2971.75,
+      "end": 2972.75,
+      "text": "sisak 4"
+    },
+    {
+      "id": 740,
+      "start": 2972.75,
+      "end": 2974.75,
+      "text": "berarti di 2025 itu"
+    },
+    {
+      "id": 741,
+      "start": 2974.75,
+      "end": 2977.75,
+      "text": "dia dapatnya"
+    },
+    {
+      "id": 742,
+      "start": 2977.75,
+      "end": 2980.07,
+      "text": "16 kan"
+    },
+    {
+      "id": 743,
+      "start": 2980.07,
+      "end": 2981.07,
+      "text": "16"
+    },
+    {
+      "id": 744,
+      "start": 2981.07,
+      "end": 2983.07,
+      "text": "usahakan yang di kuota tahun berjalan itu"
+    },
+    {
+      "id": 745,
+      "start": 2983.07,
+      "end": 2985.07,
+      "text": "nggak perlu di input lagi"
+    },
+    {
+      "id": 746,
+      "start": 2985.07,
+      "end": 2987.07,
+      "text": "makanya ini kalau misalnya"
+    },
+    {
+      "id": 747,
+      "start": 2987.07,
+      "end": 2989.07,
+      "text": "casnya ini kita pake"
+    },
+    {
+      "id": 748,
+      "start": 2989.07,
+      "end": 2991.07,
+      "text": "dari 2024 kan memang agak"
+    },
+    {
+      "id": 749,
+      "start": 2991.07,
+      "end": 2992.07,
+      "text": "bingung tapi senggaknya"
+    },
+    {
+      "id": 750,
+      "start": 2992.07,
+      "end": 2994.07,
+      "text": "tetap kalian"
+    },
+    {
+      "id": 751,
+      "start": 2994.07,
+      "end": 2996.07,
+      "text": "kayak dijadikan cas aja gitu"
+    },
+    {
+      "id": 752,
+      "start": 2996.07,
+      "end": 2998.07,
+      "text": "karena perhitungan cuti ini"
+    },
+    {
+      "id": 753,
+      "start": 2998.07,
+      "end": 3000.07,
+      "text": "agak bahaya kalau misalnya dia"
+    },
+    {
+      "id": 754,
+      "start": 3000.07,
+      "end": 3001.07,
+      "text": "misleading gitu kan"
+    },
+    {
+      "id": 755,
+      "start": 3001.07,
+      "end": 3002.07,
+      "text": "karena kuota cutinya itu"
+    },
+    {
+      "id": 756,
+      "start": 3002.07,
+      "end": 3003.07,
+      "text": "kalau sampai 20 itu"
+    },
+    {
+      "id": 757,
+      "start": 3003.07,
+      "end": 3005.07,
+      "text": "itu udah janggal sebenarnya"
+    },
+    {
+      "id": 758,
+      "start": 3005.07,
+      "end": 3006.07,
+      "text": "karena maksimalnya itu 18"
+    },
+    {
+      "id": 759,
+      "start": 3006.07,
+      "end": 3008.07,
+      "text": "berapapun sisak kuota cuti"
+    },
+    {
+      "id": 760,
+      "start": 3008.07,
+      "end": 3009.07,
+      "text": "di tahun sebelumnya"
+    },
+    {
+      "id": 761,
+      "start": 3009.07,
+      "end": 3011.07,
+      "text": "tetap yang di kelem itu cuma 6 gitu"
+    },
+    {
+      "id": 762,
+      "start": 3037.65,
+      "end": 3040.67,
+      "text": "jadi mau dia"
+    },
+    {
+      "id": 763,
+      "start": 3040.67,
+      "end": 3042.67,
+      "text": "mau dia di 2024"
+    },
+    {
+      "id": 764,
+      "start": 3042.67,
+      "end": 3044.67,
+      "text": "dia kuota cutinya mungkin"
+    },
+    {
+      "id": 765,
+      "start": 3044.67,
+      "end": 3046.67,
+      "text": "masih 12 di 2025"
+    },
+    {
+      "id": 766,
+      "start": 3046.67,
+      "end": 3048.67,
+      "text": "dia ambil kuota cuti cuma 1 hari saja"
+    },
+    {
+      "id": 767,
+      "start": 3048.67,
+      "end": 3050.67,
+      "text": "beratikan sisanya berapa"
+    },
+    {
+      "id": 768,
+      "start": 3050.67,
+      "end": 3052.67,
+      "text": "17 kan"
+    },
+    {
+      "id": 769,
+      "start": 3052.67,
+      "end": 3054.67,
+      "text": "karena dia udah ambil 1 hari"
+    },
+    {
+      "id": 770,
+      "start": 3054.67,
+      "end": 3056.67,
+      "text": "11 ditambah 6 dari tahun sebelumnya kan"
+    },
+    {
+      "id": 771,
+      "start": 3056.67,
+      "end": 3058.7,
+      "text": "nah di 2026"
+    },
+    {
+      "id": 772,
+      "start": 3058.7,
+      "end": 3060.7,
+      "text": "kalau dia tidak pake ya"
+    },
+    {
+      "id": 773,
+      "start": 3060.7,
+      "end": 3061.7,
+      "text": "dia ditariknya juga di rowernya"
+    },
+    {
+      "id": 774,
+      "start": 3061.7,
+      "end": 3062.7,
+      "text": "cuma tetap 6 juga"
+    },
+    {
+      "id": 775,
+      "start": 3062.7,
+      "end": 3063.7,
+      "text": "berarti 18 gitu"
+    },
+    {
+      "id": 776,
+      "start": 3063.7,
+      "end": 3065.7,
+      "text": "makanya agak sayang-sayang"
+    },
+    {
+      "id": 777,
+      "start": 3065.7,
+      "end": 3067.7,
+      "text": "kalau nggak dipake kalau cutunya"
+    },
+    {
+      "id": 778,
+      "start": 3067.7,
+      "end": 3073.35,
+      "text": "jadi kalian"
+    },
+    {
+      "id": 779,
+      "start": 3073.35,
+      "end": 3075.35,
+      "text": "tanpa satu kolom aja dulu buat simulasi"
+    },
+    {
+      "id": 780,
+      "start": 3075.35,
+      "end": 3077.35,
+      "text": "simulasi perhitungan"
+    },
+    {
+      "id": 781,
+      "start": 3077.35,
+      "end": 3078.35,
+      "text": "misalnya kalau di impusnya"
+    },
+    {
+      "id": 782,
+      "start": 3078.35,
+      "end": 3079.35,
+      "text": "2024"
+    },
+    {
+      "id": 783,
+      "start": 3081.42,
+      "end": 3082.42,
+      "text": "berapa ya"
+    },
+    {
+      "id": 784,
+      "start": 3082.42,
+      "end": 3084.42,
+      "text": "perhitungannya jangan pake sistem"
+    },
+    {
+      "id": 785,
+      "start": 3084.42,
+      "end": 3085.42,
+      "text": "saldo cuti dulu"
+    },
+    {
+      "id": 786,
+      "start": 3085.42,
+      "end": 3087.42,
+      "text": "tapi kuota yang diambil"
+    },
+    {
+      "id": 787,
+      "start": 3087.42,
+      "end": 3089.42,
+      "text": "jadi tanpa satu kolom dulu buat kalian"
+    },
+    {
+      "id": 788,
+      "start": 3089.42,
+      "end": 3090.42,
+      "text": "hitung-hitung gitu kan"
+    },
+    {
+      "id": 789,
+      "start": 3090.42,
+      "end": 3092.42,
+      "text": "buat pastikan perhitungan kuotanya bener"
+    },
+    {
+      "id": 790,
+      "start": 3092.42,
+      "end": 3094.42,
+      "text": "karena tiap tahun itu"
+    },
+    {
+      "id": 791,
+      "start": 3094.42,
+      "end": 3096.42,
+      "text": "pegawai itu dapet 12 hari cuti"
+    },
+    {
+      "id": 792,
+      "start": 3096.42,
+      "end": 3097.42,
+      "text": "nah buat mempermudah perhitungan kan"
+    },
+    {
+      "id": 793,
+      "start": 3097.42,
+      "end": 3100.42,
+      "text": "kalau misalnya tiap tahun itu udah pasti 12"
+    },
+    {
+      "id": 794,
+      "start": 3100.42,
+      "end": 3102.42,
+      "text": "beratikan kalian tinggal"
+    },
+    {
+      "id": 795,
+      "start": 3102.42,
+      "end": 3104.42,
+      "text": "ngitung berapa hari"
+    },
+    {
+      "id": 796,
+      "start": 3104.42,
+      "end": 3106.48,
+      "text": "cuti yang udah kepake gitu kan"
+    },
+    {
+      "id": 797,
+      "start": 3107.48,
+      "end": 3110.48,
+      "text": "jadi 2004 kan cutinya 12"
+    },
+    {
+      "id": 798,
+      "start": 3110.48,
+      "end": 3112.48,
+      "text": "nah tinggal di input misalnya dia udah pakenya"
+    },
+    {
+      "id": 799,
+      "start": 3112.48,
+      "end": 3113.48,
+      "text": "berapa 6"
+    },
+    {
+      "id": 800,
+      "start": 3113.48,
+      "end": 3114.48,
+      "text": "beratikan sisa 6"
+    },
+    {
+      "id": 801,
+      "start": 3114.48,
+      "end": 3116.48,
+      "text": "nah di 2025 dia hitung kan"
+    },
+    {
+      "id": 802,
+      "start": 3116.48,
+      "end": 3118.48,
+      "text": "pasti 12 tambah 6 jadi 18"
+    },
+    {
+      "id": 803,
+      "start": 3118.48,
+      "end": 3119.48,
+      "text": "nah itu sisa kuota cutinya"
+    },
+    {
+      "id": 804,
+      "start": 3119.48,
+      "end": 3121.48,
+      "text": "kalau misalnya dia yang inputnya"
+    },
+    {
+      "id": 805,
+      "start": 3121.48,
+      "end": 3123.48,
+      "text": "terpake udah 5 misalnya"
+    },
+    {
+      "id": 806,
+      "start": 3123.48,
+      "end": 3125.48,
+      "text": "beratikan sisa 13"
+    },
+    {
+      "id": 807,
+      "start": 3125.48,
+      "end": 3126.48,
+      "text": "nah di tahun selacunya juga gitu"
+    },
+    {
+      "id": 808,
+      "start": 3126.48,
+      "end": 3127.48,
+      "text": "pasti di rowernya cuma 6"
+    },
+    {
+      "id": 809,
+      "start": 3127.48,
+      "end": 3129.48,
+      "text": "6 tanpa 12 lagi gitu"
+    },
+    {
+      "id": 810,
+      "start": 3130.48,
+      "end": 3132.48,
+      "text": "soalnya kalau kalian"
+    },
+    {
+      "id": 811,
+      "start": 3132.48,
+      "end": 3134.48,
+      "text": "coba ngitungnya pake saldo awal"
+    },
+    {
+      "id": 812,
+      "start": 3134.48,
+      "end": 3136.48,
+      "text": "kan agak bingung buat dibikin skenario nya kan"
+    },
+    {
+      "id": 813,
+      "start": 3136.48,
+      "end": 3138.48,
+      "text": "nah ini coba dibalik dulu"
+    },
+    {
+      "id": 814,
+      "start": 3138.48,
+      "end": 3140.48,
+      "text": "skenario nya itu setiap tahun itu"
+    },
+    {
+      "id": 815,
+      "start": 3140.48,
+      "end": 3142.48,
+      "text": "udah pasti dapet 12 gitu"
+    },
+    {
+      "id": 816,
+      "start": 3142.48,
+      "end": 3144.48,
+      "text": "jadi kalau misalnya N1N2"
+    },
+    {
+      "id": 817,
+      "start": 3144.48,
+      "end": 3146.48,
+      "text": "di 2026 kalau dia gak ngambil"
+    },
+    {
+      "id": 818,
+      "start": 3146.48,
+      "end": 3148.48,
+      "text": "di N1N2 beratikan kuota tahun itu"
+    },
+    {
+      "id": 819,
+      "start": 3148.48,
+      "end": 3150.48,
+      "text": "kan 12 ya kan"
+    },
+    {
+      "id": 820,
+      "start": 3150.48,
+      "end": 3152.48,
+      "text": "nah kuota tiap tahun itu di 2024 kan"
+    },
+    {
+      "id": 821,
+      "start": 3152.48,
+      "end": 3154.48,
+      "text": "dia gak ngambil berarti 6 ya kan"
+    },
+    {
+      "id": 822,
+      "start": 3154.48,
+      "end": 3156.48,
+      "text": "di 2025 dia dapet 6 juga"
+    },
+    {
+      "id": 823,
+      "start": 3156.48,
+      "end": 3158.48,
+      "text": "beratikan ditotakan 12"
+    },
+    {
+      "id": 824,
+      "start": 3158.48,
+      "end": 3161.48,
+      "text": "tambah 6 tambah 6 kan merapat 24 kan"
+    },
+    {
+      "id": 825,
+      "start": 3161.48,
+      "end": 3163.48,
+      "text": "nah gitu"
+    },
+    {
+      "id": 826,
+      "start": 3163.48,
+      "end": 3167.02,
+      "text": "jadi berpikirnya di balik aja"
+    },
+    {
+      "id": 827,
+      "start": 3167.02,
+      "end": 3169.02,
+      "text": "jadi pake sistem"
+    },
+    {
+      "id": 828,
+      "start": 3169.02,
+      "end": 3171.02,
+      "text": "berapa yang udah di klahim"
+    },
+    {
+      "id": 829,
+      "start": 3171.02,
+      "end": 3173.02,
+      "text": "nah itu bakal ketemu kok saldo"
+    },
+    {
+      "id": 830,
+      "start": 3173.02,
+      "end": 3176.52,
+      "text": "saldo cutinya berapa"
+    },
+    {
+      "id": 831,
+      "start": 3176.52,
+      "end": 3178.52,
+      "text": "jadi kalau untuk perhitungan saldo cuti yang"
+    },
+    {
+      "id": 832,
+      "start": 3178.52,
+      "end": 3179.52,
+      "text": "di input kan"
+    },
+    {
+      "id": 833,
+      "start": 3179.52,
+      "end": 3181.52,
+      "text": "dia udah cuti berapa hari"
+    },
+    {
+      "id": 834,
+      "start": 3181.52,
+      "end": 3183.52,
+      "text": "sebelumnya gitu kalau misalnya"
+    },
+    {
+      "id": 835,
+      "start": 3183.52,
+      "end": 3185.52,
+      "text": "tahun ini 0 yang berarti"
+    },
+    {
+      "id": 836,
+      "start": 3185.52,
+      "end": 3187.52,
+      "text": "biar nanti sisa kuota cutinya itu di hitung"
+    },
+    {
+      "id": 837,
+      "start": 3187.52,
+      "end": 3188.52,
+      "text": "bisistem"
+    },
+    {
+      "id": 838,
+      "start": 3188.52,
+      "end": 3193.04,
+      "text": "paham"
+    },
+    {
+      "id": 839,
+      "start": 3193.04,
+      "end": 3195.39,
+      "text": "apa deh yang masih membingungkan"
+    },
+    {
+      "id": 840,
+      "start": 3195.39,
+      "end": 3205.23,
+      "text": "terus kalau yang"
+    },
+    {
+      "id": 841,
+      "start": 3205.23,
+      "end": 3207.23,
+      "text": "koreksis saldo itu apa koreksis saldo"
+    },
+    {
+      "id": 842,
+      "start": 3207.23,
+      "end": 3210.45,
+      "text": "nah itu kalau misalnya"
+    },
+    {
+      "id": 843,
+      "start": 3210.45,
+      "end": 3213.45,
+      "text": "ada yang"
+    },
+    {
+      "id": 844,
+      "start": 3213.45,
+      "end": 3215.64,
+      "text": "di N2"
+    },
+    {
+      "id": 845,
+      "start": 3215.64,
+      "end": 3217.64,
+      "text": "kayak salah input gitu"
+    },
+    {
+      "id": 846,
+      "start": 3217.64,
+      "end": 3219.64,
+      "text": "jadi ini ada yang di koreksis"
+    },
+    {
+      "id": 847,
+      "start": 3219.64,
+      "end": 3221.64,
+      "text": "nah ini sebenarnya"
+    },
+    {
+      "id": 848,
+      "start": 3221.64,
+      "end": 3223.64,
+      "text": "dia gak perlu"
+    },
+    {
+      "id": 849,
+      "start": 3223.64,
+      "end": 3225.64,
+      "text": "kalau misalnya dia hitungannya udah berapa hari"
+    },
+    {
+      "id": 850,
+      "start": 3225.64,
+      "end": 3227.64,
+      "text": "yang di klahim cutinya kan"
+    },
+    {
+      "id": 851,
+      "start": 3227.64,
+      "end": 3229.64,
+      "text": "jadi gak perlu di koreksis karena perhitungannya kan"
+    },
+    {
+      "id": 852,
+      "start": 3229.64,
+      "end": 3230.64,
+      "text": "pasti bisistem kan"
+    },
+    {
+      "id": 853,
+      "start": 3230.64,
+      "end": 3232.64,
+      "text": "kalau pun dia ada selisi tinggal di"
+    },
+    {
+      "id": 854,
+      "start": 3232.64,
+      "end": 3235.64,
+      "text": "di edit manual lagi misalnya dari 6"
+    },
+    {
+      "id": 855,
+      "start": 3235.64,
+      "end": 3237.64,
+      "text": "sebenarnya dia udah klahim 5 tapi ke inputnya 6"
+    },
+    {
+      "id": 856,
+      "start": 3237.64,
+      "end": 3239.64,
+      "text": "tinggal diganti otomatiskan saldo cutinya bakal"
+    },
+    {
+      "id": 857,
+      "start": 3239.64,
+      "end": 3241.64,
+      "text": "menyesuaikan sendirinya gitu kan"
+    },
+    {
+      "id": 858,
+      "start": 3259.06,
+      "end": 3261.06,
+      "text": "berarti inputannya nanti"
+    },
+    {
+      "id": 859,
+      "start": 3261.06,
+      "end": 3263.06,
+      "text": "cuma 1"
+    },
+    {
+      "id": 860,
+      "start": 3263.06,
+      "end": 3265.06,
+      "text": "dia otomatis di hitung"
+    },
+    {
+      "id": 861,
+      "start": 3265.06,
+      "end": 3267.06,
+      "text": "iya di hitung"
+    },
+    {
+      "id": 862,
+      "start": 3267.06,
+      "end": 3269.06,
+      "text": "jadi di rumusnya itu tinggal di patok"
+    },
+    {
+      "id": 863,
+      "start": 3269.06,
+      "end": 3271.06,
+      "text": "lewat"
+    },
+    {
+      "id": 864,
+      "start": 3271.06,
+      "end": 3273.06,
+      "text": "lewat back end aja gitu"
+    },
+    {
+      "id": 865,
+      "start": 3273.06,
+      "end": 3275.06,
+      "text": "jadi kalau misalnya di hitungannya"
+    },
+    {
+      "id": 866,
+      "start": 3275.06,
+      "end": 3277.06,
+      "text": "N min 2 nya kan 2024 dia udah"
+    },
+    {
+      "id": 867,
+      "start": 3277.06,
+      "end": 3279.06,
+      "text": "klahimnya berapa nanti kan otomatis"
+    },
+    {
+      "id": 868,
+      "start": 3279.06,
+      "end": 3281.06,
+      "text": "berkurang tuh"
+    },
+    {
+      "id": 869,
+      "start": 3281.06,
+      "end": 3283.06,
+      "text": "nanti yang dari n min 2 itu bakal"
+    },
+    {
+      "id": 870,
+      "start": 3283.06,
+      "end": 3285.06,
+      "text": "di akumulasi lagi ke 2025"
+    },
+    {
+      "id": 871,
+      "start": 3285.06,
+      "end": 3287.06,
+      "text": "estimasi kota cutinya berapa gitu"
+    },
+    {
+      "id": 872,
+      "start": 3287.06,
+      "end": 3289.06,
+      "text": "berarti nanti"
+    },
+    {
+      "id": 873,
+      "start": 3289.06,
+      "end": 3291.06,
+      "text": "tinggal di input lagi kota yang"
+    },
+    {
+      "id": 874,
+      "start": 3291.06,
+      "end": 3293.06,
+      "text": "kota cuti yang kepake di 2025 berapa gitu kan"
+    },
+    {
+      "id": 875,
+      "start": 3293.06,
+      "end": 3295.06,
+      "text": "itu kan pasti ke hitung otomatis semua kan"
+    },
+    {
+      "id": 876,
+      "start": 3295.06,
+      "end": 3298.25,
+      "text": "jadi berjenjang jadinya"
+    },
+    {
+      "id": 877,
+      "start": 3298.25,
+      "end": 3300.25,
+      "text": "kalau pun ada yang gak sesuai itu kan"
+    },
+    {
+      "id": 878,
+      "start": 3300.25,
+      "end": 3302.25,
+      "text": "berarti tinggal"
+    },
+    {
+      "id": 879,
+      "start": 3302.25,
+      "end": 3304.25,
+      "text": "kalau ada yang gak sesuai itu berarti ada"
+    },
+    {
+      "id": 880,
+      "start": 3304.25,
+      "end": 3306.25,
+      "text": "klahim cuti yang"
+    },
+    {
+      "id": 881,
+      "start": 3306.25,
+      "end": 3309.3,
+      "text": "masih kurang atau lebih gitu"
+    },
+    {
+      "id": 882,
+      "start": 3309.3,
+      "end": 3312.49,
+      "text": "iya kan"
+    },
+    {
+      "id": 883,
+      "start": 3312.49,
+      "end": 3314.49,
+      "text": "kalau pakai sistem sisa kuota cuti"
+    },
+    {
+      "id": 884,
+      "start": 3314.49,
+      "end": 3316.49,
+      "text": "itu kan berarti inputan manual"
+    },
+    {
+      "id": 885,
+      "start": 3316.49,
+      "end": 3318.49,
+      "text": "nah itu gimana kita mau validasi"
+    },
+    {
+      "id": 886,
+      "start": 3318.49,
+      "end": 3320.49,
+      "text": "berarti kan hujungnya tetap kita hitung sendiri"
+    },
+    {
+      "id": 887,
+      "start": 3320.49,
+      "end": 3322.49,
+      "text": "tapi kalau misalnya dia inputannya per"
+    },
+    {
+      "id": 888,
+      "start": 3322.49,
+      "end": 3324.49,
+      "text": "berapa kuota cuti yang udah di klahim"
+    },
+    {
+      "id": 889,
+      "start": 3324.49,
+      "end": 3326.49,
+      "text": "kalau misalnya yang tahun berjalan kan"
+    },
+    {
+      "id": 890,
+      "start": 3326.49,
+      "end": 3328.49,
+      "text": "2026 itu kan gak apa-apa"
+    },
+    {
+      "id": 891,
+      "start": 3328.49,
+      "end": 3330.49,
+      "text": "bisistem aja gitu kan jadi kalau cuti"
+    },
+    {
+      "id": 892,
+      "start": 3330.49,
+      "end": 3332.49,
+      "text": "cuti yang udah di klahim di 2026"
+    },
+    {
+      "id": 893,
+      "start": 3332.49,
+      "end": 3334.49,
+      "text": "kita bisa input manual nanti dia ngitung"
+    },
+    {
+      "id": 894,
+      "start": 3334.49,
+      "end": 3336.49,
+      "text": "cuti yang udah terpakai itu berapa dari sana gitu"
+    },
+    {
+      "id": 895,
+      "start": 3336.49,
+      "end": 3338.49,
+      "text": "tapi kalau 2025-2024"
+    },
+    {
+      "id": 896,
+      "start": 3338.49,
+      "end": 3340.49,
+      "text": "karena lampau itu gak apa-apa"
+    },
+    {
+      "id": 897,
+      "start": 3340.49,
+      "end": 3342.49,
+      "text": "dari admin kepegawainya input"
+    },
+    {
+      "id": 898,
+      "start": 3342.49,
+      "end": 3344.49,
+      "text": "2024 itu dia udah"
+    },
+    {
+      "id": 899,
+      "start": 3344.49,
+      "end": 3346.49,
+      "text": "cuti berapa hari, 2025 itu dia"
+    },
+    {
+      "id": 900,
+      "start": 3346.49,
+      "end": 3348.78,
+      "text": "cuti berapa hari gitu"
+    },
+    {
+      "id": 901,
+      "start": 3348.78,
+      "end": 3351.58,
+      "text": "nanti bakal kelihatan saldo cutinya berapa"
+    },
+    {
+      "id": 902,
+      "start": 3353.99,
+      "end": 3356.34,
+      "text": "paham kan"
+    },
+    {
+      "id": 903,
+      "start": 3356.34,
+      "end": 3358.34,
+      "text": "iya berarti yang di inputkan itu dia"
+    },
+    {
+      "id": 904,
+      "start": 3358.34,
+      "end": 3360.34,
+      "text": "sudah cuti berapa hari"
+    },
+    {
+      "id": 905,
+      "start": 3360.34,
+      "end": 3362.34,
+      "text": "iya tinggal"
+    },
+    {
+      "id": 906,
+      "start": 3362.34,
+      "end": 3364.34,
+      "text": "dia udah klahim cutinya berapa hari yang lampau ya"
+    },
+    {
+      "id": 907,
+      "start": 3364.34,
+      "end": 3366.34,
+      "text": "yang lampau kalau yang 2026 kan"
+    },
+    {
+      "id": 908,
+      "start": 3366.34,
+      "end": 3368.34,
+      "text": "dia gak perlu di hitung karena kan udah tahun"
+    },
+    {
+      "id": 909,
+      "start": 3368.34,
+      "end": 3370.34,
+      "text": "berjalan itu nanti dia di tahun"
+    },
+    {
+      "id": 910,
+      "start": 3370.34,
+      "end": 3372.34,
+      "text": "berjalan itu kan dia ngitungnya"
+    },
+    {
+      "id": 911,
+      "start": 3372.34,
+      "end": 3374.34,
+      "text": "berdasarkan"
+    },
+    {
+      "id": 912,
+      "start": 3374.34,
+      "end": 3376.34,
+      "text": "usulan cuti, nah dia ajuan cuti itu kan"
+    },
+    {
+      "id": 913,
+      "start": 3376.34,
+      "end": 3378.34,
+      "text": "bisa input manual juga kan"
+    },
+    {
+      "id": 914,
+      "start": 3378.34,
+      "end": 3380.34,
+      "text": "tapi di alur"
+    },
+    {
+      "id": 915,
+      "start": 3380.34,
+      "end": 3382.34,
+      "text": "ajuan cuti itu"
+    },
+    {
+      "id": 916,
+      "start": 3382.34,
+      "end": 3384.34,
+      "text": "ada form ini gak yang input manual"
+    },
+    {
+      "id": 917,
+      "start": 3384.34,
+      "end": 3386.34,
+      "text": "kalau tadi kan saya baru liat"
+    },
+    {
+      "id": 918,
+      "start": 3386.34,
+      "end": 3388.34,
+      "text": "yang ajuannya itu butuh"
+    },
+    {
+      "id": 919,
+      "start": 3388.34,
+      "end": 3390.34,
+      "text": "validasi kan"
+    },
+    {
+      "id": 920,
+      "start": 3390.34,
+      "end": 3392.41,
+      "text": "gimana kalau"
+    },
+    {
+      "id": 921,
+      "start": 3392.41,
+      "end": 3394.41,
+      "text": "casenya itu cutinya itu"
+    },
+    {
+      "id": 922,
+      "start": 3394.41,
+      "end": 3396.41,
+      "text": "udah pernah di klahim"
+    },
+    {
+      "id": 923,
+      "start": 3396.41,
+      "end": 3398.41,
+      "text": "tapi masih manual dan akhirnya mau di inputkan ke aplikasi"
+    },
+    {
+      "id": 924,
+      "start": 3398.41,
+      "end": 3400.41,
+      "text": "gitu kan, itu udah ada forumnya belum"
+    },
+    {
+      "id": 925,
+      "start": 3400.41,
+      "end": 3408.42,
+      "text": "yang forumnya itu soal"
+    },
+    {
+      "id": 926,
+      "start": 3408.42,
+      "end": 3410.42,
+      "text": "ada yang ada"
+    },
+    {
+      "id": 927,
+      "start": 3412.42,
+      "end": 3415.42,
+      "text": "sorry bapak bisa diulang yang itu"
+    },
+    {
+      "id": 928,
+      "start": 3415.42,
+      "end": 3417.42,
+      "text": "yang mana"
+    },
+    {
+      "id": 929,
+      "start": 3417.42,
+      "end": 3419.42,
+      "text": "yang di forum cuti"
+    },
+    {
+      "id": 930,
+      "start": 3419.42,
+      "end": 3421.42,
+      "text": "nah forum cuti sekarang itu kan"
+    },
+    {
+      "id": 931,
+      "start": 3421.42,
+      "end": 3423.42,
+      "text": "masih baik usulan kan"
+    },
+    {
+      "id": 932,
+      "start": 3423.42,
+      "end": 3425.42,
+      "text": "jadi pegawai usul"
+    },
+    {
+      "id": 933,
+      "start": 3425.42,
+      "end": 3427.42,
+      "text": "terus di validasi, di setuju"
+    },
+    {
+      "id": 934,
+      "start": 3427.42,
+      "end": 3429.42,
+      "text": "nah casenya itu gimana"
+    },
+    {
+      "id": 935,
+      "start": 3429.42,
+      "end": 3431.42,
+      "text": "kalau misalnya pegawainya ini"
+    },
+    {
+      "id": 936,
+      "start": 3431.42,
+      "end": 3433.42,
+      "text": "udah pernah cuti di tahun berjalan ini"
+    },
+    {
+      "id": 937,
+      "start": 3433.42,
+      "end": 3435.42,
+      "text": "tapi dia masih ikut mekanisme manual"
+    },
+    {
+      "id": 938,
+      "start": 3435.42,
+      "end": 3437.42,
+      "text": "ini kan kemungkinan di implementasinya"
+    },
+    {
+      "id": 939,
+      "start": 3437.42,
+      "end": 3439.42,
+      "text": "kalau bukan agustus september gitu kan"
+    },
+    {
+      "id": 940,
+      "start": 3439.42,
+      "end": 3441.42,
+      "text": "dari januari sampai agustus kan"
+    },
+    {
+      "id": 941,
+      "start": 3441.42,
+      "end": 3443.42,
+      "text": "pasti mereka ada usulan cuti di tahun berjalan"
+    },
+    {
+      "id": 942,
+      "start": 3443.42,
+      "end": 3445.42,
+      "text": "tapi mekanisme nya masih manual kan"
+    },
+    {
+      "id": 943,
+      "start": 3445.42,
+      "end": 3447.42,
+      "text": "nah itu kan kalau misalnya mau"
+    },
+    {
+      "id": 944,
+      "start": 3447.42,
+      "end": 3449.42,
+      "text": "ikut prosedur yang sekarang pakai form yang sekarang kan"
+    },
+    {
+      "id": 945,
+      "start": 3449.42,
+      "end": 3451.42,
+      "text": "itu berarti harus di validasi-validasi dulu"
+    },
+    {
+      "id": 946,
+      "start": 3451.42,
+      "end": 3453.42,
+      "text": "padahal kan mereka udah"
+    },
+    {
+      "id": 947,
+      "start": 3453.42,
+      "end": 3455.42,
+      "text": "ke klahim cutinya ya kan"
+    },
+    {
+      "id": 948,
+      "start": 3455.42,
+      "end": 3457.42,
+      "text": "nah berarti kan harus ada forum ini"
+    },
+    {
+      "id": 949,
+      "start": 3457.42,
+      "end": 3459.42,
+      "text": "forum penginputan cuti manual"
+    },
+    {
+      "id": 950,
+      "start": 3459.42,
+      "end": 3461.42,
+      "text": "jadinya"
+    },
+    {
+      "id": 951,
+      "start": 3461.42,
+      "end": 3463.42,
+      "text": "dokumen pendukungnya itu bakal wajib di input"
+    },
+    {
+      "id": 952,
+      "start": 3463.42,
+      "end": 3465.42,
+      "text": "nah dia itu cutinya berapa hari"
+    },
+    {
+      "id": 953,
+      "start": 3465.42,
+      "end": 3467.42,
+      "text": "dan itu langsung otomatis gitu gak perlu validasi lagi"
+    },
+    {
+      "id": 954,
+      "start": 3467.42,
+      "end": 3469.42,
+      "text": "langsung ke input cutinya gitu"
+    },
+    {
+      "id": 955,
+      "start": 3469.42,
+      "end": 3471.42,
+      "text": "cuma admin kepegawainya bisa input"
+    },
+    {
+      "id": 956,
+      "start": 3471.42,
+      "end": 3473.42,
+      "text": "itu kan biar bisa kahitung"
+    },
+    {
+      "id": 957,
+      "start": 3473.42,
+      "end": 3475.42,
+      "text": "di tahun ini dia udah berapa cuti"
+    },
+    {
+      "id": 958,
+      "start": 3475.42,
+      "end": 3477.42,
+      "text": "nanti dia bakal di akumulasi dengan usulan cuti"
+    },
+    {
+      "id": 959,
+      "start": 3477.42,
+      "end": 3479.42,
+      "text": "dari sistem yang udah berjalan"
+    },
+    {
+      "id": 960,
+      "start": 3479.42,
+      "end": 3481.67,
+      "text": "ngerti kan?"
+    },
+    {
+      "id": 961,
+      "start": 3481.67,
+      "end": 3483.67,
+      "text": "ya untuk yang itu belum kami tambahkan sih"
+    },
+    {
+      "id": 962,
+      "start": 3483.67,
+      "end": 3485.67,
+      "text": "bak"
+    },
+    {
+      "id": 963,
+      "start": 3485.67,
+      "end": 3487.67,
+      "text": "untuk me input tahun sekarang"
+    },
+    {
+      "id": 964,
+      "start": 3487.67,
+      "end": 3489.67,
+      "text": "iya"
+    },
+    {
+      "id": 965,
+      "start": 3489.67,
+      "end": 3491.67,
+      "text": "soalnya dia"
+    },
+    {
+      "id": 966,
+      "start": 3491.67,
+      "end": 3493.67,
+      "text": "bakal bergenjang karena kan"
+    },
+    {
+      "id": 967,
+      "start": 3493.67,
+      "end": 3495.67,
+      "text": "kuota cutinya ini kan mau dibaliknya paradigman"
+    },
+    {
+      "id": 968,
+      "start": 3495.67,
+      "end": 3497.67,
+      "text": "iya bukan lagi inputan berapa sisa"
+    },
+    {
+      "id": 969,
+      "start": 3497.67,
+      "end": 3499.67,
+      "text": "kuota tapi"
+    },
+    {
+      "id": 970,
+      "start": 3499.67,
+      "end": 3501.67,
+      "text": "berapa yang udah di kelahim ya kan"
+    },
+    {
+      "id": 971,
+      "start": 3501.67,
+      "end": 3503.67,
+      "text": "di 2016 kan kita gak bisa"
+    },
+    {
+      "id": 972,
+      "start": 3503.67,
+      "end": 3505.67,
+      "text": "ngotak-kantik lagi gitu tahun berjalannya"
+    },
+    {
+      "id": 973,
+      "start": 3505.67,
+      "end": 3507.67,
+      "text": "ya kan semenjak sistemnya di implementasi"
+    },
+    {
+      "id": 974,
+      "start": 3507.67,
+      "end": 3509.67,
+      "text": "yang kita bisa gitu kan cuma yang"
+    },
+    {
+      "id": 975,
+      "start": 3509.67,
+      "end": 3511.67,
+      "text": "2 tahun sebelumnya ya kan"
+    },
+    {
+      "id": 976,
+      "start": 3511.67,
+      "end": 3513.67,
+      "text": "nah"
+    },
+    {
+      "id": 977,
+      "start": 3513.67,
+      "end": 3515.67,
+      "text": "kalau misalnya dibaliknya"
+    },
+    {
+      "id": 978,
+      "start": 3515.67,
+      "end": 3517.67,
+      "text": "itu itu gimana kita bisa ngitung"
+    },
+    {
+      "id": 979,
+      "start": 3517.67,
+      "end": 3519.67,
+      "text": "berapa hari yang udah ke kelahim"
+    },
+    {
+      "id": 980,
+      "start": 3519.67,
+      "end": 3521.67,
+      "text": "dari periode januari sampai agusus"
+    },
+    {
+      "id": 981,
+      "start": 3521.67,
+      "end": 3523.67,
+      "text": "kalau tidak ada form manual iya kan"
+    },
+    {
+      "id": 982,
+      "start": 3523.67,
+      "end": 3525.67,
+      "text": "jadi bakal bergenjang itu"
+    },
+    {
+      "id": 983,
+      "start": 3525.67,
+      "end": 3527.77,
+      "text": "jadi kalau di hitungnya cuma berdasarkan"
+    },
+    {
+      "id": 984,
+      "start": 3527.77,
+      "end": 3529.77,
+      "text": "dari usulan cuti sekarang"
+    },
+    {
+      "id": 985,
+      "start": 3529.77,
+      "end": 3531.77,
+      "text": "berarti ibaratnya"
+    },
+    {
+      "id": 986,
+      "start": 3531.77,
+      "end": 3534.15,
+      "text": "preset dari nol lagi dong"
+    },
+    {
+      "id": 987,
+      "start": 3534.15,
+      "end": 3536.15,
+      "text": "cuma usulan yang masuk di sistem"
+    },
+    {
+      "id": 988,
+      "start": 3536.15,
+      "end": 3538.15,
+      "text": "yang bisa yang kehitung"
+    },
+    {
+      "id": 989,
+      "start": 3538.15,
+      "end": 3540.86,
+      "text": "kelahim cutinya iya kan"
+    },
+    {
+      "id": 990,
+      "start": 3540.86,
+      "end": 3542.86,
+      "text": "nah makanya untuk mengatisi pasti itu"
+    },
+    {
+      "id": 991,
+      "start": 3542.86,
+      "end": 3544.86,
+      "text": "ada form usus penginputan"
+    },
+    {
+      "id": 992,
+      "start": 3544.86,
+      "end": 3546.86,
+      "text": "cuti manual gitu"
+    },
+    {
+      "id": 993,
+      "start": 3546.86,
+      "end": 3548.86,
+      "text": "dia gak apa-apa dia pake flow tapi flow nya itu langsung"
+    },
+    {
+      "id": 994,
+      "start": 3548.86,
+      "end": 3550.86,
+      "text": "otomatis aja gitu dia langsung disetujui semua"
+    },
+    {
+      "id": 995,
+      "start": 3550.86,
+      "end": 3552.86,
+      "text": "kalau dari admin kepegawain yang input"
+    },
+    {
+      "id": 996,
+      "start": 3552.86,
+      "end": 3555.27,
+      "text": "jadi bukan sistem usulan tapi sistem"
+    },
+    {
+      "id": 997,
+      "start": 3555.27,
+      "end": 3557.27,
+      "text": "penginputan"
+    },
+    {
+      "id": 998,
+      "start": 3557.27,
+      "end": 3560.52,
+      "text": "penginputan yang lampau gitu"
+    },
+    {
+      "id": 999,
+      "start": 3560.52,
+      "end": 3562.52,
+      "text": "berarti itu hanya proses untuk tahun"
+    },
+    {
+      "id": 1000,
+      "start": 3562.52,
+      "end": 3564.74,
+      "text": "saat ini?"
+    },
+    {
+      "id": 1001,
+      "start": 3564.74,
+      "end": 3566.74,
+      "text": "enggak jadi"
+    },
+    {
+      "id": 1002,
+      "start": 3566.74,
+      "end": 3568.74,
+      "text": "untuk form penginputan"
+    },
+    {
+      "id": 1003,
+      "start": 3568.74,
+      "end": 3570.74,
+      "text": "cuti manual itu gak apa-apa dibuka aja"
+    },
+    {
+      "id": 1004,
+      "start": 3570.74,
+      "end": 3572.74,
+      "text": "tapi yang disini itu cuma dari admin kepegawain"
+    },
+    {
+      "id": 1005,
+      "start": 3572.74,
+      "end": 3574.74,
+      "text": "toh itu"
+    },
+    {
+      "id": 1006,
+      "start": 3574.74,
+      "end": 3576.74,
+      "text": "dari kepegawain"
+    },
+    {
+      "id": 1007,
+      "start": 3576.74,
+      "end": 3578.74,
+      "text": "karena itu kan mengatisi pasti barangkali kan dari sistemnya"
+    },
+    {
+      "id": 1008,
+      "start": 3578.74,
+      "end": 3580.74,
+      "text": "mungkin ada masalah dari server nya"
+    },
+    {
+      "id": 1009,
+      "start": 3580.74,
+      "end": 3582.74,
+      "text": "akhirnya kan si pengnya gak bisa jalan gitu kan"
+    },
+    {
+      "id": 1010,
+      "start": 3582.74,
+      "end": 3584.74,
+      "text": "tapi ini mati pegawain-pegawain ini"
+    },
+    {
+      "id": 1011,
+      "start": 3584.74,
+      "end": 3586.74,
+      "text": "butuh cuti gitu kan akhirnya mereka"
+    },
+    {
+      "id": 1012,
+      "start": 3586.74,
+      "end": 3588.74,
+      "text": "muslinya lewat manual nah"
+    },
+    {
+      "id": 1013,
+      "start": 3588.74,
+      "end": 3590.74,
+      "text": "kalau saat sistemnya jalan kan dari"
+    },
+    {
+      "id": 1014,
+      "start": 3590.74,
+      "end": 3592.74,
+      "text": "admin kepegawain kan tinggal input lagi gitu kan"
+    },
+    {
+      "id": 1015,
+      "start": 3592.74,
+      "end": 3596.02,
+      "text": "ya"
+    },
+    {
+      "id": 1016,
+      "start": 3596.02,
+      "end": 3598.02,
+      "text": "jadi tuh"
+    },
+    {
+      "id": 1017,
+      "start": 3598.02,
+      "end": 3600.02,
+      "text": "kes-kes yang bisa saja terjadi"
+    },
+    {
+      "id": 1018,
+      "start": 3600.02,
+      "end": 3602.02,
+      "text": "makanya tetap yang form manual itu"
+    },
+    {
+      "id": 1019,
+      "start": 3602.02,
+      "end": 3604.02,
+      "text": "tetap ada gitu"
+    },
+    {
+      "id": 1020,
+      "start": 3604.02,
+      "end": 3606.7,
+      "text": "ternyata"
+    },
+    {
+      "id": 1021,
+      "start": 3606.7,
+      "end": 3608.7,
+      "text": "nanti ke depan-ke depannya"
+    },
+    {
+      "id": 1022,
+      "start": 3608.7,
+      "end": 3610.7,
+      "text": "kalau misalnya untuk saldo awal kayak gini"
+    },
+    {
+      "id": 1023,
+      "start": 3610.7,
+      "end": 3612.7,
+      "text": "itu kan kalau tahun mau"
+    },
+    {
+      "id": 1024,
+      "start": 3612.7,
+      "end": 3614.7,
+      "text": "tahunnya bakal berganti gitu kan"
+    },
+    {
+      "id": 1025,
+      "start": 3614.7,
+      "end": 3616.7,
+      "text": "itu gak apa-apa tetap"
+    },
+    {
+      "id": 1026,
+      "start": 3616.7,
+      "end": 3618.7,
+      "text": "tiap pegawainya masih bisa diubah"
+    },
+    {
+      "id": 1027,
+      "start": 3618.7,
+      "end": 3620.7,
+      "text": "saldo cutinya tapi cuman wewinannya"
+    },
+    {
+      "id": 1028,
+      "start": 3620.7,
+      "end": 3622.7,
+      "text": "dari kepegawain toh gitu"
+    },
+    {
+      "id": 1029,
+      "start": 3622.7,
+      "end": 3624.7,
+      "text": "barangkali ada perhitungannya keliru atau gimana gitu"
+    },
+    {
+      "id": 1030,
+      "start": 3624.7,
+      "end": 3626.7,
+      "text": "kalau pun"
+    },
+    {
+      "id": 1031,
+      "start": 3626.7,
+      "end": 3628.7,
+      "text": "meskipun fiturnya itu gak bakal kepake"
+    },
+    {
+      "id": 1032,
+      "start": 3628.7,
+      "end": 3630.7,
+      "text": "tapi tetap disediain aja gitu"
+    },
+    {
+      "id": 1033,
+      "start": 3630.7,
+      "end": 3632.7,
+      "text": "buat pengeditan kota cuti manual"
+    },
+    {
+      "id": 1034,
+      "start": 3632.7,
+      "end": 3634.7,
+      "text": "misalnya claim cutinya itu"
+    },
+    {
+      "id": 1035,
+      "start": 3634.7,
+      "end": 3636.7,
+      "text": "keliru"
+    },
+    {
+      "id": 1036,
+      "start": 3636.7,
+      "end": 3638.7,
+      "text": "dari kepegawainya paling kan tinggal"
+    },
+    {
+      "id": 1037,
+      "start": 3638.7,
+      "end": 3640.7,
+      "text": "di input aja lewat pengajuan form"
+    },
+    {
+      "id": 1038,
+      "start": 3640.7,
+      "end": 3642.7,
+      "text": "manual itu kan otomatis kan angkanya"
+    },
+    {
+      "id": 1039,
+      "start": 3642.7,
+      "end": 3644.7,
+      "text": "pasti berubah gitu ya kan"
+    },
+    {
+      "id": 1040,
+      "start": 3644.7,
+      "end": 3646.7,
+      "text": "misalnya ini 2004 atau 2005 gitu"
+    },
+    {
+      "id": 1041,
+      "start": 3646.7,
+      "end": 3648.7,
+      "text": "cuman kan"
+    },
+    {
+      "id": 1042,
+      "start": 3648.7,
+      "end": 3650.7,
+      "text": "kalau posisinya sekarang gak mungkin"
+    },
+    {
+      "id": 1043,
+      "start": 3650.7,
+      "end": 3652.7,
+      "text": "dong dari kepegawainya itu mau langsung input"
+    },
+    {
+      "id": 1044,
+      "start": 3652.7,
+      "end": 3654.7,
+      "text": "semua makanya di antisipasinya"
+    },
+    {
+      "id": 1045,
+      "start": 3654.7,
+      "end": 3656.7,
+      "text": "biar sistem cutinya bisa jalan"
+    },
+    {
+      "id": 1046,
+      "start": 3656.7,
+      "end": 3658.7,
+      "text": "paling di input manual dulu gitu kan"
+    },
+    {
+      "id": 1047,
+      "start": 3658.7,
+      "end": 3663.51,
+      "text": "angkanya gitu"
+    },
+    {
+      "id": 1048,
+      "start": 3663.51,
+      "end": 3665.51,
+      "text": "paham kan"
+    },
+    {
+      "id": 1049,
+      "start": 3665.51,
+      "end": 3668.22,
+      "text": "atau ada pertanyaan"
+    },
+    {
+      "id": 1050,
+      "start": 3668.22,
+      "end": 3670.22,
+      "text": "jadi gitu memang cutinya"
+    },
+    {
+      "id": 1051,
+      "start": 3670.22,
+      "end": 3672.22,
+      "text": "agak tricky"
+    },
+    {
+      "id": 1052,
+      "start": 3672.22,
+      "end": 3674.22,
+      "text": "jadinya harus disamakan dulu"
+    },
+    {
+      "id": 1053,
+      "start": 3674.22,
+      "end": 3676.22,
+      "text": "persepsinya"
+    },
+    {
+      "id": 1054,
+      "start": 3676.22,
+      "end": 3681.86,
+      "text": "tambah form inputan manual"
+    },
+    {
+      "id": 1055,
+      "start": 3681.86,
+      "end": 3683.86,
+      "text": "form inputan manual cuti"
+    },
+    {
+      "id": 1056,
+      "start": 3683.86,
+      "end": 3685.86,
+      "text": "jadi bukan pengajuan cuti tapi input cuti lah"
+    },
+    {
+      "id": 1057,
+      "start": 3685.86,
+      "end": 3690.3,
+      "text": "berarti yang akan"
+    },
+    {
+      "id": 1058,
+      "start": 3690.3,
+      "end": 3692.3,
+      "text": "di inputkan nanti cuti yang"
+    },
+    {
+      "id": 1059,
+      "start": 3692.3,
+      "end": 3694.3,
+      "text": "sudah terpakai"
+    },
+    {
+      "id": 1060,
+      "start": 3694.3,
+      "end": 3696.3,
+      "text": "oleh pegawain"
+    },
+    {
+      "id": 1061,
+      "start": 3696.3,
+      "end": 3698.3,
+      "text": "dan itu jangan"
+    },
+    {
+      "id": 1062,
+      "start": 3698.3,
+      "end": 3700.3,
+      "text": "cuman buat tahun 2006 toh"
+    },
+    {
+      "id": 1063,
+      "start": 3700.3,
+      "end": 3701.3,
+      "text": "gak menutup kemungkinan mungkin"
+    },
+    {
+      "id": 1064,
+      "start": 3701.3,
+      "end": 3703.3,
+      "text": "2004 juga tetap bakal di input"
+    },
+    {
+      "id": 1065,
+      "start": 3703.3,
+      "end": 3705.3,
+      "text": "karena buat ini kan kebutuhan administratif"
+    },
+    {
+      "id": 1066,
+      "start": 3705.3,
+      "end": 3706.3,
+      "text": "di input gitu"
+    },
+    {
+      "id": 1067,
+      "start": 3706.3,
+      "end": 3710.12,
+      "text": "jadi yang buat saldo"
+    },
+    {
+      "id": 1068,
+      "start": 3710.12,
+      "end": 3712.12,
+      "text": "saldo itu kan"
+    },
+    {
+      "id": 1069,
+      "start": 3712.12,
+      "end": 3714.12,
+      "text": "otomatis nol nih kalau misalnya"
+    },
+    {
+      "id": 1070,
+      "start": 3714.12,
+      "end": 3715.12,
+      "text": "pegawainya"
+    },
+    {
+      "id": 1071,
+      "start": 3715.12,
+      "end": 3717.12,
+      "text": "input cutinya"
+    },
+    {
+      "id": 1072,
+      "start": 3717.12,
+      "end": 3719.12,
+      "text": "acclaim cutinya di 2004 misalnya itu kan"
+    },
+    {
+      "id": 1073,
+      "start": 3719.12,
+      "end": 3721.12,
+      "text": "angkanya bakal berubah ya kan"
+    },
+    {
+      "id": 1074,
+      "start": 3721.12,
+      "end": 3723.12,
+      "text": "bakal berubah otomatis cuman kan"
+    },
+    {
+      "id": 1075,
+      "start": 3723.12,
+      "end": 3725.12,
+      "text": "tetap nanti ini kan disini sekarang ada"
+    },
+    {
+      "id": 1076,
+      "start": 3725.12,
+      "end": 3727.12,
+      "text": "fitur koreksi nah itu fitur koreksinya itu kan"
+    },
+    {
+      "id": 1077,
+      "start": 3727.12,
+      "end": 3729.12,
+      "text": "bisa langsung manual dari kepegawainya dari saldo cutinya"
+    },
+    {
+      "id": 1078,
+      "start": 3729.12,
+      "end": 3731.12,
+      "text": "misalnya yang baru ke input"
+    },
+    {
+      "id": 1079,
+      "start": 3731.12,
+      "end": 3733.12,
+      "text": "baru 1 gitu kan nah sistemnya kan"
+    },
+    {
+      "id": 1080,
+      "start": 3733.12,
+      "end": 3736.12,
+      "text": "otomatis ngetung sisa saldo cutinya itu kan"
+    },
+    {
+      "id": 1081,
+      "start": 3736.12,
+      "end": 3738.12,
+      "text": "sisa cuman 1 doa yang gitu kan yang"
+    },
+    {
+      "id": 1082,
+      "start": 3738.12,
+      "end": 3740.12,
+      "text": "kepake berarti sisa 11"
+    },
+    {
+      "id": 1083,
+      "start": 3740.12,
+      "end": 3742.12,
+      "text": "yang padahal dia masih ada 6 lagi"
+    },
+    {
+      "id": 1084,
+      "start": 3742.12,
+      "end": 3744.12,
+      "text": "nah itu kepegawainya masih bisa aja dia"
+    },
+    {
+      "id": 1085,
+      "start": 3744.12,
+      "end": 3745.12,
+      "text": "ngotang ngetik di bagian"
+    },
+    {
+      "id": 1086,
+      "start": 3745.12,
+      "end": 3747.12,
+      "text": "pendataran saldo nya ini di inputkan"
+    },
+    {
+      "id": 1087,
+      "start": 3747.12,
+      "end": 3749.12,
+      "text": "mungkin dia udah acclaim nya 6 tapi yang"
+    },
+    {
+      "id": 1088,
+      "start": 3749.12,
+      "end": 3751.7,
+      "text": "ke upload kan baru 1 gitu"
+    },
+    {
+      "id": 1089,
+      "start": 3751.7,
+      "end": 3753.7,
+      "text": "nanti kalau misalnya dari"
+    },
+    {
+      "id": 1090,
+      "start": 3753.7,
+      "end": 3755.7,
+      "text": "pengajuan cuti eh dari"
+    },
+    {
+      "id": 1091,
+      "start": 3755.7,
+      "end": 3757.7,
+      "text": "tambah cuti manual nya ini udah"
+    },
+    {
+      "id": 1092,
+      "start": 3757.7,
+      "end": 3759.7,
+      "text": "lengkap itu kan nanti tinggal dari"
+    },
+    {
+      "id": 1093,
+      "start": 3759.7,
+      "end": 3761.7,
+      "text": "kepegawainya koreksi aja angkanya yang"
+    },
+    {
+      "id": 1094,
+      "start": 3761.7,
+      "end": 3763.7,
+      "text": "di ini kan yang di saldo"
+    },
+    {
+      "id": 1095,
+      "start": 3763.7,
+      "end": 3765.7,
+      "text": "berapa yang kepake jadi misalnya ada"
+    },
+    {
+      "id": 1096,
+      "start": 3765.7,
+      "end": 3767.7,
+      "text": "tombol buat ngetung"
+    },
+    {
+      "id": 1097,
+      "start": 3767.7,
+      "end": 3769.7,
+      "text": "berapa berasarkan"
+    },
+    {
+      "id": 1098,
+      "start": 3769.7,
+      "end": 3772.7,
+      "text": "yang inputan cuti udah masuk gitu"
+    },
+    {
+      "id": 1099,
+      "start": 3772.7,
+      "end": 3774.7,
+      "text": "jadi dia gak perlu hitung manual lagi jadi"
+    },
+    {
+      "id": 1100,
+      "start": 3774.7,
+      "end": 3776.7,
+      "text": "ada otomatis nya jadi bisa nginput manual"
+    },
+    {
+      "id": 1101,
+      "start": 3776.7,
+      "end": 3778.7,
+      "text": "bisa juga langsung kayak menarik data gitu"
+    },
+    {
+      "id": 1102,
+      "start": 3778.7,
+      "end": 3780.7,
+      "text": "berapa sih cuti yang keklaim"
+    },
+    {
+      "id": 1103,
+      "start": 3780.7,
+      "end": 3782.7,
+      "text": "di tahun ini gitu jadi angkanya"
+    },
+    {
+      "id": 1104,
+      "start": 3782.7,
+      "end": 3784.7,
+      "text": "otomatis keisi gitu paham kan"
+    },
+    {
+      "id": 1105,
+      "start": 3784.7,
+      "end": 3786.76,
+      "text": "oke pak"
+    },
+    {
+      "id": 1106,
+      "start": 3786.76,
+      "end": 3791.39,
+      "text": "jadi koreksi saldo ini gak perlu ya sebenarnya"
+    },
+    {
+      "id": 1107,
+      "start": 3791.39,
+      "end": 3796.22,
+      "text": "itu nanti kita tambahkan"
+    },
+    {
+      "id": 1108,
+      "start": 3796.22,
+      "end": 3798.22,
+      "text": "jadi"
+    },
+    {
+      "id": 1109,
+      "start": 3798.22,
+      "end": 3800.22,
+      "text": "apa-apa hari ini kurang lebih"
+    },
+    {
+      "id": 1110,
+      "start": 3800.22,
+      "end": 3802.22,
+      "text": "yang jadi"
+    },
+    {
+      "id": 1111,
+      "start": 3802.22,
+      "end": 3803.22,
+      "text": "koreksi"
+    },
+    {
+      "id": 1112,
+      "start": 3803.22,
+      "end": 3805.95,
+      "text": "coba dirangkum dulu"
+    },
+    {
+      "id": 1113,
+      "start": 3805.95,
+      "end": 3808.62,
+      "text": "yang pertama di"
+    },
+    {
+      "id": 1114,
+      "start": 3808.62,
+      "end": 3812.65,
+      "text": "dicut ya"
+    },
+    {
+      "id": 1115,
+      "start": 3812.65,
+      "end": 3815.65,
+      "text": "dari yang penginputan manual"
+    },
+    {
+      "id": 1116,
+      "start": 3815.65,
+      "end": 3816.65,
+      "text": "kemudian"
+    },
+    {
+      "id": 1117,
+      "start": 3816.65,
+      "end": 3819.65,
+      "text": "penginputan saldo"
+    },
+    {
+      "id": 1118,
+      "start": 3819.65,
+      "end": 3823.09,
+      "text": "di"
+    },
+    {
+      "id": 1119,
+      "start": 3823.09,
+      "end": 3825.09,
+      "text": "n2 itu"
+    },
+    {
+      "id": 1120,
+      "start": 3825.09,
+      "end": 3828.21,
+      "text": "jadi akan di hitung otomatis nanti"
+    },
+    {
+      "id": 1121,
+      "start": 3828.21,
+      "end": 3830.21,
+      "text": "dia berjenjang"
+    },
+    {
+      "id": 1122,
+      "start": 3830.21,
+      "end": 3832.21,
+      "text": "kemudian"
+    },
+    {
+      "id": 1123,
+      "start": 3832.21,
+      "end": 3834.94,
+      "text": "hari libur"
+    },
+    {
+      "id": 1124,
+      "start": 3834.94,
+      "end": 3838.0,
+      "text": "nanti ini hanya"
+    },
+    {
+      "id": 1125,
+      "start": 3838.0,
+      "end": 3840.0,
+      "text": "diatur dari"
+    },
+    {
+      "id": 1126,
+      "start": 3840.0,
+      "end": 3842.38,
+      "text": "selama hari libur"
+    },
+    {
+      "id": 1127,
+      "start": 3842.38,
+      "end": 3844.38,
+      "text": "buat kalender"
+    },
+    {
+      "id": 1128,
+      "start": 3844.38,
+      "end": 3847.31,
+      "text": "kemudian"
+    },
+    {
+      "id": 1129,
+      "start": 3847.31,
+      "end": 3851.49,
+      "text": "email"
+    },
+    {
+      "id": 1130,
+      "start": 3851.49,
+      "end": 3853.49,
+      "text": "email"
+    },
+    {
+      "id": 1131,
+      "start": 3853.49,
+      "end": 3856.62,
+      "text": "email yang akan"
+    },
+    {
+      "id": 1132,
+      "start": 3856.62,
+      "end": 3858.68,
+      "text": "kami"
+    },
+    {
+      "id": 1133,
+      "start": 3858.68,
+      "end": 3860.68,
+      "text": "untuk lakuin testing"
+    },
+    {
+      "id": 1134,
+      "start": 3860.68,
+      "end": 3862.68,
+      "text": "switch roll"
+    },
+    {
+      "id": 1135,
+      "start": 3862.68,
+      "end": 3865.7,
+      "text": "apa lagi"
+    },
+    {
+      "id": 1136,
+      "start": 3865.7,
+      "end": 3868.31,
+      "text": "switch roll"
+    },
+    {
+      "id": 1137,
+      "start": 3868.31,
+      "end": 3870.31,
+      "text": "boleh switch roll"
+    },
+    {
+      "id": 1138,
+      "start": 3870.31,
+      "end": 3872.31,
+      "text": "yang super admin juga"
+    },
+    {
+      "id": 1139,
+      "start": 3872.31,
+      "end": 3874.31,
+      "text": "boleh switch roll"
+    },
+    {
+      "id": 1140,
+      "start": 3874.31,
+      "end": 3876.31,
+      "text": "nanti ada"
+    },
+    {
+      "id": 1141,
+      "start": 3876.31,
+      "end": 3878.54,
+      "text": "testing"
+    },
+    {
+      "id": 1142,
+      "start": 3878.54,
+      "end": 3880.79,
+      "text": "kemudian"
+    },
+    {
+      "id": 1143,
+      "start": 3880.79,
+      "end": 3882.79,
+      "text": "ada yang"
+    },
+    {
+      "id": 1144,
+      "start": 3882.79,
+      "end": 3886.55,
+      "text": "greng mau tanya"
+    },
+    {
+      "id": 1145,
+      "start": 3886.55,
+      "end": 3888.55,
+      "text": "cuman walaupun masih yang bagian switch roll"
+    },
+    {
+      "id": 1146,
+      "start": 3888.55,
+      "end": 3889.55,
+      "text": "itu"
+    },
+    {
+      "id": 1147,
+      "start": 3889.55,
+      "end": 3891.84,
+      "text": "dari super admin"
+    },
+    {
+      "id": 1148,
+      "start": 3891.84,
+      "end": 3893.84,
+      "text": "bisa"
+    },
+    {
+      "id": 1149,
+      "start": 3893.84,
+      "end": 3894.84,
+      "text": "switch roll"
+    },
+    {
+      "id": 1150,
+      "start": 3894.84,
+      "end": 3896.84,
+      "text": "pegawai atau"
+    },
+    {
+      "id": 1151,
+      "start": 3896.84,
+      "end": 3898.84,
+      "text": "super admin bisa berperan sebagai"
+    },
+    {
+      "id": 1152,
+      "start": 3898.84,
+      "end": 3900.84,
+      "text": "roll tersebut"
+    },
+    {
+      "id": 1153,
+      "start": 3900.84,
+      "end": 3902.84,
+      "text": "contoh dia bisa"
+    },
+    {
+      "id": 1154,
+      "start": 3902.84,
+      "end": 3904.84,
+      "text": "masuk ke pegawai A"
+    },
+    {
+      "id": 1155,
+      "start": 3904.84,
+      "end": 3906.84,
+      "text": "dan menjadi seperti A"
+    },
+    {
+      "id": 1156,
+      "start": 3906.84,
+      "end": 3909.35,
+      "text": "atau dia switch roll"
+    },
+    {
+      "id": 1157,
+      "start": 3909.35,
+      "end": 3911.35,
+      "text": "dia bukan"
+    },
+    {
+      "id": 1158,
+      "start": 3911.35,
+      "end": 3913.35,
+      "text": "bukan impersonate"
+    },
+    {
+      "id": 1159,
+      "start": 3913.35,
+      "end": 3915.35,
+      "text": "sebagai pegawainya tapi impersonate"
+    },
+    {
+      "id": 1160,
+      "start": 3915.35,
+      "end": 3917.96,
+      "text": "sebagai rollnya gitu"
+    },
+    {
+      "id": 1161,
+      "start": 3918.96,
+      "end": 3921.15,
+      "text": "jadi cuma base roll"
+    },
+    {
+      "id": 1162,
+      "start": 3921.15,
+      "end": 3923.15,
+      "text": "tapi itu nanti diikatnya itu jangan"
+    },
+    {
+      "id": 1163,
+      "start": 3923.15,
+      "end": 3925.15,
+      "text": "berasarkan roll super adminnya"
+    },
+    {
+      "id": 1164,
+      "start": 3925.15,
+      "end": 3926.15,
+      "text": "tapi"
+    },
+    {
+      "id": 1165,
+      "start": 3926.15,
+      "end": 3928.15,
+      "text": "dibikin aja permission gitu"
+    },
+    {
+      "id": 1166,
+      "start": 3928.15,
+      "end": 3930.15,
+      "text": "ini kan udah sistem permission kan"
+    },
+    {
+      "id": 1167,
+      "start": 3930.15,
+      "end": 3932.15,
+      "text": "jadi kalau misalnya"
+    },
+    {
+      "id": 1168,
+      "start": 3932.15,
+      "end": 3934.15,
+      "text": "pegawainya itu yang penting dia ada"
+    },
+    {
+      "id": 1169,
+      "start": 3934.15,
+      "end": 3936.15,
+      "text": "permission untuk switch roll"
+    },
+    {
+      "id": 1170,
+      "start": 3936.15,
+      "end": 3938.15,
+      "text": "dia juga bisa memakan switch roll"
+    },
+    {
+      "id": 1171,
+      "start": 3938.15,
+      "end": 3939.15,
+      "text": "buat"
+    },
+    {
+      "id": 1172,
+      "start": 3939.15,
+      "end": 3941.15,
+      "text": "gonta ganti aksesnya jadi bukan"
+    },
+    {
+      "id": 1173,
+      "start": 3941.15,
+      "end": 3943.15,
+      "text": "bukan impersonate sebagai pegawainya tapi"
+    },
+    {
+      "id": 1174,
+      "start": 3943.15,
+      "end": 3945.15,
+      "text": "impersonate sebagai rollnya gitu"
+    },
+    {
+      "id": 1175,
+      "start": 3945.15,
+      "end": 3947.15,
+      "text": "rollnya sebagai apa"
+    },
+    {
+      "id": 1176,
+      "start": 3947.15,
+      "end": 3951.78,
+      "text": "bisa"
+    },
+    {
+      "id": 1177,
+      "start": 3951.78,
+      "end": 3954.81,
+      "text": "jadi kalau misalnya mau"
+    },
+    {
+      "id": 1178,
+      "start": 3954.81,
+      "end": 3957.81,
+      "text": "mau demo atau mau dibagin itu"
+    },
+    {
+      "id": 1179,
+      "start": 3957.81,
+      "end": 3959.81,
+      "text": "misalnya ada masalah di bagian fiturnya"
+    },
+    {
+      "id": 1180,
+      "start": 3959.81,
+      "end": 3961.81,
+      "text": "pegawai dan itu kan pasti"
+    },
+    {
+      "id": 1181,
+      "start": 3961.81,
+      "end": 3963.81,
+      "text": "ada berapa"
+    },
+    {
+      "id": 1182,
+      "start": 3963.81,
+      "end": 3965.81,
+      "text": "chair uday yang cuman muncul"
+    },
+    {
+      "id": 1183,
+      "start": 3965.81,
+      "end": 3967.81,
+      "text": "di tampilan pegawai kan"
+    },
+    {
+      "id": 1184,
+      "start": 3967.81,
+      "end": 3969.81,
+      "text": "nah daripada mau lock out lagi terus minta"
+    },
+    {
+      "id": 1185,
+      "start": 3969.81,
+      "end": 3971.81,
+      "text": "usian yang password terus di pegawainya kan itu agar"
+    },
+    {
+      "id": 1186,
+      "start": 3971.81,
+      "end": 3973.81,
+      "text": "ribet nah super admin itu bisa"
+    },
+    {
+      "id": 1187,
+      "start": 3973.81,
+      "end": 3975.81,
+      "text": "tinggal ganti-ganti aja rollnya rollnya sebagai"
+    },
+    {
+      "id": 1188,
+      "start": 3975.81,
+      "end": 3976.81,
+      "text": "pegawai"
+    },
+    {
+      "id": 1189,
+      "start": 3976.81,
+      "end": 3978.81,
+      "text": "karena kan super adminnya juga kan bagian dari"
+    },
+    {
+      "id": 1190,
+      "start": 3978.81,
+      "end": 3980.97,
+      "text": "pegawai sebenarnya kan"
+    },
+    {
+      "id": 1191,
+      "start": 3980.97,
+      "end": 3982.97,
+      "text": "jadi kalau misalnya dia mau switch roll"
+    },
+    {
+      "id": 1192,
+      "start": 3982.97,
+      "end": 3984.97,
+      "text": "mau tes fitur di pimpinan ya dia tinggal"
+    },
+    {
+      "id": 1193,
+      "start": 3984.97,
+      "end": 3986.97,
+      "text": "switch roll aja sebagai pimpinan gitu"
+    },
+    {
+      "id": 1194,
+      "start": 3986.97,
+      "end": 3998.76,
+      "text": "terus yang tadi apa"
+    },
+    {
+      "id": 1195,
+      "start": 3998.76,
+      "end": 4000.76,
+      "text": "dokumen SK yang belum ini ya yang"
+    },
+    {
+      "id": 1196,
+      "start": 4000.76,
+      "end": 4003.11,
+      "text": "penginputan belum"
+    },
+    {
+      "id": 1197,
+      "start": 4003.11,
+      "end": 4005.11,
+      "text": "belum ditambahin ya fiturnya apa"
+    },
+    {
+      "id": 1198,
+      "start": 4005.11,
+      "end": 4007.78,
+      "text": "udah ada tadi"
+    },
+    {
+      "id": 1199,
+      "start": 4007.78,
+      "end": 4009.78,
+      "text": "dokumen SK sudah pak"
+    },
+    {
+      "id": 1200,
+      "start": 4009.78,
+      "end": 4010.78,
+      "text": "udah ya"
+    },
+    {
+      "id": 1201,
+      "start": 4010.78,
+      "end": 4012.78,
+      "text": "ini aja"
+    },
+    {
+      "id": 1202,
+      "start": 4012.78,
+      "end": 4013.85,
+      "text": "gini"
+    },
+    {
+      "id": 1203,
+      "start": 4013.85,
+      "end": 4015.85,
+      "text": "dokumen SK ini kan ini"
+    },
+    {
+      "id": 1204,
+      "start": 4015.85,
+      "end": 4019.29,
+      "text": "hamburannya"
+    },
+    {
+      "id": 1205,
+      "start": 4019.29,
+      "end": 4021.29,
+      "text": "nah ini ditaruh di bagian"
+    },
+    {
+      "id": 1206,
+      "start": 4021.29,
+      "end": 4023.29,
+      "text": "data pegawai coba buka data pegawai"
+    },
+    {
+      "id": 1207,
+      "start": 4023.29,
+      "end": 4025.83,
+      "text": "nah buka"
+    },
+    {
+      "id": 1208,
+      "start": 4025.83,
+      "end": 4032.47,
+      "text": "buka profilnya"
+    },
+    {
+      "id": 1209,
+      "start": 4032.47,
+      "end": 4036.3,
+      "text": "nah"
+    },
+    {
+      "id": 1210,
+      "start": 4036.3,
+      "end": 4038.3,
+      "text": "dia"
+    },
+    {
+      "id": 1211,
+      "start": 4038.3,
+      "end": 4040.3,
+      "text": "bagusnya langsung ditambahin di sini aja"
+    },
+    {
+      "id": 1212,
+      "start": 4040.3,
+      "end": 4042.3,
+      "text": "jadi memang ada dua tempat"
+    },
+    {
+      "id": 1213,
+      "start": 4042.3,
+      "end": 4044.3,
+      "text": "ada tempat untuk dokumen SK yang"
+    },
+    {
+      "id": 1214,
+      "start": 4044.3,
+      "end": 4046.3,
+      "text": "memang langsung mau dicari ada juga yang"
+    },
+    {
+      "id": 1215,
+      "start": 4046.3,
+      "end": 4048.74,
+      "text": "perpegawainya"
+    },
+    {
+      "id": 1216,
+      "start": 4048.74,
+      "end": 4052.25,
+      "text": "jadi kan ini"
+    },
+    {
+      "id": 1217,
+      "start": 4052.25,
+      "end": 4054.25,
+      "text": "satu pintu semua kan kalau misalnya"
+    },
+    {
+      "id": 1218,
+      "start": 4054.25,
+      "end": 4056.25,
+      "text": "dia ini dia baru upload KTP"
+    },
+    {
+      "id": 1219,
+      "start": 4056.25,
+      "end": 4058.25,
+      "text": "terus dia mau upload KK kan"
+    },
+    {
+      "id": 1220,
+      "start": 4058.25,
+      "end": 4060.25,
+      "text": "kudupindah menuk lagi gitu kan itu"
+    },
+    {
+      "id": 1221,
+      "start": 4060.25,
+      "end": 4062.25,
+      "text": "eksperihnya kan kurang bagus nanti"
+    },
+    {
+      "id": 1222,
+      "start": 4062.25,
+      "end": 4064.25,
+      "text": "padahal di sini kan bisa aja dia"
+    },
+    {
+      "id": 1223,
+      "start": 4064.25,
+      "end": 4066.25,
+      "text": "tinggal langsung tambah aja"
+    },
+    {
+      "id": 1224,
+      "start": 4066.25,
+      "end": 4068.25,
+      "text": "muncul pop up modal"
+    },
+    {
+      "id": 1225,
+      "start": 4068.25,
+      "end": 4070.25,
+      "text": "pilih jenis dokumennya apa profile nya udah langsung"
+    },
+    {
+      "id": 1226,
+      "start": 4070.25,
+      "end": 4072.73,
+      "text": "nambah di sini gitu kan"
+    },
+    {
+      "id": 1227,
+      "start": 4072.73,
+      "end": 4074.73,
+      "text": "lebih gampang buat dikontrol kalau misalnya dia"
+    },
+    {
+      "id": 1228,
+      "start": 4074.73,
+      "end": 4076.73,
+      "text": "mau nama-nama dokumen selain yang SK-SK ini"
+    },
+    {
+      "id": 1229,
+      "start": 4076.73,
+      "end": 4082.12,
+      "text": "cuman itu"
+    },
+    {
+      "id": 1230,
+      "start": 4082.12,
+      "end": 4084.12,
+      "text": "baiknya kalau ditampilan dokumen SK"
+    },
+    {
+      "id": 1231,
+      "start": 4084.12,
+      "end": 4086.12,
+      "text": "perpegawa ini di"
+    },
+    {
+      "id": 1232,
+      "start": 4086.12,
+      "end": 4088.12,
+      "text": "dibuat tabel terpisah yang"
+    },
+    {
+      "id": 1233,
+      "start": 4088.12,
+      "end": 4090.12,
+      "text": "dokumen lainnya dari sepegawa"
+    },
+    {
+      "id": 1234,
+      "start": 4090.12,
+      "end": 4092.12,
+      "text": "atau dokumen tambahan dengan yang SK-SK yang"
+    },
+    {
+      "id": 1235,
+      "start": 4092.12,
+      "end": 4094.12,
+      "text": "wajib di input nih kaya kenaikan pangkat"
+    },
+    {
+      "id": 1236,
+      "start": 4094.12,
+      "end": 4096.12,
+      "text": "jabatan pengelola itu kan"
+    },
+    {
+      "id": 1237,
+      "start": 4096.12,
+      "end": 4098.12,
+      "text": "memang bagian dari diwired mereka kan"
+    },
+    {
+      "id": 1238,
+      "start": 4098.12,
+      "end": 4100.12,
+      "text": "baiknya itu dipisah tabelnya"
+    },
+    {
+      "id": 1239,
+      "start": 4100.12,
+      "end": 4102.12,
+      "text": "jadi ada tabel khusus yang dokumen"
+    },
+    {
+      "id": 1240,
+      "start": 4102.12,
+      "end": 4104.12,
+      "text": "mandatori dokumen wajib di atas"
+    },
+    {
+      "id": 1241,
+      "start": 4104.12,
+      "end": 4106.12,
+      "text": "terus dokumen lainnya dibawah jadi biar lebih"
+    },
+    {
+      "id": 1242,
+      "start": 4106.12,
+      "end": 4108.15,
+      "text": "gampang buat nyari gitu"
+    },
+    {
+      "id": 1243,
+      "start": 4108.15,
+      "end": 4110.63,
+      "text": "oh iya"
+    },
+    {
+      "id": 1244,
+      "start": 4110.63,
+      "end": 4112.63,
+      "text": "kati yang SK ini bisa"
+    },
+    {
+      "id": 1245,
+      "start": 4112.63,
+      "end": 4114.63,
+      "text": "sendiri yang"
+    },
+    {
+      "id": 1246,
+      "start": 4114.63,
+      "end": 4116.63,
+      "text": "jadi gak nyampur nih kayak KTP sama SK-SK"
+    },
+    {
+      "id": 1247,
+      "start": 4116.63,
+      "end": 4118.63,
+      "text": "itu kan dokumen desmi lah kalau KTP itu kan"
+    },
+    {
+      "id": 1248,
+      "start": 4118.63,
+      "end": 4120.63,
+      "text": "lebih kena tadi atau dokumen lainnya gitu kan"
+    },
+    {
+      "id": 1249,
+      "start": 4120.63,
+      "end": 4122.63,
+      "text": "itu ditaruh aja tabelnya dibawah"
+    },
+    {
+      "id": 1250,
+      "start": 4122.63,
+      "end": 4124.63,
+      "text": "nah ini kan kaya"
+    },
+    {
+      "id": 1251,
+      "start": 4124.63,
+      "end": 4126.63,
+      "text": "kepangkatan kan udah ada nih tambari wajat"
+    },
+    {
+      "id": 1252,
+      "start": 4126.63,
+      "end": 4128.63,
+      "text": "nah di dokumen SK nya itu tinggal dibikin"
+    },
+    {
+      "id": 1253,
+      "start": 4128.63,
+      "end": 4130.63,
+      "text": "serupa juga tinggal ada pop up modelnya"
+    },
+    {
+      "id": 1254,
+      "start": 4130.63,
+      "end": 4132.73,
+      "text": "ini"
+    },
+    {
+      "id": 1255,
+      "start": 4132.73,
+      "end": 4137.86,
+      "text": "bisa"
+    },
+    {
+      "id": 1256,
+      "start": 4137.86,
+      "end": 4148.28,
+      "text": "bisa"
+    },
+    {
+      "id": 1257,
+      "start": 4148.28,
+      "end": 4150.28,
+      "text": "itu kan"
+    },
+    {
+      "id": 1258,
+      "start": 4150.28,
+      "end": 4152.28,
+      "text": "yang dokumen lainnya itu"
+    },
+    {
+      "id": 1259,
+      "start": 4152.28,
+      "end": 4154.28,
+      "text": "dibuat terpisah"
+    },
+    {
+      "id": 1260,
+      "start": 4154.28,
+      "end": 4157.43,
+      "text": "oh iya"
+    },
+    {
+      "id": 1261,
+      "start": 4157.43,
+      "end": 4159.43,
+      "text": "nah gak pas yang bagian dokumen SK"
+    },
+    {
+      "id": 1262,
+      "start": 4159.43,
+      "end": 4161.43,
+      "text": "itu"
+    },
+    {
+      "id": 1263,
+      "start": 4161.43,
+      "end": 4163.43,
+      "text": "bisa langsung"
+    },
+    {
+      "id": 1264,
+      "start": 4163.43,
+      "end": 4165.43,
+      "text": "di kawai tentu"
+    },
+    {
+      "id": 1265,
+      "start": 4165.43,
+      "end": 4167.43,
+      "text": "tapi"
+    },
+    {
+      "id": 1266,
+      "start": 4167.43,
+      "end": 4170.36,
+      "text": "ini dokumen lain"
+    },
+    {
+      "id": 1267,
+      "start": 4170.36,
+      "end": 4172.36,
+      "text": "tapi itu baru SK"
+    },
+    {
+      "id": 1268,
+      "start": 4172.36,
+      "end": 4174.36,
+      "text": "jadi untuk"
+    },
+    {
+      "id": 1269,
+      "start": 4174.36,
+      "end": 4176.36,
+      "text": "dokumen lainnya seperti KTP"
+    },
+    {
+      "id": 1270,
+      "start": 4176.36,
+      "end": 4178.36,
+      "text": "atau dan lain-lain"
+    },
+    {
+      "id": 1271,
+      "start": 4178.36,
+      "end": 4180.36,
+      "text": "nah itu memang ditambahkan manual itu"
+    },
+    {
+      "id": 1272,
+      "start": 4180.36,
+      "end": 4182.36,
+      "text": "masih di alaman"
+    },
+    {
+      "id": 1273,
+      "start": 4182.36,
+      "end": 4184.36,
+      "text": "dokumen itu nak"
+    },
+    {
+      "id": 1274,
+      "start": 4184.36,
+      "end": 4186.36,
+      "text": "tadi kan memang kalau di dokumen SK itu ditampilannya"
+    },
+    {
+      "id": 1275,
+      "start": 4186.36,
+      "end": 4188.36,
+      "text": "itu kan ada tab-tap nya lagi dibawah kan"
+    },
+    {
+      "id": 1276,
+      "start": 4188.36,
+      "end": 4190.36,
+      "text": "saya lihat tadi"
+    },
+    {
+      "id": 1277,
+      "start": 4190.36,
+      "end": 4192.36,
+      "text": "itu kan mereket tambahkannya disitu"
+    },
+    {
+      "id": 1278,
+      "start": 4192.36,
+      "end": 4194.36,
+      "text": "nah memang itu yang saya tanyakan tadi kan"
+    },
+    {
+      "id": 1279,
+      "start": 4194.36,
+      "end": 4196.36,
+      "text": "untuk dokumen lainnya kan gak ada"
+    },
+    {
+      "id": 1280,
+      "start": 4196.36,
+      "end": 4198.36,
+      "text": "ininya gak ada penambahannya gitu cuman"
+    },
+    {
+      "id": 1281,
+      "start": 4198.36,
+      "end": 4200.36,
+      "text": "ibaratnya di halaman"
+    },
+    {
+      "id": 1282,
+      "start": 4200.36,
+      "end": 4202.36,
+      "text": "profilnya si pegawai yang tadi bukan"
+    },
+    {
+      "id": 1283,
+      "start": 4202.36,
+      "end": 4204.36,
+      "text": "nyantambilan ini itu"
+    },
+    {
+      "id": 1284,
+      "start": 4204.36,
+      "end": 4206.36,
+      "text": "cuman di upload"
+    },
+    {
+      "id": 1285,
+      "start": 4206.36,
+      "end": 4208.36,
+      "text": "itu dokumen yang udah ada tab-tap nya"
+    },
+    {
+      "id": 1286,
+      "start": 4208.36,
+      "end": 4210.36,
+      "text": "yang dokumen lainnya kan gak ada tab-nya disitu kan"
+    },
+    {
+      "id": 1287,
+      "start": 4210.36,
+      "end": 4215.14,
+      "text": "jadi biar sekalian aja disitu"
+    },
+    {
+      "id": 1288,
+      "start": 4215.14,
+      "end": 4217.14,
+      "text": "dokumen untuk menu"
+    },
+    {
+      "id": 1289,
+      "start": 4217.14,
+      "end": 4218.14,
+      "text": "dan SK gak apa-apa"
+    },
+    {
+      "id": 1290,
+      "start": 4218.14,
+      "end": 4220.14,
+      "text": "tetap disitu aja itu buat"
+    },
+    {
+      "id": 1291,
+      "start": 4220.14,
+      "end": 4221.14,
+      "text": "akses super admin"
+    },
+    {
+      "id": 1292,
+      "start": 4221.14,
+      "end": 4223.14,
+      "text": "atau ke pegawainya kan buat"
+    },
+    {
+      "id": 1293,
+      "start": 4223.14,
+      "end": 4225.14,
+      "text": "mungkin barangkali dia langsung mau nyari gitu kan"
+    },
+    {
+      "id": 1294,
+      "start": 4225.14,
+      "end": 4232.17,
+      "text": "oke terus yang"
+    },
+    {
+      "id": 1295,
+      "start": 4232.17,
+      "end": 4234.17,
+      "text": "WA jangan lupa ya"
+    },
+    {
+      "id": 1296,
+      "start": 4234.17,
+      "end": 4236.17,
+      "text": "yang tempat lihat pesan WA"
+    },
+    {
+      "id": 1297,
+      "start": 4236.17,
+      "end": 4238.17,
+      "text": "dibikin aja variabelnya butuh variabel apa"
+    },
+    {
+      "id": 1298,
+      "start": 4238.17,
+      "end": 4239.17,
+      "text": "datanya apa"
+    },
+    {
+      "id": 1299,
+      "start": 4239.17,
+      "end": 4241.17,
+      "text": "jadi biar sekalian diusulin gitu"
+    },
+    {
+      "id": 1300,
+      "start": 4241.17,
+      "end": 4246.73,
+      "text": "kalau model tampilan pesannya seperti apa"
+    },
+    {
+      "id": 1301,
+      "start": 4246.73,
+      "end": 4248.73,
+      "text": "misalnya dia"
+    },
+    {
+      "id": 1302,
+      "start": 4248.73,
+      "end": 4250.73,
+      "text": "mau naik pangkat pesannya itu seperti apa"
+    },
+    {
+      "id": 1303,
+      "start": 4250.73,
+      "end": 4252.73,
+      "text": "setia lancan itu pesannya seperti apa"
+    },
+    {
+      "id": 1304,
+      "start": 4252.73,
+      "end": 4254.73,
+      "text": "butuh apa yang ditampilkan"
+    },
+    {
+      "id": 1305,
+      "start": 4254.73,
+      "end": 4255.73,
+      "text": "kayak nama atau apa-apa"
+    },
+    {
+      "id": 1306,
+      "start": 4255.73,
+      "end": 4256.73,
+      "text": "karena variabel itu yang mau"
+    },
+    {
+      "id": 1307,
+      "start": 4256.73,
+      "end": 4258.73,
+      "text": "dipasing dari aplikasinya kan"
+    },
+    {
+      "id": 1308,
+      "start": 4258.73,
+      "end": 4265.02,
+      "text": "oke ada lagi"
+    },
+    {
+      "id": 1309,
+      "start": 4265.02,
+      "end": 4269.99,
+      "text": "waktu saat ini"
+    },
+    {
+      "id": 1310,
+      "start": 4269.99,
+      "end": 4273.53,
+      "text": "untuk yang"
+    },
+    {
+      "id": 1311,
+      "start": 4273.53,
+      "end": 4275.53,
+      "text": "sekarang"
+    },
+    {
+      "id": 1312,
+      "start": 4275.53,
+      "end": 4278.07,
+      "text": "yang ini dulu"
+    },
+    {
+      "id": 1313,
+      "start": 4278.07,
+      "end": 4280.07,
+      "text": "oke"
+    },
+    {
+      "id": 1314,
+      "start": 4280.07,
+      "end": 4283.0,
+      "text": "targetnya kapan tuh"
+    },
+    {
+      "id": 1315,
+      "start": 4283.0,
+      "end": 4285.45,
+      "text": "perbaikannya"
+    },
+    {
+      "id": 1316,
+      "start": 4285.45,
+      "end": 4287.45,
+      "text": "lagi ini deh"
+    },
+    {
+      "id": 1317,
+      "start": 4287.45,
+      "end": 4289.45,
+      "text": "kalau akhir bulan ini bisa"
+    },
+    {
+      "id": 1318,
+      "start": 4289.45,
+      "end": 4291.58,
+      "text": "bebas tergantung"
+    },
+    {
+      "id": 1319,
+      "start": 4291.58,
+      "end": 4293.58,
+      "text": "tergantung dari kalian soalnya kan"
+    },
+    {
+      "id": 1320,
+      "start": 4293.58,
+      "end": 4295.58,
+      "text": "kalian juga kan mau dikejar ini juga kan"
+    },
+    {
+      "id": 1321,
+      "start": 4295.58,
+      "end": 4297.58,
+      "text": "masih ada satu lagi nih"
+    },
+    {
+      "id": 1322,
+      "start": 4297.58,
+      "end": 4299.58,
+      "text": "yang sakit"
+    },
+    {
+      "id": 1323,
+      "start": 4299.58,
+      "end": 4301.58,
+      "text": "jadi kalian menyesuaikan aja kalau misalnya"
+    },
+    {
+      "id": 1324,
+      "start": 4301.58,
+      "end": 4303.58,
+      "text": "yang"
+    },
+    {
+      "id": 1325,
+      "start": 4303.58,
+      "end": 4305.58,
+      "text": "revisi hari ini udah clear"
+    },
+    {
+      "id": 1326,
+      "start": 4305.58,
+      "end": 4307.58,
+      "text": "dengan mungkin ada beberapa tambahan"
+    },
+    {
+      "id": 1327,
+      "start": 4307.58,
+      "end": 4309.58,
+      "text": "langsung kontak aja minta buat zoom"
+    },
+    {
+      "id": 1328,
+      "start": 4309.58,
+      "end": 4311.58,
+      "text": "gak harus dihari jumat"
+    },
+    {
+      "id": 1329,
+      "start": 4311.58,
+      "end": 4313.58,
+      "text": "hari-hari biasa juga gak apa-apa gitu biar nanti"
+    },
+    {
+      "id": 1330,
+      "start": 4313.58,
+      "end": 4316.18,
+      "text": "segera langsung dicek gitu kan"
+    },
+    {
+      "id": 1331,
+      "start": 4316.18,
+      "end": 4318.18,
+      "text": "oke siapa oke siapa"
+    },
+    {
+      "id": 1332,
+      "start": 4318.18,
+      "end": 4320.18,
+      "text": "ini estimasinya targetnya"
+    },
+    {
+      "id": 1333,
+      "start": 4320.18,
+      "end": 4322.18,
+      "text": "apaan nih maksudnya kelar-kelar"
+    },
+    {
+      "id": 1334,
+      "start": 4322.18,
+      "end": 4325.08,
+      "text": "tuntasnya"
+    },
+    {
+      "id": 1335,
+      "start": 4325.08,
+      "end": 4327.14,
+      "text": "untuk yang"
+    },
+    {
+      "id": 1336,
+      "start": 4327.14,
+      "end": 4329.14,
+      "text": "awalnya"
+    },
+    {
+      "id": 1337,
+      "start": 4329.14,
+      "end": 4331.14,
+      "text": "kecana di tanggal 20 ini"
+    },
+    {
+      "id": 1338,
+      "start": 4331.14,
+      "end": 4333.21,
+      "text": "tuman"
+    },
+    {
+      "id": 1339,
+      "start": 4333.21,
+      "end": 4335.21,
+      "text": "kalau di saat ini mungkin akan selesai"
+    },
+    {
+      "id": 1340,
+      "start": 4335.21,
+      "end": 4337.72,
+      "text": "di akhir bulan ini"
+    },
+    {
+      "id": 1341,
+      "start": 4337.72,
+      "end": 4339.72,
+      "text": "akhir 2 minggu lagi berarti"
+    },
+    {
+      "id": 1342,
+      "start": 4339.72,
+      "end": 4341.72,
+      "text": "iya secepatnya"
+    },
+    {
+      "id": 1343,
+      "start": 4341.72,
+      "end": 4343.72,
+      "text": "jadi kalau misalnya"
+    },
+    {
+      "id": 1344,
+      "start": 4343.72,
+      "end": 4345.72,
+      "text": "ada"
+    },
+    {
+      "id": 1345,
+      "start": 4345.72,
+      "end": 4347.72,
+      "text": "tanggapan lain atau mungkin"
+    },
+    {
+      "id": 1346,
+      "start": 4347.72,
+      "end": 4349.72,
+      "text": "yang masukannya udah kelar gak apa-apa"
+    },
+    {
+      "id": 1347,
+      "start": 4349.72,
+      "end": 4351.72,
+      "text": "kita ases main aja mau diajak sumpah"
+    },
+    {
+      "id": 1348,
+      "start": 4351.72,
+      "end": 4353.72,
+      "text": "cuma sejam 2 jam daripada"
+    },
+    {
+      "id": 1349,
+      "start": 4353.72,
+      "end": 4355.72,
+      "text": "kalian langsung kerjain semua"
+    },
+    {
+      "id": 1350,
+      "start": 4355.72,
+      "end": 4357.72,
+      "text": "terus ternyata malah"
+    },
+    {
+      "id": 1351,
+      "start": 4357.72,
+      "end": 4359.72,
+      "text": "clearo gitu kan ujungnya kan"
+    },
+    {
+      "id": 1352,
+      "start": 4359.72,
+      "end": 4362.04,
+      "text": "balik lagi gitu kan"
+    },
+    {
+      "id": 1353,
+      "start": 4362.04,
+      "end": 4364.04,
+      "text": "oke"
+    },
+    {
+      "id": 1354,
+      "start": 4364.04,
+      "end": 4366.04,
+      "text": "soalnya yang"
+    },
+    {
+      "id": 1355,
+      "start": 4366.04,
+      "end": 4368.04,
+      "text": "yang"
+    },
+    {
+      "id": 1356,
+      "start": 4368.04,
+      "end": 4370.23,
+      "text": "next projectnya juga ini"
+    },
+    {
+      "id": 1357,
+      "start": 4370.23,
+      "end": 4372.23,
+      "text": "kayanya bisa lebih sederhana"
+    },
+    {
+      "id": 1358,
+      "start": 4372.23,
+      "end": 4374.23,
+      "text": "cuman nanti nanti"
+    },
+    {
+      "id": 1359,
+      "start": 4374.23,
+      "end": 4376.23,
+      "text": "udah kelar simpeklah"
+    },
+    {
+      "id": 1360,
+      "start": 4376.23,
+      "end": 4378.23,
+      "text": "kita bahas"
+    },
+    {
+      "id": 1361,
+      "start": 4378.23,
+      "end": 4380.23,
+      "text": "ini bisa kelar dulu karena"
+    },
+    {
+      "id": 1362,
+      "start": 4380.23,
+      "end": 4382.23,
+      "text": "sekalipun aplikasinya ini kelar kan"
+    },
+    {
+      "id": 1363,
+      "start": 4382.23,
+      "end": 4384.33,
+      "text": "masih harus"
+    },
+    {
+      "id": 1364,
+      "start": 4384.33,
+      "end": 4386.74,
+      "text": "di demo ini ya kan"
+    },
+    {
+      "id": 1365,
+      "start": 4386.74,
+      "end": 4388.74,
+      "text": "kalau misalnya dari"
+    },
+    {
+      "id": 1366,
+      "start": 4388.74,
+      "end": 4390.74,
+      "text": "apa di demoin ke dari pihak"
+    },
+    {
+      "id": 1367,
+      "start": 4390.74,
+      "end": 4392.74,
+      "text": "kepegawainya juga udah oke"
+    },
+    {
+      "id": 1368,
+      "start": 4392.74,
+      "end": 4394.97,
+      "text": "nah itu kalian kan"
+    },
+    {
+      "id": 1369,
+      "start": 4394.97,
+      "end": 4396.97,
+      "text": "masih harus lanjut bikin ininya juga"
+    },
+    {
+      "id": 1370,
+      "start": 4396.97,
+      "end": 4398.97,
+      "text": "bikin panduan nya kan"
+    },
+    {
+      "id": 1371,
+      "start": 4398.97,
+      "end": 4400.97,
+      "text": "panduan yang terdalam"
+    },
+    {
+      "id": 1372,
+      "start": 4400.97,
+      "end": 4402.97,
+      "text": "bentuk PDF atau apa jadi"
+    },
+    {
+      "id": 1373,
+      "start": 4402.97,
+      "end": 4405.0,
+      "text": "guide lainnya"
+    },
+    {
+      "id": 1374,
+      "start": 4405.0,
+      "end": 4407.0,
+      "text": "buat masing-masing roll itu"
+    },
+    {
+      "id": 1375,
+      "start": 4407.0,
+      "end": 4409.0,
+      "text": "fiturnya apa saja cara"
+    },
+    {
+      "id": 1376,
+      "start": 4409.0,
+      "end": 4411.0,
+      "text": "pakenya gimana itu pengaruhnya kemana"
+    },
+    {
+      "id": 1377,
+      "start": 4411.0,
+      "end": 4413.0,
+      "text": "itu kan memang harus ada guide nya sebelum kita"
+    },
+    {
+      "id": 1378,
+      "start": 4413.0,
+      "end": 4415.0,
+      "text": "balik ke next project gitu"
+    },
+    {
+      "id": 1379,
+      "start": 4415.0,
+      "end": 4417.0,
+      "text": "oh iya"
+    },
+    {
+      "id": 1380,
+      "start": 4417.0,
+      "end": 4419.0,
+      "text": "sekalian juga ini kan"
+    },
+    {
+      "id": 1381,
+      "start": 4419.0,
+      "end": 4421.1,
+      "text": "di ini kalian"
+    },
+    {
+      "id": 1382,
+      "start": 4421.1,
+      "end": 4423.1,
+      "text": "kerjainya masih di repo development kan ya"
+    },
+    {
+      "id": 1383,
+      "start": 4423.1,
+      "end": 4425.54,
+      "text": "iya"
+    },
+    {
+      "id": 1384,
+      "start": 4425.54,
+      "end": 4427.54,
+      "text": "itu kalian"
+    },
+    {
+      "id": 1385,
+      "start": 4427.54,
+      "end": 4429.54,
+      "text": "sebagian besar kerjainya di"
+    },
+    {
+      "id": 1386,
+      "start": 4429.54,
+      "end": 4431.54,
+      "text": "di linuxnya apa di windowsnya"
+    },
+    {
+      "id": 1387,
+      "start": 4431.54,
+      "end": 4434.06,
+      "text": "di platform"
+    },
+    {
+      "id": 1388,
+      "start": 4434.06,
+      "end": 4436.06,
+      "text": "platform pengemalan kalian nih"
+    },
+    {
+      "id": 1389,
+      "start": 4436.06,
+      "end": 4442.06,
+      "text": "windows ya"
+    },
+    {
+      "id": 1390,
+      "start": 4442.06,
+      "end": 4444.06,
+      "text": "windows"
+    },
+    {
+      "id": 1391,
+      "start": 4444.06,
+      "end": 4446.06,
+      "text": "kamis semua windows ya"
+    },
+    {
+      "id": 1392,
+      "start": 4446.06,
+      "end": 4448.06,
+      "text": "windows ya"
+    },
+    {
+      "id": 1393,
+      "start": 4448.06,
+      "end": 4450.06,
+      "text": "kemarin saya udah"
+    },
+    {
+      "id": 1394,
+      "start": 4450.06,
+      "end": 4452.06,
+      "text": "cek kan yang bagian kontainernya"
+    },
+    {
+      "id": 1395,
+      "start": 4452.06,
+      "end": 4454.06,
+      "text": "kalian tuh"
+    },
+    {
+      "id": 1396,
+      "start": 4454.06,
+      "end": 4456.06,
+      "text": "nah itu sebenarnya kalau untuk kontainernya PHP itu kan"
+    },
+    {
+      "id": 1397,
+      "start": 4456.06,
+      "end": 4458.06,
+      "text": "sebenarnya udah ada image sendiri"
+    },
+    {
+      "id": 1398,
+      "start": 4458.06,
+      "end": 4460.06,
+      "text": "jadi paling nanti"
+    },
+    {
+      "id": 1399,
+      "start": 4460.06,
+      "end": 4462.06,
+      "text": "paling entar atau besok itu"
+    },
+    {
+      "id": 1400,
+      "start": 4462.06,
+      "end": 4464.06,
+      "text": "model kontainernya itu bakal"
+    },
+    {
+      "id": 1401,
+      "start": 4464.06,
+      "end": 4466.06,
+      "text": "bakal saya ubah"
+    },
+    {
+      "id": 1402,
+      "start": 4466.06,
+      "end": 4468.06,
+      "text": "nanti saya push di development"
+    },
+    {
+      "id": 1403,
+      "start": 4468.06,
+      "end": 4470.06,
+      "text": "nanti saya inputkan di group gitu"
+    },
+    {
+      "id": 1404,
+      "start": 4470.06,
+      "end": 4473.14,
+      "text": "jadi image nya berubah"
+    },
+    {
+      "id": 1405,
+      "start": 4473.14,
+      "end": 4475.14,
+      "text": "yang jelasinnya aja data-data"
+    },
+    {
+      "id": 1406,
+      "start": 4475.14,
+      "end": 4477.14,
+      "text": "kalian yang tadi itu kan data sidar semua kan"
+    },
+    {
+      "id": 1407,
+      "start": 4477.14,
+      "end": 4479.14,
+      "text": "gak ada yang kayak di input manual atau apa kan"
+    },
+    {
+      "id": 1408,
+      "start": 4479.14,
+      "end": 4483.67,
+      "text": "ya kan"
+    },
+    {
+      "id": 1409,
+      "start": 4483.67,
+      "end": 4485.67,
+      "text": "iya pak"
+    },
+    {
+      "id": 1410,
+      "start": 4485.67,
+      "end": 4487.67,
+      "text": "iya kan"
+    },
+    {
+      "id": 1411,
+      "start": 4487.67,
+      "end": 4489.86,
+      "text": "kalau bikin obah di aparat"
+    },
+    {
+      "id": 1412,
+      "start": 4489.86,
+      "end": 4492.25,
+      "text": "ini tenang"
+    },
+    {
+      "id": 1413,
+      "start": 4492.25,
+      "end": 4494.25,
+      "text": "kalau tadi kan ada obah"
+    },
+    {
+      "id": 1414,
+      "start": 4494.25,
+      "end": 4497.21,
+      "text": "karena model kontainernya"
+    },
+    {
+      "id": 1415,
+      "start": 4497.21,
+      "end": 4499.21,
+      "text": "mau saya ubah dikit itu"
+    },
+    {
+      "id": 1416,
+      "start": 4499.21,
+      "end": 4501.21,
+      "text": "jadi kemungkinan paling kalian sedih lagi gitu kan"
+    },
+    {
+      "id": 1417,
+      "start": 4501.21,
+      "end": 4504.14,
+      "text": "kalau pun kalian mau backup juga gak apa-apa"
+    },
+    {
+      "id": 1418,
+      "start": 4504.14,
+      "end": 4506.14,
+      "text": "backup terus restore lagi gak apa-apa"
+    },
+    {
+      "id": 1419,
+      "start": 4506.14,
+      "end": 4508.62,
+      "text": "soalnya buat ini"
+    },
+    {
+      "id": 1420,
+      "start": 4508.62,
+      "end": 4510.62,
+      "text": "karena udah mulai dipengujung kan"
+    },
+    {
+      "id": 1421,
+      "start": 4510.62,
+      "end": 4512.62,
+      "text": "jadinya saya juga perlu siapkan"
+    },
+    {
+      "id": 1422,
+      "start": 4512.62,
+      "end": 4514.62,
+      "text": "apa"
+    },
+    {
+      "id": 1423,
+      "start": 4514.62,
+      "end": 4516.62,
+      "text": "dev-offs nya gitu kan"
+    },
+    {
+      "id": 1424,
+      "start": 4516.62,
+      "end": 4518.62,
+      "text": "biar kalau pun kaliannya udah"
+    },
+    {
+      "id": 1425,
+      "start": 4518.62,
+      "end": 4520.62,
+      "text": "udah kelar"
+    },
+    {
+      "id": 1426,
+      "start": 4520.62,
+      "end": 4522.62,
+      "text": "saya tinggal deploy aja gitu"
+    },
+    {
+      "id": 1427,
+      "start": 4522.62,
+      "end": 4524.62,
+      "text": "udah gak perlu banyak kontainer"
+    },
+    {
+      "id": 1428,
+      "start": 4524.62,
+      "end": 4526.62,
+      "text": "soalnya tadi pas saya cek juga kan"
+    },
+    {
+      "id": 1429,
+      "start": 4526.62,
+      "end": 4528.62,
+      "text": "kayak misalnya engine X nya"
+    },
+    {
+      "id": 1430,
+      "start": 4528.62,
+      "end": 4530.62,
+      "text": "ada konfigurasi nya sendiri terus"
+    },
+    {
+      "id": 1431,
+      "start": 4530.62,
+      "end": 4532.62,
+      "text": "deploy dock apa"
+    },
+    {
+      "id": 1432,
+      "start": 4532.62,
+      "end": 4534.62,
+      "text": "kontainerisasi nya juga sendiri"
+    },
+    {
+      "id": 1433,
+      "start": 4534.62,
+      "end": 4536.62,
+      "text": "nah itu kan"
+    },
+    {
+      "id": 1434,
+      "start": 4536.62,
+      "end": 4538.62,
+      "text": "di kontainer kalian itu"
+    },
+    {
+      "id": 1435,
+      "start": 4538.62,
+      "end": 4540.62,
+      "text": "untuk PHP nya itu"
+    },
+    {
+      "id": 1436,
+      "start": 4540.62,
+      "end": 4542.62,
+      "text": "baratnya kalian pakai image nya dari debian"
+    },
+    {
+      "id": 1437,
+      "start": 4542.62,
+      "end": 4544.62,
+      "text": "terus di install 1x1"
+    },
+    {
+      "id": 1438,
+      "start": 4544.62,
+      "end": 4546.62,
+      "text": "nah itu kan buat meminimalisir itu"
+    },
+    {
+      "id": 1439,
+      "start": 4546.62,
+      "end": 4548.62,
+      "text": "saya kan memang udah ada image sendiri"
+    },
+    {
+      "id": 1440,
+      "start": 4548.62,
+      "end": 4550.62,
+      "text": "itu sempat bikin image sendiri yang tinggal langsung di deploy"
+    },
+    {
+      "id": 1441,
+      "start": 4550.62,
+      "end": 4552.62,
+      "text": "jadi paling itu aja yang saya ganti gitu"
+    },
+    {
+      "id": 1442,
+      "start": 4552.62,
+      "end": 4554.62,
+      "text": "dengan paling"
+    },
+    {
+      "id": 1443,
+      "start": 4554.62,
+      "end": 4556.62,
+      "text": "nge-upgrade sedikit"
+    },
+    {
+      "id": 1444,
+      "start": 4556.62,
+      "end": 4558.62,
+      "text": "versi post grain nya gitu"
+    },
+    {
+      "id": 1445,
+      "start": 4558.62,
+      "end": 4560.62,
+      "text": "selebihnya sih tetep sama aja"
+    },
+    {
+      "id": 1446,
+      "start": 4560.62,
+      "end": 4562.62,
+      "text": "jadi biar kalian saya beritahukan dulu"
+    },
+    {
+      "id": 1447,
+      "start": 4562.62,
+      "end": 4564.62,
+      "text": "biar kalian gak kaget gitu"
+    },
+    {
+      "id": 1448,
+      "start": 4564.62,
+      "end": 4566.62,
+      "text": "tiba-tiba pas mungkin nge-upus ada yang bener"
+    },
+    {
+      "id": 1449,
+      "start": 4566.62,
+      "end": 4568.62,
+      "text": "atau apa gitu cuma itu aja yang saya ubah sih"
+    },
+    {
+      "id": 1450,
+      "start": 4568.62,
+      "end": 4571.7,
+      "text": "oke"
+    },
+    {
+      "id": 1451,
+      "start": 4571.7,
+      "end": 4573.7,
+      "text": "oke boleh pak"
+    },
+    {
+      "id": 1452,
+      "start": 4573.7,
+      "end": 4575.7,
+      "text": "ada lagi, ada pertanyaan lagi"
+    },
+    {
+      "id": 1453,
+      "start": 4575.7,
+      "end": 4577.7,
+      "text": "atau mungkin dari"
+    },
+    {
+      "id": 1454,
+      "start": 4577.7,
+      "end": 4583.16,
+      "text": "dari pak Idayat"
+    },
+    {
+      "id": 1455,
+      "start": 4583.16,
+      "end": 4586.34,
+      "text": "cukup kayaknya cukup"
+    },
+    {
+      "id": 1456,
+      "start": 4586.34,
+      "end": 4589.11,
+      "text": "aman ya"
+    },
+    {
+      "id": 1457,
+      "start": 4589.11,
+      "end": 4591.11,
+      "text": "dari kalian mungkin"
+    },
+    {
+      "id": 1458,
+      "start": 4591.11,
+      "end": 4593.72,
+      "text": "gak ada lagi"
+    },
+    {
+      "id": 1459,
+      "start": 4593.72,
+      "end": 4595.72,
+      "text": "akhir mungkin"
+    },
+    {
+      "id": 1460,
+      "start": 4595.72,
+      "end": 4597.72,
+      "text": "dokumentasi"
+    },
+    {
+      "id": 1461,
+      "start": 4597.72,
+      "end": 4601.77,
+      "text": "oke siap"
+    },
+    {
+      "id": 1462,
+      "start": 4601.77,
+      "end": 4604.86,
+      "text": "tarah"
+    },
+    {
+      "id": 1463,
+      "start": 4604.86,
+      "end": 4610.86,
+      "text": "oke"
+    },
+    {
+      "id": 1464,
+      "start": 4610.86,
+      "end": 4614.97,
+      "text": "siapa ababan"
+    },
+    {
+      "id": 1465,
+      "start": 4614.97,
+      "end": 4619.94,
+      "text": "oke"
+    },
+    {
+      "id": 1466,
+      "start": 4619.94,
+      "end": 4621.94,
+      "text": "oke sudah pak"
+    },
+    {
+      "id": 1467,
+      "start": 4621.94,
+      "end": 4623.94,
+      "text": "oke terima kasih ya diaan"
+    },
+    {
+      "id": 1468,
+      "start": 4623.94,
+      "end": 4625.94,
+      "text": "teman-teman yang lain juga ditunggu"
+    },
+    {
+      "id": 1469,
+      "start": 4625.94,
+      "end": 4627.94,
+      "text": "update nya"
+    },
+    {
+      "id": 1470,
+      "start": 4627.94,
+      "end": 4629.94,
+      "text": "nanti mungkin yang setelah"
+    },
+    {
+      "id": 1471,
+      "start": 4629.94,
+      "end": 4631.94,
+      "text": "kita akan meeting ulang"
+    },
+    {
+      "id": 1472,
+      "start": 4631.94,
+      "end": 4633.94,
+      "text": "iya gak apa-apa misalnya"
+    },
+    {
+      "id": 1473,
+      "start": 4633.94,
+      "end": 4635.94,
+      "text": "barangkali kalian yang lebih cepat gak harus nunggu hari jumat lagi gitu"
+    },
+    {
+      "id": 1474,
+      "start": 4635.94,
+      "end": 4637.94,
+      "text": "di kabarnya"
+    },
+    {
+      "id": 1475,
+      "start": 4637.94,
+      "end": 4639.94,
+      "text": "kapan bisa zoom gitu"
+    },
+    {
+      "id": 1476,
+      "start": 4639.94,
+      "end": 4641.94,
+      "text": "saya bisa luangkan waktu kalau buat zoom"
+    },
+    {
+      "id": 1477,
+      "start": 4641.94,
+      "end": 4643.94,
+      "text": "yang penting kalian tidak sampai"
+    },
+    {
+      "id": 1478,
+      "start": 4643.94,
+      "end": 4645.94,
+      "text": "kejauhan salah arahnya gitu kan"
+    },
+    {
+      "id": 1479,
+      "start": 4645.94,
+      "end": 4648.04,
+      "text": "saya ingat lain waktu juga"
+    },
+    {
+      "id": 1480,
+      "start": 4648.04,
+      "end": 4650.04,
+      "text": "oke terima kasih ya teman-teman ya"
+    },
+    {
+      "id": 1481,
+      "start": 4650.04,
+      "end": 4652.04,
+      "text": "terima kasih pak"
+    },
+    {
+      "id": 1482,
+      "start": 4652.04,
+      "end": 4654.04,
+      "text": "saya Ijin Pamit, selamat bertugas"
+    },
+    {
+      "id": 1483,
+      "start": 4654.04,
+      "end": 4656.14,
+      "text": "kembali"
+    }
+  ]
+}

@@ -895,3 +895,18 @@ tests/Feature/EmployeeRestoreTest.php
 ```
 
 Controller tetap hanya memanggil Action.
+
+
+---
+
+## Addendum Keputusan Evaluasi Meeting LLDIKTI — SSO dan Switch Role
+
+Berdasarkan [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md), email Keycloak adalah identifier mapping utama. Pada mapping pertama yang emailnya cocok dengan pegawai lokal, claim role default `Pegawai` boleh **menginisialisasi** role internal Pegawai. Setelah nilai internal itu tersimpan, seluruh request tetap wajib dievaluasi memakai role dan permission SIMPEG; claim Keycloak lain tidak boleh langsung memberikan permission aplikasi. Nama claim nomor telepon harus dibaca dari kontrak respons LLDIKTI, bukan diasumsikan di source code.
+
+Untuk switch role:
+
+- gate endpoint dengan permission khusus, FormRequest `authorize()`, dan scoped policy/service; jangan mengandalkan visibilitas menu;
+- simulasikan role efektif saja, bukan identitas atau `employee_id` pegawai lain;
+- simpan role/permission sementara secara persisten sampai revert, tetapi batasi target pada role yang lebih rendah daripada role asli;
+- setiap switch, request yang memakai role sementara, dan revert wajib menyimpan audit actor, role asli, role sementara, waktu, serta konteks yang aman;
+- jalur role sementara tetap fail-closed saat permission/role asal/target tidak valid dan tidak boleh memberi akses ke data di luar scope aktor.

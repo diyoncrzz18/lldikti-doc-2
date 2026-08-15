@@ -2074,3 +2074,23 @@ Untuk transparansi, berikut fitur yang direncanakan di fase berikutnya:
 ---
 
 *Dokumen ini disusun berdasarkan transkrip paparan SIMPEG, rekap PDF presentasi, dan diagram alur v0.4 SIMPEG LLDIKTI Wilayah XVI.*
+
+
+
+
+---
+
+## 23. Addendum Keputusan Evaluasi Meeting LLDIKTI — 15 Agustus 2026 (PRD v1.5)
+
+> **Status:** Disetujui. [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md) adalah penetapan terbaru yang menggantikan ketentuan PRD sebelumnya bila berbeda pada area berikut.
+
+1. Chain cuti baru wajib menempatkan **verifikator dinamis → Kepala Bagian → PYBMC**. Ketua Tim Kerja menjadi verifikator bila diperlukan; tanpa verifikator, chain dimulai dari Kepala Bagian. Ketentuan lama yang menempatkan Kepala Bagian sebagai default pertama atau contoh urutan Kepala Bagian sebelum verifikator tidak berlaku.
+2. Saldo awal/historis tidak lagi diinput sebagai sisa saldo. Admin memasukkan **jumlah cuti yang telah dipakai/diklaim per tahun** dan sistem menghitung sisa, rollover maksimal 6 hari, serta hak tahun berjalan secara berjenjang. Hak 24 hari hanya berlaku bila pemakaian N-2 dan N-1 sama dengan nol; selain itu batas totalnya 18 hari.
+3. Admin Kepegawaian memiliki jalur input cuti manual dengan dokumen pendukung wajib untuk cuti historis, cuti sebelum go-live, atau cuti ketika layanan tidak tersedia. Entri ini langsung mengakui keputusan yang sudah ditetapkan di luar SIMPEG, tidak melalui chain ulang, dan menjadi bagian dari kalkulasi saldo serta rollover.
+4. Email Keycloak menjadi atribut mapping utama; role default Pegawai dari SSO menginisialisasi role internal Pegawai pada mapping pertama; nomor telepon dapat dipetakan dari custom attribute yang dikonfirmasi LLDIKTI. Setelah inisialisasi, SIMPEG tetap mengevaluasi role internal dan permission pada setiap akses.
+5. Aktor yang memiliki permission khusus dapat melakukan switch role berbasis `temporary_role`/`temporary_permission`, bersifat persisten sampai di-revert, hanya menyimulasikan role dan tidak mengimpersonasi pegawai lain. Target hanya role lebih rendah; seluruh perubahan diaudit dan backend tetap menegakkan permission efektif.
+6. Hari Libur berada pada menu tersendiri dengan kalender di atas tabel, bukan pada Data Master. Profil pegawai menyediakan unggah dokumen tambahan dan memisahkannya secara visual dari dokumen wajib/SK; menu dokumen lintas pegawai tetap dipertahankan.
+7. Tim menyediakan dokumen template WhatsApp beserta variabelnya untuk pengajuan Meta oleh LLDIKTI. Integrasi diuji setelah template ID dan petunjuk layanan diterima; teks bebas tidak menjadi kontrak integrasi.
+8. Target penyelesaian direvisi menjadi akhir Agustus 2026. Revisi yang siap harus segera divalidasi melalui Zoom tanpa menunggu hari Jumat. Perubahan image container atau versi PostgreSQL dari LLDIKTI harus didahului bukti backup/restore dan verifikasi aplikasi.
+
+Fitur dalam addendum ini belum boleh dinyatakan selesai hanya karena tercatat di PRD; penyelesaian tetap membutuhkan implementasi, test, audit, dan QA sesuai kriteria yang diperbarui pada User Stories.

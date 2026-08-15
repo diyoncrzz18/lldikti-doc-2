@@ -1496,3 +1496,32 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 | **Grantly Sorongan — Support Backend + QA Tester** | #2, #3, #5, #13, #14, #15, #16, #17, #21, #22, #29, #31, #33, #34, #39, #42, #52 |
 | **Adithian Gunawan** | #7, #8, #14, #16, #17, #21, #30, #31, #35, #39, #40, #41, #44, #48, #49 |
 | **Adriel Walintukan** | #9, #12, #25, #32, #36, #37, #42, #43, #47, #48, #50, #51, #52 |
+
+
+---
+
+## Addendum Backlog — Keputusan Evaluasi Meeting LLDIKTI, 15 Agustus 2026
+
+> Sumber: [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md). Butir ini menimpa task lama yang bertentangan dan belum boleh ditutup sebelum test, QA, serta audit evidence tersedia.
+
+### Auth/RBAC
+
+- [ ] **US-1.4 — Mapping SSO:** map email Keycloak sebagai identifier utama; inisialisasi role internal Pegawai dari role default SSO hanya pada mapping pertama yang emailnya sudah cocok; map nomor telepon bila custom attribute LLDIKTI telah dikonfirmasi; tetap gunakan role/permission internal untuk keputusan akses setiap request.
+- [ ] **US-1.6 — Switch role:** tambah permission khusus, `temporary_role`, `temporary_permission`, revert persisten, pembatasan target ke role lebih rendah, audit penuh, dan test unauthorized/privilege-escalation/ownership pada development serta production-like configuration.
+
+### Cuti
+
+- [ ] **US-4.10 / Issue #28:** ubah validasi urutan chain menjadi verifikator dinamis → Kepala Bagian → PYBMC. Ketua Tim Kerja masuk kelompok verifikator; bila kelompok kosong, Kepala Bagian menjadi step pertama.
+- [ ] **US-4.3 / US-4.9 / Issue #32 dan #45:** ganti input saldo awal/sisa menjadi input jumlah cuti yang telah dipakai per tahun; hitung saldo, rollover maksimal 6 hari, dan kondisi 24 versus 18 hari secara berjenjang. Tambahkan tabel simulasi N-2/N-1/tahun berjalan pada test unit dan feature.
+- [ ] **US-4.13:** buat input cuti manual khusus Admin Kepegawaian untuk cuti eksternal/historis/downtime dengan dokumen wajib, tanpa approval ulang, perhitungan saldo atomik, dan audit lengkap.
+
+### Data Pegawai dan Hari Libur
+
+- [ ] **US-2.4:** tambah unggah dokumen tambahan langsung dari profil pegawai; pisahkan tabel dokumen wajib/SK dan dokumen tambahan; pertahankan pencarian dokumen lintas pegawai bagi Super Admin/Admin Kepegawaian.
+- [ ] **US-8.4 / Issue #10:** keluarkan Hari Libur dari Data Master; tampilkan kalender di atas tabel Hari Libur tanpa mengubah sumber data `ref_hari_libur`, audit, atau kalkulasi hari kerja.
+
+### Notifikasi, UAT, dan deployment
+
+- [ ] **US-6.5:** susun dokumen template WhatsApp beserta allowlist variabel, serahkan kepada LLDIKTI untuk pengajuan Meta, dan gunakan template ID/petunjuk yang dikembalikan sebelum pengujian adapter.
+- [ ] Jadwalkan Zoom evaluasi segera setelah satu kelompok revisi selesai; target penyelesaian adalah akhir Agustus 2026, bukan rencana tanggal 20 sebelumnya.
+- [ ] Sebelum memakai perubahan container/image PHP atau peningkatan PostgreSQL dari LLDIKTI: lakukan backup/restore, migration check, queue/scheduler smoke test, serta catat rollback evidence.
