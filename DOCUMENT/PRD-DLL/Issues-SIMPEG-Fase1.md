@@ -413,6 +413,7 @@ Buat semua migration dan seeder untuk reference tables Fase 1.
 - [ ] `ref_jenis_pegawai` — PNS, PPPK
 - [ ] `ref_jenis_cuti` — Tahunan, Sakit, Melahirkan, Besar, Alasan Penting, CLTN
 - [ ] `ref_jenjang_pendidikan` — SD, SMP, SMA, D3, D4/S1, S2, S3
+- [ ] `ref_program_studi` — UUID, nama unik ter-normalisasi, `is_active`; katalog awal dibentuk dari snapshot pegawai dan riwayat pendidikan
 - [ ] `ref_agama` — Islam, Kristen, Katolik, Hindu, Buddha, Konghucu
 - [ ] `ref_status_kawin` — Belum Kawin, Kawin, Cerai Hidup, Cerai Mati
 - [ ] `ref_hubungan_keluarga` — Suami, Istri, Anak
@@ -465,7 +466,7 @@ Buat migration untuk semua tabel terkait pegawai.
 
 **Tasks:**
 - [ ] Migration `employees`:
-  - Data utama sesuai Excel: nama_lengkap, email_pribadi, nip (unique), tanggal_lahir, jenis_pegawai/status_kepegawaian, status_pegawai_id (FK), status_keterangan, golongan/pangkat/jabatan/kelas snapshot awal, pendidikan_terakhir, prodi_pendidikan_terakhir, tanggal_pensiun, person_label, person_formula_label, profil_status
+  - Data utama sesuai Excel: nama_lengkap, email_pribadi, nip (unique), tanggal_lahir, jenis_pegawai/status_kepegawaian, status_pegawai_id (FK), status_keterangan, golongan/pangkat/jabatan/kelas snapshot awal, pendidikan_terakhir, program_studi_id (FK nullable), prodi_pendidikan_terakhir (snapshot), tanggal_pensiun, person_label, person_formula_label, profil_status
   - Data pelengkap profil: nik, no_kk, tempat_lahir, jenis_kelamin, agama_id, status_kawin_id, golongan_darah, foto_path
   - Data kontak: alamat, no_hp, no_telepon_rumah
   - Data pengangkatan: jenis_pengangkatan, tmt_pengangkatan, no_sk_pengangkatan, tanggal_sk_pengangkatan, file_sk_pengangkatan
@@ -484,8 +485,9 @@ Buat migration untuk semua tabel terkait pegawai.
   - employee_id, jenis_hukuman (enum: ringan/sedang/berat), deskripsi, tanggal_mulai, tanggal_berakhir (nullable), no_sk, tanggal_sk, file_sk, is_active (bool), timestamps
 - [ ] Migration `family_members` (data keluarga):
   - employee_id, nama, hubungan (enum), nik, tempat_lahir, tanggal_lahir, jenis_kelamin, status_tunjangan (bool), pekerjaan, SoftDeletes, timestamps
-- [ ] Migration `employee_education` (riwayat pendidikan):
-  - employee_id, jenjang_id (FK), nama_institusi, jurusan, tahun_lulus, no_ijazah, timestamps
+- [ ] Migration `education_histories` (riwayat pendidikan):
+  - employee_id, jenjang_id (FK), program_studi_id (FK nullable), nama_institusi, jurusan (snapshot), tahun_lulus, no_ijazah, timestamps
+- [ ] Backfill Program Studi dari gabungan snapshot pegawai dan riwayat pendidikan, deduplikasi berdasarkan trim/spasi/kapitalisasi, lalu isi relasi tanpa menghapus snapshot lama
 - [ ] Buat semua model dengan relationships + fillable + casts
 
 ---
@@ -513,6 +515,7 @@ Form input multi-tab untuk menambahkan pegawai baru.
   - Tanggal lahir: required, date, before today
   - Foto: nullable, image, max 10MB, mimes: jpg,png
   - File SK: nullable, file, max 10MB, mimes: pdf,jpg,png
+  - Program Studi: nullable, UUID, harus mengarah ke `ref_program_studi` aktif
 - [ ] Simpan foto ke `storage/app/public/photos/`
 - [ ] Simpan file SK ke `storage/app/public/sk/`
 - [ ] Set status = Aktif setelah simpan
@@ -551,6 +554,8 @@ Form edit data pegawai dengan validasi dan audit trail.
 - [ ] Foto bisa diganti (old foto di-replace)
 - [ ] Flash message sukses
 - [ ] Re-use view dari Issue #14 (mode edit)
+- [ ] Tampilkan Program Studi nonaktif yang sedang dipakai dan izinkan mempertahankannya; tolak pemilihan referensi nonaktif lain
+- [ ] Pengosongan Program Studi memakai intent eksplisit agar snapshot import yang belum direkonsiliasi tidak hilang pada edit biasa
 
 ---
 
@@ -610,6 +615,7 @@ Form edit data pegawai dengan validasi dan audit trail.
 - [ ] Tampilkan flag "Kinerja Baik" (toggle)
 - [ ] Tampilkan kepala bagian
 - [ ] Tombol "Edit" → ke form edit
+- [ ] Tampilkan Program Studi profil dan riwayat pendidikan dari relasi, dengan fallback ke snapshot lama
 
 ---
 
@@ -746,6 +752,7 @@ Implementasi penambahan riwayat kepangkatan, jabatan, dan KGB. Data bersifat app
   - Process baris valid → insert ke employees
   - Skip baris NIP duplikat
   - Simpan snapshot awal dari Excel: golongan, pangkat, jabatan, kelas jabatan, pendidikan, prodi, tanggal pensiun jika tersedia
+  - Simpan `Prodi Pendidikan Terakhir` hanya sebagai snapshot; jangan mencari, membuat, atau menghubungkan `ref_program_studi`
   - Set `profil_status = belum_lengkap` untuk pegawai hasil import yang belum punya data pelengkap PRD
   - JANGAN membuat riwayat kepangkatan, riwayat jabatan, maupun riwayat KGB. Import hanya mempersistensikan record pegawai beserta field snapshot; riwayat resmi diinput per pegawai melalui CRUD append-only (keputusan pengguna 22 Juli 2026)
   - Pertahankan tanggal pensiun hasil import apa adanya. Import TIDAK menghitung ulang atau menimpa tanggal pensiun, termasuk saat kolom `Pensiun` kosong
@@ -1326,14 +1333,16 @@ Implementasi penambahan riwayat kepangkatan, jabatan, dan KGB. Data bersifat app
 
 > **Catatan keputusan 26 Juli 2026 (kanonis):** kebijakan penghapusan memakai pola hybrid `is_active` — item yang sudah dipakai data pegawai tidak dapat dihapus dan hanya dinonaktifkan via `is_active`; item yang belum pernah dipakai boleh dihapus permanen dengan audit. Frasa "soft delete jika sudah dipakai" dibaca sebagai nonaktif `is_active`, **bukan** `SoftDeletes`/`deleted_at`. Lihat `Kickoff-Sprint-6-Kontrak-dan-Keputusan.md` (K-1).
 
-> **Catatan keputusan 27 Juli 2026 (kanonis, K-4):** cakupan CRUD issue ini berubah dari 9 tabel menjadi **8 tabel**. `ref_bup` di-deprecate dan tidak dibuatkan CRUD karena tidak dibaca kode mana pun; sumber BUP resmi Fase 1 adalah `ref_jabatan.default_bup` (prioritas pertama) dengan fallback `ref_jenis_jabatan.maks_usia_pensiun`. Tabel, model, dan seeder `ref_bup` tetap dipertahankan pada Fase 1; penghapusannya dijadwalkan ke Fase 2. **Konsekuensi wajib:** CRUD `ref_jabatan` tetap berada dalam cakupan issue ini karena menjadi satu-satunya jalur Admin mengatur BUP per jabatan detail. Lihat `Kickoff-Sprint-6-Kontrak-dan-Keputusan.md` (K-4).
+> **Catatan keputusan 27 Juli dan 17 Agustus 2026:** K-4 mengeluarkan `ref_bup` dari CRUD karena tidak dibaca kode mana pun. Keputusan Program Studi kemudian menambahkan `ref_program_studi`, sehingga cakupan CRUD menjadi **9 tabel**. Sumber BUP resmi Fase 1 tetap `ref_jabatan.default_bup` dengan fallback `ref_jenis_jabatan.maks_usia_pensiun`. Lihat `Kickoff-Sprint-6-Kontrak-dan-Keputusan.md` (K-4) dan [Keputusan Program Studi sebagai Data Referensi](../Keputusan-Program-Studi-Data-Master.md).
 
 **Tasks:**
-- [ ] CRUD untuk: ref_golongan, ref_jenis_jabatan, ref_jabatan, ref_status_pegawai, ref_eselon, ref_unit_kerja hierarkis, ref_jenjang_pendidikan, ref_notification_channels — **8 tabel** (`ref_bup` dikeluarkan per K-4)
+- [ ] CRUD untuk: ref_golongan, ref_jenis_jabatan, ref_jabatan, ref_status_pegawai, ref_eselon, ref_unit_kerja hierarkis, ref_jenjang_pendidikan, ref_program_studi, ref_notification_channels — **9 tabel** (`ref_bup` dikeluarkan per K-4)
 - [ ] Validasi: tidak bisa hapus item yang sedang dipakai
 - [ ] Soft delete jika sudah dipakai (per keputusan 26 Juli 2026: nonaktif via `is_active`)
 - [ ] Audit log
 - [ ] Akses: Super Admin
+- [ ] Mutasi Program Studi memakai dual gate backend `role:super_admin` dan permission `reference_tables.manage`
+- [ ] Nama Program Studi unik setelah normalisasi; rename menyinkronkan snapshot; item terpakai hanya dapat dinonaktifkan
 
 ---
 
@@ -1465,6 +1474,7 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 - [ ] **Notifikasi:** In-app badge + email terkirim
 - [ ] **Responsive:** Test di Chrome, Firefox, Edge — desktop + tablet
 - [ ] **RBAC:** Setiap role hanya bisa akses halaman yang diizinkan
+- [ ] **Program Studi:** Backfill/deduplikasi → CRUD Data Master → tambah/edit pegawai dan riwayat pendidikan → pertahankan referensi nonaktif → clear eksplisit → rename snapshot → delete protection → fallback detail → import tanpa side effect master
 - [ ] **Soft Delete & Restore:** Nonaktifkan → tidak muncul di daftar aktif → tampil di filter non-aktif → restore → muncul lagi
 
 **Output:**

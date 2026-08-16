@@ -122,7 +122,7 @@ Dari 9 tabel yang tercantum pada Issue #46, `ref_bup` tidak memiliki foreign key
 
 ### Alasan
 
-PRD memposisikan `ref_bup` sebagai opsi kondisional, bukan kewajiban: §16.13 memakai kata "dipakai bila", §16.2 memakai "dapat dioverride oleh `ref_jabatan` atau `ref_bup`", §10 memakai "atau detail `ref_bup`", dan §1 poin 15 tidak menyebutnya sama sekali. Kewajiban substantif PRD hanya dua, yaitu BUP tidak di-hardcode dan Admin dapat memperbaruinya tanpa ubah kode; keduanya sudah dipenuhi jalur yang berjalan. Menyambungkan `ref_bup` justru menciptakan jalur ketiga yang berebut sumber kebenaran dengan dua jalur yang sudah ada, tanpa aturan presedensi.
+PRD memposisikan `ref_bup` sebagai opsi kondisional, bukan kewajiban: §16.14 memakai kata "dipakai bila", §16.2 memakai "dapat dioverride oleh `ref_jabatan` atau `ref_bup`", §10 memakai "atau detail `ref_bup`", dan §1 poin 15 tidak menyebutnya sama sekali. Kewajiban substantif PRD hanya dua, yaitu BUP tidak di-hardcode dan Admin dapat memperbaruinya tanpa ubah kode; keduanya sudah dipenuhi jalur yang berjalan. Menyambungkan `ref_bup` justru menciptakan jalur ketiga yang berebut sumber kebenaran dengan dua jalur yang sudah ada, tanpa aturan presedensi.
 
 ### Dokumen yang direvisi
 
@@ -133,8 +133,8 @@ PRD memposisikan `ref_bup` sebagai opsi kondisional, bukan kewajiban: §16.13 me
 | `User-Stories-SIMPEG-Fase1.md` | US-8.5 AC-1 | `ref_bup` dikeluarkan; cakupan menjadi 8 tabel |
 | `PRD-SIMPEG-Fase1-Core.md` | §10 baris BUP | Sumber BUP diubah menjadi `ref_jabatan.default_bup` dengan fallback `ref_jenis_jabatan.maks_usia_pensiun` |
 | `PRD-SIMPEG-Fase1-Core.md` | §16.2 catatan | `ref_bup` dihapus dari jalur override |
-| `PRD-SIMPEG-Fase1-Core.md` | §16.13 | Ditandai DEPRECATED; daftar nilai dipertahankan sebagai acuan domain |
-| `PRD-SIMPEG-Fase1-Core.md` | §16.13 catatan penutup | Reference table yang dimaksud diperjelas menjadi `ref_jabatan` dan `ref_jenis_jabatan` |
+| `PRD-SIMPEG-Fase1-Core.md` | §16.14 | Ditandai DEPRECATED; daftar nilai dipertahankan sebagai acuan domain |
+| `PRD-SIMPEG-Fase1-Core.md` | §16.14 catatan penutup | Reference table yang dimaksud diperjelas menjadi `ref_jabatan` dan `ref_jenis_jabatan` |
 | `Tracking-Role/Role-Super-Admin.md` | Baris sisa Data Master | Open question `ref_bup` ditutup |
 | `Tracking-Sprint-1-7/Sprint-6-Dashboard-dan-Laporan.md` | Status #46 | Open question `ref_bup` ditutup |
 

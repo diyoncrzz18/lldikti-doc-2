@@ -234,6 +234,8 @@ Sprint 4 dibuat 3 minggu karena cuti punya dependensi business rule, role approv
 | 6.2 | Hari 5-7 | Dashboard Kepala Bagian + reference tables (US-8.3, US-8.5) | Kepala Bagian melihat bawahan dan admin kelola master data | Adithian buat dashboard kepala bagian dan CRUD reference UI; Jordan buat policy/query; Grantly QA role access/reference update; Adriel review PR | Dashboard Kepala Bagian dan reference tables siap |
 | 6.3 | Hari 8-10 | Laporan & export (US-9.1, US-9.2, US-9.3, US-9.4) | Export pegawai dan cuti ke Excel/PDF | Adithian siapkan halaman filter/export; Jordan buat query laporan; Grantly bantu export Excel dan QA file output; Adriel bantu layout PDF/review merge | Export Excel/PDF berjalan dan hasil file diverifikasi |
 
+**Koordinasi tambahan Program Studi pada Slice 6.2:** Dion mengunci kontrak produk dan acceptance criteria; Jordan menjaga arsitektur reference table, migrasi, RBAC, serta integritas data; Grantly mendukung integrasi data pegawai/import dan regression QA; Adithian memastikan form serta tampilan memakai data referensi nyata; Adriel menjalankan review akhir dan merge gate. Pembagian ini mengikuti peran existing dan tidak membuat role atau jalur kepemilikan baru.
+
 ### Sprint 7 — Stabilization, Regression, UAT, Go-Live Prep (Minggu 14-16)
 
 | Urutan | Durasi | Vertical Slice | Fokus Bersama | Pembagian Kerja | Output Selesai |

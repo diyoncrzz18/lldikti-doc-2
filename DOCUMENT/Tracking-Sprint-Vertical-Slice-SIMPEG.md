@@ -390,7 +390,7 @@ DoD Sprint 1:
 |-------|--------|
 | User stories | US-8.3, US-8.5 |
 | Durasi target | Hari 5-7 |
-| Goal | Kepala Bagian melihat bawahan dan admin bisa kelola reference tables |
+| Goal | Kepala Bagian melihat bawahan dan Super Admin bisa mengelola reference tables, termasuk Program Studi |
 
 | Stage | Owner | Yang Dihandle | Output | Status |
 |-------|-------|---------------|--------|--------|
@@ -402,6 +402,14 @@ DoD Sprint 1:
 | Integrasi | Adithian + Jordan | UI memakai real data | Flow real data | Not Started |
 | Review | Adriel | Review PR dashboard/reference | Merge atau return bug | Not Started |
 | QA | Grantly | Test role kepala bagian, CRUD reference, delete protection | QA pass/retest note | Not Started |
+
+#### Kontrak tambahan Program Studi
+
+- `ref_program_studi` menjadi reference table kelolaan US-8.5 kesembilan dan tersedia sebagai tab Program Studi pada `/data-master`.
+- Data pegawai serta riwayat pendidikan memakai relasi UUID nullable dengan snapshot teks sebagai kompatibilitas dan fallback.
+- Katalog awal dibentuk melalui backfill/deduplikasi snapshot legacy; import baru tetap snapshot-only dan tidak membuat master.
+- Mutasi memakai dual gate backend `role:super_admin` dan permission `reference_tables.manage`, disertai audit dan delete protection.
+- QA mencakup migrasi fresh/existing, normalisasi nama, active/inactive, preserve/clear, rename snapshot, akses negatif, fallback detail Pimpinan read-only, serta import tanpa side effect master.
 
 ### Slice 6.3 - Laporan & Export
 

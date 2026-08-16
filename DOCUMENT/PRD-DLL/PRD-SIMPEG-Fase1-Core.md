@@ -3,8 +3,8 @@
 
 | Field | Detail |
 |-------|--------|
-| **Versi Dokumen** | 1.4 |
-| **Tanggal** | 28 Juli 2026 |
+| **Versi Dokumen** | 1.6 |
+| **Tanggal** | 17 Agustus 2026 |
 | **Domain** | Disiapkan LLDIKTI saat tahap deployment |
 | **Fase** | 1 — Core / Fondasi |
 | **Target Go-Live** | 20 Agustus 2026 |
@@ -33,6 +33,7 @@ PRD ini menjadi **sumber kebenaran utama** untuk Fase 1. Keputusan meeting tekni
 16. Sample data pegawai, referensi jabatan, pangkat, golongan, struktur unit, saldo cuti awal, dan data mentah lainnya disediakan oleh bagian kepegawaian LLDIKTI.
 17. Keputusan sesi langsung pengguna 22 Juli 2026 (kanonis, disetujui pengguna): import massal Fase 1 hanya mengaktifkan template Data Utama. Import membuat record pegawai beserta field snapshot awal (golongan, pangkat, jabatan, kelas jabatan, pendidikan, prodi, dan tanggal pensiun bila tersedia di kolom Excel), tetapi tidak membuat riwayat kepangkatan, riwayat jabatan, maupun riwayat KGB. Riwayat resmi diinput per pegawai melalui CRUD riwayat append-only. Kalkulasi TMT dijalankan saat riwayat/sumber resmi disimpan, bukan saat import selesai. Tanggal pensiun hasil import dipertahankan apa adanya dan tidak dihitung ulang atau ditimpa oleh proses import. Template lanjutan multi-jenis (Data Pelengkap, Riwayat Kepangkatan, Riwayat Jabatan, Riwayat KGB) tidak termasuk ruang lingkup saat ini dan tidak dipulihkan tanpa keputusan eksplisit baru. Keputusan ini menggantikan rincian import versi sebelumnya jika bertentangan.
 18. Keputusan pengguna 28 Juli 2026: nama tabel fisik canonical cuti adalah `leave_request_steps`, `leave_balance_ledger`, dan `leave_proofs`. Keputusan, alasan, serta batasnya dicatat pada [Keputusan Skema Cuti Canonical](Keputusan-Skema-Cuti-Canonical.md).
+19. Keputusan pengguna 17 Agustus 2026: Program Studi menjadi reference table Fase 1 yang dikelola Super Admin melalui Data Master. Relasi UUID nullable dipakai pada data pegawai dan riwayat pendidikan, sedangkan snapshot teks lama tetap dipertahankan untuk kompatibilitas dan import. Kontrak lengkap dicatat pada [Keputusan Program Studi sebagai Data Referensi](../Keputusan-Program-Studi-Data-Master.md).
 
 ---
 
@@ -528,7 +529,8 @@ Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di F
 | `jabatan_terakhir` | snapshot | Ya untuk import Excel | Snapshot dari kolom Excel saat import Data Utama. Setelah ada riwayat jabatan resmi, nilai terkini diturunkan dari riwayat terbaru berdasarkan TMT dan `ref_jabatan`; import tidak membuat riwayat |
 | `kelas_jabatan_terakhir` | snapshot | Ya untuk import Excel | Snapshot dari kolom Excel; nilai kelas resmi disimpan pada riwayat jabatan, bukan pada master jabatan. Import tidak membuat riwayat jabatan |
 | `pendidikan_terakhir` | string(20) | Ya untuk import Excel | Contoh: D3, S1, S2; snapshot dari kolom Excel |
-| `prodi_pendidikan_terakhir` | string(255) | Ya untuk import Excel | Dari kolom `Prodi Pendidikan Terakhir`; snapshot dari kolom Excel |
+| `program_studi_id` | ref_program_studi_id | Tidak | FK nullable ke `ref_program_studi`; form operasional memakai referensi, sedangkan import Data Utama tidak mengisi relasi ini |
+| `prodi_pendidikan_terakhir` | string(255) | Ya untuk import Excel | Snapshot kompatibilitas dari kolom `Prodi Pendidikan Terakhir`; disinkronkan dari referensi ketika `program_studi_id` dipilih dan menjadi fallback untuk data/import yang belum memiliki relasi |
 | `tanggal_pensiun` | date | Tidak | Dari kolom `Pensiun`. Nilai hasil import dipertahankan apa adanya dan tidak dihitung ulang atau ditimpa oleh import. Bila kolom kosong, tanggal pensiun dihitung dari BUP hanya melalui kalkulasi TMT saat riwayat/sumber resmi disimpan, bukan saat import |
 | `profil_status` | enum | Ya | `belum_lengkap` / `lengkap` untuk membedakan hasil import awal dan profil yang sudah dilengkapi |
 
@@ -625,7 +627,8 @@ Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di F
 |-------|------|-------|------------|
 | `jenjang_id` | ref_jenjang_pendidikan_id | Ya | FK ke ref_jenjang_pendidikan |
 | `nama_institusi` | string(255) | Ya | |
-| `jurusan` | string(255) | Tidak | |
+| `program_studi_id` | ref_program_studi_id | Tidak | FK nullable ke `ref_program_studi`; tidak berelasi langsung dengan jenjang pada Fase 1 |
+| `jurusan` | string(255) | Tidak | Snapshot kompatibilitas; disinkronkan dari referensi dan digunakan sebagai fallback untuk data lama |
 | `tahun_lulus` | year | Ya | |
 | `no_ijazah` | string(100) | Ya | |
 | `file_ijazah` | string(path) | Tidak | |
@@ -672,6 +675,8 @@ Format import awal mengikuti file `daftar_pegawai.xlsx` sheet `Pegawai`. Sistem 
 
 > **Ruang lingkup import Fase 1 (keputusan pengguna 22 Juli 2026):** Hanya template Data Utama yang aktif. Import membuat record pegawai beserta field snapshot awal, tetapi tidak membuat riwayat kepangkatan, riwayat jabatan, maupun riwayat KGB, dan tidak memanggil kalkulasi TMT. Riwayat resmi diinput per pegawai melalui CRUD riwayat append-only. Tanggal pensiun hasil import dipertahankan apa adanya. Template lanjutan multi-jenis tidak termasuk ruang lingkup saat ini dan tidak dipulihkan tanpa keputusan eksplisit baru.
 
+> **Batas Program Studi:** Kolom `Prodi Pendidikan Terakhir` tetap diproses sebagai snapshot teks. Import tidak mencari, membuat, atau menghubungkan `ref_program_studi`; `program_studi_id` hasil import tetap null sampai direkonsiliasi melalui alur operasional tersendiri.
+
 ### 8.2 User Stories
 
 #### US-CSV-01: Import Data Pegawai dari Excel/CSV
@@ -687,7 +692,7 @@ Format import awal mengikuti file `daftar_pegawai.xlsx` sheet `Pegawai`. Sistem 
 4. Validasi sebelum import: NIP unik, email pegawai terisi, format tanggal benar, field wajib dari Excel terisi.
 5. Tampilkan **ringkasan validasi**: berapa baris valid, berapa baris error, detail error per baris.
 6. Admin bisa memilih: import hanya yang valid, atau batalkan semua.
-7. Import hanya memproses template Data Utama: membuat record pegawai beserta field snapshot awal. Import tidak membuat riwayat kepangkatan, riwayat jabatan, maupun riwayat KGB, dan tidak memanggil kalkulasi TMT.
+7. Import hanya memproses template Data Utama: membuat record pegawai beserta field snapshot awal. Import tidak membuat riwayat kepangkatan, riwayat jabatan, maupun riwayat KGB, tidak memanggil kalkulasi TMT, dan tidak membuat atau menghubungkan master Program Studi.
 8. Tanggal pensiun hasil import dipertahankan apa adanya; import tidak menghitung ulang atau menimpa tanggal pensiun.
 9. Setelah import, tampilkan **laporan hasil**: berapa berhasil, berapa gagal.
 10. Audit log mencatat import (siapa, kapan, berapa record).
@@ -1371,11 +1376,12 @@ Fase 1 menyediakan export laporan dasar ke format PDF dan Excel. Selain export f
 │ jenis_pegawai    │  │  │──────────────────────│
 │ status_pegawai_id│  ├──│ id (PK, UUID)        │
 │ status_keterangan│  │  │ employee_id (FK)     │
-│ alamat           │  │  │ golongan_id (FK)     │
-│ no_hp            │  │  │ tmt_pangkat          │
-│ email_pribadi    │  │  │ no_sk                │
-│ is_kinerja_baik  │  │  │ is_latest            │
-│ keycloak_id      │  │  └──────────────────────┘
+│ program_studi_id │  │  │ golongan_id (FK)     │
+│ alamat           │  │  │ tmt_pangkat          │
+│ no_hp            │  │  │ no_sk                │
+│ email_pribadi    │  │  │ is_latest            │
+│ is_kinerja_baik  │  │  └──────────────────────┘
+│ keycloak_id      │  │
 │ role             │  │
 │ deleted_at       │  │
 │ created_at       │  │  ┌──────────────────────┐
@@ -1421,7 +1427,9 @@ Fase 1 menyediakan export laporan dasar ke format PDF dan Excel. Selain export f
                       ├──│ id (PK, UUID)        │
                       │  │ employee_id (FK)     │
                       │  │ jenjang_id (FK)      │
+                      │  │ program_studi_id(FK) │
                       │  │ nama_institusi       │
+                      │  │ jurusan              │
                       │  │ tahun_lulus          │
                       │  │ no_ijazah            │
                       │  └──────────────────────┘
@@ -1447,6 +1455,12 @@ Fase 1 menyediakan export laporan dasar ke format PDF dan Excel. Selain export f
                          │ no_sk                │
                          └──────────────────────┘
 ```
+
+Relasi `employees.program_studi_id` dan `education_histories.program_studi_id` mengarah
+ke `ref_program_studi`. Kolom snapshot `employees.prodi_pendidikan_terakhir` dan
+`education_histories.jurusan` tetap dipertahankan agar data lama dan kontrak import
+tetap kompatibel. Tampilan memprioritaskan nama relasi lalu memakai snapshot sebagai
+fallback.
 
 ### 15.2 Tabel Cuti
 
@@ -1558,6 +1572,12 @@ Keycloak tidak menyimpan role dan permission aplikasi. Setelah login SSO berhasi
 | `employee_roles` / `employees.role_id` | `employee_id`, `role_id` | Fase awal dapat memakai satu role utama per pegawai; pivot disiapkan bila perlu ekspansi |
 
 **Aturan:** Keycloak hanya menghasilkan identitas login. Hak akses fitur, redirect dashboard, akses menu, dan otorisasi route harus mengacu ke RBAC internal SIMPEG.
+
+Permission `reference_tables.manage` melindungi mutasi Data Master dan pada konfigurasi
+awal hanya dipetakan ke role `super_admin`. Route Program Studi tetap memakai role gate
+`super_admin` dan permission gate tersebut sebagai pertahanan berlapis. Permission dan
+pivot role harus tersedia melalui jalur migrasi yang idempoten agar database existing
+mendapat kontrak otorisasi yang sama dengan instalasi baru.
 
 ---
 
@@ -1722,7 +1742,27 @@ Daftar final nama tim kerja, urusan, dan sub-unit mengikuti data bagian kepegawa
 | 8 | S2 / Profesi |
 | 9 | S3 |
 
-### 16.12 ref_hari_libur
+### 16.12 ref_program_studi
+
+Program Studi menjadi data referensi yang dikelola terpisah dari Jenjang Pendidikan.
+Fase 1 tidak menetapkan relasi langsung antara keduanya.
+
+| Field | Tipe | Keterangan |
+|-------|------|------------|
+| `id` | UUID | Primary key |
+| `nama` | string(255) | Nama Program Studi; unik setelah trim, penyatuan spasi, dan perbandingan tanpa membedakan kapitalisasi |
+| `is_active` | boolean | Menentukan ketersediaan untuk pilihan data baru |
+
+Aturan lifecycle dan kompatibilitas:
+
+- Migrasi awal membentuk katalog dari gabungan snapshot pegawai dan riwayat pendidikan, menggabungkan nama yang sama setelah normalisasi, lalu mengisi foreign key record asal.
+- Referensi aktif tersedia untuk input baru. Referensi nonaktif yang sedang dipakai tetap ditampilkan pada form edit agar data lama dapat dipertahankan.
+- Referensi yang sedang dipakai tidak dapat dihapus dan hanya dapat dinonaktifkan. Referensi yang belum dipakai dapat dihapus permanen dengan audit.
+- Perubahan nama menyinkronkan snapshot `prodi_pendidikan_terakhir` dan `jurusan` pada record yang terhubung.
+- Mutasi hanya tersedia bagi `super_admin` yang memiliki permission `reference_tables.manage`.
+- Import baru tetap menyimpan snapshot teks dan tidak membuat atau menghubungkan master Program Studi.
+
+### 16.13 ref_hari_libur
 
 | Field | Tipe | Keterangan |
 |-------|------|------------|
@@ -1734,7 +1774,7 @@ Daftar final nama tim kerja, urusan, dan sub-unit mengikuti data bagian kepegawa
 
 > Diinput manual oleh Admin/Super Admin setiap awal tahun berdasarkan SKB Menteri.
 
-### 16.13 ref_bup (Batas Usia Pensiun) — DEPRECATED per K-4
+### 16.14 ref_bup (Batas Usia Pensiun) — DEPRECATED per K-4
 
 > **DEPRECATED per K-4 (27 Juli 2026).** Tabel ini tidak dipakai perhitungan BUP mana pun dan tidak dibuatkan CRUD. Sumber BUP resmi Fase 1 adalah `ref_jabatan.default_bup` (prioritas pertama) dengan fallback `ref_jenis_jabatan.maks_usia_pensiun`. Alasan: PRD memposisikan reference ini sebagai opsi kondisional ("bila", "atau"), bukan kewajiban; kewajiban PRD — BUP tidak di-hardcode dan dapat diubah Admin tanpa ubah kode — sudah dipenuhi jalur yang berjalan. Kolom `jenis_jabatan` di sini berupa teks tanpa foreign key sehingga duplikat semantik dengan `ref_jenis_jabatan.nama`; menyambungkannya akan membuat jalur ketiga yang berebut sumber kebenaran tanpa aturan presedensi. Tabel, model, dan seeder tetap dipertahankan pada Fase 1; penghapusan dijadwalkan ke Fase 2. Daftar BUP di bawah tetap dipertahankan sebagai acuan nilai domain, bukan sebagai spesifikasi tabel yang harus dikelola.
 
@@ -1752,7 +1792,7 @@ Hasil meeting menyepakati bahwa BUP tidak di-hardcode di aplikasi.
 
 > **Catatan:** Data BUP final mengikuti daftar jabatan yang diberikan oleh bagian kepegawaian LLDIKTI. Bila ada jabatan dengan usia pensiun berbeda, Admin harus dapat memperbaruinya melalui reference table. **Per K-4 (27 Juli 2026)** reference table yang dimaksud adalah `ref_jabatan` (kolom `default_bup`, tingkat paling detail) dan `ref_jenis_jabatan` (kolom `maks_usia_pensiun`, fallback per kategori) — bukan `ref_bup`. Kewajiban ini baru sepenuhnya tertepati setelah CRUD `ref_jabatan` tersedia; sampai saat itu Admin hanya dapat mengatur BUP pada tingkat kategori jenis jabatan.
 
-### 16.14 ref_notification_channels
+### 16.15 ref_notification_channels
 
 | Field | Tipe | Keterangan |
 |-------|------|------------|
@@ -1882,6 +1922,11 @@ Meskipun Fase 1 menggunakan Laravel Blade (server-side rendering), semua logika 
 | POST | `/admin/approval-chain/cuti` | LeaveApprovalConfigController@store | SuperAdmin |
 | GET | `/admin/notification-channels` | NotificationChannelController@index | SuperAdmin |
 | PUT | `/admin/notification-channels/{id}` | NotificationChannelController@update | SuperAdmin |
+| GET | `/data-master` | DataMasterController@index | SuperAdmin |
+| POST | `/data-master/program-studi` | DataMasterProgramStudiController@store | SuperAdmin + `reference_tables.manage` |
+| POST | `/data-master/program-studi/{programStudi}/update` | DataMasterProgramStudiController@update | SuperAdmin + `reference_tables.manage` |
+| POST | `/data-master/program-studi/{programStudi}/toggle-aktif` | DataMasterProgramStudiController@toggle | SuperAdmin + `reference_tables.manage` |
+| POST | `/data-master/program-studi/{programStudi}/destroy` | DataMasterProgramStudiController@destroy | SuperAdmin + `reference_tables.manage` |
 
 ---
 
@@ -1965,7 +2010,7 @@ Meskipun Fase 1 menggunakan Laravel Blade (server-side rendering), semua logika 
 5. **Server/hosting dan domain production disiapkan LLDIKTI pada tahap deployment** — development tidak menunggu server production.
 6. **Email production menggunakan email operasional LLDIKTI/Gmail resmi** — selama development testing email dapat memakai Mailpit.
 7. **WhatsApp Business belum wajib aktif di Fase 1** — sistem hanya menyiapkan desain channel-configurable sampai layanan/credential disediakan.
-8. **Referensi jabatan, pangkat, golongan, unit kerja hierarkis, status pegawai, dan BUP disediakan bagian kepegawaian** — sistem menyediakan struktur dan CRUD reference.
+8. **Referensi jabatan, pangkat, golongan, unit kerja hierarkis, status pegawai, Program Studi, dan BUP disediakan atau diverifikasi bagian kepegawaian** — sistem menyediakan struktur dan CRUD reference; katalog awal Program Studi dapat dibentuk dari snapshot yang sudah tersimpan.
 9. **Saldo cuti awal dan riwayat N-1/N-2 disediakan/diinput Admin Kepegawaian** — dibutuhkan agar carry-over tahun berjalan akurat.
 10. **Format formulir cuti resmi dan konten halaman QR diverifikasi LLDIKTI** — tim pengembang menyediakan generator dan halaman verifikasi.
 
@@ -1989,7 +2034,7 @@ Meskipun Fase 1 menggunakan Laravel Blade (server-side rendering), semua logika 
 | User/password email operasional production atau Gmail resmi | Tim IT LLDIKTI XVI |
 | Layanan/library/credential WhatsApp Business jika ingin diaktifkan | Tim IT LLDIKTI XVI |
 | Data pegawai awal (CSV/Excel) | Admin Kepegawaian LLDIKTI XVI |
-| Daftar unit/tim kerja hierarkis, jabatan, pangkat, golongan, status pegawai, dan BUP | Admin Kepegawaian LLDIKTI XVI |
+| Daftar unit/tim kerja hierarkis, jabatan, pangkat, golongan, status pegawai, Program Studi, dan BUP | Admin Kepegawaian LLDIKTI XVI |
 | Saldo cuti awal, riwayat cuti N-1/N-2, dan aturan koreksi saldo awal | Admin Kepegawaian LLDIKTI XVI |
 | Format formulir cuti resmi dan narasi verifikasi QR | Admin Kepegawaian LLDIKTI XVI |
 | Daftar hari libur nasional 2026 | Admin / Super Admin |

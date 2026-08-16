@@ -3,8 +3,8 @@
 
 | Field | Detail |
 |-------|--------|
-| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.4 |
-| **Tanggal** | 22 Juli 2026 |
+| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.6 |
+| **Tanggal** | 17 Agustus 2026 |
 | **Pembaruan status terakhir** | 14 Agustus 2026 |
 | **Basis verifikasi status** | Branch `development` @ `ff0e9e1` (setelah PR #182 masuk) |
 | **Total User Stories** | 53 |
@@ -13,6 +13,8 @@
 > **Catatan sinkronisasi PRD 1.4:** Keycloak digunakan hanya untuk SSO/login. Role dan permission dikelola di database SIMPEG. Approval cuti memakai tepat satu chain runtime per pegawai; unit hanya menjadi target penyalinan template sesuai K-US-01. Status keputusan resmi adalah `Disetujui`, `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`; cuti tahunan tidak boleh lintas tahun; EWS menambahkan Satyalancana; notifikasi harus channel-configurable; dan laporan mendukung export nominatif Excel custom.
 >
 > **Keputusan import Fase 1 (kanonis, disetujui pengguna 22 Juli 2026):** import massal hanya mengaktifkan template Data Utama. Import membuat record pegawai beserta field snapshot awal, tidak membuat riwayat kepangkatan/jabatan/KGB, dan tidak memanggil kalkulasi TMT. Riwayat resmi diinput per pegawai melalui CRUD append-only. Tanggal pensiun hasil import dipertahankan apa adanya. Kalkulasi TMT dipicu saat riwayat/sumber resmi disimpan, bukan saat import selesai. Template lanjutan multi-jenis tidak termasuk ruang lingkup saat ini.
+>
+> **Keputusan Program Studi (17 Agustus 2026):** Program Studi menjadi reference table kelolaan US-8.5 kesembilan yang dikelola Super Admin melalui Data Master. Form pegawai dan riwayat pendidikan memakai relasi UUID nullable, sementara snapshot lama tetap dipertahankan sebagai fallback dan kontrak import. Import tidak membuat atau menghubungkan master Program Studi. Lihat [Keputusan Program Studi sebagai Data Referensi](../Keputusan-Program-Studi-Data-Master.md).
 
 ---
 
@@ -487,8 +489,8 @@ Setiap story mengikuti format:
 
 **Acceptance Criteria:**
 
-- [x] AC-1: Form input multi-step atau tabbed:
-  - Tab 1: Data Utama (nama, email pegawai, NIP, status pegawai dari `ref_status_pegawai`, keterangan status, tanggal lahir, golongan/pangkat terkini dari riwayat, jabatan dari `ref_jabatan`, kelas jabatan dari riwayat, pendidikan terakhir, prodi pendidikan terakhir, tanggal pensiun)
+- AC-1: Form input multi-step atau tabbed:
+  - Tab 1: Data Utama (nama, email pegawai, NIP, status pegawai dari `ref_status_pegawai`, keterangan status, tanggal lahir, golongan/pangkat terkini dari riwayat, jabatan dari `ref_jabatan`, kelas jabatan dari riwayat, pendidikan terakhir, Program Studi aktif dari `ref_program_studi`, tanggal pensiun)
   - Tab 2: Data Pelengkap (NIK, No. KK, tempat lahir, jenis kelamin, agama, status kawin, golongan darah, foto)
   - Tab 3: Data Kontak (alamat, no HP, no telepon rumah)
   - Tab 4: Data Pengangkatan (jenis pengangkatan, TMT, no SK, tanggal SK, upload file SK)
@@ -500,6 +502,7 @@ Setiap story mengikuti format:
 - [x] AC-6: Setelah simpan, pegawai memakai status default `Aktif` dari `ref_status_pegawai` dan muncul di daftar pegawai.
 - [x] AC-7: Audit log mencatat: user yang menambahkan, timestamp, dan seluruh data yang dimasukkan.
 - [x] AC-8: Tampilkan notifikasi sukses: *"Data pegawai [Nama] berhasil ditambahkan."*
+- AC-9: Program Studi disimpan melalui `program_studi_id`; sistem menyinkronkan `prodi_pendidikan_terakhir` sebagai snapshot kompatibilitas.
 
 **Keputusan status awal pegawai:** Pegawai baru menggunakan status default `Aktif` dari `ref_status_pegawai`. Sistem tidak membuat tanggal efektif status maupun riwayat status awal tanpa sumber administrasi resmi. `employees.status_tanggal` tetap `null` dan `employee_status_histories` belum dibuat sampai perubahan status resmi pertama dilakukan.
 
@@ -529,6 +532,8 @@ Setiap story mengikuti format:
 - [x] AC-4: Timestamp `updated_at` otomatis diperbarui.
 - [x] AC-5: Foto bisa diganti dengan upload baru (foto lama di-replace).
 - [x] AC-6: Tampilkan notifikasi sukses setelah simpan.
+- AC-7: Program Studi nonaktif yang sedang dipakai tetap tersedia dan dapat dipertahankan, tetapi referensi nonaktif lain tidak dapat dipilih untuk data baru.
+- AC-8: Pengosongan Program Studi memakai intent eksplisit dan mengosongkan relasi beserta snapshot tanpa menghapus snapshot import secara tidak sengaja pada edit biasa.
 
 ---
 
@@ -590,6 +595,7 @@ Setiap story mengikuti format:
 - [x] AC-4: Menampilkan informasi kalkulasi otomatis: tanggal kenaikan pangkat berikutnya, tanggal KGB berikutnya, tanggal pensiun.
 - [x] AC-5: Menampilkan flag "Kinerja Baik" (toggle, bisa diubah admin — US-5.4).
 - [x] AC-6: Menampilkan kepala bagian yang di-assign.
+- AC-7: Profil dan riwayat pendidikan menampilkan nama dari relasi Program Studi, lalu snapshot lama sebagai fallback.
 
 ---
 
@@ -614,6 +620,7 @@ Setiap story mengikuti format:
 - [x] AC-3: Pegawai tidak bisa mengakses data pegawai lain.
 - [x] AC-4: Menampilkan saldo cuti tahun berjalan.
 - [x] AC-5: Menampilkan tanggal kenaikan pangkat & KGB berikutnya (hasil kalkulasi otomatis).
+- AC-6: Program Studi pada profil dan riwayat pendidikan ditampilkan dari relasi dengan fallback snapshot serta tetap bersifat read-only.
 
 ---
 
@@ -850,7 +857,7 @@ Setiap story mengikuti format:
 - [x] AC-4: Laporan bisa di-download sebagai laporan CSV/Excel (berisi baris yang gagal + alasan gagal).
 - [x] AC-5: Semua record yang berhasil diimpor langsung berstatus aktif dan muncul di daftar pegawai.
 - [x] AC-6: Audit log mencatat: user, timestamp, nama file, jumlah record berhasil/gagal.
-- [x] AC-7: Import hanya mempersistensikan record pegawai beserta field snapshot awal (golongan, pangkat, jabatan, kelas jabatan, pendidikan, prodi, dan tanggal pensiun bila tersedia). Import tidak membuat riwayat kepangkatan, riwayat jabatan, maupun riwayat KGB.
+- AC-7: Import hanya mempersistensikan record pegawai beserta field snapshot awal (golongan, pangkat, jabatan, kelas jabatan, pendidikan, prodi, dan tanggal pensiun bila tersedia). Import tidak membuat riwayat kepangkatan, riwayat jabatan, maupun riwayat KGB, serta tidak mencari, membuat, atau menghubungkan `ref_program_studi`.
 - [x] AC-8: Tanggal pensiun hasil import dipertahankan apa adanya; import tidak menghitung ulang atau menimpa tanggal pensiun.
 - [x] AC-9: Import tidak memanggil kalkulasi TMT. Kalkulasi TMT hanya dipicu saat riwayat/sumber resmi disimpan per pegawai (lihat US-5.5).
 
@@ -1628,11 +1635,14 @@ Setiap story mengikuti format:
 
 **Acceptance Criteria:**
 
-- [x] AC-1: Halaman admin untuk mengelola setiap reference table: ref_golongan, ref_jenis_jabatan, ref_jabatan, ref_status_pegawai, ref_eselon, ref_unit_kerja hierarkis, ref_jenjang_pendidikan, dan ref_notification_channels — **8 tabel**. `ref_bup` dikeluarkan dari cakupan per K-4 (27 Juli 2026) karena tidak dibaca perhitungan BUP mana pun; sumber BUP resmi adalah `ref_jabatan.default_bup` dengan fallback `ref_jenis_jabatan.maks_usia_pensiun`. Tujuh tabel dikelola sebagai tab pada halaman `/data-master`, sedangkan `ref_notification_channels` dikelola pada halaman tersendiri `/data-master/channel-notifikasi` yang tertaut dari menu Super Admin.
+- AC-1: Halaman admin untuk mengelola setiap reference table: ref_golongan, ref_jenis_jabatan, ref_jabatan, ref_status_pegawai, ref_eselon, ref_unit_kerja hierarkis, ref_jenjang_pendidikan, ref_program_studi, dan ref_notification_channels — **9 tabel**. `ref_bup` dikeluarkan dari cakupan per K-4 (27 Juli 2026) karena tidak dibaca perhitungan BUP mana pun; sumber BUP resmi adalah `ref_jabatan.default_bup` dengan fallback `ref_jenis_jabatan.maks_usia_pensiun`. Delapan tabel dikelola sebagai tab pada halaman `/data-master`, sedangkan `ref_notification_channels` dikelola pada halaman tersendiri `/data-master/channel-notifikasi` yang tertaut dari menu Super Admin.
 - [x] AC-2: CRUD per table: lihat daftar, tambah, edit, hapus (soft delete jika sudah dipakai oleh data pegawai). Frasa *soft delete* di sini dibaca sebagai **nonaktif melalui kolom `is_active`** sesuai K-1 aturan 5 (26 Juli 2026); Fase 1 tidak menambahkan `SoftDeletes` maupun kolom `deleted_at` pada reference table. Item yang belum pernah dipakai boleh dihapus permanen, item yang sudah dipakai hanya boleh dinonaktifkan dan diaktifkan kembali.
 - [x] AC-3: Validasi: tidak bisa menghapus item reference table yang sedang dipakai oleh data pegawai. PR #170 memperluas guard ke `employee_status_histories` dan menegakkannya kembali melalui foreign key `RESTRICT` pada PostgreSQL.
 - [x] AC-4: Perubahan tercatat di audit log.
 - [x] AC-5: Data reference table yang sudah di-seed saat instalasi tidak boleh hilang.
+- AC-6: Nama Program Studi unik setelah normalisasi spasi dan kapitalisasi; rename menyinkronkan snapshot pegawai dan riwayat pendidikan yang terhubung.
+- AC-7: Referensi Program Studi aktif tersedia untuk input baru; referensi nonaktif yang sedang dipakai tetap dapat dipertahankan; referensi terpakai tidak dapat dihapus.
+- AC-8: Mutasi Program Studi hanya dapat dilakukan oleh `super_admin` yang memiliki permission `reference_tables.manage`, dengan audit pada setiap perubahan.
 
 ---
 
