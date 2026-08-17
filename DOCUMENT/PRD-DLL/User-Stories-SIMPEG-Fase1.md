@@ -361,10 +361,10 @@ Setiap story mengikuti format:
 
 - [x] AC-1: Saat mengakses URL SIMPEG tanpa session aktif, browser otomatis redirect ke halaman login Keycloak.
 - [x] AC-2: Setelah login berhasil di Keycloak, browser redirect kembali ke SIMPEG dan session aktif terbentuk.
-- [x] AC-3: Data email user dari Keycloak disimpan / di-cache ke tabel `employees` (kolom `keycloak_id` dan email) saat login pertama kali.
+- [x] AC-3: Pada callback login, data email user dari Keycloak disimpan / di-cache ke tabel `employees` (kolom `keycloak_id` dan email) saat login pertama kali. Auto-mapping callback ini dibedakan dari mapping manual oleh Super Admin pada US-1.4.
 - [x] AC-4: Jika email Keycloak belum ter-mapping ke data pegawai manapun di SIMPEG, tampilkan halaman informasi: *"Akun Anda belum terdaftar di SIMPEG. Silakan hubungi Admin Kepegawaian."*
 - [x] AC-5: Jika ini adalah user pertama yang berhasil login melalui SSO dan belum ada user lokal SIMPEG, sistem otomatis membuat user tersebut sebagai `Super Admin` untuk kebutuhan bootstrap awal.
-- [x] AC-6: Jika mapping ditemukan tetapi role SIMPEG user masih kosong / belum diset / tidak valid, session login tetap terbentuk tetapi akses dashboard/fitur normal ditolak dengan HTTP `403 Access Forbidden` dan pesan: *"Akun Anda belum memiliki role SIMPEG. Hubungi Admin."*
+- [x] AC-6 — **Bukti historis; Superseded sebagian oleh K-MTG-02:** ~~Jika mapping ditemukan tetapi role SIMPEG user masih kosong / belum diset / tidak valid, session login tetap terbentuk tetapi akses dashboard/fitur normal ditolak dengan HTTP `403 Access Forbidden` dan pesan: *"Akun Anda belum memiliki role SIMPEG. Hubungi Admin."*~~ Tanda `[x]` hanya merekam implementasi kontrak lama; kontrak normatif penggantinya berada pada AC `[ ]` addendum US-1.4.
 - [x] AC-7: Jika mapping ditemukan dan role SIMPEG valid, user diarahkan ke halaman dashboard sesuai role-nya.
 - [x] AC-8: Login yang berhasil, gagal mapping, dan penolakan karena role belum diset dicatat di audit log jika mekanisme audit sudah tersedia pada flow tersebut.
 
@@ -435,14 +435,14 @@ Setiap story mengikuti format:
 **Acceptance Criteria:**
 
 - [x] AC-1: Halaman "Kelola Akses User" menampilkan daftar pegawai beserta status mapping (Terhubung / Belum Terhubung).
-- [x] AC-2: Super Admin bisa mengisi Keycloak ID atau email Keycloak untuk setiap pegawai.
+- [x] AC-2: Super Admin bisa mengisi Keycloak ID atau email Keycloak untuk setiap pegawai melalui jalur mapping manual. Jalur admin ini adalah jalur administratif yang terpisah dari auto-mapping callback berbasis email pada addendum K-MTG-02.
 - [x] AC-3: Super Admin bisa menetapkan satu role internal per pegawai: Super Admin, Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai.
 - [x] AC-4: Perubahan role langsung berlaku pada login berikutnya.
 - [x] AC-5: Perubahan mapping dan role dicatat di audit log.
 - [x] AC-6: Validasi: satu akun Keycloak hanya bisa di-mapping ke satu pegawai.
 - [x] AC-7: Role dan permission aplikasi dibaca dari database SIMPEG, bukan dari data otorisasi Keycloak.
-- [x] AC-8: User yang sudah berhasil login SSO tetapi belum memiliki role internal SIMPEG tetap tercatat sebagai user lokal dengan role kosong sampai Super Admin menetapkan role.
-- [x] AC-9: Role dasar dari SSO tidak boleh otomatis memberi akses fitur; role tersebut hanya boleh diperlakukan sebagai informasi identitas eksternal, bukan sumber otorisasi SIMPEG.
+- [x] AC-8 — **Bukti historis; Superseded oleh K-MTG-02:** ~~User yang sudah berhasil login SSO tetapi belum memiliki role internal SIMPEG tetap tercatat sebagai user lokal dengan role kosong sampai Super Admin menetapkan role.~~ Tanda `[x]` tidak menyatakan kontrak K-MTG-02 sudah diimplementasikan; kontrak normatif penggantinya berada pada AC `[ ]` addendum.
+- [x] AC-9 — **Bukti historis; Superseded sebagian oleh K-MTG-02:** ~~Role dasar dari SSO tidak boleh otomatis memberi akses fitur; role tersebut hanya boleh diperlakukan sebagai informasi identitas eksternal, bukan sumber otorisasi SIMPEG.~~ Tanda `[x]` tidak menyatakan inisialisasi role default baru sudah diimplementasikan; kontrak normatif penggantinya berada pada AC `[ ]` addendum.
 
 ---
 
@@ -957,6 +957,8 @@ Setiap story mengikuti format:
 
 ### US-4.4 · Approval/Verifikasi Step 1 — Kepala Bagian atau Pihak Pertama
 
+> **Superseded oleh K-MTG-01:** istilah lama yang menempatkan Kepala Bagian sebagai step pertama default tidak lagi normatif. Rumus normatif addendum adalah nol atau lebih verifikator; bila ada, seluruh verifikator ditempatkan sebelum Kepala Bagian. Karena AC addendum masih `[ ]`, catatan ini tidak menyatakan perilaku baru sudah diimplementasikan.
+
 | Field | Detail |
 |-------|--------|
 | **ID** | US-4.4 |
@@ -965,8 +967,8 @@ Setiap story mengikuti format:
 | **Modul** | Cuti — Approval |
 | **Dependensi** | US-4.1 |
 
-> **Sebagai** Kepala Bagian,
-> **Saya ingin** melihat dan menindaklanjuti pengajuan cuti bawahan saya,
+> **Sebagai** pihak pertama yang dikonfigurasi pada approval chain,
+> **Saya ingin** melihat dan menindaklanjuti pengajuan cuti yang menunggu tindakan saya,
 > **Sehingga** proses approval bisa berjalan tepat waktu.
 
 **Acceptance Criteria:**
@@ -978,7 +980,7 @@ Setiap story mengikuti format:
 - [x] AC-5: Klik "Perubahan", "Ditangguhkan", atau "Tidak Disetujui" → muncul textarea keterangan wajib → status dan keterangan tersimpan → notifikasi ke pegawai.
 - [x] AC-6: Tidak ada tombol formal "Tolak"; keputusan negatif memakai label **"Tidak Disetujui"**.
 - [x] AC-7: Audit log mencatat aksi approval/penundaan.
-- [x] AC-8: Kepala Bagian hanya melihat pengajuan dari pegawai yang di-assign kepadanya (bukan semua pegawai).
+- [x] AC-8 — **Bukti historis; scope lama superseded untuk generalisasi step pertama:** ~~Kepala Bagian hanya melihat pengajuan dari pegawai yang di-assign kepadanya (bukan semua pegawai).~~ Tanda `[x]` hanya membuktikan scope lama Kepala Bagian dan tidak membuktikan perilaku verifikator dinamis dari K-MTG-01.
 - [x] AC-9: Jika kepala bagian juga menjadi approver pada step berikutnya, sistem otomatis skip step duplikat agar orang yang sama tidak menyetujui dua kali.
 - [x] AC-10: Pengajuan berstatus "Perubahan" atau "Ditangguhkan" tetap terlihat di timeline sampai ada tindak lanjut sesuai keputusan.
 - [x] AC-11: Perubahan rekomendasi/keputusan dicatat di audit log beserta timestamp dan komentar.
@@ -997,8 +999,10 @@ Setiap story mengikuti format:
 | **Dependensi** | US-4.4 |
 
 > **Sebagai** verifikator/Kepegawaian yang dikonfigurasi,
-> **Saya ingin** menyetujui atau menunda pengajuan cuti yang sudah diketahui kepala bagian,
+> **Narasi historis:** ~~Saya ingin menyetujui atau menunda pengajuan cuti yang sudah diketahui kepala bagian,~~
 > **Sehingga** proses approval berlanjut ke tahap akhir.
+
+> **Superseded oleh K-MTG-01:** frasa lama "sudah diketahui kepala bagian" tidak lagi normatif. Rumus normatif addendum adalah nol atau lebih verifikator; bila ada, seluruh verifikator ditempatkan sebelum Kepala Bagian. Status implementasinya tetap mengikuti AC `[ ]` addendum.
 
 **Acceptance Criteria:**
 
@@ -1109,8 +1113,8 @@ Setiap story mengikuti format:
 **Acceptance Criteria:**
 
 - [x] AC-1: Halaman daftar saldo cuti: Nama, NIP, Jatah, Carry-Over, Terpakai, Sisa.
-- [x] AC-2: Admin bisa melakukan **koreksi manual** saldo cuti (misal: menambah/mengurangi carry-over) dengan alasan wajib.
-- [x] AC-3: Koreksi manual tercatat di audit log.
+- [x] AC-2 — **Bukti historis; Superseded oleh K-MTG-01:** ~~Admin bisa melakukan **koreksi manual** saldo cuti (misal: menambah/mengurangi carry-over) dengan alasan wajib.~~ Tanda `[x]` tidak menyatakan kontrak koreksi berbasis pemakaian/entri manual sudah diimplementasikan; kontrak normatif penggantinya berada pada AC `[ ]` addendum.
+- [x] AC-3 — **Bukti historis; Superseded bersama AC-2 oleh K-MTG-01:** ~~Koreksi manual tercatat di audit log.~~ Bukti audit untuk mekanisme koreksi baru harus diverifikasi kembali melalui AC `[ ]` addendum.
 - [x] AC-4: Setiap awal tahun (1 Januari), sistem otomatis:
   - Menghitung carry-over N-1 maksimal 6 hari.
   - Menghitung hak tambahan jika pegawai tidak mengambil cuti tahunan pada N-2 dan N-1.
@@ -1136,7 +1140,7 @@ Setiap story mengikuti format:
 **Acceptance Criteria:**
 
 - [x] AC-1: Halaman konfigurasi approval chain cuti.
-- [x] AC-2: Admin dapat mengatur chain per pegawai: kepala bagian, Ketua Tim Kerja, satu atau lebih verifikator, Kabag/Kepegawaian, dan Pimpinan/PYBMC. Konfigurasi tersebut dapat diterapkan sekaligus ke seluruh anggota satu unit kerja melalui penyalinan template. *(Direvisi oleh keputusan K-US-01, 5 Agustus 2026: rantai aktif pada runtime tetap tepat satu per pegawai sehingga tidak ada precedence global, unit, dan pegawai yang perlu ditetapkan. Cakupan unit sebagai lapisan resolusi runtime ditunda ke Fase 2. Implementasi penyalinan template selesai melalui PR #177; hardening invarian writer pada issue #178 selesai melalui PR #179.)*
+- [x] AC-2 — **Bukti historis; urutan superseded oleh K-MTG-01:** ~~Admin dapat mengatur chain per pegawai: kepala bagian, Ketua Tim Kerja, satu atau lebih verifikator, Kabag/Kepegawaian, dan Pimpinan/PYBMC. Konfigurasi tersebut dapat diterapkan sekaligus ke seluruh anggota satu unit kerja melalui penyalinan template.~~ Tanda `[x]` tidak menyatakan rumus chain K-MTG-01 sudah diimplementasikan; kontrak normatif penggantinya berada pada AC `[ ]` addendum. *(Direvisi sebelumnya oleh keputusan K-US-01, 5 Agustus 2026: rantai aktif pada runtime tetap tepat satu per pegawai sehingga tidak ada precedence global, unit, dan pegawai yang perlu ditetapkan. Cakupan unit sebagai lapisan resolusi runtime ditunda ke Fase 2. Implementasi penyalinan template selesai melalui PR #177; hardening invarian writer pada issue #178 selesai melalui PR #179.)*
 - [x] AC-3: Perubahan konfigurasi tercatat di audit log.
 - [x] AC-4: Konfigurasi langsung berlaku untuk pengajuan cuti baru.
 - [x] AC-5: Ketua Tim Kerja dapat dipilih sebagai verifikator tanpa perlu role baru.
@@ -1958,9 +1962,10 @@ Sprint 1 tetap menjadi fondasi teknis sebelum vertical slice dimulai.
 
 ### US-1.4 · Tambahan mapping atribut SSO
 
-- [ ] AC-MTG-1: Saat email Keycloak cocok dengan pegawai lokal, role default `Pegawai` dari SSO menginisialisasi role internal Pegawai secara otomatis pada mapping pertama.
-- [ ] AC-MTG-2: Nomor telepon dipetakan dari custom attribute Keycloak hanya setelah nama claim/objek dikonfirmasi LLDIKTI; sistem tidak mengasumsikan nama claim.
-- [ ] AC-MTG-3: Role internal yang tersimpan tetap menjadi dasar otorisasi setiap request. Role Keycloak selain default Pegawai tidak langsung memberi permission SIMPEG.
+- [ ] AC-MTG-1: Email Keycloak menjadi atribut utama auto-mapping pada callback. Saat email cocok dengan pegawai lokal dan belum ada role internal tersimpan, role default `Pegawai` dari SSO menginisialisasi role internal Pegawai pada mapping pertama; inisialisasi ini tidak boleh menimpa role internal yang sudah ada. *(Sumber keputusan: K-MTG-02.1 dan K-MTG-02.2; guardrail engineering turunan: auto-mapping ditempatkan pada callback dan tidak menimpa role internal existing.)*
+- [ ] AC-MTG-2: Nomor telepon dipetakan dari custom attribute Keycloak hanya setelah nama claim/objek dikonfirmasi LLDIKTI; sistem tidak mengasumsikan nama claim. *(Sumber: K-MTG-02.3.)*
+- [ ] AC-MTG-3: Role internal yang tersimpan tetap menjadi dasar otorisasi setiap request. Role Keycloak selain default Pegawai tidak langsung memberi permission SIMPEG. *(Sumber: K-MTG-02.2 dan K-MTG-02.4.)*
+- [ ] AC-MTG-4: Readiness integrasi SSO membutuhkan daftar akun uji dari LLDIKTI yang memuat email lengkap dan expected role setiap akun; pengujian mapping belum dapat dinyatakan selesai sebelum data tersebut tersedia. *(Sumber keputusan: K-MTG-02.1; guardrail DoD turunan: pengujian mapping belum ditutup sebelum dependency tersedia.)*
 
 ### US-1.6 · Switch Role Berbasis Permission
 
@@ -1968,31 +1973,42 @@ Sprint 1 tetap menjadi fondasi teknis sebelum vertical slice dimulai.
 > **Saya ingin** mensimulasikan tampilan dan akses role yang lebih rendah tanpa login sebagai pegawai lain,
 > **Sehingga** demo, pengujian, dan dukungan dapat dilakukan tanpa pertukaran kredensial.
 
-- [ ] AC-1: Aksi hanya tersedia bagi actor dengan permission khusus switch role dan backend menolak actor tanpa permission tersebut.
-- [ ] AC-2: Switch hanya mengganti role efektif, bukan identitas, `employee_id`, atau scope kepemilikan data actor.
-- [ ] AC-3: Sistem menyimpan `temporary_role` dan `temporary_permission`; nilai tersebut tetap berlaku setelah logout/login hingga aktor melakukan revert.
-- [ ] AC-4: Revert menghapus nilai temporary dan mengembalikan role/permission asli.
-- [ ] AC-5: Target hanya role lebih rendah daripada role asli; tidak ada privilege escalation.
-- [ ] AC-6: Switch, penggunaan role sementara, dan revert tercatat pada audit log dengan actor, role asal, role target, waktu, dan alasan bila disediakan.
+- [ ] AC-1: Aksi hanya tersedia bagi aktor dengan permission khusus switch role dan backend menolak aktor tanpa permission tersebut. *(Sumber: K-MTG-03.1.)*
+- [ ] AC-2: Switch hanya mengganti role efektif, bukan identitas, `employee_id`, atau scope kepemilikan data aktor. *(Sumber: K-MTG-03.2.)*
+- [ ] AC-3: Sistem menyimpan `temporary_role` dan `temporary_permission`; nilai tersebut tetap berlaku setelah logout/login hingga aktor melakukan revert. *(Sumber: K-MTG-03.3.)*
+- [ ] AC-4: Revert menghapus nilai temporary dan mengembalikan role/permission asli. *(Sumber: K-MTG-03.3.)*
+- [ ] AC-5: Target hanya role lebih rendah daripada role asli; tidak ada privilege escalation. Definisi matriks role lebih rendah dan semantik `temporary_permission` tetap Open Question dan tidak boleh diasumsikan oleh implementasi. *(Sumber: K-MTG-03.4.)*
+- [ ] AC-6: Switch, penggunaan role sementara, dan revert tercatat pada audit log dengan aktor, role asal, role target, waktu, dan alasan bila disediakan. *(Sumber keputusan: K-MTG-03.4; guardrail engineering/DoD turunan: field audit aktor, role asal, role target, waktu, dan alasan bila disediakan.)*
+- [ ] AC-7: Switch role tersedia untuk kebutuhan yang diotorisasi pada environment development maupun production dan tidak bergantung pada bypass khusus environment. *(Sumber keputusan: K-MTG-03.1; guardrail engineering turunan: implementasi tidak bergantung pada bypass khusus environment.)*
+- [ ] AC-8: Seluruh endpoint tetap mengevaluasi permission efektif di backend selama role sementara aktif, sedangkan identitas asli dan data scope kepemilikan tetap berasal dari aktor asli. *(Sumber: K-MTG-03.2 dan K-MTG-03.4.)*
 
 ### US-2.4 · Tambahan dokumen pada profil pegawai
 
-- [ ] AC-MTG-1: Admin Kepegawaian dapat mengunggah dokumen tambahan langsung dari halaman profil pegawai melalui modal pemilihan jenis dokumen.
-- [ ] AC-MTG-2: Tab Dokumen menampilkan tabel dokumen wajib/SK pada bagian atas dan tabel dokumen tambahan (misalnya KTP, KK, ijazah) pada bagian bawah.
-- [ ] AC-MTG-3: Menu dokumen terpusat tetap menyediakan pencarian lintas pegawai untuk Super Admin/Admin Kepegawaian.
+- [ ] AC-MTG-1: Admin Kepegawaian dapat mengunggah dokumen tambahan langsung dari halaman profil pegawai melalui modal pemilihan jenis dokumen. *(Sumber keputusan: K-MTG-04.2; guardrail UI turunan: pemilihan jenis dokumen disajikan melalui modal.)*
+- [ ] AC-MTG-2: Tab Dokumen menampilkan tabel dokumen wajib/SK pada bagian atas dan tabel dokumen tambahan (misalnya KTP, KK, ijazah) pada bagian bawah. *(Sumber: K-MTG-04.2.)*
+- [ ] AC-MTG-3: Menu dokumen terpusat tetap menyediakan pencarian lintas pegawai untuk Super Admin/Admin Kepegawaian. *(Sumber: K-MTG-04.3.)*
 
 ### US-4.3 dan US-4.9 · Penghitungan saldo dari pemakaian
 
-- [ ] AC-MTG-1: Pendaftaran historis menerima jumlah cuti tahunan yang telah dipakai/diklaim per tahun; saldo sisa tidak menjadi input utama.
-- [ ] AC-MTG-2: Sistem menghitung sisa, rollover N-1 maksimal 6 hari, dan total hak secara berjenjang dari pemakaian N-2, N-1, dan tahun berjalan.
-- [ ] AC-MTG-3: Total tahun berjalan adalah 24 hari hanya bila pemakaian N-2 dan N-1 keduanya nol; bila ada pemakaian pada salah satu tahun tersebut, total maksimum 18 hari.
-- [ ] AC-MTG-4: Koreksi administratif memperbaiki data pemakaian/entri manual lalu memicu hitung ulang yang diaudit, bukan menulis saldo sisa sebagai fakta utama.
+- [ ] AC-MTG-1: Pendaftaran historis menerima jumlah cuti tahunan yang telah dipakai/diklaim per tahun; saldo sisa tidak menjadi input utama. *(Sumber: K-MTG-01.3.)*
+- [ ] AC-MTG-2: Sistem menghitung sisa, rollover N-1 maksimal 6 hari, dan total hak secara berjenjang dari pemakaian N-2, N-1, dan tahun berjalan. *(Sumber: K-MTG-01.2 dan K-MTG-01.3.)*
+- [ ] AC-MTG-3: Total tahun berjalan adalah 24 hari hanya bila pemakaian N-2 dan N-1 keduanya nol; bila ada pemakaian pada salah satu tahun tersebut, total maksimum 18 hari. *(Sumber: K-MTG-01.2.)*
+- [ ] AC-MTG-4: Koreksi administratif memperbaiki data pemakaian/entri manual lalu memicu hitung ulang yang diaudit, bukan menulis saldo sisa sebagai fakta utama. *(Sumber: K-MTG-01.5.)*
+
+**Decision table saldo tahunan yang sudah disepakati:**
+
+| Kondisi pemakaian N-2 dan N-1 | Hak dasar | Ceiling total hak tahun berjalan | Saldo tersedia |
+|---|---:|---:|---|
+| Pemakaian N-2 = 0 hari dan N-1 = 0 hari | 12 hari | Maksimal 24 hari | Total hak tahun berjalan hasil perhitungan sistem dikurangi pemakaian tahun berjalan |
+| Pemakaian satu hari atau lebih pada salah satu atau kedua tahun | 12 hari | Maksimal 18 hari | Total hak tahun berjalan hasil perhitungan sistem dikurangi pemakaian tahun berjalan |
+
+Rollover dari N-1 tetap dibatasi maksimal 6 hari, tetapi batas tersebut **bukan persamaan `12 + 6 = 24`** dan tabel ini tidak menetapkan komposisi bucket pembentuk hak 24 hari. Tabel hanya menetapkan hak dasar, ceiling, dan sumber hitung yang sudah diputuskan. Urutan konsumsi bucket N-2/N-1/tahun berjalan, masa kedaluwarsa setiap bucket, komposisi hak 24 hari, dan dampak koreksi backdated tetap Open Question. *(Sumber: K-MTG-01.2 untuk hak dasar, rollover, dan ceiling; K-MTG-01.3 untuk saldo yang diturunkan dari data pemakaian.)*
 
 ### US-4.5 dan US-4.10 · Urutan approval cuti
 
-- [ ] AC-MTG-1: Chain baru atau chain yang diperbarui mengurutkan satu atau lebih verifikator dinamis sebelum Kepala Bagian, lalu PYBMC sebagai final approver.
-- [ ] AC-MTG-2: Ketua Tim Kerja ditempatkan sebagai verifikator bila ditunjuk; jika tidak ada verifikator, chain langsung dimulai dari Kepala Bagian.
-- [ ] AC-MTG-3: Konfigurasi yang menempatkan Kepala Bagian sebelum verifikator ditolak dengan pesan yang dapat ditindaklanjuti.
+- [ ] AC-MTG-1: Chain baru atau chain yang diperbarui memuat nol atau lebih verifikator dinamis; bila ada, seluruh verifikator ditempatkan sebelum Kepala Bagian, lalu PYBMC menjadi final approver. *(Sumber: K-MTG-01.1.)*
+- [ ] AC-MTG-2: Ketua Tim Kerja ditempatkan sebagai verifikator bila ditunjuk; jika tidak ada verifikator, chain langsung dimulai dari Kepala Bagian. *(Sumber: K-MTG-01.1.)*
+- [ ] AC-MTG-3: Konfigurasi yang menempatkan Kepala Bagian sebelum salah satu verifikator ditolak dengan pesan yang dapat ditindaklanjuti. *(Sumber keputusan: K-MTG-01.1; guardrail engineering/DoD turunan: konfigurasi tidak valid ditolak dengan pesan yang dapat ditindaklanjuti.)*
 
 ### US-4.13 · Input Cuti Manual oleh Admin Kepegawaian
 
@@ -2000,51 +2016,78 @@ Sprint 1 tetap menjadi fondasi teknis sebelum vertical slice dimulai.
 > **Saya ingin** mencatat cuti yang telah disetujui dan dijalankan di luar SIMPEG,
 > **Sehingga** saldo dan rollover tetap akurat saat go-live, downtime, atau rekonsiliasi administrasi.
 
-- [ ] AC-1: Hanya Admin Kepegawaian yang dapat mengakses form input cuti manual.
-- [ ] AC-2: Form mencatat pegawai, jenis cuti, periode, jumlah hari kerja, alasan/keterangan, dan dokumen pendukung wajib.
-- [ ] AC-3: Entri langsung dicatat sebagai cuti yang telah disetujui di luar SIMPEG tanpa menjalankan usulan atau approval chain ulang.
-- [ ] AC-4: Entri dapat dipakai untuk tahun historis, tahun berjalan sebelum go-live, serta pencatatan setelah downtime; pemakaian tahunan otomatis memperbarui saldo dan rollover.
-- [ ] AC-5: Perubahan atau koreksi entry menghasilkan perhitungan ulang atomik dan audit actor, alasan, dokumen, serta nilai sebelum/sesudah.
+- [ ] AC-1: Hanya Admin Kepegawaian yang dapat mengakses form input cuti manual. *(Sumber: K-MTG-01.4.)*
+- [ ] AC-2: Form mencatat pegawai, jenis cuti, periode, jumlah hari kerja, alasan/keterangan, dan dokumen pendukung wajib. *(Sumber keputusan: K-MTG-01.4; guardrail engineering/DoD turunan: field pegawai, jenis cuti, periode, jumlah hari kerja, dan alasan/keterangan.)*
+- [ ] AC-3: Entri langsung dicatat sebagai cuti yang telah disetujui di luar SIMPEG tanpa menjalankan usulan atau approval chain ulang. *(Sumber: K-MTG-01.4.)*
+- [ ] AC-4: Entri dapat dipakai untuk tahun historis, tahun berjalan sebelum go-live, serta pencatatan setelah downtime; pemakaian tahunan otomatis memperbarui saldo dan rollover. *(Sumber: K-MTG-01.4.)*
+- [ ] AC-5: Perubahan atau koreksi entri menghasilkan perhitungan ulang atomik dan audit aktor, alasan, dokumen, serta nilai sebelum/sesudah. *(Sumber keputusan: K-MTG-01.5; guardrail engineering/DoD turunan: perhitungan ulang harus atomik.)*
 
 ### US-6.5 · Persiapan Template WhatsApp Business
 
-- [ ] AC-1: Tersedia dokumen template untuk setiap event WhatsApp yang diusulkan, minimal EWS kenaikan pangkat dan Satyalancana, dalam Bahasa Indonesia.
-- [ ] AC-2: Setiap template menyebut contoh isi, nama template, penerima, dan allowlist variabel payload.
-- [ ] AC-3: Setelah LLDIKTI mengembalikan template ID dan petunjuk layanan dari Meta, dispatcher memilih template dan mengirim variabel yang diizinkan; sistem tidak mengirim teks bebas.
+- [ ] AC-1: Tersedia dokumen template untuk setiap event WhatsApp yang diusulkan, minimal EWS kenaikan pangkat dan Satyalancana, dalam Bahasa Indonesia. *(Sumber keputusan: K-MTG-05.1; guardrail engineering/DoD turunan: dokumen ditulis dalam Bahasa Indonesia.)*
+- [ ] AC-2: Setiap template menyebut contoh isi, nama template, penerima, dan allowlist variabel payload. *(Sumber keputusan: K-MTG-05.1; guardrail engineering/DoD turunan: nama template, penerima, dan variabel dinyatakan sebagai allowlist.)*
+- [ ] AC-3: Setelah LLDIKTI mengembalikan template ID dan petunjuk layanan dari Meta, dispatcher memilih template dan mengirim variabel yang diizinkan; sistem tidak mengirim teks bebas. *(Sumber keputusan: K-MTG-05.2; guardrail engineering/DoD turunan: dispatcher menegakkan allowlist variabel.)*
+- [ ] AC-4: Sebelum template ID dan petunjuk provider diterima serta diverifikasi, adapter/provider WhatsApp tetap nonaktif dan dispatcher tidak memanggil layanan tersebut. *(Sumber: K-MTG-05.3.)*
 
 ### US-8.4 · Penempatan Hari Libur
 
-- [ ] AC-MTG-1: Hari Libur dihapus dari tab/menu Data Master dan dikelola melalui menu Hari Libur tersendiri.
-- [ ] AC-MTG-2: Halaman Hari Libur menampilkan kalender pada bagian atas dan tabel terfilter/paginated pada bagian bawah.
+- [ ] AC-MTG-1: Hari Libur dihapus dari tab/menu Data Master dan dikelola melalui menu Hari Libur tersendiri. *(Sumber: K-MTG-04.1.)*
+- [ ] AC-MTG-2: Halaman Hari Libur menampilkan kalender pada bagian atas dan tabel terfilter/paginated pada bagian bawah. *(Sumber keputusan: K-MTG-04.1; guardrail engineering/DoD turunan: tabel menggunakan filter dan pagination.)*
+
+### Work Item K-MTG-06 · Validasi Revisi, Dokumentasi Pengguna, dan Deployment
+
+> **Status:** **Belum Selesai.** Work item ini tidak membuat ID User Story baru. Konflik target 20 Agustus dengan akhir Agustus tetap Open Question dan tidak ditetapkan sebagai acceptance criterion final.
+
+- [ ] WI-MTG-1: Setiap kelompok revisi yang sudah memenuhi DoD dijadwalkan untuk validasi Zoom secepatnya tanpa menunggu rapat rutin hari Jumat. *(Sumber keputusan: K-MTG-06.1; guardrail DoD turunan: kelompok revisi dinilai siap setelah memenuhi DoD.)*
+- [ ] WI-MTG-2: Hasil validasi dan penerimaan Kepegawaian dicatat per kelompok revisi, termasuk fitur yang diterima, ditolak, atau memerlukan tindak lanjut. *(Sumber keputusan: K-MTG-06.1 dan K-MTG-06.2; guardrail DoD turunan: status dan hasil validasi dicatat per kelompok revisi.)*
+- [ ] WI-MTG-3: Setelah penerimaan fitur oleh Kepegawaian, tersedia panduan penggunaan per role yang menjelaskan fitur, langkah penggunaan, prasyarat, dan dampak setiap aksi. *(Sumber keputusan: K-MTG-06.2; guardrail dokumentasi turunan: panduan juga mencatat prasyarat penggunaan.)*
+- [ ] WI-MTG-4: Perubahan image PHP/container pada branch `development` dan perubahan versi PostgreSQL dicatat sebagai dependensi eksternal LLDIKTI; versi baru belum menjadi baseline hanya karena tersedia. *(Sumber keputusan: K-MTG-06.3; guardrail operasional turunan: versi baru tidak menjadi baseline sebelum gate verifikasi selesai.)*
+- [ ] WI-MTG-5: Sebelum environment baru dijadikan baseline, tersedia bukti backup dan restore data, lalu verifikasi aplikasi, migrasi, queue, dan scheduler pada environment tersebut. *(Sumber: K-MTG-06.3.)*
 
 
 
 ### Status Implementasi Hasil Meeting
 
-> Status di bawah berlaku untuk **tambahan atau revisi dari hasil meeting**. Acceptance criteria lama yang sudah selesai tidak berubah, tetapi user story terkait tetap memiliki pekerjaan terbuka dan tidak boleh dinyatakan tuntas secara keseluruhan sampai baris ini selesai diverifikasi.
+> Status di bawah berlaku untuk **tambahan atau revisi dari hasil meeting**. Tanda `[x]` pada acceptance criteria lama tetap dipertahankan sebagai bukti historis implementasi kontrak lama; bila diberi label **Superseded**, kriterianya tidak lagi normatif dan tidak membuktikan kontrak pengganti sudah selesai. User story terkait tetap memiliki pekerjaan terbuka dan tidak boleh dinyatakan tuntas secara keseluruhan sampai baris ini selesai diverifikasi.
 
-| User Story | Perubahan hasil meeting | Status | Bukti penutupan yang wajib ada |
+| User Story / Work Item | Perubahan hasil meeting | Status | Bukti penutupan yang wajib ada |
 |---|---|---|---|
-| US-1.4 | Inisialisasi role internal Pegawai dari role default SSO, serta mapping nomor telepon dari custom attribute terkonfirmasi | **Belum Selesai** | Feature test mapping email/role/nomor telepon, penolakan claim tidak dikenal, RBAC regression, dan audit |
-| US-1.6 | Switch role berbasis permission dengan role/permission sementara dan revert | **Belum Selesai** | Feature test permission, persistence, revert, ownership scope, privilege-escalation denial, audit, serta QA browser |
+| US-1.4 | Email sebagai atribut utama auto-mapping, inisialisasi role internal Pegawai tanpa menimpa role existing, serta mapping nomor telepon dari custom attribute terkonfirmasi | **Belum Selesai** | Daftar email + expected role akun uji dari LLDIKTI, feature test mapping email/role/nomor telepon, non-overwrite role existing, penolakan claim tidak dikenal, RBAC regression, dan audit |
+| US-1.6 | Switch role berbasis permission dengan role/permission sementara dan revert pada development maupun production | **Belum Selesai** | Feature test permission, persistence, revert, ownership scope, privilege-escalation denial, evaluasi permission efektif seluruh endpoint di backend, audit, serta QA browser |
 | US-2.4 | Unggah dokumen tambahan dari profil dan pemisahan visual dokumen wajib/SK | **Belum Selesai** | Feature test upload/authorization/audit dan smoke test browser profil pegawai |
 | US-4.3 | Saldo dihitung dari jumlah cuti yang dipakai, bukan input saldo sisa | **Belum Selesai** | Unit/feature test matriks N-2/N-1, perhitungan 12/18/24, dan audit rekonsiliasi |
-| US-4.5 | Verifikator ditempatkan sebelum Kepala Bagian dalam approval chain | **Belum Selesai** | Feature test urutan chain, tanpa verifikator, Ketua Tim sebagai verifikator, dan regresi snapshot |
+| US-4.5 | Chain memuat nol atau lebih verifikator; bila ada, seluruhnya ditempatkan sebelum Kepala Bagian | **Belum Selesai** | Feature test chain tanpa verifikator, satu/banyak verifikator, Ketua Tim sebagai verifikator, urutan seluruh verifikator sebelum Kepala Bagian, dan regresi snapshot |
 | US-4.9 | Koreksi memakai data pemakaian/entri manual dan perhitungan ulang saldo | **Belum Selesai** | Feature test transaksi atomik, nilai sebelum/sesudah, audit, dan regresi rollover |
-| US-4.10 | Validasi konfigurasi verifikator → Kepala Bagian → PYBMC | **Belum Selesai** | Feature test konfigurasi valid/tidak valid, skip duplikat, dan audit konfigurasi |
+| US-4.10 | Validasi konfigurasi nol atau lebih verifikator → Kepala Bagian → PYBMC | **Belum Selesai** | Feature test konfigurasi valid/tidak valid, seluruh verifikator sebelum Kepala Bagian, skip duplikat, dan audit konfigurasi |
 | US-4.13 | Input cuti manual oleh Admin Kepegawaian | **Belum Selesai** | Feature test RBAC, dokumen wajib, penghitungan saldo/rollover, audit, dan QA browser |
-| US-6.5 | Dokumen template WhatsApp serta integrasi berbasis template ID | **Belum Selesai** | Dokumen template disetujui LLDIKTI/Meta, test dispatcher/template variable, dan bukti uji layanan |
+| US-6.5 | Dokumen template WhatsApp serta integrasi berbasis template ID | **Belum Selesai** | Dokumen template disetujui LLDIKTI/Meta, test dispatcher/allowlist variabel, bukti adapter tetap nonaktif sebelum dependency tersedia, dan bukti uji layanan setelah kontrak final diterima |
 | US-8.4 | Hari Libur dipisahkan dari Data Master dengan kalender di atas tabel | **Belum Selesai** | Feature/regression test, smoke test browser, dan konfirmasi menu lama tidak lagi tersedia |
+| K-MTG-06 | Validasi Zoom, penerimaan Kepegawaian, panduan per role, serta readiness environment/container/PostgreSQL | **Belum Selesai** | Notulen/hasil penerimaan per kelompok revisi, panduan per role, versi baseline environment, bukti backup/restore, serta verifikasi aplikasi, migrasi, queue, dan scheduler |
 
 
 
-### US-6.5 · Addendum Katalog Template WhatsApp Business
+#### Addendum Katalog Template WhatsApp Business (bagian dari US-6.5)
 
 > **Status:** **Belum Selesai** — menunggu dokumen template dari tim, pengajuan LLDIKTI kepada Meta/Qontak, template ID, serta petunjuk provider.
 
-- [ ] AC-MTG-4: Dokumen template memuat minimal tiga model: `simpeg_cuti_perlu_tindakan`, `simpeg_cuti_status`, dan `simpeg_ews_pengingat`. Model `simpeg_notifikasi_sistem` bersifat opsional sampai ada event operasional yang disetujui.
-- [ ] AC-MTG-5: `simpeg_cuti_perlu_tindakan` menyediakan variabel nama pegawai, jenis/periode cuti, jumlah hari, dan tautan detail untuk aktor pada step approval aktif.
-- [ ] AC-MTG-6: `simpeg_cuti_status` mendukung status `Disetujui`, `Perubahan`, `Ditangguhkan`, serta `Tidak Disetujui` beserta keterangan dan tautan detail bagi pegawai pemohon.
-- [ ] AC-MTG-7: `simpeg_ews_pengingat` mendukung Kenaikan Pangkat, KGB, Pensiun, Kontrak PPPK, serta Satyalancana dengan variabel nama pegawai, jenis peringatan, tanggal target, sisa waktu, dan tautan detail.
-- [ ] AC-MTG-8: Implementasi hanya menggunakan template ID, nama variabel, bahasa, serta konfigurasi tombol yang dikembalikan LLDIKTI setelah persetujuan Meta/Qontak; bila generalisasi ditolak provider, template dipecah per event.
-- [ ] AC-MTG-9: Template OTP dari baseline Qontak tidak digunakan dalam SIMPEG selama autentikasi tetap menggunakan Keycloak SSO.
+AC-MTG-4 sampai AC-MTG-7 dan AC-MTG-10 di bawah adalah kontrak rancangan **dokumen submission** yang disiapkan tim, bukan kontrak runtime final. Kontrak runtime baru boleh diikat setelah LLDIKTI mengembalikan hasil provider dan harus mengikuti AC-MTG-8.
+
+- [ ] AC-MTG-4: Dokumen template memuat minimal tiga model: `simpeg_cuti_perlu_tindakan`, `simpeg_cuti_status`, dan `simpeg_ews_pengingat`. Model `simpeg_notifikasi_sistem` bersifat opsional sampai ada event operasional yang disetujui. *(Sumber: K-MTG-05A.1.)*
+- [ ] AC-MTG-5: `simpeg_cuti_perlu_tindakan` menyediakan variabel `nama_pegawai`, `jenis_cuti`, `tanggal_mulai`, `tanggal_selesai`, `jumlah_hari`, dan `tautan_detail` untuk aktor pada step approval aktif. *(Sumber: tabel katalog K-MTG-05A, baris `simpeg_cuti_perlu_tindakan`.)*
+- [ ] AC-MTG-6: `simpeg_cuti_status` mendukung variabel `nama_pegawai`, `jenis_cuti`, `status`, `keterangan`, dan `tautan_detail` bagi pegawai pemohon; nilai status mencakup `Disetujui`, `Perubahan`, `Ditangguhkan`, serta `Tidak Disetujui`. *(Sumber: tabel katalog K-MTG-05A, baris `simpeg_cuti_status`.)*
+- [ ] AC-MTG-7: `simpeg_ews_pengingat` mendukung Kenaikan Pangkat, KGB, Pensiun, Kontrak PPPK, serta Satyalancana dengan variabel `nama_pegawai`, `jenis_peringatan`, `tanggal_target`, `sisa_waktu`, dan `tautan_detail`. *(Sumber: tabel katalog K-MTG-05A, baris `simpeg_ews_pengingat`.)*
+- [ ] AC-MTG-8: Implementasi hanya menggunakan template ID, nama variabel, bahasa, serta konfigurasi tombol yang dikembalikan LLDIKTI setelah persetujuan Meta/Qontak; bila generalisasi ditolak provider, template dipecah per event. *(Sumber: K-MTG-05A.2 dan K-MTG-05A.3.)*
+- [ ] AC-MTG-9: Template OTP dari baseline Qontak tidak digunakan dalam SIMPEG selama autentikasi tetap menggunakan Keycloak SSO. *(Sumber: K-MTG-05A.4.)*
+- [ ] AC-MTG-10: Bila `simpeg_notifikasi_sistem` kemudian disetujui untuk diajukan, allowlist variabelnya adalah `judul`, `ringkasan`, dan `tautan_detail`. *(Sumber: tabel katalog K-MTG-05A, baris `simpeg_notifikasi_sistem`; guardrail engineering/DoD turunan: variabel minimum diperlakukan sebagai allowlist dokumen submission.)*
+
+### Open Questions Hasil Evaluasi Meeting
+
+Butir berikut belum mempunyai keputusan cukup rinci dan tidak boleh diselesaikan dengan asumsi implementasi:
+
+1. **Semantik `temporary_permission`:** apakah nilainya diturunkan dari role target, snapshot permission efektif, atau bentuk lain; termasuk lifecycle ketika permission asli berubah.
+2. **Koreksi saldo break-glass:** apakah direct balance override pernah diizinkan untuk kondisi darurat. Default canonical saat ini adalah **derived-only** dari data pemakaian/entri manual dan hitung ulang sampai ada keputusan eksplisit lain.
+3. **Matriks switch role:** urutan lengkap role yang boleh menjadi target, penanganan role dengan permission lintas-hierarki, dan definisi formal "role lebih rendah".
+4. **Detail input/koreksi cuti manual:** aturan validasi per jenis cuti, penanganan duplikasi/overlap, batas koreksi, dokumen yang diterima, dan efek koreksi terhadap entri yang sudah dipakai pada perhitungan berikutnya.
+5. **Bucket saldo:** urutan konsumsi bucket N-2/N-1/tahun berjalan, masa kedaluwarsa, serta perilaku koreksi backdated.
+6. **WhatsApp Business:** provider final, kontrak API, template ID, nama variabel, bahasa, tombol URL, credential, dan petunjuk layanan yang dikembalikan LLDIKTI/Meta/Qontak.
+7. **Target penyelesaian:** metadata lama menyebut 20 Agustus 2026, sedangkan K-MTG-06 menyebut akhir Agustus 2026. Target final menunggu keputusan eksplisit dan tidak ditetapkan melalui AC.
