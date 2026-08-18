@@ -121,6 +121,9 @@ Batas yang eksplisit dalam PRD diterapkan sebagai aturan server-side yang berbas
 2. Sistem menghitung sisa tahun tersebut, carry-over N-1 maksimal 6 hari, dan total hak tahun berjalan secara berjenjang dari pemakaian N-2, N-1, dan tahun berjalan.
 3. Hak tahun berjalan menjadi 24 hari hanya bila pemakaian pada N-2 dan N-1 sama dengan nol. Jika terdapat pemakaian pada salah satu dari dua tahun tersebut, total maksimum adalah 18 hari.
 4. Koreksi dilakukan dengan memperbaiki data pemakaian atau entri cuti manual dan menjalankan hitung ulang. Saldo sisa bukan nilai administratif yang ditulis bebas sebagai sumber kebenaran.
+5. Direct balance override tidak tersedia pada Fase 1. Konsumsi hak memakai bucket tertua yang masih sah dengan urutan N-2, N-1, lalu tahun berjalan; hak lama yang tersisa kedaluwarsa pada akhir tahun penggunaannya.
+6. Koreksi backdated menghitung ulang seluruh transaksi setelah titik koreksi secara kronologis dan atomik.
+7. PNS dan PPPK memakai mesin ceiling 12/18/24 yang sama. Untuk PPPK, ceiling 18 mensyaratkan masa perjanjian kerja di atas 2 tahun dan ceiling 24 mensyaratkan masa perjanjian kerja di atas 3 tahun.
 
 ### Alasan
 
@@ -137,6 +140,8 @@ Penggunaan yang telah diklaim dapat direkonsiliasi dan divalidasi secara berjenj
 3. Entri tersebut langsung menjadi catatan cuti yang telah disetujui di luar SIMPEG; sistem tidak membuat usulan baru dan tidak menjalankan approval chain ulang.
 4. Untuk cuti tahunan, entri manual membentuk pemakaian final yang diaudit dan ikut menghitung saldo serta rollover. Ia bukan reservasi aktif K-CUT-01.
 5. Koreksi entry wajib atomik, menyimpan alasan serta nilai sebelum/sesudah, dan menghitung ulang saldo terkait.
+6. Jumlah hari kerja dihitung sistem dari periode dan kalender kerja; duplikasi serta overlap dengan cuti aktif pegawai yang sama ditolak.
+7. Koreksi mempertahankan record lama melalui pembatalan atau versi pengganti dan tidak melakukan hard delete.
 
 ### Batas
 

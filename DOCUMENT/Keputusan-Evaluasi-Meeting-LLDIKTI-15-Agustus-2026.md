@@ -15,6 +15,11 @@
 3. Pendaftaran data awal dan rekonsiliasi historis memakai **jumlah cuti yang telah dipakai/diklaim per tahun**, bukan saldo/sisa cuti. Sistem menghitung sisa, rollover, dan total hak secara berjenjang dari penggunaan tersebut. Admin tidak menjadikan saldo sisa sebagai sumber hitung utama.
 4. Admin Kepegawaian memerlukan form **input cuti manual** untuk cuti yang telah diproses di luar SIMPEG, termasuk cuti historis, cuti pada tahun berjalan sebelum go-live, dan cuti ketika sistem tidak tersedia. Hanya Admin Kepegawaian yang dapat menginputnya; dokumen pendukung wajib; catatan langsung diakui sebagai cuti yang telah disetujui di luar SIMPEG tanpa menjalankan usulan atau approval ulang; dan pemakaian tersebut wajib ikut menghitung saldo serta rollover.
 5. Koreksi administratif dilakukan melalui koreksi data pemakaian/entri cuti manual dan perhitungan ulang sistem. Audit wajib merekam aktor, alasan, dokumen, nilai sebelum/sesudah, dan waktu perubahan.
+6. **Direct balance override tidak tersedia**, termasuk sebagai jalur break-glass Fase 1. Jika saldo tidak sesuai, Admin Kepegawaian memperbaiki sumber pemakaian atau entri cuti manual, lalu sistem menghitung ulang secara atomik.
+7. Input cuti manual hanya merekam cuti yang telah terjadi/disetujui di luar SIMPEG. Jumlah hari kerja dihitung sistem; duplikasi dan periode yang overlap dengan cuti aktif pegawai yang sama ditolak; koreksi mempertahankan riwayat lama melalui pembatalan/versi pengganti, bukan hard delete.
+8. Konsumsi saldo memakai hak tertua yang masih sah terlebih dahulu: N-2, kemudian N-1, lalu tahun berjalan. Hak lama yang masih tersisa kedaluwarsa pada akhir tahun penggunaannya.
+9. Koreksi backdated menghitung ulang secara kronologis mulai dari transaksi yang dikoreksi sampai seluruh transaksi setelahnya. Sistem tidak menambal saldo akhir secara langsung.
+10. PNS dan PPPK memakai mesin hitung 12/18/24 yang sama. Untuk PPPK, total maksimum 18 mensyaratkan masa perjanjian kerja di atas 2 tahun dan total maksimum 24 mensyaratkan masa perjanjian kerja di atas 3 tahun; kesamaan angka tidak menghapus syarat kelayakan berdasarkan jenis pegawai.
 
 ## K-MTG-02 — Atribut Keycloak dan role default Pegawai
 
@@ -25,10 +30,10 @@
 
 ## K-MTG-03 — Switch role berbasis permission
 
-1. Sistem menyediakan switch role bagi aktor yang memiliki permission khusus untuk kebutuhan demo, pengujian, dan dukungan, di development maupun production.
+1. Pada Fase 1, switch role hanya tersedia bagi **Super Admin** yang juga memiliki permission khusus, untuk kebutuhan demo, pengujian, dan dukungan di development maupun production.
 2. Switch role adalah simulasi **role**, bukan impersonasi identitas/pegawai lain. Identitas aktor, kepemilikan data, dan jejak audit tidak berubah.
-3. Role efektif sementara dan permission efektif sementara disimpan secara persisten (`temporary_role` dan `temporary_permission`) sehingga tetap berlaku setelah logout/login sampai aktor melakukan revert. Revert mengosongkan nilai sementara dan mengembalikan role asli.
-4. Target role dibatasi pada role yang lebih rendah dari role asli aktor. Perubahan, penggunaan, dan revert wajib diaudit serta seluruh endpoint tetap memeriksa permission efektif di backend.
+3. `temporary_role` disimpan secara persisten sehingga tetap berlaku setelah logout/login sampai aktor melakukan revert. Permission efektif selalu diturunkan secara dinamis dari role tujuan; `temporary_permission` tidak boleh menjadi snapshot permanen atau sumber kebenaran otorisasi. Perubahan permission role tujuan berlaku pada request berikutnya.
+4. Matriks Fase 1 bersifat eksplisit: Super Admin dapat beralih ke Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai. Switch ke Super Admin, role yang sama, atau role di luar allowlist ditolak fail-closed. Perubahan, penggunaan, dan revert wajib diaudit serta seluruh endpoint tetap memeriksa permission efektif di backend.
 
 ## K-MTG-04 — Hari libur dan dokumen pegawai
 
@@ -41,12 +46,29 @@
 1. Tim menyusun dokumen template WhatsApp untuk setiap jenis notifikasi yang akan diajukan, berisi contoh pesan dan daftar variabel payload. Contoh minimal mencakup EWS kenaikan pangkat dan Satyalancana.
 2. LLDIKTI mengajukan template kepada Meta dan mengembalikan template ID beserta petunjuk pemasangan. Setelah itu integrasi dapat diuji dengan pola pemilihan template dan pengisian variabel, bukan pengiriman teks bebas.
 3. Aktivasi adapter/provider WhatsApp tidak dilakukan sebelum template ID dan petunjuk layanan diterima dari LLDIKTI.
+4. WhatsApp Business merupakan keluaran wajib hasil evaluasi meeting dan harus siap paling lambat pada target penyelesaian akhir Agustus 2026. Provider final, kontrak API, credential, template ID, bahasa, tombol, nomor uji, serta sandbox tetap diperlakukan sebagai dependency implementasi dari LLDIKTI/provider, bukan Open Question produk baru.
 
 ## K-MTG-06 — Validasi revisi dan deployment
 
 1. Target penyelesaian direvisi dari rencana tanggal 20 menjadi **akhir Agustus 2026**, dengan evaluasi Zoom segera setelah satu kelompok revisi siap; tidak perlu menunggu rapat rutin hari Jumat.
 2. Setelah penerimaan fitur oleh Kepegawaian, tim menyusun panduan penggunaan per role yang menerangkan fitur, langkah penggunaan, dan dampak aksi.
 3. LLDIKTI akan memperbarui image PHP/container pada branch `development` dan dapat menaikkan versi PostgreSQL sedikit. Sebelum lingkungan baru dipakai sebagai acuan, data perlu dapat dibackup dan direstore, lalu aplikasi, migrasi, queue, dan scheduler diverifikasi kembali.
+
+## K-MTG-07 — Penutupan Open Questions addendum
+
+| Field | Detail |
+|---|---|
+| Tanggal keputusan lanjutan | 18 Agustus 2026 |
+| Sumber persetujuan | Konfirmasi langsung pengguna pada pembahasan [Issue SIMPEG #221](https://github.com/LLDIKTI-XVI-TEAM/SIMPEG/issues/221) |
+| Kedudukan | Mengikat dan menggantikan status Open Question pada addendum 15 Agustus 2026 |
+
+1. **OQ-MTG-01 — Decided:** permission efektif switch role diturunkan secara dinamis dari role tujuan; snapshot `temporary_permission` tidak menjadi sumber otorisasi.
+2. **OQ-MTG-02 — Decided:** direct balance override tidak tersedia. Koreksi selalu memperbaiki sumber pemakaian/entri manual dan menghitung ulang.
+3. **OQ-MTG-03 — Decided:** hanya Super Admin ber-permission khusus yang dapat switch ke Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai.
+4. **OQ-MTG-04 — Decided:** input cuti manual khusus Admin Kepegawaian, dengan dokumen wajib, kalkulasi hari kerja oleh sistem, penolakan duplikasi/overlap, dan koreksi auditabel tanpa hard delete.
+5. **OQ-MTG-05 — Decided:** bucket tertua yang masih sah dikonsumsi lebih dahulu; expiry terjadi pada akhir tahun penggunaan; koreksi backdated memicu rekalkulasi kronologis. PNS dan PPPK memakai mesin 12/18/24 yang sama; PPPK memerlukan masa perjanjian di atas 2 tahun untuk maksimum 18 dan di atas 3 tahun untuk maksimum 24.
+6. **OQ-MTG-06 — Decided:** WhatsApp Business wajib siap dalam target akhir Agustus. Detail provider dan artefak layanan diteruskan sebagai dependency implementasi #214/#215, bukan pertanyaan produk terbuka.
+7. **OQ-MTG-07 — Decided:** target penyelesaian final adalah **akhir Agustus 2026**. Target ini tidak dipecah menjadi tanggal teknis tambahan pada acceptance criteria.
 
 ## Dampak dokumentasi
 

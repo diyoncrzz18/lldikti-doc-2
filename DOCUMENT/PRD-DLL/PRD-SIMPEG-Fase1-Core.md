@@ -20,7 +20,7 @@ PRD ini menjadi **sumber kebenaran utama** untuk Fase 1. Keputusan meeting tekni
 3. Server dan domain production disiapkan oleh LLDIKTI ketika sistem mendekati tahap deployment.
 4. Database development menggunakan PostgreSQL 17 melalui container.
 5. Production diprioritaskan menggunakan Podman karena pertimbangan keamanan.
-6. Notifikasi tidak boleh mengunci channel ke in-app/email saja; Fase 1 menyediakan in-app dan email, dengan arsitektur channel-configurable agar WhatsApp Business dapat ditambahkan saat layanan/credential tersedia.
+6. Notifikasi tidak boleh mengunci channel ke in-app/email saja. Fase 1 menyediakan in-app, email, dan WhatsApp Business berbasis template melalui arsitektur channel-configurable; aktivasi WhatsApp menunggu kontrak serta credential provider, tetapi kesiapan channel tetap wajib dituntaskan paling lambat akhir Agustus 2026.
 7. Approval cuti tidak boleh hardcoded 3 stage seragam. Sesuai K-US-01, setiap pegawai memakai tepat satu rantai runtime yang dinamis; konfigurasi satu pegawai dapat disalin ke seluruh anggota unit sebagai template, tetapi unit bukan scope resolver runtime. Rantai dapat memuat 1, 2, 3, atau lebih verifikator dan dapat menunjuk pegawai tertentu seperti Ketua Tim Kerja tanpa membuat role baru.
 8. Keputusan cuti mengikuti label resmi pada formulir: `Disetujui`, `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`. Istilah formal `Ditolak` tidak digunakan pada keputusan cuti.
 9. Cuti tahunan tidak boleh lintas tahun kalender; periode Desember–Januari harus dipecah menjadi dua pengajuan terpisah. Kuota tahunan 12 hari dengan carry-over maksimal 6 hari dari N-1, kecuali pegawai tidak mengambil cuti tahunan dua tahun berturut-turut sehingga total tahun berjalan dapat mencapai 24 hari.
@@ -143,7 +143,7 @@ Pengelolaan data kepegawaian di LLDIKTI Wilayah XVI masih dilakukan secara manua
 | Pending changes (approval perubahan data) | Fase 2 | Slide 5 |
 | Klaim kehadiran | Fase 2 | Slide 8 |
 | Surat tugas | Fase 2 | — |
-| Notifikasi WhatsApp Business production | Fase 2 / setelah layanan tersedia | Hasil meeting teknis |
+| Perluasan katalog/event WhatsApp di luar katalog K-MTG-05A | Fase 2 | Hasil meeting teknis; tiga template minimum tetap wajib Fase 1 |
 | Kalender virtual / Kalender tim | Fase 2 | Slide 10 |
 | Log harian (catat kegiatan harian) | Fase 2 | Slide 8 |
 | SKP & penilaian kinerja | Fase 3 | Slide 9 |
@@ -1020,7 +1020,7 @@ Kalkulasi TMT tidak dipicu oleh selesainya import massal. Import Data Utama hany
 
 ### 11.1 Deskripsi
 
-Notifikasi dipicu oleh events di modul lain (cuti, EWS, import, audit penting, dll). Fase 1 mengirim notifikasi melalui in-app dan email via queue, tetapi implementasi tidak boleh mengunci channel hanya ke dua opsi tersebut. Sistem harus memakai konfigurasi channel agar WhatsApp Business atau channel lain dapat ditambahkan saat layanan/credential tersedia.
+Notifikasi dipicu oleh events di modul lain (cuti, EWS, import, audit penting, dll). Fase 1 mengirim notifikasi melalui in-app dan email via queue serta menyiapkan WhatsApp Business berbasis template sebagai keluaran wajib addendum meeting. Sistem memakai konfigurasi channel agar domain tidak bergantung pada provider tertentu; adapter WhatsApp baru diaktifkan setelah kontrak, template ID, credential, dan sandbox dari LLDIKTI/provider tersedia.
 
 ### 11.2 Channel Notifikasi
 
@@ -1028,7 +1028,7 @@ Notifikasi dipicu oleh events di modul lain (cuti, EWS, import, audit penting, d
 |---------|---------------|-----------|------------|
 | **In-App** | Wajib | Database-backed, polling/SSE | Tampil di bell icon di navbar, badge count |
 | **Email** | Wajib bila credential tersedia | SMTP/Gmail resmi via Laravel Mail + Queue | Development dapat memakai Mailpit; production memakai email operasional LLDIKTI atau Gmail credential yang disediakan |
-| **WhatsApp Business** | Disiapkan sebagai konfigurasi/future channel | Adapter/service terpisah | Tidak wajib production di Fase 1; aktif bila LLDIKTI menyediakan layanan/library/credential |
+| **WhatsApp Business** | Wajib siap pada akhir Agustus 2026 | Adapter/service terpisah melalui dispatcher | Aktif setelah template, kontrak, credential, nomor uji, dan sandbox LLDIKTI/provider terverifikasi |
 
 **Aturan:** Event notifikasi memilih channel berdasarkan konfigurasi. Kode domain tidak boleh memanggil SMTP/WA langsung; gunakan dispatcher/notification service agar channel bisa dinyalakan/dimatikan per event.
 
@@ -2009,7 +2009,7 @@ Meskipun Fase 1 menggunakan Laravel Blade (server-side rendering), semua logika 
 4. **Data pegawai awal tersedia dalam CSV/Excel** — sample dapat digunakan untuk import awal, tetapi field lengkap tetap mengikuti struktur PRD.
 5. **Server/hosting dan domain production disiapkan LLDIKTI pada tahap deployment** — development tidak menunggu server production.
 6. **Email production menggunakan email operasional LLDIKTI/Gmail resmi** — selama development testing email dapat memakai Mailpit.
-7. **WhatsApp Business belum wajib aktif di Fase 1** — sistem hanya menyiapkan desain channel-configurable sampai layanan/credential disediakan.
+7. **WhatsApp Business wajib dituntaskan pada Fase 1 paling lambat akhir Agustus 2026** — kontrak provider, credential, template ID, nomor uji, dan sandbox tetap merupakan dependency implementasi dari LLDIKTI/provider; adapter tidak boleh aktif sebelum dependency tersebut terverifikasi.
 8. **Referensi jabatan, pangkat, golongan, unit kerja hierarkis, status pegawai, Program Studi, dan BUP disediakan atau diverifikasi bagian kepegawaian** — sistem menyediakan struktur dan CRUD reference; katalog awal Program Studi dapat dibentuk dari snapshot yang sudah tersimpan.
 9. **Saldo cuti awal dan riwayat N-1/N-2 disediakan/diinput Admin Kepegawaian** — dibutuhkan agar carry-over tahun berjalan akurat.
 10. **Format formulir cuti resmi dan konten halaman QR diverifikasi LLDIKTI** — tim pengembang menyediakan generator dan halaman verifikasi.
@@ -2052,7 +2052,7 @@ Untuk transparansi, berikut fitur yang direncanakan di fase berikutnya:
 - Surat tugas
 - Kalender virtual (per pegawai / per tim)
 - Log harian
-- Aktivasi penuh WhatsApp Business notification bila layanan/credential sudah tersedia
+- Perluasan event/template WhatsApp Business di luar katalog minimum K-MTG-05A
 
 ### Fase 3 — Kinerja
 - SKP & Rencana Hasil Kerja (RHK)
@@ -2133,9 +2133,9 @@ Untuk transparansi, berikut fitur yang direncanakan di fase berikutnya:
 2. Saldo awal/historis tidak lagi diinput sebagai sisa saldo. Admin memasukkan **jumlah cuti yang telah dipakai/diklaim per tahun** dan sistem menghitung sisa, rollover maksimal 6 hari, serta hak tahun berjalan secara berjenjang. Hak 24 hari hanya berlaku bila pemakaian N-2 dan N-1 sama dengan nol; selain itu batas totalnya 18 hari.
 3. Admin Kepegawaian memiliki jalur input cuti manual dengan dokumen pendukung wajib untuk cuti historis, cuti sebelum go-live, atau cuti ketika layanan tidak tersedia. Entri ini langsung mengakui keputusan yang sudah ditetapkan di luar SIMPEG, tidak melalui chain ulang, dan menjadi bagian dari kalkulasi saldo serta rollover.
 4. Email Keycloak menjadi atribut mapping utama; role default Pegawai dari SSO menginisialisasi role internal Pegawai pada mapping pertama; nomor telepon dapat dipetakan dari custom attribute yang dikonfirmasi LLDIKTI. Setelah inisialisasi, SIMPEG tetap mengevaluasi role internal dan permission pada setiap akses.
-5. Aktor yang memiliki permission khusus dapat melakukan switch role berbasis `temporary_role`/`temporary_permission`, bersifat persisten sampai di-revert, hanya menyimulasikan role dan tidak mengimpersonasi pegawai lain. Target hanya role lebih rendah; seluruh perubahan diaudit dan backend tetap menegakkan permission efektif.
+5. Hanya Super Admin dengan permission khusus yang dapat melakukan switch role berbasis `temporary_role` persisten sampai revert. Permission efektif selalu diturunkan dinamis dari role tujuan; target Fase 1 terbatas pada Admin Kepegawaian, Pimpinan, Kepala Bagian, dan Pegawai. Switch hanya menyimulasikan role, tidak mengimpersonasi pegawai lain; seluruh perubahan diaudit dan backend tetap menegakkan permission efektif terbaru.
 6. Hari Libur berada pada menu tersendiri dengan kalender di atas tabel, bukan pada Data Master. Profil pegawai menyediakan unggah dokumen tambahan dan memisahkannya secara visual dari dokumen wajib/SK; menu dokumen lintas pegawai tetap dipertahankan.
-7. Tim menyediakan dokumen template WhatsApp beserta variabelnya untuk pengajuan Meta oleh LLDIKTI. Integrasi diuji setelah template ID dan petunjuk layanan diterima; teks bebas tidak menjadi kontrak integrasi.
+7. Tim menyediakan dokumen template WhatsApp beserta variabelnya untuk pengajuan Meta/Qontak oleh LLDIKTI. WhatsApp Business wajib siap paling lambat akhir Agustus 2026; integrasi diuji setelah template ID, kontrak provider, credential, nomor uji, dan sandbox diterima. Teks bebas tidak menjadi kontrak integrasi.
 8. Target penyelesaian direvisi menjadi akhir Agustus 2026. Revisi yang siap harus segera divalidasi melalui Zoom tanpa menunggu hari Jumat. Perubahan image container atau versi PostgreSQL dari LLDIKTI harus didahului bukti backup/restore dan verifikasi aplikasi.
 
 Fitur dalam addendum ini belum boleh dinyatakan selesai hanya karena tercatat di PRD; penyelesaian tetap membutuhkan implementasi, test, audit, dan QA sesuai kriteria yang diperbarui pada User Stories.
