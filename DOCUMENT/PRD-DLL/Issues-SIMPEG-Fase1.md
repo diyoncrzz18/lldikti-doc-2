@@ -1517,13 +1517,13 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 ### Auth/RBAC
 
 - [ ] **US-1.4 — Mapping SSO:** map email Keycloak sebagai identifier utama; inisialisasi role internal Pegawai dari role default SSO hanya pada mapping pertama yang emailnya sudah cocok; map nomor telepon bila custom attribute LLDIKTI telah dikonfirmasi; tetap gunakan role/permission internal untuk keputusan akses setiap request.
-- [ ] **US-1.6 — Switch role:** tambah permission khusus, `temporary_role`, `temporary_permission`, revert persisten, pembatasan target ke role lebih rendah, audit penuh, dan test unauthorized/privilege-escalation/ownership pada development serta production-like configuration.
+- [ ] **US-1.6 — Switch role:** batasi aktor ke Super Admin ber-permission khusus; simpan `temporary_role` sampai revert; turunkan permission efektif secara dinamis dari target; izinkan target Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai; serta uji unauthorized, matriks fail-closed, audit, dan ownership pada development maupun production-like configuration.
 
 ### Cuti
 
 - [ ] **US-4.10 / Issue #28:** ubah validasi urutan chain menjadi verifikator dinamis → Kepala Bagian → PYBMC. Ketua Tim Kerja masuk kelompok verifikator; bila kelompok kosong, Kepala Bagian menjadi step pertama.
-- [ ] **US-4.3 / US-4.9 / Issue #32 dan #45:** ganti input saldo awal/sisa menjadi input jumlah cuti yang telah dipakai per tahun; hitung saldo, rollover maksimal 6 hari, dan kondisi 24 versus 18 hari secara berjenjang. Tambahkan tabel simulasi N-2/N-1/tahun berjalan pada test unit dan feature.
-- [ ] **US-4.13:** buat input cuti manual khusus Admin Kepegawaian untuk cuti eksternal/historis/downtime dengan dokumen wajib, tanpa approval ulang, perhitungan saldo atomik, dan audit lengkap.
+- [ ] **US-4.3 / US-4.9 / Issue #32 dan #45:** ganti input saldo awal/sisa menjadi input jumlah cuti yang telah dipakai per tahun; hitung saldo, rollover maksimal 6 hari, dan kondisi 24 versus 18 hari secara berjenjang. Konsumsi bucket N-2 → N-1 → tahun berjalan, expiry akhir tahun penggunaan, rekalkulasi kronologis untuk backdated correction, dan larangan direct balance override wajib tercakup pada test unit/feature.
+- [ ] **US-4.13:** buat input cuti manual khusus Admin Kepegawaian untuk cuti eksternal/historis/downtime dengan dokumen wajib dan jumlah hari kerja hasil kalkulasi sistem; tolak duplikasi/overlap, jangan jalankan approval ulang, pertahankan histori koreksi tanpa hard delete, serta buktikan perhitungan saldo atomik dan audit lengkap.
 
 ### Data Pegawai dan Hari Libur
 
@@ -1532,6 +1532,6 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 
 ### Notifikasi, UAT, dan deployment
 
-- [ ] **US-6.5:** susun dokumen template WhatsApp beserta allowlist variabel, serahkan kepada LLDIKTI untuk pengajuan Meta, dan gunakan template ID/petunjuk yang dikembalikan sebelum pengujian adapter.
+- [ ] **US-6.5:** tuntaskan WhatsApp Business paling lambat akhir Agustus 2026: susun dokumen template beserta allowlist variabel, serahkan kepada LLDIKTI untuk pengajuan Meta/Qontak, implementasikan melalui dispatcher, dan gunakan kontrak, credential, template ID, nomor uji, serta sandbox yang dikembalikan sebelum aktivasi adapter.
 - [ ] Jadwalkan Zoom evaluasi segera setelah satu kelompok revisi selesai; target penyelesaian adalah akhir Agustus 2026, bukan rencana tanggal 20 sebelumnya.
 - [ ] Sebelum memakai perubahan container/image PHP atau peningkatan PostgreSQL dari LLDIKTI: lakukan backup/restore, migration check, queue/scheduler smoke test, serta catat rollback evidence.

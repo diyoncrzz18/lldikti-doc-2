@@ -1967,20 +1967,20 @@ Sprint 1 tetap menjadi fondasi teknis sebelum vertical slice dimulai.
 - [ ] AC-MTG-3: Role internal yang tersimpan tetap menjadi dasar otorisasi setiap request. Role Keycloak selain default Pegawai tidak langsung memberi permission SIMPEG. *(Sumber: K-MTG-02.2 dan K-MTG-02.4.)*
 - [ ] AC-MTG-4: Readiness integrasi SSO membutuhkan daftar akun uji dari LLDIKTI yang memuat email lengkap dan expected role setiap akun; pengujian mapping belum dapat dinyatakan selesai sebelum data tersebut tersedia. *(Sumber keputusan: K-MTG-02.1; guardrail DoD turunan: pengujian mapping belum ditutup sebelum dependency tersedia.)*
 
-### US-1.6 · Switch Role Berbasis Permission
+### US-1.6 · Switch Role Super Admin Berbasis Permission
 
-> **Sebagai** pengguna yang memiliki permission switch role,
+> **Sebagai** Super Admin yang memiliki permission switch role,
 > **Saya ingin** mensimulasikan tampilan dan akses role yang lebih rendah tanpa login sebagai pegawai lain,
 > **Sehingga** demo, pengujian, dan dukungan dapat dilakukan tanpa pertukaran kredensial.
 
-- [ ] AC-1: Aksi hanya tersedia bagi aktor dengan permission khusus switch role dan backend menolak aktor tanpa permission tersebut. *(Sumber: K-MTG-03.1.)*
+- [ ] AC-1: Aksi hanya tersedia bagi Super Admin yang memiliki permission khusus switch role; backend menolak role lain dan Super Admin tanpa permission tersebut. *(Sumber: K-MTG-03.1 dan K-MTG-07.3.)*
 - [ ] AC-2: Switch hanya mengganti role efektif, bukan identitas, `employee_id`, atau scope kepemilikan data aktor. *(Sumber: K-MTG-03.2.)*
-- [ ] AC-3: Sistem menyimpan `temporary_role` dan `temporary_permission`; nilai tersebut tetap berlaku setelah logout/login hingga aktor melakukan revert. *(Sumber: K-MTG-03.3.)*
+- [ ] AC-3: Sistem menyimpan `temporary_role` secara persisten setelah logout/login hingga revert. Permission efektif diturunkan dinamis dari role tujuan pada setiap request; `temporary_permission` tidak menjadi snapshot permanen atau sumber kebenaran otorisasi. *(Sumber: K-MTG-03.3 dan K-MTG-07.1.)*
 - [ ] AC-4: Revert menghapus nilai temporary dan mengembalikan role/permission asli. *(Sumber: K-MTG-03.3.)*
-- [ ] AC-5: Target hanya role lebih rendah daripada role asli; tidak ada privilege escalation. Definisi matriks role lebih rendah dan semantik `temporary_permission` tetap Open Question dan tidak boleh diasumsikan oleh implementasi. *(Sumber: K-MTG-03.4.)*
+- [ ] AC-5: Matriks Fase 1 hanya mengizinkan Super Admin beralih ke Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai. Switch ke Super Admin, role yang sama, atau role di luar allowlist ditolak fail-closed. *(Sumber: K-MTG-03.4 dan K-MTG-07.3.)*
 - [ ] AC-6: Switch, penggunaan role sementara, dan revert tercatat pada audit log dengan aktor, role asal, role target, waktu, dan alasan bila disediakan. *(Sumber keputusan: K-MTG-03.4; guardrail engineering/DoD turunan: field audit aktor, role asal, role target, waktu, dan alasan bila disediakan.)*
 - [ ] AC-7: Switch role tersedia untuk kebutuhan yang diotorisasi pada environment development maupun production dan tidak bergantung pada bypass khusus environment. *(Sumber keputusan: K-MTG-03.1; guardrail engineering turunan: implementasi tidak bergantung pada bypass khusus environment.)*
-- [ ] AC-8: Seluruh endpoint tetap mengevaluasi permission efektif di backend selama role sementara aktif, sedangkan identitas asli dan data scope kepemilikan tetap berasal dari aktor asli. *(Sumber: K-MTG-03.2 dan K-MTG-03.4.)*
+- [ ] AC-8: Seluruh endpoint mengevaluasi permission role tujuan yang terbaru di backend selama role sementara aktif; perubahan konfigurasi permission berlaku pada request berikutnya, sedangkan identitas asli dan data scope kepemilikan tetap berasal dari aktor asli. *(Sumber: K-MTG-03.2, K-MTG-03.4, dan K-MTG-07.1.)*
 
 ### US-2.4 · Tambahan dokumen pada profil pegawai
 
@@ -1993,7 +1993,10 @@ Sprint 1 tetap menjadi fondasi teknis sebelum vertical slice dimulai.
 - [ ] AC-MTG-1: Pendaftaran historis menerima jumlah cuti tahunan yang telah dipakai/diklaim per tahun; saldo sisa tidak menjadi input utama. *(Sumber: K-MTG-01.3.)*
 - [ ] AC-MTG-2: Sistem menghitung sisa, rollover N-1 maksimal 6 hari, dan total hak secara berjenjang dari pemakaian N-2, N-1, dan tahun berjalan. *(Sumber: K-MTG-01.2 dan K-MTG-01.3.)*
 - [ ] AC-MTG-3: Total tahun berjalan adalah 24 hari hanya bila pemakaian N-2 dan N-1 keduanya nol; bila ada pemakaian pada salah satu tahun tersebut, total maksimum 18 hari. *(Sumber: K-MTG-01.2.)*
-- [ ] AC-MTG-4: Koreksi administratif memperbaiki data pemakaian/entri manual lalu memicu hitung ulang yang diaudit, bukan menulis saldo sisa sebagai fakta utama. *(Sumber: K-MTG-01.5.)*
+- [ ] AC-MTG-4: Koreksi administratif memperbaiki data pemakaian/entri manual lalu memicu hitung ulang yang diaudit. Direct balance override tidak tersedia, termasuk sebagai break-glass Fase 1. *(Sumber: K-MTG-01.5, K-MTG-01.6, dan K-MTG-07.2.)*
+- [ ] AC-MTG-5: Pemakaian memotong bucket tertua yang masih sah dengan urutan N-2 → N-1 → tahun berjalan. Hak lama yang tersisa kedaluwarsa pada akhir tahun penggunaannya. *(Sumber: K-MTG-01.8 dan K-MTG-07.5.)*
+- [ ] AC-MTG-6: Koreksi backdated menghitung ulang secara kronologis mulai dari transaksi yang dikoreksi sampai seluruh transaksi setelahnya; saldo akhir tidak ditambal langsung. *(Sumber: K-MTG-01.9 dan K-MTG-07.5.)*
+- [ ] AC-MTG-7: PNS dan PPPK memakai mesin ceiling 12/18/24 yang sama. Untuk PPPK, ceiling 18 mensyaratkan masa perjanjian kerja di atas 2 tahun dan ceiling 24 mensyaratkan masa perjanjian kerja di atas 3 tahun. *(Sumber: K-MTG-01.10 dan K-MTG-07.5.)*
 
 **Decision table saldo tahunan yang sudah disepakati:**
 
@@ -2002,7 +2005,9 @@ Sprint 1 tetap menjadi fondasi teknis sebelum vertical slice dimulai.
 | Pemakaian N-2 = 0 hari dan N-1 = 0 hari | 12 hari | Maksimal 24 hari | Total hak tahun berjalan hasil perhitungan sistem dikurangi pemakaian tahun berjalan |
 | Pemakaian satu hari atau lebih pada salah satu atau kedua tahun | 12 hari | Maksimal 18 hari | Total hak tahun berjalan hasil perhitungan sistem dikurangi pemakaian tahun berjalan |
 
-Rollover dari N-1 tetap dibatasi maksimal 6 hari, tetapi batas tersebut **bukan persamaan `12 + 6 = 24`** dan tabel ini tidak menetapkan komposisi bucket pembentuk hak 24 hari. Tabel hanya menetapkan hak dasar, ceiling, dan sumber hitung yang sudah diputuskan. Urutan konsumsi bucket N-2/N-1/tahun berjalan, masa kedaluwarsa setiap bucket, komposisi hak 24 hari, dan dampak koreksi backdated tetap Open Question. *(Sumber: K-MTG-01.2 untuk hak dasar, rollover, dan ceiling; K-MTG-01.3 untuk saldo yang diturunkan dari data pemakaian.)*
+Rollover dari N-1 tetap dibatasi maksimal 6 hari dan batas tersebut **bukan persamaan `12 + 6 = 24`**. Ceiling 24 hanya berlaku ketika pemakaian N-2 dan N-1 sama dengan nol serta eligibility jenis pegawai terpenuhi. Saat saldo dipakai, sistem mengonsumsi bucket tertua yang masih sah lebih dahulu; koreksi backdated menghitung ulang seluruh transaksi setelah titik koreksi secara kronologis. *(Sumber: K-MTG-01.2, K-MTG-01.8 sampai K-MTG-01.10, dan K-MTG-07.5.)*
+
+**Contoh hasil eksak:** bila bucket N-2 = 4, N-1 = 6, dan tahun berjalan = 12, pemakaian 5 hari menghasilkan sisa `0 / 5 / 12` (total 17). Jika kemudian ditambahkan koreksi backdated 2 hari sebelum pemakaian tersebut, rekalkulasi kronologis menghasilkan sisa `0 / 3 / 12` (total 15).
 
 ### US-4.5 dan US-4.10 · Urutan approval cuti
 
@@ -2017,10 +2022,11 @@ Rollover dari N-1 tetap dibatasi maksimal 6 hari, tetapi batas tersebut **bukan 
 > **Sehingga** saldo dan rollover tetap akurat saat go-live, downtime, atau rekonsiliasi administrasi.
 
 - [ ] AC-1: Hanya Admin Kepegawaian yang dapat mengakses form input cuti manual. *(Sumber: K-MTG-01.4.)*
-- [ ] AC-2: Form mencatat pegawai, jenis cuti, periode, jumlah hari kerja, alasan/keterangan, dan dokumen pendukung wajib. *(Sumber keputusan: K-MTG-01.4; guardrail engineering/DoD turunan: field pegawai, jenis cuti, periode, jumlah hari kerja, dan alasan/keterangan.)*
+- [ ] AC-2: Form mencatat pegawai, jenis cuti, periode, alasan/keterangan, dan dokumen pendukung wajib; jumlah hari kerja dihitung oleh sistem dari periode dan kalender kerja, bukan diketik bebas. *(Sumber: K-MTG-01.4, K-MTG-01.7, dan K-MTG-07.4.)*
 - [ ] AC-3: Entri langsung dicatat sebagai cuti yang telah disetujui di luar SIMPEG tanpa menjalankan usulan atau approval chain ulang. *(Sumber: K-MTG-01.4.)*
 - [ ] AC-4: Entri dapat dipakai untuk tahun historis, tahun berjalan sebelum go-live, serta pencatatan setelah downtime; pemakaian tahunan otomatis memperbarui saldo dan rollover. *(Sumber: K-MTG-01.4.)*
-- [ ] AC-5: Perubahan atau koreksi entri menghasilkan perhitungan ulang atomik dan audit aktor, alasan, dokumen, serta nilai sebelum/sesudah. *(Sumber keputusan: K-MTG-01.5; guardrail engineering/DoD turunan: perhitungan ulang harus atomik.)*
+- [ ] AC-5: Perubahan atau koreksi entri menghasilkan perhitungan ulang atomik dan audit aktor, alasan, dokumen, serta nilai sebelum/sesudah. Record lama dipertahankan melalui pembatalan/versi pengganti dan tidak di-hard-delete. *(Sumber: K-MTG-01.5, K-MTG-01.7, dan K-MTG-07.4.)*
+- [ ] AC-6: Duplikasi dan periode yang overlap dengan cuti aktif pegawai yang sama ditolak. Entri cuti tahunan memengaruhi saldo; jenis cuti lain tidak memotong saldo tahunan. *(Sumber: K-MTG-01.7 dan K-MTG-07.4.)*
 
 ### US-6.5 · Persiapan Template WhatsApp Business
 
@@ -2028,6 +2034,7 @@ Rollover dari N-1 tetap dibatasi maksimal 6 hari, tetapi batas tersebut **bukan 
 - [ ] AC-2: Setiap template menyebut contoh isi, nama template, penerima, dan allowlist variabel payload. *(Sumber keputusan: K-MTG-05.1; guardrail engineering/DoD turunan: nama template, penerima, dan variabel dinyatakan sebagai allowlist.)*
 - [ ] AC-3: Setelah LLDIKTI mengembalikan template ID dan petunjuk layanan dari Meta, dispatcher memilih template dan mengirim variabel yang diizinkan; sistem tidak mengirim teks bebas. *(Sumber keputusan: K-MTG-05.2; guardrail engineering/DoD turunan: dispatcher menegakkan allowlist variabel.)*
 - [ ] AC-4: Sebelum template ID dan petunjuk provider diterima serta diverifikasi, adapter/provider WhatsApp tetap nonaktif dan dispatcher tidak memanggil layanan tersebut. *(Sumber: K-MTG-05.3.)*
+- [ ] AC-5: WhatsApp Business wajib siap pada target penyelesaian akhir Agustus 2026. Provider final, kontrak API, credential, template ID, bahasa, tombol URL, nomor uji, dan sandbox dicatat sebagai dependency implementasi LLDIKTI/provider, bukan Open Question produk. *(Sumber: K-MTG-05.4, K-MTG-07.6, dan K-MTG-07.7.)*
 
 ### US-8.4 · Penempatan Hari Libur
 
@@ -2036,7 +2043,7 @@ Rollover dari N-1 tetap dibatasi maksimal 6 hari, tetapi batas tersebut **bukan 
 
 ### Work Item K-MTG-06 · Validasi Revisi, Dokumentasi Pengguna, dan Deployment
 
-> **Status:** **Belum Selesai.** Work item ini tidak membuat ID User Story baru. Konflik target 20 Agustus dengan akhir Agustus tetap Open Question dan tidak ditetapkan sebagai acceptance criterion final.
+> **Status:** **Belum Selesai.** Work item ini tidak membuat ID User Story baru. Target final telah diputuskan menjadi **akhir Agustus 2026** melalui K-MTG-07.7.
 
 - [ ] WI-MTG-1: Setiap kelompok revisi yang sudah memenuhi DoD dijadwalkan untuk validasi Zoom secepatnya tanpa menunggu rapat rutin hari Jumat. *(Sumber keputusan: K-MTG-06.1; guardrail DoD turunan: kelompok revisi dinilai siap setelah memenuhi DoD.)*
 - [ ] WI-MTG-2: Hasil validasi dan penerimaan Kepegawaian dicatat per kelompok revisi, termasuk fitur yang diterima, ditolak, atau memerlukan tindak lanjut. *(Sumber keputusan: K-MTG-06.1 dan K-MTG-06.2; guardrail DoD turunan: status dan hasil validasi dicatat per kelompok revisi.)*
@@ -2080,14 +2087,16 @@ AC-MTG-4 sampai AC-MTG-7 dan AC-MTG-10 di bawah adalah kontrak rancangan **dokum
 - [ ] AC-MTG-9: Template OTP dari baseline Qontak tidak digunakan dalam SIMPEG selama autentikasi tetap menggunakan Keycloak SSO. *(Sumber: K-MTG-05A.4.)*
 - [ ] AC-MTG-10: Bila `simpeg_notifikasi_sistem` kemudian disetujui untuk diajukan, allowlist variabelnya adalah `judul`, `ringkasan`, dan `tautan_detail`. *(Sumber: tabel katalog K-MTG-05A, baris `simpeg_notifikasi_sistem`; guardrail engineering/DoD turunan: variabel minimum diperlakukan sebagai allowlist dokumen submission.)*
 
-### Open Questions Hasil Evaluasi Meeting
+### Keputusan Final Open Questions Hasil Evaluasi Meeting
 
-Butir berikut belum mempunyai keputusan cukup rinci dan tidak boleh diselesaikan dengan asumsi implementasi:
+Seluruh Open Question telah diputuskan pada 18 Agustus 2026 melalui K-MTG-07 dan tidak lagi menjadi blocker keputusan produk. Dependency eksternal provider WhatsApp tetap dilacak pada issue implementasinya.
 
-1. **Semantik `temporary_permission`:** apakah nilainya diturunkan dari role target, snapshot permission efektif, atau bentuk lain; termasuk lifecycle ketika permission asli berubah.
-2. **Koreksi saldo break-glass:** apakah direct balance override pernah diizinkan untuk kondisi darurat. Default canonical saat ini adalah **derived-only** dari data pemakaian/entri manual dan hitung ulang sampai ada keputusan eksplisit lain.
-3. **Matriks switch role:** urutan lengkap role yang boleh menjadi target, penanganan role dengan permission lintas-hierarki, dan definisi formal "role lebih rendah".
-4. **Detail input/koreksi cuti manual:** aturan validasi per jenis cuti, penanganan duplikasi/overlap, batas koreksi, dokumen yang diterima, dan efek koreksi terhadap entri yang sudah dipakai pada perhitungan berikutnya.
-5. **Bucket saldo:** urutan konsumsi bucket N-2/N-1/tahun berjalan, masa kedaluwarsa, serta perilaku koreksi backdated.
-6. **WhatsApp Business:** provider final, kontrak API, template ID, nama variabel, bahasa, tombol URL, credential, dan petunjuk layanan yang dikembalikan LLDIKTI/Meta/Qontak.
-7. **Target penyelesaian:** metadata lama menyebut 20 Agustus 2026, sedangkan K-MTG-06 menyebut akhir Agustus 2026. Target final menunggu keputusan eksplisit dan tidak ditetapkan melalui AC.
+| ID | Keputusan final | Status |
+|---|---|---|
+| OQ-MTG-01 | Permission efektif diturunkan dinamis dari role tujuan; `temporary_permission` bukan snapshot otorisasi permanen | **Decided** |
+| OQ-MTG-02 | Tidak ada direct balance override; koreksi memperbaiki sumber data dan menghitung ulang | **Decided** |
+| OQ-MTG-03 | Super Admin ber-permission khusus dapat switch ke Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai | **Decided** |
+| OQ-MTG-04 | Input manual khusus Admin Kepegawaian, dokumen wajib, hari dihitung sistem, duplikasi/overlap ditolak, koreksi tanpa hard delete | **Decided** |
+| OQ-MTG-05 | Konsumsi N-2 → N-1 → tahun berjalan, expiry akhir tahun penggunaan, dan rekalkulasi kronologis untuk koreksi backdated | **Decided** |
+| OQ-MTG-06 | WhatsApp Business wajib siap akhir Agustus; detail provider menjadi dependency implementasi #214/#215 | **Decided** |
+| OQ-MTG-07 | Target final adalah akhir Agustus 2026 | **Decided** |
