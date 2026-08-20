@@ -30,7 +30,7 @@ PRD ini menjadi **sumber kebenaran utama** untuk Fase 1. Keputusan meeting tekni
 13. EWS menambahkan Satyalancana 10/20/30 tahun dan setiap alert harus punya status tindak lanjut agar tidak muncul terus setelah ditangani.
 14. Laporan menambahkan export nominatif Excel yang customizable: pengguna memilih kolom dan filter baris; PDF custom tidak masuk Fase 1.
 15. BUP tidak di-hardcode; usia pensiun dihitung dari referensi jabatan / jenis jabatan.
-16. Sample data pegawai, referensi jabatan, pangkat, golongan, struktur unit, saldo cuti awal, dan data mentah lainnya disediakan oleh bagian kepegawaian LLDIKTI.
+16. Sample data pegawai, referensi jabatan, pangkat, golongan, struktur unit, data pemakaian cuti historis/entri manual yang telah disetujui, dan data mentah lainnya disediakan oleh bagian kepegawaian LLDIKTI.
 17. Keputusan sesi langsung pengguna 22 Juli 2026 (kanonis, disetujui pengguna): import massal Fase 1 hanya mengaktifkan template Data Utama. Import membuat record pegawai beserta field snapshot awal (golongan, pangkat, jabatan, kelas jabatan, pendidikan, prodi, dan tanggal pensiun bila tersedia di kolom Excel), tetapi tidak membuat riwayat kepangkatan, riwayat jabatan, maupun riwayat KGB. Riwayat resmi diinput per pegawai melalui CRUD riwayat append-only. Kalkulasi TMT dijalankan saat riwayat/sumber resmi disimpan, bukan saat import selesai. Tanggal pensiun hasil import dipertahankan apa adanya dan tidak dihitung ulang atau ditimpa oleh proses import. Template lanjutan multi-jenis (Data Pelengkap, Riwayat Kepangkatan, Riwayat Jabatan, Riwayat KGB) tidak termasuk ruang lingkup saat ini dan tidak dipulihkan tanpa keputusan eksplisit baru. Keputusan ini menggantikan rincian import versi sebelumnya jika bertentangan.
 18. Keputusan pengguna 28 Juli 2026: nama tabel fisik canonical cuti adalah `leave_request_steps`, `leave_balance_ledger`, dan `leave_proofs`. Keputusan, alasan, serta batasnya dicatat pada [Keputusan Skema Cuti Canonical](Keputusan-Skema-Cuti-Canonical.md).
 19. Keputusan pengguna 17 Agustus 2026: Program Studi menjadi reference table Fase 1 yang dikelola Super Admin melalui Data Master. Relasi UUID nullable dipakai pada data pegawai dan riwayat pendidikan, sedangkan snapshot teks lama tetap dipertahankan untuk kompatibilitas dan import. Kontrak lengkap dicatat pada [Keputusan Program Studi sebagai Data Referensi](../Keputusan-Program-Studi-Data-Master.md).
@@ -211,7 +211,7 @@ Super Admin
 | Riwayat | Tambah riwayat kepangkatan, jabatan, KGB, disiplin (append-only) |
 | Import Excel/CSV | Upload dan mapping data dari Excel/CSV |
 | Set Supervisor | Assign kepala bagian per pegawai |
-| Cuti | Lihat semua pengajuan cuti, kelola saldo cuti, input saldo awal/prior year, upload dokumen cuti eksternal |
+| Cuti | Lihat semua pengajuan cuti, lihat saldo hasil perhitungan sistem, catat/perbaiki data pemakaian cuti historis atau entri manual dengan dokumen, upload dokumen cuti eksternal |
 | EWS | Lihat semua peringatan, update flag kinerja |
 | Notifikasi | Terima notifikasi EWS |
 | Dokumen | Upload/kelola dokumen dan SK pegawai |
@@ -831,7 +831,7 @@ Ketua Tim Kerja tidak memerlukan role baru. Jika perlu mengetahui atau memverifi
 **Acceptance Criteria:**
 1. Tampilkan saldo cuti tahunan: jatah dasar 12 hari, carry-over N-1, hak tambahan jika memenuhi aturan N-2/N-1, total tersedia, terpakai, dan sisa.
 2. Tampilkan riwayat penggunaan cuti tahun berjalan dan dua tahun sebelumnya yang memengaruhi carry-over.
-3. Admin dapat mengisi/koreksi saldo awal dan riwayat N-1/N-2 saat setup awal dengan alasan dan audit log.
+3. Sesuai Addendum 15/18 Agustus 2026, Admin mendaftarkan atau memperbaiki data pemakaian/entri manual N-2, N-1, dan tahun berjalan dengan alasan, dokumen, versi, dan audit; sistem menghitung ulang saldo serta rollover.
 
 ### 9.4 Aturan Bisnis Cuti
 
@@ -844,7 +844,7 @@ Ketua Tim Kerja tidak memerlukan role baru. Jika perlu mengetahui atau memverifi
 | Kondisi N-2 dan N-1 tidak mengambil cuti | Jika pegawai tidak mengambil cuti tahunan selama dua tahun berturut-turut, total hak tahun berjalan dapat mencapai 24 hari |
 | Kondisi mengambil cuti pada salah satu dari N-2/N-1 | Carry-over tetap maksimal 6 hari, bukan 12 |
 | Reset | Dihitung ulang otomatis di awal tahun (1 Januari) |
-| Setup awal | Admin Kepegawaian dapat menginput saldo/riwayat tahun sebelumnya agar kalkulasi awal akurat |
+| Setup awal | Sesuai Addendum 15/18 Agustus 2026, Admin Kepegawaian mendaftarkan pemakaian/entri manual tahun sebelumnya; sistem menghitung saldo dan rollover dari data sumber tersebut |
 
 #### Batas Tahun Kalender
 
@@ -1103,7 +1103,7 @@ Setiap perubahan data di SIMPEG dicatat dalam audit log yang immutable. Audit lo
 | Operasi yang Dicatat | Contoh |
 |----------------------|--------|
 | **Create** | Tambah pegawai baru, tambah riwayat kepangkatan |
-| **Update** | Edit data pribadi, update saldo cuti |
+| **Update** | Edit data pribadi, perbaikan data pemakaian cuti/entri manual yang memicu rekalkulasi saldo |
 | **Soft Delete** | Nonaktifkan pegawai |
 | **Restore** | Aktifkan kembali data pegawai non-aktif |
 | **Verifikasi / Keputusan Cuti** | Setiap step approval, rekomendasi, keputusan final, dan perubahan status |
@@ -1493,14 +1493,14 @@ fallback.
 
 ```
 
-`leave_balance_ledger` menyimpan event append-only yang terkait dengan pegawai, bucket saldo, dan bila relevan pengajuan cuti; contoh event termasuk hak tahunan, carry-over, pemotongan final, serta koreksi manual.
+`leave_balance_ledger` menyimpan event append-only yang terkait dengan pegawai, bucket saldo, dan bila relevan pengajuan cuti; contoh event termasuk hak tahunan, carry-over, pemotongan final, serta hasil rekalkulasi setelah perbaikan data pemakaian/entri manual. Sesuai Addendum 15/18 Agustus 2026, ledger bukan jalur direct balance override.
 
 | Tabel | Catatan |
 |-------|---------|
 | `leave_approval_chains` | Satu konfigurasi chain runtime per pegawai; dapat disalin ke anggota unit sebagai template dan memuat urutan step, tipe step, serta pegawai approver/verifikator |
 | `leave_request_steps` | Snapshot chain per pengajuan: urutan, tipe langkah, approver, status, keputusan/keterangan, dan waktu tindakan; perubahan konfigurasi tidak mengubah riwayat pengajuan lama |
 | `leave_proofs` | Bukti formulir cuti resmi final: token QR, path/mime PDF, penerbit, waktu terbit, dan metadata snapshot |
-| `leave_balance_ledger` | Ledger append-only mutasi saldo tahunan, termasuk hak, carry-over, pemotongan final, dan koreksi manual beserta alasan serta audit trail |
+| `leave_balance_ledger` | Ledger append-only mutasi saldo tahunan, termasuk hak, carry-over, pemotongan final, dan hasil rekalkulasi perbaikan data pemakaian/entri manual beserta alasan serta audit trail; bukan jalur direct balance override menurut Addendum 15/18 Agustus 2026 |
 
 Nama tabel fisik canonical di bagian ini mengikuti [Keputusan Skema Cuti Canonical](Keputusan-Skema-Cuti-Canonical.md). `external_approval` dan `external_document_path` bukan kolom runtime pada `leave_proofs`; kebutuhan dokumen eksternal tetap merupakan kebutuhan bisnis yang memerlukan desain storage dan migration tersendiri sebelum diaktifkan.
 
@@ -1872,7 +1872,7 @@ Meskipun Fase 1 menggunakan Laravel Blade (server-side rendering), semua logika 
 | GET | `/cuti/verify/{token}` | LeaveVerificationController@show | Public |
 | GET | `/cuti/saldo` | LeaveBalanceController@show | Pegawai (self) |
 | GET | `/admin/cuti/saldo` | LeaveBalanceController@index | Admin |
-| POST | `/admin/cuti/saldo/{employeeId}/adjust` | LeaveBalanceController@adjust | Admin |
+| ~~POST~~ | ~~`/admin/cuti/saldo/{employeeId}/adjust`~~ | ~~LeaveBalanceController@adjust~~ | **Superseded oleh Addendum 15/18 Agustus 2026:** direct balance override tidak tersedia; koreksi dilakukan pada data pemakaian/entri manual, lalu sistem melakukan rekalkulasi |
 
 #### EWS Routes
 
@@ -2011,7 +2011,7 @@ Meskipun Fase 1 menggunakan Laravel Blade (server-side rendering), semua logika 
 6. **Email production menggunakan email operasional LLDIKTI/Gmail resmi** — selama development testing email dapat memakai Mailpit.
 7. **WhatsApp Business wajib dituntaskan pada Fase 1 paling lambat akhir Agustus 2026** — kontrak provider, credential, template ID, nomor uji, dan sandbox tetap merupakan dependency implementasi dari LLDIKTI/provider; adapter tidak boleh aktif sebelum dependency tersebut terverifikasi.
 8. **Referensi jabatan, pangkat, golongan, unit kerja hierarkis, status pegawai, Program Studi, dan BUP disediakan atau diverifikasi bagian kepegawaian** — sistem menyediakan struktur dan CRUD reference; katalog awal Program Studi dapat dibentuk dari snapshot yang sudah tersimpan.
-9. **Saldo cuti awal dan riwayat N-1/N-2 disediakan/diinput Admin Kepegawaian** — dibutuhkan agar carry-over tahun berjalan akurat.
+9. **Data pemakaian cuti yang telah dipakai/diklaim untuk N-2, N-1, dan tahun berjalan disediakan/didaftarkan Admin Kepegawaian** — sesuai Addendum 15/18 Agustus 2026, sistem menghitung saldo serta carry-over dari data sumber tersebut.
 10. **Format formulir cuti resmi dan konten halaman QR diverifikasi LLDIKTI** — tim pengembang menyediakan generator dan halaman verifikasi.
 
 ### 20.2 Batasan
@@ -2035,7 +2035,7 @@ Meskipun Fase 1 menggunakan Laravel Blade (server-side rendering), semua logika 
 | Layanan/library/credential WhatsApp Business jika ingin diaktifkan | Tim IT LLDIKTI XVI |
 | Data pegawai awal (CSV/Excel) | Admin Kepegawaian LLDIKTI XVI |
 | Daftar unit/tim kerja hierarkis, jabatan, pangkat, golongan, status pegawai, Program Studi, dan BUP | Admin Kepegawaian LLDIKTI XVI |
-| Saldo cuti awal, riwayat cuti N-1/N-2, dan aturan koreksi saldo awal | Admin Kepegawaian LLDIKTI XVI |
+| Data pemakaian cuti N-2/N-1/tahun berjalan, entri manual yang telah disetujui, dan dokumen pendukung koreksi | Admin Kepegawaian LLDIKTI XVI |
 | Format formulir cuti resmi dan narasi verifikasi QR | Admin Kepegawaian LLDIKTI XVI |
 | Daftar hari libur nasional 2026 | Admin / Super Admin |
 
@@ -2130,7 +2130,7 @@ Untuk transparansi, berikut fitur yang direncanakan di fase berikutnya:
 > **Status:** Disetujui. [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md) adalah penetapan terbaru yang menggantikan ketentuan PRD sebelumnya bila berbeda pada area berikut.
 
 1. Chain cuti baru wajib menempatkan **verifikator dinamis → Kepala Bagian → PYBMC**. Ketua Tim Kerja menjadi verifikator bila diperlukan; tanpa verifikator, chain dimulai dari Kepala Bagian. Ketentuan lama yang menempatkan Kepala Bagian sebagai default pertama atau contoh urutan Kepala Bagian sebelum verifikator tidak berlaku.
-2. Saldo awal/historis tidak lagi diinput sebagai sisa saldo. Admin memasukkan **jumlah cuti yang telah dipakai/diklaim per tahun** dan sistem menghitung sisa, rollover maksimal 6 hari, serta hak tahun berjalan secara berjenjang. Hak 24 hari hanya berlaku bila pemakaian N-2 dan N-1 sama dengan nol; selain itu batas totalnya 18 hari.
+2. Saldo awal/historis tidak lagi diinput sebagai sisa saldo. Admin memasukkan **jumlah cuti yang telah dipakai/diklaim per tahun** dan sistem menghitung sisa, rollover maksimal 6 hari, serta hak tahun berjalan secara berjenjang. Direct balance override tidak tersedia. Hak 24 hari hanya berlaku bila pemakaian N-2 dan N-1 sama dengan nol; selain itu batas totalnya 18 hari.
 3. Admin Kepegawaian memiliki jalur input cuti manual dengan dokumen pendukung wajib untuk cuti historis, cuti sebelum go-live, atau cuti ketika layanan tidak tersedia. Entri ini langsung mengakui keputusan yang sudah ditetapkan di luar SIMPEG, tidak melalui chain ulang, dan menjadi bagian dari kalkulasi saldo serta rollover.
 4. Email Keycloak menjadi atribut mapping utama; role default Pegawai dari SSO menginisialisasi role internal Pegawai pada mapping pertama; nomor telepon dapat dipetakan dari custom attribute yang dikonfirmasi LLDIKTI. Setelah inisialisasi, SIMPEG tetap mengevaluasi role internal dan permission pada setiap akses.
 5. Hanya Super Admin dengan permission khusus yang dapat melakukan switch role berbasis `temporary_role` persisten sampai revert. Permission efektif selalu diturunkan dinamis dari role tujuan; target Fase 1 terbatas pada Admin Kepegawaian, Pimpinan, Kepala Bagian, dan Pegawai. Switch hanya menyimulasikan role, tidak mengimpersonasi pegawai lain; seluruh perubahan diaudit dan backend tetap menegakkan permission efektif terbaru.

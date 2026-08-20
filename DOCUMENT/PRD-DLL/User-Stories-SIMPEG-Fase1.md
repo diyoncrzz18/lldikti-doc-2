@@ -1113,8 +1113,8 @@ Setiap story mengikuti format:
 **Acceptance Criteria:**
 
 - [x] AC-1: Halaman daftar saldo cuti: Nama, NIP, Jatah, Carry-Over, Terpakai, Sisa.
-- [x] AC-2 — **Bukti historis; Superseded oleh K-MTG-01:** ~~Admin bisa melakukan **koreksi manual** saldo cuti (misal: menambah/mengurangi carry-over) dengan alasan wajib.~~ Tanda `[x]` tidak menyatakan kontrak koreksi berbasis pemakaian/entri manual sudah diimplementasikan; kontrak normatif penggantinya berada pada AC `[ ]` addendum.
-- [x] AC-3 — **Bukti historis; Superseded bersama AC-2 oleh K-MTG-01:** ~~Koreksi manual tercatat di audit log.~~ Bukti audit untuk mekanisme koreksi baru harus diverifikasi kembali melalui AC `[ ]` addendum.
+- [x] AC-2 — **Bukti historis; Superseded oleh Addendum 15/18 Agustus 2026 (K-MTG-01):** ~~Admin bisa melakukan **koreksi manual** saldo cuti (misal: menambah/mengurangi carry-over) dengan alasan wajib.~~ Tanda `[x]` tidak menyatakan kontrak koreksi berbasis pemakaian/entri manual sudah diimplementasikan; kontrak normatif penggantinya berada pada AC `[ ]` addendum.
+- [x] AC-3 — **Bukti historis; Superseded bersama AC-2 oleh Addendum 15/18 Agustus 2026 (K-MTG-01):** ~~Koreksi manual tercatat di audit log.~~ Bukti audit untuk mekanisme koreksi baru harus diverifikasi kembali melalui AC `[ ]` addendum.
 - [x] AC-4: Setiap awal tahun (1 Januari), sistem otomatis:
   - Menghitung carry-over N-1 maksimal 6 hari.
   - Menghitung hak tambahan jika pegawai tidak mengambil cuti tahunan pada N-2 dan N-1.
@@ -1452,7 +1452,7 @@ Setiap story mengikuti format:
 
 - [x] AC-1: Setiap operasi berikut otomatis menghasilkan record di `audit_logs`:
   - CREATE (tambah pegawai, tambah riwayat, tambah keluarga, dll)
-  - UPDATE (edit data pegawai, koreksi saldo cuti, dll)
+  - UPDATE (edit data pegawai, perbaikan data pemakaian cuti, dll)
   - SOFT_DELETE (nonaktifkan pegawai)
   - RESTORE (aktifkan kembali)
   - VERIFY / DECIDE (verifikasi dan keputusan cuti)

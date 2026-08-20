@@ -96,7 +96,7 @@ Employee yang terhubung ke `demo-klabat-pegawai` harus:
 - berstatus aktif;
 - memiliki role internal `pegawai`;
 - memiliki Kepala Bagian yang merupakan employee dari `demo-klabat-kabag`;
-- memiliki saldo cuti tahunan, misalnya 12 hari;
+- memiliki riwayat pemakaian cuti yang membuat sistem dapat menghitung saldo tahunan;
 - memiliki email testing;
 - memiliki unit kerja yang berada dalam cakupan Kepala Bagian demo; dan
 - mempunyai profil yang cukup lengkap untuk mengajukan cuti.
@@ -131,15 +131,15 @@ Login sebagai Admin Kepegawaian:
 
 1. Buka **Cuti → Administrasi Saldo Cuti** atau `/cuti/administrasi-saldo`.
 2. Cari employee `demo-klabat-pegawai`.
-3. Jika saldo tahun berjalan belum ada, buka **Pendaftaran Saldo Awal**.
+3. Jika data pemakaian belum ada, buka **Pendaftaran Pemakaian Historis**.
 4. Contoh data:
-   - Sisa N-2: `0`.
-   - Sisa N-1: `0`.
-   - Sisa Tahun Berjalan: `12`.
-   - Alasan: `Pendaftaran saldo awal untuk demo LLDIKTI`.
-5. Simpan dan pastikan angka tampil pada ringkasan dan ledger.
+   - Pemakaian N-2: `0` hari.
+   - Pemakaian N-1: `1` hari.
+   - Pemakaian tahun berjalan: `2` hari.
+   - Alasan: `Rekonsiliasi pemakaian cuti untuk demo LLDIKTI`.
+5. Simpan dan pastikan sistem menghitung ulang ringkasan, rollover, dan ledger dari tiga total pemakaian tersebut.
 
-Jika saldo sudah tersedia, jangan mendaftarkan ulang. Cukup tunjukkan nilai awalnya.
+Jika riwayat pemakaian sudah tersedia, jangan mendaftarkan ulang. Cukup tunjukkan hasil perhitungan sistemnya.
 
 ### 3.5 Tanggal cuti
 
@@ -250,7 +250,7 @@ Hasil yang dijelaskan:
 **URL:** `/rbac`
 
 1. Tunjukkan matriks role dan permission.
-2. Jelaskan contoh permission Data Pegawai, Riwayat, EWS Aktif, Audit Log, Konfigurasi EWS, dan Penyesuaian Saldo Cuti.
+2. Jelaskan contoh permission Data Pegawai, Riwayat, EWS Aktif, Audit Log, Konfigurasi EWS, dan Perbaikan Data Pemakaian Cuti.
 3. Jelaskan bahwa dua role dapat melihat jenis halaman serupa tetapi memiliki aksi berbeda.
 4. Jangan mengubah permission role utama pada demo live.
 
@@ -433,18 +433,18 @@ Hasil yang dijelaskan:
 
 1. Cari employee demo.
 2. Tunjukkan saldo aktual, terpakai, dialokasikan, dapat diajukan, N-2/N-1, ledger, dan status rollover.
-3. Jika saldo belum ada, gunakan **Pendaftaran Saldo Awal** dengan tahun berjalan 12.
+3. Jika data belum ada, gunakan **Pendaftaran Pemakaian Historis** dengan total pemakaian N-2 `0`, N-1 `1`, dan tahun berjalan `2`; sistem menghitung saldo, rollover, serta total hak.
 
-Untuk demonstrasi koreksi di staging:
+Untuk demonstrasi perbaikan data pemakaian di staging:
 
-1. Buka **Koreksi Saldo**.
-2. Pilih bucket.
-3. Isi `+1` atau `-1`.
-4. Isi alasan `Koreksi administrasi untuk demonstrasi`.
-5. Simpan.
-6. Tunjukkan transaksi baru pada ledger.
+1. Buka **Riwayat Pemakaian**.
+2. Pilih **Perbaiki Data Pemakaian** pada entri tahun berjalan.
+3. Tunjukkan tiga total pemakaian sebelum koreksi: N-2 `0` hari, N-1 `1` hari, dan tahun berjalan `2` hari.
+4. Perbaiki pemakaian tahun berjalan dari `2` menjadi `3` hari, isi alasan `Perbaikan data pemakaian untuk demonstrasi`, lalu unggah dokumen pendukung.
+5. Simpan dan pastikan versi/riwayat lama dipertahankan.
+6. Tunjukkan sistem menjalankan replay rekalkulasi otomatis serta memperbarui ledger dan ringkasan saldo.
 
-Koreksi harus selalu memiliki alasan dan dapat ditelusuri melalui audit.
+Perbaikan harus selalu memiliki alasan, dokumen, dan jejak audit; jangan menambal saldo secara langsung. Hasil harus konsisten dengan hak dasar 12 hari, ceiling 24 hanya bila pemakaian N-2 dan N-1 sama-sama nol serta kelayakan jenis pegawai terpenuhi, dan ceiling 18 bila salah satunya memiliki pemakaian atau batas kelayakan membatasinya.
 
 ---
 
@@ -570,7 +570,7 @@ Hasil:
 
 **URL:** `/dashboard/cuti/saldo`
 
-Tunjukkan saldo awal 12, penggunaan 2, dan sisa 10.
+Tunjukkan hak dasar 12 hari, penggunaan 2 hari, dan sisa hasil perhitungan sistem; nilai tersebut tidak diinput sebagai saldo awal.
 
 #### Verifikasi PDF
 
@@ -950,7 +950,7 @@ Periksa weekend, Hari Libur, urutan tanggal, rentang lintas tahun, dan hari libu
 
 ### 21.5 Saldo tidak cukup
 
-Periksa saldo awal, pengajuan lain yang masih mengalokasikan saldo, dan ledger. Jangan mengoreksi tanpa alasan.
+Periksa riwayat pemakaian N-2/N-1/tahun berjalan, entri manual, pengajuan lain yang masih mengalokasikan saldo, dan ledger. Jika sumber data salah, perbaiki data pemakaian/entri manual dengan alasan serta dokumen agar sistem menghitung ulang; jangan menambal saldo langsung.
 
 ### 21.6 Tombol keputusan tidak muncul
 
@@ -990,7 +990,7 @@ Periksa username, `keycloak_username`, role internal, employee mapping, dan sess
 - [ ] Kepala Bagian Pegawai benar.
 - [ ] PYBMC/final approver adalah employee Pimpinan demo.
 - [ ] Approval chain dan tanggal efektif benar.
-- [ ] Saldo awal tersedia.
+- [ ] Riwayat pemakaian/entri manual yang diperlukan tersedia sehingga saldo dapat dihitung sistem.
 - [ ] Tanggal cuti bukan weekend/libur dan tidak lintas tahun.
 - [ ] Form menghitung hari kerja.
 - [ ] Kepala Bagian dapat melihat pengajuan.

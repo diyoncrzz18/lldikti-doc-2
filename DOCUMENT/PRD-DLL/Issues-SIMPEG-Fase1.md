@@ -1004,7 +1004,7 @@ Implementasi penambahan riwayat kepangkatan, jabatan, dan KGB. Data bersifat app
 - [ ] Tampilkan: jatah dasar 12 hari, carry-over N-1 maksimal 6, hak tambahan N-2/N-1, total, terpakai, sisa
 - [ ] Riwayat penggunaan cuti tahun berjalan
 - [ ] Data diperbarui real-time setelah cuti disetujui
-- [ ] Buat seeder/input awal saldo 2026 untuk semua pegawai (jatah dasar = 12) + saldo/riwayat N-1/N-2 jika tersedia
+- [ ] Buat seeder/pendaftaran data pemakaian cuti 2026 untuk semua pegawai (hak dasar = 12) + pemakaian/entri manual N-1/N-2 jika tersedia; sistem menghitung saldo dan rollover
 
 ---
 
@@ -1314,10 +1314,10 @@ Implementasi penambahan riwayat kepangkatan, jabatan, dan KGB. Data bersifat app
 - [ ] Filter: status, jenis cuti, unit kerja, periode
 - [ ] Search: nama/NIP
 - [ ] Halaman kelola saldo cuti semua pegawai
-- [ ] Koreksi manual saldo (alasan wajib)
+- [ ] ~~Koreksi manual saldo (alasan wajib)~~ _(Bukti historis; disupersede oleh Addendum 15/18 Agustus 2026. Direct balance override tidak tersedia.)_
 - [ ] Auto carry-over awal tahun (scheduler 1 Januari): N-1 maksimal 6 hari, N-2/N-1 tidak mengambil cuti dapat mencapai 24 hari
-- [ ] Input/koreksi saldo awal dan riwayat N-1/N-2
-- [ ] Audit log koreksi
+- [ ] ~~Input/koreksi saldo awal dan riwayat N-1/N-2~~ _(Bukti historis; disupersede oleh Addendum 15/18 Agustus 2026. Sumber kebenaran adalah data pemakaian/entri manual.)_
+- [ ] Perbaikan fakta sumber data pemakaian/entri manual dengan alasan, dokumen, versioning, audit, dan replay rekalkulasi; rujuk tugas Cuti aktif pada baris 1525–1526.
 
 ---
 
@@ -1522,7 +1522,7 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 ### Cuti
 
 - [ ] **US-4.10 / Issue #28:** ubah validasi urutan chain menjadi verifikator dinamis → Kepala Bagian → PYBMC. Ketua Tim Kerja masuk kelompok verifikator; bila kelompok kosong, Kepala Bagian menjadi step pertama.
-- [ ] **US-4.3 / US-4.9 / Issue #32 dan #45:** ganti input saldo awal/sisa menjadi input jumlah cuti yang telah dipakai per tahun; hitung saldo, rollover maksimal 6 hari, dan kondisi 24 versus 18 hari secara berjenjang. Konsumsi bucket N-2 → N-1 → tahun berjalan, expiry akhir tahun penggunaan, rekalkulasi kronologis untuk backdated correction, dan larangan direct balance override wajib tercakup pada test unit/feature.
+- [ ] **US-4.3 / US-4.9 / Issue #32 dan #45:** daftarkan jumlah cuti yang telah dipakai per tahun sebagai fakta sumber; sistem menghitung saldo, rollover maksimal 6 hari, dan kondisi 24 versus 18 hari secara berjenjang. Perbaikan fakta sumber pemakaian/entri manual menjalankan replay rekalkulasi kronologis, dengan konsumsi N-2 → N-1 → tahun berjalan dan expiry akhir tahun penggunaan; direct balance override wajib ditolak pada test unit/feature.
 - [ ] **US-4.13:** buat input cuti manual khusus Admin Kepegawaian untuk cuti eksternal/historis/downtime dengan dokumen wajib dan jumlah hari kerja hasil kalkulasi sistem; tolak duplikasi/overlap, jangan jalankan approval ulang, pertahankan histori koreksi tanpa hard delete, serta buktikan perhitungan saldo atomik dan audit lengkap.
 
 ### Data Pegawai dan Hari Libur
