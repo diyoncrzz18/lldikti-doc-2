@@ -131,17 +131,19 @@ Penggunaan yang telah diklaim dapat direkonsiliasi dan divalidasi secara berjenj
 
 ## K-CUT-05 — Input cuti manual yang telah disetujui di luar SIMPEG
 
-> **Status:** Disetujui melalui [Keputusan Evaluasi Meeting LLDIKTI](Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md), 15 Agustus 2026.
+> **Status:** Disetujui melalui [Keputusan Evaluasi Meeting LLDIKTI](Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md), dengan revisi keputusan langsung pengguna pada 20 Agustus 2026 (K-MTG-08). Ketentuan dokumen wajib dari 15 Agustus dipertahankan sebagai jejak historis **Superseded**.
 
 ### Keputusan
 
 1. Admin Kepegawaian secara eksklusif dapat mencatat cuti yang telah disetujui dan dijalankan di luar SIMPEG: cuti historis, cuti pada tahun berjalan sebelum go-live, atau cuti saat layanan tidak tersedia.
-2. Dokumen pendukung wajib diunggah. Entri mencatat pegawai, jenis cuti, periode, jumlah hari kerja, dan keterangan administratif.
-3. Entri tersebut langsung menjadi catatan cuti yang telah disetujui di luar SIMPEG; sistem tidak membuat usulan baru dan tidak menjalankan approval chain ulang.
-4. Untuk cuti tahunan, entri manual membentuk pemakaian final yang diaudit dan ikut menghitung saldo serta rollover. Ia bukan reservasi aktif K-CUT-01.
-5. Koreksi entry wajib atomik, menyimpan alasan serta nilai sebelum/sesudah, dan menghitung ulang saldo terkait.
-6. Jumlah hari kerja dihitung sistem dari periode dan kalender kerja; duplikasi serta overlap dengan cuti aktif pegawai yang sama ditolak.
-7. Koreksi mempertahankan record lama melalui pembatalan atau versi pengganti dan tidak melakukan hard delete.
+2. Dokumen pendukung dan nomor dokumen persetujuan bersifat opsional. Bila dokumen diberikan, file wajib tervalidasi ketat dan disimpan privat. **Ketentuan dokumen wajib 15 Agustus telah superseded oleh revisi 20 Agustus 2026.**
+3. Entri baru wajib menyimpan snapshot persetujuan historis total 2–10 tahap: 0–8 `verifier`, tepat satu `kepala_bagian`, kemudian tepat satu `pybmc` final. Hasil `verified`, `approved`, atau `final_approved` diturunkan sistem dari jenis tahap dan tidak diinput Admin.
+4. Approver dapat berupa pegawai internal atau pejabat eksternal. UUID internal tetap hidden/system, bukan input UX; pejabat eksternal wajib memiliki identitas snapshot yang memadai tanpa dibuatkan akun atau pegawai palsu.
+5. Form boleh dimulai dengan chain kosong atau menyalin current chain pegawai. Hasil salinan dapat diedit bagian per bagian dan tidak mengubah sumber; snapshot tersimpan tidak mengikuti perubahan konfigurasi current.
+6. Entri tersebut langsung menjadi fakta cuti yang telah disetujui di luar SIMPEG; sistem tidak membuat usulan, approval aktif, reservasi, notifikasi approval, atau bukti approval ulang.
+7. Untuk cuti tahunan, entri manual membentuk pemakaian final yang diaudit dan ikut menghitung saldo serta rollover. Ia bukan reservasi aktif K-CUT-01. Jumlah hari kerja dihitung sistem dari periode dan kalender kerja; duplikasi serta overlap dengan cuti aktif pegawai yang sama ditolak.
+8. Koreksi entry wajib atomik, menyimpan alasan serta nilai sebelum/sesudah, dan menghitung ulang saldo terkait dengan fakta dan snapshot pengganti. Pembatalan atau perubahan current configuration tidak mengubah snapshot lama; record lama tidak di-hard-delete.
+9. Mutasi hanya tersedia bagi exact Admin Kepegawaian dengan permission `cuti.manual.manage`; audit tidak memuat path dokumen privat dan surface baca tetap menjaga privasi serta query bounded.
 
 ### Batas
 

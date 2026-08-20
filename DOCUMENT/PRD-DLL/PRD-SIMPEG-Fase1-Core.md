@@ -2127,11 +2127,11 @@ Untuk transparansi, berikut fitur yang direncanakan di fase berikutnya:
 
 ## 23. Addendum Keputusan Evaluasi Meeting LLDIKTI — 15 Agustus 2026 (PRD v1.5)
 
-> **Status:** Disetujui. [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md) adalah penetapan terbaru yang menggantikan ketentuan PRD sebelumnya bila berbeda pada area berikut.
+> **Status:** Disetujui. [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md) menjadi penetapan untuk revisi 15/18 Agustus; addendum 20 Agustus di bawah menggantikan ketentuan aktif yang berbeda untuk cuti manual. Ketentuan lama dipertahankan sebagai jejak historis **Superseded**.
 
 1. Chain cuti baru wajib menempatkan **verifikator dinamis → Kepala Bagian → PYBMC**. Ketua Tim Kerja menjadi verifikator bila diperlukan; tanpa verifikator, chain dimulai dari Kepala Bagian. Ketentuan lama yang menempatkan Kepala Bagian sebagai default pertama atau contoh urutan Kepala Bagian sebelum verifikator tidak berlaku.
 2. Saldo awal/historis tidak lagi diinput sebagai sisa saldo. Admin memasukkan **jumlah cuti yang telah dipakai/diklaim per tahun** dan sistem menghitung sisa, rollover maksimal 6 hari, serta hak tahun berjalan secara berjenjang. Direct balance override tidak tersedia. Hak 24 hari hanya berlaku bila pemakaian N-2 dan N-1 sama dengan nol; selain itu batas totalnya 18 hari.
-3. Admin Kepegawaian memiliki jalur input cuti manual dengan dokumen pendukung wajib untuk cuti historis, cuti sebelum go-live, atau cuti ketika layanan tidak tersedia. Entri ini langsung mengakui keputusan yang sudah ditetapkan di luar SIMPEG, tidak melalui chain ulang, dan menjadi bagian dari kalkulasi saldo serta rollover.
+3. **Superseded oleh Addendum 20 Agustus 2026:** ketentuan 15 Agustus mewajibkan dokumen pendukung untuk jalur input cuti manual. Kontrak aktifnya digantikan pada bagian berikut; fakta cuti manual tetap untuk cuti historis, sebelum go-live, atau ketika layanan tidak tersedia serta tetap menjadi bagian kalkulasi saldo dan rollover.
 4. Email Keycloak menjadi atribut mapping utama; role default Pegawai dari SSO menginisialisasi role internal Pegawai pada mapping pertama; nomor telepon dapat dipetakan dari custom attribute yang dikonfirmasi LLDIKTI. Setelah inisialisasi, SIMPEG tetap mengevaluasi role internal dan permission pada setiap akses.
 5. Hanya Super Admin dengan permission khusus yang dapat melakukan switch role berbasis `temporary_role` persisten sampai revert. Permission efektif selalu diturunkan dinamis dari role tujuan; target Fase 1 terbatas pada Admin Kepegawaian, Pimpinan, Kepala Bagian, dan Pegawai. Switch hanya menyimulasikan role, tidak mengimpersonasi pegawai lain; seluruh perubahan diaudit dan backend tetap menegakkan permission efektif terbaru.
 6. Hari Libur berada pada menu tersendiri dengan kalender di atas tabel, bukan pada Data Master. Profil pegawai menyediakan unggah dokumen tambahan dan memisahkannya secara visual dari dokumen wajib/SK; menu dokumen lintas pegawai tetap dipertahankan.
@@ -2139,3 +2139,17 @@ Untuk transparansi, berikut fitur yang direncanakan di fase berikutnya:
 8. Target penyelesaian direvisi menjadi akhir Agustus 2026. Revisi yang siap harus segera divalidasi melalui Zoom tanpa menunggu hari Jumat. Perubahan image container atau versi PostgreSQL dari LLDIKTI harus didahului bukti backup/restore dan verifikasi aplikasi.
 
 Fitur dalam addendum ini belum boleh dinyatakan selesai hanya karena tercatat di PRD; penyelesaian tetap membutuhkan implementasi, test, audit, dan QA sesuai kriteria yang diperbarui pada User Stories.
+
+---
+
+## 24. Addendum Snapshot Persetujuan Cuti Manual — 20 Agustus 2026
+
+> **Status:** **Disetujui** melalui keputusan langsung pengguna pada 20 Agustus 2026. Addendum ini adalah kontrak aktif untuk cuti manual dan menggantikan kewajiban dokumen pada Addendum 15 Agustus/K-MTG-01.4, K-CUT-05, serta US-4.13 yang lama.
+
+1. Cuti manual adalah fakta cuti yang telah disetujui di luar SIMPEG untuk data historis, sebelum go-live, atau downtime. Ia tidak membuat `leave_requests`, approval aktif, reservasi, notifikasi approval, maupun bukti approval ulang SIMPEG.
+2. Nomor dokumen persetujuan dan dokumen pendukung opsional. Bila file tersedia, server memvalidasinya ketat dan menyimpannya privat; audit tidak mencatat path privat.
+3. Setiap fakta manual baru memiliki snapshot 2–10 tahap: 0–8 `verifier`, tepat satu `kepala_bagian`, lalu tepat satu `pybmc` sebagai tahap terakhir. Jenis lain ditolak; server menurunkan hasil `verified`, `approved`, dan `final_approved`, sehingga client tidak mengirim urutan atau hasil tahap.
+4. Approver dapat internal atau external. UUID pegawai internal adalah detail hidden/system, bukan input UX. Snapshot identitas internal menjaga histori meski data pegawai berubah; eksternal menggunakan nama, jabatan, dan instansi tanpa akun atau record pegawai palsu.
+5. Form dapat mulai kosong atau menyalin current chain pegawai lalu mengedit setiap bagian hasil salinan. Salinan tidak mengubah konfigurasi sumber; snapshot historis tidak berubah oleh perubahan konfigurasi, koreksi, atau pembatalan. Koreksi membuat fakta dan snapshot pengganti, sedangkan pembatalan mempertahankan snapshot lama.
+6. Mutasi dibatasi untuk exact Admin Kepegawaian dengan permission `cuti.manual.manage`, ditegakkan pada route, FormRequest, Action, dan service. Audit mencatat aktor, alasan, nilai fakta, keberadaan dokumen, serta snapshot tanpa data privat yang tidak perlu.
+7. Preview, lookup, dan histori menjaga privacy serta performance: field minimum, query dan hasil bounded, pagination server-side, eager loading bounded, dan tanpa query Blade atau payload besar ke Alpine. Implementasi DB-sensitive dibuktikan pada PostgreSQL; browser smoke Chrome membuktikan form kosong/copy-edit, dokumen opsional, aksesibilitas, viewport, serta tanpa console error atau polling besar.

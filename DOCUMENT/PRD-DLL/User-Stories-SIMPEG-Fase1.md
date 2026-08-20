@@ -2021,12 +2021,17 @@ Rollover dari N-1 tetap dibatasi maksimal 6 hari dan batas tersebut **bukan pers
 > **Saya ingin** mencatat cuti yang telah disetujui dan dijalankan di luar SIMPEG,
 > **Sehingga** saldo dan rollover tetap akurat saat go-live, downtime, atau rekonsiliasi administrasi.
 
-- [ ] AC-1: Hanya Admin Kepegawaian yang dapat mengakses form input cuti manual. *(Sumber: K-MTG-01.4.)*
-- [ ] AC-2: Form mencatat pegawai, jenis cuti, periode, alasan/keterangan, dan dokumen pendukung wajib; jumlah hari kerja dihitung oleh sistem dari periode dan kalender kerja, bukan diketik bebas. *(Sumber: K-MTG-01.4, K-MTG-01.7, dan K-MTG-07.4.)*
-- [ ] AC-3: Entri langsung dicatat sebagai cuti yang telah disetujui di luar SIMPEG tanpa menjalankan usulan atau approval chain ulang. *(Sumber: K-MTG-01.4.)*
-- [ ] AC-4: Entri dapat dipakai untuk tahun historis, tahun berjalan sebelum go-live, serta pencatatan setelah downtime; pemakaian tahunan otomatis memperbarui saldo dan rollover. *(Sumber: K-MTG-01.4.)*
-- [ ] AC-5: Perubahan atau koreksi entri menghasilkan perhitungan ulang atomik dan audit aktor, alasan, dokumen, serta nilai sebelum/sesudah. Record lama dipertahankan melalui pembatalan/versi pengganti dan tidak di-hard-delete. *(Sumber: K-MTG-01.5, K-MTG-01.7, dan K-MTG-07.4.)*
-- [ ] AC-6: Duplikasi dan periode yang overlap dengan cuti aktif pegawai yang sama ditolak. Entri cuti tahunan memengaruhi saldo; jenis cuti lain tidak memotong saldo tahunan. *(Sumber: K-MTG-01.7 dan K-MTG-07.4.)*
+> **Riwayat superseded:** AC-2 versi 15/18 Agustus yang mewajibkan dokumen pendukung tidak lagi normatif. Revisi 20 Agustus menggantinya dengan dokumen opsional dan snapshot persetujuan historis wajib.
+
+- [ ] AC-1: Mutation hanya dapat diakses oleh exact role Admin Kepegawaian yang memiliki permission `cuti.manual.manage`; route, FormRequest, Action, dan service menolak role lain atau permission yang tidak sesuai sebelum side effect. *(Sumber: K-MTG-08 dan K-CUT-05.)*
+- [ ] AC-2: Form mencatat pegawai, jenis cuti, periode, alasan/keterangan, nomor dokumen opsional, dan dokumen pendukung opsional. Bila file ada, validasi ketat dan storage privat tetap wajib; jumlah hari kerja dihitung sistem dari periode dan kalender kerja, bukan diketik bebas. *(Sumber: K-MTG-08 dan K-CUT-05.)*
+- [ ] AC-3: Setiap entri baru menyimpan snapshot persetujuan 2–10 tahap: 0–8 `verifier`, tepat satu `kepala_bagian`, lalu tepat satu `pybmc` final. Hasil `verified`, `approved`, dan `final_approved` selalu diturunkan server; input client untuk urutan atau hasil tahap ditolak. *(Sumber: K-MTG-08 dan K-CUT-05.)*
+- [ ] AC-4: Approver dapat berupa pegawai internal atau pejabat external. UUID internal tidak ditampilkan sebagai input UX; histori menyimpan snapshot identitas internal, sedangkan external memiliki nama, jabatan, dan instansi tanpa akun atau record pegawai palsu. *(Sumber: K-MTG-08 dan K-CUT-05.)*
+- [ ] AC-5: Form dapat dimulai dengan chain kosong atau menyalin current chain pegawai. Salinan dapat diedit per bagian tanpa mengubah sumber, dan submit ditolak sampai struktur akhirnya valid. *(Sumber: K-MTG-08 dan K-CUT-05.)*
+- [ ] AC-6: Entri langsung dicatat sebagai fakta cuti yang sudah disetujui di luar SIMPEG untuk historis, sebelum go-live, atau downtime; sistem tidak membuat usulan, approval aktif, reservasi, notifikasi approval, atau bukti approval ulang. Pemakaian tahunan otomatis memperbarui saldo dan rollover. *(Sumber: K-MTG-08 dan K-CUT-05.)*
+- [ ] AC-7: Koreksi menghasilkan fakta dan snapshot pengganti dengan perhitungan ulang atomik serta audit aktor, alasan, keberadaan dokumen, nilai sebelum/sesudah, dan snapshot tanpa path privat. Pembatalan atau perubahan current configuration tidak mengubah snapshot lama dan record tidak di-hard-delete. *(Sumber: K-MTG-08 dan K-CUT-05.)*
+- [ ] AC-8: Duplikasi dan periode yang overlap dengan cuti aktif pegawai yang sama ditolak. Entri cuti tahunan memengaruhi saldo; jenis cuti lain tidak memotong saldo tahunan. *(Sumber: K-MTG-01.7 dan K-MTG-08.)*
+- [ ] AC-9: Preview, lookup, dan histori hanya memuat data minimum, query/hasil bounded, pagination server-side, dan eager loading bounded. Bukti selesai mencakup test PostgreSQL serta smoke Chrome untuk form kosong, copy-edit, dokumen opsional, aksesibilitas, desktop/mobile, dan tanpa console error atau polling payload besar. *(Sumber: Addendum Snapshot 20 Agustus 2026.)*
 
 ### US-6.5 · Persiapan Template WhatsApp Business
 
@@ -2066,7 +2071,7 @@ Rollover dari N-1 tetap dibatasi maksimal 6 hari dan batas tersebut **bukan pers
 | US-4.5 | Chain memuat nol atau lebih verifikator; bila ada, seluruhnya ditempatkan sebelum Kepala Bagian | **Belum Selesai** | Feature test chain tanpa verifikator, satu/banyak verifikator, Ketua Tim sebagai verifikator, urutan seluruh verifikator sebelum Kepala Bagian, dan regresi snapshot |
 | US-4.9 | Koreksi memakai data pemakaian/entri manual dan perhitungan ulang saldo | **Belum Selesai** | Feature test transaksi atomik, nilai sebelum/sesudah, audit, dan regresi rollover |
 | US-4.10 | Validasi konfigurasi nol atau lebih verifikator → Kepala Bagian → PYBMC | **Belum Selesai** | Feature test konfigurasi valid/tidak valid, seluruh verifikator sebelum Kepala Bagian, skip duplikat, dan audit konfigurasi |
-| US-4.13 | Input cuti manual oleh Admin Kepegawaian | **Belum Selesai** | Feature test RBAC, dokumen wajib, penghitungan saldo/rollover, audit, dan QA browser |
+| US-4.13 | Input cuti manual dengan snapshot persetujuan historis; ketentuan dokumen wajib sebelumnya **Superseded** | **Belum Selesai** | Feature test exact RBAC/permission, dokumen opsional dan private storage, snapshot 2–10/internal-external/copy-edit, tanpa approval ulang, PostgreSQL, penghitungan saldo/rollover, audit/privacy/performance, dan QA Chrome |
 | US-6.5 | Dokumen template WhatsApp serta integrasi berbasis template ID | **Belum Selesai** | Dokumen template disetujui LLDIKTI/Meta, test dispatcher/allowlist variabel, bukti adapter tetap nonaktif sebelum dependency tersedia, dan bukti uji layanan setelah kontrak final diterima |
 | US-8.4 | Hari Libur dipisahkan dari Data Master dengan kalender di atas tabel | **Belum Selesai** | Feature/regression test, smoke test browser, dan konfirmasi menu lama tidak lagi tersedia |
 | K-MTG-06 | Validasi Zoom, penerimaan Kepegawaian, panduan per role, serta readiness environment/container/PostgreSQL | **Belum Selesai** | Notulen/hasil penerimaan per kelompok revisi, panduan per role, versi baseline environment, bukti backup/restore, serta verifikasi aplikasi, migrasi, queue, dan scheduler |
@@ -2096,7 +2101,7 @@ Seluruh Open Question telah diputuskan pada 18 Agustus 2026 melalui K-MTG-07 dan
 | OQ-MTG-01 | Permission efektif diturunkan dinamis dari role tujuan; `temporary_permission` bukan snapshot otorisasi permanen | **Decided** |
 | OQ-MTG-02 | Tidak ada direct balance override; koreksi memperbaiki sumber data dan menghitung ulang | **Decided** |
 | OQ-MTG-03 | Super Admin ber-permission khusus dapat switch ke Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai | **Decided** |
-| OQ-MTG-04 | Input manual khusus Admin Kepegawaian, dokumen wajib, hari dihitung sistem, duplikasi/overlap ditolak, koreksi tanpa hard delete | **Decided** |
+| OQ-MTG-04 | **Superseded:** keputusan 18 Agustus yang mewajibkan dokumen digantikan oleh addendum 20 Agustus: dokumen opsional, snapshot historis wajib, hari dihitung sistem, duplikasi/overlap ditolak, dan koreksi tanpa hard delete | **Superseded** |
 | OQ-MTG-05 | Konsumsi N-2 → N-1 → tahun berjalan, expiry akhir tahun penggunaan, dan rekalkulasi kronologis untuk koreksi backdated | **Decided** |
 | OQ-MTG-06 | WhatsApp Business wajib siap akhir Agustus; detail provider menjadi dependency implementasi #214/#215 | **Decided** |
 | OQ-MTG-07 | Target final adalah akhir Agustus 2026 | **Decided** |
