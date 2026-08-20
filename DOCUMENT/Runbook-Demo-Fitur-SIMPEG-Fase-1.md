@@ -131,7 +131,7 @@ Login sebagai Admin Kepegawaian:
 
 1. Buka **Cuti → Administrasi Saldo Cuti** atau `/cuti/administrasi-saldo`.
 2. Cari employee `demo-klabat-pegawai`.
-3. Jika data pemakaian belum ada, buka **Pendaftaran Pemakaian Historis**.
+3. Jika data pemakaian belum ada, buka tab **Rekonsiliasi** lalu gunakan form **Rekonsiliasi Pemakaian Tahunan**.
 4. Contoh data:
    - Pemakaian N-2: `0` hari.
    - Pemakaian N-1: `1` hari.
@@ -433,7 +433,7 @@ Hasil yang dijelaskan:
 
 1. Cari employee demo.
 2. Tunjukkan saldo aktual, terpakai, dialokasikan, dapat diajukan, N-2/N-1, ledger, dan status rollover.
-3. Jika data belum ada, gunakan **Pendaftaran Pemakaian Historis** dengan total pemakaian N-2 `0`, N-1 `1`, dan tahun berjalan `2`; sistem menghitung saldo, rollover, serta total hak.
+3. Jika data belum ada, buka tab **Rekonsiliasi** lalu gunakan form **Rekonsiliasi Pemakaian Tahunan** dengan total pemakaian N-2 `0`, N-1 `1`, dan tahun berjalan `2`; sistem menghitung saldo, rollover, serta total hak.
 
 Untuk demonstrasi perbaikan data pemakaian di staging:
 
