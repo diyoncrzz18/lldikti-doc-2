@@ -70,10 +70,23 @@
 6. **OQ-MTG-06 — Decided:** WhatsApp Business wajib siap dalam target akhir Agustus. Detail provider dan artefak layanan diteruskan sebagai dependency implementasi #214/#215, bukan pertanyaan produk terbuka.
 7. **OQ-MTG-07 — Decided:** target penyelesaian final adalah **akhir Agustus 2026**. Target ini tidak dipecah menjadi tanggal teknis tambahan pada acceptance criteria.
 
+## K-MTG-08 — Dokumen wajib, berkas SK, dan arsip dokumen terpusat
+
+| Field | Detail |
+|---|---|
+| Tanggal keputusan lanjutan | 21 Agustus 2026 |
+| Sumber persetujuan | Konfirmasi pengguna setelah klarifikasi dengan pihak terkait LLDIKTI pada review PR #218 |
+| Kedudukan | Mengikat; melengkapi dan menggantikan K-MTG-04.2–04.3 pada bagian yang berbeda |
+
+1. Ketentuan dokumen wajib/SK tidak boleh di-hardcode sebagai empat dokumen yang sama untuk seluruh pegawai. Admin Kepegawaian mengelola **matriks dokumen wajib berdasarkan jenis pegawai** sehingga tiap jenis, misalnya PNS, CPNS, atau PPPK sesuai data referensi yang tersedia, dapat memiliki daftar SK wajib yang berbeda.
+2. Matriks aktif menjadi sumber tampilan dan penilaian kelengkapan dokumen wajib pada profil pegawai. Dokumen tambahan tetap dikelola terpisah dari daftar SK wajib.
+3. Sifat append-only pada riwayat kepangkatan, jabatan, dan KGB berlaku pada **record substantifnya**. Data riwayat yang sudah tersimpan tidak dapat diedit atau dihapus. Namun, berkas lampiran SK pada record tersebut **boleh diganti** tanpa mengubah data substantif, `is_latest`, atau dasar kalkulasi riwayat. Penggantian berkas tetap melewati validasi upload dan wajib diaudit.
+4. Arsip dokumen terpusat untuk Super Admin/Admin Kepegawaian bersifat **read-only**: digunakan untuk pencarian lintas pegawai, melihat detail, dan mengunduh berkas yang berwenang diakses. Arsip ini tidak menyediakan unggah, penggantian, penghapusan, atau perubahan metadata dokumen. Semua kontrol dokumen/SK dilakukan dari halaman detail/profil pegawai.
+
 ## Dampak dokumentasi
 
-- [PRD SIMPEG Fase 1](PRD-DLL/PRD-SIMPEG-Fase1-Core.md), [User Stories](PRD-DLL/User-Stories-SIMPEG-Fase1.md), [Issues](PRD-DLL/Issues-SIMPEG-Fase1.md), [Panduan Penulisan Kode](PRD-DLL/Panduan-Penulisan-Kode-SIMPEG.md), dan [Keputusan Cuti Saldo Tahap 0](Keputusan-Cuti-Saldo-Tahap-0.md) merujuk keputusan ini sebagai addendum terbaru.
-- Fitur yang muncul dari keputusan ini ditandai **belum diimplementasikan** sampai ada bukti code review, test, dan QA yang sesuai.
+- [PRD SIMPEG Fase 1](PRD-DLL/PRD-SIMPEG-Fase1-Core.md), [User Stories](PRD-DLL/User-Stories-SIMPEG-Fase1.md), [Issues](PRD-DLL/Issues-SIMPEG-Fase1.md), serta tracker peran dan sprint yang terdampak telah diperbarui untuk K-MTG-08. [Panduan Penulisan Kode](PRD-DLL/Panduan-Penulisan-Kode-SIMPEG.md) tetap menjadi acuan arsitektur, keamanan, dan QA tanpa mengubah keputusan produk ini.
+- Pencatatan keputusan tidak menjadi bukti penyelesaian fitur. Status implementasi setiap butir tetap ditentukan oleh bukti code review, test, dan QA yang sesuai.
 
 
 

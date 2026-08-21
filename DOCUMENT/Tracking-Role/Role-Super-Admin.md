@@ -41,7 +41,7 @@ Hardening audit fail-closed untuk seluruh CRUD pegawai/import masih ⚠️. Peng
 | 2 | SSO Keycloak = autentikasi saja; role/permission dari DB SIMPEG; bootstrap Super Admin pertama; collision guard | `HandleKeycloakCallbackAction` |
 | 3 | CRUD pegawai utama + soft delete/restore + halaman Data Backup (`onlyTrashed()`, tanpa permanent delete) | `StoreEmployeeRequest`/`UpdateEmployeeRequest` + Action |
 | 4 | **Riwayat pangkat/jabatan/KGB append-only ditegakkan** — id riwayat lama ditolak validasi, action selalu membuat record baru | PR #129 (`1b3dfd6`), `UpdateEmployeeRequest.php:42-44`, `EmployeeUpdateTest` |
-| 5 | Dokumen & SK — upload/update/detail/download/check-impact/delete via Action + FormRequest | `DokumenController` |
+| 5 | Dokumen & SK — upload/update/check-impact/delete melalui detail/profil pegawai via Action + FormRequest; arsip dokumen terpusat hanya untuk pencarian, detail, dan unduh lintas pegawai secara read-only | `DokumenController` |
 | 6 | Import pegawai — wizard lengkap, template 2 baris contoh (PNS+PPPK, PR #130), **laporan hasil import permanen + unduhan CSV** (PR #131, tabel `import_batches`) | `GenerateImportTemplateAction`, `ExecuteImportBatchAction`, `DownloadImportReportAction` |
 | 7 | Monitoring + keputusan cuti, rekap saldo/ledger + koreksi ber-audit, laporan cuti PDF/Excel fixed, konfigurasi approval chain dinamis (PYBMC, backfill, audit) | `Actions/Cuti/*`, `CutiConfigPageTest` |
 | 8 | EWS aktif + follow-up + flag eligibility; scheduler + deduplikasi alert | `ListActiveEwsAlertsAction` |

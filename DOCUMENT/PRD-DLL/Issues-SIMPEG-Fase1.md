@@ -3,7 +3,7 @@
 
 > Dokumen ini berisi daftar issues yang siap dipindahkan ke GitHub Issues / Notion Board.
 > Setiap issue diturunkan dari User Stories dan dipecah menjadi task teknis yang actionable.
-> Sinkron dengan PRD-SIMPEG-Fase1-Core.md v1.4: Keycloak hanya untuk SSO, RBAC internal aplikasi, approval cuti memakai tepat satu chain runtime per pegawai dengan penyalinan template ke anggota unit, status cuti memakai label resmi, PostgreSQL development via container, production diarahkan ke Podman, notifikasi channel-configurable, dan laporan mendukung export nominatif Excel custom.
+> Sinkron dengan PRD-SIMPEG-Fase1-Core.md v1.7: Keycloak hanya untuk SSO, RBAC internal aplikasi, approval cuti memakai tepat satu chain runtime per pegawai dengan penyalinan template ke anggota unit, status cuti memakai label resmi, PostgreSQL development via container, production diarahkan ke Podman, notifikasi channel-configurable, dan laporan mendukung export nominatif Excel custom.
 >
 > **Catatan status:** checkbox pada dokumen ini adalah dekomposisi scope/import-ready, bukan tracker implementasi terkini. Gunakan `User-Stories-SIMPEG-Fase1.md` untuk status acceptance criteria dan tracker sprint untuk status source/QA.
 >
@@ -1510,7 +1510,7 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 
 ---
 
-## Addendum Backlog — Keputusan Evaluasi Meeting LLDIKTI, 15 Agustus 2026
+## Addendum Backlog — Keputusan Evaluasi Meeting LLDIKTI, 15, 18, dan 21 Agustus 2026
 
 > Sumber: [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md). Butir ini menimpa task lama yang bertentangan dan belum boleh ditutup sebelum test, QA, serta audit evidence tersedia.
 
@@ -1527,7 +1527,7 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 
 ### Data Pegawai dan Hari Libur
 
-- [ ] **US-2.4:** tambah unggah dokumen tambahan langsung dari profil pegawai; pisahkan tabel dokumen wajib/SK dan dokumen tambahan; pertahankan pencarian dokumen lintas pegawai bagi Super Admin/Admin Kepegawaian.
+- [ ] **US-2.4 / US-2.6:** tambah unggah dokumen tambahan langsung dari profil pegawai; pisahkan tabel dokumen wajib/SK dan dokumen tambahan; kelola matriks SK wajib per jenis pegawai tanpa hardcode empat SK; pertahankan arsip pusat read-only untuk pencarian/detail/unduh lintas pegawai bagi Super Admin/Admin Kepegawaian; dan izinkan penggantian berkas SK dari detail/profil tanpa memutasi record substantif riwayat, `is_latest`, atau dasar kalkulasi. Validasi upload dan audit perubahan berkas wajib diuji.
 - [ ] **US-8.4 / Issue #10:** keluarkan Hari Libur dari Data Master; tampilkan kalender di atas tabel Hari Libur tanpa mengubah sumber data `ref_hari_libur`, audit, atau kalkulasi hari kerja.
 
 ### Notifikasi, UAT, dan deployment

@@ -3,8 +3,8 @@
 
 | Field | Detail |
 |-------|--------|
-| **Versi Dokumen** | 1.6 |
-| **Tanggal** | 17 Agustus 2026 |
+| **Versi Dokumen** | 1.7 |
+| **Tanggal** | 21 Agustus 2026 |
 | **Domain** | Disiapkan LLDIKTI saat tahap deployment |
 | **Fase** | 1 — Core / Fondasi |
 | **Target Go-Live** | 20 Agustus 2026 |
@@ -34,6 +34,7 @@ PRD ini menjadi **sumber kebenaran utama** untuk Fase 1. Keputusan meeting tekni
 17. Keputusan sesi langsung pengguna 22 Juli 2026 (kanonis, disetujui pengguna): import massal Fase 1 hanya mengaktifkan template Data Utama. Import membuat record pegawai beserta field snapshot awal (golongan, pangkat, jabatan, kelas jabatan, pendidikan, prodi, dan tanggal pensiun bila tersedia di kolom Excel), tetapi tidak membuat riwayat kepangkatan, riwayat jabatan, maupun riwayat KGB. Riwayat resmi diinput per pegawai melalui CRUD riwayat append-only. Kalkulasi TMT dijalankan saat riwayat/sumber resmi disimpan, bukan saat import selesai. Tanggal pensiun hasil import dipertahankan apa adanya dan tidak dihitung ulang atau ditimpa oleh proses import. Template lanjutan multi-jenis (Data Pelengkap, Riwayat Kepangkatan, Riwayat Jabatan, Riwayat KGB) tidak termasuk ruang lingkup saat ini dan tidak dipulihkan tanpa keputusan eksplisit baru. Keputusan ini menggantikan rincian import versi sebelumnya jika bertentangan.
 18. Keputusan pengguna 28 Juli 2026: nama tabel fisik canonical cuti adalah `leave_request_steps`, `leave_balance_ledger`, dan `leave_proofs`. Keputusan, alasan, serta batasnya dicatat pada [Keputusan Skema Cuti Canonical](Keputusan-Skema-Cuti-Canonical.md).
 19. Keputusan pengguna 17 Agustus 2026: Program Studi menjadi reference table Fase 1 yang dikelola Super Admin melalui Data Master. Relasi UUID nullable dipakai pada data pegawai dan riwayat pendidikan, sedangkan snapshot teks lama tetap dipertahankan untuk kompatibilitas dan import. Kontrak lengkap dicatat pada [Keputusan Program Studi sebagai Data Referensi](../Keputusan-Program-Studi-Data-Master.md).
+20. Keputusan pengguna 21 Agustus 2026: dokumen wajib/SK dikonfigurasi melalui matriks per jenis pegawai, bukan hardcode empat SK. Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only, tetapi berkas SK dapat diganti secara terpisah dengan audit. Arsip dokumen terpusat digunakan read-only untuk pencarian lintas pegawai; seluruh kontrol dokumen dilakukan dari detail/profil pegawai. Kontrak lengkap dicatat pada [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md#k-mtg-08--dokumen-wajib-berkas-sk-dan-arsip-dokumen-terpusat).
 
 ---
 
@@ -214,7 +215,7 @@ Super Admin
 | Cuti | Lihat semua pengajuan cuti, lihat saldo hasil perhitungan sistem, catat/perbaiki data pemakaian cuti historis atau entri manual dengan dokumen, upload dokumen cuti eksternal |
 | EWS | Lihat semua peringatan, update flag kinerja |
 | Notifikasi | Terima notifikasi EWS |
-| Dokumen | Upload/kelola dokumen dan SK pegawai |
+| Dokumen | Upload dan kelola dokumen/SK dari detail atau profil pegawai; arsip dokumen terpusat hanya untuk pencarian, detail, dan unduh lintas pegawai secara read-only |
 | Laporan | Generate dan export semua laporan |
 
 #### Pimpinan (Kepala Lembaga)
@@ -633,6 +634,10 @@ Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di F
 | `no_ijazah` | string(100) | Ya | |
 | `file_ijazah` | string(path) | Tidak | |
 
+#### Matriks Dokumen Wajib Berdasarkan Jenis Pegawai
+
+Dokumen wajib/SK ditentukan oleh **matriks konfigurasi per jenis pegawai**, bukan daftar empat SK yang di-hardcode secara global. Admin Kepegawaian menetapkan jenis SK wajib untuk masing-masing jenis pegawai yang tersedia pada data referensi, misalnya PNS, CPNS, atau PPPK. Matriks aktif menjadi sumber daftar dokumen wajib dan status kelengkapan pada profil pegawai; dokumen tambahan tetap berada di kelompok terpisah.
+
 #### Dokumen & SK
 
 | Field | Tipe | Wajib | Keterangan |
@@ -643,6 +648,14 @@ Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di F
 | `tanggal_dokumen` | date | Tidak | |
 | `file_path` | string(path) | Ya | Path ke file |
 | `keterangan` | text | Tidak | |
+
+##### Arsip dokumen terpusat
+
+Arsip dokumen terpusat bagi Super Admin dan Admin Kepegawaian adalah permukaan **read-only** untuk pencarian lintas pegawai, melihat detail, dan mengunduh dokumen yang berwenang diakses. Arsip tersebut tidak menyediakan unggah, penggantian, penghapusan, atau perubahan metadata. Semua kontrol dokumen dan SK dilakukan dari halaman detail/profil pegawai.
+
+##### Berkas SK pada riwayat append-only
+
+Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only: field bisnis riwayat, status `is_latest`, dan dasar kalkulasi tidak dapat diedit atau dihapus. Berkas `file_sk` pada record tersebut boleh diganti dari detail/profil pegawai tanpa memutasi data substantif riwayat. Setiap penggantian tetap mematuhi validasi upload dan menghasilkan audit perubahan berkas.
 
 ### 7.4 Aturan Upload File
 
@@ -2060,7 +2073,7 @@ Untuk transparansi, berikut fitur yang direncanakan di fase berikutnya:
 - Evaluasi kinerja oleh kepala bagian
 - Riwayat pelatihan
 - Tracker 20 JP pengembangan kompetensi
-- Arsip dokumen (modul terpisah)
+- Arsip dokumen dengan lifecycle/retensi mandiri sebagai modul terpisah (berbeda dari arsip pencarian read-only Fase 1)
 - Laporan PDF & Excel lengkap
 
 ### Fase 4 — Integrasi
@@ -2125,7 +2138,7 @@ Untuk transparansi, berikut fitur yang direncanakan di fase berikutnya:
 
 ---
 
-## 23. Addendum Keputusan Evaluasi Meeting LLDIKTI — 15 Agustus 2026 (PRD v1.5)
+## 23. Addendum Keputusan Evaluasi Meeting LLDIKTI — 15, 18, dan 21 Agustus 2026 (PRD v1.5)
 
 > **Status:** Disetujui. [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md) adalah penetapan terbaru yang menggantikan ketentuan PRD sebelumnya bila berbeda pada area berikut.
 
@@ -2137,5 +2150,6 @@ Untuk transparansi, berikut fitur yang direncanakan di fase berikutnya:
 6. Hari Libur berada pada menu tersendiri dengan kalender di atas tabel, bukan pada Data Master. Profil pegawai menyediakan unggah dokumen tambahan dan memisahkannya secara visual dari dokumen wajib/SK; menu dokumen lintas pegawai tetap dipertahankan.
 7. Tim menyediakan dokumen template WhatsApp beserta variabelnya untuk pengajuan Meta/Qontak oleh LLDIKTI. WhatsApp Business wajib siap paling lambat akhir Agustus 2026; integrasi diuji setelah template ID, kontrak provider, credential, nomor uji, dan sandbox diterima. Teks bebas tidak menjadi kontrak integrasi.
 8. Target penyelesaian direvisi menjadi akhir Agustus 2026. Revisi yang siap harus segera divalidasi melalui Zoom tanpa menunggu hari Jumat. Perubahan image container atau versi PostgreSQL dari LLDIKTI harus didahului bukti backup/restore dan verifikasi aplikasi.
+9. Ketentuan dokumen wajib/SK memakai matriks konfigurasi per jenis pegawai, bukan hardcode empat SK. Riwayat substantif kepangkatan, jabatan, dan KGB tetap append-only, sedangkan berkas SK-nya dapat diganti secara terpisah dengan validasi dan audit. Arsip dokumen terpusat bersifat read-only untuk pencarian, detail, dan unduh lintas pegawai; semua kontrol dokumen/SK dilakukan dari detail/profil pegawai.
 
 Fitur dalam addendum ini belum boleh dinyatakan selesai hanya karena tercatat di PRD; penyelesaian tetap membutuhkan implementasi, test, audit, dan QA sesuai kriteria yang diperbarui pada User Stories.
