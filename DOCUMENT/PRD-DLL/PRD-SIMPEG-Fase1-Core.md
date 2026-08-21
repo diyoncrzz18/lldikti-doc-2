@@ -3,7 +3,7 @@
 
 | Field | Detail |
 |-------|--------|
-| **Versi Dokumen** | 1.8 |
+| **Versi Dokumen** | 1.9 |
 | **Tanggal** | 21 Agustus 2026 |
 | **Domain** | Disiapkan LLDIKTI saat tahap deployment |
 | **Fase** | 1 — Core / Fondasi |
@@ -35,6 +35,7 @@ PRD ini menjadi **sumber kebenaran utama** untuk Fase 1. Keputusan meeting tekni
 18. Keputusan pengguna 28 Juli 2026: nama tabel fisik canonical cuti adalah `leave_request_steps`, `leave_balance_ledger`, dan `leave_proofs`. Keputusan, alasan, serta batasnya dicatat pada [Keputusan Skema Cuti Canonical](Keputusan-Skema-Cuti-Canonical.md).
 19. Keputusan pengguna 17 Agustus 2026: Program Studi menjadi reference table Fase 1 yang dikelola Super Admin melalui Data Master. Relasi UUID nullable dipakai pada data pegawai dan riwayat pendidikan, sedangkan snapshot teks lama tetap dipertahankan untuk kompatibilitas dan import. Kontrak lengkap dicatat pada [Keputusan Program Studi sebagai Data Referensi](../Keputusan-Program-Studi-Data-Master.md).
 20. Keputusan pengguna 21 Agustus 2026: dokumen wajib/SK dikonfigurasi melalui matriks per jenis pegawai, bukan hardcode empat SK. PNS dan CPNS memakai matriks yang sama: SK Pengangkatan, SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru. Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only, tetapi berkas SK dapat diganti secara terpisah dengan audit. Arsip dokumen terpusat digunakan read-only untuk pencarian lintas pegawai; seluruh kontrol dokumen dilakukan dari detail/profil pegawai. Indikasi daftar PPPK berupa SK Pengangkatan dan SK KGB terbaru masih menunggu konfirmasi dan tidak menjadi aturan aktif. Kontrak lengkap dicatat pada [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md#k-mtg-08--dokumen-wajib-berkas-sk-dan-arsip-dokumen-terpusat).
+21. Keputusan pengguna 21 Agustus 2026: lifecycle pegawai menggunakan `ref_status_pegawai`, bukan `deleted_at` atau Laravel `SoftDeletes`. Menonaktifkan pegawai mengubah statusnya menjadi `Nonaktif`; record tetap berada pada tabel `employees`. Perubahan status wajib menyimpan tanggal efektif, histori status, keterangan, dan audit trail. Ketentuan lifecycle pegawai sebelumnya yang berbasis penghapusan tidak berlaku lagi bila bertentangan.
 
 ---
 
@@ -133,7 +134,7 @@ Pengelolaan data kepegawaian di LLDIKTI Wilayah XVI masih dilakukan secara manua
 | 8 | Audit Log | Semua operasi CRUD + approval + login/logout |
 | 9 | Dashboard | 7 widget untuk pimpinan dan admin |
 | 10 | Laporan & Export | Daftar nominatif + rekap cuti + riwayat kepangkatan ke PDF/Excel, plus nominatif Excel custom |
-| 11 | Soft Delete | Flag-based deletion; tidak ada penghapusan permanen di aplikasi |
+| 11 | Status Pegawai | Aktivitas pegawai ditentukan oleh klasifikasi `ref_status_pegawai`; pegawai nonaktif tetap berada pada tabel `employees` |
 | 12 | Reference Tables | Master data hierarkis dan referensi pegawai/jabatan/status/unit yang dapat dikelola |
 
 **Tidak Termasuk (Out of Scope Fase 1):**
@@ -201,14 +202,14 @@ Super Admin
 | Konfigurasi Sistem | Kelola reference tables, konfigurasi EWS, hari libur nasional, channel notifikasi, dan chain approval cuti |
 | User Management | Assign role ke user, mapping user Keycloak ↔ pegawai |
 | Semua Fitur Admin | Semua yang bisa dilakukan Admin Kepegawaian |
-| Soft Delete & Restore | Menonaktifkan data tanpa menghapus permanen, serta memulihkan data jika dibutuhkan |
+| Status Pegawai | Mengubah status pegawai melalui `ref_status_pegawai`; pegawai tetap tersimpan dan perubahan status memiliki histori serta audit trail |
 | Audit Log | Akses penuh ke seluruh audit log |
 
 #### Admin Kepegawaian
 
 | Hak Akses | Detail |
 |-----------|--------|
-| Data Pegawai | CRUD semua data pegawai (create, read, update, soft-delete) |
+| Data Pegawai | CRUD data pegawai (create, read, update) serta perubahan status pegawai melalui `ref_status_pegawai` |
 | Riwayat | Tambah riwayat kepangkatan, jabatan, KGB, disiplin (append-only) |
 | Import Excel/CSV | Upload dan mapping data dari Excel/CSV |
 | Set Supervisor | Assign kepala bagian per pegawai |
@@ -310,7 +311,7 @@ Admin Kepegawaian meng-assign kepala bagian per pegawai. Mapping ini menentukan:
 |-------|----------|
 | **Bahasa UI** | Bahasa Indonesia |
 | **Timezone** | Asia/Makassar (WITA, UTC+8) |
-| **Soft Delete** | Kolom `deleted_at` (Laravel SoftDeletes) |
+| **Status pegawai** | Employee tidak memakai `deleted_at` maupun Laravel `SoftDeletes`; status aktif/nonaktif berasal dari klasifikasi `ref_status_pegawai` |
 | **Timestamps** | Kolom `created_at`, `updated_at` otomatis |
 | **UUID** | Primary key menggunakan UUID v4 |
 | **Naming** | Database: snake_case · Model: PascalCase · Route: kebab-case |
@@ -473,32 +474,32 @@ Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di F
 3. Data bersifat read-only (tidak bisa edit di Fase 1).
 4. Tampilkan informasi saldo cuti.
 
-#### US-PEG-05: Soft Delete Pegawai
+#### US-PEG-05: Nonaktifkan Pegawai melalui Status Kepegawaian
 
 > **Sebagai** Admin Kepegawaian,
 > **Saya ingin** menonaktifkan data pegawai yang sudah pensiun/mutasi,
 > **Sehingga** data tidak muncul di daftar aktif tapi tetap tersimpan untuk riwayat.
 
 **Acceptance Criteria:**
-1. Soft delete mengisi kolom `deleted_at` (data tidak dihapus dari database).
-2. Pegawai yang di-soft-delete tidak muncul di daftar pegawai aktif.
-3. Admin bisa melihat daftar pegawai yang sudah dinonaktifkan (filter terpisah).
-4. Admin bisa me-restore pegawai yang di-soft-delete.
-5. Audit log mencatat soft delete dan restore.
+1. Menonaktifkan pegawai mengubah `status_pegawai_id` ke referensi `Nonaktif`, tanpa menghapus record dari tabel `employees`.
+2. Perubahan status wajib menyimpan tanggal efektif, keterangan/alasan, dan satu record `employee_status_histories`.
+3. Daftar pegawai default hanya menampilkan status yang diklasifikasikan aktif oleh `ref_status_pegawai`; pegawai Nonaktif tetap dapat ditemukan melalui filter status pegawai.
+4. Perubahan status selanjutnya, termasuk kembali ke status Aktif bila ada dasar administrasi resmi, dilakukan sebagai perubahan status baru dengan tanggal efektif, histori, keterangan, dan audit trail; tidak melalui lifecycle data terhapus.
+5. Pegawai dengan status yang diklasifikasikan Nonaktif tidak diproses oleh EWS.
+6. Audit log mencatat status sebelum/sesudah, tanggal efektif, dan keterangan perubahan.
 
-#### US-PEG-06: Soft Delete oleh Super Admin
+#### US-PEG-06: Kelola Status Pegawai oleh Super Admin
 
 > **Sebagai** Super Admin,
-> **Saya ingin** menonaktifkan data pegawai tanpa menghapus permanen,
-> **Sehingga** data yang sewaktu-waktu dibutuhkan masih bisa ditemukan dan dipulihkan.
+> **Saya ingin** mengubah status pegawai sesuai referensi dan dasar administrasi resmi,
+> **Sehingga** data pegawai tetap tersimpan dan riwayat statusnya dapat ditelusuri.
 
 **Acceptance Criteria:**
 1. Tidak ada fitur hapus permanen untuk data pegawai di aplikasi.
-2. Super Admin hanya bisa melakukan soft delete/nonaktifkan pegawai dengan konfirmasi.
-3. Data pegawai yang dinonaktifkan tetap tersimpan di database.
-4. Data pegawai yang dinonaktifkan bisa ditemukan melalui filter pegawai non-aktif.
-5. Super Admin bisa melakukan restore jika data perlu dipakai kembali.
-6. Audit log mencatat soft delete dan restore.
+2. Super Admin mengubah status pegawai ke `Nonaktif` atau status lain yang tersedia pada `ref_status_pegawai`, bukan menghapus record pegawai.
+3. Data pegawai yang berstatus Nonaktif tetap tersimpan di tabel `employees` dan dapat ditemukan melalui filter status pegawai.
+4. Setiap perubahan status menyimpan tanggal efektif, histori status, keterangan, dan audit trail.
+5. Pengaktifan kembali, bila sah secara administrasi, adalah perubahan status baru ke status yang diklasifikasikan Aktif; bukan pemulihan data terhapus.
 
 ### 7.3 Struktur Data Pegawai
 
@@ -524,6 +525,7 @@ Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di F
 | `foto` | string(path) | Tidak | Path ke file foto |
 | `jenis_pegawai` | enum/ref | Ya | PNS / PPPK / CPNS; dapat dibuat reference bila LLDIKTI ingin menambah kategori |
 | `status_pegawai_id` | ref_status_pegawai_id | Ya | FK ke `ref_status_pegawai`; default `Aktif` |
+| `status_tanggal` | date nullable | Tidak | Tanggal efektif status saat ini; diisi saat perubahan status resmi |
 | `status_keterangan` | text | Tidak | Keterangan/alasan saat status pegawai berubah, misalnya CLTN, tugas belajar, atau pemberhentian sementara |
 | `golongan_terakhir` | snapshot | Ya untuk import Excel | Snapshot langsung dari kolom Excel saat import Data Utama. Setelah ada riwayat kepangkatan resmi, nilai terkini diturunkan dari riwayat terbaru berdasarkan TMT; import tidak membuat riwayat |
 | `pangkat_terakhir` | snapshot | Tidak | Snapshot dari kolom Excel; boleh kosong untuk PPPK/CPNS. Setelah ada riwayat kepangkatan resmi, nilai terkini diturunkan dari riwayat terbaru; import tidak membuat riwayat |
@@ -534,6 +536,10 @@ Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di F
 | `prodi_pendidikan_terakhir` | string(255) | Ya untuk import Excel | Snapshot kompatibilitas dari kolom `Prodi Pendidikan Terakhir`; disinkronkan dari referensi ketika `program_studi_id` dipilih dan menjadi fallback untuk data/import yang belum memiliki relasi |
 | `tanggal_pensiun` | date | Tidak | Dari kolom `Pensiun`. Nilai hasil import dipertahankan apa adanya dan tidak dihitung ulang atau ditimpa oleh import. Bila kolom kosong, tanggal pensiun dihitung dari BUP hanya melalui kalkulasi TMT saat riwayat/sumber resmi disimpan, bukan saat import |
 | `profil_status` | enum | Ya | `belum_lengkap` / `lengkap` untuk membedakan hasil import awal dan profil yang sudah dilengkapi |
+
+#### Riwayat Status Kepegawaian
+
+Setiap perubahan status resmi membuat satu record `employee_status_histories` yang menyimpan `employee_id`, `status_pegawai_id`, `tanggal_efektif`, `keterangan`, serta timestamp. Riwayat ini menjadi jejak status pegawai dan tidak digantikan oleh `deleted_at`. Perubahan status wajib diaudit bersama nilai status sebelum/sesudah, tanggal efektif, dan keterangan.
 
 #### Data Kontak
 
@@ -1125,8 +1131,7 @@ Setiap perubahan data di SIMPEG dicatat dalam audit log yang immutable. Audit lo
 |----------------------|--------|
 | **Create** | Tambah pegawai baru, tambah riwayat kepangkatan |
 | **Update** | Edit data pribadi, perbaikan data pemakaian cuti/entri manual yang memicu rekalkulasi saldo |
-| **Soft Delete** | Nonaktifkan pegawai |
-| **Restore** | Aktifkan kembali data pegawai non-aktif |
+| **Perubahan Status Pegawai** | Mengubah status pegawai melalui `ref_status_pegawai`, termasuk penonaktifan dan pengaktifan kembali yang memiliki dasar administrasi |
 | **Verifikasi / Keputusan Cuti** | Setiap step approval, rekomendasi, keputusan final, dan perubahan status |
 | **Login** | Login berhasil via Keycloak |
 | **Logout** | Logout manual atau session timeout |
@@ -1166,7 +1171,7 @@ Setiap perubahan data di SIMPEG dicatat dalam audit log yang immutable. Audit lo
 | `id` | UUID | PK |
 | `user_id` | UUID | FK ke pegawai yang melakukan aksi |
 | `user_name` | string | Snapshot nama user (untuk readability) |
-| `event` | enum | CREATE / UPDATE / DELETE / SOFT_DELETE / RESTORE / LOGIN / LOGOUT / VERIFY / DECIDE / CHANGE_REQUESTED / DEFER / NOT_APPROVED / IMPORT / CONFIG_UPDATE |
+| `event` | enum | CREATE / UPDATE / DELETE / SOFT_DELETE / RESTORE / LOGIN / LOGOUT / VERIFY / DECIDE / CHANGE_REQUESTED / DEFER / NOT_APPROVED / IMPORT / CONFIG_UPDATE; perubahan status pegawai dicatat sebagai UPDATE dengan payload status sebelum/sesudah, tanggal efektif, dan keterangan |
 | `auditable_type` | string | Nama model/tabel (misal: `Employee`, `LeaveRequest`) |
 | `auditable_id` | UUID | ID record yang diubah |
 | `old_values` | json | Data sebelum perubahan |
@@ -1404,7 +1409,7 @@ Fase 1 menyediakan export laporan dasar ke format PDF dan Excel. Selain export f
 │ is_kinerja_baik  │  │  └──────────────────────┘
 │ keycloak_id      │  │
 │ role             │  │
-│ deleted_at       │  │
+│ status_tanggal   │  │
 │ created_at       │  │  ┌──────────────────────┐
 │ updated_at       │  │  │  position_histories  │
 └─────────────────┘  │  │  (Jabatan)           │
@@ -1416,11 +1421,22 @@ Fase 1 menyediakan export laporan dasar ke format PDF dan Excel. Selain export f
                       │  │ unit_kerja_id (FK)   │
                       │  │ kelas_jabatan        │
                       │  │ tmt_jabatan          │
-                      │  │ is_latest            │
-                      │  └──────────────────────┘
-                      │
-                      │  ┌──────────────────────┐
-                      │  │  salary_histories    │
+                       │  │ is_latest            │
+                       │  └──────────────────────┘
+                       │
+                       │  ┌──────────────────────────┐
+                       │  │ employee_status_histories│
+                       │  │──────────────────────────│
+                       ├──│ id (PK, UUID)            │
+                       │  │ employee_id (FK)         │
+                       │  │ status_pegawai_id (FK)   │
+                       │  │ tanggal_efektif          │
+                       │  │ keterangan               │
+                       │  │ created_at               │
+                       │  └──────────────────────────┘
+                       │
+                       │  ┌──────────────────────┐
+                       │  │  salary_histories    │
                       │  │  (KGB)               │
                       │  │──────────────────────│
                       ├──│ id (PK, UUID)        │
@@ -1671,7 +1687,7 @@ Status pegawai tidak boleh berupa enum hardcoded. Seed awal minimal:
 | WAJIB_MILITER | Wajib Militer | Nonaktif/khusus |
 | HILANG | PNS Dinyatakan Hilang | Nonaktif/khusus |
 
-Setiap perubahan status pegawai wajib dapat menyimpan `status_keterangan` dan tercatat di audit log.
+Setiap perubahan status pegawai wajib menyimpan tanggal efektif, `status_keterangan`, satu record riwayat status, dan audit trail. Klasifikasi Aktif/Nonaktif pada referensi ini menjadi sumber visibilitas daftar pegawai serta pemrosesan EWS; tidak ada `deleted_at` pada Employee.
 
 ### 16.5 ref_eselon
 
@@ -1836,7 +1852,7 @@ Meskipun Fase 1 menggunakan Laravel Blade (server-side rendering), semua logika 
 | Aspek | Konvensi |
 |-------|----------|
 | **URL Pattern** | `/api/v1/{resource}` (untuk JSON) atau `/{resource}` (untuk Blade) |
-| **Method** | GET (list/show), POST (create), PUT (update), DELETE (soft-delete) |
+| **Method** | GET (list/show), POST (create), PUT (update), DELETE hanya untuk resource yang secara eksplisit mengizinkan penghapusan; Employee menggunakan perubahan status melalui update |
 | **Response** | JSON untuk API, Blade view untuk web |
 | **Authentication** | Middleware auth via Keycloak session |
 | **Authorization** | Middleware RBAC internal: role dan permission dari database SIMPEG |
@@ -1864,8 +1880,6 @@ Meskipun Fase 1 menggunakan Laravel Blade (server-side rendering), semua logika 
 | GET | `/pegawai/{id}` | EmployeeController@show | Admin+/Self | Detail pegawai |
 | GET | `/pegawai/{id}/edit` | EmployeeController@edit | Admin | Form edit |
 | PUT | `/pegawai/{id}` | EmployeeController@update | Admin | Update data |
-| DELETE | `/pegawai/{id}` | EmployeeController@destroy | Admin | Soft delete |
-| POST | `/pegawai/{id}/restore` | EmployeeController@restore | Admin | Restore |
 | GET | `/profil-saya` | EmployeeController@myProfile | Pegawai | Data sendiri |
 
 #### History Routes (Riwayat)
@@ -2015,7 +2029,7 @@ Meskipun Fase 1 menggunakan Laravel Blade (server-side rendering), semua logika 
 | Aspek | Implementasi |
 |-------|-------------|
 | Audit trail | Semua operasi tercatat (immutable) |
-| Soft delete | Data tidak dihapus permanen secara default |
+| Lifecycle pegawai | Employee tetap berada pada tabel `employees`; status aktif/nonaktif ditentukan oleh `ref_status_pegawai`, tanpa `deleted_at` atau Laravel `SoftDeletes` |
 | Regulasi | PP 11/2017, PP 49/2018, PP 94/2021, PP 99/2000 |
 
 ---

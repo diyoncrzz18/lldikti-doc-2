@@ -235,8 +235,7 @@ Nama Action harus jelas:
 
 - `CreateEmployeeAction`
 - `UpdateEmployeeAction`
-- `DeactivateEmployeeAction`
-- `RestoreEmployeeAction`
+- `ChangeEmployeeStatusAction`
 - `CreateEmployeeFamilyAction`
 - `GenerateEwsEventsAction`
 
@@ -623,8 +622,7 @@ Setiap mutation penting harus audit-aware:
 
 - create;
 - update;
-- soft delete;
-- restore;
+- soft delete/restore hanya untuk domain yang memang memiliki lifecycle tersebut;
 - import;
 - verifikasi/keputusan cuti;
 - config changes.
@@ -644,6 +642,8 @@ DEFER
 NOT_APPROVED
 CONFIG_UPDATE
 ```
+
+Untuk Employee, perubahan aktif/nonaktif dicatat sebagai `UPDATE` dengan status sebelum/sesudah, tanggal efektif, dan keterangan. Jangan menggunakan event `SOFT_DELETE` atau `RESTORE` untuk lifecycle pegawai.
 
 Untuk domain cuti, jangan memakai event `REJECT` atau label `Ditolak`. Keputusan negatif resmi adalah `NOT_APPROVED` / `Tidak Disetujui`. Aksi `Perubahan` dan `Ditangguhkan` wajib membawa keterangan.
 
@@ -758,16 +758,16 @@ Jika Blade memanggil API:
 - error response harus ditangani;
 - jangan biarkan tombol hanya pura-pura berhasil di JavaScript tanpa request backend.
 
-Contoh anti-pattern:
+Contoh anti-pattern perubahan status pegawai:
 
 ```text
-Klik restore -> JavaScript hanya hide row -> tidak ada backend call.
+Klik Nonaktifkan -> JavaScript hanya hide row -> tidak ada backend call.
 ```
 
 Contoh yang benar:
 
 ```text
-Klik restore -> POST/PATCH ke backend -> backend restore -> audit RESTORE -> UI refresh/list update.
+Klik ubah status -> request backend tervalidasi -> status_pegawai_id, tanggal efektif, keterangan, dan riwayat status disimpan atomik -> audit UPDATE -> UI refresh/list update.
 ```
 
 ## Testing Rules
@@ -783,7 +783,7 @@ Minimal test untuk CRUD/mutation:
 - invalid request gagal validasi;
 - audit log tertulis jika mutation penting;
 - data ownership dicek jika ada nested resource;
-- soft delete/restore benar-benar mengubah data.
+- perubahan status pegawai menyimpan status sebelum/sesudah, tanggal efektif, riwayat status, dan audit tanpa menghapus record Employee.
 
 Untuk refactor route/API:
 
@@ -843,8 +843,8 @@ Komentar harus plain text. Jangan gunakan emoji di source code comment atau docb
 Contoh komentar yang baik:
 
 ```php
-// Restore hanya mengaktifkan kembali pegawai; relasi riwayat tetap dipertahankan untuk menjaga auditability.
-$employee->restore();
+// Perubahan status tidak menghapus Employee; tanggal efektif dan histori diperlukan agar status dapat diaudit.
+$changeEmployeeStatusAction->execute($employee, $payload);
 ```
 
 Contoh komentar yang buruk:
@@ -874,24 +874,24 @@ Sebelum membuat PR, pastikan:
 
 ## Contoh Struktur Fitur Baru
 
-Contoh fitur: restore pegawai.
+Contoh fitur: perubahan status pegawai.
 
 ```text
-routes/web.php atau routes/api/v1/pegawai.php
--> PegawaiController@restore
--> RestoreEmployeeRequest jika perlu payload/authorize khusus
--> RestoreEmployeeAction
--> AuditService::log('RESTORE', ...)
+route deklaratif pegawai
+-> controller status pegawai
+-> ChangeEmployeeStatusRequest
+-> ChangeEmployeeStatusAction
+-> employee_status_histories + AuditService::log('UPDATE', ...)
 -> response redirect/json
--> Feature test restore + RBAC + audit
+-> Feature test perubahan status + RBAC + histori + audit
 ```
 
 File yang mungkin dibuat:
 
 ```text
-app/Actions/Employees/RestoreEmployeeAction.php
-app/Http/Requests/Employee/RestoreEmployeeRequest.php
-tests/Feature/EmployeeRestoreTest.php
+app/Actions/Employees/ChangeEmployeeStatusAction.php
+app/Http/Requests/Employee/ChangeEmployeeStatusRequest.php
+tests/Feature/EmployeeStatusChangeTest.php
 ```
 
 Controller tetap hanya memanggil Action.
