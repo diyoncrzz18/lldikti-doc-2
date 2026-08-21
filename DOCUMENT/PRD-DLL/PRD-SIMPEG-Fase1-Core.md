@@ -3,7 +3,7 @@
 
 | Field | Detail |
 |-------|--------|
-| **Versi Dokumen** | 1.7 |
+| **Versi Dokumen** | 1.8 |
 | **Tanggal** | 21 Agustus 2026 |
 | **Domain** | Disiapkan LLDIKTI saat tahap deployment |
 | **Fase** | 1 — Core / Fondasi |
@@ -34,7 +34,7 @@ PRD ini menjadi **sumber kebenaran utama** untuk Fase 1. Keputusan meeting tekni
 17. Keputusan sesi langsung pengguna 22 Juli 2026 (kanonis, disetujui pengguna): import massal Fase 1 hanya mengaktifkan template Data Utama. Import membuat record pegawai beserta field snapshot awal (golongan, pangkat, jabatan, kelas jabatan, pendidikan, prodi, dan tanggal pensiun bila tersedia di kolom Excel), tetapi tidak membuat riwayat kepangkatan, riwayat jabatan, maupun riwayat KGB. Riwayat resmi diinput per pegawai melalui CRUD riwayat append-only. Kalkulasi TMT dijalankan saat riwayat/sumber resmi disimpan, bukan saat import selesai. Tanggal pensiun hasil import dipertahankan apa adanya dan tidak dihitung ulang atau ditimpa oleh proses import. Template lanjutan multi-jenis (Data Pelengkap, Riwayat Kepangkatan, Riwayat Jabatan, Riwayat KGB) tidak termasuk ruang lingkup saat ini dan tidak dipulihkan tanpa keputusan eksplisit baru. Keputusan ini menggantikan rincian import versi sebelumnya jika bertentangan.
 18. Keputusan pengguna 28 Juli 2026: nama tabel fisik canonical cuti adalah `leave_request_steps`, `leave_balance_ledger`, dan `leave_proofs`. Keputusan, alasan, serta batasnya dicatat pada [Keputusan Skema Cuti Canonical](Keputusan-Skema-Cuti-Canonical.md).
 19. Keputusan pengguna 17 Agustus 2026: Program Studi menjadi reference table Fase 1 yang dikelola Super Admin melalui Data Master. Relasi UUID nullable dipakai pada data pegawai dan riwayat pendidikan, sedangkan snapshot teks lama tetap dipertahankan untuk kompatibilitas dan import. Kontrak lengkap dicatat pada [Keputusan Program Studi sebagai Data Referensi](../Keputusan-Program-Studi-Data-Master.md).
-20. Keputusan pengguna 21 Agustus 2026: dokumen wajib/SK dikonfigurasi melalui matriks per jenis pegawai, bukan hardcode empat SK. Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only, tetapi berkas SK dapat diganti secara terpisah dengan audit. Arsip dokumen terpusat digunakan read-only untuk pencarian lintas pegawai; seluruh kontrol dokumen dilakukan dari detail/profil pegawai. Kontrak lengkap dicatat pada [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md#k-mtg-08--dokumen-wajib-berkas-sk-dan-arsip-dokumen-terpusat).
+20. Keputusan pengguna 21 Agustus 2026: dokumen wajib/SK dikonfigurasi melalui matriks per jenis pegawai, bukan hardcode empat SK. PNS dan CPNS memakai matriks yang sama: SK Pengangkatan, SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru. Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only, tetapi berkas SK dapat diganti secara terpisah dengan audit. Arsip dokumen terpusat digunakan read-only untuk pencarian lintas pegawai; seluruh kontrol dokumen dilakukan dari detail/profil pegawai. Indikasi daftar PPPK berupa SK Pengangkatan dan SK KGB terbaru masih menunggu konfirmasi dan tidak menjadi aturan aktif. Kontrak lengkap dicatat pada [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md#k-mtg-08--dokumen-wajib-berkas-sk-dan-arsip-dokumen-terpusat).
 
 ---
 
@@ -162,7 +162,7 @@ Pengelolaan data kepegawaian di LLDIKTI Wilayah XVI masih dilakukan secara manua
 | Karakteristik | Detail |
 |--------------|--------|
 | Jumlah pengguna | ~46 pegawai internal |
-| Jenis pegawai | PNS dan PPPK |
+| Jenis pegawai yang didukung | PNS, CPNS, dan PPPK |
 | Organisasi | LLDIKTI Wilayah XVI (single-tenant) |
 | Ekspansi | Tidak ada rencana ekspansi ke PTS binaan |
 
@@ -636,7 +636,15 @@ Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di F
 
 #### Matriks Dokumen Wajib Berdasarkan Jenis Pegawai
 
-Dokumen wajib/SK ditentukan oleh **matriks konfigurasi per jenis pegawai**, bukan daftar empat SK yang di-hardcode secara global. Admin Kepegawaian menetapkan jenis SK wajib untuk masing-masing jenis pegawai yang tersedia pada data referensi, misalnya PNS, CPNS, atau PPPK. Matriks aktif menjadi sumber daftar dokumen wajib dan status kelengkapan pada profil pegawai; dokumen tambahan tetap berada di kelompok terpisah.
+Dokumen wajib/SK ditentukan oleh **matriks konfigurasi per jenis pegawai**, bukan daftar empat SK yang di-hardcode secara global. Admin Kepegawaian menetapkan jenis SK wajib untuk masing-masing jenis pegawai yang tersedia pada data referensi. Matriks yang sudah dikonfirmasi adalah sebagai berikut:
+
+| Jenis pegawai | Dokumen SK wajib | Status keputusan |
+|---|---|---|
+| PNS | SK Pengangkatan; SK Pangkat terbaru; SK Jabatan terbaru; SK KGB terbaru | Dikonfirmasi |
+| CPNS | SK Pengangkatan; SK Pangkat terbaru; SK Jabatan terbaru; SK KGB terbaru | Dikonfirmasi; sama dengan PNS |
+| PPPK | Belum ditetapkan. Indikasi awal: SK Pengangkatan dan SK KGB terbaru | Menunggu konfirmasi; tidak boleh menjadi aturan aktif |
+
+Saat jenis pegawai berubah, sistem mengevaluasi ulang matriks aktif untuk jenis pegawai baru. Transisi CPNS menjadi PNS tidak mengubah kewajiban dokumen karena kedua matriks yang dikonfirmasi sama. Matriks aktif menjadi sumber daftar dokumen wajib dan status kelengkapan pada profil pegawai; dokumen tambahan tetap berada di kelompok terpisah.
 
 #### Dokumen & SK
 

@@ -3,7 +3,7 @@
 
 > Dokumen ini berisi daftar issues yang siap dipindahkan ke GitHub Issues / Notion Board.
 > Setiap issue diturunkan dari User Stories dan dipecah menjadi task teknis yang actionable.
-> Sinkron dengan PRD-SIMPEG-Fase1-Core.md v1.7: Keycloak hanya untuk SSO, RBAC internal aplikasi, approval cuti memakai tepat satu chain runtime per pegawai dengan penyalinan template ke anggota unit, status cuti memakai label resmi, PostgreSQL development via container, production diarahkan ke Podman, notifikasi channel-configurable, dan laporan mendukung export nominatif Excel custom.
+> Sinkron dengan PRD-SIMPEG-Fase1-Core.md v1.8: Keycloak hanya untuk SSO, RBAC internal aplikasi, approval cuti memakai tepat satu chain runtime per pegawai dengan penyalinan template ke anggota unit, status cuti memakai label resmi, PostgreSQL development via container, production diarahkan ke Podman, notifikasi channel-configurable, dan laporan mendukung export nominatif Excel custom.
 >
 > **Catatan status:** checkbox pada dokumen ini adalah dekomposisi scope/import-ready, bukan tracker implementasi terkini. Gunakan `User-Stories-SIMPEG-Fase1.md` untuk status acceptance criteria dan tracker sprint untuk status source/QA.
 >
@@ -410,7 +410,7 @@ Buat semua migration dan seeder untuk reference tables Fase 1.
 - [ ] `ref_status_pegawai` — Aktif, Nonaktif, Pensiun, Mutasi, CLTN, Perpanjangan CLTN, Tugas Belajar, Pemberhentian Sementara, Wajib Militer, PNS Dinyatakan Hilang
 - [ ] `ref_eselon` — I.a s/d V (jika relevan)
 - [ ] `ref_unit_kerja` — hierarkis (`parent_id`, `level`, `jenis_unit`) untuk Kepala Lembaga, Bagian Umum, Tim Kerja, urusan/sub-unit
-- [ ] `ref_jenis_pegawai` — PNS, PPPK
+- [ ] `ref_jenis_pegawai` — PNS, CPNS, PPPK
 - [ ] `ref_jenis_cuti` — Tahunan, Sakit, Melahirkan, Besar, Alasan Penting, CLTN
 - [ ] `ref_jenjang_pendidikan` — SD, SMP, SMA, D3, D4/S1, S2, S3
 - [ ] `ref_program_studi` — UUID, nama unik ter-normalisasi, `is_active`; katalog awal dibentuk dari snapshot pegawai dan riwayat pendidikan
@@ -1527,7 +1527,7 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 
 ### Data Pegawai dan Hari Libur
 
-- [ ] **US-2.4 / US-2.6:** tambah unggah dokumen tambahan langsung dari profil pegawai; pisahkan tabel dokumen wajib/SK dan dokumen tambahan; kelola matriks SK wajib per jenis pegawai tanpa hardcode empat SK; pertahankan arsip pusat read-only untuk pencarian/detail/unduh lintas pegawai bagi Super Admin/Admin Kepegawaian; dan izinkan penggantian berkas SK dari detail/profil tanpa memutasi record substantif riwayat, `is_latest`, atau dasar kalkulasi. Validasi upload dan audit perubahan berkas wajib diuji.
+- [ ] **US-2.4 / US-2.6:** tambah unggah dokumen tambahan langsung dari profil pegawai; pisahkan tabel dokumen wajib/SK dan dokumen tambahan; kelola matriks SK wajib per jenis pegawai tanpa hardcode empat SK. Matriks PNS dan CPNS wajib memuat SK Pengangkatan, SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru; transisi CPNS→PNS mengevaluasi ulang matriks tanpa mengubah kewajiban. Indikasi PPPK berupa SK Pengangkatan dan SK KGB terbaru tetap Open Question serta tidak boleh menjadi aturan aktif sebelum konfirmasi final. Pertahankan arsip pusat read-only untuk pencarian/detail/unduh lintas pegawai bagi Super Admin/Admin Kepegawaian; dan izinkan penggantian berkas SK dari detail/profil tanpa memutasi record substantif riwayat, `is_latest`, atau dasar kalkulasi. Validasi upload dan audit perubahan berkas wajib diuji.
 - [ ] **US-8.4 / Issue #10:** keluarkan Hari Libur dari Data Master; tampilkan kalender di atas tabel Hari Libur tanpa mengubah sumber data `ref_hari_libur`, audit, atau kalkulasi hari kerja.
 
 ### Notifikasi, UAT, dan deployment

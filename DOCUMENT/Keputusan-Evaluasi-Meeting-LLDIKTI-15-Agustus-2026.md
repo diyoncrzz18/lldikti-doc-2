@@ -82,6 +82,9 @@
 2. Matriks aktif menjadi sumber tampilan dan penilaian kelengkapan dokumen wajib pada profil pegawai. Dokumen tambahan tetap dikelola terpisah dari daftar SK wajib.
 3. Sifat append-only pada riwayat kepangkatan, jabatan, dan KGB berlaku pada **record substantifnya**. Data riwayat yang sudah tersimpan tidak dapat diedit atau dihapus. Namun, berkas lampiran SK pada record tersebut **boleh diganti** tanpa mengubah data substantif, `is_latest`, atau dasar kalkulasi riwayat. Penggantian berkas tetap melewati validasi upload dan wajib diaudit.
 4. Arsip dokumen terpusat untuk Super Admin/Admin Kepegawaian bersifat **read-only**: digunakan untuk pencarian lintas pegawai, melihat detail, dan mengunduh berkas yang berwenang diakses. Arsip ini tidak menyediakan unggah, penggantian, penghapusan, atau perubahan metadata dokumen. Semua kontrol dokumen/SK dilakukan dari halaman detail/profil pegawai.
+5. Matriks yang telah dikonfirmasi untuk **PNS** dan **CPNS** adalah sama: (a) SK Pengangkatan, (b) SK Pangkat terbaru, (c) SK Jabatan terbaru, dan (d) SK KGB terbaru. Keempatnya menjadi dokumen wajib pada masing-masing jenis pegawai tersebut.
+6. Saat jenis pegawai berubah dari **CPNS menjadi PNS**, sistem mengevaluasi ulang matriks dokumen wajib berdasarkan jenis pegawai yang baru. Karena matriks CPNS dan PNS yang dikonfirmasi sama, perubahan ini tidak menambah atau menghapus kewajiban dokumen.
+7. Untuk **PPPK**, indikasi awal dari LLDIKTI adalah SK Pengangkatan dan SK KGB terbaru. Indikasi ini **belum menjadi keputusan final** sampai dikonfirmasi kembali oleh pihak terkait; sistem tidak boleh mengaktifkannya sebagai matriks wajib, menilai kelengkapan, atau menolak alur apa pun berdasarkan daftar tersebut sebelum konfirmasi final tersedia.
 
 ## Dampak dokumentasi
 
