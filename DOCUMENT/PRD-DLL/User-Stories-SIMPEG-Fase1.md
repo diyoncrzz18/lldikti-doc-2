@@ -3,7 +3,7 @@
 
 | Field | Detail |
 |-------|--------|
-| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.7 |
+| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.9 |
 | **Tanggal** | 21 Agustus 2026 |
 | **Pembaruan status terakhir** | 14 Agustus 2026 |
 | **Basis verifikasi status** | Branch `development` @ `ff0e9e1` (setelah PR #182 masuk) |
@@ -16,7 +16,9 @@
 >
 > **Keputusan Program Studi (17 Agustus 2026):** Program Studi menjadi reference table kelolaan US-8.5 kesembilan yang dikelola Super Admin melalui Data Master. Form pegawai dan riwayat pendidikan memakai relasi UUID nullable, sementara snapshot lama tetap dipertahankan sebagai fallback dan kontrak import. Import tidak membuat atau menghubungkan master Program Studi. Lihat [Keputusan Program Studi sebagai Data Referensi](../Keputusan-Program-Studi-Data-Master.md).
 >
-> **Keputusan dokumen/SK (21 Agustus 2026):** Dokumen wajib/SK mengikuti matriks yang dapat dikonfigurasi per jenis pegawai, bukan empat SK hardcode. Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only, sedangkan berkas SK dapat diganti dengan audit. Arsip dokumen terpusat read-only; seluruh kontrol dokumen dilakukan dari detail/profil pegawai. Lihat [K-MTG-08](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md#k-mtg-08--dokumen-wajib-berkas-sk-dan-arsip-dokumen-terpusat).
+> **Keputusan dokumen/SK (21 Agustus 2026):** Dokumen wajib/SK mengikuti matriks yang dapat dikonfigurasi per jenis pegawai, bukan empat SK hardcode. PNS dan CPNS sama-sama wajib memiliki SK Pengangkatan, SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru. Indikasi PPPK berupa SK Pengangkatan dan SK KGB terbaru masih menunggu konfirmasi sehingga tidak menjadi aturan aktif. Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only, sedangkan berkas SK dapat diganti dengan audit. Arsip dokumen terpusat read-only; seluruh kontrol dokumen dilakukan dari detail/profil pegawai. Lihat [K-MTG-08](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md#k-mtg-08--dokumen-wajib-berkas-sk-dan-arsip-dokumen-terpusat).
+>
+> **Keputusan status pegawai (21 Agustus 2026):** Employee tidak memakai `deleted_at` atau Laravel `SoftDeletes`. Penonaktifan mengubah status ke referensi `Nonaktif`; record tetap berada pada tabel `employees`. Status aktif/nonaktif berasal dari klasifikasi `ref_status_pegawai`, dengan tanggal efektif, histori status, keterangan, dan audit trail untuk setiap perubahan resmi.
 
 ---
 
@@ -506,7 +508,7 @@ Setiap story mengikuti format:
 - [x] AC-8: Tampilkan notifikasi sukses: *"Data pegawai [Nama] berhasil ditambahkan."*
 - AC-9: Program Studi disimpan melalui `program_studi_id`; sistem menyinkronkan `prodi_pendidikan_terakhir` sebagai snapshot kompatibilitas.
 
-**Keputusan status awal pegawai:** Pegawai baru menggunakan status default `Aktif` dari `ref_status_pegawai`. Sistem tidak membuat tanggal efektif status maupun riwayat status awal tanpa sumber administrasi resmi. `employees.status_tanggal` tetap `null` dan `employee_status_histories` belum dibuat sampai perubahan status resmi pertama dilakukan.
+**Keputusan status awal pegawai:** Pegawai baru menggunakan status default `Aktif` dari `ref_status_pegawai`. Sistem tidak membuat tanggal efektif status maupun riwayat status awal tanpa sumber administrasi resmi. `employees.status_tanggal` tetap `null` dan `employee_status_histories` belum dibuat sampai perubahan status resmi pertama dilakukan. Employee tidak memakai `deleted_at` atau Laravel `SoftDeletes`.
 
 > **Catatan status implementasi (13 Agustus 2026):** ✅ Selesai melalui PR #194 (`73a358a`) pada branch `development`. Regression test memastikan create pegawai tidak mengarang tanggal efektif atau riwayat status awal.
 
@@ -562,7 +564,7 @@ Setiap story mengikuti format:
 - [x] AC-5: Pagination: 10 / 25 / 50 baris per halaman (user bisa memilih).
 - [x] AC-6: Klik nama pegawai membuka halaman detail pegawai.
 - [x] AC-7: Tombol "Tambah Pegawai" mengarah ke form tambah (US-2.1).
-- [x] AC-8: Daftar default hanya menampilkan pegawai aktif (yang belum di-soft-delete).
+- [ ] AC-8: Daftar default hanya menampilkan pegawai yang statusnya diklasifikasikan Aktif pada `ref_status_pegawai`; pegawai dengan status Nonaktif tetap dapat ditemukan melalui filter status pegawai.
 
 ---
 
@@ -703,7 +705,7 @@ Setiap story mengikuti format:
 
 ---
 
-### US-2.9 · Soft Delete Pegawai
+### US-2.9 · Nonaktifkan Pegawai melalui Status Kepegawaian
 
 | Field | Detail |
 |-------|--------|
@@ -719,17 +721,17 @@ Setiap story mengikuti format:
 
 **Acceptance Criteria:**
 
-- [x] AC-1: Tombol "Nonaktifkan" di halaman detail pegawai.
-- [x] AC-2: Konfirmasi dialog: *"Apakah Anda yakin ingin menonaktifkan pegawai [Nama]? Data tidak dihapus dan bisa diaktifkan kembali."*
-- [x] AC-3: Pegawai yang dinonaktifkan tidak muncul di daftar pegawai aktif (default view).
-- [x] AC-4: Filter "Tampilkan Pegawai Non-Aktif" di halaman daftar pegawai.
-- [x] AC-5: Admin bisa melakukan "Aktifkan Kembali" (restore) dari daftar non-aktif.
-- [x] AC-6: Pegawai yang dinonaktifkan tidak lagi diproses oleh EWS.
-- [x] AC-7: Audit log mencatat soft delete dan restore.
+- [ ] AC-1: Tombol "Nonaktifkan" di halaman detail pegawai membuka perubahan status ke referensi `Nonaktif`, bukan penghapusan record.
+- [ ] AC-2: Konfirmasi perubahan status meminta tanggal efektif dan keterangan/alasan; sistem membuat satu `employee_status_histories` untuk perubahan resmi tersebut.
+- [ ] AC-3: Record pegawai tetap tersimpan di tabel `employees` tanpa `deleted_at` maupun Laravel `SoftDeletes`.
+- [ ] AC-4: Daftar default hanya menampilkan pegawai berstatus Aktif berdasarkan klasifikasi `ref_status_pegawai`; filter status pegawai dapat menemukan pegawai Nonaktif.
+- [ ] AC-5: Perubahan kembali ke status Aktif, bila memiliki dasar administrasi resmi, dilakukan sebagai perubahan status baru dengan tanggal efektif, histori, keterangan, dan audit trail; tidak melalui lifecycle data terhapus.
+- [ ] AC-6: Pegawai dengan status yang diklasifikasikan Nonaktif tidak diproses oleh EWS.
+- [ ] AC-7: Audit log mencatat status sebelum/sesudah, tanggal efektif, serta keterangan perubahan status.
 
 ---
 
-### US-2.10 · Soft Delete Pegawai oleh Super Admin
+### US-2.10 · Kelola Status Pegawai oleh Super Admin
 
 | Field | Detail |
 |-------|--------|
@@ -740,16 +742,16 @@ Setiap story mengikuti format:
 | **Dependensi** | US-2.9 |
 
 > **Sebagai** Super Admin,
-> **Saya ingin** menonaktifkan data pegawai tanpa menghapus permanen,
-> **Sehingga** data yang sewaktu-waktu dibutuhkan masih bisa ditemukan dan dipulihkan.
+> **Saya ingin** mengubah status pegawai berdasarkan referensi dan dasar administrasi resmi,
+> **Sehingga** data pegawai tetap tersimpan dan riwayat statusnya dapat ditelusuri.
 
 **Acceptance Criteria:**
 
-- [x] AC-1: Tidak ada tombol "Hapus Permanen" di aplikasi untuk role apa pun, termasuk Super Admin.
-- [x] AC-2: Super Admin hanya bisa melakukan soft delete/nonaktifkan pegawai dengan konfirmasi.
-- [x] AC-3: Data yang dinonaktifkan tetap tersimpan di database dan bisa ditemukan melalui filter pegawai non-aktif.
-- [x] AC-4: Super Admin bisa melakukan restore jika data perlu dipakai kembali.
-- [x] AC-5: Audit log mencatat soft delete dan restore.
+- [ ] AC-1: Tidak ada tombol "Hapus Permanen" di aplikasi untuk role apa pun, termasuk Super Admin.
+- [ ] AC-2: Super Admin mengubah status pegawai ke referensi `Nonaktif` atau status lain yang tersedia pada `ref_status_pegawai`, bukan menghapus record pegawai.
+- [ ] AC-3: Data pegawai berstatus Nonaktif tetap tersimpan di tabel `employees` dan dapat ditemukan melalui filter status pegawai.
+- [ ] AC-4: Setiap perubahan status menyimpan tanggal efektif, histori status, keterangan, dan audit trail.
+- [ ] AC-5: Pengaktifan kembali, bila sah secara administrasi, adalah perubahan status baru ke status yang diklasifikasikan Aktif; bukan pemulihan data terhapus.
 
 ---
 
@@ -1455,8 +1457,8 @@ Setiap story mengikuti format:
 - [x] AC-1: Setiap operasi berikut otomatis menghasilkan record di `audit_logs`:
   - CREATE (tambah pegawai, tambah riwayat, tambah keluarga, dll)
   - UPDATE (edit data pegawai, perbaikan data pemakaian cuti, dll)
-  - SOFT_DELETE (nonaktifkan pegawai)
-  - RESTORE (aktifkan kembali)
+  - UPDATE (termasuk perubahan status pegawai dengan nilai sebelum/sesudah, tanggal efektif, dan keterangan)
+  - SOFT_DELETE / RESTORE hanya untuk domain lain yang memang menggunakan lifecycle tersebut, bukan Employee
   - VERIFY / DECIDE (verifikasi dan keputusan cuti)
   - CHANGE_REQUESTED / DEFER / NOT_APPROVED (Perubahan, Ditangguhkan, Tidak Disetujui)
   - LOGIN (login berhasil)
@@ -1793,8 +1795,8 @@ E2 (Data Pegawai) ←── E1
   ├── US-2.6 Riwayat (Pangkat/Jabatan/KGB) ←── US-2.1
   ├── US-2.7 Hukuman Disiplin ←── US-2.1
   ├── US-2.8 Data Keluarga ←── US-2.1
-  ├── US-2.9 Soft Delete ←── US-2.1
-  └── US-2.10 Soft Delete Super Admin ←── US-2.9
+  ├── US-2.9 Nonaktifkan Pegawai melalui Status ←── US-2.1
+  └── US-2.10 Kelola Status Pegawai Super Admin ←── US-2.9
 
 E3 (Import Excel/CSV) ←── E2
   ├── US-3.1 Template Import
@@ -1889,8 +1891,8 @@ Sprint 1 tetap menjadi fondasi teknis sebelum vertical slice dimulai.
 | Import Excel/CSV | US-3.4 Eksekusi Import | 7 |
 | Profil & keluarga | US-2.5 Profil sendiri | 3 |
 | Profil & keluarga | US-2.8 Data keluarga | 3 |
-| Penghapusan aman | US-2.9 Soft delete | 3 |
-| Penghapusan aman | US-2.10 Soft delete Super Admin | 2 |
+| Status pegawai | US-2.9 Nonaktifkan melalui status | 3 |
+| Status pegawai | US-2.10 Kelola status Super Admin | 2 |
 | **Total** | | **30** |
 
 ### Sprint 4 — Cuti Core (Minggu 7–9)
@@ -1991,6 +1993,8 @@ Sprint 1 tetap menjadi fondasi teknis sebelum vertical slice dimulai.
 - [ ] AC-MTG-3: Admin Kepegawaian dapat mengonfigurasi matriks jenis SK wajib per jenis pegawai; daftar tidak boleh hardcode empat SK yang sama untuk semua pegawai. *(Sumber: K-MTG-08.1–08.2.)*
 - [ ] AC-MTG-4: Menu dokumen terpusat menyediakan pencarian lintas pegawai, detail, dan unduh yang berwenang bagi Super Admin/Admin Kepegawaian, tetapi seluruh permukaannya read-only. Unggah, ganti berkas, hapus, dan ubah metadata hanya tersedia dari detail/profil pegawai. *(Sumber: K-MTG-08.4.)*
 - [ ] AC-MTG-5: Record substantif riwayat kepangkatan, jabatan, dan KGB yang telah tersimpan tetap tidak dapat diedit atau dihapus. Berkas SK pada record boleh diganti dari detail/profil pegawai tanpa mengubah data substantif, `is_latest`, atau dasar kalkulasi; validasi upload dan audit perubahan berkas wajib berjalan. *(Sumber: K-MTG-08.3.)*
+- [ ] AC-MTG-6: Matriks PNS dan CPNS sama-sama mewajibkan SK Pengangkatan, SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru. Perubahan jenis pegawai dari CPNS ke PNS mengevaluasi ulang matriks, tetapi tidak mengubah kewajiban dokumen karena kedua matriks sama. *(Sumber: K-MTG-08.5–08.6.)*
+- [ ] AC-MTG-7: Sistem tidak mengaktifkan, menilai kelengkapan, atau menolak alur berdasarkan daftar dokumen PPPK sampai pihak terkait memberikan konfirmasi final. Indikasi awal SK Pengangkatan dan SK KGB terbaru dicatat sebagai Open Question, bukan konfigurasi aktif. *(Sumber: K-MTG-08.7.)*
 
 ### US-4.3 dan US-4.9 · Penghitungan saldo dari pemakaian
 
@@ -2070,7 +2074,7 @@ Rollover dari N-1 tetap dibatasi maksimal 6 hari dan batas tersebut **bukan pers
 |---|---|---|---|
 | US-1.4 | Email sebagai atribut utama auto-mapping, inisialisasi role internal Pegawai tanpa menimpa role existing, serta mapping nomor telepon dari custom attribute terkonfirmasi | **Belum Selesai** | Daftar email + expected role akun uji dari LLDIKTI, feature test mapping email/role/nomor telepon, non-overwrite role existing, penolakan claim tidak dikenal, RBAC regression, dan audit |
 | US-1.6 | Switch role berbasis permission dengan role/permission sementara dan revert pada development maupun production | **Belum Selesai** | Feature test permission, persistence, revert, ownership scope, privilege-escalation denial, evaluasi permission efektif seluruh endpoint di backend, audit, serta QA browser |
-| US-2.4 / US-2.6 | Unggah dokumen dari profil, matriks SK wajib per jenis pegawai, arsip pusat read-only, dan penggantian berkas SK tanpa mutasi record riwayat | **Belum Selesai** | Feature test konfigurasi matriks per jenis pegawai, upload/penggantian berkas/authorization/audit, penolakan mutasi dari arsip pusat, serta smoke test browser profil pegawai |
+| US-2.4 / US-2.6 | Unggah dokumen dari profil, matriks SK wajib PNS/CPNS, penangguhan aturan PPPK sampai konfirmasi, arsip pusat read-only, dan penggantian berkas SK tanpa mutasi record riwayat | **Belum Selesai** | Feature test matriks PNS/CPNS, reevaluasi CPNS→PNS tanpa perubahan kewajiban, penolakan penggunaan matriks PPPK sebelum konfirmasi, upload/penggantian berkas/authorization/audit, penolakan mutasi dari arsip pusat, serta smoke test browser profil pegawai |
 | US-4.3 | Saldo dihitung dari jumlah cuti yang dipakai, bukan input saldo sisa | **Belum Selesai** | Unit/feature test matriks N-2/N-1, perhitungan 12/18/24, dan audit rekonsiliasi |
 | US-4.5 | Chain memuat nol atau lebih verifikator; bila ada, seluruhnya ditempatkan sebelum Kepala Bagian | **Belum Selesai** | Feature test chain tanpa verifikator, satu/banyak verifikator, Ketua Tim sebagai verifikator, urutan seluruh verifikator sebelum Kepala Bagian, dan regresi snapshot |
 | US-4.9 | Koreksi memakai data pemakaian/entri manual dan perhitungan ulang saldo | **Belum Selesai** | Feature test transaksi atomik, nilai sebelum/sesudah, audit, dan regresi rollover |
@@ -2098,7 +2102,7 @@ AC-MTG-4 sampai AC-MTG-7 dan AC-MTG-10 di bawah adalah kontrak rancangan **dokum
 
 ### Keputusan Final Open Questions Hasil Evaluasi Meeting
 
-Seluruh Open Question telah diputuskan pada 18 Agustus 2026 melalui K-MTG-07 dan tidak lagi menjadi blocker keputusan produk. Dependency eksternal provider WhatsApp tetap dilacak pada issue implementasinya.
+Seluruh Open Question OQ-MTG-01 sampai OQ-MTG-07 dari evaluasi 15/18 Agustus 2026 telah diputuskan melalui K-MTG-07 dan tidak lagi menjadi blocker keputusan produk. Open Question baru mengenai matriks dokumen PPPK pada K-MTG-08.7 tetap menunggu konfirmasi dan bukan aturan aktif. Dependency eksternal provider WhatsApp tetap dilacak pada issue implementasinya.
 
 | ID | Keputusan final | Status |
 |---|---|---|

@@ -65,7 +65,7 @@ Catatan dashboard role:
 
 - **Super Admin** dan **Admin Kepegawaian** memakai satu halaman yang sama: **Dashboard Admin**.
 - Perbedaannya bukan di dashboard terpisah, tetapi di permission/menu/aksi.
-- Super Admin bisa melihat semua fitur Admin Kepegawaian plus konfigurasi sistem, user/role management, reference tables, audit penuh, serta soft delete/restore sesuai permission.
+- Super Admin bisa melihat semua fitur Admin Kepegawaian plus konfigurasi sistem, user/role management, reference tables, audit penuh, serta perubahan status pegawai sesuai permission.
 - Admin Kepegawaian memakai Dashboard Admin untuk operasional kepegawaian: data pegawai, import, cuti, EWS, dashboard, dan laporan, tetapi tidak mendapat aksi khusus Super Admin.
 
 ---
@@ -215,24 +215,24 @@ DoD Sprint 1:
 | Review | Adriel | Review PR profil dan keluarga | Merge atau return bug | Not Started |
 | QA | Grantly | Test role pegawai/admin, CRUD keluarga, audit log | QA pass/retest note | Not Started |
 
-### Slice 3.3 - Soft Delete dan Restore Pegawai
+### Slice 3.3 - Perubahan Status Pegawai
 
 | Field | Detail |
 |-------|--------|
 | User stories | US-2.9, US-2.10 |
 | Durasi target | Hari 9-10 |
-| Goal | Data pegawai bisa dinonaktifkan dan dipulihkan tanpa penghapusan permanen |
+| Goal | Data pegawai dapat dinonaktifkan atau diaktifkan kembali melalui `ref_status_pegawai` tanpa menghapus record Employee |
 
 | Stage | Owner | Yang Dihandle | Output | Status |
 |-------|-------|---------------|--------|--------|
-| Kickoff | Dion | Kunci aturan soft delete, restore, role access, audit log | Kontrak delete | Not Started |
-| Frontend dummy | Adithian | Dialog soft delete/restore dan state nonaktif | UI delete siap | Not Started |
-| Frontend support | Adriel | Review dialog konfirmasi soft delete dan flow restore | UI delete aman | Not Started |
-| Backend | Jordan | Soft delete, restore, policy akses, filter data non-aktif | Backend delete siap | Not Started |
+| Kickoff | Dion | Kunci aturan referensi status, tanggal efektif, keterangan, role access, histori, dan audit log | Kontrak perubahan status | Not Started |
+| Frontend dummy | Adithian | Dialog perubahan status dengan tanggal efektif, keterangan, dan state aktif/nonaktif | UI status siap | Not Started |
+| Frontend support | Adriel | Review dialog konfirmasi dan flow perubahan status | UI status aman | Not Started |
+| Backend | Jordan | Perubahan `status_pegawai_id`, policy akses, histori status, audit, dan filter klasifikasi aktif/nonaktif | Backend status siap | Not Started |
 | Backend support | Grantly | Negative case, data uji, audit evidence | QA data siap | Not Started |
-| Integrasi | Adithian + Jordan | Hubungkan UI delete ke backend | Flow delete real data | Not Started |
-| Review | Adriel | Review PR soft delete/restore sebelum merge | Merge atau return bug | Not Started |
-| QA | Grantly | Test permission, soft delete, restore, audit log | Sprint 3 QA pass | Not Started |
+| Integrasi | Adithian + Jordan | Hubungkan UI perubahan status ke backend | Flow status real data | Not Started |
+| Review | Adriel | Review PR perubahan status sebelum merge | Merge atau return bug | Not Started |
+| QA | Grantly | Test permission, tanggal efektif, histori, klasifikasi aktif/nonaktif, dan audit log | Sprint 3 QA pass | Not Started |
 
 ---
 
