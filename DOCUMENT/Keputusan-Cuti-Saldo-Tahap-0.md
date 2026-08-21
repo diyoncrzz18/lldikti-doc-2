@@ -131,7 +131,7 @@ Penggunaan yang telah diklaim dapat direkonsiliasi dan divalidasi secara berjenj
 
 ## K-CUT-05 — Input cuti manual yang telah disetujui di luar SIMPEG
 
-> **Status:** Disetujui melalui [Keputusan Evaluasi Meeting LLDIKTI](Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md), dengan revisi keputusan langsung pengguna pada 20 Agustus 2026 (K-MTG-08). Ketentuan dokumen wajib dari 15 Agustus dipertahankan sebagai jejak historis **Superseded**.
+> **Status:** Disetujui melalui [Keputusan Evaluasi Meeting LLDIKTI](Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md), dengan revisi keputusan langsung pengguna pada 20 Agustus 2026 (K-MTG-07A). Ketentuan dokumen wajib dari 15 Agustus dipertahankan sebagai jejak historis **Superseded**.
 
 ### Keputusan
 

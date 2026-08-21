@@ -3,8 +3,8 @@
 
 | Field | Detail |
 |-------|--------|
-| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.6 |
-| **Tanggal** | 17 Agustus 2026 |
+| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.7 |
+| **Tanggal** | 21 Agustus 2026 |
 | **Pembaruan status terakhir** | 14 Agustus 2026 |
 | **Basis verifikasi status** | Branch `development` @ `ff0e9e1` (setelah PR #182 masuk) |
 | **Total User Stories** | 53 |
@@ -15,6 +15,8 @@
 > **Keputusan import Fase 1 (kanonis, disetujui pengguna 22 Juli 2026):** import massal hanya mengaktifkan template Data Utama. Import membuat record pegawai beserta field snapshot awal, tidak membuat riwayat kepangkatan/jabatan/KGB, dan tidak memanggil kalkulasi TMT. Riwayat resmi diinput per pegawai melalui CRUD append-only. Tanggal pensiun hasil import dipertahankan apa adanya. Kalkulasi TMT dipicu saat riwayat/sumber resmi disimpan, bukan saat import selesai. Template lanjutan multi-jenis tidak termasuk ruang lingkup saat ini.
 >
 > **Keputusan Program Studi (17 Agustus 2026):** Program Studi menjadi reference table kelolaan US-8.5 kesembilan yang dikelola Super Admin melalui Data Master. Form pegawai dan riwayat pendidikan memakai relasi UUID nullable, sementara snapshot lama tetap dipertahankan sebagai fallback dan kontrak import. Import tidak membuat atau menghubungkan master Program Studi. Lihat [Keputusan Program Studi sebagai Data Referensi](../Keputusan-Program-Studi-Data-Master.md).
+>
+> **Keputusan dokumen/SK (21 Agustus 2026):** Dokumen wajib/SK mengikuti matriks yang dapat dikonfigurasi per jenis pegawai, bukan empat SK hardcode. Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only, sedangkan berkas SK dapat diganti dengan audit. Arsip dokumen terpusat read-only; seluruh kontrol dokumen dilakukan dari detail/profil pegawai. Lihat [K-MTG-08](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md#k-mtg-08--dokumen-wajib-berkas-sk-dan-arsip-dokumen-terpusat).
 
 ---
 
@@ -160,7 +162,7 @@ Basis pemeriksaan adalah branch `development` @ `037e137` setelah PR #174 masuk 
 
 | User Story | Kriteria | Bukti implementasi |
 |---|---|---|
-| US-7.1 | AC-1 | Seluruh operasi yang disyaratkan menghasilkan record audit. Kosakata keputusan cuti dipisah sehingga verifikasi tahap menengah tercatat `VERIFY` dan keputusan akhir tercatat `DECIDE`, sedangkan Perubahan, Ditangguhkan, dan Tidak Disetujui tercatat `CHANGE_REQUESTED`, `DEFER`, serta `NOT_APPROVED`. Perubahan hak akses peran, arsip dokumen pegawai, dan perubahan kata sandi yang sebelumnya tidak berjejak kini tercatat, dan pencatatannya menyatu dalam transaksi mutasinya sehingga tidak ada perubahan yang berlaku tanpa jejak. Kejadian `CREATE`, `UPDATE`, `SOFT_DELETE`, `RESTORE`, `LOGIN`, `LOGOUT`, dan `IMPORT` diverifikasi masih tercakup. Diuji pada `tests/Feature/LeaveDecisionAuditTest.php`, `tests/Feature/RolePermissionMatrixAuditTest.php`, `tests/Feature/DocumentAuditTest.php`, `tests/Feature/SystemSettingsAuditTest.php`, `tests/Feature/AuditEventLabelTest.php`, dan `tests/Feature/ProfileTest.php` |
+| US-7.1 | AC-1 | Seluruh operasi yang disyaratkan menghasilkan record audit. Kosakata keputusan cuti dipisah sehingga verifikasi tahap menengah tercatat `VERIFY` dan keputusan akhir tercatat `DECIDE`, sedangkan Perubahan, Ditangguhkan, dan Tidak Disetujui tercatat `CHANGE_REQUESTED`, `DEFER`, serta `NOT_APPROVED`. Perubahan hak akses peran, dokumen pegawai yang dimutasi dari profil/detail, dan perubahan kata sandi yang sebelumnya tidak berjejak kini tercatat, dan pencatatannya menyatu dalam transaksi mutasinya sehingga tidak ada perubahan yang berlaku tanpa jejak. Kejadian `CREATE`, `UPDATE`, `SOFT_DELETE`, `RESTORE`, `LOGIN`, `LOGOUT`, dan `IMPORT` diverifikasi masih tercakup. Diuji pada `tests/Feature/LeaveDecisionAuditTest.php`, `tests/Feature/RolePermissionMatrixAuditTest.php`, `tests/Feature/DocumentAuditTest.php`, `tests/Feature/SystemSettingsAuditTest.php`, `tests/Feature/AuditEventLabelTest.php`, dan `tests/Feature/ProfileTest.php` |
 | US-7.1 | AC-3 | Audit log tidak dapat diubah maupun dihapus melalui aplikasi. Penegakan dipasang dua lapis, yaitu penjaga pada model yang menolak pembaruan dan penghapusan, serta trigger PostgreSQL yang menutup jalur di luar model seperti query builder, tinker, seeder, dan sesi basis data langsung. Pengosongan tabel lewat `TRUNCATE` juga ditolak. Diuji pada `tests/Feature/AuditImmutabilityTest.php` |
 | US-7.2 | AC-3 | Pencarian pada halaman audit menerima nama operator maupun pengenal record, termasuk pengenal berbentuk kunci konfigurasi, dan dijalankan di basis data. Diuji pada `tests/Feature/AuditPageServerSideFilterTest.php` |
 | US-7.2 | AC-4 | Halaman audit memakai paginasi sisi peladen dengan bawaan dua puluh lima baris per halaman beserta pilihan jumlah baris, dan penyaringan serta pengurutan ikut berpindah ke basis data. Diuji pada `tests/Feature/AuditPageServerSideFilterTest.php` dan `tests/Feature/AuditPageIntegrationTest.php` |
@@ -176,7 +178,7 @@ Catatan tambahan yang timbul dari pekerjaan ini:
 | Perlindungan terhadap pemegang akses basis data langsung | Trigger menutup kecelakaan operasional, namun pemegang role pemilik skema masih dapat melepas trigger atau melepas tabel | Perlu keputusan penggelaran untuk memisahkan peran aplikasi dari peran pemilik skema |
 | Istilah tampilan untuk verifikasi tahap menengah | Empat istilah resmi yang ditetapkan adalah Disetujui, Perubahan, Ditangguhkan, dan Tidak Disetujui, sedangkan verifikasi tahap menengah belum punya istilah. Sementara ini dipakai Diverifikasi | Sudah dikonfirmasi dipakai. Bila kemudian diubah, yang terpengaruh hanya satu pemetaan label beserta ujinya |
 | Halaman pengaturan sistem | Halaman ini sebelumnya menyatakan berhasil menyimpan dan menulis audit, padahal tidak ada penyimpanan sama sekali. Seluruh masukan tidak punya nama field dan tidak ada tabel penyimpanannya. Pengakuan berhasil dan audit tanpa dasar tersebut sudah dihentikan | Perlu menjadi story tersendiri. Isinya menyentuh asumsi infrastruktur seperti peladen surel dan masa sesi, sehingga tidak dapat ditetapkan dari sisi teknis |
-| Audit pada berkas lain di arsip dokumen | Jalur unggah berkas lainnya menulis audit di dalam controller memakai salinan seluruh kolom model, bukan lewat Action seperti jalur dokumen lainnya | Perlu diseragamkan pada pekerjaan yang memang menyentuh berkas tersebut |
+| Audit pada berkas lain di dokumen pegawai | Jalur unggah berkas dari profil/detail lainnya menulis audit di dalam controller memakai salinan seluruh kolom model, bukan lewat Action seperti jalur dokumen lainnya | Perlu diseragamkan pada pekerjaan yang memang menyentuh berkas tersebut |
 
 ### Penyelarasan rumusan PRD
 
@@ -1982,11 +1984,13 @@ Sprint 1 tetap menjadi fondasi teknis sebelum vertical slice dimulai.
 - [ ] AC-7: Switch role tersedia untuk kebutuhan yang diotorisasi pada environment development maupun production dan tidak bergantung pada bypass khusus environment. *(Sumber keputusan: K-MTG-03.1; guardrail engineering turunan: implementasi tidak bergantung pada bypass khusus environment.)*
 - [ ] AC-8: Seluruh endpoint mengevaluasi permission role tujuan yang terbaru di backend selama role sementara aktif; perubahan konfigurasi permission berlaku pada request berikutnya, sedangkan identitas asli dan data scope kepemilikan tetap berasal dari aktor asli. *(Sumber: K-MTG-03.2, K-MTG-03.4, dan K-MTG-07.1.)*
 
-### US-2.4 · Tambahan dokumen pada profil pegawai
+### US-2.4 dan US-2.6 · Dokumen pada profil dan riwayat pegawai
 
 - [ ] AC-MTG-1: Admin Kepegawaian dapat mengunggah dokumen tambahan langsung dari halaman profil pegawai melalui modal pemilihan jenis dokumen. *(Sumber keputusan: K-MTG-04.2; guardrail UI turunan: pemilihan jenis dokumen disajikan melalui modal.)*
 - [ ] AC-MTG-2: Tab Dokumen menampilkan tabel dokumen wajib/SK pada bagian atas dan tabel dokumen tambahan (misalnya KTP, KK, ijazah) pada bagian bawah. *(Sumber: K-MTG-04.2.)*
-- [ ] AC-MTG-3: Menu dokumen terpusat tetap menyediakan pencarian lintas pegawai untuk Super Admin/Admin Kepegawaian. *(Sumber: K-MTG-04.3.)*
+- [ ] AC-MTG-3: Admin Kepegawaian dapat mengonfigurasi matriks jenis SK wajib per jenis pegawai; daftar tidak boleh hardcode empat SK yang sama untuk semua pegawai. *(Sumber: K-MTG-08.1–08.2.)*
+- [ ] AC-MTG-4: Menu dokumen terpusat menyediakan pencarian lintas pegawai, detail, dan unduh yang berwenang bagi Super Admin/Admin Kepegawaian, tetapi seluruh permukaannya read-only. Unggah, ganti berkas, hapus, dan ubah metadata hanya tersedia dari detail/profil pegawai. *(Sumber: K-MTG-08.4.)*
+- [ ] AC-MTG-5: Record substantif riwayat kepangkatan, jabatan, dan KGB yang telah tersimpan tetap tidak dapat diedit atau dihapus. Berkas SK pada record boleh diganti dari detail/profil pegawai tanpa mengubah data substantif, `is_latest`, atau dasar kalkulasi; validasi upload dan audit perubahan berkas wajib berjalan. *(Sumber: K-MTG-08.3.)*
 
 ### US-4.3 dan US-4.9 · Penghitungan saldo dari pemakaian
 
@@ -2023,14 +2027,14 @@ Rollover dari N-1 tetap dibatasi maksimal 6 hari dan batas tersebut **bukan pers
 
 > **Riwayat superseded:** AC-2 versi 15/18 Agustus yang mewajibkan dokumen pendukung tidak lagi normatif. Revisi 20 Agustus menggantinya dengan dokumen opsional dan snapshot persetujuan historis wajib.
 
-- [ ] AC-1: Mutation hanya dapat diakses oleh exact role Admin Kepegawaian yang memiliki permission `cuti.manual.manage`; route, FormRequest, Action, dan service menolak role lain atau permission yang tidak sesuai sebelum side effect. *(Sumber: K-MTG-08 dan K-CUT-05.)*
-- [ ] AC-2: Form mencatat pegawai, jenis cuti, periode, alasan/keterangan, nomor dokumen opsional, dan dokumen pendukung opsional. Bila file ada, validasi ketat dan storage privat tetap wajib; jumlah hari kerja dihitung sistem dari periode dan kalender kerja, bukan diketik bebas. *(Sumber: K-MTG-08 dan K-CUT-05.)*
-- [ ] AC-3: Setiap entri baru menyimpan snapshot persetujuan 2–10 tahap: 0–8 `verifier`, tepat satu `kepala_bagian`, lalu tepat satu `pybmc` final. Hasil `verified`, `approved`, dan `final_approved` selalu diturunkan server; input client untuk urutan atau hasil tahap ditolak. *(Sumber: K-MTG-08 dan K-CUT-05.)*
-- [ ] AC-4: Approver dapat berupa pegawai internal atau pejabat external. UUID internal tidak ditampilkan sebagai input UX; histori menyimpan snapshot identitas internal, sedangkan external memiliki nama, jabatan, dan instansi tanpa akun atau record pegawai palsu. *(Sumber: K-MTG-08 dan K-CUT-05.)*
-- [ ] AC-5: Form dapat dimulai dengan chain kosong atau menyalin current chain pegawai. Salinan dapat diedit per bagian tanpa mengubah sumber, dan submit ditolak sampai struktur akhirnya valid. *(Sumber: K-MTG-08 dan K-CUT-05.)*
-- [ ] AC-6: Entri langsung dicatat sebagai fakta cuti yang sudah disetujui di luar SIMPEG untuk historis, sebelum go-live, atau downtime; sistem tidak membuat usulan, approval aktif, reservasi, notifikasi approval, atau bukti approval ulang. Pemakaian tahunan otomatis memperbarui saldo dan rollover. *(Sumber: K-MTG-08 dan K-CUT-05.)*
-- [ ] AC-7: Koreksi menghasilkan fakta dan snapshot pengganti dengan perhitungan ulang atomik serta audit aktor, alasan, keberadaan dokumen, nilai sebelum/sesudah, dan snapshot tanpa path privat. Pembatalan atau perubahan current configuration tidak mengubah snapshot lama dan record tidak di-hard-delete. *(Sumber: K-MTG-08 dan K-CUT-05.)*
-- [ ] AC-8: Duplikasi dan periode yang overlap dengan cuti aktif pegawai yang sama ditolak. Entri cuti tahunan memengaruhi saldo; jenis cuti lain tidak memotong saldo tahunan. *(Sumber: K-MTG-01.7 dan K-MTG-08.)*
+- [ ] AC-1: Mutation hanya dapat diakses oleh exact role Admin Kepegawaian yang memiliki permission `cuti.manual.manage`; route, FormRequest, Action, dan service menolak role lain atau permission yang tidak sesuai sebelum side effect. *(Sumber: K-MTG-07A dan K-CUT-05.)*
+- [ ] AC-2: Form mencatat pegawai, jenis cuti, periode, alasan/keterangan, nomor dokumen opsional, dan dokumen pendukung opsional. Bila file ada, validasi ketat dan storage privat tetap wajib; jumlah hari kerja dihitung sistem dari periode dan kalender kerja, bukan diketik bebas. *(Sumber: K-MTG-07A dan K-CUT-05.)*
+- [ ] AC-3: Setiap entri baru menyimpan snapshot persetujuan 2–10 tahap: 0–8 `verifier`, tepat satu `kepala_bagian`, lalu tepat satu `pybmc` final. Hasil `verified`, `approved`, dan `final_approved` selalu diturunkan server; input client untuk urutan atau hasil tahap ditolak. *(Sumber: K-MTG-07A dan K-CUT-05.)*
+- [ ] AC-4: Approver dapat berupa pegawai internal atau pejabat external. UUID internal tidak ditampilkan sebagai input UX; histori menyimpan snapshot identitas internal, sedangkan external memiliki nama, jabatan, dan instansi tanpa akun atau record pegawai palsu. *(Sumber: K-MTG-07A dan K-CUT-05.)*
+- [ ] AC-5: Form dapat dimulai dengan chain kosong atau menyalin current chain pegawai. Salinan dapat diedit per bagian tanpa mengubah sumber, dan submit ditolak sampai struktur akhirnya valid. *(Sumber: K-MTG-07A dan K-CUT-05.)*
+- [ ] AC-6: Entri langsung dicatat sebagai fakta cuti yang sudah disetujui di luar SIMPEG untuk historis, sebelum go-live, atau downtime; sistem tidak membuat usulan, approval aktif, reservasi, notifikasi approval, atau bukti approval ulang. Pemakaian tahunan otomatis memperbarui saldo dan rollover. *(Sumber: K-MTG-07A dan K-CUT-05.)*
+- [ ] AC-7: Koreksi menghasilkan fakta dan snapshot pengganti dengan perhitungan ulang atomik serta audit aktor, alasan, keberadaan dokumen, nilai sebelum/sesudah, dan snapshot tanpa path privat. Pembatalan atau perubahan current configuration tidak mengubah snapshot lama dan record tidak di-hard-delete. *(Sumber: K-MTG-07A dan K-CUT-05.)*
+- [ ] AC-8: Duplikasi dan periode yang overlap dengan cuti aktif pegawai yang sama ditolak. Entri cuti tahunan memengaruhi saldo; jenis cuti lain tidak memotong saldo tahunan. *(Sumber: K-MTG-01.7 dan K-MTG-07A.)*
 - [ ] AC-9: Preview, lookup, dan histori hanya memuat data minimum, query/hasil bounded, pagination server-side, dan eager loading bounded. Bukti selesai mencakup test PostgreSQL serta smoke Chrome untuk form kosong, copy-edit, dokumen opsional, aksesibilitas, desktop/mobile, dan tanpa console error atau polling payload besar. *(Sumber: Addendum Snapshot 20 Agustus 2026.)*
 
 ### US-6.5 · Persiapan Template WhatsApp Business
@@ -2066,7 +2070,7 @@ Rollover dari N-1 tetap dibatasi maksimal 6 hari dan batas tersebut **bukan pers
 |---|---|---|---|
 | US-1.4 | Email sebagai atribut utama auto-mapping, inisialisasi role internal Pegawai tanpa menimpa role existing, serta mapping nomor telepon dari custom attribute terkonfirmasi | **Belum Selesai** | Daftar email + expected role akun uji dari LLDIKTI, feature test mapping email/role/nomor telepon, non-overwrite role existing, penolakan claim tidak dikenal, RBAC regression, dan audit |
 | US-1.6 | Switch role berbasis permission dengan role/permission sementara dan revert pada development maupun production | **Belum Selesai** | Feature test permission, persistence, revert, ownership scope, privilege-escalation denial, evaluasi permission efektif seluruh endpoint di backend, audit, serta QA browser |
-| US-2.4 | Unggah dokumen tambahan dari profil dan pemisahan visual dokumen wajib/SK | **Belum Selesai** | Feature test upload/authorization/audit dan smoke test browser profil pegawai |
+| US-2.4 / US-2.6 | Unggah dokumen dari profil, matriks SK wajib per jenis pegawai, arsip pusat read-only, dan penggantian berkas SK tanpa mutasi record riwayat | **Belum Selesai** | Feature test konfigurasi matriks per jenis pegawai, upload/penggantian berkas/authorization/audit, penolakan mutasi dari arsip pusat, serta smoke test browser profil pegawai |
 | US-4.3 | Saldo dihitung dari jumlah cuti yang dipakai, bukan input saldo sisa | **Belum Selesai** | Unit/feature test matriks N-2/N-1, perhitungan 12/18/24, dan audit rekonsiliasi |
 | US-4.5 | Chain memuat nol atau lebih verifikator; bila ada, seluruhnya ditempatkan sebelum Kepala Bagian | **Belum Selesai** | Feature test chain tanpa verifikator, satu/banyak verifikator, Ketua Tim sebagai verifikator, urutan seluruh verifikator sebelum Kepala Bagian, dan regresi snapshot |
 | US-4.9 | Koreksi memakai data pemakaian/entri manual dan perhitungan ulang saldo | **Belum Selesai** | Feature test transaksi atomik, nilai sebelum/sesudah, audit, dan regresi rollover |

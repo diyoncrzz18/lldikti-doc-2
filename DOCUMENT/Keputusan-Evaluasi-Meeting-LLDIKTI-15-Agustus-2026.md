@@ -13,7 +13,7 @@
 1. Untuk pengajuan cuti biasa, urutan chain adalah **satu atau lebih verifikator dinamis → Kepala Bagian → PYBMC**. Ketua Tim Kerja, bila dibutuhkan, ditempatkan sebagai verifikator; bukan setelah Kepala Bagian. Jika tidak ada verifikator, chain dimulai dari Kepala Bagian lalu diteruskan ke PYBMC.
 2. Kuota dasar cuti tahunan adalah **12 hari kerja setiap tahun**. Rollover dari N-1 maksimal **6 hari**. Total tahun berjalan dapat menjadi **24 hari** hanya bila pegawai tidak memakai cuti tahunan pada N-2 dan N-1; bila ada pemakaian satu hari atau lebih pada salah satu dari dua tahun itu, total maksimum tahun berjalan adalah **18 hari**.
 3. Pendaftaran data awal dan rekonsiliasi historis memakai **jumlah cuti yang telah dipakai/diklaim per tahun**, bukan saldo/sisa cuti. Sistem menghitung sisa, rollover, dan total hak secara berjenjang dari penggunaan tersebut. Admin tidak menjadikan saldo sisa sebagai sumber hitung utama.
-4. Admin Kepegawaian memerlukan form **input cuti manual** untuk cuti yang telah diproses di luar SIMPEG, termasuk cuti historis, cuti pada tahun berjalan sebelum go-live, dan cuti ketika sistem tidak tersedia. Hanya Admin Kepegawaian yang dapat menginputnya; catatan langsung diakui sebagai cuti yang telah disetujui di luar SIMPEG tanpa menjalankan usulan atau approval ulang; dan pemakaian tersebut wajib ikut menghitung saldo serta rollover. **Jejak historis superseded:** ketentuan 15 Agustus yang mewajibkan dokumen pendukung digantikan oleh K-MTG-08 pada 20 Agustus 2026.
+4. Admin Kepegawaian memerlukan form **input cuti manual** untuk cuti yang telah diproses di luar SIMPEG, termasuk cuti historis, cuti pada tahun berjalan sebelum go-live, dan cuti ketika sistem tidak tersedia. Hanya Admin Kepegawaian yang dapat menginputnya; catatan langsung diakui sebagai cuti yang telah disetujui di luar SIMPEG tanpa menjalankan usulan atau approval ulang; dan pemakaian tersebut wajib ikut menghitung saldo serta rollover. **Jejak historis superseded:** ketentuan 15 Agustus yang mewajibkan dokumen pendukung digantikan oleh K-MTG-07A pada 20 Agustus 2026.
 5. Koreksi administratif dilakukan melalui koreksi data pemakaian/entri cuti manual dan perhitungan ulang sistem. Audit wajib merekam aktor, alasan, dokumen, nilai sebelum/sesudah, dan waktu perubahan.
 6. **Direct balance override tidak tersedia**, termasuk sebagai jalur break-glass Fase 1. Jika saldo tidak sesuai, Admin Kepegawaian memperbaiki sumber pemakaian atau entri cuti manual, lalu sistem menghitung ulang secara atomik.
 7. Input cuti manual hanya merekam cuti yang telah terjadi/disetujui di luar SIMPEG. Jumlah hari kerja dihitung sistem; duplikasi dan periode yang overlap dengan cuti aktif pegawai yang sama ditolak; koreksi mempertahankan riwayat lama melalui pembatalan/versi pengganti, bukan hard delete.
@@ -65,12 +65,12 @@
 1. **OQ-MTG-01 — Decided:** permission efektif switch role diturunkan secara dinamis dari role tujuan; snapshot `temporary_permission` tidak menjadi sumber otorisasi.
 2. **OQ-MTG-02 — Decided:** direct balance override tidak tersedia. Koreksi selalu memperbaiki sumber pemakaian/entri manual dan menghitung ulang.
 3. **OQ-MTG-03 — Decided:** hanya Super Admin ber-permission khusus yang dapat switch ke Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai.
-4. **OQ-MTG-04 — Superseded pada 20 Agustus 2026:** keputusan 18 Agustus mewajibkan dokumen pendukung. Ketentuan pengganti pada K-MTG-08 menjadikannya opsional, dengan chain snapshot historis wajib.
+4. **OQ-MTG-04 — Superseded pada 20 Agustus 2026:** keputusan 18 Agustus mewajibkan dokumen pendukung. Ketentuan pengganti pada K-MTG-07A menjadikannya opsional, dengan chain snapshot historis wajib.
 5. **OQ-MTG-05 — Decided:** bucket tertua yang masih sah dikonsumsi lebih dahulu; expiry terjadi pada akhir tahun penggunaan; koreksi backdated memicu rekalkulasi kronologis. PNS dan PPPK memakai mesin 12/18/24 yang sama; PPPK memerlukan masa perjanjian di atas 2 tahun untuk maksimum 18 dan di atas 3 tahun untuk maksimum 24.
 6. **OQ-MTG-06 — Decided:** WhatsApp Business wajib siap dalam target akhir Agustus. Detail provider dan artefak layanan diteruskan sebagai dependency implementasi #214/#215, bukan pertanyaan produk terbuka.
 7. **OQ-MTG-07 — Decided:** target penyelesaian final adalah **akhir Agustus 2026**. Target ini tidak dipecah menjadi tanggal teknis tambahan pada acceptance criteria.
 
-## K-MTG-08 — Revisi 20 Agustus 2026: Snapshot Persetujuan Cuti Manual
+## K-MTG-07A — Revisi 20 Agustus 2026: Snapshot Persetujuan Cuti Manual
 
 > **Status:** **Disetujui** melalui keputusan langsung pengguna pada 20 Agustus 2026. Ketentuan ini menggantikan kontrak aktif K-MTG-01.4 dan OQ-MTG-04 yang berbeda; jejak keputusan sebelumnya dipertahankan sebagai **Superseded**.
 
@@ -82,10 +82,23 @@
 6. Cuti manual tetap hanya mencatat fakta yang sudah disetujui di luar SIMPEG. SIMPEG tidak membuat pengajuan, approval aktif, reservasi, notifikasi approval, atau bukti approval ulang.
 7. Koreksi membuat fakta dan snapshot pengganti; pembatalan atau perubahan current configuration tidak mengubah snapshot lama. Mutasi dibatasi pada exact Admin Kepegawaian dengan permission `cuti.manual.manage`, serta tetap diaudit dan menjaga privasi dokumen/identitas.
 
+## K-MTG-08 — Dokumen wajib, berkas SK, dan arsip dokumen terpusat
+
+| Field | Detail |
+|---|---|
+| Tanggal keputusan lanjutan | 21 Agustus 2026 |
+| Sumber persetujuan | Konfirmasi pengguna setelah klarifikasi dengan pihak terkait LLDIKTI pada review PR #218 |
+| Kedudukan | Mengikat; melengkapi dan menggantikan K-MTG-04.2–04.3 pada bagian yang berbeda |
+
+1. Ketentuan dokumen wajib/SK tidak boleh di-hardcode sebagai empat dokumen yang sama untuk seluruh pegawai. Admin Kepegawaian mengelola **matriks dokumen wajib berdasarkan jenis pegawai** sehingga tiap jenis, misalnya PNS, CPNS, atau PPPK sesuai data referensi yang tersedia, dapat memiliki daftar SK wajib yang berbeda.
+2. Matriks aktif menjadi sumber tampilan dan penilaian kelengkapan dokumen wajib pada profil pegawai. Dokumen tambahan tetap dikelola terpisah dari daftar SK wajib.
+3. Sifat append-only pada riwayat kepangkatan, jabatan, dan KGB berlaku pada **record substantifnya**. Data riwayat yang sudah tersimpan tidak dapat diedit atau dihapus. Namun, berkas lampiran SK pada record tersebut **boleh diganti** tanpa mengubah data substantif, `is_latest`, atau dasar kalkulasi riwayat. Penggantian berkas tetap melewati validasi upload dan wajib diaudit.
+4. Arsip dokumen terpusat untuk Super Admin/Admin Kepegawaian bersifat **read-only**: digunakan untuk pencarian lintas pegawai, melihat detail, dan mengunduh berkas yang berwenang diakses. Arsip ini tidak menyediakan unggah, penggantian, penghapusan, atau perubahan metadata dokumen. Semua kontrol dokumen/SK dilakukan dari halaman detail/profil pegawai.
+
 ## Dampak dokumentasi
 
-- [PRD SIMPEG Fase 1](PRD-DLL/PRD-SIMPEG-Fase1-Core.md), [User Stories](PRD-DLL/User-Stories-SIMPEG-Fase1.md), [Issues](PRD-DLL/Issues-SIMPEG-Fase1.md), [Panduan Penulisan Kode](PRD-DLL/Panduan-Penulisan-Kode-SIMPEG.md), dan [Keputusan Cuti Saldo Tahap 0](Keputusan-Cuti-Saldo-Tahap-0.md) merujuk keputusan ini sebagai addendum terbaru.
-- Fitur yang muncul dari keputusan ini ditandai **belum diimplementasikan** sampai ada bukti code review, test, dan QA yang sesuai.
+- [PRD SIMPEG Fase 1](PRD-DLL/PRD-SIMPEG-Fase1-Core.md), [User Stories](PRD-DLL/User-Stories-SIMPEG-Fase1.md), [Issues](PRD-DLL/Issues-SIMPEG-Fase1.md), dan [Keputusan Cuti Saldo Tahap 0](Keputusan-Cuti-Saldo-Tahap-0.md) telah diselaraskan untuk K-MTG-07A. Dokumen PRD, User Stories, Issues, serta tracker peran dan sprint yang terdampak juga telah diperbarui untuk K-MTG-08. [Panduan Penulisan Kode](PRD-DLL/Panduan-Penulisan-Kode-SIMPEG.md) tetap menjadi acuan arsitektur, keamanan, dan QA tanpa mengubah keputusan produk ini.
+- Pencatatan keputusan tidak menjadi bukti penyelesaian fitur. Status implementasi setiap butir tetap ditentukan oleh bukti code review, test, dan QA yang sesuai.
 
 
 
