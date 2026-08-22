@@ -129,14 +129,14 @@ Approval chain disalin menjadi snapshot saat pengajuan dibuat. Memperbaiki konfi
 
 Login sebagai Admin Kepegawaian:
 
-1. Buka **Cuti → Administrasi Saldo Cuti** atau `/cuti/administrasi-saldo`.
+1. Buka **Cuti → Administrasi Pemakaian Cuti** atau `/cuti/administrasi-saldo`.
 2. Cari employee `demo-klabat-pegawai`.
-3. Jika data pemakaian belum ada, buka tab **Rekonsiliasi** lalu gunakan form **Rekonsiliasi Pemakaian Tahunan**.
+3. Jika data pemakaian belum ada, buka tab **Catat Pemakaian Tahunan** lalu gunakan form **Catat Pemakaian Tahunan**.
 4. Contoh data:
    - Pemakaian N-2: `0` hari.
    - Pemakaian N-1: `1` hari.
    - Pemakaian tahun berjalan: `2` hari.
-   - Alasan: `Rekonsiliasi pemakaian cuti untuk demo LLDIKTI`.
+   - Alasan: `Data pemakaian cuti untuk demo LLDIKTI`.
 5. Simpan dan pastikan sistem menghitung ulang ringkasan, rollover, dan ledger dari tiga total pemakaian tersebut.
 
 Jika riwayat pemakaian sudah tersedia, jangan mendaftarkan ulang. Cukup tunjukkan hasil perhitungan sistemnya.
@@ -425,21 +425,21 @@ Hasil yang dijelaskan:
 
 ---
 
-## 11. Demo Administrasi Saldo Cuti
+## 11. Demo Administrasi Pemakaian Cuti
 
-**Role:** Admin Kepegawaian  
-**Menu:** Cuti → Administrasi Saldo Cuti  
-**URL:** `/cuti/administrasi-saldo`
+- **Role:** Admin Kepegawaian
+- **Menu:** Cuti → Administrasi Pemakaian Cuti
+- **URL:** `/cuti/administrasi-saldo`
 
 1. Cari employee demo.
 2. Tunjukkan saldo aktual, terpakai, dialokasikan, dapat diajukan, N-2/N-1, ledger, dan status rollover.
-3. Jika data belum ada, buka tab **Rekonsiliasi** lalu gunakan form **Rekonsiliasi Pemakaian Tahunan** dengan total pemakaian N-2 `0`, N-1 `1`, dan tahun berjalan `2`; sistem menghitung saldo, rollover, serta total hak.
+3. Jika data belum ada, buka tab **Catat Pemakaian Tahunan** lalu gunakan form **Catat Pemakaian Tahunan** dengan total pemakaian N-2 `0`, N-1 `1`, dan tahun berjalan `2`; sistem menghitung saldo, rollover, serta total hak.
 
 Untuk demonstrasi perbaikan data pemakaian di staging:
 
 1. Buka **Riwayat Pemakaian**.
 2. Pilih **Perbaiki Data Pemakaian** pada entri tahun berjalan.
-3. Tunjukkan tiga total pemakaian sebelum koreksi: N-2 `0` hari, N-1 `1` hari, dan tahun berjalan `2` hari.
+3. Tunjukkan tiga total pemakaian sebelum perbaikan: N-2 `0` hari, N-1 `1` hari, dan tahun berjalan `2` hari.
 4. Perbaiki pemakaian tahun berjalan dari `2` menjadi `3` hari, isi alasan `Perbaikan data pemakaian untuk demonstrasi`, lalu unggah dokumen pendukung.
 5. Simpan dan pastikan versi/riwayat lama dipertahankan.
 6. Tunjukkan sistem menjalankan replay rekalkulasi otomatis serta memperbarui ledger dan ringkasan saldo.
