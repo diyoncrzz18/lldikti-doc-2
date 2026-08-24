@@ -43,7 +43,7 @@ Kabar baik: **3 dari 4 issue fitur Sprint 7 sudah jadi lebih awal** — #45 (daf
 | #47 | Halaman audit log + diff view (US-7.2, US-7.3) | ⚠️ | Halaman + filter + drawer diff tersedia dengan data `audit_logs` nyata. **Gap:** seluruh record dimuat `->get()` lalu difilter/paginasi Alpine di browser (tidak skalabel), dan `old_values`/`new_values` dikirim mentah tanpa masking. Perbaikan bergantung task masking (7.2-1). |
 | #48 | Halaman semua notifikasi + tandai dibaca (US-6.2, US-6.4) | ✅ | Route `notifications.index` + permission, paginator backend, tandai dibaca per item & semua, ownership per user, `NotificationInboxTest`. Sisa: verifikasi AC badge berkurang tanpa reload + QA formal. |
 | #50 | Redirect berdasarkan role (US-1.5) | ⚠️ | Callback SSO mengarah ke `route('dashboard')` yang mendispatch view/redirect per role (admin/pimpinan/kabag/pegawai — kabag dikunci `KepalaBagianRouteGateTest`). Sisa: feature test eksplisit kelima role dari callback + samakan interpretasi AC (redirect vs dispatcher). |
-| #52 | Full regression test + UAT | ❌ | Belum dimulai — inti Sprint 7. 14 skenario E2E + evidence + sign-off (rincian di Slice 7.3). |
+| #52 | Full regression test + UAT | ❌ | Persiapan dokumentasi dimulai melalui paket Issue #14: register UAT, draft panduan lima role, environment/recovery evidence, dan go/no-go checklist. Eksekusi 14 skenario E2E, Zoom, penerimaan, restore/rollback drill, serta sign-off belum dilakukan. |
 
 ---
 
@@ -112,6 +112,7 @@ Prioritas P2 & dokumen:
 
 | Tanggal | Perubahan |
 |---|---|
+| 24 Agustus 2026 | Paket eksekusi dokumentasi Issue #14 dibuat dan ditautkan melalui `Issue-14-UAT-Release-Readiness.md`. Artefak masih Draft/Executing; tidak ada gate UAT/release yang ditandai lulus tanpa evidence aktual. |
 | 14 Agustus 2026 | PR #182 (`ff0e9e1`) merge: BUG-04 tertutup — NIP yang sudah terdaftar di database menjadi SKIP pada wizard import dengan bukti browser Playwright (0 valid, 1 skip, 0 error), lifecycle lock bersama untuk aksi validasi/antrean/mapping, dan regression test kondisi balapan. Task 7.2-8 turun menjadi sisa migrasi FormRequest validate/execute. PR #181, #198, dan #202 yang masuk pada rentang yang sama belum direkonsiliasi ke dokumen ini. |
 | 10 Agustus 2026 | Sinkronisasi terhadap `development` @ `ff260a5`: PR #179 menutup Issue #178 dan menyelesaikan hardening 7.2-13 pada source. Browser QA 7.1-4, hardening audit menyeluruh 7.2-9, full regression, UAT, dan release gate tetap terbuka. |
 | 10 Agustus 2026 | Sinkronisasi terhadap `development` @ `1fd99cb`: 7.1-1, 7.2-1, dan 7.2-2 selesai melalui PR #174; 7.2-4 melalui PR #173; 7.2-5 melalui PR #166; 7.2-6 melalui PR #140; carry-over Sprint 6 selesai pada source; dan US-4.10 AC-2 selesai melalui PR #177. Task 7.1-4 tetap terbuka untuk browser QA/evidence final dan 7.2-9 masih sebagian. Issue #178 tetap open sebagai hardening follow-up terpisah. |

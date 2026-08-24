@@ -2064,6 +2064,13 @@ Rollover dari N-1 tetap dibatasi maksimal 6 hari dan batas tersebut **bukan pers
 - [ ] WI-MTG-4: Perubahan image PHP/container pada branch `development` dan perubahan versi PostgreSQL dicatat sebagai dependensi eksternal LLDIKTI; versi baru belum menjadi baseline hanya karena tersedia. *(Sumber keputusan: K-MTG-06.3; guardrail operasional turunan: versi baru tidak menjadi baseline sebelum gate verifikasi selesai.)*
 - [ ] WI-MTG-5: Sebelum environment baru dijadikan baseline, tersedia bukti backup dan restore data, lalu verifikasi aplikasi, migrasi, queue, dan scheduler pada environment tersebut. *(Sumber: K-MTG-06.3.)*
 
+> **Status eksekusi 24 Agustus 2026:** Paket persiapan Issue #14 tersedia pada
+> [`Issue-14-UAT-Release-Readiness.md`](../Issue-14-UAT-Release-Readiness.md), meliputi register UAT,
+> lima draft panduan role, inventaris/verifikasi environment, prosedur backup/restore/rollback, dan
+> checklist go/no-go. Dokumen tersebut masih berstatus **Draft/Executing**. Checkbox WI-MTG-1
+> sampai WI-MTG-5 tetap terbuka sampai Zoom/penerimaan Kepegawaian, environment kandidat,
+> restore, verifikasi runtime, rollback drill, dan sign-off memiliki evidence aktual.
+
 
 
 ### Status Implementasi Hasil Meeting
