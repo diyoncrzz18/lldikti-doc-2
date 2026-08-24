@@ -3,8 +3,8 @@
 
 | Field | Detail |
 |-------|--------|
-| **Versi Dokumen** | 1.9 |
-| **Tanggal** | 21 Agustus 2026 |
+| **Versi Dokumen** | 1.10 |
+| **Tanggal** | 24 Agustus 2026 |
 | **Domain** | Disiapkan LLDIKTI saat tahap deployment |
 | **Fase** | 1 — Core / Fondasi |
 | **Target Go-Live** | 20 Agustus 2026 |
@@ -34,7 +34,7 @@ PRD ini menjadi **sumber kebenaran utama** untuk Fase 1. Keputusan meeting tekni
 17. Keputusan sesi langsung pengguna 22 Juli 2026 (kanonis, disetujui pengguna): import massal Fase 1 hanya mengaktifkan template Data Utama. Import membuat record pegawai beserta field snapshot awal (golongan, pangkat, jabatan, kelas jabatan, pendidikan, prodi, dan tanggal pensiun bila tersedia di kolom Excel), tetapi tidak membuat riwayat kepangkatan, riwayat jabatan, maupun riwayat KGB. Riwayat resmi diinput per pegawai melalui CRUD riwayat append-only. Kalkulasi TMT dijalankan saat riwayat/sumber resmi disimpan, bukan saat import selesai. Tanggal pensiun hasil import dipertahankan apa adanya dan tidak dihitung ulang atau ditimpa oleh proses import. Template lanjutan multi-jenis (Data Pelengkap, Riwayat Kepangkatan, Riwayat Jabatan, Riwayat KGB) tidak termasuk ruang lingkup saat ini dan tidak dipulihkan tanpa keputusan eksplisit baru. Keputusan ini menggantikan rincian import versi sebelumnya jika bertentangan.
 18. Keputusan pengguna 28 Juli 2026: nama tabel fisik canonical cuti adalah `leave_request_steps`, `leave_balance_ledger`, dan `leave_proofs`. Keputusan, alasan, serta batasnya dicatat pada [Keputusan Skema Cuti Canonical](Keputusan-Skema-Cuti-Canonical.md).
 19. Keputusan pengguna 17 Agustus 2026: Program Studi menjadi reference table Fase 1 yang dikelola Super Admin melalui Data Master. Relasi UUID nullable dipakai pada data pegawai dan riwayat pendidikan, sedangkan snapshot teks lama tetap dipertahankan untuk kompatibilitas dan import. Kontrak lengkap dicatat pada [Keputusan Program Studi sebagai Data Referensi](../Keputusan-Program-Studi-Data-Master.md).
-20. Keputusan pengguna 21 Agustus 2026: dokumen wajib/SK dikonfigurasi melalui matriks per jenis pegawai, bukan hardcode empat SK. PNS dan CPNS memakai matriks yang sama: SK Pengangkatan, SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru. Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only, tetapi berkas SK dapat diganti secara terpisah dengan audit. Arsip dokumen terpusat digunakan read-only untuk pencarian lintas pegawai; seluruh kontrol dokumen dilakukan dari detail/profil pegawai. Indikasi daftar PPPK berupa SK Pengangkatan dan SK KGB terbaru masih menunggu konfirmasi dan tidak menjadi aturan aktif. Kontrak lengkap dicatat pada [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md#k-mtg-08--dokumen-wajib-berkas-sk-dan-arsip-dokumen-terpusat).
+20. Keputusan pengguna 21 Agustus 2026 dengan konfirmasi lanjutan 24 Agustus 2026: dokumen wajib/SK dikonfigurasi melalui matriks per jenis pegawai, bukan hardcode empat SK. PNS dan CPNS memakai matriks yang sama: SK Pengangkatan, SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru. Admin Kepegawaian yang berwenang dapat mengustom matriks PPPK tanpa daftar bawaan; PPPK berstatus Tidak Dinilai sampai sedikitnya satu kategori diaktifkan. Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only, tetapi berkas SK dapat diganti secara terpisah dengan audit. Arsip dokumen terpusat digunakan read-only untuk pencarian lintas pegawai; seluruh kontrol dokumen dilakukan dari detail/profil pegawai. Kontrak lengkap dicatat pada [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md#k-mtg-08--dokumen-wajib-berkas-sk-dan-arsip-dokumen-terpusat).
 21. Keputusan pengguna 21 Agustus 2026: lifecycle pegawai menggunakan `ref_status_pegawai`, bukan `deleted_at` atau Laravel `SoftDeletes`. Menonaktifkan pegawai mengubah statusnya menjadi `Nonaktif`; record tetap berada pada tabel `employees`. Perubahan status wajib menyimpan tanggal efektif, histori status, keterangan, dan audit trail. Ketentuan lifecycle pegawai sebelumnya yang berbasis penghapusan tidak berlaku lagi bila bertentangan.
 
 ---
@@ -648,9 +648,9 @@ Dokumen wajib/SK ditentukan oleh **matriks konfigurasi per jenis pegawai**, buka
 |---|---|---|
 | PNS | SK Pengangkatan; SK Pangkat terbaru; SK Jabatan terbaru; SK KGB terbaru | Dikonfirmasi |
 | CPNS | SK Pengangkatan; SK Pangkat terbaru; SK Jabatan terbaru; SK KGB terbaru | Dikonfirmasi; sama dengan PNS |
-| PPPK | Belum ditetapkan. Indikasi awal: SK Pengangkatan dan SK KGB terbaru | Menunggu konfirmasi; tidak boleh menjadi aturan aktif |
+| PPPK | Tidak memiliki daftar bawaan; kategori dipilih melalui matriks oleh Admin Kepegawaian yang berwenang | Dikonfirmasi dapat dikustom; Tidak Dinilai selama belum ada kategori aktif |
 
-Saat jenis pegawai berubah, sistem mengevaluasi ulang matriks aktif untuk jenis pegawai baru. Transisi CPNS menjadi PNS tidak mengubah kewajiban dokumen karena kedua matriks yang dikonfirmasi sama. Matriks aktif menjadi sumber daftar dokumen wajib dan status kelengkapan pada profil pegawai; dokumen tambahan tetap berada di kelompok terpisah.
+Saat jenis pegawai berubah, sistem mengevaluasi ulang matriks aktif untuk jenis pegawai baru. Transisi CPNS menjadi PNS tidak mengubah kewajiban dokumen karena kedua matriks yang dikonfirmasi sama. Matriks aktif menjadi sumber daftar dokumen wajib dan status kelengkapan pada profil pegawai; dokumen tambahan tetap berada di kelompok terpisah. Khusus PPPK, penilaian dimulai setelah sedikitnya satu kategori diaktifkan oleh Admin Kepegawaian. Matriks PPPK tanpa kategori aktif menghasilkan status Tidak Dinilai, bukan Belum Ada atau Belum Lengkap.
 
 #### Dokumen & SK
 

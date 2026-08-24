@@ -86,8 +86,8 @@
 
 | Field | Detail |
 |---|---|
-| Tanggal keputusan lanjutan | 21 Agustus 2026 |
-| Sumber persetujuan | Konfirmasi pengguna setelah klarifikasi dengan pihak terkait LLDIKTI pada review PR #218 |
+| Tanggal keputusan lanjutan | 21 Agustus 2026; konfirmasi matriks PPPK 24 Agustus 2026 |
+| Sumber persetujuan | Konfirmasi pengguna setelah klarifikasi dengan pihak terkait LLDIKTI pada review PR #218 dan konfirmasi langsung pengguna untuk pengelolaan matriks PPPK pada 24 Agustus 2026 |
 | Kedudukan | Mengikat; melengkapi dan menggantikan K-MTG-04.2–04.3 pada bagian yang berbeda |
 
 1. Ketentuan dokumen wajib/SK tidak boleh di-hardcode sebagai empat dokumen yang sama untuk seluruh pegawai. Admin Kepegawaian mengelola **matriks dokumen wajib berdasarkan jenis pegawai** sehingga tiap jenis, misalnya PNS, CPNS, atau PPPK sesuai data referensi yang tersedia, dapat memiliki daftar SK wajib yang berbeda.
@@ -96,7 +96,7 @@
 4. Arsip dokumen terpusat untuk Super Admin/Admin Kepegawaian bersifat **read-only**: digunakan untuk pencarian lintas pegawai, melihat detail, dan mengunduh berkas yang berwenang diakses. Arsip ini tidak menyediakan unggah, penggantian, penghapusan, atau perubahan metadata dokumen. Semua kontrol dokumen/SK dilakukan dari halaman detail/profil pegawai.
 5. Matriks yang telah dikonfirmasi untuk **PNS** dan **CPNS** adalah sama: (a) SK Pengangkatan, (b) SK Pangkat terbaru, (c) SK Jabatan terbaru, dan (d) SK KGB terbaru. Keempatnya menjadi dokumen wajib pada masing-masing jenis pegawai tersebut.
 6. Saat jenis pegawai berubah dari **CPNS menjadi PNS**, sistem mengevaluasi ulang matriks dokumen wajib berdasarkan jenis pegawai yang baru. Karena matriks CPNS dan PNS yang dikonfirmasi sama, perubahan ini tidak menambah atau menghapus kewajiban dokumen.
-7. Untuk **PPPK**, indikasi awal dari LLDIKTI adalah SK Pengangkatan dan SK KGB terbaru. Indikasi ini **belum menjadi keputusan final** sampai dikonfirmasi kembali oleh pihak terkait; sistem tidak boleh mengaktifkannya sebagai matriks wajib, menilai kelengkapan, atau menolak alur apa pun berdasarkan daftar tersebut sebelum konfirmasi final tersedia.
+7. Untuk **PPPK**, Admin Kepegawaian yang berwenang dapat mengelola sendiri kategori SK wajib melalui matriks **SK Wajib per Jenis Pegawai**. Sistem tidak menetapkan daftar bawaan PPPK berdasarkan indikasi lama; penilaian kelengkapan baru berlaku setelah sedikitnya satu kategori diaktifkan. Selama matriks PPPK tidak memiliki kategori aktif, statusnya **Tidak Dinilai** dan tidak boleh diperlakukan sebagai dokumen belum lengkap.
 
 ## Dampak dokumentasi
 
