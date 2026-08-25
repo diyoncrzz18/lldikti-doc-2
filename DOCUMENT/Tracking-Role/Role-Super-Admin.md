@@ -1,5 +1,7 @@
 # Tracking Role: Super Admin
 
+> **Pembaruan kanonis 25 Agustus 2026:** penyebutan soft delete/restore, `onlyTrashed()`, dan Data Backup di bawah dipertahankan hanya sebagai snapshot implementasi lama dan berstatus **Superseded**. Lifecycle aktif mengikuti [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md); Super Admin tetap memerlukan effective permission `employees.restore` untuk reaktivasi dan tidak membypass blokir linked Employee Nonaktif.
+
 | Field | Nilai |
 |---|---|
 | Role internal | `super_admin` |
@@ -39,7 +41,7 @@ Hardening audit fail-closed untuk seluruh CRUD pegawai/import masih ⚠️. Peng
 |---|---|---|
 | 1 | **Kelola Akses User / US-1.4** (dulu ❌ P0) — option value kode internal, paginasi+filter server-side (`ListUserMappingsAction` → `paginate()->withQueryString()`), controller tipis ber-FormRequest, audit dengan identifier ter-masking, `logOrFail()` di dalam `DB::transaction` sehingga kegagalan audit membatalkan mutasi, `lockForUpdate` anti-race, constraint unik terverifikasi di PostgreSQL 17 | `admin/user-management/index.blade.php:172-176,407-411`; `ListUserMappingsAction.php:39-60`; `UpdateUserMappingAction.php:33,71-82,216-230`; PR #126 (`a4e00dd`); `Bukti-QA-Kelola-Akses-User-Super-Admin.md` |
 | 2 | SSO Keycloak = autentikasi saja; role/permission dari DB SIMPEG; bootstrap Super Admin pertama; collision guard | `HandleKeycloakCallbackAction` |
-| 3 | CRUD pegawai utama + soft delete/restore + halaman Data Backup (`onlyTrashed()`, tanpa permanent delete) | `StoreEmployeeRequest`/`UpdateEmployeeRequest` + Action |
+| 3 | **Superseded:** bukti CRUD + soft delete/restore/Data Backup adalah snapshot kontrak lama; kontrak aktif memakai perubahan status dan filter Data Pegawai | Keputusan lifecycle 25 Agustus 2026 |
 | 4 | **Riwayat pangkat/jabatan/KGB append-only ditegakkan** — id riwayat lama ditolak validasi, action selalu membuat record baru | PR #129 (`1b3dfd6`), `UpdateEmployeeRequest.php:42-44`, `EmployeeUpdateTest` |
 | 5 | Dokumen & SK — upload/update/check-impact/delete melalui detail/profil pegawai via Action + FormRequest; arsip dokumen terpusat hanya untuk pencarian, detail, dan unduh lintas pegawai secara read-only | `DokumenController` |
 | 6 | Import pegawai — wizard lengkap, template 2 baris contoh (PNS+PPPK, PR #130), **laporan hasil import permanen + unduhan CSV** (PR #131, tabel `import_batches`) | `GenerateImportTemplateAction`, `ExecuteImportBatchAction`, `DownloadImportReportAction` |

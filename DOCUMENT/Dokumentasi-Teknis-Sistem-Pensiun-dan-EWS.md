@@ -1,8 +1,10 @@
 # Dokumentasi Teknis Sistem Pensiun & EWS SIMPEG
 
-**Version:** 1.0  
-**Last Updated:** 2 Agustus 2026  
+**Version:** 1.1
+**Last Updated:** 25 Agustus 2026
 **Author:** Development Team
+
+> **Kontrak status aktif:** Dokumen ini mengikuti [Keputusan Lifecycle dan Status Pegawai](Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md). Contoh lama yang membandingkan `status_aktif = 'Aktif'` sudah superseded. EWS wajib memakai relasi `ref_status_pegawai.kelompok` melalui predicate kanonis; kelompok `Aktif` dan `Aktif/khusus` sama-sama aktif, sehingga Tugas Belajar tetap diproses.
 
 ---
 
@@ -162,7 +164,7 @@ graph TB
 
 ### Data Layer
 
-**Employee** - Core employee data including `tanggal_lahir`, `tanggal_pensiun`, `status_aktif`  
+**Employee** - Core employee data including `tanggal_lahir`, `tanggal_pensiun`, and `status_pegawai_id` linked to the canonical active classification
 **EwsAlert** - Alert records with `type`, `target_date`, `interval_days`, `followup_status`  
 **EwsConfig** - Key-value configuration storage  
 **RefJabatan** - Position master with `default_bup` (position-specific BUP)  
@@ -559,8 +561,8 @@ stateDiagram-v2
 - `file_sk` - Uploaded SK file (PDF)
 
 **Side effects:**
-- Employee `status_aktif` may change (depending on status pegawai config)
-- Future scheduler runs skip this employee (`status_aktif != 'Aktif'`)
+- Employee status may change to a reference whose `kelompok` is not `Aktif`/`Aktif/khusus`
+- Future scheduler runs skip the employee only when `whereActiveStatus()` no longer includes the effective status
 - All pension notifications disappear from employee's notification bell
 
 ### Rollback Compensation
@@ -708,13 +710,12 @@ Ensures: **H-365 > H-180 > H-90** (descending order)
 ```sql
 tanggal_lahir         DATE NULL           -- Birth date for BUP calculation
 tanggal_pensiun       DATE NULL           -- Calculated or manual pension date
-status_aktif          VARCHAR(50)         -- 'Aktif' for active employees
 status_pegawai_id     UUID                -- FK to ref_status_pegawai
 ```
 
 **Purpose:**
 - `tanggal_lahir` + BUP = `tanggal_pensiun`
-- `status_aktif='Aktif'` determines if employee is scanned by EWS
+- `ref_status_pegawai.kelompok IN ('Aktif', 'Aktif/khusus')` determines if Employee is scanned by EWS, exposed through the canonical active scope
 - `tanggal_pensiun` can be manual (preserved) or calculated (filled if null)
 
 #### ews_alerts
@@ -824,7 +825,7 @@ erDiagram
         uuid id PK
         date tanggal_lahir
         date tanggal_pensiun
-        string status_aktif
+        uuid status_pegawai_id FK
     }
     
     ews_alerts {
@@ -866,8 +867,8 @@ erDiagram
 - `followup_status` (for querying active alerts)
 - `UNIQUE(employee_id, type, target_date, interval_days)` (duplicate prevention)
 
-**employees:**
-- `status_aktif` (for EWS daily scan)
+**employees/ref_status_pegawai:**
+- `employees.status_pegawai_id` and the indexed/reference classification used by `whereActiveStatus()` (for EWS daily scan)
 - `jenis_pegawai_id` (for PPPK filtering)
 
 ---
@@ -937,7 +938,7 @@ $calculator->syncForEmployee($employee);
 **Behavior:**
 1. Creates `EwsSchedulerRun` record (status: `sedang_berjalan`)
 2. Loads EWS configuration (thresholds, periods)
-3. Scans all active employees (`status_aktif='Aktif'`) in chunks of 100
+3. Scans all active employees through `whereActiveStatus()` (`kelompok` `Aktif` or `Aktif/khusus`) in chunks of 100
 4. For each employee, checks all 5 event types
 5. Creates alerts if thresholds met
 6. Updates scheduler run record (status: `berhasil` or `gagal`)
@@ -1102,8 +1103,8 @@ if ($rankHistoryChanged || $positionHistoryChanged || $salaryHistoryChanged) {
 ```
 
 **Status change impact:**
-- When employee status changes to "Pensiun": `status_aktif` may become 'Nonaktif'
-- EWS scheduler skips employees where `status_aktif != 'Aktif'`
+- When employee status effectively changes to "Pensiun", its referenced `kelompok` is not active
+- EWS scheduler skips employees excluded by `whereActiveStatus()`; `Aktif/khusus`, including Tugas Belajar, remains included
 - Future alerts not generated for retired employees
 
 ---
@@ -1338,7 +1339,7 @@ php artisan test --filter=EwsFollowupTest
 $jenisJabatan = RefJenisJabatan::factory()->create(['maks_usia_pensiun' => 58]);
 $employee = Employee::factory()->create([
     'tanggal_lahir' => now()->subYears(58)->addDays(180),
-    'status_aktif' => 'Aktif',
+    'status_pegawai_id' => $statusAktif->id,
 ]);
 PositionHistory::create([
     'employee_id' => $employee->id,
@@ -1399,7 +1400,7 @@ PositionHistory::create([
 - Admin uploads SK Pensiun at H-60
 - Budi's status changes to "Pensiun"
 - ALL 3 alerts (H-365, H-180, H-90) marked as HANDLED
-- Future scheduler runs skip Budi (`status_aktif != 'Aktif'`)
+- Future scheduler runs skip Budi because the effective status is excluded by `whereActiveStatus()`
 
 ---
 
@@ -1432,8 +1433,11 @@ PositionHistory::create([
 
 ```bash
 # 1. Check employee data
-SELECT id, nama_lengkap, tanggal_lahir, tanggal_pensiun, status_aktif 
-FROM employees WHERE nip = '199001011234';
+SELECT e.id, e.nama_lengkap, e.tanggal_lahir, e.tanggal_pensiun,
+       rsp.nama AS status_nama, rsp.kelompok
+FROM employees e
+JOIN ref_status_pegawai rsp ON rsp.id = e.status_pegawai_id
+WHERE e.nip = '199001011234';
 
 # 2. Check position history
 SELECT ph.*, rj.nama_jabatan, rj.default_bup, rjj.maks_usia_pensiun
@@ -1527,7 +1531,7 @@ use App\Services\Employees\TmtCalculatorService;
 
 $calculator = app(TmtCalculatorService::class);
 
-Employee::where('status_aktif', 'Aktif')
+Employee::whereActiveStatus()
     ->whereNotNull('tanggal_lahir')
     ->chunkById(100, function ($employees) use ($calculator) {
         foreach ($employees as $employee) {
@@ -1745,7 +1749,7 @@ WHERE e.nip = '<NIP>';
 |---------|---------------|----------|----------------|
 | No alerts for any employee | Scheduler not running | Check cron, verify `schedule:run` | `routes/console.php` |
 | | Laravel scheduler not active | Add cron job | Server crontab |
-| Alerts for pension missing | Employee `status_aktif != 'Aktif'` | Check employee status | `EwsEngineService.php:86` |
+| Alerts for pension missing | Effective status is outside `Aktif`/`Aktif/khusus` | Check `ref_status_pegawai.kelompok` and canonical scope | `EwsEngineService` active query |
 | | Target date too far | Check threshold config | `ews_configs` table |
 | | No BUP data | Check position references | `calculatePensionFromPositionBup()` |
 | | No birth date | Add `tanggal_lahir` | `employees` table |
@@ -1858,7 +1862,7 @@ Automated monitoring system that generates alerts for upcoming important dates (
 Official decision letter. Required for finalizing pension status changes.
 
 **Aktif / Nonaktif**  
-Employee active status. Only `Aktif` employees are scanned by EWS.
+Employee activity is derived from `ref_status_pegawai.kelompok`. Both `Aktif` and `Aktif/khusus` are scanned by EWS; this includes Tugas Belajar. Other groups are excluded.
 
 **Followup Status**  
 Alert lifecycle state: `aktif` (requires action), `ditangani` (handled), `tidak_perlu` (dismissed), `kedaluwarsa` (expired).
@@ -1917,14 +1921,14 @@ return null; // No stage applies
 - `User-Stories-SIMPEG-Fase1.md` - User stories for EWS features
 
 **Code Files:**
-- [TmtCalculatorService.php](../SIMPEG/app/Services/Employees/TmtCalculatorService.php) - Pension calculation engine
-- [EwsEngineService.php](../SIMPEG/app/Services/EwsEngineService.php) - Alert generation engine
-- [UpdateEwsAlertFollowupAction.php](../SIMPEG/app/Actions/Ews/UpdateEwsAlertFollowupAction.php) - Admin workflow
+- [TmtCalculatorService.php](https://github.com/LLDIKTI16/simpeg/blob/development/app/Services/Employees/TmtCalculatorService.php) - Pension calculation engine
+- [EwsEngineService.php](https://github.com/LLDIKTI16/simpeg/blob/development/app/Services/EwsEngineService.php) - Alert generation engine
+- [UpdateEwsAlertFollowupAction.php](https://github.com/LLDIKTI16/simpeg/blob/development/app/Actions/Ews/UpdateEwsAlertFollowupAction.php) - Admin workflow
 
 **Test Files:**
-- [TmtCalculatorServiceTest.php](../SIMPEG/tests/Unit/TmtCalculatorServiceTest.php) - Unit tests for calculation
-- [EwsSchedulerTest.php](../SIMPEG/tests/Feature/EwsSchedulerTest.php) - Feature tests for scheduler
-- [EwsFollowupTest.php](../SIMPEG/tests/Feature/EwsFollowupTest.php) - Feature tests for admin workflow
+- [TmtCalculatorServiceTest.php](https://github.com/LLDIKTI16/simpeg/blob/development/tests/Unit/TmtCalculatorServiceTest.php) - Unit tests for calculation
+- [EwsSchedulerTest.php](https://github.com/LLDIKTI16/simpeg/blob/development/tests/Feature/EwsSchedulerTest.php) - Feature tests for scheduler
+- [EwsFollowupTest.php](https://github.com/LLDIKTI16/simpeg/blob/development/tests/Feature/EwsFollowupTest.php) - Feature tests for admin workflow
 
 ---
 

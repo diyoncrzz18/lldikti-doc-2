@@ -1,5 +1,7 @@
 # Kickoff Sprint 6 — Kontrak & Keputusan (Dashboard & Laporan)
 
+> **Pembaruan lintas-domain 25 Agustus 2026:** keputusan K-1 tentang lifecycle **reference table** tetap berlaku. Namun contoh enum/kolom Employee `status_aktif` di catatan K-2 adalah snapshot historis dan **Superseded**; status aktif Employee kini berasal dari `ref_status_pegawai.kelompok` melalui predicate kanonis. Lihat [Keputusan Lifecycle dan Status Pegawai](Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
+
 | Field | Detail |
 |---|---|
 | Tanggal | 26 Juli 2026 |

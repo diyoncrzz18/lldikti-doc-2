@@ -103,6 +103,24 @@
 - [PRD SIMPEG Fase 1](PRD-DLL/PRD-SIMPEG-Fase1-Core.md), [User Stories](PRD-DLL/User-Stories-SIMPEG-Fase1.md), [Issues](PRD-DLL/Issues-SIMPEG-Fase1.md), dan [Keputusan Cuti Saldo Tahap 0](Keputusan-Cuti-Saldo-Tahap-0.md) telah diselaraskan untuk K-MTG-07A. Dokumen PRD, User Stories, Issues, serta tracker peran dan sprint yang terdampak juga telah diperbarui untuk K-MTG-08. [Panduan Penulisan Kode](PRD-DLL/Panduan-Penulisan-Kode-SIMPEG.md) tetap menjadi acuan arsitektur, keamanan, dan QA tanpa mengubah keputusan produk ini.
 - Pencatatan keputusan tidak menjadi bukti penyelesaian fitur. Status implementasi setiap butir tetap ditentukan oleh bukti code review, test, dan QA yang sesuai.
 
+## K-MTG-09 — Lifecycle dan status pegawai
+
+| Field | Detail |
+|---|---|
+| Tanggal keputusan lanjutan | 25 Agustus 2026 |
+| Dokumen kanonis | [Keputusan Lifecycle dan Status Pegawai](Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md) |
+| Kedudukan | Mengikat dan menggantikan ketentuan lama yang berbeda mengenai lifecycle Employee |
+
+1. Employee tidak memakai soft delete/hard delete, Data Backup, atau Data Nonaktif. Semua status berada pada Data Pegawai dan dicari melalui filter.
+2. Predicate aktif berasal dari `ref_status_pegawai.kelompok`; `Aktif` dan `Aktif/khusus` sama-sama aktif, termasuk Tugas Belajar.
+3. Alasan administratif perubahan status wajib dan terpisah dari `status_note` opsional. Pesan akun default penonaktifan telah ditetapkan pada dokumen kanonis.
+4. Reaktivasi tersedia bagi Super Admin atau Admin Kepegawaian dengan role efektif ber-permission `employees.restore`; raw role tidak boleh menjadi bypass.
+5. Linked Employee efektif Nonaktif memblokir route bisnis untuk seluruh role. Allowlist hanya halaman status akun, logout, dan auth teknis yang diperlukan.
+6. Tanggal efektif masa depan diperbolehkan dan diterapkan otomatis saat jatuh tempo tanpa mengubah keadaan/akses sebelum waktunya.
+7. Mutasi wajib lock/re-check/idempoten/concurrency-safe; snapshot, histori, dan audit kritis satu transaksi fail-closed; notifikasi hanya setelah commit.
+
+Catatan dan bukti soft delete/restore yang lebih lama tetap dipertahankan sebagai sejarah, tetapi berstatus **Superseded** dan tidak boleh digunakan sebagai acceptance criteria aktif.
+
 
 
 ## K-MTG-05A — Katalog template WhatsApp Business SIMPEG

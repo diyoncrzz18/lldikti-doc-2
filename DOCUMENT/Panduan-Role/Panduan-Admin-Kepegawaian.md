@@ -18,6 +18,7 @@
 | Fitur | Langkah ringkas | Dampak tindakan |
 |---|---|---|
 | Data Pegawai | Cari/tambah/ubah data utama, tetapkan Kepala Bagian, dan tambahkan riwayat berdasarkan SK | Mengubah data operasional pegawai dan memengaruhi scope, EWS, serta laporan |
+| Lifecycle Status | Dari Data Pegawai pilih Ubah Status/Nonaktifkan/Aktifkan Kembali, isi status tujuan, tanggal efektif, dan alasan administratif | Transisi langsung/terjadwal mengubah snapshot, histori, akses akun, EWS, dan notifikasi ketika efektif; reaktivasi memerlukan `employees.restore` |
 | Dokumen & SK | Unggah berkas, isi metadata, periksa dampak, dan unduh sesuai permission | Menyimpan dokumen ke storage terproteksi; file dan metadata menjadi bagian profil pegawai |
 | Import Pegawai | Unduh template, unggah, petakan kolom, validasi preview, lalu eksekusi | Membuat banyak data utama; tidak membuat histori pangkat/jabatan/KGB secara otomatis |
 | Administrasi Pemakaian Cuti | Cari pegawai, catat atau perbaiki sumber pemakaian dengan alasan dan dokumen | Menjalankan rekalkulasi saldo serta ledger; histori lama tetap dipertahankan |
@@ -36,8 +37,14 @@
 6. Jangan mengedit record histori lama untuk mengganti keadaan terkini.
 7. Periksa Audit Log setelah mutasi penting.
 
-Penonaktifan pegawai harus mempertahankan data dan memungkinkan pemulihan. Fase 1 tidak menyediakan
-penghapusan permanen pegawai.
+Penonaktifan mempertahankan record Employee. Tidak ada hard delete, Data Backup, atau Data Nonaktif.
+Semua status ditemukan melalui filter Data Pegawai. Kelompok `Aktif` dan `Aktif/khusus`, termasuk
+Tugas Belajar, tetap aktif. Tanggal masa depan boleh dipilih dan tidak mengubah akses sebelum efektif.
+Pengaktifan kembali adalah perubahan status resmi dan hanya tersedia bila role efektif memiliki
+`employees.restore`.
+
+Alasan administratif selalu wajib. Pesan akun `status_note` terpisah dan opsional; bila kosong pada
+penonaktifan, sistem memakai `AKUN ANDA TELAH DI NONAKTIFKAN, SILAHKAN HUBUNGI ADMIN!!`.
 
 ## 4. Alur Import Pegawai
 
@@ -71,6 +78,8 @@ saldo secara deterministik.
 - Tidak otomatis menjadi approver cuti hanya karena berperan sebagai Admin.
 - Tidak melakukan keputusan final jika tidak menjadi approver aktif pada snapshot.
 - Tidak mengedit histori lama atau menghapus pegawai permanen.
+- Tidak memakai Data Backup/Data Nonaktif atau menganggap reaktivasi sebagai restore record terhapus.
+- Tidak mencoba reaktivasi tanpa `employees.restore`, sekalipun role asal memiliki privilege lebih tinggi saat switch role aktif.
 - Tidak mengubah saldo langsung tanpa sumber, alasan, dokumen, dan audit.
 - Tidak mengekspos NIK, No. KK, token, atau credential pada export/evidence.
 - Tidak mengaktifkan provider WhatsApp.
@@ -84,6 +93,7 @@ saldo secara deterministik.
 | Saldo tidak sesuai | Periksa sumber pemakaian, alokasi pengajuan aktif, urutan kronologis, dan hasil rekalkulasi |
 | Riwayat tidak muncul | Periksa dokumen, tanggal efektif, reference, dan apakah record baru berhasil dibuat |
 | Tidak dapat membuka menu | Periksa role dan permission; jangan meminta bypass route |
+| Akun hanya melihat status Nonaktif | Status efektif Employee linked sudah tidak aktif; periksa histori/alasan dan lakukan reaktivasi resmi bila sah. Role tinggi tidak membypass blokir |
 
 ## 8. Penerimaan Panduan
 

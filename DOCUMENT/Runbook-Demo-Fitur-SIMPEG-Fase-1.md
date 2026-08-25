@@ -40,7 +40,7 @@ Pegawai melihat hasil, saldo, notifikasi, dan PDF
     ↓
 Admin menindaklanjuti EWS dan membuat laporan
     ↓
-Super Admin memeriksa Audit Log dan pemulihan data
+Super Admin memeriksa Audit Log dan lifecycle status pegawai
 ```
 
 ---
@@ -101,7 +101,7 @@ Employee yang terhubung ke `demo-klabat-pegawai` harus:
 - memiliki unit kerja yang berada dalam cakupan Kepala Bagian demo; dan
 - mempunyai profil yang cukup lengkap untuk mengajukan cuti.
 
-Jangan memakai akun Super Admin, Admin Kepegawaian, Kepala Bagian, atau Pimpinan sebagai data yang akan dihapus, dipensiunkan, atau dimutasi secara berisiko.
+Jangan memakai akun Super Admin, Admin Kepegawaian, Kepala Bagian, atau Pimpinan sebagai data yang status efektifnya akan diubah menjadi Nonaktif, Pensiun, atau Mutasi. Gunakan user linked dummy khusus karena blokir status berlaku untuk semua role.
 
 ### 3.3 Approval chain wajib dikonfigurasi sebelum pengajuan
 
@@ -179,7 +179,7 @@ Siapkan:
 | Pegawai: hasil, notifikasi, saldo, PDF | 6 menit |
 | EWS lintas role | 10 menit |
 | Dashboard dan laporan | 8 menit |
-| Audit dan restore | 6 menit |
+| Audit dan lifecycle status pegawai | 8 menit |
 
 Jika waktu terbatas, prioritaskan login/role, data pegawai, cuti end-to-end, notifikasi, EWS, dashboard Pimpinan, laporan, dan Audit Log.
 
@@ -864,43 +864,55 @@ Narasi:
 
 ---
 
-## 19. Demo Soft Delete dan Restore
+## 19. Demo Lifecycle Status Pegawai
 
-Gunakan employee dummy khusus, bukan salah satu akun demo utama.
+> **Kontrak aktif 25 Agustus 2026:** skenario soft delete/restore, Data Backup, dan Data Nonaktif sudah **Superseded**. Gunakan satu surface Data Pegawai dan perubahan status resmi sesuai [Keputusan Lifecycle dan Status Pegawai](Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
 
-### 19.1 Pindahkan ke backup
+Gunakan Employee dummy yang memiliki user linked khusus, bukan salah satu akun demo utama. Aktor dapat Super Admin atau Admin Kepegawaian sesuai matriks permission.
 
-**Role:** Super Admin  
+### 19.1 Nonaktifkan langsung
+
+**Role:** Super Admin atau Admin Kepegawaian dengan permission perubahan status
 **URL:** `/pegawai`
 
-1. Cari `[DEMO] Pegawai Restore`.
+1. Cari `[DEMO] Pegawai Lifecycle`.
 2. Pastikan bukan approver, Kepala Bagian, Pimpinan, atau employee pengajuan utama.
-3. Buka aksi hapus.
-4. Pada **Hapus Pegawai ke Backup**, klik **Ya, Hapus ke Backup**.
-5. Pastikan data hilang dari daftar aktif.
+3. Buka aksi **Ubah Status** atau **Nonaktifkan**.
+4. Pilih referensi status berkelompok Nonaktif, isi tanggal efektif hari ini, dan isi alasan administratif wajib.
+5. Biarkan pesan akun `status_note` kosong untuk membuktikan default `AKUN ANDA TELAH DI NONAKTIFKAN, SILAHKAN HUBUNGI ADMIN!!`, atau isi pesan khusus yang sah. Jangan memakai pesan ini sebagai alasan administratif.
+6. Simpan dan pastikan record tidak hilang dari tabel `employees`: ia tidak muncul pada daftar default aktif, tetapi ditemukan pada **Data Pegawai** melalui filter status.
+7. Verifikasi satu histori status dan audit UPDATE berisi konteks minimum; tidak ada event SOFT_DELETE.
+8. Login sebagai user linked dummy. Pastikan semua route bisnis diarahkan/ditolak ke halaman status akun meskipun role dummy diubah ke role tinggi; logout tetap dapat digunakan.
 
-### 19.2 Restore
+### 19.2 Aktifkan kembali
 
-**URL:** `/pegawai/data-backup`
+**Role:** Super Admin atau Admin Kepegawaian dengan role efektif yang memiliki `employees.restore`
+**URL:** `/pegawai`
 
-1. Cari employee dummy.
-2. Tunjukkan nama, NIP, jabatan/unit terakhir, waktu dinonaktifkan, dan tombol **Pulihkan**.
-3. Klik **Pulihkan** dan konfirmasi.
-4. Kembali ke `/pegawai`.
-5. Pastikan employee dan historinya kembali.
-6. Tunjukkan audit deactivate dan restore.
+1. Filter status untuk menemukan Employee dummy Nonaktif.
+2. Pilih **Aktifkan Kembali**, referensi kelompok `Aktif` atau `Aktif/khusus`, tanggal efektif, dan alasan administratif.
+3. Simpan, lalu pastikan Employee kembali pada daftar default aktif dan histori lama tetap ada.
+4. Login sebagai user linked dummy dan pastikan route bisnis kembali tersedia sesuai role efektifnya.
+5. Cabut sementara `employees.restore` pada fixture/role uji yang aman dan buktikan backend menolak reaktivasi; pulihkan konfigurasi setelah bukti diambil.
+6. Tunjukkan audit reaktivasi sebagai UPDATE, bukan RESTORE.
 
-### 19.3 Catatan blocker narasi
+### 19.3 Transisi terjadwal
 
-Terdapat ketidakkonsistenan UI:
+1. Dari Data Pegawai, jadwalkan status Nonaktif untuk tanggal masa depan pada Employee dummy.
+2. Pastikan snapshot, daftar aktif, EWS eligibility berbasis status, dan akses user belum berubah sebelum tanggal efektif.
+3. Pada environment uji yang waktunya dapat dikontrol, majukan waktu/jalankan scheduler penerapan status.
+4. Pastikan transisi diterapkan satu kali, akses bisnis diblokir, histori/audit tidak duplikat, dan notifikasi baru muncul setelah commit.
+5. Jalankan job sekali lagi untuk membuktikan idempotensi.
 
-- modal daftar pegawai menyebut data akan dihapus permanen otomatis setelah 30 hari;
-- halaman Data Backup menyebut data tidak dihapus otomatis; dan
-- ketentuan produk Fase 1 menetapkan soft delete/restore tanpa hard delete permanen.
+### 19.4 Predicate aktif khusus
 
-Sebelum demo stakeholder, teks penghapusan permanen 30 hari harus diperbaiki. Narasi resmi:
+1. Pilih/siapkan Employee berstatus Tugas Belajar dengan kelompok `Aktif/khusus`.
+2. Pastikan ia tetap muncul dalam cakupan aktif pada daftar default dan consumer yang relevan.
+3. Jelaskan bahwa nama/kode status tidak dibandingkan secara lokal; seluruh consumer memakai klasifikasi `ref_status_pegawai.kelompok`.
 
-> Pegawai dipindahkan dari daftar aktif ke Data Backup dan dapat dipulihkan. SIMPEG Fase 1 tidak menyediakan penghapusan permanen pegawai.
+Narasi resmi:
+
+> SIMPEG tidak menghapus atau memindahkan record pegawai. Lifecycle ditentukan oleh status resmi, tanggal efektif, histori append-only, dan audit. Pegawai dapat ditemukan melalui filter status pada Data Pegawai; akses akun mengikuti status efektifnya.
 
 ---
 
@@ -1004,7 +1016,11 @@ Periksa username, `keycloak_username`, role internal, employee mapping, dan sess
 - [ ] Alert EWS tersedia atau dapat dibentuk oleh scheduler.
 - [ ] Export Excel/PDF dapat dibuka.
 - [ ] Audit Log memuat tindakan demo.
-- [ ] Employee dummy restore tersedia.
+- [ ] Employee dan user linked dummy lifecycle tersedia; tidak memakai akun demo utama.
+- [ ] Super Admin dan Admin Kepegawaian uji memiliki matriks `employees.restore` yang diketahui.
+- [ ] Filter status Data Pegawai berfungsi tanpa menu Data Backup/Data Nonaktif.
+- [ ] Status Tugas Belajar (`Aktif/khusus`) tetap diperlakukan aktif.
+- [ ] Halaman status akun dan logout dapat diakses ketika Employee efektif Nonaktif; route bisnis tidak.
 - [ ] Tidak ada NIK/No. KK nyata pada layar.
 - [ ] Lima profil browser sudah diberi label.
 - [ ] Zoom/proyektor nyaman dilihat.
@@ -1014,7 +1030,8 @@ Periksa username, `keycloak_username`, role internal, employee mapping, dan sess
 
 ## 23. Checklist Setelah Demo
 
-- [ ] Restore employee dummy yang masih berada di backup.
+- [ ] Aktifkan kembali Employee dummy melalui perubahan status resmi bila masih Nonaktif.
+- [ ] Batalkan/selesaikan transisi terjadwal dummy sesuai prosedur environment uji dan pastikan tidak ada jadwal yatim.
 - [ ] Bersihkan data master/hari libur dummy sesuai prosedur staging.
 - [ ] Kembalikan konfigurasi EWS jika sempat diubah.
 - [ ] Pastikan tidak ada role/permission utama yang berubah.

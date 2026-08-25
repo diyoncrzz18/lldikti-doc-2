@@ -40,7 +40,8 @@ pada exact release candidate, dan pihak Kepegawaian memberikan konfirmasi ekspli
 - Jangan membagikan token, password, NIK, No. KK, atau dokumen pegawai kepada pihak yang tidak
   berwenang.
 - Audit Log tidak boleh diedit atau dihapus melalui aplikasi.
-- Pegawai tidak dihapus permanen pada Fase 1; lifecycle menggunakan penonaktifan dan pemulihan.
+- Employee tidak dihapus atau dipindahkan pada Fase 1; lifecycle menggunakan perubahan status resmi pada Data Pegawai, tanpa Data Backup/Data Nonaktif.
+- Kelompok status `Aktif` dan `Aktif/khusus` sama-sama aktif. User linked ke Employee efektif Nonaktif hanya dapat membuka halaman status akun, logout, dan route auth teknis yang diperlukan, tanpa pengecualian role.
 - Keputusan cuti resmi adalah `Disetujui`, `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`.
 - WhatsApp Business tidak boleh dinyatakan aktif sebelum provider, credential, template ID, nomor
   uji, dan sandbox resmi tersedia serta terverifikasi.
@@ -53,3 +54,4 @@ pada exact release candidate, dan pihak Kepegawaian memberikan konfirmasi ekspli
 - [Tracking Role](../Tracking-Role/README.md)
 - [PRD SIMPEG Fase 1](../PRD-DLL/PRD-SIMPEG-Fase1-Core.md)
 - [User Stories SIMPEG Fase 1](../PRD-DLL/User-Stories-SIMPEG-Fase1.md)
+- [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md)

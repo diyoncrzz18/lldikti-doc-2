@@ -643,7 +643,7 @@ NOT_APPROVED
 CONFIG_UPDATE
 ```
 
-Untuk Employee, perubahan aktif/nonaktif dicatat sebagai `UPDATE` dengan status sebelum/sesudah, tanggal efektif, dan keterangan. Jangan menggunakan event `SOFT_DELETE` atau `RESTORE` untuk lifecycle pegawai.
+Untuk Employee, perubahan aktif/nonaktif dicatat sebagai `UPDATE`. Payload minimum memuat aktor, status sebelum/sesudah, tanggal efektif, alasan administratif, IP, user agent, timestamp, dan konteks role efektif. Jangan menggunakan event `SOFT_DELETE` atau `RESTORE` untuk lifecycle pegawai, menyalin seluruh row Employee, atau memasukkan data sensitif yang tidak diperlukan. Audit status bersifat kritis dan fail-closed: bila audit gagal, transaksi status dan histori wajib rollback.
 
 Untuk domain cuti, jangan memakai event `REJECT` atau label `Ditolak`. Keputusan negatif resmi adalah `NOT_APPROVED` / `Tidak Disetujui`. Aksi `Perubahan` dan `Ditangguhkan` wajib membawa keterangan.
 
@@ -655,8 +655,9 @@ Aturan:
 
 - event domain cukup menerbitkan payload notifikasi;
 - dispatcher menentukan channel aktif: in-app, email, dan channel future seperti WhatsApp Business;
+- untuk perubahan status, intent baru diterbitkan setelah transaksi commit; jangan dispatch job/event delivery dari keadaan yang belum committed;
 - email dikirim via queue;
-- kegagalan delivery dicatat per channel;
+- kegagalan delivery dicatat per channel dan tidak me-roll back perubahan status yang sudah committed;
 - credential tetap di `.env` atau secret manager, bukan di database reference table.
 
 Audit log harus menyimpan old/new values jika relevan, tetapi jangan simpan data sensitif yang tidak perlu.
@@ -767,7 +768,7 @@ Klik Nonaktifkan -> JavaScript hanya hide row -> tidak ada backend call.
 Contoh yang benar:
 
 ```text
-Klik ubah status -> request backend tervalidasi -> status_pegawai_id, tanggal efektif, keterangan, dan riwayat status disimpan atomik -> audit UPDATE -> UI refresh/list update.
+Klik ubah status -> request backend tervalidasi/terotorisasi -> lock + re-check -> snapshot, histori, dan audit disimpan atomik -> commit -> intent notifikasi -> UI refresh/list update.
 ```
 
 ## Testing Rules
@@ -783,7 +784,11 @@ Minimal test untuk CRUD/mutation:
 - invalid request gagal validasi;
 - audit log tertulis jika mutation penting;
 - data ownership dicek jika ada nested resource;
-- perubahan status pegawai menyimpan status sebelum/sesudah, tanggal efektif, riwayat status, dan audit tanpa menghapus record Employee.
+- perubahan status pegawai menyimpan status sebelum/sesudah, tanggal efektif, alasan administratif, riwayat status, dan audit tanpa menghapus record Employee;
+- perubahan status diuji untuk no-op, double submit, retry, dua worker bersamaan, audit failure/rollback, dan notifikasi after-commit;
+- tanggal efektif masa depan diuji sebelum jatuh tempo, ketika scheduler menerapkan, dan saat job diulang;
+- blokir akun Employee efektif Nonaktif diuji pada seluruh role dan pada allowlist account-status/logout/auth teknis;
+- predicate aktif diuji untuk kelompok `Aktif`, `Aktif/khusus`, dan Nonaktif, termasuk Tugas Belajar.
 
 Untuk refactor route/API:
 
@@ -907,6 +912,47 @@ Untuk switch role:
 
 - gate endpoint dengan permission khusus, FormRequest `authorize()`, dan scoped policy/service; jangan mengandalkan visibilitas menu;
 - simulasikan role efektif saja, bukan identitas atau `employee_id` pegawai lain;
-- simpan role/permission sementara secara persisten sampai revert, tetapi batasi target pada role yang lebih rendah daripada role asli;
+- simpan `temporary_role` secara persisten sampai revert; permission efektif selalu diturunkan dinamis dari role tujuan dan tidak disimpan sebagai snapshot `temporary_permission`;
 - setiap switch, request yang memakai role sementara, dan revert wajib menyimpan audit actor, role asli, role sementara, waktu, serta konteks yang aman;
 - jalur role sementara tetap fail-closed saat permission/role asal/target tidak valid dan tidak boleh memberi akses ke data di luar scope aktor.
+
+---
+
+## Addendum Lifecycle dan Status Pegawai
+
+Berdasarkan [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md), implementasi Employee wajib mengikuti pola berikut.
+
+### Predicate aktif tunggal
+
+- Sumber domain adalah `ref_status_pegawai.kelompok`.
+- Kelompok `Aktif` dan `Aktif/khusus` adalah aktif; Tugas Belajar tetap aktif.
+- Pakai `Employee::isActive()` untuk instance dan `Employee::whereActiveStatus()` untuk query, atau abstraksi kanonis setara yang sudah ada.
+- Jangan menulis query baru berdasarkan `status_aktif = 'Aktif'`, nama/kode lokal, atau daftar status hardcoded.
+- Daftar, dashboard, EWS, cuti, laporan, lookup, approval, dan access guard harus memakai semantik yang sama.
+
+### Mutation dan konkurensi
+
+```text
+FormRequest authorize/validate
+-> DB transaction
+-> Employee lockForUpdate
+-> re-check status dan jadwal setelah lock
+-> no-op guard
+-> mutate snapshot + append history + audit fail-closed
+-> commit
+-> dispatch notification intent after commit
+```
+
+- Status tujuan, tanggal efektif, dan alasan administratif wajib tervalidasi. `status_note` opsional dan tidak boleh menggantikan alasan.
+- Transisi masa depan disimpan sebagai jadwal tanpa mengubah snapshot atau akses kini. Job menerapkannya saat jatuh tempo dengan lock/re-check yang sama.
+- Writer harus idempoten terhadap retry, double submit, dan worker bersamaan.
+- Generic status change yang setelah lock tidak mengubah keadaan efektif harus berhenti tanpa histori/audit/notifikasi dan tanpa overwrite `status_note`.
+- Jangan mengirim notifikasi sebelum commit. Retry delivery tidak boleh menjalankan ulang mutasi status.
+
+### Authorization dan blokir akun
+
+- Penonaktifan mengikuti permission perubahan status yang ditetapkan matriks RBAC.
+- Reaktivasi hanya bagi Super Admin atau Admin Kepegawaian ketika role efektif memiliki `employees.restore`.
+- Middleware, FormRequest, policy, Action, dan service wajib membaca role/permission efektif yang sama. Jangan menggabungkan raw `$user->role` dengan permission efektif sebagai kondisi OR.
+- Access guard untuk linked Employee efektif Nonaktif berjalan sebelum route bisnis dan berlaku untuk semua role. Allowlist hanya account-status, logout, dan route auth teknis yang benar-benar diperlukan.
+- `status_note` default penonaktifan adalah `AKUN ANDA TELAH DI NONAKTIFKAN, SILAHKAN HUBUNGI ADMIN!!`; pesan ini merupakan output akun, bukan bukti/alasan administrasi.

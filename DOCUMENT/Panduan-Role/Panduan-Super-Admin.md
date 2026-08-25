@@ -20,7 +20,7 @@
 | Kelola Akses User | Buka **Kelola Akses User**, cari pegawai, isi identifier Keycloak, pilih role internal, lalu simpan | Mengubah kemampuan user di SIMPEG dan menghasilkan Audit Log |
 | Role & Permission | Buka **Role & Permission**, periksa role dan permission, ubah hanya berdasarkan keputusan yang disetujui | Dapat memperluas atau mencabut akses; salah konfigurasi dapat mengunci alur operasional |
 | Data Master | Buka **Data Master**, pilih referensi, tambah/ubah/nonaktifkan sesuai dependency | Mengubah pilihan kanonis yang dipakai form, perhitungan, dan laporan |
-| Data Pegawai | Cari pegawai, tambah atau ubah data utama, tambahkan riwayat berdasarkan SK, dan kelola status aktif | Mutasi pegawai dan riwayat tercatat dalam audit; histori kepegawaian bersifat append-only |
+| Data Pegawai | Cari pegawai, tambah/ubah data utama, tambahkan riwayat, dan kelola status langsung atau terjadwal | Mutasi status mempertahankan Employee, membuat histori append-only/audit, serta memengaruhi akses dan EWS ketika efektif |
 | Import Pegawai | Unduh template, unggah CSV/Excel, petakan kolom, validasi, periksa preview, lalu jalankan import | Dapat membuat banyak pegawai; baris import diklasifikasikan imported/skipped/failed |
 | Konfigurasi Approval Cuti | Buka **Konfigurasi Approval Cuti**, tetapkan verifikator, Kepala Bagian, dan PYBMC sesuai urutan kanonis | Hanya pengajuan baru yang memakai konfigurasi baru; snapshot pengajuan berjalan tidak berubah |
 | Channel Notifikasi | Buka **Channel Notifikasi**, periksa kill-switch dan kebijakan event | Mengaktifkan atau menonaktifkan intent per channel; tidak mengaktifkan provider yang belum tersedia |
@@ -56,6 +56,9 @@ jangan memindahkan mapping secara manual melalui database.
 - Jangan memberi akses berdasarkan role claim Keycloak.
 - Jangan membuat login manual produksi.
 - Jangan melakukan hard delete pegawai.
+- Jangan menggunakan Data Backup/Data Nonaktif; seluruh lifecycle ada pada filter status Data Pegawai.
+- Reaktivasi tetap memerlukan permission efektif `employees.restore`. Role Super Admin tidak menjadi bypass.
+- Jangan mengandalkan raw role asal ketika switch role aktif; seluruh aksi mengikuti role/permission efektif.
 - Jangan mengedit histori kepegawaian lama; tambahkan record baru berdasarkan dokumen resmi.
 - Jangan mengubah saldo cuti secara langsung; koreksi dilakukan melalui sumber pemakaian dan
   rekalkulasi yang diaudit.
@@ -67,7 +70,8 @@ jangan memindahkan mapping secara manual melalui database.
 
 | Gejala | Pemeriksaan |
 |---|---|
-| User mendapat 403 | Periksa mapping user–pegawai, status aktif, role internal, dan permission |
+| User hanya dapat membuka status akun | Employee linked efektif Nonaktif; blokir route bisnis berlaku untuk seluruh role. Periksa dasar administrasi dan reaktivasi resmi bila sah |
+| Reaktivasi ditolak | Periksa role efektif dan permission `employees.restore`; jangan bypass melalui raw role atau database |
 | Konfigurasi cuti tidak dapat disimpan | Periksa urutan, approver aktif, tepat satu Kepala Bagian, dan PYBMC terakhir |
 | Email tidak terkirim | Periksa kebijakan channel, queue worker, failed jobs, dan konfigurasi mail tanpa membuka credential |
 | EWS tidak muncul | Periksa histori/TMT, konfigurasi periode, scheduler, deduplikasi, dan scope penerima |

@@ -3,8 +3,8 @@
 
 | Field | Detail |
 |-------|--------|
-| **Versi Dokumen** | 1.10 |
-| **Tanggal** | 24 Agustus 2026 |
+| **Versi Dokumen** | 1.11 |
+| **Tanggal** | 25 Agustus 2026 |
 | **Domain** | Disiapkan LLDIKTI saat tahap deployment |
 | **Fase** | 1 — Core / Fondasi |
 | **Target Go-Live** | 20 Agustus 2026 |
@@ -32,10 +32,10 @@ PRD ini menjadi **sumber kebenaran utama** untuk Fase 1. Keputusan meeting tekni
 15. BUP tidak di-hardcode; usia pensiun dihitung dari referensi jabatan / jenis jabatan.
 16. Sample data pegawai, referensi jabatan, pangkat, golongan, struktur unit, data pemakaian cuti historis/entri manual yang telah disetujui, dan data mentah lainnya disediakan oleh bagian kepegawaian LLDIKTI.
 17. Keputusan sesi langsung pengguna 22 Juli 2026 (kanonis, disetujui pengguna): import massal Fase 1 hanya mengaktifkan template Data Utama. Import membuat record pegawai beserta field snapshot awal (golongan, pangkat, jabatan, kelas jabatan, pendidikan, prodi, dan tanggal pensiun bila tersedia di kolom Excel), tetapi tidak membuat riwayat kepangkatan, riwayat jabatan, maupun riwayat KGB. Riwayat resmi diinput per pegawai melalui CRUD riwayat append-only. Kalkulasi TMT dijalankan saat riwayat/sumber resmi disimpan, bukan saat import selesai. Tanggal pensiun hasil import dipertahankan apa adanya dan tidak dihitung ulang atau ditimpa oleh proses import. Template lanjutan multi-jenis (Data Pelengkap, Riwayat Kepangkatan, Riwayat Jabatan, Riwayat KGB) tidak termasuk ruang lingkup saat ini dan tidak dipulihkan tanpa keputusan eksplisit baru. Keputusan ini menggantikan rincian import versi sebelumnya jika bertentangan.
-18. Keputusan pengguna 28 Juli 2026: nama tabel fisik canonical cuti adalah `leave_request_steps`, `leave_balance_ledger`, dan `leave_proofs`. Keputusan, alasan, serta batasnya dicatat pada [Keputusan Skema Cuti Canonical](Keputusan-Skema-Cuti-Canonical.md).
+18. Keputusan pengguna 28 Juli 2026: nama tabel fisik canonical cuti adalah `leave_request_steps`, `leave_balance_ledger`, dan `leave_proofs`. Keputusan, alasan, serta batasnya dicatat pada [Keputusan Skema Cuti Canonical](../Keputusan-Skema-Cuti-Canonical.md).
 19. Keputusan pengguna 17 Agustus 2026: Program Studi menjadi reference table Fase 1 yang dikelola Super Admin melalui Data Master. Relasi UUID nullable dipakai pada data pegawai dan riwayat pendidikan, sedangkan snapshot teks lama tetap dipertahankan untuk kompatibilitas dan import. Kontrak lengkap dicatat pada [Keputusan Program Studi sebagai Data Referensi](../Keputusan-Program-Studi-Data-Master.md).
 20. Keputusan pengguna 21 Agustus 2026 dengan konfirmasi lanjutan 24 Agustus 2026: dokumen wajib/SK dikonfigurasi melalui matriks per jenis pegawai, bukan hardcode empat SK. PNS dan CPNS memakai matriks yang sama: SK Pengangkatan, SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru. Admin Kepegawaian yang berwenang dapat mengustom matriks PPPK tanpa daftar bawaan; PPPK berstatus Tidak Dinilai sampai sedikitnya satu kategori diaktifkan. Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only, tetapi berkas SK dapat diganti secara terpisah dengan audit. Arsip dokumen terpusat digunakan read-only untuk pencarian lintas pegawai; seluruh kontrol dokumen dilakukan dari detail/profil pegawai. Kontrak lengkap dicatat pada [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md#k-mtg-08--dokumen-wajib-berkas-sk-dan-arsip-dokumen-terpusat).
-21. Keputusan pengguna 21 Agustus 2026: lifecycle pegawai menggunakan `ref_status_pegawai`, bukan `deleted_at` atau Laravel `SoftDeletes`. Menonaktifkan pegawai mengubah statusnya menjadi `Nonaktif`; record tetap berada pada tabel `employees`. Perubahan status wajib menyimpan tanggal efektif, histori status, keterangan, dan audit trail. Ketentuan lifecycle pegawai sebelumnya yang berbasis penghapusan tidak berlaku lagi bila bertentangan.
+21. Keputusan pengguna 21 Agustus 2026, disempurnakan 25 Agustus 2026: lifecycle pegawai menggunakan `ref_status_pegawai`, bukan `deleted_at` atau Laravel `SoftDeletes`; tidak ada hard delete Employee, Data Backup, atau dataset Data Nonaktif. Predicate aktif berasal dari `ref_status_pegawai.kelompok`: `Aktif` dan `Aktif/khusus` sama-sama aktif, termasuk Tugas Belajar. Perubahan status wajib memiliki status tujuan, tanggal efektif, alasan administratif, histori append-only, snapshot konsisten, dan audit fail-closed. Tanggal masa depan disimpan sebagai transisi terjadwal dan baru mengubah snapshot/akses ketika berlaku. Reaktivasi tersedia bagi Super Admin atau Admin Kepegawaian bila role efektif memiliki `employees.restore`. Akun yang terhubung ke Employee efektif Nonaktif diblokir dari seluruh route bisnis tanpa bypass role. Notifikasi diterbitkan setelah commit. Kontrak lengkap dicatat pada [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
 
 ---
 
@@ -190,6 +190,8 @@ Super Admin
 - User dengan role kosong, belum diset, atau role tidak valid harus menerima HTTP `403 Access Forbidden` dengan pesan: *"Akun Anda belum memiliki role SIMPEG. Hubungi Admin."*
 - Fase 1 menggunakan satu role utama per pegawai agar implementasi awal sederhana.
 - Struktur permission internal tetap disiapkan agar akses fitur dapat diatur tanpa mengubah Keycloak.
+- Semua keputusan akses membaca role efektif dan permission efektif dari SIMPEG. Raw role asal tidak boleh menjadi bypass ketika switch role aktif.
+- User yang terhubung ke Employee dengan status efektif Nonaktif ditolak dari seluruh route bisnis tanpa pengecualian role. Aksesnya terbatas pada halaman status akun, logout, dan route autentikasi teknis yang diperlukan.
 
 ### 4.2 Definisi Role & Hak Akses
 
@@ -202,14 +204,14 @@ Super Admin
 | Konfigurasi Sistem | Kelola reference tables, konfigurasi EWS, hari libur nasional, channel notifikasi, dan chain approval cuti |
 | User Management | Assign role ke user, mapping user Keycloak ↔ pegawai |
 | Semua Fitur Admin | Semua yang bisa dilakukan Admin Kepegawaian |
-| Status Pegawai | Mengubah status pegawai melalui `ref_status_pegawai`; pegawai tetap tersimpan dan perubahan status memiliki histori serta audit trail |
+| Status Pegawai | Mengubah status pegawai melalui `ref_status_pegawai`; pengaktifan kembali memerlukan permission efektif `employees.restore`; tidak ada bypass karena role Super Admin |
 | Audit Log | Akses penuh ke seluruh audit log |
 
 #### Admin Kepegawaian
 
 | Hak Akses | Detail |
 |-----------|--------|
-| Data Pegawai | CRUD data pegawai (create, read, update) serta perubahan status pegawai melalui `ref_status_pegawai` |
+| Data Pegawai | CRUD data pegawai (create, read, update) serta perubahan status pegawai melalui `ref_status_pegawai`; dapat mengaktifkan kembali bila role efektif memiliki `employees.restore` |
 | Riwayat | Tambah riwayat kepangkatan, jabatan, KGB, disiplin (append-only) |
 | Import Excel/CSV | Upload dan mapping data dari Excel/CSV |
 | Set Supervisor | Assign kepala bagian per pegawai |
@@ -353,6 +355,7 @@ Pihak LLDIKTI akan membagikan trait/fungsi Keycloak yang sudah digunakan di ling
 4. Jika user belum ter-mapping ke data pegawai di SIMPEG, tampilkan halaman "Akun belum terdaftar, hubungi Admin Kepegawaian".
 5. Jika user sudah ter-mapping, redirect ke halaman sesuai role-nya.
 6. Role dan permission yang dipakai aplikasi dibaca dari database SIMPEG, bukan dari Keycloak.
+7. Setelah mapping, status efektif Employee diperiksa sebelum route bisnis. Employee efektif Nonaktif diarahkan ke halaman status akun dan tidak memperoleh akses bisnis meskipun role-nya Super Admin atau role tinggi lain.
 
 #### US-AUTH-02: Logout
 
@@ -474,32 +477,34 @@ Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di F
 3. Data bersifat read-only (tidak bisa edit di Fase 1).
 4. Tampilkan informasi saldo cuti.
 
-#### US-PEG-05: Nonaktifkan Pegawai melalui Status Kepegawaian
+#### US-PEG-05: Ubah Status Pegawai
 
 > **Sebagai** Admin Kepegawaian,
-> **Saya ingin** menonaktifkan data pegawai yang sudah pensiun/mutasi,
-> **Sehingga** data tidak muncul di daftar aktif tapi tetap tersimpan untuk riwayat.
+> **Saya ingin** mengubah status pegawai berdasarkan dasar administrasi resmi,
+> **Sehingga** lifecycle, akses, riwayat, EWS, dan pelaporan memakai keadaan yang konsisten.
 
 **Acceptance Criteria:**
-1. Menonaktifkan pegawai mengubah `status_pegawai_id` ke referensi `Nonaktif`, tanpa menghapus record dari tabel `employees`.
-2. Perubahan status wajib menyimpan tanggal efektif, keterangan/alasan, dan satu record `employee_status_histories`.
-3. Daftar pegawai default hanya menampilkan status yang diklasifikasikan aktif oleh `ref_status_pegawai`; pegawai Nonaktif tetap dapat ditemukan melalui filter status pegawai.
-4. Perubahan status selanjutnya, termasuk kembali ke status Aktif bila ada dasar administrasi resmi, dilakukan sebagai perubahan status baru dengan tanggal efektif, histori, keterangan, dan audit trail; tidak melalui lifecycle data terhapus.
-5. Pegawai dengan status yang diklasifikasikan Nonaktif tidak diproses oleh EWS.
-6. Audit log mencatat status sebelum/sesudah, tanggal efektif, dan keterangan perubahan.
+1. Menonaktifkan pegawai mengubah `status_pegawai_id` ke referensi yang kelompoknya Nonaktif, tanpa menghapus record dari tabel `employees`; tidak ada hard delete, Data Backup, atau dataset Data Nonaktif.
+2. Perubahan status wajib menerima status tujuan, tanggal efektif, dan alasan administratif. Alasan wajib terpisah dari `status_note`, yaitu pesan akun opsional dengan default penonaktifan `AKUN ANDA TELAH DI NONAKTIFKAN, SILAHKAN HUBUNGI ADMIN!!`.
+3. Daftar pegawai default memakai predicate aktif kanonis berdasarkan `ref_status_pegawai.kelompok`: kelompok `Aktif` dan `Aktif/khusus` termasuk aktif. Tugas Belajar tetap aktif; status lain dapat ditemukan melalui filter pada Data Pegawai.
+4. Tanggal efektif masa depan diperbolehkan sebagai transisi terjadwal. Snapshot status, predicate aktif, dan akses akun tidak berubah sebelum tanggal tersebut; scheduler menerapkannya otomatis ketika jatuh tempo.
+5. Saat perubahan berlaku, sistem menyimpan satu histori append-only, snapshot Employee yang konsisten, dan audit kritis dalam satu transaksi. Mutasi memakai lock, membaca ulang keadaan setelah lock, idempoten, aman retry/concurrency, dan berhenti tanpa side effect bila hasilnya no-op.
+6. Employee efektif Nonaktif tidak diproses oleh EWS dan user yang terhubung dengannya tidak dapat mengakses route bisnis, termasuk bila memiliki role Super Admin, Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai.
+7. Audit minimum memuat aktor, status sebelum/sesudah, tanggal efektif, alasan administratif, IP, user agent, waktu, serta role efektif tanpa menyalin seluruh row atau data sensitif yang tidak perlu. Kegagalan audit me-roll back mutasi.
+8. Intent notifikasi dibuat setelah commit; kegagalan delivery tidak me-roll back status. Event `status_pegawai.dinonaktifkan` channel-configurable dengan default rekomendasi in-app dan email aktif.
 
-#### US-PEG-06: Kelola Status Pegawai oleh Super Admin
+#### US-PEG-06: Aktifkan Kembali Pegawai Berbasis Permission
 
-> **Sebagai** Super Admin,
-> **Saya ingin** mengubah status pegawai sesuai referensi dan dasar administrasi resmi,
-> **Sehingga** data pegawai tetap tersimpan dan riwayat statusnya dapat ditelusuri.
+> **Sebagai** Super Admin atau Admin Kepegawaian yang berwenang,
+> **Saya ingin** mengaktifkan kembali pegawai melalui perubahan status resmi,
+> **Sehingga** akses hanya pulih melalui tindakan administratif yang sah dan dapat diaudit.
 
 **Acceptance Criteria:**
 1. Tidak ada fitur hapus permanen untuk data pegawai di aplikasi.
-2. Super Admin mengubah status pegawai ke `Nonaktif` atau status lain yang tersedia pada `ref_status_pegawai`, bukan menghapus record pegawai.
-3. Data pegawai yang berstatus Nonaktif tetap tersimpan di tabel `employees` dan dapat ditemukan melalui filter status pegawai.
-4. Setiap perubahan status menyimpan tanggal efektif, histori status, keterangan, dan audit trail.
-5. Pengaktifan kembali, bila sah secara administrasi, adalah perubahan status baru ke status yang diklasifikasikan Aktif; bukan pemulihan data terhapus.
+2. Pengaktifan kembali tersedia bagi Super Admin atau Admin Kepegawaian hanya bila role efektif aktor memiliki permission `employees.restore`.
+3. Authorization pada middleware, FormRequest, policy, Action, dan service memakai role/permission efektif yang sama; raw role asal tidak dapat dipakai sebagai bypass.
+4. Pengaktifan kembali adalah perubahan status baru ke referensi berkelompok `Aktif` atau `Aktif/khusus`, bukan pemulihan data terhapus, dan mengikuti kontrak transaksi, histori, audit, jadwal, serta notifikasi pada US-PEG-05.
+5. Setelah transisi aktif berlaku, blokir akun dicabut berdasarkan predicate status efektif, bukan berdasarkan penghapusan/restorasi session atau record Employee.
 
 ### 7.3 Struktur Data Pegawai
 
@@ -526,7 +531,7 @@ Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di F
 | `jenis_pegawai` | enum/ref | Ya | PNS / PPPK / CPNS; dapat dibuat reference bila LLDIKTI ingin menambah kategori |
 | `status_pegawai_id` | ref_status_pegawai_id | Ya | FK ke `ref_status_pegawai`; default `Aktif` |
 | `status_tanggal` | date nullable | Tidak | Tanggal efektif status saat ini; diisi saat perubahan status resmi |
-| `status_keterangan` | text | Tidak | Keterangan/alasan saat status pegawai berubah, misalnya CLTN, tugas belajar, atau pemberhentian sementara |
+| `status_note` | text | Tidak | Pesan akun untuk status saat ini; terpisah dari alasan administratif pada riwayat/audit. Penonaktifan tanpa pesan khusus memakai default yang ditetapkan pada keputusan lifecycle |
 | `golongan_terakhir` | snapshot | Ya untuk import Excel | Snapshot langsung dari kolom Excel saat import Data Utama. Setelah ada riwayat kepangkatan resmi, nilai terkini diturunkan dari riwayat terbaru berdasarkan TMT; import tidak membuat riwayat |
 | `pangkat_terakhir` | snapshot | Tidak | Snapshot dari kolom Excel; boleh kosong untuk PPPK/CPNS. Setelah ada riwayat kepangkatan resmi, nilai terkini diturunkan dari riwayat terbaru; import tidak membuat riwayat |
 | `jabatan_terakhir` | snapshot | Ya untuk import Excel | Snapshot dari kolom Excel saat import Data Utama. Setelah ada riwayat jabatan resmi, nilai terkini diturunkan dari riwayat terbaru berdasarkan TMT dan `ref_jabatan`; import tidak membuat riwayat |
@@ -539,7 +544,7 @@ Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di F
 
 #### Riwayat Status Kepegawaian
 
-Setiap perubahan status resmi membuat satu record `employee_status_histories` yang menyimpan `employee_id`, `status_pegawai_id`, `tanggal_efektif`, `keterangan`, serta timestamp. Riwayat ini menjadi jejak status pegawai dan tidak digantikan oleh `deleted_at`. Perubahan status wajib diaudit bersama nilai status sebelum/sesudah, tanggal efektif, dan keterangan.
+Ketika perubahan status resmi berlaku, sistem membuat tepat satu record append-only `employee_status_histories` yang menyimpan `employee_id`, `status_pegawai_id`, `tanggal_efektif`, alasan administratif pada `keterangan`, serta timestamp. Riwayat ini menjadi jejak status pegawai dan tidak digantikan oleh `deleted_at`. Transisi masa depan belum mengubah snapshot/akses sebelum tanggal efektif. `status_note` pada Employee bukan alasan administratif.
 
 #### Data Kontak
 
@@ -923,6 +928,8 @@ Cuti bersama otomatis mengurangi saldo cuti tahunan (sesuai kebijakan yang berla
 
 EWS adalah scheduler otomatis yang berjalan setiap hari untuk memeriksa momen penting kepegawaian dan mengirim notifikasi di waktu yang telah ditentukan. Dasar perhitungan menggunakan TMT (Terhitung Mulai Tanggal) dari data riwayat pegawai.
 
+**Predicate pegawai aktif:** EWS hanya memproses Employee yang `ref_status_pegawai.kelompok`-nya `Aktif` atau `Aktif/khusus`, melalui scope/predicate kanonis `whereActiveStatus()`/`isActive()`. Tugas Belajar tetap diproses. Query literal terhadap nama/kode status atau kolom legacy `status_aktif` tidak menjadi sumber keputusan EWS.
+
 ### 10.2 Trigger Events
 
 #### Kenaikan Pangkat Reguler
@@ -990,7 +997,7 @@ EWS adalah scheduler otomatis yang berjalan setiap hari untuk memeriksa momen pe
 
 **Acceptance Criteria:**
 1. Laravel scheduler berjalan setiap hari pukul 07:00 WITA.
-2. Sistem memeriksa semua pegawai aktif terhadap 5 trigger di atas.
+2. Sistem memeriksa semua pegawai aktif menurut predicate kanonis terhadap 5 trigger di atas, termasuk status Tugas Belajar (`Aktif/khusus`).
 3. Jika ada pegawai yang memenuhi kriteria interval, buat notifikasi.
 4. Notifikasi tidak duplikat (jika notifikasi H-90 sudah dikirim, tidak kirim ulang H-90 keesokan harinya).
 5. Log eksekusi scheduler dicatat (waktu mulai, waktu selesai, jumlah notifikasi yang dihasilkan).
@@ -1073,6 +1080,9 @@ Notifikasi dipicu oleh events di modul lain (cuti, EWS, import, audit penting, d
 | EWS: Kontrak PPPK | Pegawai + Admin | ✅ | ✅ | H-6bln, H-3bln, H-1bln |
 | EWS: Satyalancana | Pegawai + Admin | ✅ | ✅ | H-180, H-90, H-30 |
 | Data pegawai diubah | Admin (pembuat) | ✅ | ❌ | Konfirmasi audit trail |
+| `status_pegawai.dinonaktifkan` | User yang terhubung ke pegawai + penerima operasional sesuai kebijakan | ✅ | ✅ | Default rekomendasi; channel dapat diubah operator |
+
+**Batas transaksi:** domain hanya menerbitkan intent notifikasi setelah transaksi perubahan status commit. Delivery berjalan melalui dispatcher/queue. Kegagalan channel tidak membatalkan status yang sudah sah dan ditangani melalui retry/observability notifikasi.
 
 ### 11.4 User Stories
 
@@ -1131,7 +1141,7 @@ Setiap perubahan data di SIMPEG dicatat dalam audit log yang immutable. Audit lo
 |----------------------|--------|
 | **Create** | Tambah pegawai baru, tambah riwayat kepangkatan |
 | **Update** | Edit data pribadi, perbaikan data pemakaian cuti/entri manual yang memicu rekalkulasi saldo |
-| **Perubahan Status Pegawai** | Mengubah status pegawai melalui `ref_status_pegawai`, termasuk penonaktifan dan pengaktifan kembali yang memiliki dasar administrasi |
+| **Perubahan Status Pegawai** | Mengubah status pegawai melalui `ref_status_pegawai`, termasuk transisi terjadwal, penonaktifan, dan pengaktifan kembali yang memiliki dasar administrasi |
 | **Verifikasi / Keputusan Cuti** | Setiap step approval, rekomendasi, keputusan final, dan perubahan status |
 | **Login** | Login berhasil via Keycloak |
 | **Logout** | Logout manual atau session timeout |
@@ -1147,7 +1157,7 @@ Setiap perubahan data di SIMPEG dicatat dalam audit log yang immutable. Audit lo
 
 **Acceptance Criteria:**
 1. Setiap operasi yang tercakup (lihat scope) otomatis membuat record audit log.
-2. Audit log menyimpan: user ID, timestamp, jenis operasi, nama tabel, record ID, data sebelum (old_values), data sesudah (new_values).
+2. Audit umum menyimpan identitas aktor, timestamp, jenis operasi, model, record ID, serta before/after yang relevan. Khusus status pegawai, payload minimum memuat status sebelum/sesudah, tanggal efektif, alasan administratif, IP, user agent, timestamp, dan konteks role efektif; tidak menyalin seluruh row Employee atau data sensitif yang tidak diperlukan.
 3. Audit log **tidak bisa diedit atau dihapus** oleh siapa pun (termasuk Super Admin).
 4. Implementasi menggunakan Laravel model events atau dedicated audit package.
 
@@ -1171,7 +1181,7 @@ Setiap perubahan data di SIMPEG dicatat dalam audit log yang immutable. Audit lo
 | `id` | UUID | PK |
 | `user_id` | UUID | FK ke pegawai yang melakukan aksi |
 | `user_name` | string | Snapshot nama user (untuk readability) |
-| `event` | enum | CREATE / UPDATE / DELETE / SOFT_DELETE / RESTORE / LOGIN / LOGOUT / VERIFY / DECIDE / CHANGE_REQUESTED / DEFER / NOT_APPROVED / IMPORT / CONFIG_UPDATE; perubahan status pegawai dicatat sebagai UPDATE dengan payload status sebelum/sesudah, tanggal efektif, dan keterangan |
+| `event` | enum | CREATE / UPDATE / DELETE / SOFT_DELETE / RESTORE / LOGIN / LOGOUT / VERIFY / DECIDE / CHANGE_REQUESTED / DEFER / NOT_APPROVED / IMPORT / CONFIG_UPDATE. `SOFT_DELETE`/`RESTORE` hanya untuk domain lain yang benar-benar memiliki lifecycle tersebut; Employee memakai UPDATE status dengan payload minimal yang ditetapkan dan audit fail-closed |
 | `auditable_type` | string | Nama model/tabel (misal: `Employee`, `LeaveRequest`) |
 | `auditable_id` | UUID | ID record yang diubah |
 | `old_values` | json | Data sebelum perubahan |
@@ -1401,7 +1411,7 @@ Fase 1 menyediakan export laporan dasar ke format PDF dan Excel. Selain export f
 │ foto             │  │  │  (Kepangkatan)       │
 │ jenis_pegawai    │  │  │──────────────────────│
 │ status_pegawai_id│  ├──│ id (PK, UUID)        │
-│ status_keterangan│  │  │ employee_id (FK)     │
+│ status_note      │  │  │ employee_id (FK)     │
 │ program_studi_id │  │  │ golongan_id (FK)     │
 │ alamat           │  │  │ tmt_pangkat          │
 │ no_hp            │  │  │ no_sk                │
@@ -1539,7 +1549,7 @@ fallback.
 | `leave_proofs` | Bukti formulir cuti resmi final: token QR, path/mime PDF, penerbit, waktu terbit, dan metadata snapshot |
 | `leave_balance_ledger` | Ledger append-only mutasi saldo tahunan, termasuk hak, carry-over, pemotongan final, dan hasil rekalkulasi perbaikan data pemakaian/entri manual beserta alasan serta audit trail; bukan jalur direct balance override menurut Addendum 15/18 Agustus 2026 |
 
-Nama tabel fisik canonical di bagian ini mengikuti [Keputusan Skema Cuti Canonical](Keputusan-Skema-Cuti-Canonical.md). `external_approval` dan `external_document_path` bukan kolom runtime pada `leave_proofs`; kebutuhan dokumen eksternal tetap merupakan kebutuhan bisnis yang memerlukan desain storage dan migration tersendiri sebelum diaktifkan.
+Nama tabel fisik canonical di bagian ini mengikuti [Keputusan Skema Cuti Canonical](../Keputusan-Skema-Cuti-Canonical.md). `external_approval` dan `external_document_path` bukan kolom runtime pada `leave_proofs`; kebutuhan dokumen eksternal tetap merupakan kebutuhan bisnis yang memerlukan desain storage dan migration tersendiri sebelum diaktifkan.
 
 `decision_status` dan `final_decision_status` hanya memakai label resmi: `Disetujui`, `Perubahan`, `Ditangguhkan`, `Tidak Disetujui`. Keterangan wajib untuk semua selain `Disetujui`.
 
@@ -1687,7 +1697,7 @@ Status pegawai tidak boleh berupa enum hardcoded. Seed awal minimal:
 | WAJIB_MILITER | Wajib Militer | Nonaktif/khusus |
 | HILANG | PNS Dinyatakan Hilang | Nonaktif/khusus |
 
-Setiap perubahan status pegawai wajib menyimpan tanggal efektif, `status_keterangan`, satu record riwayat status, dan audit trail. Klasifikasi Aktif/Nonaktif pada referensi ini menjadi sumber visibilitas daftar pegawai serta pemrosesan EWS; tidak ada `deleted_at` pada Employee.
+Setiap perubahan status pegawai wajib menyimpan tanggal efektif, alasan administratif, satu record riwayat status append-only ketika transisi berlaku, snapshot konsisten, dan audit fail-closed. `status_note` adalah pesan akun opsional yang terpisah dari alasan. Klasifikasi pada `kelompok` menjadi sumber tunggal predicate aktif: `Aktif` dan `Aktif/khusus` termasuk aktif; klasifikasi lain tidak aktif. Aturan ini dipakai daftar, akses akun, EWS, dashboard, cuti, laporan, dan lookup. Tidak ada `deleted_at` pada Employee.
 
 ### 16.5 ref_eselon
 
@@ -2189,3 +2199,27 @@ Fitur dalam addendum ini belum boleh dinyatakan selesai hanya karena tercatat di
 5. Form dapat mulai kosong atau menyalin current chain pegawai lalu mengedit setiap bagian hasil salinan. Salinan tidak mengubah konfigurasi sumber; snapshot historis tidak berubah oleh perubahan konfigurasi, koreksi, atau pembatalan. Koreksi membuat fakta dan snapshot pengganti, sedangkan pembatalan mempertahankan snapshot lama.
 6. Mutasi dibatasi untuk exact Admin Kepegawaian dengan permission `cuti.manual.manage`, ditegakkan pada route, FormRequest, Action, dan service. Audit mencatat aktor, alasan, nilai fakta, keberadaan dokumen, serta snapshot tanpa data privat yang tidak perlu.
 7. Preview, lookup, dan histori menjaga privacy serta performance: field minimum, query dan hasil bounded, pagination server-side, eager loading bounded, dan tanpa query Blade atau payload besar ke Alpine. Implementasi DB-sensitive dibuktikan pada PostgreSQL; browser smoke Chrome membuktikan form kosong/copy-edit, dokumen opsional, aksesibilitas, viewport, serta tanpa console error atau polling besar.
+
+---
+
+## 25. Addendum Lifecycle dan Status Pegawai — 25 Agustus 2026
+
+> **Status:** **Disetujui dan kanonis.** Addendum ini merujuk [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md) dan menggantikan aturan terdahulu yang berbeda mengenai soft delete/restore Employee, Data Backup/Data Nonaktif, larangan tanggal efektif masa depan, reaktivasi Super Admin-only, bypass akun Nonaktif berdasarkan role, dan notifikasi di dalam transaksi.
+
+1. Employee selalu dipertahankan pada `employees`; lifecycle hanya melalui status resmi dan histori append-only.
+2. Predicate aktif tunggal berasal dari `ref_status_pegawai.kelompok`; `Aktif` serta `Aktif/khusus` adalah aktif dan Tugas Belajar tetap aktif.
+3. Penonaktifan memerlukan status tujuan, tanggal efektif, alasan administratif, snapshot konsisten, histori, dan audit. `status_note` opsional serta terpisah dari alasan, dengan pesan default akun yang telah ditetapkan pada keputusan kanonis.
+4. Reaktivasi dapat dilakukan Super Admin atau Admin Kepegawaian ketika role efektif memiliki `employees.restore`; seluruh lapisan backend memakai role/permission efektif yang sama.
+5. User linked ke Employee efektif Nonaktif diblokir dari route bisnis apa pun tanpa pengecualian role; hanya halaman status akun, logout, dan route auth teknis yang diperlukan tetap tersedia.
+6. Tanggal efektif masa depan menjadi transisi terjadwal; keadaan dan akses saat ini tidak berubah sebelum jatuh tempo. Penerapan otomatis wajib idempoten dan concurrency-safe.
+7. Mutasi memakai `lockForUpdate → re-check → mutate`; status, histori, dan audit kritis berada dalam satu transaksi fail-closed. Notifikasi diterbitkan setelah commit dan kegagalan delivery tidak membatalkan mutasi.
+8. Event `status_pegawai.dinonaktifkan` channel-configurable dengan default rekomendasi in-app dan email aktif.
+
+### Changelog v1.11
+
+- Menetapkan predicate aktif kanonis termasuk `Aktif/khusus` dan Tugas Belajar.
+- Menetapkan reaktivasi berbasis role efektif + `employees.restore` untuk Super Admin dan Admin Kepegawaian.
+- Menetapkan blokir global route bisnis bagi akun linked Employee efektif Nonaktif.
+- Mengizinkan dan mengatur transisi status bertanggal efektif masa depan.
+- Memisahkan alasan administratif wajib dari `status_note` opsional.
+- Mengunci konkurensi, no-op, audit fail-closed, dan notification-after-commit.

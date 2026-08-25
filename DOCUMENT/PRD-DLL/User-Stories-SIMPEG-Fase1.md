@@ -20,6 +20,8 @@
 >
 > **Keputusan status pegawai (21 Agustus 2026):** Employee tidak memakai `deleted_at` atau Laravel `SoftDeletes`. Penonaktifan mengubah status ke referensi `Nonaktif`; record tetap berada pada tabel `employees`. Status aktif/nonaktif berasal dari klasifikasi `ref_status_pegawai`, dengan tanggal efektif, histori status, keterangan, dan audit trail untuk setiap perubahan resmi.
 
+> **Penyempurnaan lifecycle (25 Agustus 2026):** [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md) adalah kontrak aktif. Kelompok `Aktif` dan `Aktif/khusus` sama-sama aktif; Tugas Belajar tetap aktif. Alasan administratif wajib terpisah dari `status_note`; tanggal efektif masa depan dijadwalkan; reaktivasi dapat dilakukan Super Admin atau Admin Kepegawaian dengan role efektif ber-permission `employees.restore`; linked Employee efektif Nonaktif diblokir global dari route bisnis; mutasi wajib lock/re-check/idempoten, audit fail-closed, dan notifikasi after-commit.
+
 ---
 
 ## Pembaruan Status Acceptance Criteria — 14 Agustus 2026
@@ -705,7 +707,7 @@ Setiap story mengikuti format:
 
 ---
 
-### US-2.9 · Nonaktifkan Pegawai melalui Status Kepegawaian
+### US-2.9 · Kelola Lifecycle Pegawai melalui Status Kepegawaian
 
 | Field | Detail |
 |-------|--------|
@@ -716,22 +718,24 @@ Setiap story mengikuti format:
 | **Dependensi** | US-2.1 |
 
 > **Sebagai** Admin Kepegawaian,
-> **Saya ingin** menonaktifkan pegawai yang sudah pensiun atau mutasi tanpa menghapus datanya,
-> **Sehingga** data historis tetap tersimpan untuk arsip dan pelaporan.
+> **Saya ingin** mengubah status pegawai berdasarkan dasar administrasi resmi tanpa menghapus datanya,
+> **Sehingga** data, akses, histori, EWS, dan pelaporan tetap konsisten.
 
 **Acceptance Criteria:**
 
-- [ ] AC-1: Tombol "Nonaktifkan" di halaman detail pegawai membuka perubahan status ke referensi `Nonaktif`, bukan penghapusan record.
-- [ ] AC-2: Konfirmasi perubahan status meminta tanggal efektif dan keterangan/alasan; sistem membuat satu `employee_status_histories` untuk perubahan resmi tersebut.
+- [ ] AC-1: Tombol "Ubah Status"/"Nonaktifkan" pada Data Pegawai membuka perubahan status resmi, bukan penghapusan record; tidak ada Data Backup, Data Nonaktif, atau hard delete Employee.
+- [ ] AC-2: Form meminta status tujuan, tanggal efektif, dan alasan administratif wajib. `status_note` adalah pesan akun opsional yang terpisah; penonaktifan tanpa pesan khusus memakai `AKUN ANDA TELAH DI NONAKTIFKAN, SILAHKAN HUBUNGI ADMIN!!`.
 - [ ] AC-3: Record pegawai tetap tersimpan di tabel `employees` tanpa `deleted_at` maupun Laravel `SoftDeletes`.
-- [ ] AC-4: Daftar default hanya menampilkan pegawai berstatus Aktif berdasarkan klasifikasi `ref_status_pegawai`; filter status pegawai dapat menemukan pegawai Nonaktif.
-- [ ] AC-5: Perubahan kembali ke status Aktif, bila memiliki dasar administrasi resmi, dilakukan sebagai perubahan status baru dengan tanggal efektif, histori, keterangan, dan audit trail; tidak melalui lifecycle data terhapus.
-- [ ] AC-6: Pegawai dengan status yang diklasifikasikan Nonaktif tidak diproses oleh EWS.
-- [ ] AC-7: Audit log mencatat status sebelum/sesudah, tanggal efektif, serta keterangan perubahan status.
+- [ ] AC-4: Daftar default dan seluruh consumer memakai predicate `ref_status_pegawai.kelompok`: `Aktif` dan `Aktif/khusus` sama-sama aktif; Tugas Belajar tetap aktif. Filter status pada Data Pegawai dapat menemukan semua klasifikasi.
+- [ ] AC-5: Perubahan berlaku melalui `lockForUpdate → re-check → mutate`; snapshot, satu histori append-only, dan audit kritis tersimpan dalam satu transaksi. No-op, double submit, retry, dan worker bersamaan tidak membuat histori/audit duplikat atau menimpa `status_note` secara tidak relevan.
+- [ ] AC-6: Tanggal efektif masa depan disimpan sebagai transisi terjadwal. Snapshot, predicate aktif, dan akses akun tidak berubah sebelum tanggal berlaku; scheduler menerapkannya otomatis dan idempoten di zona waktu `Asia/Makassar`.
+- [ ] AC-7: Employee efektif Nonaktif tidak diproses EWS. User linked ke Employee tersebut ditolak dari seluruh route bisnis tanpa pengecualian role; hanya halaman status akun, logout, dan route auth teknis yang diperlukan diizinkan.
+- [ ] AC-8: Audit minimum mencatat aktor, status sebelum/sesudah, tanggal efektif, alasan administratif, IP, user agent, timestamp, dan konteks role efektif tanpa whole-row/sensitive payload. Kegagalan audit me-roll back mutasi.
+- [ ] AC-9: Intent notifikasi diterbitkan setelah commit. Kegagalan delivery tidak me-roll back status; `status_pegawai.dinonaktifkan` channel-configurable dengan default rekomendasi in-app dan email.
 
 ---
 
-### US-2.10 · Kelola Status Pegawai oleh Super Admin
+### US-2.10 · Aktifkan Kembali Pegawai Berbasis Permission
 
 | Field | Detail |
 |-------|--------|
@@ -741,17 +745,18 @@ Setiap story mengikuti format:
 | **Modul** | Data Pegawai |
 | **Dependensi** | US-2.9 |
 
-> **Sebagai** Super Admin,
-> **Saya ingin** mengubah status pegawai berdasarkan referensi dan dasar administrasi resmi,
-> **Sehingga** data pegawai tetap tersimpan dan riwayat statusnya dapat ditelusuri.
+> **Sebagai** Super Admin atau Admin Kepegawaian yang berwenang,
+> **Saya ingin** mengaktifkan kembali pegawai melalui perubahan status resmi,
+> **Sehingga** akses dipulihkan hanya oleh aktor yang sah dan dapat diaudit.
 
 **Acceptance Criteria:**
 
 - [ ] AC-1: Tidak ada tombol "Hapus Permanen" di aplikasi untuk role apa pun, termasuk Super Admin.
-- [ ] AC-2: Super Admin mengubah status pegawai ke referensi `Nonaktif` atau status lain yang tersedia pada `ref_status_pegawai`, bukan menghapus record pegawai.
-- [ ] AC-3: Data pegawai berstatus Nonaktif tetap tersimpan di tabel `employees` dan dapat ditemukan melalui filter status pegawai.
-- [ ] AC-4: Setiap perubahan status menyimpan tanggal efektif, histori status, keterangan, dan audit trail.
-- [ ] AC-5: Pengaktifan kembali, bila sah secara administrasi, adalah perubahan status baru ke status yang diklasifikasikan Aktif; bukan pemulihan data terhapus.
+- [ ] AC-2: Super Admin atau Admin Kepegawaian dapat mengaktifkan kembali hanya ketika role efektif memiliki permission `employees.restore`.
+- [ ] AC-3: Middleware, FormRequest, policy, Action, dan service membaca role/permission efektif yang sama; raw `$user->role` tidak dapat menjadi bypass saat switch role aktif.
+- [ ] AC-4: Pengaktifan kembali adalah perubahan status baru ke kelompok `Aktif` atau `Aktif/khusus`, bukan pemulihan data terhapus, dan tunduk pada kontrak transaksi, jadwal, histori, audit, serta notifikasi US-2.9.
+- [ ] AC-5: Ketika transisi aktif sudah efektif, blokir route bisnis dicabut berdasarkan predicate status efektif tanpa menghapus/membuat ulang Employee atau mengganti identitas user.
+- [ ] AC-6: Test mencakup kedua role, permission dicabut, temporary role, tanggal masa depan sebelum/sesudah scheduler, audit gagal, retry, double submit, dan dua worker bersamaan.
 
 ---
 
@@ -1216,13 +1221,13 @@ Setiap story mengikuti format:
 | **Dependensi** | US-2.6, US-2.7, E6 (Notifikasi) |
 
 > **Sebagai** sistem,
-> **Saya ingin** menjalankan pengecekan otomatis setiap hari terhadap semua pegawai aktif,
+> **Saya ingin** menjalankan pengecekan otomatis setiap hari terhadap semua pegawai aktif menurut klasifikasi kanonis,
 > **Sehingga** notifikasi kenaikan pangkat, KGB, pensiun, kontrak PPPK, dan Satyalancana terkirim tepat waktu.
 
 **Acceptance Criteria:**
 
 - [x] AC-1: Laravel scheduler berjalan setiap hari pukul 07:00 WITA (configurable). *(Jam dibaca dari konfigurasi EWS; setelah jam tersebut tercapai, pemeriksaan diulang tiap lima menit dengan proteksi overlap agar jadwal yang terlewat tetap terkejar.)*
-- [x] AC-2: Cek semua pegawai aktif terhadap 5 trigger:
+- [x] AC-2: Cek semua pegawai dengan `ref_status_pegawai.kelompok` `Aktif` atau `Aktif/khusus` terhadap 5 trigger. Tugas Belajar termasuk aktif; query literal `status_aktif = 'Aktif'` tidak menjadi sumber domain:
   - **Kenaikan Pangkat**: TMT pangkat terakhir + 4 tahun → cek H-90, H-60, H-30.
   - **KGB**: TMT KGB terakhir + 2 tahun → cek H-60, H-30, H-14.
   - **Pensiun (BUP)**: Tanggal lahir + BUP per jabatan → cek H-1thn, H-6bln, H-3bln.
@@ -1986,6 +1991,21 @@ Sprint 1 tetap menjadi fondasi teknis sebelum vertical slice dimulai.
 - [ ] AC-7: Switch role tersedia untuk kebutuhan yang diotorisasi pada environment development maupun production dan tidak bergantung pada bypass khusus environment. *(Sumber keputusan: K-MTG-03.1; guardrail engineering turunan: implementasi tidak bergantung pada bypass khusus environment.)*
 - [ ] AC-8: Seluruh endpoint mengevaluasi permission role tujuan yang terbaru di backend selama role sementara aktif; perubahan konfigurasi permission berlaku pada request berikutnya, sedangkan identitas asli dan data scope kepemilikan tetap berasal dari aktor asli. *(Sumber: K-MTG-03.2, K-MTG-03.4, dan K-MTG-07.1.)*
 
+### US-2.9 dan US-2.10 · Lifecycle/status pegawai kanonis
+
+> **Sumber:** [Keputusan Lifecycle dan Status Pegawai, 25 Agustus 2026](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md). Ketentuan ini menggantikan soft delete/restore Employee, Data Backup/Data Nonaktif, larangan tanggal efektif masa depan, reaktivasi Super Admin-only, dan pengecualian blokir berdasarkan role.
+
+- [ ] AC-STATUS-1: Employee tetap pada tabel `employees` dan dicari pada satu surface Data Pegawai melalui filter status; tidak ada `deleted_at`, `SoftDeletes`, hard delete, Data Backup, atau Data Nonaktif.
+- [ ] AC-STATUS-2: `isActive()`/`whereActiveStatus()` atau abstraksi kanonis setara menurunkan status aktif dari `ref_status_pegawai.kelompok`; `Aktif` serta `Aktif/khusus` termasuk aktif dan Tugas Belajar tetap aktif. Seluruh consumer memakai semantik yang sama.
+- [ ] AC-STATUS-3: Mutasi mewajibkan status tujuan, tanggal efektif, dan alasan administratif. `status_note` opsional serta terpisah, dengan pesan default penonaktifan yang telah ditetapkan.
+- [ ] AC-STATUS-4: Super Admin dan Admin Kepegawaian dapat reaktivasi hanya bila role efektif memiliki `employees.restore`; authorization fail-closed dan tidak mencampur raw role dengan permission efektif.
+- [ ] AC-STATUS-5: Linked Employee efektif Nonaktif memblokir route bisnis bagi seluruh role. Hanya account-status, logout, dan route auth teknis yang diperlukan tetap dapat diakses.
+- [ ] AC-STATUS-6: Transisi masa depan tidak mengubah keadaan/akses kini; scheduler menerapkan pada waktunya secara otomatis, idempoten, dan concurrency-safe.
+- [ ] AC-STATUS-7: Semua writer memakai `lockForUpdate → re-check → mutate`, menjaga no-op, retry, double submit, dan dua worker tanpa histori/audit/notifikasi duplikat atau overwrite `status_note` tidak valid.
+- [ ] AC-STATUS-8: Snapshot status, histori append-only, dan audit kritis merupakan satu transaksi fail-closed. Audit hanya memuat konteks minimum yang relevan termasuk role efektif dan tidak menyalin whole Employee/sensitive data.
+- [ ] AC-STATUS-9: Notification intent dibuat setelah commit. Delivery failure tidak me-roll back status; event `status_pegawai.dinonaktifkan` memakai kebijakan channel configurable dengan default rekomendasi in-app + email.
+- [ ] AC-STATUS-10: Bukti selesai mencakup feature/integration test PostgreSQL dan smoke browser untuk filter status, penjadwalan sebelum/sesudah efektif, blokir global lintas role, reaktivasi dua role, audit rollback, retry/concurrency, console, aksesibilitas, serta performa halaman.
+
 ### US-2.4 dan US-2.6 · Dokumen pada profil dan riwayat pegawai
 
 - [ ] AC-MTG-1: Admin Kepegawaian dapat mengunggah dokumen tambahan langsung dari halaman profil pegawai melalui modal pemilihan jenis dokumen. *(Sumber keputusan: K-MTG-04.2; guardrail UI turunan: pemilihan jenis dokumen disajikan melalui modal.)*
@@ -2080,7 +2100,8 @@ Rollover dari N-1 tetap dibatasi maksimal 6 hari dan batas tersebut **bukan pers
 | User Story / Work Item | Perubahan hasil meeting | Status | Bukti penutupan yang wajib ada |
 |---|---|---|---|
 | US-1.4 | Email sebagai atribut utama auto-mapping, inisialisasi role internal Pegawai tanpa menimpa role existing, serta mapping nomor telepon dari custom attribute terkonfirmasi | **Belum Selesai** | Daftar email + expected role akun uji dari LLDIKTI, feature test mapping email/role/nomor telepon, non-overwrite role existing, penolakan claim tidak dikenal, RBAC regression, dan audit |
-| US-1.6 | Switch role berbasis permission dengan role/permission sementara dan revert pada development maupun production | **Belum Selesai** | Feature test permission, persistence, revert, ownership scope, privilege-escalation denial, evaluasi permission efektif seluruh endpoint di backend, audit, serta QA browser |
+| US-1.6 | Switch role dengan `temporary_role`, permission efektif yang selalu diturunkan dinamis dari target, dan revert pada development maupun production | **Belum Selesai** | Feature test permission, persistence, revert, ownership scope, privilege-escalation denial, evaluasi permission efektif seluruh endpoint di backend, audit, serta QA browser |
+| US-2.9 / US-2.10 | Lifecycle Employee berbasis status, predicate aktif kanonis, scheduled transition, reaktivasi berbasis permission efektif, blokir akun global, audit fail-closed, dan notifikasi after-commit | **Belum Selesai** | Test PostgreSQL untuk role/permission, `Aktif/khusus`, filter tunggal, jadwal, lock/no-op/retry/concurrency, rollback audit, after-commit, blokir lintas role, dan QA browser |
 | US-2.4 / US-2.6 | Unggah dokumen dari profil, matriks SK wajib PNS/CPNS, matriks PPPK yang dapat dikustom tanpa daftar bawaan, arsip pusat read-only, dan penggantian berkas SK tanpa mutasi record riwayat | **Belum Selesai** | Feature test matriks PNS/CPNS, reevaluasi CPNS→PNS tanpa perubahan kewajiban, PPPK Tidak Dinilai tanpa kategori aktif dan dinilai setelah matriks diaktifkan, upload/penggantian berkas/authorization/audit, penolakan mutasi dari arsip pusat, serta smoke test browser profil pegawai |
 | US-4.3 | Saldo dihitung dari jumlah cuti yang dipakai, bukan input saldo sisa | **Belum Selesai** | Unit/feature test matriks N-2/N-1, perhitungan 12/18/24, dan audit rekonsiliasi |
 | US-4.5 | Chain memuat nol atau lebih verifikator; bila ada, seluruhnya ditempatkan sebelum Kepala Bagian | **Belum Selesai** | Feature test chain tanpa verifikator, satu/banyak verifikator, Ketua Tim sebagai verifikator, urutan seluruh verifikator sebelum Kepala Bagian, dan regresi snapshot |

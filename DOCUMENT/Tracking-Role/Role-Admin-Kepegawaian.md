@@ -1,12 +1,14 @@
 # Tracking Role: Admin Kepegawaian
 
+> **Pembaruan kanonis 25 Agustus 2026:** seluruh penyebutan soft delete/restore, Data Backup, atau Data Nonaktif di bawah adalah snapshot audit kontrak lama dan berstatus **Superseded**. Lifecycle aktif mengikuti [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md): satu Data Pegawai berfilter status; reaktivasi tersedia bagi Admin Kepegawaian ketika role efektif memiliki `employees.restore`.
+
 | Field | Nilai |
 |---|---|
 | Role internal | `admin_kepegawaian` |
 | Tanggal analisis ulang | 10 Agustus 2026 |
 | Basis verifikasi | Branch `development` @ `1fd99cb` setelah PR #177 |
 | Dokumen asal (dikonsolidasi ke file ini) | `Analisis-Frontend-Backend-Role-Admin-Kepegawaian.md` — audit 21 Juli 2026 |
-| Acuan produk | PRD v1.4 matriks role (CRUD pegawai + soft delete/restore + set atasan, dokumen, cuti non-approver, EWS, laporan, audit read) |
+| Acuan produk | Snapshot PRD v1.4; bagian soft delete/restore superseded oleh PRD v1.11 dan keputusan lifecycle 25 Agustus 2026 |
 | Status keseluruhan | ⚠️ **Belum sepenuhnya sesuai** — dari 4 gap utama audit lama, 1 sudah tuntas (set atasan); lifecycle nonaktif, laporan, dan audit-sensitif masih terbuka |
 
 ## Ringkasan
@@ -50,7 +52,7 @@ Hardening fail-closed CRUD pegawai/import, navigasi lifecycle pegawai, batas pen
 | # | Prioritas | Temuan (terverifikasi 27 Juli) | Tindak lanjut |
 |---|:---:|---|---|
 | 1 | P0 | **Audit update pegawai bocor NIK/No. KK plaintext** — `UpdateEmployeeAction.php:35,349` masih `toArray()`; create sudah aman (`getRawOriginal()`) | Task tracker #2, Sprint 7 (7.2-1) |
-| 2 | P1 | **Lifecycle pegawai nonaktif belum bisa dituntaskan dari UI** — route `data-nonaktif` + restore per-baris **sudah dibuka** untuk Admin (`routes/web.php:196-198,333-336`), tetapi menu `data-nonaktif` kini **hilang dari sidebar untuk semua role** (hanya muncul sebagai entri terkunci Kabag di `app.blade.php:98`), tidak ada tautan dari daftar pegawai, dan bulk restore tetap super_admin-only via halaman Data Backup | Perlu diangkat ke backlog (regresi navigasi — lebih luas dari temuan lama) |
+| 2 | P1 | **Superseded sebagai kontrak aktif:** temuan route `data-nonaktif`, restore, dan Data Backup merekam implementasi lama. Pekerjaan aktif adalah satu Data Pegawai berfilter status, reaktivasi Super Admin/Admin Kepegawaian dengan effective `employees.restore`, serta blokir linked account Nonaktif lintas role | GitHub Issue #22 + keputusan lifecycle 25 Agustus 2026 |
 | 3 | P1 | **Tombol Ubah Status / Hapus ke Backup disembunyikan dari Admin** — Blade masih cek `role === 'super_admin'` (`admin/pegawai/index.blade.php:632,673`) padahal route `pegawai.destroy`/`bulkDestroy` mengizinkan Admin ber-permission `employees.deactivate` (`routes/web.php:326-332`); UI dan route tidak konsisten | Backlog P1 (keputusan: tampilkan sesuai permission) |
 | 4 | P1 | **Dokumen destroy/check-impact masih super_admin-only** (`routes/web.php:468-475`) — PRD menyebut Admin "mengelola dokumen"; batas kata *mengelola* belum pernah diputuskan resmi | Eskalasi keputusan produk (dicatat sejak audit 21 Juli) |
 | 5 | P1 | **Dashboard Admin masih dummy kecuali panel EWS** — statistik/distribusi/cuti/pegawai/audit/hari-libur hardcoded di Blade | Task tracker #16 (Issue #39); kontrak K-3 sudah tersedia |

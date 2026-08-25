@@ -221,18 +221,18 @@ DoD Sprint 1:
 |-------|--------|
 | User stories | US-2.9, US-2.10 |
 | Durasi target | Hari 9-10 |
-| Goal | Data pegawai dapat dinonaktifkan atau diaktifkan kembali melalui `ref_status_pegawai` tanpa menghapus record Employee |
+| Goal | Lifecycle Employee berjalan melalui `ref_status_pegawai` tanpa delete/backup dataset, dengan predicate aktif kanonis, jadwal efektif, akses akun, audit, dan notifikasi konsisten |
 
 | Stage | Owner | Yang Dihandle | Output | Status |
 |-------|-------|---------------|--------|--------|
-| Kickoff | Dion | Kunci aturan referensi status, tanggal efektif, keterangan, role access, histori, dan audit log | Kontrak perubahan status | Not Started |
-| Frontend dummy | Adithian | Dialog perubahan status dengan tanggal efektif, keterangan, dan state aktif/nonaktif | UI status siap | Not Started |
+| Kickoff | Dion | Kunci `kelompok` aktif, alasan vs `status_note`, tanggal langsung/masa depan, role efektif + permission, blokir akun, histori, audit, dan after-commit | Kontrak perubahan status | Selesai — keputusan 25 Agustus 2026 |
+| Frontend dummy | Adithian | Dialog status tujuan, tanggal efektif, alasan wajib, `status_note` opsional, state terjadwal, dan filter satu Data Pegawai | UI status siap | Not Started |
 | Frontend support | Adriel | Review dialog konfirmasi dan flow perubahan status | UI status aman | Not Started |
-| Backend | Jordan | Perubahan `status_pegawai_id`, policy akses, histori status, audit, dan filter klasifikasi aktif/nonaktif | Backend status siap | Not Started |
-| Backend support | Grantly | Negative case, data uji, audit evidence | QA data siap | Not Started |
+| Backend | Jordan | Predicate `isActive`/`whereActiveStatus`, mutasi lock/re-check/no-op, scheduler idempoten, effective RBAC, blokir global, transaksi histori+audit, notification after-commit | Backend status siap | Not Started |
+| Backend support | Grantly | Negative case, role/permission, future transition, concurrency/retry, audit rollback, notification failure, dan data uji `Aktif/khusus` | QA data siap | Not Started |
 | Integrasi | Adithian + Jordan | Hubungkan UI perubahan status ke backend | Flow status real data | Not Started |
 | Review | Adriel | Review PR perubahan status sebelum merge | Merge atau return bug | Not Started |
-| QA | Grantly | Test permission, tanggal efektif, histori, klasifikasi aktif/nonaktif, dan audit log | Sprint 3 QA pass | Not Started |
+| QA | Grantly | Test PostgreSQL + browser untuk permission dua role, blokir lintas role, tanggal langsung/future, histori/audit atomik, no-op/retry/concurrency, after-commit, filter, EWS, dan Tugas Belajar | Sprint 3 QA pass | Not Started |
 
 ---
 

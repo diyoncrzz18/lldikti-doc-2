@@ -1,5 +1,7 @@
 # Dokumentasi Implementasi Sprint 6 — Dashboard & Laporan
 
+> **Status snapshot:** contoh query `status_aktif = 'Aktif'` dalam dokumen implementasi 4 Agustus ini berstatus **Superseded**. Implementasi baru wajib memakai predicate `ref_status_pegawai.kelompok` melalui `whereActiveStatus()`/`isActive()`; `Aktif` dan `Aktif/khusus` sama-sama aktif. Lihat [Keputusan Lifecycle dan Status Pegawai](Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
+
 **Tanggal Implementasi:** 4 Agustus 2026  
 **Developer:** Claude Code (via Kiro)  
 **Basis Kode:** `development` @ `0b94960` (PR #147)  

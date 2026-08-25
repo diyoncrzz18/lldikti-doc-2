@@ -3,7 +3,7 @@
 
 > Dokumen ini berisi daftar issues yang siap dipindahkan ke GitHub Issues / Notion Board.
 > Setiap issue diturunkan dari User Stories dan dipecah menjadi task teknis yang actionable.
-> Sinkron dengan PRD-SIMPEG-Fase1-Core.md v1.9: Keycloak hanya untuk SSO, RBAC internal aplikasi, approval cuti memakai tepat satu chain runtime per pegawai dengan penyalinan template ke anggota unit, status cuti memakai label resmi, PostgreSQL development via container, production diarahkan ke Podman, notifikasi channel-configurable, dan laporan mendukung export nominatif Excel custom.
+> Sinkron dengan PRD-SIMPEG-Fase1-Core.md v1.11: Keycloak hanya untuk SSO, RBAC internal aplikasi, approval cuti memakai tepat satu chain runtime per pegawai dengan penyalinan template ke anggota unit, status cuti memakai label resmi, PostgreSQL development via container, production diarahkan ke Podman, notifikasi channel-configurable, laporan mendukung export nominatif Excel custom, dan lifecycle Employee sepenuhnya berbasis status menurut [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
 >
 > **Catatan status:** checkbox pada dokumen ini adalah dekomposisi scope/import-ready, bukan tracker implementasi terkini. Gunakan `User-Stories-SIMPEG-Fase1.md` untuk status acceptance criteria dan tracker sprint untuk status source/QA.
 >
@@ -466,7 +466,7 @@ Buat migration untuk semua tabel terkait pegawai.
 
 **Tasks:**
 - [ ] Migration `employees`:
-  - Data utama sesuai Excel: nama_lengkap, email_pribadi, nip (unique), tanggal_lahir, jenis_pegawai/status_kepegawaian, status_pegawai_id (FK), status_tanggal (nullable), status_keterangan, golongan/pangkat/jabatan/kelas snapshot awal, pendidikan_terakhir, program_studi_id (FK nullable), prodi_pendidikan_terakhir (snapshot), tanggal_pensiun, person_label, person_formula_label, profil_status
+  - Data utama sesuai Excel: nama_lengkap, email_pribadi, nip (unique), tanggal_lahir, jenis_pegawai/status_kepegawaian, status_pegawai_id (FK), status_tanggal (nullable), `status_note` (nullable, pesan akun; bukan alasan administratif), golongan/pangkat/jabatan/kelas snapshot awal, pendidikan_terakhir, program_studi_id (FK nullable), prodi_pendidikan_terakhir (snapshot), tanggal_pensiun, person_label, person_formula_label, profil_status
   - Data pelengkap profil: nik, no_kk, tempat_lahir, jenis_kelamin, agama_id, status_kawin_id, golongan_darah, foto_path
   - Data kontak: alamat, no_hp, no_telepon_rumah
   - Data pengangkatan: jenis_pengangkatan, tmt_pengangkatan, no_sk_pengangkatan, tanggal_sk_pengangkatan, file_sk_pengangkatan
@@ -476,8 +476,8 @@ Buat migration untuk semua tabel terkait pegawai.
   - Kalkulasi: tanggal_kenaikan_pangkat_berikutnya, tanggal_kgb_berikutnya, tanggal_pensiun
   - Timestamps tanpa `deleted_at` dan tanpa Laravel `SoftDeletes` untuk Employee; status aktif/nonaktif ditentukan oleh `status_pegawai_id` yang mengacu pada `ref_status_pegawai`
 - [ ] Migration `employee_status_histories`:
-  - employee_id (FK), status_pegawai_id (FK), tanggal_efektif, keterangan (wajib saat perubahan status), timestamps
-  - Dibuat pada setiap perubahan status resmi; audit log menyimpan status sebelum/sesudah, tanggal efektif, serta keterangan
+  - employee_id (FK), status_pegawai_id (FK), tanggal_efektif, keterangan/alasan administratif (wajib saat perubahan berlaku), timestamps
+  - Append-only; dibuat tepat satu kali ketika perubahan status berlaku. Transisi masa depan disimpan terjadwal tanpa mengubah snapshot saat ini sampai jatuh tempo
 - [ ] Migration `rank_histories` (riwayat kepangkatan):
   - employee_id (FK), golongan_id (FK ref_golongan), tmt_pangkat, no_sk, tanggal_sk, file_sk, is_latest (bool), timestamps
 - [ ] Migration `position_histories` (riwayat jabatan):
@@ -808,7 +808,7 @@ Implementasi penambahan riwayat kepangkatan, jabatan, dan KGB. Data bersifat app
 
 ---
 
-## Issue #25 · Nonaktifkan Pegawai melalui Status Kepegawaian
+## Issue #25 · Lifecycle Pegawai melalui Status Kepegawaian
 
 | Field | Detail |
 |-------|--------|
@@ -819,14 +819,16 @@ Implementasi penambahan riwayat kepangkatan, jabatan, dan KGB. Data bersifat app
 | **Dependensi** | Issue #13 |
 
 **Tasks:**
-- [ ] Tombol "Nonaktifkan" di halaman detail pegawai
-- [ ] Confirm dialog mengumpulkan tanggal efektif dan keterangan/alasan perubahan status
-- [ ] Ubah `status_pegawai_id` ke referensi `Nonaktif`; record tetap berada di tabel `employees`, tanpa `deleted_at` atau Laravel `SoftDeletes`
-- [ ] Buat `employee_status_histories` untuk setiap perubahan status resmi
-- [ ] Daftar default hanya menampilkan klasifikasi status Aktif; filter status pegawai dapat menemukan status Nonaktif
-- [ ] Pengaktifan kembali dilakukan sebagai perubahan status baru ke referensi yang diklasifikasikan Aktif, dengan tanggal efektif, histori, keterangan, dan audit trail; bukan pemulihan data terhapus
-- [ ] Pegawai dengan status yang diklasifikasikan Nonaktif tidak diproses EWS
-- [ ] Audit log memuat status sebelum/sesudah, tanggal efektif, dan keterangan
+- [ ] Sediakan aksi Ubah Status/Nonaktifkan pada Data Pegawai; tidak ada hard delete, Data Backup, atau Data Nonaktif
+- [ ] Form mengumpulkan status tujuan, tanggal efektif, dan alasan administratif wajib; `status_note` opsional serta terpisah dengan default penonaktifan yang disepakati
+- [ ] Pertahankan record di `employees` tanpa `deleted_at` atau Laravel `SoftDeletes`; histori perubahan bersifat append-only
+- [ ] Pakai predicate `ref_status_pegawai.kelompok`: `Aktif` dan `Aktif/khusus` termasuk aktif; Tugas Belajar tetap aktif; seluruh status dicari melalui filter Data Pegawai
+- [ ] Izinkan tanggal efektif masa depan sebagai transisi terjadwal yang tidak mengubah snapshot/akses sebelum berlaku; terapkan otomatis melalui scheduler idempoten dan concurrency-safe
+- [ ] Semua writer memakai `lockForUpdate → re-check → mutate` dengan no-op guard; double submit/retry/worker bersamaan tidak membuat histori, audit, atau notifikasi duplikat
+- [ ] Simpan perubahan snapshot + satu histori + audit kritis dalam satu transaksi fail-closed; payload audit minimum, scoped, dan tidak memuat whole row/data sensitif
+- [ ] Setelah commit, dispatch event status melalui kebijakan channel; kegagalan delivery tidak me-roll back status
+- [ ] Pegawai efektif Nonaktif tidak diproses EWS dan user linked-nya diblokir dari seluruh route bisnis lintas role, kecuali account-status/logout/auth teknis
+- [ ] Tambahkan test PostgreSQL untuk predicate aktif, jadwal, no-op/retry/concurrency, audit rollback, after-commit, global blocking, filter, dan smoke browser
 
 ---
 
@@ -1431,23 +1433,23 @@ Implementasi penambahan riwayat kepangkatan, jabatan, dan KGB. Data bersifat app
 
 ---
 
-## Issue #51 · Kebijakan Status Pegawai (Super Admin)
+## Issue #51 · Reaktivasi Pegawai Berbasis Permission
 
 | Field | Detail |
 |-------|--------|
-| **Story** | US-2.10 · Kelola Status Pegawai oleh Super Admin |
+| **Story** | US-2.10 · Aktifkan Kembali Pegawai Berbasis Permission |
 | **Labels** | `epic:pegawai`, `type:feature`, `sprint:3`, `priority:P1` |
 | **Assignee** | Jordan Sutarto (backend/delete policy) + Adriel Walintukan (UI/review) |
 | **Story Points** | 2 |
 | **Dependensi** | Issue #25 |
 
 **Tasks:**
-- [ ] Pastikan tidak ada tombol "Hapus Permanen" untuk role apa pun, termasuk Super Admin
-- [ ] Super Admin mengubah status pegawai ke referensi `Nonaktif` atau status lain pada `ref_status_pegawai` melalui dialog yang meminta tanggal efektif dan keterangan
-- [ ] Data pegawai yang berstatus Nonaktif tetap tersimpan di tabel `employees` dan file fisik tetap ada di storage
-- [ ] Data Nonaktif dapat ditemukan melalui filter status pegawai
-- [ ] Pengaktifan kembali adalah perubahan status baru ke referensi yang diklasifikasikan Aktif, bukan pemulihan data terhapus
-- [ ] Setiap perubahan status menghasilkan `employee_status_histories` dan audit yang memuat status sebelum/sesudah, tanggal efektif, serta keterangan
+- [ ] Pastikan tidak ada tombol/jalur hard delete Employee untuk role apa pun
+- [ ] Izinkan reaktivasi bagi Super Admin dan Admin Kepegawaian hanya ketika role efektif memiliki `employees.restore`
+- [ ] Terapkan pemeriksaan role/permission efektif konsisten pada middleware, FormRequest, policy, Action, dan service; raw role tidak dapat menjadi bypass
+- [ ] Reaktivasi adalah perubahan status baru ke kelompok `Aktif`/`Aktif/khusus`, mengikuti transaksi, jadwal, histori, audit, dan notifikasi Issue #25
+- [ ] Setelah status aktif berlaku, akses dipulihkan dari predicate efektif tanpa menghapus/membuat ulang Employee atau user
+- [ ] Uji dua role, permission dicabut, temporary role, target status tidak aktif, transisi future, no-op, audit gagal, retry, dan concurrency
 
 ---
 
@@ -1478,7 +1480,7 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 - [ ] **Responsive:** Test di Chrome, Firefox, Edge — desktop + tablet
 - [ ] **RBAC:** Setiap role hanya bisa akses halaman yang diizinkan
 - [ ] **Program Studi:** Backfill/deduplikasi → CRUD Data Master → tambah/edit pegawai dan riwayat pendidikan → pertahankan referensi nonaktif → clear eksplisit → rename snapshot → delete protection → fallback detail → import tanpa side effect master
-- [ ] **Status pegawai:** Ubah ke Nonaktif → record tetap di `employees` → tidak muncul pada daftar default aktif → ditemukan melalui filter status → perubahan status resmi berikutnya tetap menyimpan tanggal efektif, histori, keterangan, dan audit
+- [ ] **Status pegawai:** ubah langsung/terjadwal → record tetap di `employees` → predicate `Aktif`/`Aktif/khusus` konsisten lintas consumer → filter status tunggal → linked account Nonaktif diblokir lintas role → reaktivasi dua role ber-permission → histori/audit atomik → notifikasi after-commit → retry/concurrency/no-op aman
 
 **Output:**
 - [ ] Bug report list (severity: critical/major/minor)
@@ -1530,6 +1532,7 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 
 ### Data Pegawai dan Hari Libur
 
+- [ ] **US-2.9 / US-2.10 / GitHub Issue #22:** sinkronkan lifecycle terhadap [Keputusan 25 Agustus 2026](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md): tanpa soft delete/Data Backup/Data Nonaktif; predicate aktif dari `kelompok`; alasan wajib terpisah dari `status_note`; future transition terjadwal; reaktivasi Super Admin/Admin Kepegawaian berbasis role efektif + `employees.restore`; blokir akun Nonaktif global; lock/re-check/no-op/idempotensi; status+histori+audit fail-closed; dan notifikasi after-commit.
 - [ ] **US-2.4 / US-2.6:** tambah unggah dokumen tambahan langsung dari profil pegawai; pisahkan tabel dokumen wajib/SK dan dokumen tambahan; kelola matriks SK wajib per jenis pegawai tanpa hardcode empat SK. Matriks PNS dan CPNS wajib memuat SK Pengangkatan, SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru; transisi CPNS→PNS mengevaluasi ulang matriks tanpa mengubah kewajiban. Matriks PPPK dapat dikustom oleh Admin Kepegawaian tanpa daftar bawaan; PPPK berstatus Tidak Dinilai selama belum ada kategori aktif dan baru dinilai terhadap matriks setelah sedikitnya satu kategori diaktifkan. Pertahankan arsip pusat read-only untuk pencarian/detail/unduh lintas pegawai bagi Super Admin/Admin Kepegawaian; dan izinkan penggantian berkas SK dari detail/profil tanpa memutasi record substantif riwayat, `is_latest`, atau dasar kalkulasi. Validasi upload dan audit perubahan berkas wajib diuji.
 - [ ] **US-8.4 / Issue #10:** keluarkan Hari Libur dari Data Master; tampilkan kalender di atas tabel Hari Libur tanpa mengubah sumber data `ref_hari_libur`, audit, atau kalkulasi hari kerja.
 

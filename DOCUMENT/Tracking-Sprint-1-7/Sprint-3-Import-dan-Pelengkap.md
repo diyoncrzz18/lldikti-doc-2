@@ -1,5 +1,7 @@
 # Tracking Sprint 3 — Import & Pelengkap Data Pegawai
 
+> **Pembaruan kanonis 25 Agustus 2026:** status ✅ soft delete/restore pada tracker ini adalah bukti historis kontrak lama dan berstatus **Superseded**. Ia tidak membuktikan lifecycle status terbaru selesai. Kontrak aktif dan gate baru berada pada [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md) serta GitHub Issue #22.
+
 | Field | Detail |
 |---|---|
 | Periode | 1 – 10 Juli 2026 |
@@ -13,7 +15,7 @@ Legend: ✅ selesai pada source · ⚠️ sebagian · ❌ belum selesai. Status 
 
 ## Ringkasan
 
-**7 ✅ · 0 ⚠️ · 0 ❌** pada level source. Profil mandiri, keluarga, dan soft delete tuntas sejak awal. Gap manual column mapping dan warning pada #21 ditutup melalui **PR #183** yang telah merge ke `development`. Dusk/manual browser regression dan UAT formal tetap dicatat sebagai gate QA terpisah.
+**Snapshot 14 Agustus: 7 ✅ · 0 ⚠️ · 0 ❌** pada level source untuk kontrak saat itu. Profil mandiri dan keluarga tetap tercatat selesai; klaim soft delete hanya historis/superseded. Gap manual column mapping dan warning pada #21 ditutup melalui **PR #183** yang telah merge ke `development`. Lifecycle baru tetap terbuka sampai seluruh AC 25 Agustus terbukti.
 
 ## Status per Issue
 
@@ -24,8 +26,8 @@ Legend: ✅ selesai pada source · ⚠️ sebagian · ❌ belum selesai. Status 
 | #22 | Eksekusi import & laporan hasil | ✅ | **Ditutup 26 Juli 2026 — PR #131, commit `e359248` (menunggu review/merge).** Tabel/model baru `import_batches` (id = batch id wizard, pemilik, counter, `row_issues` JSON, status, waktu; retensi permanen); eksekusi merekam batch saat mulai/sukses/gagal **sebelum** file sumber dibersihkan; endpoint `GET /pegawai/import/{batchId}/laporan` (gate role + kepemilikan) menghasilkan CSV ringkasan + rincian baris bermasalah dari database; tombol laporan wizard dialihkan ke server dan `downloadErrorReport()` browser dihapus. Test membuktikan laporan tetap bisa diunduh setelah `Cache::flush()`. Batasan Data Utama tetap dikunci test PR #121. |
 | #23 | Profil sendiri read-only | ✅ | Ditutup PR #117: keluarga/pendidikan mandiri hanya GET ber-scope sesi; endpoint & UI mutasi dihapus; test mengunci scope + ketiadaan route mutasi. |
 | #24 | CRUD data keluarga | ✅ | FormRequest, Action, soft delete, audit masking NIK keluarga, data scope, API v1, test lengkap. |
-| #25 | Soft delete & restore pegawai | ✅ | Soft delete, restore, audit, daftar nonaktif, EWS exclusion. Seluruh mekanisme hard delete (action, command, scheduler purge 02:00) sudah dihapus; Data Backup menjadi filter permanen. |
-| #51 | Kebijakan soft delete Super Admin | ✅ | Tidak ada tombol/jalur hapus permanen untuk role mana pun; restore tersedia; audit tercatat. |
+| #25 | Lifecycle pegawai | ⚠️ | **Bukti lama superseded:** soft delete, restore, daftar nonaktif, dan Data Backup bukan kontrak aktif. Perlu status-based lifecycle lengkap menurut keputusan 25 Agustus. |
+| #51 | Reaktivasi berbasis permission | ⚠️ | Tidak ada hard delete tetap benar; reaktivasi dua role dengan effective `employees.restore`, scheduled transition, global blocking, dan concurrency/audit/notification gate belum dibuktikan oleh bukti lama. |
 
 ## Gap dan Tindak Lanjut
 

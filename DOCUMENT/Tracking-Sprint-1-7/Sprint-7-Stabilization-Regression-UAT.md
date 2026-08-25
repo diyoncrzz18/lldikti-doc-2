@@ -1,5 +1,7 @@
 # Tracking Sprint 7 — Stabilization, Regression & UAT
 
+> **Pembaruan kanonis 25 Agustus 2026:** skenario regression "soft delete & restore" di snapshot lama berstatus **Superseded**. Regression aktif wajib memakai lifecycle status pada [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
+
 | Field | Detail |
 |---|---|
 | Periode | 10 – 20 Agustus 2026 (gate akhir: release candidate siap, go-live 20 Agustus) |
@@ -93,7 +95,7 @@ Prioritas P2 & dokumen:
 
 | # | Task | Owner | Detail |
 |---|---|---|---|
-| 7.3-1 | **Full regression 14 skenario** (Issue #52): Auth SSO→mapping→redirect→logout→timeout · CRUD pegawai · riwayat append-only + `is_latest` + TMT · import template→upload→validasi→eksekusi→laporan persisten · cuti E2E sampai QR + saldo berkurang · cuti edge cases (saldo habis, weekend, lintas tahun, PPPK, `Perubahan`/`Ditangguhkan`/`Tidak Disetujui`) · EWS scheduler manual + no-duplicate + follow-up + Satyalancana · dashboard 4 role · export Excel/PDF pegawai & cuti · audit log + diff · notifikasi in-app + email (Mailpit) · responsive Chrome/Firefox/Edge desktop+tablet · RBAC per role · soft delete & restore | Grantly | Setiap skenario dicatat Pass/Fail + evidence; bug masuk board dengan severity. |
+| 7.3-1 | **Full regression:** Auth SSO→mapping→redirect→logout→timeout · CRUD pegawai · riwayat append-only + `is_latest` + TMT · import · cuti E2E/edge cases · EWS no-duplicate · dashboard/export/audit/notifikasi/responsive/RBAC · lifecycle status: predicate `Aktif`/`Aktif/khusus`, filter tunggal, direct/future transition, reaktivasi dua role ber-permission, blokir linked account lintas role, lock/no-op/retry/concurrency, audit rollback, dan after-commit | Grantly | Setiap skenario dicatat Pass/Fail + evidence; bug masuk board dengan severity. |
 | 7.3-2 | Verifikasi PostgreSQL 17 menyeluruh (migration baru `import_batches` + EWS #127, UUID, JSON, FK, transaksi) — SQLite lokal bukan bukti cukup | Grantly | Jalankan suite penuh pada container PostgreSQL 17; catat hasil. |
 | 7.3-3 | Bugfix hasil regression/UAT — owner sesuai area, PR kecil per bug, retest oleh Grantly | Semua (routing: Adriel) | Tidak ada bug critical/major terbuka sebelum RC. |
 | 7.3-4 | Koordinasi UAT dengan LLDIKTI: jadwal, skenario demo, data demo, pencatatan feedback | Dion | Daftar issue UAT terprioritaskan. |

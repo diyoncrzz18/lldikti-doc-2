@@ -1,5 +1,7 @@
 # Tracking Sprint 6 — Dashboard & Laporan
 
+> **Pembaruan kanonis 25 Agustus 2026:** literal `status_aktif` dan pengecualian nama status pada catatan audit lama adalah snapshot historis dan **Superseded**. Dashboard/laporan aktif harus memakai predicate `ref_status_pegawai.kelompok` melalui scope kanonis; `Aktif/khusus` termasuk aktif. Lihat [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
+
 | Field | Detail |
 |---|---|
 | Periode | 31 Juli – 9 Agustus 2026 |
