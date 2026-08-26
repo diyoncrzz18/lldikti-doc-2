@@ -729,9 +729,9 @@ Setiap story mengikuti format:
 - [ ] AC-4: Daftar default dan seluruh consumer memakai predicate `ref_status_pegawai.kelompok`: `Aktif` dan `Aktif/khusus` sama-sama aktif; Tugas Belajar tetap aktif. Filter status pada Data Pegawai dapat menemukan semua klasifikasi.
 - [ ] AC-5: Perubahan berlaku melalui `lockForUpdate → re-check → mutate`; snapshot, satu histori append-only, dan audit kritis tersimpan dalam satu transaksi. No-op, double submit, retry, dan worker bersamaan tidak membuat histori/audit duplikat atau menimpa `status_note` secara tidak relevan.
 - [ ] AC-6: Tanggal efektif masa depan disimpan sebagai transisi terjadwal. Snapshot, predicate aktif, dan akses akun tidak berubah sebelum tanggal berlaku; scheduler menerapkannya otomatis dan idempoten di zona waktu `Asia/Makassar`.
-- [ ] AC-7: Employee efektif Nonaktif tidak diproses EWS. User linked ke Employee tersebut ditolak dari seluruh route bisnis tanpa pengecualian role; hanya halaman status akun, logout, dan route auth teknis yang diperlukan diizinkan.
+- [ ] AC-7: Employee efektif Nonaktif tidak diproses EWS. User linked ke Employee tersebut ditolak dari seluruh route bisnis tanpa pengecualian role; hanya halaman status akun, logout, dan route auth teknis yang diperlukan diizinkan. Employee linked yang hilang atau status efektifnya invalid/tidak dapat ditentukan juga harus ditolak fail-closed; wording/presentasi bantuan pengguna bukan kontrak acceptance ini selama tidak meloloskan akses.
 - [ ] AC-8: Audit minimum mencatat aktor, status sebelum/sesudah, tanggal efektif, alasan administratif, IP, user agent, timestamp, dan konteks role efektif tanpa whole-row/sensitive payload. Kegagalan audit me-roll back mutasi.
-- [ ] AC-9: Intent notifikasi diterbitkan setelah commit. Kegagalan delivery tidak me-roll back status; `status_pegawai.dinonaktifkan` channel-configurable dengan default rekomendasi in-app dan email.
+- [ ] AC-9: Intent notifikasi diterbitkan setelah commit. Kegagalan delivery tidak me-roll back status; `status_pegawai.dinonaktifkan` channel-configurable dengan kebijakan default in-app dan email.
 
 ---
 
@@ -755,8 +755,9 @@ Setiap story mengikuti format:
 - [ ] AC-2: Super Admin atau Admin Kepegawaian dapat mengaktifkan kembali hanya ketika role efektif memiliki permission `employees.restore`.
 - [ ] AC-3: Middleware, FormRequest, policy, Action, dan service membaca role/permission efektif yang sama; raw `$user->role` tidak dapat menjadi bypass saat switch role aktif.
 - [ ] AC-4: Pengaktifan kembali adalah perubahan status baru ke kelompok `Aktif` atau `Aktif/khusus`, bukan pemulihan data terhapus, dan tunduk pada kontrak transaksi, jadwal, histori, audit, serta notifikasi US-2.9.
-- [ ] AC-5: Ketika transisi aktif sudah efektif, blokir route bisnis dicabut berdasarkan predicate status efektif tanpa menghapus/membuat ulang Employee atau mengganti identitas user.
-- [ ] AC-6: Test mencakup kedua role, permission dicabut, temporary role, tanggal masa depan sebelum/sesudah scheduler, audit gagal, retry, double submit, dan dua worker bersamaan.
+- [ ] AC-5: Intent notifikasi pengaktifan kembali dibuat setelah commit dan kegagalan delivery tidak me-roll back status. Identifier event, judul, teks, penerima, serta default channel khusus reaktivasi belum dikunci oleh story ini dan memerlukan keputusan produk bila akan dibakukan.
+- [ ] AC-6: Ketika transisi aktif sudah efektif, blokir route bisnis dicabut berdasarkan predicate status efektif tanpa menghapus/membuat ulang Employee atau mengganti identitas user.
+- [ ] AC-7: Test mencakup kedua role, permission dicabut, temporary role, tanggal masa depan sebelum/sesudah scheduler, audit gagal, retry, double submit, dan dua worker bersamaan.
 
 ---
 
@@ -1999,12 +2000,14 @@ Sprint 1 tetap menjadi fondasi teknis sebelum vertical slice dimulai.
 - [ ] AC-STATUS-2: `isActive()`/`whereActiveStatus()` atau abstraksi kanonis setara menurunkan status aktif dari `ref_status_pegawai.kelompok`; `Aktif` serta `Aktif/khusus` termasuk aktif dan Tugas Belajar tetap aktif. Seluruh consumer memakai semantik yang sama.
 - [ ] AC-STATUS-3: Mutasi mewajibkan status tujuan, tanggal efektif, dan alasan administratif. `status_note` opsional serta terpisah, dengan pesan default penonaktifan yang telah ditetapkan.
 - [ ] AC-STATUS-4: Super Admin dan Admin Kepegawaian dapat reaktivasi hanya bila role efektif memiliki `employees.restore`; authorization fail-closed dan tidak mencampur raw role dengan permission efektif.
-- [ ] AC-STATUS-5: Linked Employee efektif Nonaktif memblokir route bisnis bagi seluruh role. Hanya account-status, logout, dan route auth teknis yang diperlukan tetap dapat diakses.
+- [ ] AC-STATUS-5: Linked Employee efektif Nonaktif memblokir route bisnis bagi seluruh role. Linked Employee yang hilang, relasi status yang invalid, atau status efektif yang tidak dapat ditentukan juga harus ditolak fail-closed. Hanya account-status, logout, dan route auth teknis yang diperlukan tetap dapat diakses; wording/presentasi bantuan pengguna adalah keputusan UX selama tidak membuka bypass.
 - [ ] AC-STATUS-6: Transisi masa depan tidak mengubah keadaan/akses kini; scheduler menerapkan pada waktunya secara otomatis, idempoten, dan concurrency-safe.
-- [ ] AC-STATUS-7: Semua writer memakai `lockForUpdate → re-check → mutate`, menjaga no-op, retry, double submit, dan dua worker tanpa histori/audit/notifikasi duplikat atau overwrite `status_note` tidak valid.
+- [ ] AC-STATUS-7: Semua writer memakai `lockForUpdate → re-check → mutate`, menjaga no-op, retry, double submit, dan dua worker tanpa histori/audit/notifikasi duplikat atau overwrite `status_note` tidak valid. Kriteria ini mewajibkan kontrak perilaku yang sama, bukan satu class/service teknis tertentu.
 - [ ] AC-STATUS-8: Snapshot status, histori append-only, dan audit kritis merupakan satu transaksi fail-closed. Audit hanya memuat konteks minimum yang relevan termasuk role efektif dan tidak menyalin whole Employee/sensitive data.
-- [ ] AC-STATUS-9: Notification intent dibuat setelah commit. Delivery failure tidak me-roll back status; event `status_pegawai.dinonaktifkan` memakai kebijakan channel configurable dengan default rekomendasi in-app + email.
+- [ ] AC-STATUS-9: Notification intent dibuat setelah commit, termasuk untuk reaktivasi. Delivery failure tidak me-roll back status; event `status_pegawai.dinonaktifkan` memakai kebijakan channel configurable dengan default in-app + email. Identifier event, judul, teks, penerima, dan default channel khusus reaktivasi belum menjadi kontrak kanonis.
 - [ ] AC-STATUS-10: Bukti selesai mencakup feature/integration test PostgreSQL dan smoke browser untuk filter status, penjadwalan sebelum/sesudah efektif, blokir global lintas role, reaktivasi dua role, audit rollback, retry/concurrency, console, aksesibilitas, serta performa halaman.
+
+> **Catatan implementasi nonnormatif:** aplikasi boleh memakai Action terpisah untuk perubahan umum, penonaktifan, pengaktifan kembali, dan scheduler. Menggunakan satu lifecycle engine/service bersama adalah rekomendasi arsitektur untuk menjaga konsistensi, bukan bentuk teknis yang diwajibkan oleh acceptance criteria.
 
 ### US-2.4 dan US-2.6 · Dokumen pada profil dan riwayat pegawai
 

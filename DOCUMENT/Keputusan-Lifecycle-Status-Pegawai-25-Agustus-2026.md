@@ -6,6 +6,27 @@
 | Status | **Disetujui — kanonis** |
 | Sumber | Keputusan stakeholder untuk sinkronisasi dokumentasi lifecycle/status pegawai pada SIMPEG Issue #22 dan PR #19 |
 | Kedudukan | Menggantikan ketentuan terdahulu yang berbeda mengenai soft delete/restore Employee, tanggal efektif masa depan, reaktivasi Super Admin-only, transaksi notifikasi, dan akses akun pegawai Nonaktif |
+| Klarifikasi | 26 Agustus 2026 — membedakan requirement produk yang normatif dari rekomendasi arsitektur dan keputusan UX/detail notifikasi yang belum dikunci |
+
+## K-STATUS-00 — Kedudukan requirement dan pedoman implementasi
+
+Tabel ini mencegah keputusan produk dibaca lebih sempit atau lebih luas daripada yang
+ditetapkan. Label **eksplisit** berarti wajib dipenuhi oleh implementasi. Label
+**keputusan implementasi/UX** berarti boleh dipilih untuk memenuhi requirement, tetapi
+bukan kontrak produk yang mengunci bentuk teknis atau kata-kata tertentu.
+
+| No. | Keputusan | Kedudukan | Penjelasan kanonis |
+|---:|---|---|---|
+| 1 | Tanggal efektif masa depan diperbolehkan | **Eksplisit** | Diatur oleh K-STATUS-06 sebagai transisi terjadwal. |
+| 2 | Reaktivasi dapat dilakukan Super Admin dan Admin Kepegawaian | **Eksplisit** | Keduanya harus memiliki role efektif dan permission efektif `employees.restore` yang sah. |
+| 3 | Semua role yang linked ke Employee efektif Nonaktif diblokir | **Eksplisit** | Tidak ada bypass berdasarkan role; allowlist hanya sesuai K-STATUS-05. |
+| 4 | Status/relasi yang invalid atau hilang diproses fail-closed | **Eksplisit** untuk fail-closed; **UX tambahan** untuk teks bantuan | Guard wajib menolak akses. Teks seperti “Silakan hubungi administrator SIMPEG” boleh dipakai agar pengguna tidak menerima error teknis, tetapi bukan wording produk yang dikunci. |
+| 5 | `ref_status_pegawai.kelompok` menjadi single source of truth | **Eksplisit** | Tidak ada fallback domain ke `status_aktif`, nama, atau kode status legacy. |
+| 6 | Semua perubahan status melalui satu lifecycle engine/class | **Rekomendasi arsitektur** | Kontrak perilaku harus sama, tetapi dokumen tidak mewajibkan satu class/service tertentu. |
+| 7 | Reaktivasi menuju kelompok `Aktif` atau `Aktif/khusus` | **Eksplisit** | Pengaktifan kembali adalah perubahan status baru, bukan pemulihan record terhapus. |
+| 8 | Notifikasi penonaktifan default in-app dan email serta channel-configurable | **Eksplisit** | Event `status_pegawai.dinonaktifkan` mengikuti kebijakan channel yang dapat diubah operator. |
+| 9 | Reaktivasi mengikuti notifikasi lifecycle | **Eksplisit** untuk intent setelah commit; **detail produk terbuka** | Reaktivasi tunduk pada kontrak notifikasi status. Identifier event, judul, teks, penerima, dan default channel khusus reaktivasi belum ditetapkan sebagai kontrak kanonis. |
+| 10 | Data Backup dan Data Nonaktif dihapus | **Eksplisit** | Data Pegawai menjadi satu-satunya surface daftar; pencarian dilakukan melalui filter status. |
 
 ## K-STATUS-01 — Lifecycle Employee berbasis status
 
@@ -51,6 +72,7 @@ Nilai `status_note` tidak boleh dipakai sebagai pengganti alasan administratif. 
 2. Akses yang tetap diizinkan hanya halaman status akun, logout, dan route teknis autentikasi yang benar-benar diperlukan untuk menyelesaikan atau membersihkan sesi.
 3. Middleware/access guard mengevaluasi status efektif sebelum controller dan fail-closed bila relasi status yang diperlukan tidak valid atau tidak dapat ditentukan.
 4. Pesan default halaman status akun menggunakan `status_note` di atas, kecuali tersedia pesan khusus yang sah.
+5. Bila `employee_id` menunjuk record Employee yang hilang, `status_pegawai_id` tidak dapat di-resolve, atau kelompok status tidak dapat ditentukan, akses bisnis tetap harus ditolak. Implementasi boleh menampilkan pesan nonteknis yang mengarahkan pengguna menghubungi administrator SIMPEG; teks, halaman, dan status HTTP spesifiknya adalah keputusan UX selama tidak membuka akses kembali.
 
 ## K-STATUS-06 — Tanggal efektif masa depan
 
@@ -64,8 +86,9 @@ Nilai `status_note` tidak boleh dipakai sebagai pengganti alasan administratif. 
 1. Mutasi status aktif menggunakan urutan minimum `lockForUpdate → re-check → mutate`.
 2. Perubahan snapshot status, pembuatan riwayat append-only, dan audit kritis merupakan satu transaksi logis. Kegagalan audit menggagalkan dan me-roll back perubahan status.
 3. Payload audit minimum memuat aktor, status sebelum/sesudah, tanggal efektif, alasan administratif, IP, user agent, timestamp, dan konteks role efektif. Payload tidak menyalin seluruh row Employee dan tidak memuat NIK, No. KK, token, credential, atau data sensitif lain yang tidak diperlukan.
-4. Intent notifikasi diterbitkan hanya setelah commit. Kegagalan delivery notifikasi tidak me-roll back status yang sudah sah; retry mengikuti infrastruktur notifikasi.
-5. Event `status_pegawai.dinonaktifkan` memakai channel yang dapat dikonfigurasi. Default yang direkomendasikan adalah in-app dan email aktif, tetapi operator tetap dapat mengubah kebijakan channel tanpa mengubah kode domain.
+4. Intent notifikasi untuk setiap transisi lifecycle diterbitkan hanya setelah commit. Kegagalan delivery notifikasi tidak me-roll back status yang sudah sah; retry mengikuti infrastruktur notifikasi.
+5. Event `status_pegawai.dinonaktifkan` memakai channel yang dapat dikonfigurasi. Kebijakan defaultnya adalah in-app dan email aktif, tetapi operator tetap dapat mengubah kebijakan channel tanpa mengubah kode domain.
+6. Pengaktifan kembali tunduk pada kontrak notifikasi pada butir 4. Dokumen ini belum mengunci identifier event, judul, teks, penerima, maupun default channel khusus untuk reaktivasi. Detail tersebut harus dicatat sebagai keputusan produk tersendiri sebelum diperlakukan sebagai kontrak tetap lintas aplikasi.
 
 ## K-STATUS-08 — Acceptance dan regression minimum
 
@@ -83,6 +106,12 @@ Implementasi belum dapat dinyatakan selesai tanpa bukti untuk:
 10. Data Pegawai tetap menjadi satu-satunya surface daftar dengan filter status, tanpa Data Backup/Data Nonaktif;
 11. EWS, dashboard, laporan, cuti, dan lookup memakai predicate aktif kanonis yang sama;
 12. PostgreSQL feature/integration test serta smoke browser untuk alur utama, aksesibilitas dasar, console error, dan performa halaman.
+
+## K-STATUS-09 — Batas keputusan arsitektur
+
+1. Semua writer perubahan status—jalur perubahan umum, penonaktifan, pengaktifan kembali, dan scheduler transisi masa depan—wajib memenuhi kontrak K-STATUS-03, K-STATUS-04, K-STATUS-06, dan K-STATUS-07 secara setara.
+2. Dokumen ini tidak mewajibkan bentuk teknis berupa satu class atau service tertentu. Aplikasi boleh memiliki Action terpisah, misalnya `ChangeEmployeeStatusAction`, `DeactivateEmployeeAction`, dan `RestoreEmployeeAction`, selama authorization, lock/re-check, no-op, scheduling, histori, audit, dan notifikasinya tidak menyimpang.
+3. Menggunakan satu service/policy transisi bersama—misalnya `EmployeeStatusTransitionService`—adalah rekomendasi arsitektur untuk mengurangi divergensi antar-writer, bukan requirement produk. Struktur yang dipilih tetap mengikuti arsitektur Laravel dan panduan penulisan kode SIMPEG.
 
 ## Ketentuan yang dinyatakan Superseded
 

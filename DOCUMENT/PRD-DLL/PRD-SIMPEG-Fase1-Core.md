@@ -489,9 +489,9 @@ Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di F
 3. Daftar pegawai default memakai predicate aktif kanonis berdasarkan `ref_status_pegawai.kelompok`: kelompok `Aktif` dan `Aktif/khusus` termasuk aktif. Tugas Belajar tetap aktif; status lain dapat ditemukan melalui filter pada Data Pegawai.
 4. Tanggal efektif masa depan diperbolehkan sebagai transisi terjadwal. Snapshot status, predicate aktif, dan akses akun tidak berubah sebelum tanggal tersebut; scheduler menerapkannya otomatis ketika jatuh tempo.
 5. Saat perubahan berlaku, sistem menyimpan satu histori append-only, snapshot Employee yang konsisten, dan audit kritis dalam satu transaksi. Mutasi memakai lock, membaca ulang keadaan setelah lock, idempoten, aman retry/concurrency, dan berhenti tanpa side effect bila hasilnya no-op.
-6. Employee efektif Nonaktif tidak diproses oleh EWS dan user yang terhubung dengannya tidak dapat mengakses route bisnis, termasuk bila memiliki role Super Admin, Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai.
+6. Employee efektif Nonaktif tidak diproses oleh EWS dan user yang terhubung dengannya tidak dapat mengakses route bisnis, termasuk bila memiliki role Super Admin, Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai. Jika Employee linked hilang atau status efektifnya tidak dapat ditentukan, access guard tetap menolak akses secara fail-closed; teks bantuan pengguna adalah keputusan UX selama tidak membuka bypass.
 7. Audit minimum memuat aktor, status sebelum/sesudah, tanggal efektif, alasan administratif, IP, user agent, waktu, serta role efektif tanpa menyalin seluruh row atau data sensitif yang tidak perlu. Kegagalan audit me-roll back mutasi.
-8. Intent notifikasi dibuat setelah commit; kegagalan delivery tidak me-roll back status. Event `status_pegawai.dinonaktifkan` channel-configurable dengan default rekomendasi in-app dan email aktif.
+8. Intent notifikasi dibuat setelah commit; kegagalan delivery tidak me-roll back status. Event `status_pegawai.dinonaktifkan` channel-configurable dengan kebijakan default in-app dan email aktif.
 
 #### US-PEG-06: Aktifkan Kembali Pegawai Berbasis Permission
 
@@ -505,6 +505,7 @@ Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di F
 3. Authorization pada middleware, FormRequest, policy, Action, dan service memakai role/permission efektif yang sama; raw role asal tidak dapat dipakai sebagai bypass.
 4. Pengaktifan kembali adalah perubahan status baru ke referensi berkelompok `Aktif` atau `Aktif/khusus`, bukan pemulihan data terhapus, dan mengikuti kontrak transaksi, histori, audit, jadwal, serta notifikasi pada US-PEG-05.
 5. Setelah transisi aktif berlaku, blokir akun dicabut berdasarkan predicate status efektif, bukan berdasarkan penghapusan/restorasi session atau record Employee.
+6. Intent notifikasi reaktivasi diterbitkan setelah commit sesuai kontrak lifecycle. Identifier event, judul, teks, penerima, dan kebijakan channel default khusus reaktivasi belum dikunci sebagai kontrak produk dan memerlukan keputusan produk tersendiri bila akan distandardkan.
 
 ### 7.3 Struktur Data Pegawai
 
@@ -1080,9 +1081,11 @@ Notifikasi dipicu oleh events di modul lain (cuti, EWS, import, audit penting, d
 | EWS: Kontrak PPPK | Pegawai + Admin | ✅ | ✅ | H-6bln, H-3bln, H-1bln |
 | EWS: Satyalancana | Pegawai + Admin | ✅ | ✅ | H-180, H-90, H-30 |
 | Data pegawai diubah | Admin (pembuat) | ✅ | ❌ | Konfirmasi audit trail |
-| `status_pegawai.dinonaktifkan` | User yang terhubung ke pegawai + penerima operasional sesuai kebijakan | ✅ | ✅ | Default rekomendasi; channel dapat diubah operator |
+| `status_pegawai.dinonaktifkan` | User yang terhubung ke pegawai + penerima operasional sesuai kebijakan | ✅ | ✅ | Kebijakan default; channel dapat diubah operator |
 
 **Batas transaksi:** domain hanya menerbitkan intent notifikasi setelah transaksi perubahan status commit. Delivery berjalan melalui dispatcher/queue. Kegagalan channel tidak membatalkan status yang sudah sah dan ditangani melalui retry/observability notifikasi.
+
+**Reaktivasi status:** reaktivasi mengikuti batas transaksi lifecycle yang sama dan wajib menerbitkan intent setelah commit. Dokumen ini belum menetapkan identifier event, judul, teks, penerima, maupun default channel khusus reaktivasi; detail tersebut memerlukan keputusan produk sebelum digunakan sebagai kontrak tetap.
 
 ### 11.4 User Stories
 
@@ -2213,7 +2216,13 @@ Fitur dalam addendum ini belum boleh dinyatakan selesai hanya karena tercatat di
 5. User linked ke Employee efektif Nonaktif diblokir dari route bisnis apa pun tanpa pengecualian role; hanya halaman status akun, logout, dan route auth teknis yang diperlukan tetap tersedia.
 6. Tanggal efektif masa depan menjadi transisi terjadwal; keadaan dan akses saat ini tidak berubah sebelum jatuh tempo. Penerapan otomatis wajib idempoten dan concurrency-safe.
 7. Mutasi memakai `lockForUpdate → re-check → mutate`; status, histori, dan audit kritis berada dalam satu transaksi fail-closed. Notifikasi diterbitkan setelah commit dan kegagalan delivery tidak membatalkan mutasi.
-8. Event `status_pegawai.dinonaktifkan` channel-configurable dengan default rekomendasi in-app dan email aktif.
+8. Event `status_pegawai.dinonaktifkan` channel-configurable dengan kebijakan default in-app dan email aktif.
+
+### Klarifikasi penerapan — 26 Agustus 2026
+
+- Kontrak lifecycle mewajibkan seluruh writer perubahan status memiliki perilaku yang setara untuk authorization, lock/re-check, no-op, scheduling, histori, audit, dan notifikasi. Kontrak ini **tidak** mengharuskan satu class/service tertentu; satu lifecycle engine bersama adalah rekomendasi arsitektur, bukan requirement produk.
+- Linked Employee yang hilang atau statusnya invalid/tidak dapat ditentukan wajib diblokir fail-closed. Halaman, HTTP status, dan wording seperti “Silakan hubungi administrator SIMPEG” adalah keputusan UX yang boleh dibuat selama tidak meloloskan akses bisnis.
+- Reaktivasi tunduk pada notifikasi lifecycle setelah commit. Hanya detail event penonaktifan yang sudah dikunci; nama event, judul, teks, penerima, dan default channel khusus reaktivasi tetap memerlukan keputusan produk jika ingin dibakukan.
 
 ### Changelog v1.11
 
