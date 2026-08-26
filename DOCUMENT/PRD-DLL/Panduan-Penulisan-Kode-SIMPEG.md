@@ -253,19 +253,73 @@ Action tidak boleh menjadi tempat semua logic domain jika logic tersebut dipakai
 
 Action juga tidak boleh dipakai untuk mengubah response contract secara diam-diam. Jika response akan dimigrasikan ke API Resource atau envelope baru, kunci kontrak lama dengan test terlebih dahulu.
 
-Contoh Action:
+Contoh Action transisi status yang sudah berlaku:
+
+> Contoh ini menunjukkan kontrak perubahan status Employee, bukan keharusan memakai
+> satu class atau service tertentu. Request bertanggal efektif masa depan harus disimpan
+> sebagai transisi terjadwal dan tidak menjalankan mutasi snapshot/histori di bawah sampai
+> scheduler menerapkannya saat jatuh tempo.
 
 ```php
-class DeactivateEmployeeAction
+class ChangeEmployeeStatusAction
 {
-    public function execute(Employee $employee, Request $request): void
+    public function execute(Employee $employee, array $data, Request $request): Employee
     {
-        DB::transaction(function () use ($employee, $request): void {
-            $oldValues = $employee->only(['id', 'nama', 'nip', 'email']);
+        return DB::transaction(function () use ($employee, $data, $request): Employee {
+            $employee = Employee::query()
+                ->whereKey($employee->id)
+                ->lockForUpdate()
+                ->firstOrFail();
+            $status = RefStatusPegawai::query()
+                ->whereKey($data['status_pegawai_id'])
+                ->firstOrFail();
+            $oldValues = $employee->getRawOriginal();
 
-            $employee->delete();
+            // Re-check setelah lock mencegah histori dan audit ganda saat retry/double submit.
+            $isNoOp = $employee->status_pegawai_id === $status->id
+                && $employee->status_tanggal?->toDateString() === $data['tanggal_efektif'];
 
-            AuditService::log('SOFT_DELETE', 'Employee', $employee->id, $oldValues, null, $request);
+            if ($isNoOp) {
+                return $employee;
+            }
+
+            EmployeeStatusHistory::query()
+                ->where('employee_id', $employee->id)
+                ->where('is_latest', true)
+                ->update(['is_latest' => false]);
+
+            EmployeeStatusHistory::create([
+                'employee_id' => $employee->id,
+                'status_pegawai_id' => $status->id,
+                'tanggal_efektif' => $data['tanggal_efektif'],
+                'keterangan' => $data['alasan_administratif'],
+                'changed_by_user_id' => $request->user()?->id,
+                'is_latest' => true,
+            ]);
+
+            $employee->update([
+                'status_pegawai_id' => $status->id,
+                // Snapshot kompatibilitas boleh disimpan, tetapi bukan predicate aktif domain.
+                'status_aktif' => $status->nama,
+                'status_tanggal' => $data['tanggal_efektif'],
+                'status_keterangan' => $data['alasan_administratif'],
+            ]);
+            $employee->refresh();
+
+            AuditService::logOrFail(
+                'UPDATE',
+                'Employee',
+                $employee->id,
+                AuditService::statusPayload($oldValues),
+                AuditService::statusPayload($employee->getRawOriginal()),
+                $request,
+            );
+
+            DB::afterCommit(function (): void {
+                // Terbitkan intent ke notification dispatcher, bukan delivery langsung.
+            });
+
+            return $employee;
         });
     }
 }
@@ -855,8 +909,8 @@ $changeEmployeeStatusAction->execute($employee, $payload);
 Contoh komentar yang buruk:
 
 ```php
-// Delete employee
-$employee->delete();
+// Memperbarui field status_pegawai_id.
+$employee->update(['status_pegawai_id' => $status->id]);
 ```
 
 ## Checklist Sebelum PR

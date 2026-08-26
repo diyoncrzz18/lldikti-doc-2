@@ -3,10 +3,10 @@
 
 | Field | Detail |
 |-------|--------|
-| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.9 |
-| **Tanggal** | 21 Agustus 2026 |
-| **Pembaruan status terakhir** | 14 Agustus 2026 |
-| **Basis verifikasi status** | Branch `development` @ `ff0e9e1` (setelah PR #182 masuk) |
+| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.11 dan Keputusan Lifecycle/Status Pegawai 25 Agustus 2026 |
+| **Tanggal dokumen awal** | 21 Agustus 2026 |
+| **Pembaruan dokumen terakhir** | 26 Agustus 2026 |
+| **Basis verifikasi implementasi terakhir** | Branch `development` @ `ff0e9e1` (setelah PR #182 masuk, 14 Agustus 2026); pembaruan 25–26 Agustus menyelaraskan kontrak produk dan belum menjadi bukti verifikasi implementasi baru |
 | **Total User Stories** | 53 |
 | **Total Epics** | 9 |
 
@@ -1802,7 +1802,7 @@ E2 (Data Pegawai) ←── E1
   ├── US-2.7 Hukuman Disiplin ←── US-2.1
   ├── US-2.8 Data Keluarga ←── US-2.1
   ├── US-2.9 Nonaktifkan Pegawai melalui Status ←── US-2.1
-  └── US-2.10 Kelola Status Pegawai Super Admin ←── US-2.9
+  └── US-2.10 Aktifkan Kembali Pegawai melalui Status ←── US-2.9
 
 E3 (Import Excel/CSV) ←── E2
   ├── US-3.1 Template Import
@@ -1898,7 +1898,7 @@ Sprint 1 tetap menjadi fondasi teknis sebelum vertical slice dimulai.
 | Profil & keluarga | US-2.5 Profil sendiri | 3 |
 | Profil & keluarga | US-2.8 Data keluarga | 3 |
 | Status pegawai | US-2.9 Nonaktifkan melalui status | 3 |
-| Status pegawai | US-2.10 Kelola status Super Admin | 2 |
+| Status pegawai | US-2.10 Aktifkan kembali pegawai melalui status | 2 |
 | **Total** | | **30** |
 
 ### Sprint 4 — Cuti Core (Minggu 7–9)
