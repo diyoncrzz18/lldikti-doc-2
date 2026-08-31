@@ -4,7 +4,7 @@
 |---|---|
 | **Tanggal keputusan dokumentasi** | 31 Agustus 2026 |
 | **Status** | **Disetujui** — melengkapi dan menggantikan keputusan terdahulu pada area yang disebutkan di dokumen ini |
-| **Dasar** | Notulen *Evaluasi Projek SIMPEG bersama Mahasiswa Magang Univ Klabat* yang disampaikan pengguna pada 31 Agustus 2026 |
+| **Dasar** | Notulen *Evaluasi Projek SIMPEG bersama Mahasiswa Magang Univ Klabat* serta klarifikasi langsung stakeholder pada 31 Agustus 2026 tentang bootstrap pengguna pertama dan pemulihan pencatatan cuti setelah downtime |
 | **Dokumen produk terkait** | [PRD SIMPEG Fase 1 Core v1.12](PRD-DLL/PRD-SIMPEG-Fase1-Core.md) dan [User Stories SIMPEG Fase 1 v1.12](PRD-DLL/User-Stories-SIMPEG-Fase1.md) |
 | **Dokumen keputusan terdahulu** | [Keputusan Evaluasi Meeting LLDIKTI 15 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md) dan [Keputusan Cuti Saldo Tahap 0](Keputusan-Cuti-Saldo-Tahap-0.md) |
 
@@ -27,9 +27,9 @@
 
 ## K-MTG-10.3 — Sumber pemakaian cuti historis
 
-1. **Cuti di Luar SIMPEG** atau cuti manual adalah satu sumber fakta pemakaian tahunan historis/transisi untuk N-2, N-1, dan tahun berjalan sebelum go-live.
+1. **Cuti di Luar SIMPEG** atau cuti manual adalah satu sumber fakta pemakaian tahunan historis/transisi untuk N-2, N-1, dan tahun berjalan sebelum go-live, serta untuk cuti yang telah diproses dan disetujui secara manual ketika layanan SIMPEG mengalami downtime setelah go-live.
 2. Halaman **Catat Pemakaian Tahunan** hanya menampilkan agregat hasil sumber fakta tersebut. Input angka pemakaian langsung pada halaman ringkasan dinonaktifkan agar saldo dan rollover tidak terhitung ganda.
-3. Cuti operasional baru diproses melalui pengajuan cuti SIMPEG normal. Entri manual tidak boleh dipakai sebagai jalan pintas untuk pengajuan baru yang belum memperoleh persetujuan di luar SIMPEG.
+3. Cuti operasional baru diproses melalui pengajuan cuti SIMPEG normal. Ketika layanan downtime, proses manual harus diselesaikan dan disetujui di luar sistem; setelah SIMPEG pulih, Admin Kepegawaian mencatatnya sebagai fakta final melalui Cuti di Luar SIMPEG. Entri manual tidak boleh dipakai sebagai jalan pintas ketika SIMPEG tersedia atau untuk pengajuan yang belum memperoleh persetujuan di luar SIMPEG.
 4. Nomor dokumen dan dokumen pendukung cuti manual tetap opsional. Bila diberikan, berkas wajib divalidasi dan disimpan privat; perubahan atau koreksi tetap beralasan, teraudit, dan tidak melakukan hard delete.
 
 ## K-MTG-10.4 — Formulir dan dokumen cuti
@@ -57,12 +57,16 @@
 - Alasan tetap wajib untuk keputusan cuti non-persetujuan, termasuk `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`.
 - Channel notifikasi tetap mengikuti konfigurasi global. Preferensi notifikasi per pengguna belum menjadi requirement Fase 1.
 - Kegagalan WhatsApp `422` adalah temuan integrasi yang ditangani melalui kontrak/provider; bukan perubahan status atau aturan domain cuti.
+- Bootstrap Super Admin hanya berlaku bagi pengguna pertama ketika sistem belum memiliki user. Pengguna berikutnya mengikuti pemetaan email/data pegawai dan RBAC; mereka tidak otomatis menjadi Super Admin.
+- EWS kenaikan pangkat tetap dihitung dari TMT/SK pangkat terakhir ditambah empat tahun.
 
 ## Open question yang tetap harus dikonfirmasi sebelum implementasi
 
 1. **Batas pembatalan/revisi:** notulen menekankan waktu sebelum persetujuan Atasan Langsung, sedangkan PRD merekam batas aman sebelum tindakan approval pertama. Perlu konfirmasi apakah Pegawai masih boleh membatalkan setelah Verifikator bertindak tetapi sebelum Atasan Langsung.
-2. **Pengecualian downtime setelah go-live:** keputusan 15/20 Agustus mengizinkan fakta cuti manual saat layanan tidak tersedia. Keputusan ini menekankan data historis/transisi dan penggunaan alur normal untuk cuti baru. Perlu konfirmasi apakah pengecualian downtime tetap berlaku.
-3. **RBAC dan schema legacy:** perubahan label bisnis tidak mengesahkan migrasi role `kepala_bagian`, route `/kepala-bagian/*`, service legacy, atau field `kepala_bagian_id`.
+
+## Batas implementasi yang tetap berlaku
+
+- Perubahan label bisnis tidak mengesahkan migrasi role `kepala_bagian`, route `/kepala-bagian/*`, service legacy, atau field `kepala_bagian_id`.
 
 ## Dampak dokumentasi dan delivery
 

@@ -66,15 +66,15 @@ dokumen setelah pegawai tersedia.
 
 1. Buka `/cuti/administrasi-saldo` dan cari pegawai.
 2. Periksa saldo aktual, pemakaian, alokasi, dan ledger.
-3. Gunakan entri **Cuti di Luar SIMPEG** untuk fakta historis/transisi yang sudah disetujui; halaman **Catat Pemakaian Tahunan** hanya dibaca sebagai agregat dan bukan tempat memasukkan angka langsung.
+3. Gunakan entri **Cuti di Luar SIMPEG** untuk fakta historis/transisi yang sudah disetujui atau cuti yang diproses manual ketika layanan downtime; halaman **Catat Pemakaian Tahunan** hanya dibaca sebagai agregat dan bukan tempat memasukkan angka langsung.
 4. Untuk koreksi, pilih fakta sumber yang benar dan isi alasan wajib.
 5. Nomor dokumen dan dokumen pendukung bersifat opsional; bila diberikan, unggah file tervalidasi pada storage privat.
 6. Simpan, lalu periksa hasil replay/rekalkulasi dan audit.
 7. Untuk cuti yang sudah final `Disetujui` tetapi harus dibatalkan secara administratif, gunakan aksi `Ditangguhkan`, isi alasan wajib, dan periksa koreksi ledger serta histori.
 
 Tidak tersedia direct balance override. Koreksi memperbaiki sumber pemakaian dan menghitung ulang
-saldo secara deterministik. Entri manual setelah go-live akibat layanan tidak tersedia masih menunggu
-konfirmasi LLDIKTI; jangan memakainya sebagai jalur rutin pengajuan baru.
+saldo secara deterministik. Setelah downtime, catat hanya cuti yang proses manualnya sudah selesai dan
+disetujui di luar sistem. Jangan memakai Cuti di Luar SIMPEG sebagai jalur rutin ketika SIMPEG tersedia.
 
 ## 6. Batas Akses dan Larangan
 

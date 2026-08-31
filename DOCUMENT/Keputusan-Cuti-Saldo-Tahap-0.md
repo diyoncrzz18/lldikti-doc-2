@@ -143,11 +143,11 @@ Penggunaan yang telah diklaim dapat direkonsiliasi dan divalidasi secara berjenj
 6. Entri tersebut langsung menjadi fakta cuti yang telah disetujui di luar SIMPEG; sistem tidak membuat usulan, approval aktif, reservasi, notifikasi approval, atau bukti approval ulang.
 7. Untuk cuti tahunan, entri manual membentuk pemakaian final yang diaudit dan ikut menghitung saldo serta rollover. Ia bukan reservasi aktif K-CUT-01. Jumlah hari kerja dihitung sistem dari periode dan kalender kerja; duplikasi serta overlap dengan cuti aktif pegawai yang sama ditolak.
 8. Koreksi entry wajib atomik, menyimpan alasan serta nilai sebelum/sesudah, dan menghitung ulang saldo terkait dengan fakta dan snapshot pengganti. Pembatalan atau perubahan current configuration tidak mengubah snapshot lama; record lama tidak di-hard-delete.
-9. Mutasi hanya tersedia bagi exact Admin Kepegawaian dengan permission `cuti.manual.manage`; audit tidak memuat path dokumen privat dan surface baca tetap menjaga privasi serta query bounded.
+9. Mutasi hanya tersedia bagi role Admin Kepegawaian secara eksklusif dengan permission `cuti.manual.manage`; audit tidak memuat path dokumen privat dan surface baca tetap menjaga privasi serta query bounded.
 
 ### Batas
 
-Jalur ini tidak boleh dipakai untuk mempercepat pengajuan baru yang belum memperoleh persetujuan di luar SIMPEG.
+Jalur ini tidak boleh dipakai untuk mempercepat pengajuan baru yang belum memperoleh persetujuan di luar SIMPEG atau sebagai alternatif ketika SIMPEG tersedia. Setelah go-live, jalur ini tetap dapat digunakan untuk mencatat cuti yang telah diproses dan disetujui secara manual saat layanan SIMPEG downtime.
 
 ---
 
@@ -161,11 +161,12 @@ Jalur ini tidak boleh dipakai untuk mempercepat pengajuan baru yang belum memper
 2. Ketika Atasan Langsung dan PYBMC adalah orang yang sama, keduanya tetap merupakan dua tahap snapshot dan membutuhkan dua tindakan. Sistem tidak boleh melewati tahap kedua hanya karena `approver_employee_id` sama pada pasangan peran tersebut.
 3. Pegawai membatalkan atau merevisi pengajuan melalui aksi resmi sebelum ada tindakan approval. Pembatalan melepas reservasi secara atomik dan tercatat pada audit; ia tidak menghapus request, snapshot, maupun histori mutasi saldo.
 4. `Ditangguhkan` ketika pengajuan masih aktif tetap mempertahankan reservasi seperti K-CUT-01. Namun, bila cuti yang sudah final `Disetujui` ditetapkan `Ditangguhkan` oleh Admin Kepegawaian dengan alasan wajib, sistem membuat koreksi/replay ledger atomik untuk membalik pemakaian final yang terdampak. Kedua keadaan tersebut tidak boleh disamakan.
-5. Cuti di Luar SIMPEG adalah fakta historis/transisi yang menjadi sumber pemakaian tahunan N-2, N-1, dan tahun berjalan sebelum go-live. Halaman ringkasan **Catat Pemakaian Tahunan** tidak menerima input angka langsung; ia menampilkan agregat dari fakta pemakaian dan entri manual yang telah tercatat.
-6. Ketentuan K-CUT-05 mengenai cuti yang disetujui ketika layanan tidak tersedia tetap berstatus **Open Question** untuk operasi setelah go-live sampai LLDIKTI mengonfirmasi apakah pengecualian downtime dipertahankan. Ia tidak boleh diperlakukan sebagai jalur rutin pengajuan cuti baru.
+5. Cuti di Luar SIMPEG adalah fakta historis/transisi yang menjadi sumber pemakaian tahunan N-2, N-1, dan tahun berjalan sebelum go-live, serta fakta pemulihan untuk cuti yang telah disetujui secara manual ketika SIMPEG downtime setelah go-live. Halaman ringkasan **Catat Pemakaian Tahunan** tidak menerima input angka langsung; ia menampilkan agregat dari fakta pemakaian dan entri manual yang telah tercatat.
+6. Saat SIMPEG downtime, proses manual harus selesai dan disetujui di luar sistem. Setelah layanan pulih, Admin Kepegawaian mencatat keputusan tersebut sebagai fakta final melalui Cuti di Luar SIMPEG; sistem tidak membuat approval aktif baru, dan jalur ini tidak boleh dipakai rutin ketika SIMPEG tersedia.
 
 ### Konsekuensi verifikasi
 
 - Uji PostgreSQL harus mencakup pasangan Atasan Langsung/PYBMC dengan aktor sama, tanpa melewati salah satu peran.
 - Uji saldo harus membedakan pembatalan sebelum approval, penangguhan pengajuan aktif, dan penangguhan administratif setelah final `Disetujui`.
 - Uji UI harus membuktikan bahwa ringkasan pemakaian tidak dapat diubah langsung dan koreksi hanya berasal dari fakta sumber yang beralasan serta teraudit.
+- Uji pemulihan downtime harus membuktikan bahwa fakta final dicatat tepat satu kali setelah layanan pulih, menolak duplikasi/overlap, dan tidak membuat approval aktif atau reservasi baru.

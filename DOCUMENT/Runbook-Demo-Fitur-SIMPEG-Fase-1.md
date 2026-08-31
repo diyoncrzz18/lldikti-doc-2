@@ -136,7 +136,7 @@ Login sebagai Admin Kepegawaian:
 
 1. Buka **Cuti → Administrasi Pemakaian Cuti** atau `/cuti/administrasi-saldo`.
 2. Cari employee `demo-klabat-pegawai`.
-3. Jika fakta pemakaian historis belum ada, gunakan alur **Cuti di Luar SIMPEG** sebagai Admin Kepegawaian. Tab **Catat Pemakaian Tahunan** hanya menampilkan agregat dan tidak menerima input angka langsung.
+3. Jika fakta pemakaian historis belum ada, gunakan alur **Cuti di Luar SIMPEG** sebagai Admin Kepegawaian. Alur yang sama digunakan setelah downtime untuk mencatat keputusan manual yang sudah final ketika layanan kembali aktif. Tab **Catat Pemakaian Tahunan** hanya menampilkan agregat dan tidak menerima input angka langsung.
 4. Contoh data:
    - Pemakaian N-2: `0` hari.
    - Pemakaian N-1: `1` hari.
@@ -144,7 +144,7 @@ Login sebagai Admin Kepegawaian:
    - Alasan: `Data pemakaian cuti untuk demo LLDIKTI`.
 5. Simpan fakta sumber dan pastikan sistem menghitung ulang ringkasan, rollover, dan ledger dari pemakaian tersebut.
 
-Jika riwayat pemakaian sudah tersedia, jangan mendaftarkan ulang. Cukup tunjukkan hasil perhitungan sistemnya. Entri manual setelah go-live akibat layanan tidak tersedia tidak didemokan sampai LLDIKTI mengonfirmasi pengecualian tersebut.
+Jika riwayat pemakaian sudah tersedia, jangan mendaftarkan ulang. Cukup tunjukkan hasil perhitungan sistemnya. Bila skenario pemulihan downtime didemokan, gunakan fakta baru yang sudah disetujui manual dan pastikan pencatatan setelah layanan pulih tidak membuat approval aktif atau reservasi baru.
 
 ### 3.5 Tanggal cuti
 
@@ -179,7 +179,7 @@ Siapkan:
 | Admin: data pegawai dan riwayat | 10 menit |
 | Import pegawai | 7 menit |
 | Pegawai: profil dan pengajuan cuti | 8 menit |
-| Kepala Bagian: approval tahap pertama | 6 menit |
+| Atasan Langsung: approval tahap wajib | 6 menit |
 | Pimpinan: keputusan akhir | 6 menit |
 | Pegawai: hasil, notifikasi, saldo, PDF | 6 menit |
 | EWS lintas role | 10 menit |

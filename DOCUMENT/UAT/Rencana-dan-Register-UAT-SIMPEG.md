@@ -96,10 +96,11 @@ Setiap sesi menggunakan urutan berikut:
 | UAT-CUT-31-04 | Cuti | Admin Kepegawaian menangguhkan cuti yang telah final `Disetujui` | Alasan wajib; histori tetap ada; koreksi/replay ledger satu kali; Pegawai dapat mengajukan lagi setelah tidak ada pengajuan aktif | Ledger before/after, audit, detail request |
 | UAT-CUT-31-05 | Saldo historis | Catat Cuti di Luar SIMPEG lalu buka ringkasan pemakaian | Fakta historis menjadi sumber pemakaian; ringkasan Catat Pemakaian Tahunan read-only; tidak ada hitung ganda | UI smoke, ledger, test anti duplikasi/overlap |
 | UAT-CUT-31-06 | Dokumen cuti | Finalkan cuti dan buka PDF/QR | PDF memuat Nama, Jabatan aktual/terkini, dan Peran setiap tahap; QR serta otorisasi dokumen tetap benar | PDF tersanitasi, verifikasi QR, authorization test |
+| UAT-CUT-31-07 | Pemulihan downtime | Setelah layanan pulih, catat cuti yang telah diproses dan disetujui manual saat downtime | Fakta final tercatat satu kali; saldo/rollover sinkron; tidak ada approval aktif atau reservasi baru; duplikasi/overlap ditolak | UI smoke, ledger before/after, audit, test PostgreSQL |
 | UAT-EMP-31-01 | Dokumen pegawai | Uji PNS, CPNS, lalu transisi CPNS→PNS | PNS memerlukan SK Pengangkatan PNS; CPNS memerlukan SK Pengangkatan CPNS; transisi menandai belum lengkap sampai SK PNS tersedia | Screenshot status kelengkapan, upload/audit, RBAC denial |
 | UAT-REP-31-01 | Reporting | Buka Reporting Statistik dengan data/role berbeda | Halaman terpisah dari dashboard/export; chart golongan, jenis jabatan, jabatan, unit, dan jenis kepegawaian mengikuti scope dan empty state | Screenshot desktop/tablet/mobile, test scope/query, console bersih |
 
-Catatan Open Question harus dicatat pada sesi UAT, bukan diasumsikan oleh tester: batas pembatalan setelah Verifikator bertindak dan penggunaan cuti manual ketika layanan tidak tersedia setelah go-live menunggu keputusan LLDIKTI.
+Catatan Open Question harus dicatat pada sesi UAT, bukan diasumsikan oleh tester: batas pembatalan setelah Verifikator bertindak masih menunggu keputusan LLDIKTI.
 
 ## 7. Template Notulen dan Hasil Skenario
 

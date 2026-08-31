@@ -1528,7 +1528,7 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 
 - [ ] **US-4.10 / Issue #28:** ubah validasi urutan chain menjadi verifikator dinamis → Kepala Bagian → PYBMC. Ketua Tim Kerja masuk kelompok verifikator; bila kelompok kosong, Kepala Bagian menjadi step pertama.
 - [ ] **US-4.3 / US-4.9 / Issue #32 dan #45:** daftarkan jumlah cuti yang telah dipakai per tahun sebagai fakta sumber; sistem menghitung saldo, rollover maksimal 6 hari, dan kondisi 24 versus 18 hari secara berjenjang. Perbaikan fakta sumber pemakaian/entri manual menjalankan replay rekalkulasi kronologis, dengan konsumsi N-2 → N-1 → tahun berjalan dan expiry akhir tahun penggunaan; direct balance override wajib ditolak pada test unit/feature.
-- [ ] **US-4.13:** revisi backlog 20 Agustus untuk input cuti manual khusus exact Admin Kepegawaian + permission `cuti.manual.manage` pada cuti eksternal/historis/downtime. **Ketentuan dokumen wajib sebelumnya superseded:** nomor dokumen dan dokumen pendukung opsional, tetapi file yang ada tervalidasi ketat dan privat. Wajibkan snapshot historis 2–10 tahap (0–8 `verifier`, tepat satu `kepala_bagian`, tepat satu `pybmc` final) dengan hasil server `verified`/`approved`/`final_approved`; approver internal/external, UUID bukan input UX, dan form kosong atau copy-edit current chain tanpa mengubah sumber. Cuti manual tidak membuat usulan, approval aktif, reservasi, notifikasi approval, atau bukti approval ulang. Koreksi membuat fakta/snapshot pengganti; pembatalan/perubahan current config tidak mengubah snapshot lama. Buktikan audit/privacy, query bounded/performance, PostgreSQL, Chrome smoke, duplikasi/overlap, saldo atomik, dan tanpa hard delete. Perbaikan urutan konfigurasi chain utama tetap berada pada **US-4.10 / Issue #28**.
+- [ ] **US-4.13:** revisi backlog 20 Agustus untuk input cuti manual khusus role Admin Kepegawaian dengan permission `cuti.manual.manage` pada cuti eksternal/historis/downtime. **Ketentuan dokumen wajib sebelumnya superseded:** nomor dokumen dan dokumen pendukung opsional, tetapi file yang ada tervalidasi ketat dan privat. Wajibkan snapshot historis 2–10 tahap (0–8 `verifier`, tepat satu `kepala_bagian`, tepat satu `pybmc` final) dengan hasil server `verified`/`approved`/`final_approved`; approver internal/external, UUID bukan input UX, dan form kosong atau copy-edit current chain tanpa mengubah sumber. Cuti manual tidak membuat usulan, approval aktif, reservasi, notifikasi approval, atau bukti approval ulang. Koreksi membuat fakta/snapshot pengganti; pembatalan/perubahan current config tidak mengubah snapshot lama. Buktikan audit/privacy, query bounded/performance, PostgreSQL, Chrome smoke, duplikasi/overlap, saldo atomik, dan tanpa hard delete. Perbaikan urutan konfigurasi chain utama tetap berada pada **US-4.10 / Issue #28**.
 
 ### Data Pegawai dan Hari Libur
 
@@ -1559,10 +1559,10 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 
 ### Cuti — pemakaian historis dan saldo
 
-- [ ] **US-4.3 / Issue #32 dan US-4.13:** jadikan Cuti di Luar SIMPEG/entri manual sebagai satu sumber fakta pemakaian tahunan N-2, N-1, dan tahun berjalan sebelum go-live. Halaman **Catat Pemakaian Tahunan** menampilkan agregat read-only dan tidak menerima input angka langsung.
+- [ ] **US-4.3 / Issue #32 dan US-4.13:** jadikan Cuti di Luar SIMPEG/entri manual sebagai satu sumber fakta pemakaian tahunan N-2, N-1, dan tahun berjalan sebelum go-live serta pemulihan pencatatan setelah downtime. Halaman **Catat Pemakaian Tahunan** menampilkan agregat read-only dan tidak menerima input angka langsung.
 - [ ] **US-4.13:** entri manual tetap eksklusif bagi Admin Kepegawaian dengan permission `cuti.manual.manage`; nomor dokumen dan dokumen pendukung opsional, sedangkan file yang ada tervalidasi ketat, privat, dan tidak diaudit sebagai path sensitif.
 - [ ] **US-4.3 / US-4.13:** buktikan PostgreSQL transaction/lock, anti duplikasi-overlap, ledger append-only, rekalkulasi kronologis, audit before/after, dan tidak adanya direct balance override atau hard delete.
-- [ ] **Open Question — downtime:** jangan perluas entri manual sebagai jalur rutin cuti setelah go-live sebelum LLDIKTI mengonfirmasi apakah pengecualian layanan tidak tersedia dari keputusan 15/20 Agustus tetap berlaku.
+- [ ] **US-4.13 — pemulihan downtime:** ketika layanan SIMPEG downtime, cuti dapat diproses dan disetujui secara manual di luar sistem. Setelah layanan pulih, Admin Kepegawaian mencatatnya sebagai fakta final melalui Cuti di Luar SIMPEG; sistem menolak duplikasi/overlap, tidak membuat approval aktif atau reservasi baru, dan tidak menyediakan jalur manual sebagai alternatif ketika SIMPEG tersedia.
 
 ### Data pegawai dan dokumen wajib
 
@@ -1578,6 +1578,6 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 
 ### Regression, UAT, dan batas yang dipertahankan
 
-- [ ] **Issue #52:** tambahkan skenario lengkap untuk 0, 1, dan banyak Verifikator; Atasan Langsung/PYBMC orang yang sama; pembatalan/revisi; penangguhan final dan ledger; agregat historis read-only; PDF Nama/Jabatan/Peran; matriks CPNS→PNS; serta Reporting Statistik.
+- [ ] **Issue #52:** tambahkan skenario lengkap untuk 0, 1, dan banyak Verifikator; Atasan Langsung/PYBMC orang yang sama; pembatalan/revisi; penangguhan final dan ledger; agregat historis read-only; pemulihan fakta cuti setelah downtime; PDF Nama/Jabatan/Peran; matriks CPNS→PNS; serta Reporting Statistik.
 - [ ] Kriteria baru wajib memiliki test guest/unauthorized, role/data scope, valid/invalid request, audit immutable, PostgreSQL, dan browser smoke sebelum ditandai selesai.
 - [ ] Jangan menambahkan retensi audit 90 hari, preferensi channel notifikasi per pengguna, atau perubahan status produk WhatsApp dari temuan `422`; ketiganya bukan keputusan implementasi pada evaluasi ini.

@@ -80,7 +80,7 @@
 4. Form dapat dimulai dengan chain kosong atau menyalin current chain pegawai. Hasil salinan dapat diedit bagian per bagian tanpa mengubah konfigurasi sumber; UUID internal tetap hidden/system dan bukan input UX.
 5. Approver dapat berasal dari pegawai internal atau pejabat eksternal. Snapshot historis menyimpan identitas yang diperlukan; pejabat eksternal tidak dibuatkan akun atau record pegawai palsu.
 6. Cuti manual tetap hanya mencatat fakta yang sudah disetujui di luar SIMPEG. SIMPEG tidak membuat pengajuan, approval aktif, reservasi, notifikasi approval, atau bukti approval ulang.
-7. Koreksi membuat fakta dan snapshot pengganti; pembatalan atau perubahan current configuration tidak mengubah snapshot lama. Mutasi dibatasi pada exact Admin Kepegawaian dengan permission `cuti.manual.manage`, serta tetap diaudit dan menjaga privasi dokumen/identitas.
+7. Koreksi membuat fakta dan snapshot pengganti; pembatalan atau perubahan current configuration tidak mengubah snapshot lama. Mutasi dibatasi pada role Admin Kepegawaian secara eksklusif dengan permission `cuti.manual.manage`, serta tetap diaudit dan menjaga privasi dokumen/identitas.
 
 ## K-MTG-08 — Dokumen wajib, berkas SK, dan arsip dokumen terpusat
 

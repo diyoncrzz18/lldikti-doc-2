@@ -2,66 +2,71 @@
 
 > Senin, 31 Agustus 2026 · 10.26–12.21 WITA (1 jam 55 menit)
 
+> Ringkasan ini bersifat interpretatif. Jika terdapat perbedaan redaksi, keputusan produk dan PRD kanonis menjadi acuan. Istilah dan kesimpulan di bawah telah diselaraskan kembali terhadap transkrip lengkap dan klarifikasi stakeholder.
+
 ## Rekap cepat
 
-Pertemuan difokuskan untuk menunjukkan kemajuan dan fungsionalitas pengembangan aplikasi SIMPEG, yang mencakup lima peran pengguna: super admin, admin, staf, kepala bagian, dan karyawan. Dion mempresentasikan fitur utama aplikasi termasuk manajemen personil, impor data karyawan, proses aplikasi cuti, alur kerja persetujuan, dan sistem peringatan dini untuk promosi dan perpanjangan kontrak. Tim membahas modifikasi penting termasuk mengubah label "Kepala Bagian" menjadi "Pengawas Langsung" dalam formulir cuti, menambahkan bidang nama karyawan, dan menyempurnakan sistem perhitungan kuota cuti. Beberapa masalah teknis ditangani termasuk masalah saluran pemberitahuan (terutama integrasi WhatsApp dengan kode kesalahan 422), kemampuan pelaporan data master, dan penanganan catatan cuti di luar sistem SIMPEG. Diskusi juga mencakup manajemen akses pengguna, persyaratan pengunggahan dokumen, dan alur proses verifikasi untuk persetujuan cuti.
+Pertemuan difokuskan untuk menunjukkan kemajuan dan fungsionalitas SIMPEG pada lima role: Super Admin, Admin Kepegawaian, Kepala Bagian, Pimpinan, dan Pegawai. Dion mempresentasikan manajemen pegawai, import data, dokumen, cuti, approval chain, notifikasi, EWS, dashboard, dan laporan. Evaluasi menghasilkan perubahan utama pada terminologi **Atasan Langsung**, lifecycle cuti, sumber pemakaian historis, isi formulir cuti, validasi SK Pengangkatan PNS/CPNS, dan Reporting Statistik. Demo juga menemukan kegagalan integrasi WhatsApp `422` yang harus ditangani sebagai masalah provider, bukan perubahan aturan domain.
 
 ## Langkah selanjutnya
 
 ### dion
 
-- Merancang ulang formulir cuti PDF untuk memasukkan nama pejabat (bukan hanya peran) dan mengganti label "Kepala Bagian" dengan "Pengawas Langsung" dalam alur persetujuan.
-- Menerapkan logika untuk pembatalan dan revisi cuti: memungkinkan karyawan untuk membatalkan atau merevisi aplikasi cuti mereka hanya sebelum disetujui oleh atasan langsung; setelah persetujuan, hanya Admin Staf yang dapat menangguhkan atau melarang cuti, yang memungkinkan karyawan untuk mengajukan permohonan kembali.
-- Sesuaikan perhitungan kuota cuti hanya berdasarkan fitur "Leave out Simpeg", menonaktifkan input manual dari catatan penggunaan tahunan untuk menghindari duplikasi data.
-- Selidiki dan selesaikan masalah dengan saluran pemberitahuan Whatsapp (error 422) untuk aplikasi cuti.
-- Tambahkan fitur pelaporan di bagian Master Data untuk menampilkan statistik dalam bentuk bagan untuk setiap kategori (misalnya, peringkat, posisi).
-- Menerapkan templat atau fitur pengaturan massal untuk konfigurasi persetujuan cuti untuk memungkinkan pengaturan verifikasi untuk sekelompok karyawan (misalnya, oleh tim kerja) alih-alih satu per satu.
-- Pastikan bahwa Sistem Peringatan Dini (EWS) untuk promosi didasarkan pada SK yang diinput terakhir (dokumen penunjukan), bukan periode empat tahun yang tetap.
-- Memvalidasi bahwa dokumen SK wajib (penunjukan, pangkat, posisi) sesuai dengan status karyawan saat ini (misalnya, PNS, PPPK) dan diunggah dengan benar.
-- Bersiaplah untuk pertemuan berikutnya pada hari Jumat, 11 September, dan bertujuan untuk peluncuran sistem pada bulan Oktober.
+- Ubah seluruh label bisnis approval cuti dari **Kepala Bagian** menjadi **Atasan Langsung**, tanpa otomatis mengganti nama role, route, atau field teknis lama.
+- Pertahankan urutan `0..n Verifikator → Atasan Langsung → PYBMC`; jika Atasan Langsung dan PYBMC adalah orang yang sama, pejabat tersebut tetap melakukan dua tindakan terpisah.
+- Perbarui formulir/PDF agar setiap pihak approval menampilkan **Nama**, **Jabatan**, dan **Peran**, serta rapikan jarak antara kop surat dan tabel.
+- Konfirmasikan kepada LLDIKTI batas pembatalan/revisi setelah Verifikator bertindak. Sampai ada keputusan, batas aman yang tercatat adalah sebelum tindakan approval pertama.
+- Jangan menghapus cuti final `Disetujui`. Admin Kepegawaian menggunakan status `Ditangguhkan` dengan alasan wajib, histori/audit tetap terjaga, dan saldo dikoreksi melalui ledger.
+- Jadikan **Cuti di Luar SIMPEG** sebagai satu sumber fakta untuk data historis/transisi dan pemulihan setelah downtime; halaman **Catat Pemakaian Tahunan** hanya menampilkan agregat read-only.
+- Pertahankan flow SIMPEG sebagai jalur operasional normal. Ketika layanan downtime, proses manual harus selesai di luar sistem dan baru dicatat sebagai fakta final setelah SIMPEG pulih.
+- Selidiki dan selesaikan kegagalan integrasi WhatsApp `422` berdasarkan kontrak parameter/template provider.
+- Tambahkan halaman **Reporting Statistik Kepegawaian** yang terpisah dari Data Master, dashboard, dan export nominatif.
+- Pertahankan EWS kenaikan pangkat berdasarkan TMT/SK pangkat terakhir ditambah empat tahun.
+- Validasi SK Pengangkatan terhadap status aktif: CPNS memerlukan SK Pengangkatan CPNS dan PNS memerlukan SK Pengangkatan PNS.
+- Siapkan evaluasi lanjutan dan pengujian sebelum target peluncuran; penyebutan Oktober pada rapat merupakan sasaran, bukan keputusan tanggal go-live final.
 
 ## Ringkasan
 
 ### Kemajuan Pengembangan Aplikasi Simpeg
 
-Dion mendemonstrasikan kemajuan pengembangan aplikasi simpeg, yang hampir lengkap dengan lima peran pengguna termasuk super admin, admin, staf, kepala bagian, dan karyawan. Aplikasi ini mencakup fitur untuk manajemen personalia, entri data karyawan dengan template Excel, manajemen dokumen, pelacakan cuti dengan perhitungan otomatis, dan alur kerja persetujuan yang dapat dikonfigurasi. Demonstrasi menunjukkan bagaimana sistem menangani detail karyawan, perubahan status, dokumen wajib, dan meninggalkan aplikasi dengan pengaturan otorisasi yang tepat.
+Dion mendemonstrasikan kemajuan SIMPEG dengan lima role: Super Admin, Admin Kepegawaian, Kepala Bagian, Pimpinan, dan Pegawai. Aplikasi mencakup manajemen pegawai, import Excel, dokumen, perhitungan cuti, serta approval chain yang dapat dikonfigurasi. Demonstrasi juga menunjukkan detail pegawai, perubahan status, dokumen wajib, dan pembatasan akses berdasarkan role/permission.
 
-### Tinggalkan Demo Sistem Manajemen
+### Demo Sistem Manajemen Cuti
 
-Dion mendemonstrasikan sistem manajemen cuti, menjelaskan cara memasukkan saldo cuti karyawan dan memproses permintaan cuti melalui antarmuka admin. Dia menunjukkan alur kerja persetujuan di mana permintaan pertama pergi ke Kepala Departemen, kemudian ke PBMC untuk persetujuan akhir, dengan pemberitahuan dikirim melalui aplikasi, email, dan WhatsApp. Sistem ini mencakup fitur untuk melacak saldo cuti, menghasilkan formulir cuti PDF dengan barcode, dan mengelola Sistem Peringatan Dini untuk tonggak pencapaian karyawan seperti promosi dan perpanjangan kontrak.
+Dion mendemonstrasikan perhitungan saldo dan pengajuan cuti. Kontrak approval yang diklarifikasi adalah `0..n Verifikator → Atasan Langsung → PYBMC`, dengan notifikasi melalui channel yang dikonfigurasi. Sistem juga melacak saldo, menghasilkan PDF dengan QR verifikasi, serta menyediakan EWS untuk event kepegawaian.
 
 ### Sistem Pemberitahuan dan Akses Global
 
-Tim membahas implementasi saluran pemberitahuan global dan sistem manajemen akses pengguna. Mereka mengklarifikasi bahwa ketika karyawan masuk untuk pertama kalinya, peran dan izin mereka secara otomatis dipetakan berdasarkan data yang diimpor sebelumnya, dengan pengguna baru mulai sebagai administrator super. Diskusi mencakup bagaimana data master dapat dikelola secara fleksibel, termasuk posisi karyawan, eselon kantor, jenis cuti, dan konfigurasi liburan, dengan semua aktivitas sistem dicatat dalam log audit.
+Tim membahas konfigurasi channel notifikasi global dan manajemen akses. **Hanya pengguna pertama sistem**, ketika belum ada user sama sekali, yang menjadi Super Admin untuk bootstrap. Pengguna berikutnya dipetakan melalui email/data pegawai dan RBAC yang berlaku; mereka tidak otomatis menjadi Super Admin. Data master dapat dikelola secara terkontrol dan perubahan penting dicatat dalam audit log.
 
-### Tinggalkan Diskusi Proses Aplikasi
+### Diskusi Proses Pengajuan Cuti
 
-Tim membahas proses aplikasi cuti dan fungsionalitas sistem. Abd mengajukan pertanyaan tentang penamaan liburan, persyaratan formulir cuti, dan kemampuan karyawan untuk memodifikasi atau membatalkan permintaan cuti. Kelompok tersebut mengklarifikasi bahwa karyawan dapat memodifikasi aplikasi sebelum persetujuan, tetapi setelah disetujui, hanya administrator staf yang dapat melarang atau menghapusnya, dan karyawan tidak dapat mengirimkan kembali permintaan yang sama setelah penghapusan.
+Tim membahas kemampuan Pegawai untuk membatalkan atau merevisi pengajuan. Batas setelah Verifikator bertindak tetapi sebelum Atasan Langsung masih menunggu konfirmasi LLDIKTI. Cuti final `Disetujui` tidak dihapus; Admin Kepegawaian dapat menetapkannya `Ditangguhkan` dengan alasan, histori, audit, dan koreksi ledger. Setelah tidak ada pengajuan aktif, Pegawai dapat mengajukan kembali melalui alur normal.
 
-### Tinggalkan Kebijakan dan Konfigurasi Sistem
+### Kebijakan dan Konfigurasi Cuti
 
-Pertemuan tersebut membahas kebijakan cuti dan konfigurasi sistem. Dion dan Abd mengklarifikasi bahwa ketika aplikasi cuti karyawan ditangguhkan, itu tidak dihitung terhadap saldo cuti yang disetujui dan kembali ke status sebelumnya. Memang menjelaskan berbagai jenis janji SK, termasuk transfer SK ke SK dan konfigurasi promosi sistem peringatan dini (EWS), mencatat bahwa periode promosi default adalah empat tahun berdasarkan SK yang diinput terakhir.
+Pertemuan membedakan penangguhan saat pengajuan masih aktif dari penangguhan administratif setelah cuti final disetujui. Penangguhan final harus membalik pemakaian melalui ledger secara atomik tanpa menghapus histori. Untuk EWS kenaikan pangkat, dasar perhitungan tetap TMT/SK pangkat terakhir ditambah empat tahun.
 
-### Tinjauan Sistem Promosi dan Pemberitahuan
+### Tinjauan EWS dan Notifikasi
 
-Tim membahas penentuan promosi dan peringkat berdasarkan masukan SK terakhir daripada kerangka waktu empat tahun. Mereka meninjau kemampuan sistem data master untuk pelaporan karyawan khusus, termasuk penyaringan berdasarkan peringkat, posisi, dan departemen. Diskusi juga membahas masalah saluran pemberitahuan, di mana Dion melaporkan bahwa hanya meninggalkan pemberitahuan yang gagal dikirim dengan benar, dengan kode kesalahan 422, dan Sidik menyarankan untuk memeriksa parameter dan mempertimbangkan apakah akan mempertahankan pengaturan pemberitahuan global atau khusus pengguna.
+Tim mengonfirmasi EWS kenaikan pangkat memakai TMT/SK pangkat terakhir sebagai titik awal, kemudian menambahkan empat tahun. Demo WhatsApp menghasilkan respons `422`; tindak lanjutnya adalah memeriksa parameter, template, dan kontrak provider. Konfigurasi channel tetap global; preferensi per pengguna tidak ditetapkan sebagai requirement Fase 1.
 
-### Tinggalkan Alur Kerja Proses Persetujuan
+### Alur Persetujuan Cuti
 
-Diskusi berfokus pada proses persetujuan cuti dan peran yang terlibat dalam alur kerja persetujuan. Sidik_LLDikti dan Abd mengklarifikasi bahwa ada dua kemungkinan pengawas langsung untuk kepala bagian: baik Kepala Departemen atau Kepala LLDikti. Mereka menentukan bahwa aliran persetujuan harus mempertahankan dua langkah yang berbeda - pertama melalui verifier atau supervisor langsung, kemudian ke PBMC - daripada digabungkan menjadi satu langkah. Kelompok ini mengkonfirmasi bahwa semua persetujuan, termasuk verifikasi, akan muncul secara berurutan pada formulir cuti PDF terlepas dari apakah verifikasi tambahan terlibat dalam proses tersebut.
+Atasan Langsung merupakan peran bisnis yang ditetapkan per pegawai dan dapat dijalankan Kepala Bagian, Kepala Lembaga, atau pejabat lain yang sah. Rantai persetujuan adalah `0..n Verifikator → Atasan Langsung → PYBMC`. Atasan Langsung dan PYBMC tetap merupakan dua tahap meskipun dijalankan orang yang sama. Seluruh tahap yang bertindak ditampilkan berurutan pada PDF.
 
-### Tinggalkan Pembaruan Sistem Dokumentasi
+### Pembaruan Formulir dan Dokumentasi Cuti
 
-Tim membahas cara yang tepat untuk mendokumentasikan posisi pejabat dalam catatan cuti, menentukan bahwa nama harus ditambahkan sebagai kolom sambil berfokus pada posisi struktural pejabat daripada gelar kantor khusus mereka. Mereka mengklarifikasi bahwa verifikasi harus ditandai sebagai opsional karena mereka bukan informasi yang diperlukan, dan sistem harus secara otomatis menghitung kuota cuti berdasarkan input data. Diskusi juga membahas bagaimana menangani catatan cuti di luar sistem SIMPEG, memastikan bahwa input manual untuk cuti di luar SIMPEG tidak akan mempengaruhi perhitungan kuota otomatis.
+Formulir/PDF menampilkan **Nama**, **Jabatan**, dan **Peran** setiap pihak approval. Jabatan mengikuti jabatan aktual yang relevan, termasuk jabatan struktural, fungsional, atau pelaksana. Verifikator bersifat opsional, tetapi setiap Verifikator yang terlibat tetap muncul pada PDF. Fakta Cuti di Luar SIMPEG memengaruhi saldo dan rollover sesuai jenis cutinya.
 
-### Pembaruan Proses Rekaman Cuti Tahunan
+### Pembaruan Pencatatan Cuti Tahunan
 
-Sidik menjelaskan proses pencatatan penggunaan tahunan dan cuti di luar sistem simpeg, menjelaskan bahwa penggunaan tahunan harus dicatat terlebih dahulu, diikuti dengan cuti di luar sistem. Abd mengklarifikasi bahwa sistem harus menangkap data historis dan aplikasi cuti di masa depan, dengan pemahaman bahwa daun di luar simpeg tidak akan lagi diproses ke depan. Diskusi difokuskan pada memastikan semua data cuti yang relevan, termasuk aplikasi masa lalu, dicatat dengan benar dalam sistem.
+Hasil akhir diskusi menetapkan **Cuti di Luar SIMPEG** sebagai satu pintu pencatatan fakta historis/transisi dan pemulihan setelah downtime. Halaman **Catat Pemakaian Tahunan** tidak menerima angka langsung; halaman tersebut hanya menampilkan agregat yang dihitung dari fakta pemakaian. Saat SIMPEG normal setelah go-live, pengajuan baru wajib memakai alur SIMPEG.
 
-### Tinggalkan Implementasi Sistem Pelacakan
+### Implementasi Pelacakan Cuti
 
-Tim membahas penerapan sistem pelacakan cuti di mana perhitungan akan didasarkan pada cuti yang diambil di luar sistem yang ada, membutuhkan input manual untuk akuntabilitas yang lebih besar. Mereka mengklarifikasi bahwa hanya administrator yang berwenang (super admin dan admin pagawea) yang dapat mengubah status karyawan dan mengunggah dokumen, bukan karyawan itu sendiri. Diskusi juga mencakup persyaratan validasi untuk dokumen SK (penunjukan), terutama untuk kategori peringkat yang berbeda seperti CPNS, PNS, dan PPPK, memastikan dokumentasi lengkap dipertahankan bahkan ketika status karyawan berubah.
+Pemakaian historis dan cuti yang diproses manual selama downtime dicatat per kejadian agar dapat diaudit dan dihitung tepat satu kali. Hanya Admin Kepegawaian berwenang dengan permission yang sesuai yang mencatat fakta tersebut. Perubahan status pegawai dan unggah dokumen tetap dibatasi untuk Super Admin/Admin Kepegawaian. Kelengkapan SK Pengangkatan harus cocok dengan status aktif CPNS atau PNS.
 
-### Pelaksanaan Arus Verifikasi Karyawan
+### Konfigurasi Rangkaian Persetujuan
 
-Tim membahas penerapan sistem aliran verifikasi untuk persetujuan karyawan, dengan LLDIKTI XVI mengusulkan pendekatan berbasis template di mana tim dapat menggunakan proses verifikasi standar daripada membuat jalur verifikasi individual untuk setiap karyawan. Sidik_LLDikti menyarankan agar atasan secara langsung menetapkan verifier dan mengusulkan penerapan alur verifikasi yang sama kepada semua karyawan dalam satu unit kerja. Tim setuju untuk menargetkan peluncuran pada bulan Oktober, dengan pertemuan tindak lanjut dijadwalkan untuk Jumat depan (11) untuk mengevaluasi kemajuan dan mempersiapkan implementasi.
+Tim membahas penyalinan konfigurasi persetujuan kepada anggota unit agar Admin tidak menyusun Verifikator satu per satu. Chain runtime tetap disimpan per pegawai; template hanya menyalin konfigurasi dan tidak menjadi resolver paralel. Pertemuan lanjutan direncanakan untuk evaluasi progres, sedangkan Oktober disebut sebagai sasaran peluncuran yang masih bergantung pada perbaikan, testing, dan UAT.

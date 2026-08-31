@@ -57,7 +57,7 @@ Legend: ✅ selesai pada source · ⚠️ sebagian · ❌ belum selesai. Status 
 | Approver sama | Atasan Langsung dan PYBMC yang menunjuk orang sama tetap dua tahap/tindakan; perbarui writer, snapshot, UI, test, dan audit | Belum Dimulai |
 | Pengajuan Pegawai | Pembatalan/revisi resmi sebelum tindakan approval, tanpa hard delete, dengan reservasi dan audit atomik | Belum Dimulai |
 | Penangguhan final | Admin Kepegawaian menangguhkan cuti final `Disetujui` dengan alasan, histori, dan replay ledger idempoten | Belum Dimulai |
-| Pemakaian historis | Cuti di Luar SIMPEG sebagai sumber fakta transisi; ringkasan Catat Pemakaian Tahunan read-only; uji anti-duplikasi/overlap dan PostgreSQL | Belum Dimulai |
+| Pemakaian historis/downtime | Cuti di Luar SIMPEG sebagai sumber fakta transisi dan pemulihan setelah downtime; ringkasan Catat Pemakaian Tahunan read-only; uji anti-duplikasi/overlap dan PostgreSQL | Belum Dimulai |
 | Formulir cuti | Nama, Jabatan, Peran tiap tahap approval dan tata letak kop/tabel yang diperbarui, dengan QR/privasi tetap terjaga | Belum Dimulai |
 
-Pengecualian cuti manual saat layanan tidak tersedia setelah go-live tetap **Open Question** sesuai [keputusan 31 Agustus](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md); jangan dijadikan jalur rutin sebelum dikonfirmasi.
+Cuti manual setelah go-live hanya digunakan untuk memulihkan pencatatan keputusan yang telah diproses dan disetujui di luar sistem ketika layanan downtime. Jalur ini tidak digunakan sebagai alternatif saat SIMPEG tersedia.
