@@ -8,8 +8,10 @@
 | Tanggal analisis ulang | 10 Agustus 2026 |
 | Basis verifikasi | Branch `development` @ `ff260a5` setelah PR #179 |
 | Dokumen asal (dikonsolidasi ke file ini) | `Analisis-Frontend-Backend-Role-Super-Admin.md` (audit 21 Juli) dan `Analisis-Kesesuaian-Administrasi-Sistem-Super-Admin.md` (audit 23 Juli) |
-| Acuan produk | PRD v1.4 §4.2 (konfigurasi sistem, user management, seluruh kemampuan Admin), §12 (audit immutable), §15–16 (RBAC & master dari database), US-1.4 |
+| Acuan produk | PRD v1.12 §4.2 (konfigurasi sistem, user management, seluruh kemampuan Admin), §12 (audit immutable), §15–16 (RBAC & master dari database), US-1.4, US-8.6 |
 | Status keseluruhan | ⚠️ **Belum sepenuhnya sesuai** — operasional harian kuat; halaman konfigurasi sistem masih titik terlemah |
+
+> **Addendum 31 Agustus 2026:** konfigurasi cuti harus memakai label bisnis `Verifikator → Atasan Langsung → PYBMC`, mempertahankan dua tindakan bila Atasan/PYBMC sama, serta menyediakan Reporting Statistik setelah owner dan issue baru ditetapkan. Evidence sebelum addendum tidak menutup kriteria ini.
 
 ## Ringkasan
 

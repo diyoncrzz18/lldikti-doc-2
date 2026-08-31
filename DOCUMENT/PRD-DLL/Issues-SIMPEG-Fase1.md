@@ -1541,3 +1541,43 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 - [ ] **US-6.5:** tuntaskan WhatsApp Business paling lambat akhir Agustus 2026: susun dokumen template beserta allowlist variabel, serahkan kepada LLDIKTI untuk pengajuan Meta/Qontak, implementasikan melalui dispatcher, dan gunakan kontrak, credential, template ID, nomor uji, serta sandbox yang dikembalikan sebelum aktivasi adapter.
 - [ ] Jadwalkan Zoom evaluasi segera setelah satu kelompok revisi selesai; target penyelesaian adalah akhir Agustus 2026, bukan rencana tanggal 20 sebelumnya.
 - [ ] Sebelum memakai perubahan container/image PHP atau peningkatan PostgreSQL dari LLDIKTI: lakukan backup/restore, migration check, queue/scheduler smoke test, serta catat rollback evidence.
+
+---
+
+## Addendum Backlog — Evaluasi SIMPEG Bersama LLDIKTI, 31 Agustus 2026
+
+> Sumber: [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md), [PRD v1.12](PRD-SIMPEG-Fase1-Core.md), dan [User Stories v1.12](User-Stories-SIMPEG-Fase1.md). Butir ini menimpa task lama yang bertentangan, tetapi tidak mengubah klaim historis issue/PR yang sudah ditutup. Seluruh item di bawah berstatus **belum diimplementasikan** sampai dibuktikan dengan test, QA, dan audit evidence baru.
+
+### Cuti — chain, pengajuan, dan keputusan
+
+- [ ] **US-4.10 / Issue #28:** gunakan urutan runtime **0..n Verifikator → Atasan Langsung → PYBMC**. Ganti label bisnis/UX “Kepala Bagian” menjadi “Atasan Langsung”; field, route, atau enum legacy tidak dimigrasikan hanya karena penggantian label.
+- [ ] **US-4.10 / Issue #28:** bila tidak ada Verifikator, tampilkan Atasan Langsung sebagai tahap pertama tanpa label “tanpa verifikator”. Snapshot harus menyimpan urutan, nama, jabatan aktual/terkini, dan peran setiap tahap.
+- [ ] **US-4.10 / Issue #28 dan US-4.4 / Issue #31:** bila Atasan Langsung dan PYBMC adalah orang yang sama, pertahankan dua tahap dan wajibkan dua tindakan. Validasi duplikasi tidak boleh melewati pasangan peran ini; duplikasi pada kombinasi tahap lain tetap dicegah/ditolak.
+- [ ] **US-4.1 / Issue #30:** Pegawai dapat membatalkan atau merevisi pengajuan melalui aksi resmi sebelum tindakan approval. Aksi harus berotorisasi pada pemohon, atomik terhadap reservasi, teraudit, tidak menghapus request/snapshot, dan mencegah pengajuan aktif yang bertabrakan.
+- [ ] **US-4.6 / Issue #31:** Admin Kepegawaian ber-permission yang tepat dapat menandai cuti final `Disetujui` menjadi `Ditangguhkan` dengan alasan wajib. Implementasi menyimpan riwayat, tidak hard-delete, dan melakukan koreksi/replay ledger idempoten sehingga pemakaian final tidak tersisa keliru.
+- [ ] **US-4.6 / Issue #31:** formulir/PDF cuti memuat Nama, Jabatan aktual/terkini, dan Peran (`Verifikator`, `Atasan Langsung`, `PYBMC`) untuk setiap approval; pertahankan QR, akses terproteksi, timeline, serta ruang visual antara kop dan tabel.
+
+### Cuti — pemakaian historis dan saldo
+
+- [ ] **US-4.3 / Issue #32 dan US-4.13:** jadikan Cuti di Luar SIMPEG/entri manual sebagai satu sumber fakta pemakaian tahunan N-2, N-1, dan tahun berjalan sebelum go-live. Halaman **Catat Pemakaian Tahunan** menampilkan agregat read-only dan tidak menerima input angka langsung.
+- [ ] **US-4.13:** entri manual tetap eksklusif bagi Admin Kepegawaian dengan permission `cuti.manual.manage`; nomor dokumen dan dokumen pendukung opsional, sedangkan file yang ada tervalidasi ketat, privat, dan tidak diaudit sebagai path sensitif.
+- [ ] **US-4.3 / US-4.13:** buktikan PostgreSQL transaction/lock, anti duplikasi-overlap, ledger append-only, rekalkulasi kronologis, audit before/after, dan tidak adanya direct balance override atau hard delete.
+- [ ] **Open Question — downtime:** jangan perluas entri manual sebagai jalur rutin cuti setelah go-live sebelum LLDIKTI mengonfirmasi apakah pengecualian layanan tidak tersedia dari keputusan 15/20 Agustus tetap berlaku.
+
+### Data pegawai dan dokumen wajib
+
+- [ ] **US-2.4 / US-2.6:** matriks PNS mewajibkan **SK Pengangkatan PNS** dan matriks CPNS mewajibkan **SK Pengangkatan CPNS**, selain dokumen wajib lain yang relevan pada matriks aktif.
+- [ ] **US-2.4 / US-2.6:** transisi CPNS → PNS mengevaluasi matriks PNS dan menandai kelengkapan belum lengkap sampai SK Pengangkatan PNS tersedia; tidak mengubah record substantif riwayat maupun memberi jalur self-service Pegawai.
+- [ ] **US-2.4 / US-2.6:** uji akses Super Admin/Admin Kepegawaian, upload/validasi privat, kelengkapan dokumen, audit, dan penolakan akses Pegawai.
+
+### Dashboard dan reporting
+
+- [ ] **US-8.6 — Issue baru perlu diberi nomor oleh pemelihara tracker:** buat halaman Reporting Statistik Kepegawaian yang terpisah dari Data Master, dashboard ringkas, dan export. Cakupan minimal chart/agregat: golongan, jenis jabatan, jabatan, unit kerja, dan jenis kepegawaian.
+- [ ] **US-8.6:** gunakan agregasi database yang scoped dan bounded, state kosong yang jelas, responsive UI, authorization/masking sesuai dashboard/laporan, serta test query/data scope dan browser smoke tanpa console error.
+- [ ] **Estimasi dan assignee US-8.6:** ditetapkan pada planning setelah owner dan kapasitas disepakati; addendum ini tidak mengubah total 52 issue historis atau mengarang Story Point baru.
+
+### Regression, UAT, dan batas yang dipertahankan
+
+- [ ] **Issue #52:** tambahkan skenario lengkap untuk 0, 1, dan banyak Verifikator; Atasan Langsung/PYBMC orang yang sama; pembatalan/revisi; penangguhan final dan ledger; agregat historis read-only; PDF Nama/Jabatan/Peran; matriks CPNS→PNS; serta Reporting Statistik.
+- [ ] Kriteria baru wajib memiliki test guest/unauthorized, role/data scope, valid/invalid request, audit immutable, PostgreSQL, dan browser smoke sebelum ditandai selesai.
+- [ ] Jangan menambahkan retensi audit 90 hari, preferensi channel notifikasi per pengguna, atau perubahan status produk WhatsApp dari temuan `422`; ketiganya bukan keputusan implementasi pada evaluasi ini.

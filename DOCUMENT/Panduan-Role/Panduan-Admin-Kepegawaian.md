@@ -17,9 +17,9 @@
 
 | Fitur | Langkah ringkas | Dampak tindakan |
 |---|---|---|
-| Data Pegawai | Cari/tambah/ubah data utama, tetapkan Kepala Bagian, dan tambahkan riwayat berdasarkan SK | Mengubah data operasional pegawai dan memengaruhi scope, EWS, serta laporan |
+| Data Pegawai | Cari/tambah/ubah data utama, tetapkan Atasan Langsung, dan tambahkan riwayat berdasarkan SK | Mengubah data operasional pegawai dan memengaruhi scope, EWS, serta laporan |
 | Lifecycle Status | Dari Data Pegawai pilih Ubah Status/Nonaktifkan/Aktifkan Kembali, isi status tujuan, tanggal efektif, dan alasan administratif | Transisi langsung/terjadwal mengubah snapshot, histori, akses akun, EWS, dan notifikasi ketika efektif; reaktivasi memerlukan `employees.restore` |
-| Dokumen & SK | Unggah berkas, isi metadata, periksa dampak, dan unduh sesuai permission | Menyimpan dokumen ke storage terproteksi; file dan metadata menjadi bagian profil pegawai |
+| Dokumen & SK | Unggah berkas, isi metadata, periksa dampak, dan unduh sesuai permission | Menyimpan dokumen ke storage terproteksi; matriks membedakan SK Pengangkatan PNS dan SK Pengangkatan CPNS |
 | Import Pegawai | Unduh template, unggah, petakan kolom, validasi preview, lalu eksekusi | Membuat banyak data utama; tidak membuat histori pangkat/jabatan/KGB secara otomatis |
 | Administrasi Pemakaian Cuti | Cari pegawai, catat atau perbaiki sumber pemakaian dengan alasan dan dokumen | Menjalankan rekalkulasi saldo serta ledger; histori lama tetap dipertahankan |
 | Monitoring dan Rekap Cuti | Gunakan filter, buka detail, periksa alur, saldo, dan status | Akses monitoring; Admin tidak otomatis menjadi approver |
@@ -36,6 +36,8 @@
 5. Unggah dokumen SK yang sesuai dan isi tanggal efektif.
 6. Jangan mengedit record histori lama untuk mengganti keadaan terkini.
 7. Periksa Audit Log setelah mutasi penting.
+
+Untuk PNS, periksa SK Pengangkatan PNS; untuk CPNS, periksa SK Pengangkatan CPNS. Saat status berubah dari CPNS menjadi PNS, evaluasi kembali kelengkapan matriks PNS dan unggah SK Pengangkatan PNS bila belum tersedia. Pegawai tidak mengunggah dokumen sendiri pada Fase 1.
 
 Penonaktifan mempertahankan record Employee. Tidak ada hard delete, Data Backup, atau Data Nonaktif.
 Semua status ditemukan melalui filter Data Pegawai. Kelompok `Aktif` dan `Aktif/khusus`, termasuk
@@ -64,13 +66,15 @@ dokumen setelah pegawai tersedia.
 
 1. Buka `/cuti/administrasi-saldo` dan cari pegawai.
 2. Periksa saldo aktual, pemakaian, alokasi, dan ledger.
-3. Catat pemakaian tahunan atau entri manual sesuai dokumen sumber.
-4. Untuk koreksi, pilih record yang benar dan isi alasan wajib.
-5. Unggah dokumen pendukung.
+3. Gunakan entri **Cuti di Luar SIMPEG** untuk fakta historis/transisi yang sudah disetujui; halaman **Catat Pemakaian Tahunan** hanya dibaca sebagai agregat dan bukan tempat memasukkan angka langsung.
+4. Untuk koreksi, pilih fakta sumber yang benar dan isi alasan wajib.
+5. Nomor dokumen dan dokumen pendukung bersifat opsional; bila diberikan, unggah file tervalidasi pada storage privat.
 6. Simpan, lalu periksa hasil replay/rekalkulasi dan audit.
+7. Untuk cuti yang sudah final `Disetujui` tetapi harus dibatalkan secara administratif, gunakan aksi `Ditangguhkan`, isi alasan wajib, dan periksa koreksi ledger serta histori.
 
 Tidak tersedia direct balance override. Koreksi memperbaiki sumber pemakaian dan menghitung ulang
-saldo secara deterministik.
+saldo secara deterministik. Entri manual setelah go-live akibat layanan tidak tersedia masih menunggu
+konfirmasi LLDIKTI; jangan memakainya sebagai jalur rutin pengajuan baru.
 
 ## 6. Batas Akses dan Larangan
 

@@ -41,7 +41,7 @@ Aturan status paket:
 | # | Acceptance criterion | Artefak pembuktian | Status | Evidence aktual |
 |---:|---|---|---|---|
 | 1 | Zoom retest segera untuk setiap kelompok yang memenuhi DoD | Register UAT §4–§6 | Belum Lulus | Belum ada jadwal dan notulen retest |
-| 2 | Penerimaan Kepegawaian per kelompok dengan owner, evidence, dan status resmi | Register UAT §7 | Belum Lulus | Belum ada keputusan penerimaan |
+| 2 | Penerimaan Kepegawaian per kelompok dengan owner, evidence, dan status resmi | Register UAT §8 | Belum Lulus | Belum ada keputusan penerimaan |
 | 3 | Panduan lima role setelah penerimaan | `Panduan-Role/` | Draft | Lima draft tersedia; belum diterima stakeholder |
 | 4 | Image/container dan PostgreSQL diperlakukan sebagai dependency eksternal | Dokumen baseline §2–§4 | Lulus pada level kebijakan | Keputusan K-MTG-06.3; kandidat aktual belum diterima |
 | 5 | Backup berhasil direstore dan data tervalidasi | Dokumen recovery §3–§6 | Belum Lulus | Drill belum dilaksanakan |
@@ -85,6 +85,7 @@ ketiadaan dependency tidak boleh diubah menjadi klaim lulus.
 ## 6. Sumber Kanonis
 
 - [Keputusan Evaluasi Meeting LLDIKTI 15 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md)
+- [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md)
 - [User Stories SIMPEG Fase 1 — K-MTG-06](PRD-DLL/User-Stories-SIMPEG-Fase1.md)
 - [Tracking Sprint 7](Tracking-Sprint-1-7/Sprint-7-Stabilization-Regression-UAT.md)
 - [Runbook Demo Fitur SIMPEG Fase 1](Runbook-Demo-Fitur-SIMPEG-Fase-1.md)

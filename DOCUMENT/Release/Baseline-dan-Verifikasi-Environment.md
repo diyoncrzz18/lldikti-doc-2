@@ -136,7 +136,7 @@ Gunakan data sintetis/staging. Jangan menjalankan mutasi uji pada produksi tanpa
 | ENV-01 | Super Admin login dan dashboard | Role/menu sesuai, HTTP 200 | — | Belum | — |
 | ENV-02 | Admin Kepegawaian data pegawai | List/filter/detail berfungsi sesuai permission | — | Belum | — |
 | ENV-03 | Pegawai membuat pengajuan cuti | Validasi, snapshot, alokasi, audit, dan notifikasi terbentuk | — | Belum | — |
-| ENV-04 | Verifikator/Kepala Bagian/Pimpinan | Chain berjalan berurutan sampai keputusan final | — | Belum | — |
+| ENV-04 | Verifikator/Atasan Langsung/PYBMC | Chain berjalan `0..n Verifikator → Atasan Langsung → PYBMC` sampai keputusan final; pasangan Atasan/PYBMC dengan aktor sama tetap dua tindakan | — | Belum | — |
 | ENV-05 | Saldo cuti | Dipotong hanya setelah final `Disetujui` | — | Belum | — |
 | ENV-06 | EWS | Scheduler/dedup/scope/notifikasi sesuai | — | Belum | — |
 | ENV-07 | Laporan/export | Preview dan berkas dapat dibuka tanpa data sensitif berlebih | — | Belum | — |

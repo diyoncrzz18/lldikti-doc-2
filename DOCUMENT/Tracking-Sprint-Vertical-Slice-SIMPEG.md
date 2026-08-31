@@ -568,3 +568,18 @@ Status retest:
 | Sprint 5 | 21 Juli 2026 - 30 Juli 2026 | EWS dan notifikasi | 3 | EWS/notifikasi QA pass |
 | Sprint 6 | 31 Juli 2026 - 9 Agustus 2026 | Dashboard dan laporan | 3 | Dashboard/export QA pass |
 | Sprint 7 | 10 Agustus 2026 - 20 Agustus 2026 | Stabilization, regression, UAT, release candidate | 3 | RC siap dan tidak ada bug critical/major |
+
+---
+
+## 15. Addendum Vertical Slice — Evaluasi LLDIKTI 31 Agustus 2026
+
+> Slice di bawah adalah pekerjaan perubahan setelah rencana Sprint 1–7. Status dan timeline historis pada bagian sebelumnya tidak ditulis ulang.
+
+| Slice | Fokus | Ketergantungan | Evidence selesai | Status |
+|---|---|---|---|---|
+| 15.1 | Penyelarasan cuti: Atasan Langsung, tahap ganda aktor sama, pembatalan/revisi, penangguhan final, dan formulir | Konfigurasi chain, approval engine, ledger, dokumen QR | Feature/unit test PostgreSQL, audit, browser smoke, review, UAT | Belum Direncanakan |
+| 15.2 | Pemakaian historis cuti sebagai sumber fakta tunggal dan ringkasan read-only | Ledger/replay, permission Admin Kepegawaian, dokumen privat | Test anti duplikasi/overlap, audit before/after, smoke UI | Belum Direncanakan |
+| 15.3 | Matriks SK PNS/CPNS dan transisi CPNS→PNS | Profil pegawai, matriks dokumen, upload privat | Authorization, kelengkapan, audit, browser smoke | Belum Direncanakan |
+| 15.4 | Reporting Statistik Kepegawaian | Query agregasi, policy/data scope, chart UI | Test query/scope, responsive smoke, performance note, UAT | Belum Direncanakan |
+
+Owner dan estimasi tidak ditetapkan di sini karena belum ada perencanaan kapasitas yang disetujui.

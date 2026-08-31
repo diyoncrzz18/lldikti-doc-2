@@ -21,6 +21,7 @@
 | Persetujuan Cuti | Buka `/pimpinan/cuti`, cari pengajuan aktif, baca detail, lalu pilih keputusan | Keputusan final dapat memotong saldo, menghasilkan dokumen, notifikasi, dan audit |
 | EWS | Buka EWS organisasi dan filter alert | Memantau kondisi organisasi; EWS bukan keputusan otomatis |
 | Laporan | Buka laporan nominatif/kepangkatan, gunakan filter, periksa preview, dan unduh | Menghasilkan salinan data fixed-format sesuai batas akses |
+| Reporting Statistik Kepegawaian | Buka halaman reporting dan pilih filter yang diizinkan | Menampilkan chart/agregat sesuai scope; bukan jalur mutasi atau export detail |
 | Notifikasi | Buka inbox, pilih notifikasi, lalu tandai dibaca | Mengubah status baca milik user dan mengarahkan ke record terkait |
 
 ## 3. Alur Keputusan Akhir Cuti
@@ -34,6 +35,7 @@
 7. Untuk selain `Disetujui`, isi alasan yang jelas.
 8. Konfirmasi tindakan.
 9. Periksa status akhir, notifikasi, dokumen, dan Audit Log.
+10. Bila Anda juga ditetapkan sebagai Atasan Langsung untuk pengajuan yang sama, pastikan tindakan Atasan Langsung dan tindakan PYBMC tercatat sebagai dua tahap terpisah.
 
 Dampak keputusan:
 
@@ -43,6 +45,8 @@ Dampak keputusan:
 | `Perubahan` | Mengembalikan pengajuan untuk diperbaiki; saldo tidak dipotong final |
 | `Ditangguhkan` | Menyimpan alasan penangguhan; saldo tidak dipotong final |
 | `Tidak Disetujui` | Menutup pengajuan tanpa pemotongan saldo dan melepaskan alokasi |
+
+Formulir yang dihasilkan setelah keputusan final memuat Nama, Jabatan, dan Peran setiap pihak approval. Periksa data tersebut melalui jalur dokumen yang berwenang tanpa membagikan lampiran kepada pihak di luar scope.
 
 ## 4. Batas Akses dan Larangan
 

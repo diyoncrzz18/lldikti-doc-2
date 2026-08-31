@@ -148,3 +148,24 @@ Penggunaan yang telah diklaim dapat direkonsiliasi dan divalidasi secara berjenj
 ### Batas
 
 Jalur ini tidak boleh dipakai untuk mempercepat pengajuan baru yang belum memperoleh persetujuan di luar SIMPEG.
+
+---
+
+## K-CUT-06 — Penyelarasan evaluasi LLDIKTI 31 Agustus 2026
+
+> **Status:** Disetujui melalui [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md). Ketentuan ini melengkapi K-CUT-01, K-CUT-04, dan K-CUT-05 tanpa menghapus jejak keputusan sebelumnya.
+
+### Keputusan
+
+1. Label bisnis snapshot dan konfigurasi approval cuti adalah `Verifikator → Atasan Langsung → PYBMC`. Nilai teknis legacy `kepala_bagian` pada data yang sudah ada tetap dapat dipertahankan sebagai representasi internal Atasan Langsung sampai ada keputusan migrasi schema tersendiri.
+2. Ketika Atasan Langsung dan PYBMC adalah orang yang sama, keduanya tetap merupakan dua tahap snapshot dan membutuhkan dua tindakan. Sistem tidak boleh melewati tahap kedua hanya karena `approver_employee_id` sama pada pasangan peran tersebut.
+3. Pegawai membatalkan atau merevisi pengajuan melalui aksi resmi sebelum ada tindakan approval. Pembatalan melepas reservasi secara atomik dan tercatat pada audit; ia tidak menghapus request, snapshot, maupun histori mutasi saldo.
+4. `Ditangguhkan` ketika pengajuan masih aktif tetap mempertahankan reservasi seperti K-CUT-01. Namun, bila cuti yang sudah final `Disetujui` ditetapkan `Ditangguhkan` oleh Admin Kepegawaian dengan alasan wajib, sistem membuat koreksi/replay ledger atomik untuk membalik pemakaian final yang terdampak. Kedua keadaan tersebut tidak boleh disamakan.
+5. Cuti di Luar SIMPEG adalah fakta historis/transisi yang menjadi sumber pemakaian tahunan N-2, N-1, dan tahun berjalan sebelum go-live. Halaman ringkasan **Catat Pemakaian Tahunan** tidak menerima input angka langsung; ia menampilkan agregat dari fakta pemakaian dan entri manual yang telah tercatat.
+6. Ketentuan K-CUT-05 mengenai cuti yang disetujui ketika layanan tidak tersedia tetap berstatus **Open Question** untuk operasi setelah go-live sampai LLDIKTI mengonfirmasi apakah pengecualian downtime dipertahankan. Ia tidak boleh diperlakukan sebagai jalur rutin pengajuan cuti baru.
+
+### Konsekuensi verifikasi
+
+- Uji PostgreSQL harus mencakup pasangan Atasan Langsung/PYBMC dengan aktor sama, tanpa melewati salah satu peran.
+- Uji saldo harus membedakan pembatalan sebelum approval, penangguhan pengajuan aktif, dan penangguhan administratif setelah final `Disetujui`.
+- Uji UI harus membuktikan bahwa ringkasan pemakaian tidak dapat diubah langsung dan koreksi hanya berasal dari fakta sumber yang beralasan serta teraudit.

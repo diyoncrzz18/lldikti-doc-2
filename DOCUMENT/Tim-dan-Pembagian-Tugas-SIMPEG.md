@@ -400,3 +400,18 @@ Sebuah user story dianggap "Done" jika:
 | Adithian | Adriel | Frontend/UI |
 | Adriel | Dion + Adithian | GitHub review/merge |
 | Dion | Grantly | Tech decisions |
+
+---
+
+## Addendum Pembagian Kerja — Evaluasi LLDIKTI 31 Agustus 2026
+
+> Ini adalah daftar kebutuhan koordinasi, bukan assignment final. Owner dan kapasitas harus disetujui sebelum implementasi; dokumen tidak mengubah pembagian atau komitmen sprint historis.
+
+| Area | Cakupan baru | Peran yang dibutuhkan | Gate sebelum mulai |
+|---|---|---|---|
+| Cuti core | Atasan Langsung, chain dua tindakan untuk aktor sama, pembatalan/revisi, penangguhan final, ledger, formulir | Backend domain, UI, QA, reviewer | Detail Open Question pembatalan dan downtime dikonfirmasi; issue/owner ditetapkan |
+| Cuti historis | Satu sumber fakta, ringkasan read-only, koreksi/audit/privasi | Backend domain, UI Admin, QA | Kontrak downtime pasca-go-live dikonfirmasi |
+| Dokumen pegawai | SK Pengangkatan PNS/CPNS dan evaluasi CPNS→PNS | Backend pegawai, UI, QA | Matriks aktif dan contoh data uji tersedia |
+| Reporting statistik | Halaman chart/agregasi terpisah | Backend query, UI chart, QA, reviewer | Nomor issue, owner, Story Point, dan data scope disetujui |
+
+Rujukan keputusan: [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md).

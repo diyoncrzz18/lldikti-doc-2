@@ -84,7 +84,24 @@ Setiap sesi menggunakan urutan berikut:
 9. minta keputusan penerimaan per kelompok;
 10. sepakati jadwal retest jika diperlukan.
 
-## 6. Template Notulen dan Hasil Skenario
+## 6. Skenario Wajib Addendum Evaluasi 31 Agustus 2026
+
+> Skenario berikut belum dijalankan. Skenario hanya dapat masuk sesi UAT setelah implementasi, review, automated test relevan, dan preflight environment telah lulus. Evidence sebelum addendum tidak dapat dipakai kembali tanpa retest terhadap exact SHA kandidat.
+
+| ID | Kelompok | Skenario | Expected result | Evidence minimum |
+|---|---|---|---|---|
+| UAT-CUT-31-01 | Cuti | Buat chain dengan nol, satu, dan lebih dari satu Verifikator | Urutan runtime selalu `0..n Verifikator → Atasan Langsung → PYBMC`; jika nol Verifikator, Atasan Langsung menjadi tahap pertama tanpa placeholder kosong | Screenshot chain/snapshot, test PostgreSQL, audit submit |
+| UAT-CUT-31-02 | Cuti | Tetapkan Atasan Langsung dan PYBMC ke employee yang sama | Dua tahap, dua tindakan, dua event audit, dan dua entri timeline tetap terjadi | Rekaman langkah, audit masked, hasil test regression |
+| UAT-CUT-31-03 | Cuti | Pegawai membatalkan atau merevisi sebelum tindakan approval | Hanya pemohon yang dapat bertindak; request/snapshot tidak dihapus, reservasi diperbarui atomik, audit tercatat | Request/response atau screenshot, ledger, audit |
+| UAT-CUT-31-04 | Cuti | Admin Kepegawaian menangguhkan cuti yang telah final `Disetujui` | Alasan wajib; histori tetap ada; koreksi/replay ledger satu kali; Pegawai dapat mengajukan lagi setelah tidak ada pengajuan aktif | Ledger before/after, audit, detail request |
+| UAT-CUT-31-05 | Saldo historis | Catat Cuti di Luar SIMPEG lalu buka ringkasan pemakaian | Fakta historis menjadi sumber pemakaian; ringkasan Catat Pemakaian Tahunan read-only; tidak ada hitung ganda | UI smoke, ledger, test anti duplikasi/overlap |
+| UAT-CUT-31-06 | Dokumen cuti | Finalkan cuti dan buka PDF/QR | PDF memuat Nama, Jabatan aktual/terkini, dan Peran setiap tahap; QR serta otorisasi dokumen tetap benar | PDF tersanitasi, verifikasi QR, authorization test |
+| UAT-EMP-31-01 | Dokumen pegawai | Uji PNS, CPNS, lalu transisi CPNS→PNS | PNS memerlukan SK Pengangkatan PNS; CPNS memerlukan SK Pengangkatan CPNS; transisi menandai belum lengkap sampai SK PNS tersedia | Screenshot status kelengkapan, upload/audit, RBAC denial |
+| UAT-REP-31-01 | Reporting | Buka Reporting Statistik dengan data/role berbeda | Halaman terpisah dari dashboard/export; chart golongan, jenis jabatan, jabatan, unit, dan jenis kepegawaian mengikuti scope dan empty state | Screenshot desktop/tablet/mobile, test scope/query, console bersih |
+
+Catatan Open Question harus dicatat pada sesi UAT, bukan diasumsikan oleh tester: batas pembatalan setelah Verifikator bertindak dan penggunaan cuti manual ketika layanan tidak tersedia setelah go-live menunggu keputusan LLDIKTI.
+
+## 7. Template Notulen dan Hasil Skenario
 
 Salin bagian ini untuk setiap sesi.
 
@@ -113,7 +130,7 @@ Salin bagian ini untuk setiap sesi.
 |---|---|---|---|---|---|---|
 | — | — | — | — | — | — | Belum Diretest |
 
-## 7. Register Penerimaan Kepegawaian
+## 8. Register Penerimaan Kepegawaian
 
 Hanya gunakan tiga status keputusan resmi berikut:
 
@@ -129,7 +146,7 @@ Keputusan tidak boleh diisi berdasarkan kesimpulan implementor. Bila pemberi kep
 atau belum memberikan konfirmasi eksplisit, status tetap `Perlu Tindak Lanjut` dengan alasan yang
 sesuai.
 
-## 8. Gate Panduan Pengguna
+## 9. Gate Panduan Pengguna
 
 Setelah kelompok terkait berstatus `Diterima`:
 
@@ -140,7 +157,7 @@ Setelah kelompok terkait berstatus `Diterima`:
 5. minta penerimaan panduan oleh Kepegawaian;
 6. ubah status panduan dari `Draft` menjadi `Diterima` hanya setelah ada evidence.
 
-## 9. Evidence Handling
+## 10. Evidence Handling
 
 - Masking wajib diterapkan pada screenshot dan log.
 - Jangan unggah dump database, token, credential, NIK, No. KK, atau data pribadi nyata.
@@ -150,18 +167,20 @@ Setelah kelompok terkait berstatus `Diterima`:
 - Perubahan setelah sesi memerlukan retest; evidence lama tidak boleh dipakai untuk SHA baru tanpa
   analisis dampak.
 
-## 10. Exit Criteria UAT
+## 11. Exit Criteria UAT
 
 - [ ] seluruh kelompok release candidate memiliki hasil UAT;
 - [ ] setiap kelompok memiliki keputusan resmi;
 - [ ] semua defect critical/major ditutup atau menghasilkan keputusan no-go;
 - [ ] retest memiliki evidence baru;
 - [ ] lima panduan role diselaraskan dengan fitur yang diterima;
+- [ ] seluruh skenario addendum evaluasi 31 Agustus yang masuk release candidate memiliki evidence retest;
 - [ ] hasil UAT ditautkan pada checklist go/no-go.
 
-## 11. Referensi
+## 12. Referensi
 
 - [Paket Eksekusi Issue #14](../Issue-14-UAT-Release-Readiness.md)
 - [Runbook Demo Fitur SIMPEG Fase 1](../Runbook-Demo-Fitur-SIMPEG-Fase-1.md)
 - [Tracking Sprint 7](../Tracking-Sprint-1-7/Sprint-7-Stabilization-Regression-UAT.md)
 - [Keputusan Evaluasi Meeting](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md)
+- [Keputusan Evaluasi 31 Agustus 2026](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md)

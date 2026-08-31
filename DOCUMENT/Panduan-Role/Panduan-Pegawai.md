@@ -10,7 +10,7 @@
 
 - Akun Keycloak sudah dipetakan ke satu pegawai aktif.
 - Role internal user adalah `pegawai`.
-- Kepala Bagian dan approval chain sudah dikonfigurasi.
+- Atasan Langsung dan approval chain sudah dikonfigurasi.
 - Saldo/pemakaian cuti yang diperlukan sudah tersedia dan periode pengajuan valid.
 
 ## 2. Fitur dan Langkah Utama
@@ -36,6 +36,7 @@
 7. Periksa saldo aktual, saldo yang masih dapat diajukan, dan tahapan persetujuan.
 8. Kirim pengajuan.
 9. Buka detail untuk memastikan status dan tahap aktif.
+10. Sebelum terdapat tindakan approval, gunakan aksi resmi pada detail bila perlu membatalkan atau merevisi pengajuan; jangan membuat pengajuan aktif baru yang bertabrakan.
 
 Setelah dikirim, saldo belum dipotong final tetapi dapat dialokasikan agar tidak dipakai ganda.
 Saldo dipotong hanya setelah keputusan final `Disetujui`.
@@ -46,7 +47,7 @@ Saldo dipotong hanya setelah keputusan final `Disetujui`.
 |---|---|
 | `Disetujui` | Periksa detail, saldo, notifikasi, dan unduh formulir bila tersedia |
 | `Perubahan` | Baca alasan, perbaiki tanggal/alasan/kontak/lampiran, lalu kirim ulang melalui aksi resmi |
-| `Ditangguhkan` | Baca alasan dan tunggu/tindak lanjuti sesuai arahan; saldo tidak dipotong final |
+| `Ditangguhkan` | Baca alasan dan tindak lanjuti sesuai arahan. Bila penangguhan dilakukan atas cuti yang sebelumnya final disetujui, pengajuan baru hanya dapat dibuat setelah tidak ada pengajuan aktif |
 | `Tidak Disetujui` | Baca alasan; pengajuan selesai dan alokasi saldo dilepas |
 
 ## 5. Batas Akses dan Larangan
@@ -63,7 +64,8 @@ Saldo dipotong hanya setelah keputusan final `Disetujui`.
 | Gejala | Pemeriksaan |
 |---|---|
 | Form tidak dapat dibuka | Periksa mapping pegawai aktif, role, dan permission pengajuan |
-| Chain belum tersedia | Hubungi Admin/Super Admin untuk memeriksa Kepala Bagian, verifikator, dan PYBMC |
+| Chain belum tersedia | Hubungi Admin/Super Admin untuk memeriksa Atasan Langsung, Verifikator, dan PYBMC |
+| Tidak dapat membatalkan/merevisi | Pastikan belum ada tindakan approval; setelah tindakan terjadi, ikuti status dan arahan resmi pada detail pengajuan |
 | Hari kerja salah | Periksa tanggal, weekend, hari libur, dan larangan lintas tahun |
 | Saldo tidak cukup | Periksa pemakaian final, alokasi pengajuan aktif, dan tahun saldo |
 | Tidak dapat kirim ulang | Pastikan status `Perubahan` dan gunakan tombol resubmit pada detail pengajuan |

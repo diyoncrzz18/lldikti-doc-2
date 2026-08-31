@@ -1,10 +1,10 @@
 # Runbook Demo Fitur SIMPEG Fase 1
 
 **Jenis dokumen:** Panduan Operasional Demo  
-**Versi:** 1.0  
-**Tanggal:** 10 Agustus 2026  
+**Versi:** 1.1<br>
+**Tanggal:** 31 Agustus 2026<br>
 **Target pembaca:** Presenter, tim pengembang, QA, dan pendamping demo LLDIKTI Wilayah XVI  
-**Status:** Siap digunakan setelah checklist preflight dinyatakan lulus  
+**Status:** Draft pembaruan — gunakan hanya setelah checklist preflight, implementasi, dan evidence addendum 31 Agustus dinyatakan lulus<br>
 **Kedudukan dokumen:** Panduan ini menjelaskan urutan dan cara mendemonstrasikan fitur. Dokumen ini tidak menggantikan PRD, Panduan Penulisan Kode, User Stories, atau keputusan produk yang telah disetujui.
 
 ---
@@ -32,9 +32,11 @@ Admin Kepegawaian mengelola data pegawai, riwayat, saldo, dan import
     ↓
 Pegawai melihat profil dan mengajukan cuti
     ↓
-Kepala Bagian memeriksa dan menyetujui tahap pertama
+Nol atau lebih Verifikator memeriksa bila dikonfigurasi
     ↓
-Pimpinan memberikan keputusan akhir
+Atasan Langsung memeriksa dan menyetujui tahap berikutnya
+    ↓
+PYBMC memberikan keputusan akhir
     ↓
 Pegawai melihat hasil, saldo, notifikasi, dan PDF
     ↓
@@ -53,7 +55,7 @@ Akun berikut hanya untuk environment `local` atau `testing`. Jangan memperkenalk
 |---|---|---|---|
 | Super Admin | `demo-klabat` | `demo-klabat` | Kelola akses, RBAC, data master, approval chain, EWS config, audit, dan backup |
 | Admin Kepegawaian | `demo-klabat-kepeg` | `demo-klabat-kepeg` | Data pegawai, import, riwayat, saldo cuti, EWS, dan laporan |
-| Kepala Bagian | `demo-klabat-kabag` | `demo-klabat-kabag` | Daftar bawahan, cuti bawahan, dan EWS bawahan |
+| Atasan Langsung (role teknis `kepala_bagian`) | `demo-klabat-kabag` | `demo-klabat-kabag` | Daftar bawahan, cuti bawahan, dan EWS bawahan |
 | Pimpinan | `demo-klabat-pimpinan` | `demo-klabat-pimpinan` | Persetujuan akhir cuti, dashboard pimpinan, EWS, dan laporan |
 | Pegawai | `demo-klabat-pegawai` | `demo-klabat-pegawai` | Profil sendiri, pengajuan cuti, saldo, notifikasi, dan EWS pribadi |
 
@@ -70,7 +72,7 @@ Gunakan profil browser atau jendela terpisah:
 - `SA — Super Admin`
 - `ADM — Admin Kepegawaian`
 - `PEG — Pegawai`
-- `KABAG — Kepala Bagian`
+- `ATASAN — Atasan Langsung` (profil browser untuk role teknis `kepala_bagian`)
 - `PIM — Pimpinan`
 
 Jika hanya menggunakan satu browser, selalu logout sepenuhnya sebelum login dengan akun lain. Jangan mengandalkan tombol Back karena halaman sebelumnya dapat masih menampilkan state sesi lama.
@@ -95,13 +97,13 @@ Employee yang terhubung ke `demo-klabat-pegawai` harus:
 
 - berstatus aktif;
 - memiliki role internal `pegawai`;
-- memiliki Kepala Bagian yang merupakan employee dari `demo-klabat-kabag`;
+- memiliki Atasan Langsung yang merupakan employee dari `demo-klabat-kabag`;
 - memiliki riwayat pemakaian cuti yang membuat sistem dapat menghitung saldo tahunan;
 - memiliki email testing;
-- memiliki unit kerja yang berada dalam cakupan Kepala Bagian demo; dan
+- memiliki unit kerja yang berada dalam cakupan role teknis `kepala_bagian` demo; dan
 - mempunyai profil yang cukup lengkap untuk mengajukan cuti.
 
-Jangan memakai akun Super Admin, Admin Kepegawaian, Kepala Bagian, atau Pimpinan sebagai data yang status efektifnya akan diubah menjadi Nonaktif, Pensiun, atau Mutasi. Gunakan user linked dummy khusus karena blokir status berlaku untuk semua role.
+Jangan memakai akun Super Admin, Admin Kepegawaian, Atasan Langsung, atau Pimpinan sebagai data yang status efektifnya akan diubah menjadi Nonaktif, Pensiun, atau Mutasi. Gunakan user linked dummy khusus karena blokir status berlaku untuk semua role.
 
 ### 3.3 Approval chain wajib dikonfigurasi sebelum pengajuan
 
@@ -114,14 +116,17 @@ Login sebagai Super Admin:
 3. Isi alasan perubahan, misalnya `Konfigurasi approval untuk demo LLDIKTI`.
 4. Klik **Simpan PYBMC Global**.
 5. Pada **Chain Approval Pegawai**, cari employee `demo-klabat-pegawai`.
-6. Pastikan Kepala Bagian adalah employee milik `demo-klabat-kabag`.
+6. Pastikan Atasan Langsung adalah employee milik `demo-klabat-kabag`.
 7. Pastikan urutan chain:
-   - Tahap 1: Kepala Bagian — employee `demo-klabat-kabag`.
+   - Nol atau lebih tahap awal: Verifikator bila dipakai pada fixture demo.
+   - Tahap berikutnya: Atasan Langsung — employee `demo-klabat-kabag`.
    - Tahap final: PYBMC/Pimpinan — employee `demo-klabat-pimpinan`.
-8. Isi tanggal efektif yang tidak lebih baru dari tanggal demo.
-9. Isi alasan perubahan.
-10. Klik **Simpan Chain Pegawai**.
-11. Muat kembali pegawai tersebut dan periksa ulang urutannya.
+8. Jangan tampilkan label “tanpa verifikator” bila fixture tidak memakai Verifikator.
+9. Untuk skenario regression, bila Atasan Langsung dan PYBMC adalah orang yang sama, pastikan preview tetap memperlihatkan dua tindakan; jangan gunakan skenario ini untuk happy path dasar.
+10. Isi tanggal efektif yang tidak lebih baru dari tanggal demo.
+11. Isi alasan perubahan.
+12. Klik **Simpan Chain Pegawai**.
+13. Muat kembali pegawai tersebut dan periksa ulang urutannya.
 
 Approval chain disalin menjadi snapshot saat pengajuan dibuat. Memperbaiki konfigurasi setelah pengajuan dibuat tidak menjamin pengajuan lama ikut berubah. Jika snapshot lama salah, perbaiki konfigurasi lalu buat pengajuan baru.
 
@@ -131,15 +136,15 @@ Login sebagai Admin Kepegawaian:
 
 1. Buka **Cuti → Administrasi Pemakaian Cuti** atau `/cuti/administrasi-saldo`.
 2. Cari employee `demo-klabat-pegawai`.
-3. Jika data pemakaian belum ada, buka tab **Catat Pemakaian Tahunan** lalu gunakan form **Catat Pemakaian Tahunan**.
+3. Jika fakta pemakaian historis belum ada, gunakan alur **Cuti di Luar SIMPEG** sebagai Admin Kepegawaian. Tab **Catat Pemakaian Tahunan** hanya menampilkan agregat dan tidak menerima input angka langsung.
 4. Contoh data:
    - Pemakaian N-2: `0` hari.
    - Pemakaian N-1: `1` hari.
    - Pemakaian tahun berjalan: `2` hari.
    - Alasan: `Data pemakaian cuti untuk demo LLDIKTI`.
-5. Simpan dan pastikan sistem menghitung ulang ringkasan, rollover, dan ledger dari tiga total pemakaian tersebut.
+5. Simpan fakta sumber dan pastikan sistem menghitung ulang ringkasan, rollover, dan ledger dari pemakaian tersebut.
 
-Jika riwayat pemakaian sudah tersedia, jangan mendaftarkan ulang. Cukup tunjukkan hasil perhitungan sistemnya.
+Jika riwayat pemakaian sudah tersedia, jangan mendaftarkan ulang. Cukup tunjukkan hasil perhitungan sistemnya. Entri manual setelah go-live akibat layanan tidak tersedia tidak didemokan sampai LLDIKTI mengonfirmasi pengecualian tersebut.
 
 ### 3.5 Tanggal cuti
 
@@ -433,18 +438,18 @@ Hasil yang dijelaskan:
 
 1. Cari employee demo.
 2. Tunjukkan saldo aktual, terpakai, dialokasikan, dapat diajukan, N-2/N-1, ledger, dan status rollover.
-3. Jika data belum ada, buka tab **Catat Pemakaian Tahunan** lalu gunakan form **Catat Pemakaian Tahunan** dengan total pemakaian N-2 `0`, N-1 `1`, dan tahun berjalan `2`; sistem menghitung saldo, rollover, serta total hak.
+3. Jika fakta historis belum ada, catat melalui alur **Cuti di Luar SIMPEG** sebagai Admin Kepegawaian dengan pemakaian N-2 `0`, N-1 `1`, dan tahun berjalan `2`. Setelah tersimpan, buka tab **Catat Pemakaian Tahunan** untuk menunjukkan agregat read-only; sistem menghitung saldo, rollover, serta total hak.
 
 Untuk demonstrasi perbaikan data pemakaian di staging:
 
 1. Buka **Riwayat Pemakaian**.
 2. Pilih **Perbaiki Data Pemakaian** pada entri tahun berjalan.
 3. Tunjukkan tiga total pemakaian sebelum perbaikan: N-2 `0` hari, N-1 `1` hari, dan tahun berjalan `2` hari.
-4. Perbaiki pemakaian tahun berjalan dari `2` menjadi `3` hari, isi alasan `Perbaikan data pemakaian untuk demonstrasi`, lalu unggah dokumen pendukung.
+4. Perbaiki fakta pemakaian tahun berjalan dari `2` menjadi `3` hari, isi alasan `Perbaikan data pemakaian untuk demonstrasi`, lalu tambahkan dokumen pendukung bila tersedia.
 5. Simpan dan pastikan versi/riwayat lama dipertahankan.
 6. Tunjukkan sistem menjalankan replay rekalkulasi otomatis serta memperbarui ledger dan ringkasan saldo.
 
-Perbaikan harus selalu memiliki alasan, dokumen, dan jejak audit; jangan menambal saldo secara langsung. Hasil harus konsisten dengan hak dasar 12 hari, ceiling 24 hanya bila pemakaian N-2 dan N-1 sama-sama nol serta kelayakan jenis pegawai terpenuhi, dan ceiling 18 bila salah satunya memiliki pemakaian atau batas kelayakan membatasinya.
+Perbaikan harus selalu memiliki alasan dan jejak audit; dokumen pendukung bersifat opsional tetapi wajib privat/tervalidasi bila dilampirkan. Jangan menambal saldo secara langsung. Hasil harus konsisten dengan hak dasar 12 hari, ceiling 24 hanya bila pemakaian N-2 dan N-1 sama-sama nol serta kelayakan jenis pegawai terpenuhi, dan ceiling 18 bila salah satunya memiliki pemakaian atau batas kelayakan membatasinya.
 
 ---
 
@@ -454,8 +459,9 @@ Alur utama:
 
 ```text
 Pegawai mengajukan
-→ Kepala Bagian menyetujui tahap pertama
-→ Pimpinan memberikan keputusan akhir
+→ 0..n Verifikator menyetujui bila dikonfigurasi
+→ Atasan Langsung menyetujui
+→ PYBMC/Pimpinan memberikan keputusan akhir
 → Pegawai melihat hasil
 → Admin membuktikan perubahan saldo, rekap, laporan, dan audit
 ```
@@ -469,7 +475,7 @@ Pegawai mengajukan
 1. Buka **Pengajuan Cuti** dan buat pengajuan baru.
 2. Pastikan halaman **Form Pengajuan Cuti**.
 3. Tunjukkan Tahun Saldo, Saldo Tersedia Aktual, Masih Dapat Diajukan, dan tahapan persetujuan.
-4. Pastikan chain menampilkan Kepala Bagian dan PYBMC/Pimpinan.
+4. Pastikan chain menampilkan Verifikator bila ada, lalu Atasan Langsung dan PYBMC/Pimpinan. Bila tidak ada Verifikator, Atasan Langsung tampil sebagai tahap pertama tanpa placeholder kosong.
 5. Isi:
    - Jenis Cuti: **Cuti Tahunan**.
    - Mulai: `9 November 2026`.
@@ -485,10 +491,10 @@ Pegawai mengajukan
 Hasil:
 
 - status **Menunggu Approval**;
-- tahap Kepala Bagian aktif;
+- tahap Atasan Langsung aktif;
 - saldo belum terpakai final;
 - jumlah hari dialokasikan agar tidak dipakai ganda;
-- Kepala Bagian menerima notifikasi; dan
+- Atasan Langsung menerima notifikasi; dan
 - audit pengajuan dibuat.
 
 Contoh saldo untuk pengajuan dua hari:
@@ -499,9 +505,9 @@ Contoh saldo untuk pengajuan dua hari:
 | Menunggu approval | 12 | 0 | 2 | 10 |
 | Final Disetujui | 10 | 2 | 0 | 10 |
 
-### 12.2 Kepala Bagian memeriksa
+### 12.2 Atasan Langsung memeriksa
 
-**Pindah role:** Kepala Bagian  
+**Pindah role:** Atasan Langsung (role teknis `kepala_bagian`)<br>
 **Akun:** `demo-klabat-kabag`  
 **Menu:** Cuti → Cuti Bawahan  
 **URL:** `/kepala-bagian/cuti`
@@ -509,13 +515,13 @@ Contoh saldo untuk pengajuan dua hari:
 1. Cari pengajuan berdasarkan nama, periode, status, atau alasan.
 2. Buka **Detail Pengajuan Cuti**.
 3. Tunjukkan data pegawai, jenis, periode, hari kerja, alasan, lampiran, saldo, alur persetujuan, dan riwayat tindakan resmi.
-4. Pastikan Kepala Bagian yang login adalah approver aktif.
+4. Pastikan Atasan Langsung yang login adalah approver aktif.
 5. Pilih **Disetujui**.
 6. Pada modal konfirmasi, klik **Ya, Setujui**.
 
 Hasil:
 
-- tahap Kepala Bagian disetujui;
+- tahap Atasan Langsung disetujui;
 - pengajuan belum final;
 - tahap aktif berpindah ke Pimpinan;
 - Pimpinan menerima notifikasi;
@@ -532,7 +538,7 @@ Hasil:
 1. Buka **Persetujuan Cuti**.
 2. Periksa ringkasan **Menunggu Keputusan Anda**.
 3. Cari dan buka pengajuan demo.
-4. Tunjukkan data, periode, saldo, approval Kepala Bagian, timeline, riwayat resmi, dan lampiran.
+4. Tunjukkan data, periode, saldo, approval Verifikator/Atasan Langsung, timeline, riwayat resmi, dan lampiran.
 5. Pastikan tombol keputusan tersedia.
 6. Pilih **Disetujui** dan klik **Ya, Setujui**.
 
@@ -563,8 +569,9 @@ Hasil:
 
 1. Cari pengajuan.
 2. Pastikan status **Disetujui**.
-3. Buka detail dan tunjukkan timeline kedua approver serta riwayat resmi.
+3. Buka detail dan tunjukkan semua tahap snapshot serta riwayat resmi.
 4. Klik **Unduh Formulir Cuti (PDF)**.
+5. Pastikan tabel approval PDF menampilkan Nama, Jabatan, dan Peran (`Verifikator`, `Atasan Langsung`, atau `PYBMC`) serta ada ruang visual yang jelas setelah kop surat.
 
 #### Saldo Cuti Saya
 
@@ -609,17 +616,19 @@ Pindah ke Pegawai:
 4. Klik **Kirim Ulang Pengajuan**.
 5. Sistem menghitung ulang hari kerja dan saldo.
 
-### 13.2 Ditangguhkan
+### 13.2 Ditangguhkan saat pengajuan masih aktif
 
 1. Approver memilih **Ditangguhkan**.
 2. Isi alasan: `Pelaksanaan cuti ditunda sampai kegiatan layanan selesai.`
 3. Simpan.
 
-Hasil: saldo tidak dipotong final, Pegawai diberi tahu, dan catatan tercatat.
+Hasil: saldo tidak dipotong final, reservasi tetap mengikuti pengajuan aktif, Pegawai diberi tahu, dan catatan tercatat.
 
-### 13.3 Ditangguhkan karena Tugas Dinas
+### 13.3 Penangguhan administratif atas cuti final
 
-Gunakan hanya pada skenario Cuti Tahunan yang disiapkan. Tunjukkan bahwa label status eksplisit, alasan dicatat, hak terkait dapat dilindungi untuk rollover, dan saldo tidak dianggap terpakai tanpa keputusan final. Lebih aman memakai fixture karena skenario ini berdampak pada rollover.
+Gunakan fixture cuti tahunan yang sudah final `Disetujui`. Pindah ke **Admin Kepegawaian**, pilih aksi `Ditangguhkan`, lalu isi alasan, misalnya `Pelaksanaan cuti ditunda karena kebutuhan layanan unit.` Tunjukkan bahwa request tidak dihapus, histori/snapshot tetap ada, audit tercatat, dan sistem melakukan koreksi/replay ledger sehingga pemakaian final yang terdampak tidak tersisa keliru. Pegawai hanya dapat mengajukan lagi setelah tidak ada pengajuan aktif.
+
+> Jangan menggunakan fixture happy path utama untuk skenario ini. Pembatalan/revisi Pegawai hanya didemokan sebelum tindakan approval; setelah ada tindakan, gunakan cabang status resmi pada pengajuan tersebut.
 
 ### 13.4 Tidak Disetujui
 
@@ -637,8 +646,8 @@ Hasil: status final Tidak Disetujui, tahap berikutnya dilewati, saldo tidak dipo
 
 ### 14.1 Alur notifikasi cuti
 
-1. Pegawai mengirim pengajuan → Kepala Bagian menerima notifikasi.
-2. Kepala Bagian menyetujui → Pimpinan menerima notifikasi.
+1. Pegawai mengirim pengajuan → Verifikator pertama, atau Atasan Langsung bila tidak ada Verifikator, menerima notifikasi.
+2. Setelah seluruh Verifikator selesai, Atasan Langsung menyetujui → PYBMC menerima notifikasi.
 3. Pimpinan memutus → Pegawai menerima notifikasi hasil.
 
 Pada setiap role:
@@ -794,17 +803,30 @@ Tunjukkan jumlah pegawai, distribusi/status, cuti, EWS, aktivitas terbaru, dan s
 
 Tunjukkan profil, saldo, pengajuan cuti, EWS pribadi, dan notifikasi milik sendiri.
 
-### 16.3 Kepala Bagian
+### 16.3 Atasan Langsung
 
 **URL:** `/kepala-bagian/dashboard`
 
-Tunjukkan bawahan, cuti bawahan menunggu, dan EWS bawahan. Buka `/kepala-bagian/bawahan`, lalu detail Pegawai demo untuk membuktikan scope bawahan.
+Tunjukkan bawahan, cuti bawahan menunggu, dan EWS bawahan. Buka `/kepala-bagian/bawahan`, lalu detail Pegawai demo untuk membuktikan scope bawahan. URL memakai nama role teknis lama, tetapi label bisnis cuti adalah Atasan Langsung.
 
 ### 16.4 Pimpinan
 
 **URL:** `/pimpinan/dashboard`
 
 Tunjukkan ringkasan organisasi, cuti menunggu keputusan, EWS, statistik, aktivitas, dan shortcut laporan.
+
+### 16.5 Reporting Statistik Kepegawaian
+
+> Jalankan bagian ini hanya setelah US-8.6 telah diimplementasikan dan evidence preflight tersedia.
+
+**Role:** sesuai akses dashboard/laporan yang dikonfigurasi<br>
+**Halaman:** Reporting Statistik Kepegawaian
+
+1. Buka halaman reporting, bukan Data Master atau halaman export.
+2. Tunjukkan chart/agregat untuk golongan, jenis jabatan, jabatan, unit kerja, dan jenis kepegawaian.
+3. Ubah filter yang diizinkan lalu pastikan angka dan chart mengikuti scope role.
+4. Tunjukkan empty state bila data uji tidak menghasilkan baris.
+5. Periksa tampilan desktop/tablet/mobile dan console browser sebelum menyatakan bagian ini lulus.
 
 ---
 
@@ -841,6 +863,10 @@ Excel dapat dikustomisasi; PDF tetap fixed-format. Jangan menjanjikan custom PDF
 **Kepangkatan:** `/pimpinan/laporan/kepangkatan`
 
 Pada nominatif, gunakan filter, periksa preview, lalu unduh PDF/Excel tanpa informasi kontak pribadi. Pada laporan kepangkatan, cari riwayat yang telah ditambahkan dan cocokkan hasil export.
+
+### 17.4 Batas Reporting Statistik
+
+Reporting Statistik Kepegawaian bukan export. Jangan mendemonstrasikan chart sebagai bukti bahwa pengguna dapat mengunduh seluruh data pegawai atau mengubah Data Master. Bila halaman belum diimplementasikan, catat sebagai blocker/UAT tidak lulus; jangan menggantinya dengan screenshot dashboard dummy.
 
 ---
 
@@ -937,16 +963,16 @@ Jangan mendemonstrasikan sebagai fitur produksi:
 
 ## 21. Troubleshooting
 
-### 21.1 Pengajuan tidak muncul pada Kepala Bagian
+### 21.1 Pengajuan tidak muncul pada Atasan Langsung
 
 - Periksa `kepala_bagian_id` employee pemohon.
 - Periksa snapshot chain.
-- Periksa employee yang terhubung ke akun Kepala Bagian.
+- Periksa employee yang terhubung ke akun Atasan Langsung.
 - Pastikan pengajuan dibuat setelah chain dikonfigurasi.
 
 ### 21.2 Pengajuan tidak muncul pada Pimpinan
 
-- Pastikan Kepala Bagian sudah menyetujui.
+- Pastikan seluruh Verifikator dan Atasan Langsung yang diperlukan sudah menyetujui.
 - Pastikan employee Pimpinan menjadi PYBMC/final approver.
 - Pastikan current step berada pada Pimpinan.
 - Periksa snapshot pengajuan, bukan hanya konfigurasi terbaru.
@@ -954,7 +980,7 @@ Jangan mendemonstrasikan sebagai fitur produksi:
 
 ### 21.3 Form menyatakan chain belum tersedia
 
-Buka `/cuti/konfigurasi-approval` sebagai Super Admin, atur Kepala Bagian dan PYBMC, simpan chain, lalu muat ulang form Pegawai.
+Buka `/cuti/konfigurasi-approval` sebagai Super Admin, atur Verifikator bila diperlukan, Atasan Langsung, dan PYBMC, simpan chain, lalu muat ulang form Pegawai.
 
 ### 21.4 Hari kerja salah
 
@@ -999,16 +1025,20 @@ Periksa username, `keycloak_username`, role internal, employee mapping, dan sess
 - [ ] Lima akun demo dapat login.
 - [ ] Pimpinan masuk ke `/pimpinan/dashboard`, bukan Super Admin.
 - [ ] Pegawai terhubung ke employee aktif.
-- [ ] Kepala Bagian Pegawai benar.
+- [ ] Atasan Langsung Pegawai benar.
 - [ ] PYBMC/final approver adalah employee Pimpinan demo.
 - [ ] Approval chain dan tanggal efektif benar.
 - [ ] Riwayat pemakaian/entri manual yang diperlukan tersedia sehingga saldo dapat dihitung sistem.
 - [ ] Tanggal cuti bukan weekend/libur dan tidak lintas tahun.
 - [ ] Form menghitung hari kerja.
-- [ ] Kepala Bagian dapat melihat pengajuan.
-- [ ] Pimpinan dapat melihat pengajuan setelah tahap pertama.
+- [ ] Atasan Langsung dapat melihat pengajuan setelah Verifikator selesai atau langsung bila tidak ada Verifikator.
+- [ ] PYBMC dapat melihat pengajuan setelah tahap Atasan Langsung.
 - [ ] Saldo dipotong hanya setelah final Disetujui.
 - [ ] PDF dan token verifikasi dapat dibuka.
+- [ ] PDF menampilkan Nama, Jabatan, dan Peran tiap tahap approval.
+- [ ] Ringkasan Catat Pemakaian Tahunan hanya dibaca; fakta historis dicatat melalui Cuti di Luar SIMPEG.
+- [ ] Skenario Atasan Langsung/PYBMC dengan aktor sama, pembatalan/revisi, serta penangguhan final memiliki fixture dan evidence terpisah.
+- [ ] Reporting Statistik hanya didemokan bila implementasi, data scope, dan browser smoke tersedia.
 - [ ] Notifikasi In-App muncul.
 - [ ] Queue worker berjalan jika email didemokan.
 - [ ] Template import dapat diunduh.
@@ -1046,15 +1076,15 @@ Periksa username, `keycloak_username`, role internal, employee mapping, dan sess
 
 ### Pembuka
 
-> Hari ini kami akan menunjukkan alur SIMPEG dari beberapa sisi pengguna. Kita mulai dari pengaturan akses oleh Super Admin, pengelolaan data oleh Admin Kepegawaian, pengajuan oleh Pegawai, persetujuan oleh Kepala Bagian dan Pimpinan, kemudian melihat bagaimana hasilnya masuk ke saldo, notifikasi, EWS, laporan, dan Audit Log.
+> Hari ini kami akan menunjukkan alur SIMPEG dari beberapa sisi pengguna. Kita mulai dari pengaturan akses oleh Super Admin, pengelolaan data oleh Admin Kepegawaian, pengajuan oleh Pegawai, persetujuan oleh Verifikator bila ada, Atasan Langsung, dan PYBMC, kemudian melihat bagaimana hasilnya masuk ke saldo, notifikasi, EWS, laporan, dan Audit Log.
 
-### Perpindahan Pegawai ke Kepala Bagian
+### Perpindahan Pegawai ke Atasan Langsung
 
-> Sekarang kita berpindah dari role Pegawai ke Kepala Bagian. Pegawai hanya dapat mengajukan dan melihat data miliknya, sedangkan Kepala Bagian menerima pengajuan dari bawahan yang memang berada dalam cakupannya.
+> Sekarang kita berpindah dari role Pegawai ke Atasan Langsung. Role teknis yang dipakai demo masih `kepala_bagian`, tetapi pada alur cuti Atasan Langsung menerima pengajuan dari bawahan yang memang berada dalam cakupannya.
 
-### Perpindahan Kepala Bagian ke Pimpinan
+### Perpindahan Atasan Langsung ke Pimpinan
 
-> Setelah Kepala Bagian menyetujui, pengajuan belum selesai karena masih ada tahap Pimpinan. Sekarang kita login sebagai Pimpinan untuk memberikan keputusan final.
+> Setelah Atasan Langsung menyetujui, pengajuan belum selesai karena masih ada tahap PYBMC. Sekarang kita login sebagai Pimpinan untuk memberikan keputusan final.
 
 ### Penutup
 
@@ -1072,4 +1102,5 @@ Dokumen ini disusun dengan mengacu pada:
 4. `PRD-DLL/Issues-SIMPEG-Fase1.md`.
 5. `Tracking-Sprint-Vertical-Slice-SIMPEG.md`.
 6. `Tim-dan-Pembagian-Tugas-SIMPEG.md`.
-7. Route, controller, request validation, dan Blade view pada source SIMPEG saat dokumen dibuat.
+7. `Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md`.
+8. Route, controller, request validation, dan Blade view pada source SIMPEG saat dokumen dibuat.

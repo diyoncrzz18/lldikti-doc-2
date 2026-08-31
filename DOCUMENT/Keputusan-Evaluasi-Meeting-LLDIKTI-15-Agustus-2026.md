@@ -102,6 +102,7 @@
 
 - [PRD SIMPEG Fase 1](PRD-DLL/PRD-SIMPEG-Fase1-Core.md), [User Stories](PRD-DLL/User-Stories-SIMPEG-Fase1.md), [Issues](PRD-DLL/Issues-SIMPEG-Fase1.md), dan [Keputusan Cuti Saldo Tahap 0](Keputusan-Cuti-Saldo-Tahap-0.md) telah diselaraskan untuk K-MTG-07A. Dokumen PRD, User Stories, Issues, serta tracker peran dan sprint yang terdampak juga telah diperbarui untuk K-MTG-08. [Panduan Penulisan Kode](PRD-DLL/Panduan-Penulisan-Kode-SIMPEG.md) tetap menjadi acuan arsitektur, keamanan, dan QA tanpa mengubah keputusan produk ini.
 - Pencatatan keputusan tidak menjadi bukti penyelesaian fitur. Status implementasi setiap butir tetap ditentukan oleh bukti code review, test, dan QA yang sesuai.
+- Keputusan setelah 25 Agustus yang mengubah terminologi dan alur cuti, sumber pemakaian historis, formulir, matriks SK, dan reporting dicatat terpisah pada [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md). Dokumen tersebut menggantikan butir lama hanya pada area yang dinyatakan eksplisit.
 
 ## K-MTG-09 — Lifecycle dan status pegawai
 
@@ -129,7 +130,7 @@ Catatan dan bukti soft delete/restore yang lebih lama tetap dipertahankan sebaga
 
 | Kode rancangan | Model template | Event yang dicakup | Penerima | Variabel minimum |
 |---|---|---|---|---|
-| `simpeg_cuti_perlu_tindakan` | Cuti — Perlu Tindakan | Pengajuan cuti masuk ke verifikator, Kepala Bagian, atau PYBMC aktif | Aktor pada step aktif | nama_pegawai, jenis_cuti, tanggal_mulai, tanggal_selesai, jumlah_hari, tautan_detail |
+| `simpeg_cuti_perlu_tindakan` | Cuti — Perlu Tindakan | Pengajuan cuti masuk ke Verifikator, Atasan Langsung, atau PYBMC aktif | Aktor pada step aktif | nama_pegawai, jenis_cuti, tanggal_mulai, tanggal_selesai, jumlah_hari, tautan_detail |
 | `simpeg_cuti_status` | Cuti — Perubahan Status | Keputusan `Disetujui`, `Perubahan`, `Ditangguhkan`, atau `Tidak Disetujui` | Pegawai pemohon | nama_pegawai, jenis_cuti, status, keterangan, tautan_detail |
 | `simpeg_ews_pengingat` | EWS — Pengingat Kepegawaian | Kenaikan Pangkat, KGB, Pensiun, Kontrak PPPK, dan Satyalancana | Pegawai terkait dan/atau Admin Kepegawaian | nama_pegawai, jenis_peringatan, tanggal_target, sisa_waktu, tautan_detail |
 | `simpeg_notifikasi_sistem` | Notifikasi Sistem | Pesan operasional di luar cuti/EWS bila kemudian disetujui | Penerima sesuai event | judul, ringkasan, tautan_detail |

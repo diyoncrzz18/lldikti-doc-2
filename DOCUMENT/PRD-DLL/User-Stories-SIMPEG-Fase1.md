@@ -3,24 +3,26 @@
 
 | Field | Detail |
 |-------|--------|
-| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.11 dan Keputusan Lifecycle/Status Pegawai 25 Agustus 2026 |
+| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.12 dan Keputusan Lifecycle/Status Pegawai 25 Agustus 2026 |
 | **Tanggal dokumen awal** | 21 Agustus 2026 |
-| **Pembaruan dokumen terakhir** | 26 Agustus 2026 |
-| **Basis verifikasi implementasi terakhir** | Branch `development` @ `ff0e9e1` (setelah PR #182 masuk, 14 Agustus 2026); pembaruan 25–26 Agustus menyelaraskan kontrak produk dan belum menjadi bukti verifikasi implementasi baru |
-| **Total User Stories** | 53 |
+| **Pembaruan dokumen terakhir** | 31 Agustus 2026 |
+| **Basis verifikasi implementasi terakhir** | Branch `development` @ `ff0e9e1` (setelah PR #182 masuk, 14 Agustus 2026); pembaruan 25–31 Agustus menyelaraskan kontrak produk dan belum menjadi bukti verifikasi implementasi baru |
+| **Total User Stories** | 57 — 53 baseline ditambah US-1.6, US-4.13, US-6.5, dan US-8.6; estimasi total perlu direbaseline |
 | **Total Epics** | 9 |
 
-> **Catatan sinkronisasi PRD 1.4:** Keycloak digunakan hanya untuk SSO/login. Role dan permission dikelola di database SIMPEG. Approval cuti memakai tepat satu chain runtime per pegawai; unit hanya menjadi target penyalinan template sesuai K-US-01. Status keputusan resmi adalah `Disetujui`, `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`; cuti tahunan tidak boleh lintas tahun; EWS menambahkan Satyalancana; notifikasi harus channel-configurable; dan laporan mendukung export nominatif Excel custom.
+> **Catatan sinkronisasi PRD 1.12:** Keycloak digunakan hanya untuk SSO/login. Role dan permission dikelola di database SIMPEG. Approval cuti memakai tepat satu chain runtime per pegawai; unit hanya menjadi target penyalinan template sesuai K-US-01. Status keputusan resmi adalah `Disetujui`, `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`; cuti tahunan tidak boleh lintas tahun; EWS menambahkan Satyalancana; notifikasi harus channel-configurable; dan laporan mendukung export nominatif Excel custom.
 >
 > **Keputusan import Fase 1 (kanonis, disetujui pengguna 22 Juli 2026):** import massal hanya mengaktifkan template Data Utama. Import membuat record pegawai beserta field snapshot awal, tidak membuat riwayat kepangkatan/jabatan/KGB, dan tidak memanggil kalkulasi TMT. Riwayat resmi diinput per pegawai melalui CRUD append-only. Tanggal pensiun hasil import dipertahankan apa adanya. Kalkulasi TMT dipicu saat riwayat/sumber resmi disimpan, bukan saat import selesai. Template lanjutan multi-jenis tidak termasuk ruang lingkup saat ini.
 >
 > **Keputusan Program Studi (17 Agustus 2026):** Program Studi menjadi reference table kelolaan US-8.5 kesembilan yang dikelola Super Admin melalui Data Master. Form pegawai dan riwayat pendidikan memakai relasi UUID nullable, sementara snapshot lama tetap dipertahankan sebagai fallback dan kontrak import. Import tidak membuat atau menghubungkan master Program Studi. Lihat [Keputusan Program Studi sebagai Data Referensi](../Keputusan-Program-Studi-Data-Master.md).
 >
-> **Keputusan dokumen/SK (21 Agustus 2026; konfirmasi PPPK 24 Agustus 2026):** Dokumen wajib/SK mengikuti matriks yang dapat dikonfigurasi per jenis pegawai, bukan empat SK hardcode. PNS dan CPNS sama-sama wajib memiliki SK Pengangkatan, SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru. PPPK tidak memiliki daftar bawaan; Admin Kepegawaian yang berwenang dapat mengustom kategorinya melalui matriks, dan statusnya Tidak Dinilai selama belum ada kategori aktif. Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only, sedangkan berkas SK dapat diganti dengan audit. Arsip dokumen terpusat read-only; seluruh kontrol dokumen dilakukan dari detail/profil pegawai. Lihat [K-MTG-08](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md#k-mtg-08--dokumen-wajib-berkas-sk-dan-arsip-dokumen-terpusat).
+> **Keputusan dokumen/SK (21 Agustus 2026; diperjelas pada evaluasi 31 Agustus 2026):** Dokumen wajib/SK mengikuti matriks yang dapat dikonfigurasi per jenis pegawai, bukan empat SK hardcode. PNS wajib memiliki **SK Pengangkatan PNS**, sedangkan CPNS wajib memiliki **SK Pengangkatan CPNS**, serta keduanya membutuhkan SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru. PPPK tidak memiliki daftar bawaan; Admin Kepegawaian yang berwenang dapat mengustom kategorinya melalui matriks, dan statusnya Tidak Dinilai selama belum ada kategori aktif. Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only, sedangkan berkas SK dapat diganti dengan audit. Arsip dokumen terpusat read-only; seluruh kontrol dokumen dilakukan dari detail/profil pegawai. Lihat [K-MTG-08](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md#k-mtg-08--dokumen-wajib-berkas-sk-dan-arsip-dokumen-terpusat).
 >
 > **Keputusan status pegawai (21 Agustus 2026):** Employee tidak memakai `deleted_at` atau Laravel `SoftDeletes`. Penonaktifan mengubah status ke referensi `Nonaktif`; record tetap berada pada tabel `employees`. Status aktif/nonaktif berasal dari klasifikasi `ref_status_pegawai`, dengan tanggal efektif, histori status, keterangan, dan audit trail untuk setiap perubahan resmi.
 
 > **Penyempurnaan lifecycle (25 Agustus 2026):** [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md) adalah kontrak aktif. Kelompok `Aktif` dan `Aktif/khusus` sama-sama aktif; Tugas Belajar tetap aktif. Alasan administratif wajib terpisah dari `status_note`; tanggal efektif masa depan dijadwalkan; reaktivasi dapat dilakukan Super Admin atau Admin Kepegawaian dengan role efektif ber-permission `employees.restore`; linked Employee efektif Nonaktif diblokir global dari route bisnis; mutasi wajib lock/re-check/idempoten, audit fail-closed, dan notifikasi after-commit.
+
+> **Keputusan evaluasi SIMPEG bersama LLDIKTI (31 Agustus 2026):** chain cuti memakai nol atau lebih Verifikator → Atasan Langsung → PYBMC; label Kepala Bagian pada surface cuti diganti menjadi Atasan Langsung. Cuti manual/historis menjadi satu-satunya sumber pemakaian tahunan sebelum go-live, formulir cuti memuat Nama/Jabatan/Peran approval, kelengkapan SK Pengangkatan harus cocok dengan status PNS/CPNS aktif, dan Fase 1 menambah reporting statistik berbentuk chart. Kriteria pengganti berstatus `[ ]` pada addendum akhir dokumen dan belum boleh dianggap selesai hanya karena kriteria lama bertanda `[x]`.
 
 ---
 
@@ -341,9 +343,10 @@ Setiap story mengikuti format:
 | E5 | Early Warning System (EWS) | 5 | 26 |
 | E6 | Notifikasi | 4 | 16 |
 | E7 | Audit Log | 3 | 11 |
-| E8 | Dashboard | 5 | 26 |
+| E8 | Dashboard | 6 | 26 + estimasi US-8.6 belum ditetapkan |
 | E9 | Laporan & Export | 5 | 16 |
-| | **Total** | **53** | **235** |
+| | **Total baseline** | **53** | **235** |
+| | **Total kontrak normatif** | **57** | **235 + estimasi US-1.6/US-4.13/US-6.5/US-8.6 belum direbaseline** |
 
 ---
 
@@ -965,9 +968,9 @@ Setiap story mengikuti format:
 
 ---
 
-### US-4.4 · Approval/Verifikasi Step 1 — Kepala Bagian atau Pihak Pertama
+### US-4.4 · Approval/Verifikasi Step 1 — Atasan Langsung atau Pihak Pertama
 
-> **Superseded oleh K-MTG-01:** istilah lama yang menempatkan Kepala Bagian sebagai step pertama default tidak lagi normatif. Rumus normatif addendum adalah nol atau lebih verifikator; bila ada, seluruh verifikator ditempatkan sebelum Kepala Bagian. Karena AC addendum masih `[ ]`, catatan ini tidak menyatakan perilaku baru sudah diimplementasikan.
+> **Superseded oleh addendum evaluasi 31 Agustus:** istilah lama yang menempatkan Kepala Bagian sebagai step pertama default tidak lagi normatif. Rumus normatif adalah nol atau lebih Verifikator, lalu Atasan Langsung, lalu PYBMC. Karena AC pengganti masih `[ ]`, catatan ini tidak menyatakan perilaku baru sudah diimplementasikan.
 
 | Field | Detail |
 |-------|--------|
@@ -991,7 +994,7 @@ Setiap story mengikuti format:
 - [x] AC-6: Tidak ada tombol formal "Tolak"; keputusan negatif memakai label **"Tidak Disetujui"**.
 - [x] AC-7: Audit log mencatat aksi approval/penundaan.
 - [x] AC-8 — **Bukti historis; scope lama superseded untuk generalisasi step pertama:** ~~Kepala Bagian hanya melihat pengajuan dari pegawai yang di-assign kepadanya (bukan semua pegawai).~~ Tanda `[x]` hanya membuktikan scope lama Kepala Bagian dan tidak membuktikan perilaku verifikator dinamis dari K-MTG-01.
-- [x] AC-9: Jika kepala bagian juga menjadi approver pada step berikutnya, sistem otomatis skip step duplikat agar orang yang sama tidak menyetujui dua kali.
+- [x] AC-9 — **Bukti historis; superseded sebagian:** ~~Jika kepala bagian juga menjadi approver pada step berikutnya, sistem otomatis skip step duplikat agar orang yang sama tidak menyetujui dua kali.~~ Aturan skip tetap berlaku untuk duplikasi tidak bermakna, tetapi tidak berlaku saat Atasan Langsung dan PYBMC adalah orang yang sama; kontrak penggantinya berada pada AC `[ ]` addendum 31 Agustus.
 - [x] AC-10: Pengajuan berstatus "Perubahan" atau "Ditangguhkan" tetap terlihat di timeline sampai ada tindak lanjut sesuai keputusan.
 - [x] AC-11: Perubahan rekomendasi/keputusan dicatat di audit log beserta timestamp dan komentar.
 - [x] AC-12: Notifikasi terkirim ke step berikutnya atau pegawai sesuai status terbaru.
@@ -1154,11 +1157,11 @@ Setiap story mengikuti format:
 - [x] AC-3: Perubahan konfigurasi tercatat di audit log.
 - [x] AC-4: Konfigurasi langsung berlaku untuk pengajuan cuti baru.
 - [x] AC-5: Ketua Tim Kerja dapat dipilih sebagai verifikator tanpa perlu role baru.
-- [x] AC-6: Sistem melakukan skip otomatis jika approver pada dua step adalah orang yang sama.
+- [x] AC-6 — **Bukti historis; superseded sebagian:** ~~Sistem melakukan skip otomatis jika approver pada dua step adalah orang yang sama.~~ Skip tetap berlaku untuk duplikasi tidak bermakna, tetapi bukan untuk pasangan peran Atasan Langsung–PYBMC yang sengaja ditetapkan pada pejabat yang sama.
 
 ---
 
-### US-4.11 · Assign Kepala Bagian per Pegawai
+### US-4.11 · Assign Atasan Langsung per Pegawai
 
 | Field | Detail |
 |-------|--------|
@@ -1169,8 +1172,10 @@ Setiap story mengikuti format:
 | **Dependensi** | US-2.1 |
 
 > **Sebagai** Admin Kepegawaian,
-> **Saya ingin** menetapkan kepala bagian untuk setiap pegawai,
-> **Sehingga** pengajuan cuti bawahan otomatis diarahkan ke kepala bagian yang benar.
+> **Saya ingin** menetapkan Atasan Langsung untuk setiap pegawai,
+> **Sehingga** pengajuan cuti bawahan otomatis diarahkan ke pihak pertama yang benar sesuai konfigurasi cuti.
+
+> **Catatan perubahan istilah:** bukti `[x]` di bawah membuktikan mapping supervisor historis yang sebelumnya dilabeli Kepala Bagian. Kontrak UI dan formulir aktif menggunakan label Atasan Langsung; penutupan perubahan label/semantik tersebut mengikuti AC `[ ]` addendum evaluasi 31 Agustus.
 
 **Acceptance Criteria:**
 
@@ -1660,6 +1665,30 @@ Setiap story mengikuti format:
 
 ---
 
+### US-8.6 · Reporting Statistik Kepegawaian
+
+| Field | Detail |
+|-------|--------|
+| **ID** | US-8.6 |
+| **Prioritas** | Belum ditetapkan pada notulen evaluasi |
+| **Story Points** | Belum diestimasi |
+| **Modul** | Dashboard / Reporting |
+| **Dependensi** | US-2.3, US-8.5 |
+
+> **Sebagai** pengguna yang memiliki akses dashboard Admin/Pimpinan,
+> **Saya ingin** melihat statistik kepegawaian dalam bentuk chart berdasarkan kategori data referensi,
+> **Sehingga** saya dapat menjawab kebutuhan pelaporan angka tanpa menghitung tabel pegawai secara manual.
+
+**Acceptance Criteria:**
+
+- [ ] AC-1: Tersedia halaman Reporting Statistik yang terpisah dari daftar/tabel Data Master dan tidak menggantikan export nominatif custom.
+- [ ] AC-2: Halaman menyajikan agregasi jumlah pegawai dalam chart untuk minimal golongan, jenis jabatan, jabatan, unit kerja, dan jenis pegawai.
+- [ ] AC-3: Angka chart berasal dari query agregasi basis data dengan scope akses dashboard yang sama; halaman tidak memuat seluruh dataset pegawai ke browser hanya untuk menghitung statistik.
+- [ ] AC-4: Empty state menyatakan kategori belum memiliki data tanpa menampilkan data contoh, dan layout tetap dapat dibaca pada desktop, tablet, serta mobile.
+- [ ] AC-5: Bukti selesai mencakup feature test authorization/data scope, test query agregasi, serta smoke browser tanpa console error atau lag yang tampak pada halaman reporting.
+
+---
+
 ## E9 — Laporan & Export
 
 ### US-9.1 · Export Daftar Pegawai ke Excel
@@ -1847,7 +1876,8 @@ E8 (Dashboard) ←── E2, E4, E5
   ├── US-8.2 Dashboard Pegawai ←── US-2.5, US-4.3, US-5.3
   ├── US-8.3 Dashboard Kepala Bagian ←── US-4.4, US-4.11
   ├── US-8.4 Kelola Hari Libur
-  └── US-8.5 Kelola Reference Tables
+  ├── US-8.5 Kelola Reference Tables
+  └── US-8.6 Reporting Statistik ←── US-2.3, US-8.5
 
 E9 (Laporan) ←── E2, E4
   ├── US-9.1 Export Pegawai Excel ←── US-2.3
@@ -2016,7 +2046,7 @@ Sprint 1 tetap menjadi fondasi teknis sebelum vertical slice dimulai.
 - [ ] AC-MTG-3: Admin Kepegawaian dapat mengonfigurasi matriks jenis SK wajib per jenis pegawai; daftar tidak boleh hardcode empat SK yang sama untuk semua pegawai. *(Sumber: K-MTG-08.1–08.2.)*
 - [ ] AC-MTG-4: Menu dokumen terpusat menyediakan pencarian lintas pegawai, detail, dan unduh yang berwenang bagi Super Admin/Admin Kepegawaian, tetapi seluruh permukaannya read-only. Unggah, ganti berkas, hapus, dan ubah metadata hanya tersedia dari detail/profil pegawai. *(Sumber: K-MTG-08.4.)*
 - [ ] AC-MTG-5: Record substantif riwayat kepangkatan, jabatan, dan KGB yang telah tersimpan tetap tidak dapat diedit atau dihapus. Berkas SK pada record boleh diganti dari detail/profil pegawai tanpa mengubah data substantif, `is_latest`, atau dasar kalkulasi; validasi upload dan audit perubahan berkas wajib berjalan. *(Sumber: K-MTG-08.3.)*
-- [ ] AC-MTG-6: Matriks PNS dan CPNS sama-sama mewajibkan SK Pengangkatan, SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru. Perubahan jenis pegawai dari CPNS ke PNS mengevaluasi ulang matriks, tetapi tidak mengubah kewajiban dokumen karena kedua matriks sama. *(Sumber: K-MTG-08.5–08.6.)*
+- [ ] AC-MTG-6: **Superseded oleh evaluasi 31 Agustus.** Matriks PNS mewajibkan SK Pengangkatan PNS dan matriks CPNS mewajibkan SK Pengangkatan CPNS, selain kategori wajib lain pada matriks aktif. Transisi CPNS→PNS mengevaluasi ulang kelengkapan dan menjadi Tidak Lengkap sampai SK Pengangkatan PNS tersedia. *(Sumber aktif: K-MTG-10.5.)*
 - [ ] AC-MTG-7: Admin Kepegawaian yang berwenang dapat mengustom matriks SK wajib PPPK tanpa daftar bawaan. PPPK berstatus Tidak Dinilai selama belum ada kategori aktif; setelah sedikitnya satu kategori diaktifkan, status kelengkapan dihitung terhadap matriks aktif tersebut. *(Sumber: K-MTG-08.7.)*
 
 ### US-4.3 dan US-4.9 · Penghitungan saldo dari pemakaian
@@ -2042,24 +2072,24 @@ Rollover dari N-1 tetap dibatasi maksimal 6 hari dan batas tersebut **bukan pers
 
 ### US-4.5 dan US-4.10 · Urutan approval cuti
 
-- [ ] AC-MTG-1: Chain baru atau chain yang diperbarui memuat nol atau lebih verifikator dinamis; bila ada, seluruh verifikator ditempatkan sebelum Kepala Bagian, lalu PYBMC menjadi final approver. *(Sumber: K-MTG-01.1.)*
-- [ ] AC-MTG-2: Ketua Tim Kerja ditempatkan sebagai verifikator bila ditunjuk; jika tidak ada verifikator, chain langsung dimulai dari Kepala Bagian. *(Sumber: K-MTG-01.1.)*
-- [ ] AC-MTG-3: Konfigurasi yang menempatkan Kepala Bagian sebelum salah satu verifikator ditolak dengan pesan yang dapat ditindaklanjuti. *(Sumber keputusan: K-MTG-01.1; guardrail engineering/DoD turunan: konfigurasi tidak valid ditolak dengan pesan yang dapat ditindaklanjuti.)*
+- [ ] AC-MTG-1: **Superseded oleh evaluasi 31 Agustus.** Chain baru atau chain yang diperbarui memuat nol atau lebih Verifikator dinamis; bila ada, seluruhnya ditempatkan sebelum Atasan Langsung, lalu PYBMC menjadi final approver. *(Sumber aktif: K-MTG-10.1.)*
+- [ ] AC-MTG-2: Ketua Tim Kerja ditempatkan sebagai Verifikator bila ditunjuk; jika tidak ada Verifikator, chain langsung dimulai dari Atasan Langsung tanpa placeholder. *(Sumber aktif: K-MTG-10.1.)*
+- [ ] AC-MTG-3: Konfigurasi yang menempatkan Atasan Langsung sebelum salah satu Verifikator ditolak dengan pesan yang dapat ditindaklanjuti. Bila Atasan Langsung dan PYBMC orang yang sama, dua tahap/tindakan tetap wajib dipertahankan. *(Sumber aktif: K-MTG-10.1.)*
 
 ### US-4.13 · Input Cuti Manual oleh Admin Kepegawaian
 
 > **Sebagai** Admin Kepegawaian,
 > **Saya ingin** mencatat cuti yang telah disetujui dan dijalankan di luar SIMPEG,
-> **Sehingga** saldo dan rollover tetap akurat saat go-live, downtime, atau rekonsiliasi administrasi.
+> **Sehingga** saldo dan rollover tetap akurat untuk data historis, masa transisi sebelum go-live, atau rekonsiliasi administrasi.
 
 > **Riwayat superseded:** AC-2 versi 15/18 Agustus yang mewajibkan dokumen pendukung tidak lagi normatif. Revisi 20 Agustus menggantinya dengan dokumen opsional dan snapshot persetujuan historis wajib.
 
 - [ ] AC-1: Mutation hanya dapat diakses oleh exact role Admin Kepegawaian yang memiliki permission `cuti.manual.manage`; route, FormRequest, Action, dan service menolak role lain atau permission yang tidak sesuai sebelum side effect. *(Sumber: K-MTG-07A dan K-CUT-05.)*
 - [ ] AC-2: Form mencatat pegawai, jenis cuti, periode, alasan/keterangan, nomor dokumen opsional, dan dokumen pendukung opsional. Bila file ada, validasi ketat dan storage privat tetap wajib; jumlah hari kerja dihitung sistem dari periode dan kalender kerja, bukan diketik bebas. *(Sumber: K-MTG-07A dan K-CUT-05.)*
-- [ ] AC-3: Setiap entri baru menyimpan snapshot persetujuan 2–10 tahap: 0–8 `verifier`, tepat satu `kepala_bagian`, lalu tepat satu `pybmc` final. Hasil `verified`, `approved`, dan `final_approved` selalu diturunkan server; input client untuk urutan atau hasil tahap ditolak. *(Sumber: K-MTG-07A dan K-CUT-05.)*
+- [ ] AC-3: Setiap entri baru menyimpan snapshot persetujuan 2–10 tahap: 0–8 `verifier`, tepat satu representasi internal `kepala_bagian` untuk **Atasan Langsung**, lalu tepat satu `pybmc` final. Hasil `verified`, `approved`, dan `final_approved` selalu diturunkan server; input client untuk urutan atau hasil tahap ditolak. Label bisnis/formulir menggunakan Atasan Langsung, dan pasangan Atasan Langsung/PYBMC yang orangnya sama tetap dua tahap. *(Sumber: K-MTG-07A, K-CUT-05, dan K-MTG-10.1.)*
 - [ ] AC-4: Approver dapat berupa pegawai internal atau pejabat external. UUID internal tidak ditampilkan sebagai input UX; histori menyimpan snapshot identitas internal, sedangkan external memiliki nama, jabatan, dan instansi tanpa akun atau record pegawai palsu. *(Sumber: K-MTG-07A dan K-CUT-05.)*
 - [ ] AC-5: Form dapat dimulai dengan chain kosong atau menyalin current chain pegawai. Salinan dapat diedit per bagian tanpa mengubah sumber, dan submit ditolak sampai struktur akhirnya valid. *(Sumber: K-MTG-07A dan K-CUT-05.)*
-- [ ] AC-6: Entri langsung dicatat sebagai fakta cuti yang sudah disetujui di luar SIMPEG untuk historis, sebelum go-live, atau downtime; sistem tidak membuat usulan, approval aktif, reservasi, notifikasi approval, atau bukti approval ulang. Pemakaian tahunan otomatis memperbarui saldo dan rollover. *(Sumber: K-MTG-07A dan K-CUT-05.)*
+- [ ] AC-6: Entri langsung dicatat sebagai fakta cuti yang sudah disetujui di luar SIMPEG untuk historis atau sebelum go-live; sistem tidak membuat usulan, approval aktif, reservasi, notifikasi approval, atau bukti approval ulang. Pemakaian tahunan otomatis memperbarui saldo dan rollover. Pengecualian ketika layanan tidak tersedia setelah go-live tetap Open Question. *(Sumber: K-MTG-07A, K-CUT-05, dan K-MTG-10.3.)*
 - [ ] AC-7: Koreksi menghasilkan fakta dan snapshot pengganti dengan perhitungan ulang atomik serta audit aktor, alasan, keberadaan dokumen, nilai sebelum/sesudah, dan snapshot tanpa path privat. Pembatalan atau perubahan current configuration tidak mengubah snapshot lama dan record tidak di-hard-delete. *(Sumber: K-MTG-07A dan K-CUT-05.)*
 - [ ] AC-8: Duplikasi dan periode yang overlap dengan cuti aktif pegawai yang sama ditolak. Entri cuti tahunan memengaruhi saldo; jenis cuti lain tidak memotong saldo tahunan. *(Sumber: K-MTG-01.7 dan K-MTG-07A.)*
 - [ ] AC-9: Preview, lookup, dan histori hanya memuat data minimum, query/hasil bounded, pagination server-side, dan eager loading bounded. Bukti selesai mencakup test PostgreSQL serta smoke Chrome untuk form kosong, copy-edit, dokumen opsional, aksesibilitas, desktop/mobile, dan tanpa console error atau polling payload besar. *(Sumber: Addendum Snapshot 20 Agustus 2026.)*
@@ -2105,11 +2135,11 @@ Rollover dari N-1 tetap dibatasi maksimal 6 hari dan batas tersebut **bukan pers
 | US-1.4 | Email sebagai atribut utama auto-mapping, inisialisasi role internal Pegawai tanpa menimpa role existing, serta mapping nomor telepon dari custom attribute terkonfirmasi | **Belum Selesai** | Daftar email + expected role akun uji dari LLDIKTI, feature test mapping email/role/nomor telepon, non-overwrite role existing, penolakan claim tidak dikenal, RBAC regression, dan audit |
 | US-1.6 | Switch role dengan `temporary_role`, permission efektif yang selalu diturunkan dinamis dari target, dan revert pada development maupun production | **Belum Selesai** | Feature test permission, persistence, revert, ownership scope, privilege-escalation denial, evaluasi permission efektif seluruh endpoint di backend, audit, serta QA browser |
 | US-2.9 / US-2.10 | Lifecycle Employee berbasis status, predicate aktif kanonis, scheduled transition, reaktivasi berbasis permission efektif, blokir akun global, audit fail-closed, dan notifikasi after-commit | **Belum Selesai** | Test PostgreSQL untuk role/permission, `Aktif/khusus`, filter tunggal, jadwal, lock/no-op/retry/concurrency, rollback audit, after-commit, blokir lintas role, dan QA browser |
-| US-2.4 / US-2.6 | Unggah dokumen dari profil, matriks SK wajib PNS/CPNS, matriks PPPK yang dapat dikustom tanpa daftar bawaan, arsip pusat read-only, dan penggantian berkas SK tanpa mutasi record riwayat | **Belum Selesai** | Feature test matriks PNS/CPNS, reevaluasi CPNS→PNS tanpa perubahan kewajiban, PPPK Tidak Dinilai tanpa kategori aktif dan dinilai setelah matriks diaktifkan, upload/penggantian berkas/authorization/audit, penolakan mutasi dari arsip pusat, serta smoke test browser profil pegawai |
+| US-2.4 / US-2.6 | Unggah dokumen dari profil, matriks SK wajib PNS/CPNS dengan SK Pengangkatan yang cocok, matriks PPPK yang dapat dikustom tanpa daftar bawaan, arsip pusat read-only, dan penggantian berkas SK tanpa mutasi record riwayat | **Belum Selesai** | Feature test matriks PNS/CPNS, reevaluasi CPNS→PNS menjadi Tidak Lengkap sampai SK Pengangkatan PNS tersedia, PPPK Tidak Dinilai tanpa kategori aktif dan dinilai setelah matriks diaktifkan, upload/penggantian berkas/authorization/audit, penolakan mutasi dari arsip pusat, serta smoke test browser profil pegawai |
 | US-4.3 | Saldo dihitung dari jumlah cuti yang dipakai, bukan input saldo sisa | **Belum Selesai** | Unit/feature test matriks N-2/N-1, perhitungan 12/18/24, dan audit rekonsiliasi |
-| US-4.5 | Chain memuat nol atau lebih verifikator; bila ada, seluruhnya ditempatkan sebelum Kepala Bagian | **Belum Selesai** | Feature test chain tanpa verifikator, satu/banyak verifikator, Ketua Tim sebagai verifikator, urutan seluruh verifikator sebelum Kepala Bagian, dan regresi snapshot |
+| US-4.5 | Chain memuat nol atau lebih Verifikator; bila ada, seluruhnya ditempatkan sebelum Atasan Langsung | **Belum Selesai** | Feature test chain tanpa Verifikator, satu/banyak Verifikator, Ketua Tim sebagai Verifikator, urutan seluruh Verifikator sebelum Atasan Langsung, pasangan Atasan/PYBMC dengan dua tindakan, dan regresi snapshot |
 | US-4.9 | Koreksi memakai data pemakaian/entri manual dan perhitungan ulang saldo | **Belum Selesai** | Feature test transaksi atomik, nilai sebelum/sesudah, audit, dan regresi rollover |
-| US-4.10 | Validasi konfigurasi nol atau lebih verifikator → Kepala Bagian → PYBMC | **Belum Selesai** | Feature test konfigurasi valid/tidak valid, seluruh verifikator sebelum Kepala Bagian, skip duplikat, dan audit konfigurasi |
+| US-4.10 | Validasi konfigurasi nol atau lebih Verifikator → Atasan Langsung → PYBMC | **Belum Selesai** | Feature test konfigurasi valid/tidak valid, seluruh Verifikator sebelum Atasan Langsung, pengecualian pasangan Atasan/PYBMC yang tetap dua tindakan, dan audit konfigurasi |
 | US-4.13 | Input cuti manual dengan snapshot persetujuan historis; ketentuan dokumen wajib sebelumnya **Superseded** | **Belum Selesai** | Feature test exact RBAC/permission, dokumen opsional dan private storage, snapshot 2–10/internal-external/copy-edit, tanpa approval ulang, PostgreSQL, penghitungan saldo/rollover, audit/privacy/performance, dan QA Chrome |
 | US-6.5 | Dokumen template WhatsApp serta integrasi berbasis template ID | **Belum Selesai** | Dokumen template disetujui LLDIKTI/Meta, test dispatcher/allowlist variabel, bukti adapter tetap nonaktif sebelum dependency tersedia, dan bukti uji layanan setelah kontrak final diterima |
 | US-8.4 | Hari Libur dipisahkan dari Data Master dengan kalender di atas tabel | **Belum Selesai** | Feature/regression test, smoke test browser, dan konfirmasi menu lama tidak lagi tersedia |
@@ -2127,7 +2157,7 @@ AC-MTG-4 sampai AC-MTG-7 dan AC-MTG-10 di bawah adalah kontrak rancangan **dokum
 - [ ] AC-MTG-5: `simpeg_cuti_perlu_tindakan` menyediakan variabel `nama_pegawai`, `jenis_cuti`, `tanggal_mulai`, `tanggal_selesai`, `jumlah_hari`, dan `tautan_detail` untuk aktor pada step approval aktif. *(Sumber: tabel katalog K-MTG-05A, baris `simpeg_cuti_perlu_tindakan`.)*
 - [ ] AC-MTG-6: `simpeg_cuti_status` mendukung variabel `nama_pegawai`, `jenis_cuti`, `status`, `keterangan`, dan `tautan_detail` bagi pegawai pemohon; nilai status mencakup `Disetujui`, `Perubahan`, `Ditangguhkan`, serta `Tidak Disetujui`. *(Sumber: tabel katalog K-MTG-05A, baris `simpeg_cuti_status`.)*
 - [ ] AC-MTG-7: `simpeg_ews_pengingat` mendukung Kenaikan Pangkat, KGB, Pensiun, Kontrak PPPK, serta Satyalancana dengan variabel `nama_pegawai`, `jenis_peringatan`, `tanggal_target`, `sisa_waktu`, dan `tautan_detail`. *(Sumber: tabel katalog K-MTG-05A, baris `simpeg_ews_pengingat`.)*
-- [ ] AC-MTG-8: Implementasi hanya menggunakan template ID, nama variabel, bahasa, serta konfigurasi tombol yang dikembalikan LLDIKTI setelah persetujuan Meta/Qontak; bila generalisasi ditolak provider, template dipecah per event. *(Sumber: K-MTG-05A.2 dan K-MTG-05A.3.)*
+- [ ] AC-MTG-8: Implementasi hanya menggunakan template ID, nama variabel, bahasa, serta konfigurasi tombol yang dikembalikan LLDIKTI setelah persetujuan Meta/Qontak; bila generalisasi ditolak provider, template dipecah per event. Kontrak disimpan di Setting Aplikasi dan tombol URL memuat `button.value_format`; untuk URL `https://simpeg.lldiktiwil16.id/{{1}}`, nilainya wajib `path_without_leading_slash` sehingga placeholder menerima `dashboard/...`, bukan `/dashboard/...`. *(Sumber: K-MTG-05A.2 dan K-MTG-05A.3, klarifikasi kontrak provider 31 Agustus 2026.)*
 - [ ] AC-MTG-9: Template OTP dari baseline Qontak tidak digunakan dalam SIMPEG selama autentikasi tetap menggunakan Keycloak SSO. *(Sumber: K-MTG-05A.4.)*
 - [ ] AC-MTG-10: Bila `simpeg_notifikasi_sistem` kemudian disetujui untuk diajukan, allowlist variabelnya adalah `judul`, `ringkasan`, dan `tautan_detail`. *(Sumber: tabel katalog K-MTG-05A, baris `simpeg_notifikasi_sistem`; guardrail engineering/DoD turunan: variabel minimum diperlakukan sebagai allowlist dokumen submission.)*
 
@@ -2144,3 +2174,56 @@ Seluruh Open Question OQ-MTG-01 sampai OQ-MTG-07 dari evaluasi 15/18 Agustus 202
 | OQ-MTG-05 | Konsumsi N-2 → N-1 → tahun berjalan, expiry akhir tahun penggunaan, dan rekalkulasi kronologis untuk koreksi backdated | **Decided** |
 | OQ-MTG-06 | WhatsApp Business wajib siap akhir Agustus; detail provider menjadi dependency implementasi #214/#215 | **Decided** |
 | OQ-MTG-07 | Target final adalah akhir Agustus 2026 | **Decided** |
+
+---
+
+## Addendum Hasil Evaluasi SIMPEG Bersama LLDIKTI — 31 Agustus 2026
+
+> **Status:** **Belum Selesai.** Addendum ini bersumber dari notulen evaluasi SIMPEG bersama LLDIKTI yang diterima 31 Agustus 2026 dan dicatat pada [Keputusan Evaluasi 31 Agustus 2026](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md). Ketentuan berikut menggantikan acceptance criteria lama yang bertentangan; tanda `[x]` lama tetap merupakan bukti implementasi historis, bukan bukti penutupan kontrak pengganti.
+
+### US-4.1 dan US-4.2 · Pengajuan, pembatalan, dan revisi cuti
+
+- [ ] AC-NTL-1: Setelah submit, pengajuan menunggu Verifikator pertama bila konfigurasi memiliki Verifikator; bila tidak ada, pengajuan langsung menunggu Atasan Langsung. Label status, notifikasi, dan timeline memakai istilah peran yang sama.
+- [ ] AC-NTL-2: Pegawai dapat membatalkan atau merevisi pengajuan hanya sebelum ada tindakan approval pada chain. Aksi tersebut menyimpan audit dan tidak menghapus jejak pengajuan.
+- [ ] AC-NTL-3: Pengajuan baru tidak dapat dibuat apabila masih ada pengajuan aktif yang belum selesai atau belum ditangguhkan, sehingga tidak terjadi duplikasi pengajuan periode yang sama.
+
+### US-4.4, US-4.5, US-4.10, dan US-4.11 · Atasan Langsung dan konfigurasi chain
+
+- [ ] AC-NTL-1: Semua surface bisnis cuti—konfigurasi, daftar/timeline, notifikasi, dan formulir—menggunakan label **Atasan Langsung**, bukan Kepala Bagian. Mapping supervisor historis dapat tetap memakai nama field fisik lama; perubahan ini tidak mensyaratkan migrasi schema tanpa keputusan terpisah.
+- [ ] AC-NTL-2: Chain baru atau yang diperbarui berurutan `0..n Verifikator → Atasan Langsung → PYBMC`. Verifikator bersifat opsional; UI tidak menampilkan keterangan “tanpa verifikator” saat chain langsung dimulai dari Atasan Langsung.
+- [ ] AC-NTL-3: Atasan Langsung dikonfigurasi per pegawai dan dapat berupa Kepala Bagian, Kepala Lembaga, atau pegawai yang sah menurut struktur LLDIKTI. Konfigurasi per pegawai tetap satu-satunya chain runtime; penyalinan ke anggota unit hanya membuat template/copy, bukan precedence resolver runtime.
+- [ ] AC-NTL-4: Jika Atasan Langsung dan PYBMC adalah pegawai yang sama, sistem menyimpan dua snapshot langkah dengan peran berbeda dan pejabat tersebut wajib melakukan dua tindakan terpisah. Konfigurasi/engine hanya melewati duplikasi lain yang tidak bermakna.
+- [ ] AC-NTL-5: Bukti selesai mencakup feature test chain tanpa verifikator, dengan satu/banyak verifikator, template unit, serta kasus satu pejabat Atasan Langsung sekaligus PYBMC; timeline dan audit harus membuktikan dua tindakan pada kasus terakhir.
+
+### US-4.6 dan US-4.7 · Penangguhan pasca-persetujuan dan formulir cuti
+
+- [ ] AC-NTL-1: Pengajuan yang telah Disetujui final tidak boleh dihapus. Admin Kepegawaian dapat menetapkannya `Ditangguhkan` untuk pembatalan atau penjadwalan ulang setelah persetujuan, dengan keterangan wajib, timeline/audit lengkap, dan tanpa menghilangkan keputusan sebelumnya.
+- [ ] AC-NTL-2: Penangguhan pasca-persetujuan mengoreksi pemakaian saldo hanya melalui ledger append-only dan rekalkulasi atomik yang idempoten; saldo tidak boleh dibalik dua kali akibat retry atau double submit. Pegawai baru dapat mengajukan kembali setelah pengajuan terdahulu tidak lagi aktif.
+- [ ] AC-NTL-3: Formulir cuti resmi menampilkan tabel approval berisi **Nama**, **Jabatan**, dan **Peran**. Peran adalah Verifikator, Atasan Langsung, atau PYBMC; jabatan mengikuti jabatan aktual terakhir pihak yang bertindak. Tata letak memberi jarak yang cukup antara kop surat dan tabel.
+- [ ] AC-NTL-4: Halaman QR dan detail/timeline tetap menampilkan status resmi, keputusan, keterangan, serta urutan snapshot; perubahan formulir tidak mengurangi informasi verifikasi publik yang telah disetujui.
+
+### US-4.3, US-4.9, dan US-4.13 · Satu sumber pemakaian cuti historis
+
+- [ ] AC-NTL-1: Cuti di Luar SIMPEG/cuti manual menjadi satu-satunya sumber fakta pemakaian tahunan untuk data sebelum go-live atau cuti lampau yang sudah disetujui di luar aplikasi. Fakta yang relevan dijumlahkan untuk N-2, N-1, dan tahun berjalan. Penggunaan cuti manual ketika layanan tidak tersedia setelah go-live tetap Open Question sampai ada keputusan LLDIKTI.
+- [ ] AC-NTL-2: Permukaan Catat Pemakaian Tahunan hanya menampilkan agregat dan riwayat hasil fakta cuti manual; input angka pemakaian langsung dinonaktifkan agar tidak terjadi dua sumber data atau double counting.
+- [ ] AC-NTL-3: Pengajuan operasional setelah SIMPEG digunakan mengikuti flow pengajuan normal. Entri Cuti di Luar SIMPEG tetap menerima informasi dan dokumen pendukung opsional untuk fakta historis; file yang ada divalidasi ketat, disimpan privat, serta tidak mengekspos path privat pada audit.
+- [ ] AC-NTL-4: Bukti selesai mencakup kasus pemakaian historis dan Cuti di Luar SIMPEG pada tahun yang sama, yang menghasilkan satu total penggunaan tanpa double counting, disertai uji PostgreSQL untuk perhitungan saldo/rollover dan audit.
+
+### US-2.4 dan US-2.6 · Kecocokan SK Pengangkatan dengan status pegawai
+
+- [ ] AC-NTL-1: Matriks dokumen PNS dan CPNS tetap memiliki empat kategori wajib yang sama, tetapi kategori SK Pengangkatan divalidasi terhadap jenis pegawai aktif: CPNS membutuhkan SK Pengangkatan CPNS dan PNS membutuhkan SK Pengangkatan PNS.
+- [ ] AC-NTL-2: Ketika status pegawai berubah dari CPNS ke PNS, sistem mengevaluasi ulang kelengkapan. Jika SK Pengangkatan PNS belum ada, status kelengkapan dokumen wajib menjadi Tidak Lengkap sampai berkas yang sesuai diunggah.
+- [ ] AC-NTL-3: Hanya Super Admin atau Admin Kepegawaian yang berwenang dapat mengubah status terkait dan mengunggah dokumen; pegawai tidak memperoleh self-service untuk mutasi tersebut.
+
+### US-8.6 · Reporting Statistik Kepegawaian
+
+> US-8.6 ditambahkan berdasarkan permintaan LLDIKTI pada evaluasi ini. Prioritas dan estimasi story point belum diputuskan, sehingga tidak dihitung sebagai tambahan estimasi sprint sampai rebaseline disetujui.
+
+- [ ] AC-NTL-1: Halaman Reporting Statistik memenuhi acceptance criteria US-8.6 dan menyajikan chart agregat untuk kebutuhan pelaporan angka per kategori referensi.
+- [ ] AC-NTL-2: Halaman tidak menggantikan Data Master, dashboard yang sudah ada, maupun export nominatif custom; ketiganya tetap memiliki tujuan dan scope akses masing-masing.
+
+### Ketetapan yang tidak berubah
+
+- Audit log tetap immutable. Usulan retensi/pengurangan record berkala dalam rapat belum menjadi keputusan produk dan tidak dapat mengubah US-7.1/US-7.2.
+- Keterangan tetap wajib untuk keputusan cuti `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`. Usulan alasan opsional hanya dapat dipertimbangkan untuk penyesuaian data ringan setelah ada keputusan produk tersendiri; ia tidak mengubah kontrak cuti maupun lifecycle.
+- Konfigurasi channel notifikasi tetap global. Preferensi channel per pegawai dibahas sebagai kemungkinan, tetapi tidak menjadi acceptance criterion Fase 1 dari rapat ini.

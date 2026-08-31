@@ -10,7 +10,7 @@
 
 - Akun Keycloak sudah dipetakan ke user dan pegawai aktif SIMPEG.
 - Role internal user adalah `super_admin` dengan permission yang sesuai.
-- Reference data, unit, Kepala Bagian, dan konfigurasi approval yang diperlukan sudah tersedia.
+- Reference data, unit, Atasan Langsung, dan konfigurasi approval yang diperlukan sudah tersedia.
 - Gunakan environment dan data uji yang disetujui untuk UAT; jangan memakai data pribadi nyata.
 
 ## 2. Fitur dan Langkah Utama
@@ -22,11 +22,12 @@
 | Data Master | Buka **Data Master**, pilih referensi, tambah/ubah/nonaktifkan sesuai dependency | Mengubah pilihan kanonis yang dipakai form, perhitungan, dan laporan |
 | Data Pegawai | Cari pegawai, tambah/ubah data utama, tambahkan riwayat, dan kelola status langsung atau terjadwal | Mutasi status mempertahankan Employee, membuat histori append-only/audit, serta memengaruhi akses dan EWS ketika efektif |
 | Import Pegawai | Unduh template, unggah CSV/Excel, petakan kolom, validasi, periksa preview, lalu jalankan import | Dapat membuat banyak pegawai; baris import diklasifikasikan imported/skipped/failed |
-| Konfigurasi Approval Cuti | Buka **Konfigurasi Approval Cuti**, tetapkan verifikator, Kepala Bagian, dan PYBMC sesuai urutan kanonis | Hanya pengajuan baru yang memakai konfigurasi baru; snapshot pengajuan berjalan tidak berubah |
+| Konfigurasi Approval Cuti | Buka **Konfigurasi Approval Cuti**, tetapkan Verifikator, Atasan Langsung, dan PYBMC sesuai urutan kanonis | Hanya pengajuan baru yang memakai konfigurasi baru; snapshot pengajuan berjalan tidak berubah |
 | Channel Notifikasi | Buka **Channel Notifikasi**, periksa kill-switch dan kebijakan event | Mengaktifkan atau menonaktifkan intent per channel; tidak mengaktifkan provider yang belum tersedia |
 | Konfigurasi EWS | Buka **Konfigurasi EWS**, ubah parameter yang disetujui, lalu simpan | Memengaruhi alert yang dibentuk scheduler dan penerima notifikasi |
 | Audit Log | Buka **Audit Log**, filter aktivitas, lalu buka detail | Akses baca untuk traceability; record audit tidak boleh diubah atau dihapus |
 | Laporan/Export | Pilih filter dan kolom aman, periksa preview, lalu unduh Excel atau PDF | Menghasilkan salinan data; NIK/No. KK tidak boleh masuk export tanpa kebutuhan dan persetujuan eksplisit |
+| Reporting Statistik Kepegawaian | Buka halaman reporting, pilih filter yang diizinkan, lalu baca chart/agregat | Menampilkan statistik teragregasi sesuai scope; bukan Data Master atau pengganti export detail |
 
 ## 3. Alur Kelola Akses User
 
@@ -44,12 +45,14 @@ jangan memindahkan mapping secara manual melalui database.
 
 ## 4. Alur Konfigurasi Approval Cuti
 
-1. Pastikan pegawai, verifikator, Kepala Bagian, dan PYBMC aktif.
-2. Atur rantai `0..N verifikator → Kepala Bagian → PYBMC`.
+1. Pastikan pegawai, Verifikator, Atasan Langsung, dan PYBMC aktif.
+2. Atur rantai `0..N Verifikator → Atasan Langsung → PYBMC`.
 3. Ketua Tim, bila digunakan, dicatat sebagai verifikator.
-4. Simpan dan periksa preview rantai.
-5. Buat pengajuan uji baru untuk membuktikan runtime.
-6. Jangan mengubah snapshot pengajuan yang sudah berjalan.
+4. Bila kelompok Verifikator kosong, pastikan preview dimulai dari Atasan Langsung tanpa label placeholder.
+5. Bila Atasan Langsung dan PYBMC adalah orang yang sama, pastikan preview tetap memperlihatkan dua peran/tahap yang membutuhkan dua tindakan.
+6. Simpan dan periksa preview rantai.
+7. Buat pengajuan uji baru untuk membuktikan runtime.
+8. Jangan mengubah snapshot pengajuan yang sudah berjalan.
 
 ## 5. Batas Akses dan Larangan
 
@@ -72,7 +75,7 @@ jangan memindahkan mapping secara manual melalui database.
 |---|---|
 | User hanya dapat membuka status akun | Employee linked efektif Nonaktif; blokir route bisnis berlaku untuk seluruh role. Periksa dasar administrasi dan reaktivasi resmi bila sah |
 | Reaktivasi ditolak | Periksa role efektif dan permission `employees.restore`; jangan bypass melalui raw role atau database |
-| Konfigurasi cuti tidak dapat disimpan | Periksa urutan, approver aktif, tepat satu Kepala Bagian, dan PYBMC terakhir |
+| Konfigurasi cuti tidak dapat disimpan | Periksa urutan, approver aktif, tepat satu Atasan Langsung, dan PYBMC terakhir; pasangan Atasan/PYBMC yang orangnya sama tetap dua tahap |
 | Email tidak terkirim | Periksa kebijakan channel, queue worker, failed jobs, dan konfigurasi mail tanpa membuka credential |
 | EWS tidak muncul | Periksa histori/TMT, konfigurasi periode, scheduler, deduplikasi, dan scope penerima |
 | Audit tidak ditemukan | Periksa actor, waktu, model, filter, serta apakah mutasi berhasil di-commit |

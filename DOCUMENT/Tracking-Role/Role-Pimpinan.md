@@ -6,8 +6,10 @@
 | Tanggal analisis ulang | 27 Juli 2026 |
 | Basis verifikasi | Branch `development` @ `e82b527` (sesudah PR #121–#131, termasuk perbaikan dashboard PR #125) |
 | Dokumen asal (dikonsolidasi ke file ini) | `Analisis-Frontend-Role-Pimpinan.md` — audit 21 Juli 2026 |
-| Acuan produk | PRD v1.3 (dashboard seluruh pegawai, PYBMC/approver final, data pegawai read-only, laporan), US-4.6, US-5.2, US-8.1 W1–W7, US-9.1B, L1/L1b/L2/L3 |
+| Acuan produk | PRD v1.12 (dashboard seluruh pegawai, PYBMC/approver final, data pegawai read-only, laporan), US-4.6, US-5.2, US-8.1, US-8.6, US-9.1B, L1/L1b/L2/L3 |
 | Status keseluruhan | ⚠️ **Sebagian besar sesuai** — inti operasional lengkap; sisa: akurasi tren W7, konsistensi label, dan 1 keputusan produk |
+
+> **Addendum 31 Agustus 2026:** verifikasi Pimpinan harus mencakup chain yang dapat memiliki Atasan Langsung/PYBMC dengan aktor sama, output formulir Nama–Jabatan–Peran, dan scope Reporting Statistik bila role ini diberi akses. Bukti implementasi sebelum addendum tidak menutup kriteria tersebut.
 
 ## Ringkasan
 

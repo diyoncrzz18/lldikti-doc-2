@@ -14,7 +14,7 @@
 | Super Admin | [Panduan Super Admin](Panduan-Super-Admin.md) | Draft | Belum ada |
 | Admin Kepegawaian | [Panduan Admin Kepegawaian](Panduan-Admin-Kepegawaian.md) | Draft | Belum ada |
 | Pimpinan | [Panduan Pimpinan](Panduan-Pimpinan.md) | Draft | Belum ada |
-| Kepala Bagian | [Panduan Kepala Bagian](Panduan-Kepala-Bagian.md) | Draft | Belum ada |
+| Atasan Langsung (role teknis `kepala_bagian`) | [Panduan Kepala Bagian](Panduan-Kepala-Bagian.md) | Draft | Belum ada |
 | Pegawai | [Panduan Pegawai](Panduan-Pegawai.md) | Draft | Belum ada |
 
 ## Kontrak Isi
@@ -43,6 +43,8 @@ pada exact release candidate, dan pihak Kepegawaian memberikan konfirmasi ekspli
 - Employee tidak dihapus atau dipindahkan pada Fase 1; lifecycle menggunakan perubahan status resmi pada Data Pegawai, tanpa Data Backup/Data Nonaktif.
 - Kelompok status `Aktif` dan `Aktif/khusus` sama-sama aktif. User linked ke Employee efektif Nonaktif hanya dapat membuka halaman status akun, logout, dan route auth teknis yang diperlukan, tanpa pengecualian role.
 - Keputusan cuti resmi adalah `Disetujui`, `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`.
+- Pada alur cuti, urutan bisnis adalah `0..n Verifikator → Atasan Langsung → PYBMC`. Nama role/route teknis lama tidak berubah hanya karena label bisnis ini.
+- Panduan ini mengikuti [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md). Semua langkah baru tetap berstatus draft sampai tersedia evidence UAT pada release candidate yang tepat.
 - WhatsApp Business tidak boleh dinyatakan aktif sebelum provider, credential, template ID, nomor
   uji, dan sandbox resmi tersedia serta terverifikasi.
 - PDF bersifat fixed-format. Custom PDF bebas dan tanda tangan elektronik tersertifikasi bukan scope

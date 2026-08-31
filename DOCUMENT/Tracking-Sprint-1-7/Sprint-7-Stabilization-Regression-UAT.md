@@ -119,3 +119,18 @@ Prioritas P2 & dokumen:
 | 10 Agustus 2026 | Sinkronisasi terhadap `development` @ `ff260a5`: PR #179 menutup Issue #178 dan menyelesaikan hardening 7.2-13 pada source. Browser QA 7.1-4, hardening audit menyeluruh 7.2-9, full regression, UAT, dan release gate tetap terbuka. |
 | 10 Agustus 2026 | Sinkronisasi terhadap `development` @ `1fd99cb`: 7.1-1, 7.2-1, dan 7.2-2 selesai melalui PR #174; 7.2-4 melalui PR #173; 7.2-5 melalui PR #166; 7.2-6 melalui PR #140; carry-over Sprint 6 selesai pada source; dan US-4.10 AC-2 selesai melalui PR #177. Task 7.1-4 tetap terbuka untuk browser QA/evidence final dan 7.2-9 masih sebagian. Issue #178 tetap open sebagai hardening follow-up terpisah. |
 | 26 Juli 2026 | File dibuat pra-sprint. Status awal: #45 ✅, #48 ✅, #50 ⚠️ (perlu test formal), #47 ⚠️ (pagination server + masking), #52 ❌. Daftar task disusun dari Issues #45–#52 + backlog terverifikasi Sprint 1–6; item EWS ditandai "verifikasi dulu" karena PR #127 kemungkinan sudah menutup sebagian. |
+
+---
+
+## Addendum Regression dan UAT — Evaluasi LLDIKTI 31 Agustus 2026
+
+> Addendum ini membuka regression/UAT baru; evidence sebelum 31 Agustus tidak boleh dipakai untuk menyatakan perubahan berikut lulus.
+
+- [ ] Chain dengan nol, satu, dan banyak Verifikator; label tahap pertama tanpa placeholder kosong.
+- [ ] Atasan Langsung dan PYBMC dengan aktor sama tetap menerima dua tindakan, dua audit event, dan dua timeline entry.
+- [ ] Pembatalan/revisi Pegawai sebelum tindakan approval: authorization, pelepasan reservasi atomik, audit, dan larangan hard delete.
+- [ ] Penangguhan administratif atas cuti final `Disetujui`: alasan wajib, histori tidak hilang, ledger replay satu kali, dan Pegawai dapat mengajukan lagi saat tidak ada pengajuan aktif.
+- [ ] Cuti di Luar SIMPEG sebagai fakta historis: ringkasan pemakaian read-only, koreksi beralasan, anti duplikasi/overlap, dan privasi berkas opsional.
+- [ ] PDF/formulir Nama–Jabatan–Peran, QR, otorisasi dokumen, dan tata letak kop/tabel.
+- [ ] Matriks SK PNS/CPNS serta transisi CPNS→PNS menandai kelengkapan dengan tepat.
+- [ ] Reporting Statistik: data scope, query bounded, chart, empty state, responsive smoke, dan tidak ada console error.

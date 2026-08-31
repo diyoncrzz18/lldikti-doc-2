@@ -44,3 +44,20 @@ Legend: ✅ selesai pada source · ⚠️ sebagian · ❌ belum selesai. Status 
 | 27 Juli 2026 | Perbaikan A dieksekusi: validasi lintas tahun seluruh jenis cuti (#30) + test E2E alur pengajuan→approval→potong saldo. Pendukung: penetapan Kepala Bagian inline + penataan ulang halaman konfigurasi approval + pencarian PYBMC mandiri (memperhalus alur #27/#28), serta penyamaan dokumen bukti tersimpan dengan formulir resmi (penyempurnaan #31). |
 | 28 Juli 2026 | Verifikasi ulang terhadap `development` HEAD `478424f`: perbaikan lintas tahun seluruh jenis cuti telah terintegrasi melalui `952f723` (PR #140), termasuk validasi Store/Resubmit sebelum gate saldo/TMT dan regression test untuk jenis non-tahunan. **#30 ditutup menjadi ✅; status "menunggu review" dihapus.** Pada tanggal yang sama, keputusan K-SCHEMA-01 menetapkan `leave_request_steps`/`leave_balance_ledger`/`leave_proofs` sebagai schema cuti canonical; PRD §15.2 dan issue breakdown diselaraskan. **#26 ditutup menjadi ✅.** |
 | 5 Agustus 2026 | Konflik penggabungan dokumen pada bagian Ringkasan, Gap Terbuka, dan Riwayat Perubahan diselesaikan. Resolusi mengikuti [Keputusan Skema Cuti Canonical](../Keputusan-Skema-Cuti-Canonical.md) yang sudah disetujui dan sudah tercermin pada PRD butir 18 serta §15.2, dan pada tugas 7.2-12 tracker Sprint 7. Konsekuensinya: hitungan resmi menjadi **7 ✅ · 1 ⚠️ · 0 ❌**, dan butir gap "ADR skema cuti" dihapus karena keputusannya sudah terbit. Verifikasi ulang terhadap `development` @ `4839ab6`: nama tabel canonical dipakai runtime dan tidak ada sisa nama lama pada `app/`, `database/`, maupun `tests/`; #28 tetap ⚠️ karena `leave_approval_chains` masih hanya bercakup `employee_id` tanpa `scope_type`/`unit_kerja_id` dan resolver masih memilih chain per pegawai. |
+
+---
+
+## Addendum Evaluasi LLDIKTI — 31 Agustus 2026
+
+> Status **8 ✅ · 0 ⚠️ · 0 ❌** di atas adalah rekam source sebelum addendum ini. Keputusan 31 Agustus membuka pekerjaan lanjutan dan tidak boleh dibaca sebagai bukti bahwa acceptance criteria baru sudah selesai.
+
+| Area | Pekerjaan lanjutan | Status |
+|---|---|---|
+| Konfigurasi chain | UI/kontrak bisnis `0..n Verifikator → Atasan Langsung → PYBMC`; tidak menampilkan placeholder bila kelompok Verifikator kosong; nama teknis legacy tidak dimigrasikan tanpa keputusan schema | Belum Dimulai |
+| Approver sama | Atasan Langsung dan PYBMC yang menunjuk orang sama tetap dua tahap/tindakan; perbarui writer, snapshot, UI, test, dan audit | Belum Dimulai |
+| Pengajuan Pegawai | Pembatalan/revisi resmi sebelum tindakan approval, tanpa hard delete, dengan reservasi dan audit atomik | Belum Dimulai |
+| Penangguhan final | Admin Kepegawaian menangguhkan cuti final `Disetujui` dengan alasan, histori, dan replay ledger idempoten | Belum Dimulai |
+| Pemakaian historis | Cuti di Luar SIMPEG sebagai sumber fakta transisi; ringkasan Catat Pemakaian Tahunan read-only; uji anti-duplikasi/overlap dan PostgreSQL | Belum Dimulai |
+| Formulir cuti | Nama, Jabatan, Peran tiap tahap approval dan tata letak kop/tabel yang diperbarui, dengan QR/privasi tetap terjaga | Belum Dimulai |
+
+Pengecualian cuti manual saat layanan tidak tersedia setelah go-live tetap **Open Question** sesuai [keputusan 31 Agustus](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md); jangan dijadikan jalur rutin sebelum dikonfirmasi.

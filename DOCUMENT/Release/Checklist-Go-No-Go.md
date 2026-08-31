@@ -42,7 +42,7 @@ Semua gate bersifat fail-closed. Satu gate `Belum Lulus` menghasilkan keputusan 
 | # | Acceptance criterion | Status | Evidence |
 |---:|---|---|---|
 | 1 | Zoom retest segera setelah kelompok memenuhi DoD | Belum Lulus | [Register UAT](../UAT/Rencana-dan-Register-UAT-SIMPEG.md) |
-| 2 | Hasil penerimaan per kelompok | Belum Lulus | Register UAT §7 |
+| 2 | Hasil penerimaan per kelompok | Belum Lulus | Register UAT §8 |
 | 3 | Panduan lima role setelah penerimaan | Belum Lulus | [Indeks Panduan Role](../Panduan-Role/README.md) |
 | 4 | Dependency image/PostgreSQL tidak otomatis menjadi baseline | Lulus pada level kebijakan | [Baseline Environment](Baseline-dan-Verifikasi-Environment.md) |
 | 5 | Backup direstore dan data tervalidasi | Belum Lulus | [Backup/Restore](Backup-Restore-dan-Rollback.md) |

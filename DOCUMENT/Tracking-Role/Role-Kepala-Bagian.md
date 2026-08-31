@@ -6,8 +6,10 @@
 | Tanggal analisis ulang | 27 Juli 2026 |
 | Basis verifikasi | Branch `development` @ `e82b527` (sesudah PR #121–#131 dan perbaikan Sprint 4–6 awal) |
 | Dokumen asal (dikonsolidasi ke file ini) | `Analisis-Frontend-Role-Kepala-Bagian.md` — audit 21 Juli 2026 |
-| Acuan produk | PRD v1.3 (Kabag = approver tahap 1, data bawahan langsung), US-4.4, US-8.3, Panduan Kode |
-| Status keseluruhan | ✅ **Substansial sesuai** — sisa 2 temuan teknis (bersih-bersih Dinas Luar, paginasi EWS) |
+| Acuan produk | PRD v1.12 (Atasan Langsung adalah peran approval per pegawai; route/role legacy belum berubah), US-4.4, US-8.3, Panduan Kode |
+| Status keseluruhan | ⚠️ **Perlu revalidasi** — bukti lama mencakup role/route `kepala_bagian`, tetapi belum membuktikan kriteria Atasan Langsung terbaru |
+
+> **Addendum 31 Agustus 2026:** nama role internal `kepala_bagian` dan route terkait tetap fakta teknis sampai ada keputusan RBAC/schema baru. Namun pada konteks cuti, UI dan alur harus memakai **Atasan Langsung**; ia tidak selalu pejabat struktural Kabag. Kasus Atasan Langsung/PYBMC dengan orang sama wajib diuji sebagai dua tindakan.
 
 ## Ringkasan
 
