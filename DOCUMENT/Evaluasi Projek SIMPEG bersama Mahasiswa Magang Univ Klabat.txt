@@ -1,0 +1,4675 @@
+[dion kobi] 00:07:37
+Hello, Samantha, you back?
+
+
+[Sidik LLDikti XVI] 00:07:43
+Yeah, Pagi.
+
+
+[Sidik LLDikti XVI] 00:07:45
+But, uh…
+
+
+[dion kobi] 00:07:48
+Okay, bye-bye.
+
+
+[Sidik LLDikti XVI] 00:10:22
+Oke, baik.
+
+
+[Sidik LLDikti XVI] 00:10:25
+Dari Untra. Sudah lengkap, ya? Nomor lima, ya.
+
+
+[dion kobi] 00:10:29
+Uh, sir, about…
+
+
+[Sidik LLDikti XVI] 00:10:31
+Oke, baik, terima kasih. Selamat pagi, Rekan Rekan anak magang sekalian.
+
+
+[Sidik LLDikti XVI] 00:10:38
+Terima kasih sudah meluangkan waktu untuk bisa hadir di pertemuan hari ini. Ini sudah finalisasi atau gimana diannya?
+
+
+[dion kobi] 00:10:52
+Kalau untuk kiangskarang sudah di tahap akir pa. Tinggal adaba berapa silikit lagi yang peludi tambakan.
+
+
+[Sidik LLDikti XVI] 00:10:56
+Oh iya.
+
+
+[Sidik LLDikti XVI] 00:11:01
+Oke, baik, jadi yang saya hormati. Ada adik anak magang sekalian di sini juga Di sini ada Pak Rahim. Selaku Dari kepegawaian yang akan sekaligus untuk memantau hasil dari simpeg seperti apa.
+
+
+[Sidik LLDikti XVI] 00:11:16
+Apakah sudah memenuhi kebutuhan atau belum? Dan di sini ada dua juga dari Tim Spbe. Ya, Pak Hidayat dengan Bu Sabina. Jadi, untuk Assessment. Hari ini, saya persilahkan ke Dion untuk bisa mendemokan.
+
+
+[Sidik LLDikti XVI] 00:11:31
+Progres dan.
+
+
+[Sidik LLDikti XVI] 00:11:34
+Fungsionalitas aplikasi simpack yang sudah dikembangkan sejauh ini. Silahkan.
+
+
+[dion kobi] 00:11:44
+Oke, selamat pagi.
+
+
+[dion kobi] 00:11:49
+Baik, sebelum kita mulai, mungkin kita akan mulai dengan doa dulu. Ya.
+
+
+[dion kobi] 00:11:57
+Sebelum kita mulai meeting, mari kita berdoa dengan kepercayaan kita. Masing masing berdoa dimulai.
+
+
+[dion kobi] 00:12:19
+Selesai.
+
+
+[dion kobi] 00:12:23
+Oke, saya izin. Share, screen.
+
+
+[dion kobi] 00:12:38
+Fed up.
+
+
+[dion kobi] 00:12:40
+Boleh.
+
+
+[Sidik LLDikti XVI] 00:12:48
+Ini dari awal saja. Dulu dianya soalnya kan ada dari juga. Jadi, nanti dari awal sampai akhir dulu, baru di akhirnya dipaparkan. Yang hasil revisi kemarin.
+
+
+[dion kobi] 00:12:51
+Iya.
+
+
+[dion kobi] 00:13:02
+Oke, oke.
+
+
+[dion kobi] 00:13:04
+Baik untuk yang progress sekarang.
+
+
+[dion kobi] 00:13:09
+Untuk saat ini, sudah ada di tahap. Akhirnya sudah di. Sudah hampir selesai.
+
+
+[dion kobi] 00:13:14
+Jadi.
+
+
+[dion kobi] 00:13:16
+Untuk.
+
+
+[dion kobi] 00:13:20
+Simpeg ini sendiri. Kami buat itu ada.
+
+
+[dion kobi] 00:13:23
+Lima roll. Jadi, ada super admin. Admin, kepegawaian. Kemudian ada kepala Bagian.
+
+
+[dion kobi] 00:13:31
+Kemudian ada pimpinan. Dan juga ada pegawai.
+
+
+[dion kobi] 00:13:36
+Nah, jadi dari super Admin ini, dia bisa melakukan.
+
+
+[dion kobi] 00:13:45
+Manajemen Kepegawaian.
+
+
+[dion kobi] 00:13:47
+Jadi di sini untuk.
+
+
+[dion kobi] 00:13:51
+Admi untuk Super Admin sendiri. Dia bisa melakukan tambah pegawai. Nah, tambah pegawai ini sendiri bisa dilakukan.
+
+
+[dion kobi] 00:14:02
+Manual dan juga impor pegawai. Nah, kalau misalnya dia impor. Pegawai di sini. Kami sudah sediakan template.
+
+
+[dion kobi] 00:14:12
+Dalam bentuk.
+
+
+[dion kobi] 00:14:14
+Excel nanti tinggal. Bisa di download saja sini. Untuk template nya.
+
+
+[dion kobi] 00:14:22
+Nah, dia dalam bentuk Excel.
+
+
+[dion kobi] 00:14:27
+Nah, kurang lebih nanti. Template nya akan seperti ini, Jadi, tinggal diisi saja. Mau ini kayak bulket, ya? Jadi, kayak bisa langsung.
+
+
+[dion kobi] 00:14:38
+Memasukkan banyak data. Pegawai Nanti tinggal dimasukkan di sini.
+
+
+[dion kobi] 00:14:45
+Untuk memasukkan data Pegawai.
+
+
+[dion kobi] 00:14:49
+Nah, terus.
+
+
+[dion kobi] 00:14:51
+Di data pegawai. Ini.
+
+
+[dion kobi] 00:14:56
+Bentar.
+
+
+[dion kobi] 00:15:05
+Nah, di sini ada. Bisa lihat detail pegawai.
+
+
+[dion kobi] 00:15:15
+Nah, di detail pegawai sini, kita bisa menentukan kepala bagian dari pegawai tersebut. Nah, itu juga nanti akan digunakan sebagai salah satu syarat sebelum.
+
+
+[dion kobi] 00:15:30
+Bisa pegawai ini untuk melakukan pengajuan cuti.
+
+
+[dion kobi] 00:15:35
+Nah, di sini nanti bisa di halaman detail pegawai untuk menambahkan.
+
+
+[dion kobi] 00:15:42
+Data.
+
+
+[dion kobi] 00:15:43
+Pegawai.
+
+
+[dion kobi] 00:15:45
+Nah, untuk data profil ini sendiri. Nanti dia di terpisah di sini.
+
+
+[dion kobi] 00:15:51
+Diedit. Pegawai.
+
+
+[dion kobi] 00:15:56
+Nah, kemudian di sini, nanti akan di inputkan untuk data utamanya. Data, pelengkap, data, kontak dan berkas berkas yang dibutuhkan.
+
+
+[dion kobi] 00:16:08
+Nah, nanti untuk setiap dokumennya akan masuk di sini. Mulai dari dokumen keluarga. Pengangkatan jabatan Kgb, Dokumen disiplin, pendidikan, dan pengangkatan. Nah, ini dokumen Sk yang.
+
+
+[dion kobi] 00:16:23
+Sebelumnya sudah kami tambahkan juga.
+
+
+[dion kobi] 00:16:26
+Untuk berkas lainnya. Kayak Ktp, Kk dan ijazah. Nah, di sini.
+
+
+[dion kobi] 00:16:34
+Kemudian.
+
+
+[dion kobi] 00:16:36
+Di data pegawai ini juga bisa.
+
+
+[dion kobi] 00:16:41
+Dilakukan. Ubah status. Nah, ubah status ini.
+
+
+[dion kobi] 00:16:45
+Ada beberapa pilihan. Nah, ini pilihannya. Sebenarnya sudah bisa di Custom sendiri. Dari halaman data Master.
+
+
+[dion kobi] 00:16:51
+Status. Mungkin ada cuti tanggungan negara. Mutasi non aktif. Nah, di sini terus ada. Nanti nomor berkas, terus keterangan dan juga.
+
+
+[dion kobi] 00:17:01
+Upload berkas Sk. Pendukung.
+
+
+[dion kobi] 00:17:08
+Nah, di sini, kalau misalnya ingin menonaktifkan pegawai tersebut.
+
+
+[dion kobi] 00:17:15
+Nah, kemudian.
+
+
+[dion kobi] 00:17:18
+Untuk yang Sk wajib kemarin, kan? Untuk Pns.
+
+
+[dion kobi] 00:17:25
+Dan akan ada Pns, Ppk, dan juga Cpns. Nah, untuk Ppk, It.
+
+
+[dion kobi] 00:17:33
+Itu. Nah, semua itu bisa diatur di Sk wajib. Jadi sudah kami buat fleksibel. Jadi, untuk yang Sk itu bisa nanti.
+
+
+[dion kobi] 00:17:45
+Misalnya untuk Ppk. Mau dibuat wajib. Semua tadi tinggal dicentang. Nanti di sini.
+
+
+[dion kobi] 00:17:50
+Sudah otomatis. Kemudian.
+
+
+[dion kobi] 00:17:54
+Untuk halaman dokumen dan Sk. Nah, dokumen dan Sk Ini sudah dibuat hanya khusus Rate Only.
+
+
+[dion kobi] 00:18:03
+Jadi, hanya untuk.
+
+
+[dion kobi] 00:18:06
+Melakukan pengecekan. Dokumen.
+
+
+[dion kobi] 00:18:10
+Nah, di sini.
+
+
+[dion kobi] 00:18:17
+Nah, ini sudah Kemudian, Untuk fitur selanjutnya, ada ekspor Pegawai.
+
+
+[dion kobi] 00:18:25
+Nah, ekspor pegawai ini juga bisa di custom, Kak. Jadi, kalau misalnya ada pegawai, hanya ingin diambil beberapa data, itu juga bisa. Nanti bisa langsung dilihat. Preview nya di.
+
+
+[dion kobi] 00:18:40
+Sini sebelum diekspor, ya? Jadi, kalau misalnya status ingin dihilangkan nanti di sini juga akan dihilang.
+
+
+[dion kobi] 00:18:50
+Jadi, hanya yang dibutuhkan saja yang diekspor.
+
+
+[dion kobi] 00:18:58
+Cash. Kemudian.
+
+
+[dion kobi] 00:19:01
+Kita masuk di.
+
+
+[dion kobi] 00:19:04
+Cuti.
+
+
+[dion kobi] 00:19:09
+Oke, untuk cuti sendiri. Kemarin lumayan besar di faktornya. Karena awal yang kami buat itu.
+
+
+[dion kobi] 00:19:17
+Yang diinputkan Itu jatah cutinya. Sisa berapa Cuman yang sekarang? Flow nya. Itu yang diinputkan.
+
+
+[dion kobi] 00:19:26
+Cuti yang sudah terpakai. Jadi, yang N, dua, N, satu, dan N Itu.
+
+
+[dion kobi] 00:19:34
+Yang dihitung. Cuti yang tidak ter yang sudah terpakai. Kemudian nanti akan otomatis dihitung. Sisa berapa kuota cutinya?
+
+
+[dion kobi] 00:19:45
+Nah, untuk.
+
+
+[dion kobi] 00:19:48
+Cuti.
+
+
+[dion kobi] 00:20:01
+Lumayan.
+
+
+[dion kobi] 00:20:04
+Di sini kebetulan sudah ada Switch Roll.
+
+
+[dion kobi] 00:20:17
+Oke, ini untuk tampilan dari roll pegawai.
+
+
+[dion kobi] 00:20:24
+Jadi ketika dia ingin ajukan cuti, dia tinggal. Dia ajukan cuti di sini cuma untuk dia mengajukan syarat untuk mengajukan Cuti. Pegawai ini perlu ada.
+
+
+[dion kobi] 00:20:39
+Kepala Bagian.
+
+
+[dion kobi] 00:20:41
+Dan juga ada setting untuk Pbmc nya. Dan juga kalau, misalnya, temp pengangkatan dari pegawai ini belum di setting. Nah, Itu juga belum bisa melakukan cuti.
+
+
+[dion kobi] 00:20:56
+Nah, dia. Kalau untuk.
+
+
+[dion kobi] 00:21:00
+Nah, di sini. Jadi, nanti untuk pegawai. Jadi akan Dil.
+
+
+[dion kobi] 00:21:08
+Lakukan Administrasi pemakaian. Cuti.
+
+
+[dion kobi] 00:21:13
+Nah, jadi setiap pegawai itu nanti akan dicatat untuk.
+
+
+[dion kobi] 00:21:18
+Pemakaian tahunnya. Nah, kalau misalnya.
+
+
+[dion kobi] 00:21:24
+Di.
+
+
+[dion kobi] 00:21:27
+Maksud saya.
+
+
+[dion kobi] 00:21:34
+Nah, ini sebelumnya yang saya masukkan. Jadi dia untuk cuti di pemakaian tahun Dua ribu, dua puluh empat Dn dua. Itu satu.
+
+
+[dion kobi] 00:21:44
+Kemudian N, satu, dua. Dan ini nol. Jadi, data cuti yang maksimal bisa diajukan. Itu delapan belas hari. Nah, itu Sudah otomatis akan terhitung. Dan di sini juga ada log nya. Semua tercatat.
+
+
+[dion kobi] 00:22:00
+Kemudian untuk cuti di luar simplex.
+
+
+[dion kobi] 00:22:05
+Di sini juga bisa dicatat Manual.
+
+
+[dion kobi] 00:22:10
+Dan juga di perbaikan data pemakaian. Nah, ini bisa.
+
+
+[dion kobi] 00:22:17
+Dilakukan perbaikan. Kalau misalnya ada kesalahan.
+
+
+[dion kobi] 00:22:29
+Nah, kemudian kalau misalnya.
+
+
+[dion kobi] 00:22:37
+Sudah dibuat. Nah, ini dia. Ini dari halaman pegawai yang tadi tadi Jadi, saldo yang tersedia Itu.
+
+
+[dion kobi] 00:22:47
+Delapan belas hari. Nah, kebetulan kalau yang untuk pegawai ini saya sudah setting untuk kepala bagiannya.
+
+
+[dion kobi] 00:22:56
+Jadi, untuk setting kepolah, bagian itu dari.
+
+
+[dion kobi] 00:22:58
+Halaman.
+
+
+[dion kobi] 00:23:00
+Super Admin. Jadi, halaman konfigurasi. Approval.
+
+
+[dion kobi] 00:23:05
+Nah, ini.
+
+
+[dion kobi] 00:23:06
+Perlu di setting dulu. Karena kalau misalnya dia belum di setting, dia belum bisa mengajukan cuti.
+
+
+[dion kobi] 00:23:13
+Contohnya, kalau misalnya di kepala.
+
+
+[dion kobi] 00:23:17
+Di bagian kepala bagian di sini. Kalau misalnya dia.
+
+
+[dion kobi] 00:23:22
+Ingin mengajukan cuti.
+
+
+[dion kobi] 00:23:28
+Nah, di sini.
+
+
+[dion kobi] 00:23:30
+Konfigurasi approval Cuti itu belum tersedia.
+
+
+[dion kobi] 00:23:33
+Nah, jadi silakan hubungi admin untuk mengatur lantai approval sebelum mengajukan cuti. Nah, itu nanti akan diatur. Diatur dari konfigurasi Approval ini.
+
+
+[dion kobi] 00:23:58
+Nah, jadi di sini nanti akan di tentukan. Siapa kepala bagiannya? Misalnya, adminku.
+
+
+[dion kobi] 00:24:08
+Yang akan jadi kepala Bagian itu dari Admin Kepegawaian.
+
+
+[dion kobi] 00:24:14
+Tinggal disimpan Kepala Bagian.
+
+
+[dion kobi] 00:24:17
+Kemudian.
+
+
+[dion kobi] 00:24:20
+Setelah kepala, bagiannya sudah di setting.
+
+
+[dion kobi] 00:24:24
+Nanti kita bisa juga tambahkan verifikator.
+
+
+[dion kobi] 00:24:30
+Verifikator tambahan untuk pegawai tersebut. Mungkin Ketua Tim kerjanya. Ya.
+
+
+[dion kobi] 00:24:36
+Nah, ini tinggal tambah verifikator. Kemudian tinggal pilih siapa? Verifikator yang mau ditambahkan sebagai approval cuti nantinya. Untuk pegawai ini.
+
+
+[dion kobi] 00:24:48
+Nah, kalau misalnya tidak mau ditambah jadi flow nya.
+
+
+[dion kobi] 00:24:52
+Akan masuk di kepala bagian dan terakhir di Pbmc.
+
+
+[dion kobi] 00:24:58
+Nah, nanti.
+
+
+[dion kobi] 00:25:11
+Oke, ini sudah disimpan.
+
+
+[dion kobi] 00:25:15
+Harusnya di sini. Sudah bisa mengajukan cuti.
+
+
+[dion kobi] 00:25:24
+Nah, ini sudah tidak ada. Dia punya notifikasi. Cuma ini masih belum bisa mengajukan cuti. Karena.
+
+
+[dion kobi] 00:25:35
+Temenya Ini belum di setting.
+
+
+[dion kobi] 00:25:37
+Kalau misalnya saya coba ajukan ini.
+
+
+[dion kobi] 00:25:45
+Baik, saldonya belum ada juga, ya?
+
+
+[dion kobi] 00:25:47
+Nah, ini saldonya. Karena belum ada, perlu diinput dulu.
+
+
+[dion kobi] 00:25:53
+Dari halaman Admin. Kepegawaian.
+
+
+[dion kobi] 00:26:17
+Nah, di administrasi pemakaian cuti.
+
+
+[dion kobi] 00:26:28
+Nah, jadi ketika dicatat, dia akan masuk pemakaian yang sudah dicuti yang sudah digunakan tahun dua ribu, dua puluh empat.
+
+
+[dion kobi] 00:26:38
+Dua Ri. Kalau misalnya di dua ribu, dua puluh lima juga ada. Bisa dimasukkan di sini. Dan dua ribu. Dua puluh enam. Nah, kalau misalnya cuma di dua ribu. Dua puluh empat. Jadi, misalnya dua.
+
+
+[dion kobi] 00:26:49
+Nah, ini nanti.
+
+
+[dion kobi] 00:26:52
+Tinggal masukkan keterangannya.
+
+
+[dion kobi] 00:26:55
+Ini harusnya belum jadi karena belum ditentukan tempt nya.
+
+
+[dion kobi] 00:27:04
+Nah, ini hak cuti yang tahun Dua ribu dua puluh empat. Ini belum dapat dihitung karena tempe pengangkatan pegawai itu belum tersedia. Nah, jadi perlu dimasukkan dulu untuk Tempe. Pengangkatan pegawai ini dari halaman.
+
+
+[dion kobi] 00:27:19
+Detail Pegawai.
+
+
+[dion kobi] 00:27:21
+Nah, jadi di data pegawai tadi.
+
+
+[dion kobi] 00:27:25
+Untuk.
+
+
+[dion kobi] 00:27:28
+Nah, ini yang pengangkatan.
+
+
+[dion kobi] 00:27:32
+Jadi, perlu di.
+
+
+[dion kobi] 00:27:35
+Tambahkan untuk.
+
+
+[dion kobi] 00:27:37
+Sk. Pengantarannya.
+
+
+[dion kobi] 00:28:20
+Ini nanti bisa masukkan.
+
+
+[dion kobi] 00:28:24
+Dokumennya di sini.
+
+
+[dion kobi] 00:28:32
+Nah, ini tempenya sudah Ada.
+
+
+[dion kobi] 00:28:55
+Kemudian di halaman.
+
+
+[dion kobi] 00:28:58
+Admin. Kepegawaian.
+
+
+[dion kobi] 00:29:06
+Udah, deh.
+
+
+[dion kobi] 00:29:19
+Nah, kita catat kembali untuk pemakaian tahunan.
+
+
+[dion kobi] 00:29:24
+Nah, ini sudah jadi saldo yang dapat diajukan. Itu dua puluh empat hari karena.
+
+
+[dion kobi] 00:29:30
+Kalau, misalnya, dia nggak pernah mengambil cuti di tahun Dua ribu, dua puluh empat, dua ribu, dua puluh lima, dan Dua ribu, Dua puluh enam di sini.
+
+
+[dion kobi] 00:29:39
+Total saldo yang bisa diajukan Itu dua puluh empat hari.
+
+
+[dion kobi] 00:29:42
+Nah, kalau misalnya ini satu saja dia ambil. Misalnya diambil Dua maksimal yang bisa diambil. Itu delapan belas.
+
+
+[dion kobi] 00:29:55
+Jadi ini ketika saya simpan.
+
+
+[dion kobi] 00:30:03
+Kan Jadi, Nah.
+
+
+[dion kobi] 00:30:06
+Ini saldo yang bisa diajukan jadi delapan belas hari.
+
+
+[dion kobi] 00:30:20
+Nah, sekarang Kepala Bagian sudah punya saldo. Delapan belas hari untuk cuti. Nah, untuk cuti ini sendiri. Dia dibuat untuk.
+
+
+[dion kobi] 00:30:33
+Nggak hitung tanggal merah, ya? Jadi kalau misalnya ambil sepuluh hari, jadi nggak hitung untuk tanggal, bukan? Tanggal masuk kerja itu nggak dihitung.
+
+
+[dion kobi] 00:30:46
+Nah, jadi mau nanti.
+
+
+[Abd Rahim Har] 00:30:46
+Bitch.
+
+
+[dion kobi] 00:30:49
+Ya.
+
+
+[Abd Rahim Har] 00:30:51
+Individuals, yeah.
+
+
+[Sidik LLDikti XVI] 00:30:57
+Ada tanggapan, Pak Rahim.
+
+
+[Abd Rahim Har] 00:30:59
+Bismillahirrahmanirrahmanirrahmanirrahmanirrahman.
+
+
+[dion kobi] 00:31:03
+Iya, iya, Untuk yang dihitung. Hari kerja yang untuk hari libur juga. Itu yang tanggal merah. Nggak nggak dihitung.
+
+
+[Abd Rahim Har] 00:31:11
+Okay, okay, so, okay.
+
+
+[dion kobi] 00:31:13
+Nah, kemudian nanti akan ditentukan. Yang untuk delapan belas hari ini hanya masuk di cuti tahunan.
+
+
+[dion kobi] 00:31:22
+Jadi kalau untuk, misalnya, cuti sakit melahirkan itu nggak masuk di saldo yang delapan belas hari ini.
+
+
+[dion kobi] 00:31:30
+Misalnya, kita pilih dari tanggal satu sampai.
+
+
+[dion kobi] 00:31:42
+Nah, di sini ada empat.
+
+
+[dion kobi] 00:31:47
+Jumlah hari kerja yang akan dipotong kemudian di sini.
+
+
+[dion kobi] 00:31:52
+Alasan cuti.
+
+
+[dion kobi] 00:31:57
+Kemudian alamat, cuti.
+
+
+[dion kobi] 00:32:01
+Dan ini nomor telepon.
+
+
+[dion kobi] 00:32:04
+Nah, ini nomor telepon Sebenarnya, dia sudah di setting untuk yang notifika. Notifikasi.
+
+
+[dion kobi] 00:32:12
+Via Whatsapp.
+
+
+[dion kobi] 00:32:16
+Sebenarnya, masih ada kendala di bagian kontaknya. Ya.
+
+
+[dion kobi] 00:32:25
+Kemudian ini, kalau misalnya mau tambahkan lampiran untuk file, bisa juga.
+
+
+[dion kobi] 00:32:31
+Nah, itu bisa dilakukan pengajuan cuti. Jadi, persetujuan pertama itu dari Kepala Bagian.
+
+
+[dion kobi] 00:32:46
+Admin ke pegawainya.
+
+
+[dion kobi] 00:32:48
+Baik, Bu.
+
+
+[dion kobi] 00:33:00
+Tes. Kemudian kita.
+
+
+[dion kobi] 00:33:03
+Di Park.
+
+
+[dion kobi] 00:33:15
+Kak Cina Nanti silakan muncul notifikasi. Nah, ini bisa kelihatan di sini.
+
+
+[dion kobi] 00:33:24
+Nah, cuma yang perlu approval. Itu dari Admin. Kepegawaian itu dulu baru ke Pbmc atau Super Admin. Jadi.
+
+
+[dion kobi] 00:33:37
+Admin. Kepegawaian.
+
+
+[dion kobi] 00:33:44
+Nah, ini ada.
+
+
+[dion kobi] 00:33:50
+Semua.
+
+
+[dion kobi] 00:33:55
+Nah, ini yang verifikasinya sudah muncul Juga.
+
+
+[dion kobi] 00:33:58
+Jadi, notifikasi akan ada nanti via App.
+
+
+[dion kobi] 00:34:02
+Dan juga e Mail dan Whatsapp.
+
+
+[dion kobi] 00:34:07
+Nah, nanti di sini. Nah, untuk cuti ini masih ada. Mau didesain sedikit?
+
+
+[dion kobi] 00:34:12
+Nah, di sini nanti. Untuk Apakah ingin disetujui?
+
+
+[dion kobi] 00:34:18
+Tidak disetujui atau ada minta peru. Minta perubahan atau tangguhkan.
+
+
+[dion kobi] 00:34:24
+Kalau misalnya disetujui.
+
+
+[dion kobi] 00:34:35
+Oke, berhasil. Nanti dia.
+
+
+[dion kobi] 00:34:38
+Di Halaman. Super, Admin.
+
+
+[dion kobi] 00:34:42
+Dia sudah akan muncul untuk.
+
+
+[dion kobi] 00:34:46
+Approval.
+
+
+[dion kobi] 00:34:47
+Approval dari Pbmc. Nah, ini sekarang nunggu Pbmc.
+
+
+[dion kobi] 00:34:56
+Nah, ini. Ini sudah disetujui dari kepala bagian tinggal dari Pbmc.
+
+
+[dion kobi] 00:35:04
+Kemudian disetujui.
+
+
+[dion kobi] 00:35:25
+Untuk detailnya, nanti bisa dilihat. Ini sudah status. Akhirnya sudah disetujui.
+
+
+[dion kobi] 00:35:31
+Kemudian di sini bisa juga unduh formulir cuti dalam bentuk Pdf. Nah, kalau yang dari yang yang mengajukan cuti itu tadi, kan? Dari.
+
+
+[dion kobi] 00:35:46
+Gawai, gawai.
+
+
+[dion kobi] 00:35:50
+Kepala Bagian.
+
+
+[dion kobi] 00:35:53
+Nah, ini dari.
+
+
+[dion kobi] 00:35:56
+Kepala Bagian yang mengajukan cuti tadi. Nah, ini sudah status. Akhirnya sudah disetujui.
+
+
+[dion kobi] 00:36:01
+Nah, di sini.
+
+
+[dion kobi] 00:36:03
+Sudah selesai, jadi, bisa unduh formulir.
+
+
+[dion kobi] 00:36:07
+Cuti Pdf.
+
+
+[dion kobi] 00:36:11
+Nah, ini harusnya ada barcode sih.
+
+
+[dion kobi] 00:36:13
+Lu muncul, Ya.
+
+
+[dion kobi] 00:36:20
+Nah, ini formulir cutinya.
+
+
+[dion kobi] 00:36:22
+Untuk template nya. Cuma nanti akan dikasih rapi lagi sedikit. Nah, ini barcode nya. Nanti Ketika di scan, akan diarahkan langsung ke. Ada halaman untuk.
+
+
+[dion kobi] 00:36:32
+Apakah yang untuk status cuti ini? Apakah memang benar? Nah, nanti ketika di scan, akan langsung diarahkan ke halaman tersebut.
+
+
+[dion kobi] 00:36:44
+Kemudian dikembalikan ke supradmin.
+
+
+[dion kobi] 00:36:50
+Di supradmin ini ada.
+
+
+[dion kobi] 00:36:53
+Konfigurasi untuk.
+
+
+[dion kobi] 00:36:56
+Perli, warning System.
+
+
+[Sidik LLDikti XVI] 00:36:58
+Dian Dian Bentar, bentar.
+
+
+[dion kobi] 00:36:58
+Sudah, ini.
+
+
+[dion kobi] 00:36:59
+Iya, oke.
+
+
+[Sidik LLDikti XVI] 00:37:00
+Yang tadi itu kan? Coba lihat di formulir cutinya.
+
+
+[dion kobi] 00:37:04
+Di formulir yang di Pdf nya.
+
+
+[Sidik LLDikti XVI] 00:37:07
+Pdf, Pdf yang, Pdf. Uh, uh.
+
+
+[dion kobi] 00:37:13
+Yang ini.
+
+
+[Sidik LLDikti XVI] 00:37:14
+Nah, itu. Coba buka tampilannya. Ini deh yang verifikasinya itu. Itu kan ada link nya, kan?
+
+
+[dion kobi] 00:37:20
+Iya, ini kan.
+
+
+[Sidik LLDikti XVI] 00:37:24
+Sekalian mau dicek.
+
+
+[Sidik LLDikti XVI] 00:37:26
+Tampilannya gimana?
+
+
+[Sidik LLDikti XVI] 00:37:34
+Ini, ini laman public, ya?
+
+
+[dion kobi] 00:37:34
+Ini.
+
+
+[dion kobi] 00:37:36
+Iya, iya.
+
+
+[Sidik LLDikti XVI] 00:37:37
+Oke, oke.
+
+
+[dion kobi] 00:37:39
+Nah, ini untuk. Ini. Akan didesain lagi nanti.
+
+
+[Sidik LLDikti XVI] 00:37:44
+Oke, oke, aman.
+
+
+[Sidik LLDikti XVI] 00:37:46
+Next.
+
+
+[dion kobi] 00:37:47
+Oke.
+
+
+[dion kobi] 00:37:49
+Kembali ke.
+
+
+[dion kobi] 00:37:51
+Ini untuk ke Early Warning System. Nah, untuk Early Warning System. Ini.
+
+
+[dion kobi] 00:37:59
+Dia ada empat. Ada kenaikan pangkat.
+
+
+[dion kobi] 00:38:04
+Kgb Bup pensiun global, masa kontrak Ppkk. Kemudian Milestone, Setia lencana. Nah, ini bisa di setting H. Min, tiga, H, Min. Dua H min, satu. Jadi, untuk kenaikan perangkat itu, bisa mau di setting di H Min Tiga bulan.
+
+
+[dion kobi] 00:38:19
+Bisa atau mau. Di empat bulan juga bisa.
+
+
+[dion kobi] 00:38:28
+Kemudian untuk H Min Dua nanti. Mau diingatkan di.
+
+
+[dion kobi] 00:38:35
+Hari ke berapa gitu bisa. Dan H Min satu. Nah, ini kenaikan pangkat.
+
+
+[dion kobi] 00:38:41
+Kenaikan gaji berkala, batas usia, pensiun, kontrak Pbbk dan satu lencana.
+
+
+[dion kobi] 00:38:47
+Nah, ini semua perubahan yang dilakukan di sini akan dicatat di log perubahan konfigurasi. Nah, di sini.
+
+
+[dion kobi] 00:38:55
+Nah, kemudian nanti bisa dilihat untuk Ews. Aktifnya.
+
+
+[dion kobi] 00:39:12
+Nah, ini awes. Aktifnya nanti. Yang untuk pegawai yang.
+
+
+[dion kobi] 00:39:18
+Sudah.
+
+
+[dion kobi] 00:39:21
+Masuk di Yang H, Min, Tiga, H min, Dua dan H Min Satu tadi. Semuanya akan masuk di sini.
+
+
+[dion kobi] 00:39:28
+Nah, ini nanti ada Bisa difilter juga untuk kenaikan pangkat Kgb pensiun, kontrak Pppk dan rencana kemudian bisa juga yang sudah ditangani. Tidak perlu dan kadaluarsa.
+
+
+[dion kobi] 00:39:43
+Kemudian di bagian Channel Notifikasi ini.
+
+
+[dion kobi] 00:39:48
+Nah, ini.
+
+
+[dion kobi] 00:39:50
+Notifikasi yang sudah dibuat. Ya, ini yang ada dalam in app.
+
+
+[dion kobi] 00:39:55
+Kemudian E Mail. Dan juga, ini yang Whatsapp bisnis. Nah, jadi ini tinggal sesuai. Tinggal diaktifkan saja. Kalau misalnya pengin diaktifkan. Misalnya cuti yang diajukan. Dia pengin. Ada notif di aplikasi di E Mail dan di Whatsapp. Bisnis. Jadi tinggal di refund saja.
+
+
+[dion kobi] 00:40:11
+Mau juga kalau sekian pangkat? Kalau di Whatsapp ingin diaktifkan.
+
+
+[dion kobi] 00:40:17
+Tinggal diaktifkan di sini.
+
+
+[Sidik LLDikti XVI] 00:40:23
+Channel Notifikasi ini. Dia per pegawai atau global? Ya.
+
+
+[dion kobi] 00:40:27
+Nah, kalau yang ini, dia ditetapkan global.
+
+
+[Sidik LLDikti XVI] 00:40:30
+Monggo Global ya.
+
+
+[dion kobi] 00:40:31
+Iya.
+
+
+[dion kobi] 00:40:33
+Nah, kalau yang untuk Whatsapp, Dia ada konfigurasi di sini karena takutnya nanti akan ada perubahan dari.
+
+
+[dion kobi] 00:40:43
+Mungkin dari akses Token atau Channel Integration Id. Jadi, supaya lebih mudah, langsung nanti dimasukkan dari sini.
+
+
+[dion kobi] 00:40:54
+Kemudian role access.
+
+
+[dion kobi] 00:41:00
+User di sini. Nah, ini.
+
+
+[dion kobi] 00:41:06
+Bisa dilakukan untuk mengelola Akcess user. Jadi, untuk Id, nanti akan otomatis dibuat. Nah, ini juga bisa digunakan untuk, misalnya, mau memindahkan roll.
+
+
+[dion kobi] 00:41:18
+Pegawai misalnya dari pimpinan, ingin dinaikkan ke rolnya ke kepala. Bagian bisa.
+
+
+[dion kobi] 00:41:26
+Nah, jadi kemudian untuk user yang baru pertama kali log in.
+
+
+[dion kobi] 00:41:32
+Otomatis. Dia akan jadi super Admi.
+
+
+[dion kobi] 00:41:37
+Terus untuk.
+
+
+[dion kobi] 00:41:41
+Roll Information.
+
+
+[Sidik LLDikti XVI] 00:41:41
+Untuk akses user nya ini, dia langsung otomatis. Dibuat dari pas impor Pegawai atau gimana?
+
+
+[dion kobi] 00:41:45
+Ya.
+
+
+[dion kobi] 00:41:51
+Iya, dia. Dia. Dia metabeking. Ada Kiclock Francji ketika log in. Kalau yang untuk Kick Lock Id itu, dia.
+
+
+[dion kobi] 00:42:02
+Akan otomatis dibuat ketika dia pegawai. Itu Log in. Tambah pegawai Mbak.
+
+
+[Sidik LLDikti XVI] 00:42:10
+Berarti user nya pas. Impor. Pegawai itu langsung masuk. Jadi, user juga gitu, ya?
+
+
+[dion kobi] 00:42:16
+Iya.
+
+
+[Grantly Antonio Edeard Sorongan] 00:42:17
+Iya.
+
+
+[dion kobi] 00:42:17
+Jadi ketika itu sama, pegawai.
+
+
+[Grantly Antonio Edeard Sorongan] 00:42:18
+Jadi ketika pegawai impor ataupun.
+
+
+[Grantly Antonio Edeard Sorongan] 00:42:24
+Di import itu ada kolom untuk roll. Dan di bagian.
+
+
+[Grantly Antonio Edeard Sorongan] 00:42:29
+Lama juga ada. Nah, ketika kita import data pegawai rollernya, itu akan disimpan. Tapi.
+
+
+[Grantly Antonio Edeard Sorongan] 00:42:36
+Karena akun itu atau user itu? Dia belum belum log in di akun Sin Back.
+
+
+[Grantly Antonio Edeard Sorongan] 00:42:42
+Maka kiklok Id nya belum belum akan tercatat.
+
+
+[Grantly Antonio Edeard Sorongan] 00:42:46
+Nah, ketika dia log in pertama kali, baru dia akan mapping email yang kita impor tadi. I email pegawai yang Kita import tadi. Kita mapping dengan Sso yang ada di di lldikti.
+
+
+[Grantly Antonio Edeard Sorongan] 00:42:59
+Kalau emailnya sama.
+
+
+[Grantly Antonio Edeard Sorongan] 00:43:01
+K.
+
+
+[Grantly Antonio Edeard Sorongan] 00:43:03
+Dia login sebagai role yang telah di intel.
+
+
+[Grantly Antonio Edeard Sorongan] 00:43:06
+Seperti itu sih. Yang yang saat ini.
+
+
+[Sidik LLDikti XVI] 00:43:09
+Case. Kalau misal data pegawainya belum diimpor gitu, kan? Terus si pegawainya login ke simpeg itu, apa yang akan terjadi?
+
+
+[Grantly Antonio Edeard Sorongan] 00:43:20
+Nah, itu dia akan muncul. Halaman akun ini belum memiliki akses.
+
+
+[Sidik LLDikti XVI] 00:43:27
+Hm, oke, oke, oke.
+
+
+[Grantly Antonio Edeard Sorongan] 00:43:29
+Jadi pe intinya. Pokoknya, dia akan meeting Meng menggunakan E mail. E mail Itu.
+
+
+[Sidik LLDikti XVI] 00:43:30
+Sip.
+
+
+[Grantly Antonio Edeard Sorongan] 00:43:37
+Nanti yang akan diimpor di pegawai nanti.
+
+
+[Sidik LLDikti XVI] 00:43:41
+Oke, oke, sip, aman.
+
+
+[dion kobi] 00:43:52
+Nah, ini untuk Roland. Permission ini.
+
+
+[dion kobi] 00:43:56
+Nah, ini juga sudah hampir selesai. Jadi, di sini untuk roll permission. Jadi, bisa untuk, misalnya.
+
+
+[dion kobi] 00:44:08
+Admin Kepegayan. Pimpinan ingin ditambah halaman untuk kelola Aksesnya. Nanti bisa langsung dari sini.
+
+
+[dion kobi] 00:44:17
+Rol Information, lah.
+
+
+[dion kobi] 00:44:21
+Ini bisa hari mau kelola. Hari libur.
+
+
+[dion kobi] 00:44:24
+Bisa tinggal ditambahkan.
+
+
+[dion kobi] 00:44:29
+Ini untuk Roland. Permisian kalau untuk yang data Master.
+
+
+[dion kobi] 00:44:53
+Berarti malah.
+
+
+[dion kobi] 00:45:13
+Lintas, periksa.
+
+
+[dion kobi] 00:45:16
+Ini.
+
+
+[dion kobi] 00:45:18
+Nah, untuk data master ini. Nanti supaya lebih fleksibel aja.
+
+
+[dion kobi] 00:45:23
+Jadi, nanti untuk golongan itu yang ditambahkan. Ini bisa ditambahkan atau mau di hilangkan.
+
+
+[dion kobi] 00:45:30
+Nah, ini tinggal ditambahkan.
+
+
+[dion kobi] 00:45:33
+Kemudian ada jenis jabatan.
+
+
+[dion kobi] 00:45:35
+Di sini. Kemudian ada jabatan.
+
+
+[dion kobi] 00:45:40
+Yang eselon di sini juga ada. Nah, jadi sini terlihat juga. Berapa yang pegawai yang menggunakan? Misalnya Eselona Dua titik A atau misalnya jabatan.
+
+
+[dion kobi] 00:45:51
+Analisis Pegawaian Analisis Sdm. Jadi terlihat berapa yang menggunakan jabatan tersebut? Kemudian status pegawai di sini ada bisa ditambahkan juga di Custom.
+
+
+[dion kobi] 00:46:04
+Kemudian ada jenis cuti.
+
+
+[dion kobi] 00:46:07
+Gama.
+
+
+[dion kobi] 00:46:10
+Kemudian ada status perkawinan.
+
+
+[dion kobi] 00:46:13
+Ada juga jenjang pendidikan. Program studi.
+
+
+[dion kobi] 00:46:17
+Dan juga unit kerja di sini.
+
+
+[dion kobi] 00:46:22
+Nah, kemudian, untuk yang harga libur ini juga sudah dipisah dari data Master.
+
+
+[dion kobi] 00:46:28
+Jadi, hari liburnya dibuat sendiri.
+
+
+[dion kobi] 00:46:32
+Nah, di sini nanti tinggal. Bisa.
+
+
+[dion kobi] 00:46:35
+Ditambahkan hari libur.
+
+
+[dion kobi] 00:46:39
+Mau ditambahkan di tanggal.
+
+
+[dion kobi] 00:46:41
+Jam berapa? Angkat.
+
+
+[dion kobi] 00:46:44
+Kemudian, terakhir ada audit. Lock.
+
+
+[dion kobi] 00:46:58
+Nah, audit lock. Ini, semuanya.
+
+
+[dion kobi] 00:47:03
+Apa yang dilakukan di simpack akan tercatat di sini.
+
+
+[dion kobi] 00:47:10
+Ya, semua akan tercatat di sini.
+
+
+[Sidik LLDikti XVI] 00:47:14
+Audit loc nya. Ini dia, ada runningnya. Tidak, ya.
+
+
+[dion kobi] 00:47:19
+Bagaimana Mbak.
+
+
+[Sidik LLDikti XVI] 00:47:20
+Ada peruning nya. Tidak kalau untuk yang audit. Lock.
+
+
+[dion kobi] 00:47:26
+Kalau kuningnya.
+
+
+[Sidik LLDikti XVI] 00:47:28
+Karena kan gini kalau misalnya ini kan Lok Lock nya, kan? Banyak ya di tiap aksi. Itu kan banyak lognya Sebulan itu, kan? Record nya bisa bertumpuk gitu, kan? Jadinya, kan? Pasti harus ada retensi. Lognya gitu. Yang tadi Set itu fleksibel, mungkin tiap Sembilan puluh hari itu diturun data yang lama.
+
+
+[dion kobi] 00:47:33
+Iya.
+
+
+[dion kobi] 00:47:36
+Iya.
+
+
+[Sidik LLDikti XVI] 00:47:49
+Gitu kan.
+
+
+[dion kobi] 00:47:50
+Dibersihkan begitu ya, Pak.
+
+
+[Sidik LLDikti XVI] 00:47:53
+Iya, uh, uh.
+
+
+[dion kobi] 00:47:55
+Oke, kalau yang Un sekarang.
+
+
+[Sidik LLDikti XVI] 00:47:59
+Masih tampilan aja, ya? Masih apa Menampilkan data saja Belum ada.
+
+
+[dion kobi] 00:48:00
+Masih.
+
+
+[dion kobi] 00:48:03
+Iya, iya, Masih ditampilkan. Datanya.
+
+
+[dion kobi] 00:48:09
+Untuk yang diimplementasikan sekarang.
+
+
+[Sidik LLDikti XVI] 00:48:13
+Oke.
+
+
+[dion kobi] 00:48:15
+Kurang lebih untuk demo yang progress Impact seperti ini, Mbak.
+
+
+[dion kobi] 00:48:23
+Mungkin ada pertanyaan.
+
+
+[Sidik LLDikti XVI] 00:48:27
+Oke, mungkin dari kepegawaian dulu. Bagaimana Pak Rahim?
+
+
+[Abd Rahim Har] 00:48:32
+Ada beberapa hal. Ya.
+
+
+[Sidik LLDikti XVI] 00:48:33
+Silakan, Mbak.
+
+
+[Abd Rahim Har] 00:48:35
+Oh.
+
+
+[Abd Rahim Har] 00:48:37
+Yang pertama.
+
+
+[Abd Rahim Har] 00:48:39
+Penamaan ini deh dicuti. Kan? Ada tadi. Kalau nggak salah, ada approval. Itu Kepala bagiannya.
+
+
+[dion kobi] 00:48:46
+Iya.
+
+
+[Abd Rahim Har] 00:48:48
+Coba lihat di approval. Cuti Tadi.
+
+
+[dion kobi] 00:48:54
+Di, ini.
+
+
+[Abd Rahim Har] 00:48:59
+Jadi, begini, Dion, Teman teman yang lain Begini.
+
+
+[Abd Rahim Har] 00:49:04
+Di formulir cuti itu sebenarnya tidak disebutkan nama Jabatan Kepala Bagian itu, kan Nama jabatan.
+
+
+[Abd Rahim Har] 00:49:11
+Jadi di Di. Ini kan? Pbmc Pbmc ini, kan pejabat yang berwenang memberikan cuti. Tapi Ndak disebutkan Harus siapa begitu.
+
+
+[dion kobi] 00:49:22
+Oke.
+
+
+[Abd Rahim Har] 00:49:22
+Jadi, kan itu kan? Harusnya kan bisa di setting di Super Admin, kan?
+
+
+[dion kobi] 00:49:26
+Iya.
+
+
+[Abd Rahim Har] 00:49:28
+Untuk kepala bagian saran kami, itu harusnya diganti dengan atasan langsung, bukan Kepala Bagian. Jadi nanti, Apakah nanti atasan langsungnya Itu Kepala Bagian. Ataukah dia kepala Ll Dikti itu nanti diatur atau di di.
+
+
+[Abd Rahim Har] 00:49:46
+Di setting oleh admin atau super admin. Tapi perannya, kalau dia terkait cuti, bukan kepala bagian harusnya. Dia atasan langsung. Jadi, ada dua. Ada dua approval yang harus tercantum di formulir cuti. Yang pertama, atasan langsung.
+
+
+[Abd Rahim Har] 00:50:04
+Yang kedua, Pybmc atau pejabat yang berwenang memberikan cuti. Jadi, kalau bisa diganti nanti, yang kepala bagian tadi diganti dengan Apa namanya diganti dengan atasan langsung? Ya.
+
+
+[Abd Rahim Har] 00:50:17
+Atasan langsung bukan Kepala Bagian supaya sesuai dengan yang seharusnya tercantum di formulir cuti.
+
+
+[Abd Rahim Har] 00:50:25
+Nah, itu yang pertama. Masih bisa Don? Ya? Di rumah nanti deh, Ya.
+
+
+[dion kobi] 00:50:29
+Masih masih Iya.
+
+
+[Abd Rahim Har] 00:50:30
+Oke, yang kedua terkait tadi ada. Kalau nggak salah di ajuan cuti itu ada. Minta perubahan, ya?
+
+
+[dion kobi] 00:50:41
+Iya.
+
+
+[Abd Rahim Har] 00:50:43
+Minta perubahan itu. Isinya apa deh?
+
+
+[dion kobi] 00:50:43
+Perubahan.
+
+
+[dion kobi] 00:50:47
+Oke, songket.
+
+
+[Abd Rahim Har] 00:50:47
+Coba dibuka dulu.
+
+
+[dion kobi] 00:50:49
+Di halaman.
+
+
+[Abd Rahim Har] 00:50:51
+Itu yang yang minta perubahan. Maksudnya. Approval, kan?
+
+
+[dion kobi] 00:50:54
+Iya, iya.
+
+
+[dion kobi] 00:50:56
+Itu dia, pengalihan Tanggal cuti yang diambil.
+
+
+[Abd Rahim Har] 00:50:56
+Atau.
+
+
+[Abd Rahim Har] 00:51:02
+Pengalihan, misalnya. Dari tanggal sekian ke sekian.
+
+
+[dion kobi] 00:51:03
+Iya.
+
+
+[Abd Rahim Har] 00:51:06
+Siapa Siapa yang meminta itu? Pegawai yang mengajukan? Atau kalau misalnya Pimpinan yang minta, Bagaimana.
+
+
+[Abd Rahim Har] 00:51:12
+Atau atasan langsungnya. Minta bagaimana?
+
+
+[dion kobi] 00:51:14
+Kan? Nah, jadi pegawai yang mengajukan tanggal. Misalnya, dari tanggal satu sampai tanggal lima. Cuma dari tanggal satu sampai tanggal lima. Itu mungkin jadwal kerjanya padat, jadi atasannya.
+
+
+[dion kobi] 00:51:28
+Bisa mengajukan untuk dilakukan perubahan untuk cuti yang diambil Itu.
+
+
+[Abd Rahim Har] 00:51:34
+A berarti yang mengajukan. Minta perubahan. Itu atasan langsungnya, kan? Bukan yang bersangkutan.
+
+
+[dion kobi] 00:51:40
+Iya, jalan. Atasan langsung ya.
+
+
+[Abd Rahim Har] 00:51:43
+Ah, oke, oke, sekarang Begini, ada kondisi begini deh.
+
+
+[Abd Rahim Har] 00:51:46
+Misalnya, saya mau ada rencana mengajukan cuti sekarang, kan? Tanggal tiga, satu, Ya, Mengajukan cuti tanggal empat.
+
+
+[Abd Rahim Har] 00:51:54
+Tanggal tujuh sampai tanggal sembilan, misalnya. Ya.
+
+
+[dion kobi] 00:51:57
+Iya.
+
+
+[Abd Rahim Har] 00:51:57
+Tapi tiba tiba.
+
+
+[Abd Rahim Har] 00:52:00
+Saya ada penugasan di tanggal itu. Otomatis. Saya harus merubah.
+
+
+[Abd Rahim Har] 00:52:05
+Ajuan cuti itu dari tanggal tujuh ke sembilan menjadi pekan depannya. Tanggal berapa begitu? Nah, kalau ada kasus seperti itu, bagaimana.
+
+
+[dion kobi] 00:52:10
+Iya.
+
+
+[dion kobi] 00:52:14
+Nah, itu yang mengubah.
+
+
+[dion kobi] 00:52:18
+Jadwal cutinya itu dari atasan. Jadi, kalau misalnya pengin dialihkan cutinya di tanggal yang lain atau gimana.
+
+
+[Abd Rahim Har] 00:52:27
+Ya, iya, mau dialihkan ke tanggal lain. Kalau yang bersangkutan, dia mengajukan Ndak, bisa.
+
+
+[dion kobi] 00:52:35
+Nah, kalau yang dia punya Sebentar.
+
+
+[dion kobi] 00:52:39
+Uh, uh.
+
+
+[Abd Rahim Har] 00:52:40
+Kalau pegawai yang mengajukan Ndak bisa ya?
+
+
+[dion kobi] 00:52:43
+Kalau pegawai Yang itu, dia belum bisa. Kalau pegawai Yang.
+
+
+[dion kobi] 00:52:50
+Mengajukan.
+
+
+[Abd Rahim Har] 00:52:50
+Dulu bisa ya.
+
+
+[dion kobi] 00:52:51
+Iya.
+
+
+[Abd Rahim Har] 00:52:55
+Atau begini, kalau mau membatalkan ajuan yang sudah ada, ada Ndak Ininya.
+
+
+[dion kobi] 00:53:01
+Nah, itu kalau yang membatalkan.
+
+
+[dion kobi] 00:53:04
+Pengajuan, cuti.
+
+
+[Abd Rahim Har] 00:53:07
+Ada Ndak.
+
+
+[dion kobi] 00:53:08
+Itu hanya bisa dari itu sebentar. Ya.
+
+
+[Abd Rahim Har] 00:53:11
+Iya.
+
+
+[dion kobi] 00:53:12
+Itu tahunan.
+
+
+[Sidik LLDikti XVI] 00:53:30
+Berarti ini saja klawnya Gini jadi pegawai, kan? Mengajukan cuti.
+
+
+[Sidik LLDikti XVI] 00:53:38
+Dia kan sudah transfer submit Kayaknya dia. Kalau kalau posisi sekarang, kan paling hanya bisa ditolak oleh pimpinan gitu, kan? Atau atasan langsung gitu. Nah, baiknya dia flow itu dibikin.
+
+
+[Abd Rahim Har] 00:53:41
+Iya.
+
+
+[Abd Rahim Har] 00:53:46
+Iya, iya.
+
+
+[dion kobi] 00:53:48
+Iya.
+
+
+[Sidik LLDikti XVI] 00:53:53
+Ka selama apa? Selama pimpinan itu belum apa? Belum memvalidasi atau menyetujui atau mengapakan gitu Atasan langsungnya. Itu masih bisa dibatalkan gitu. Biar barangkali mau direvisi dari pegawai gitu, kan? Pegawai langsung.
+
+
+[dion kobi] 00:54:06
+Oke, berarti dari pegawainya bisa batalkan untuk pengajuan cuti yang sudah dibuat? Ya.
+
+
+[Sidik LLDikti XVI] 00:54:12
+Boleh begitu parah. Ini.
+
+
+[Abd Rahim Har] 00:54:14
+Jadi, begini, ada dua kemungkinan, Pak, Sidik yang pertama. Kalau dia belum di approve itu, kan masih ada. Masih ada Kemungkinan untuk kita merevisikan atau merubahkan.
+
+
+[Abd Rahim Har] 00:54:27
+Nah, pertanyaannya. Nah, kalau dia sudah jadi. Misalnya sudah sudah di approve.
+
+
+[Abd Rahim Har] 00:54:32
+Tiba tiba, Dia batal. Nah, itu kan? Itu mesti dipertimbangkan juga. Harusnya ada ajuan yang sudah di approve. Itu bisa dibatalkan.
+
+
+[Abd Rahim Har] 00:54:42
+Begitu juga ada ajuan yang belum di approve. Itu bisa direvisi, Misalnya.
+
+
+[Abd Rahim Har] 00:54:48
+Nah, kalau mau merevisi juga, harusnya kapan, apakah.
+
+
+[Abd Rahim Har] 00:54:53
+Sebelum di approve oleh atasan langsung.
+
+
+[Abd Rahim Har] 00:54:56
+Atau masih bisa juga sampai di level Pybmc. Misalnya, ketika belum di approve. Nah, itu mesti di dipertimbangkan. Jadi, ada Dua kondisi sebelum approval. Dan setelah approval.
+
+
+[Abd Rahim Har] 00:55:08
+Bagaimana.
+
+
+[dion kobi] 00:55:08
+Oke, oke, Mbak.
+
+
+[Abd Rahim Har] 00:55:10
+Solusinya. Kira Kira.
+
+
+[dion kobi] 00:55:12
+Bisa sih kalau misalnya mau dibikin ketika selagi pimpinannya belum melakukan approval. Nah, itu masih bisa diedit.
+
+
+[Sidik LLDikti XVI] 00:55:18
+Uh, uh.
+
+
+[Abd Rahim Har] 00:55:19
+Iya.
+
+
+[dion kobi] 00:55:22
+Tapi kalau ketika sudah di approve. Nah, itu sudah nggak nggak bisa. Kalau misalnya dari yang pegawainya yang mengajukan cuti itu.
+
+
+[Abd Rahim Har] 00:55:23
+Begitu.
+
+
+[Abd Rahim Har] 00:55:32
+Atau begini saja, atau begini, bisa enggak.
+
+
+[Sidik LLDikti XVI] 00:55:33
+Di.
+
+
+[Sidik LLDikti XVI] 00:55:34
+Dianulir aja, Pak.
+
+
+[Abd Rahim Har] 00:55:36
+Dianulir. Maksudnya. Iya.
+
+
+[Sidik LLDikti XVI] 00:55:37
+Iya, jadi dari admin, kipagonya bisa menghapus usulannya gitu. Tapi kan kalau dihapus, itu kan audit lot.
+
+
+[Abd Rahim Har] 00:55:41
+Ya, maksud saya. Jadi kalau kalau misalnya dia sudah di Approve, kemudian sudah terlanjur. Toh, di Approve kita dari kalau bisa dianulir. Dan nanti yang bersangkutan bisa mengajukan yang baru ulang.
+
+
+[dion kobi] 00:55:46
+Ya.
+
+
+[Abd Rahim Har] 00:55:56
+Gitu.
+
+
+[dion kobi] 00:55:58
+Oke, oke.
+
+
+[Abd Rahim Har] 00:55:59
+Bisa begitu, Dion.
+
+
+[dion kobi] 00:56:01
+Bisa. Mbak Bisa.
+
+
+[dion kobi] 00:56:03
+Dan sudah ada.
+
+
+[Abd Rahim Har] 00:56:04
+Jadi enggak apa? Apa terbit yang sebelumnya Enggak, apa? Apa.
+
+
+[Abd Rahim Har] 00:56:07
+Tapi nanti kita hapus. Misalnya usulannya atau dianulir di melalui admin kepegawaian. Tapi yang bersangkutan ndak bisa menghapus. Itu cuma Admin kepegawaian. Nah, nanti setelah di nanti, dia bisa mengusulkan ulang Setelah.
+
+
+[Abd Rahim Har] 00:56:22
+Dihapus.
+
+
+[Abd Rahim Har] 00:56:23
+Ajuan sebelumnya itu. Nah, itu baru dia bisa mengajukan ulang.
+
+
+[dion kobi] 00:56:28
+Iya, jadi selama pengajuannya masih aktif, dia belum bisa mengajukan ulang cuti.
+
+
+[Abd Rahim Har] 00:56:35
+Iya, kalau saya begitu. Supaya tidak double double begitu.
+
+
+[dion kobi] 00:56:36
+Iya.
+
+
+[dion kobi] 00:56:39
+Iya.
+
+
+[Abd Rahim Har] 00:56:40
+Bisa begitu.
+
+
+[dion kobi] 00:56:41
+Bisa bisa.
+
+
+[Sidik LLDikti XVI] 00:56:41
+Di ini aja, Dion dibikin status paket ditangguhkan oleh Pak Rahim. Ya, jadinya, kan? Meskipun sudah disetujui, tapi dari kepegawainya, Itu masih bisa menangguhkan. Biar ada alasannya gitu Ditangguhkannya karena apa gitu, kan?
+
+
+[dion kobi] 00:56:56
+Kalau Yang.
+
+
+[Sidik LLDikti XVI] 00:56:56
+Jadi.
+
+
+[Abd Rahim Har] 00:56:56
+Bisa saja bisa saja.
+
+
+[dion kobi] 00:56:58
+Iya.
+
+
+[Sidik LLDikti XVI] 00:56:59
+Jadi kalau kalau dihapuskan, ibaratnya kita kehilangan jejak, Pak. Jadi usulan cuti sebelumnya itu gimana? Gitu, kan?
+
+
+[Abd Rahim Har] 00:57:05
+Bisa saja begitu. Dek.
+
+
+[Sidik LLDikti XVI] 00:57:06
+Kalau ditangguhkan, itu kan Ibaratnya, meskipun dia sudah disetujui, tapi ditangguhkan karena permintaan yang bersangkutan atau gimana, kan? Itu masih Ada rekam jejaknya gitu, Pak, Ada riwayatnya, Kan.
+
+
+[Abd Rahim Har] 00:57:16
+Oke, oke, Supaya ndak hilang sistem ini, Oke, oke, begitu saja. Barangkali ditangguhkan.
+
+
+[Abd Rahim Har] 00:57:24
+Tapi nanti yang bersangkutan bisa mengajukan setelah statusnya di. Sudah ditangguhkan begitu oleh admin kepegawaian.
+
+
+[Sidik LLDikti XVI] 00:57:34
+Jadi kalau statusnya ditangguhkan, dia tidak menghitung saldo cuti yang sudah disetujui. Jadinya dia balik lagi gitu. Ga dihitung.
+
+
+[Abd Rahim Har] 00:57:39
+Iya, betul.
+
+
+[Abd Rahim Har] 00:57:41
+Balik lagi ke kondisi sebelumnya.
+
+
+[Abd Rahim Har] 00:57:44
+Oke.
+
+
+[Abd Rahim Har] 00:57:46
+Tidak, ya, Dionnya paham, Ya.
+
+
+[dion kobi] 00:57:48
+Iya, iya.
+
+
+[Abd Rahim Har] 00:57:50
+Terus ini deh.
+
+
+[Abd Rahim Har] 00:57:52
+Terkait Sk. Pengangkatan.
+
+
+[dion kobi] 00:57:57
+Oke.
+
+
+[Abd Rahim Har] 00:57:57
+Nah, itu dasarnya Sk. Pengangkatan Sk. Pengangkatan yang dimaksud yang mana? Karena di kita kan ada sk pengangkatan. Pertama. Ada Sk ke Sk. Pengangkatan ke jabatan yang baru atau jabatan fungsional. Misalnya.
+
+
+[Abd Rahim Har] 00:58:11
+Nah, di Sk. Pengangkatan itu. Apa dasarnya?
+
+
+[Abd Rahim Har] 00:58:16
+Sk, pengangkatan Pns kah.
+
+
+[Grantly Antonio Edeard Sorongan] 00:58:20
+It. Izin menjawab, Pak. Jadi, yang bagian.
+
+
+[Grantly Antonio Edeard Sorongan] 00:58:25
+Yang Yang Sk Sk itu dia, kan? Ada yang kami buat Itu Ada empat.
+
+
+[Grantly Antonio Edeard Sorongan] 00:58:33
+Yang pertama ada Sk, Tiga B. Itu untuk bagi yang.
+
+
+[Abd Rahim Har] 00:58:33
+Uh, uh.
+
+
+[Grantly Antonio Edeard Sorongan] 00:58:38
+Gajinya terus. Pangkat jabatan dan pengangkatan.
+
+
+[Abd Rahim Har] 00:58:44
+Iya.
+
+
+[Grantly Antonio Edeard Sorongan] 00:58:45
+Pengangkatan ini. Itu Sk untuk mengatur status pegawai saat ini. Contoh yang ada. Itu yang roll atau roll?
+
+
+[Grantly Antonio Edeard Sorongan] 00:58:58
+Jenis yang ada di Sk. Pengangkatan itu. Ada tiga. Ada Pns.
+
+
+[Grantly Antonio Edeard Sorongan] 00:59:03
+Japanese. Dan juga Pppk.
+
+
+[Abd Rahim Har] 00:59:08
+Oke, iya.
+
+
+[Grantly Antonio Edeard Sorongan] 00:59:08
+Ini tuh yang tes kah pengangkatan? Nah.
+
+
+[Grantly Antonio Edeard Sorongan] 00:59:11
+Sk, jabatan.
+
+
+[Grantly Antonio Edeard Sorongan] 00:59:13
+Itu ja jabatan yang ada di Sinback.
+
+
+[Grantly Antonio Edeard Sorongan] 00:59:19
+Jadi, nanti mungkin setiap pegawai baik itu Pns atau Cpns ataupun Ppk. Mungkin dia punya.
+
+
+[Grantly Antonio Edeard Sorongan] 00:59:28
+Ran atau jabatan tersendiri di Simpeng. Nah, itu ada di.
+
+
+[Grantly Antonio Edeard Sorongan] 00:59:34
+Pengkat.
+
+
+[Grantly Antonio Edeard Sorongan] 00:59:36
+Nah, terus Jabatan.
+
+
+[Grantly Antonio Edeard Sorongan] 00:59:38
+Itu kan di bagian Simp Lldt itu. Kalau enggak salah, itu ada yang bagian.
+
+
+[Grantly Antonio Edeard Sorongan] 00:59:50
+Tim kerja atau ada yang tim apa itu? Nah, itu bisa diatur di bagian data Master. Nah, nah, itu yang bagian.
+
+
+[Grantly Antonio Edeard Sorongan] 01:00:00
+Jembatan.
+
+
+[Grantly Antonio Edeard Sorongan] 01:00:03
+Seperti itu, sih. Untuk yang satu. Jadi, yang untuk pengangkatan pengangkatan. Itu yang Pns, Cpns dan Pppk.
+
+
+[Abd Rahim Har] 01:00:12
+Iya, berarti pengakat pertama, ya? Pengangkatan pertama berarti ya.
+
+
+[Grantly Antonio Edeard Sorongan] 01:00:16
+Iya.
+
+
+[Abd Rahim Har] 01:00:16
+Ketika.
+
+
+[Abd Rahim Har] 01:00:19
+Dan ketika Bpjs, kan? Ya.
+
+
+[Abd Rahim Har] 01:00:24
+Maksudnya gini.
+
+
+[Abd Rahim Har] 01:00:27
+Berarti Di di kolom jabatan atau di di menu. Jabatan Coba di klik di menu Jabatan A Ini Itu berarti.
+
+
+[Abd Rahim Har] 01:00:38
+Bisa ditambah dinamisnya berarti bisa tambah riwayat jabatan apapun di situ. Ya.
+
+
+[Grantly Antonio Edeard Sorongan] 01:00:42
+Iya, nah, untuk memuatur.
+
+
+[Grantly Antonio Edeard Sorongan] 01:00:46
+Jenis jabatan. Dan juga jabatan itu di data Master di bagian Super Admin. Jadi kita bisa atur secara dinamislah. Nah, untuk default nya. Ini.
+
+
+[Abd Rahim Har] 01:00:52
+Oke.
+
+
+[Grantly Antonio Edeard Sorongan] 01:00:54
+Di food nya. Itu sudah diisi.
+
+
+[Abd Rahim Har] 01:00:54
+Oke, oke, itu bisa. Bisa kita tambahkan berarti di data, Mas.
+
+
+[Grantly Antonio Edeard Sorongan] 01:00:58
+Bisa bisa.
+
+
+[Abd Rahim Har] 01:00:59
+Oke, oke, sip.
+
+
+[Abd Rahim Har] 01:01:01
+Terus ini lagi deh.
+
+
+[Abd Rahim Har] 01:01:05
+Dasar penentuan Early Warning system. Kenaikan pangkat.
+
+
+[Abd Rahim Har] 01:01:12
+Pws. Kenaikan pangkat.
+
+
+[Grantly Antonio Edeard Sorongan] 01:01:12
+Itu di bagian konfigurasi es.
+
+
+[Grantly Antonio Edeard Sorongan] 01:01:17
+Dikonfigurasi Ews. Ini.
+
+
+[Abd Rahim Har] 01:01:17
+Nah, kan.
+
+
+[Abd Rahim Har] 01:01:19
+Iya.
+
+
+[Grantly Antonio Edeard Sorongan] 01:01:21
+Kenaikan pangkat. Itu default nya. Kami atur itu empat tahun dari Tempe. Pengangkatan itu ada di di bagian atas. Itu yang konfigurasi. Event Ews Ada kenaikan pangkat Kgb. Nah, itu default. Itu yang untuk kenaikan pangkat empat tahun.
+
+
+[Grantly Antonio Edeard Sorongan] 01:01:38
+Untuk Kgb. Empat tahun.
+
+
+[Abd Rahim Har] 01:01:39
+Ndak Default default nya empat tahun Itu dari berdasarkan Sk yang diinput Bang. Maksudnya.
+
+
+[Grantly Antonio Edeard Sorongan] 01:01:47
+Iya, berdasarkan Sk yang diinput pegawai tertentu.
+
+
+[Abd Rahim Har] 01:01:52
+Sk Sk yang diinput terakhir, kan? Karena kan Nanti kalau.
+
+
+[Abd Rahim Har] 01:01:58
+Berarti kan, Misalnya, kalau saya kan sudah. Misalnya sudah sepuluh tahun, misalnya. Ya, Misalnya sepuluh tahun sudah jadi Pns. Berarti kan? Sudah harusnya sudah dua kali naik pangkat.
+
+
+[Grantly Antonio Edeard Sorongan] 01:02:09
+Iya, iya, iya.
+
+
+[Abd Rahim Har] 01:03:28
+Itu masukan. Itu Masukannya Jadi, dasar penentuan. Bukan waktu empat tahun, tetapi Tmt Berdasarkan Sk terakhir.
+
+
+[Abd Rahim Har] 01:03:37
+Huh? Ya, kita sepaham di situ, ya?
+
+
+[Grantly Antonio Edeard Sorongan] 01:03:39
+Yeah, you're in front of it.
+
+
+[Abd Rahim Har] 01:03:43
+Oke.
+
+
+[Grantly Antonio Edeard Sorongan] 01:03:44
+Yang saat ini yang saya buat. Izin Pak Yang. Saat ini yang saya buat.
+
+
+[Grantly Antonio Edeard Sorongan] 01:03:49
+Seperti itu sih. Jadi kan kenaikan pangkat atau pang pangkat itu? Itu kan dia, kan? Open Only itu atau beriwayat? Nah.
+
+
+[Abd Rahim Har] 01:03:58
+Iya.
+
+
+[Grantly Antonio Edeard Sorongan] 01:03:58
+Tem Ti. Pangkat itu diambil Ol dari riwayat terakhir. Jadi, Sk paling terakhir yang diinput. Nah, dari situ dihitung empat tahun kemudian.
+
+
+[Abd Rahim Har] 01:04:02
+Oke, oke.
+
+
+[Abd Rahim Har] 01:04:05
+Iya.
+
+
+[Abd Rahim Har] 01:04:08
+Oke, oke, sip.
+
+
+[Grantly Antonio Edeard Sorongan] 01:04:08
+Yang saat ini yang dibuat seperti itu sih.
+
+
+[Abd Rahim Har] 01:04:11
+Oke, oke, kalau begitu sudah. Kita sudah on track. Kalau begitu.
+
+
+[Abd Rahim Har] 01:04:15
+Nah, terus ada satu lagi dek tadi terkait data Master.
+
+
+[Abd Rahim Har] 01:04:20
+Data, Master.
+
+
+[Grantly Antonio Edeard Sorongan] 01:04:20
+Mungkin datang ke Master.
+
+
+[Abd Rahim Har] 01:04:22
+Iya, nah, kita kan di di sini, kan? Di Eladicti, kan? Kadang ada kebutuhan.
+
+
+[Abd Rahim Har] 01:04:29
+Data baik dari Kementerian atau dari pihak manapun dari Ijen, misalnya, yang meminta data terkait kepegawaian atau data kepegawaian. Nah, Biasanya itu ka. Mereka minta custom. Maksudnya.
+
+
+[Abd Rahim Har] 01:04:45
+Begini, kalau kita lihat, kan, sebenarnya sudah sudah cukup lengkap, ya? Nah, sekarang begini. Bisa nggak data yang ada ini. Itu diekspor.
+
+
+[Abd Rahim Har] 01:04:54
+Dan bisa di Custom. Misalnya, saya mau minta data pegawai berdasarkan.
+
+
+[Abd Rahim Har] 01:05:03
+Pangkat.
+
+
+[Abd Rahim Har] 01:05:05
+Atau berdasarkan jabatan, misalnya. Berapa orang yang Jabatan A? Berapa orang Jabatan B? Ja Berapa orang Jabatan C dan seterusnya Bisa di Custom seperti itu.
+
+
+[Grantly Antonio Edeard Sorongan] 01:05:14
+Saat ini sih. Sudah sih, Pak? Yang di bagian ekspor pegawai nih. Jadi, di ekspor pegawai kita bisa custom.
+
+
+[Abd Rahim Har] 01:05:18
+Sudah bisa, ya?
+
+
+[Abd Rahim Har] 01:05:20
+Oke, oke, oke, oke, oke, oke, sip.
+
+
+[Grantly Antonio Edeard Sorongan] 01:05:22
+Pegawai pegawai mana saja. Atau kita mau filter contoh Nip tertentu?
+
+
+[Abd Rahim Har] 01:05:29
+Iya, iya.
+
+
+[Grantly Antonio Edeard Sorongan] 01:05:29
+Atau pegawai dengan jenis kerja tertentu atau jabatan tertentu. Bisa.
+
+
+[Abd Rahim Har] 01:05:33
+Oke, oke, sip, sip. Oke.
+
+
+[Abd Rahim Har] 01:05:36
+Saya. Sementara itu dulu, Pak. Sidik.
+
+
+[Sidik LLDikti XVI] 01:05:40
+Oke, Pak, terima kasih. Tanggapannya.
+
+
+[Sidik LLDikti XVI] 01:05:44
+Kalau dari Bu Sabina, bagaimana? Bu Sabina? Mbak.
+
+
+[Sidik LLDikti XVI] 01:05:51
+Karena Bu Sabina ini calon pengguna sistem Pak Rahim.
+
+
+[LLDIKTI XVI Sabina Rossa] 01:05:55
+Uh, Anur Kenya Blue Med.
+
+
+[Sidik LLDikti XVI] 01:05:59
+Aman Berarti Bu Sabina, ya?
+
+
+[LLDIKTI XVI Sabina Rossa] 01:06:02
+Yeah, yeah.
+
+
+[Sidik LLDikti XVI] 01:06:02
+Yes.
+
+
+[Sidik LLDikti XVI] 01:06:04
+Pak Hidayat. Mungkin.
+
+
+[Sidik LLDikti XVI] 01:06:06
+Maksud ini.
+
+
+[LLDIKTI XVI - Hidayat] 01:06:12
+Iya.
+
+
+[Sidik LLDikti XVI] 01:06:15
+Oke, cukup. Ya.
+
+
+[Sidik LLDikti XVI] 01:06:17
+Oke, kalau dari saya, mungkin.
+
+
+[Sidik LLDikti XVI] 01:06:20
+Satu masukan, jadi tambahkan satu pet kalau bisa. Tapi dia isinya buat reporting aja gitu dalam bentuk chart.
+
+
+[Sidik LLDikti XVI] 01:06:30
+Jadi, kan tadi di data master tuh. Coba buka di data Master Ini kan masing masing data. Master kan? Sudah Ada modal. Datanya gitu, kan? Yang penggunanya? Berapa golongan golongannya itu? Nah, itu bisa dibikinkan. Satu page patch buat reporting itu. Kita bisa ngecek.
+
+
+[Sidik LLDikti XVI] 01:06:48
+Data, misalnya, golongan pangkatnya itu tidak lagi lihat dalam bentuk tabel, Tapi dia langsung dalam bentuk chart. Misalnya gitu. Jadi Bisa dilihat yang pangkat ini berapa gitu? Ada berapa orang gitu? Kalau ini kan memang khusus di data master pengeluaran data Master. Nah, yang Saya maksud itu lebih ke reporting aja buat ngelihat.
+
+
+[Sidik LLDikti XVI] 01:07:09
+Angka statistiknya.
+
+
+[Sidik LLDikti XVI] 01:07:14
+Dari masing masing kategori data master jadinya. Kalau misalnya sewaktu waktu dibutuhkan.
+
+
+[Grantly Antonio Edeard Sorongan] 01:07:14
+Iya.
+
+
+[Sidik LLDikti XVI] 01:07:20
+Berapa sih yang punya jabatan? Jabatan itu, kan ada? Sudah ada kategorinya, kan? Yang jabatan tertentu dengan Jabatan Umum? Nah, Misalnya, mau ditanya ada yang nanya kalau untuk jabatan fungsional umum itu ada berapa di misalnya gitu, kan? Nah, itu tinggal dilihat di bagian Reporting aja. Karena kita butuhnya Angka gitu, kan?
+
+
+[Sidik LLDikti XVI] 01:07:39
+Bukan dalam bentuk. Tidak selamanya dalam bentuk data. Pegawai gitu.
+
+
+[Sidik LLDikti XVI] 01:07:44
+Terus.
+
+
+[Sidik LLDikti XVI] 01:07:45
+Untuk.
+
+
+[Sidik LLDikti XVI] 01:07:47
+Channel. Notifikasi.
+
+
+[Sidik LLDikti XVI] 01:07:50
+Dana notifikasi. Ini setinggannya. Ribet. Enggak, Kemarin pas dibikin.
+
+
+[dion kobi] 01:07:56
+Oke, untuk yang channel notifikasi saya sudah testing sih, Pak. Cuma untuk yang di Whatsapp. Itu sebenarnya sudah berhasil. Cuma Request yang keluar. Itu empat, dua, dua.
+
+
+[dion kobi] 01:08:11
+Jadi, mungkin nanti Boleh minta request yang masuk untuk lognya yang ada di kontak.
+
+
+[dion kobi] 01:08:19
+Supaya bisa dilihat. Masalahnya ada di mana?
+
+
+[Sidik LLDikti XVI] 01:08:22
+Empat, dua, dua. Berarti ini inputan kalian. Berarti ada yang keliru. Itu.
+
+
+[dion kobi] 01:08:26
+Thank you.
+
+
+[dion kobi] 01:08:27
+Uh, uh.
+
+
+[Sidik LLDikti XVI] 01:08:28
+Kema yang yang apa enggak bisa ke Kirim notifikasinya? Notifikasi apa?
+
+
+[dion kobi] 01:08:34
+Yang dari cuti.
+
+
+[Sidik LLDikti XVI] 01:08:36
+Yang usulan cuti itu? Ya.
+
+
+[dion kobi] 01:08:39
+Iya, iya, Yang pengajuan. Cuti.
+
+
+[Sidik LLDikti XVI] 01:08:40
+Kalau yang tiga notifikasi lain bisa.
+
+
+[dion kobi] 01:08:43
+Sama. Masih belum bisa juga, Pak.
+
+
+[Sidik LLDikti XVI] 01:08:46
+Belum bisa, ya?
+
+
+[dion kobi] 01:08:48
+Iya.
+
+
+[Sidik LLDikti XVI] 01:08:48
+Kalau empat, dua, dua. Itu biasanya kan? Karena request nya dari kita nggak cocok sama yang dari kontaknya gitu, kan? Tapi nanti saya coba cek parameternya yang dikirim. Apa saja harusnya sudah sudah mencakup parameter yang kemarin sih yang udah dikirim.
+
+
+[Sidik LLDikti XVI] 01:09:05
+Nah, terus untuk yang channel notifikasi ini ini kan masih sifatnya global, ya?
+
+
+[dion kobi] 01:09:10
+Iya.
+
+
+[Sidik LLDikti XVI] 01:09:11
+Nah, ini saya cuma cuma nanya aja. Kalau misalnya ini di diturunkan per user itu, apa bakal nambah tabel lagi? Bakal nambah kompleks lagi. Atau enggak.
+
+
+[dion kobi] 01:09:22
+Khusus untuk ganti user.
+
+
+[dion kobi] 01:09:26
+Ini sesat. Bintang.
+
+
+[Sidik LLDikti XVI] 01:09:27
+Kalau memang nama susah, enggak apa apa? Saya cuma nanya saja gitu.
+
+
+[dion kobi] 01:09:32
+Kabel itu mungkin akan ada tambahan kalau nggak usah ditambahkan.
+
+
+[Sidik LLDikti XVI] 01:09:37
+Nambah Tabel berarti ya.
+
+
+[dion kobi] 01:09:38
+Iya.
+
+
+[Sidik LLDikti XVI] 01:09:40
+Soalnya kan.
+
+
+[Sidik LLDikti XVI] 01:09:43
+Kirain ini. Ini menu channel. Notifikasinya. Itu per sudah dibuatnya. Per Pegawai kemarin gitu, kan? Jadinya kan? Pegawai itu ada hak buat menonaktifkan.
+
+
+[Sidik LLDikti XVI] 01:09:54
+Notifikasi mana? Di bagian di channel mana? Gitu, kan? Tapi kalau memang global, enggak apa? Apa.
+
+
+[Sidik LLDikti XVI] 01:09:59
+Enggak terlalu. Arden juga. Ini.
+
+
+[Sidik LLDikti XVI] 01:10:02
+Terus yang.
+
+
+[Sidik LLDikti XVI] 01:10:06
+Apalagi tadi, ya. Yang cuti yang cuti itu kan Coba bukan menu cuti tadi. Menu cutinya agak banyak. Saya juga bingung tadi.
+
+
+[dion kobi] 01:10:15
+Oke, paham, paham.
+
+
+[Sidik LLDikti XVI] 01:10:19
+Ini monitoring. Oke.
+
+
+[dion kobi] 01:10:21
+Untuk detail. Ajukan cuti, Pak.
+
+
+[Sidik LLDikti XVI] 01:10:25
+Itu tadi dari Pak Rahim, kan? Bilangnya bukan kepala bagian, tapi atasan langsung. Nah, itu. Ini cuma ganti tinggal. Ganti. Label saja. Tapi dia tidak me mengganti jabatannya. Si Kepala Bagian. Karena kepala bagian itu, kan? Jabatan Struktural, Ya.
+
+
+[Sidik LLDikti XVI] 01:10:42
+Kalau di cuti, itu kan jabatannya. Itu bukan mengikuti jabatan strukturalnya, kan? Tapi memang jabatan yang buat verifikator. Cutinya, kan? Atau bagaimana.
+
+
+[dion kobi] 01:10:52
+Nah, kalau yang verifikator cuti itu, dia sebenarnya bisa di Custom.
+
+
+[dion kobi] 01:10:58
+Dari Super Admin.
+
+
+[dion kobi] 01:11:01
+Di sini.
+
+
+[dion kobi] 01:11:03
+Jadi, untuk jadi untuk verifikator, misalnya tim kerja itu bisa di tambahkan.
+
+
+[dion kobi] 01:11:11
+Kalau yang Kepala Bagian Mbak ada nggak ya.
+
+
+[Sidik LLDikti XVI] 01:11:13
+Tapi kan kepala bagian kayaknya paten, kan? Ini.
+
+
+[dion kobi] 01:11:16
+Iya, iya. Kalau kalau yang Kepala Ogin memang wajib dia di sini.
+
+
+[Sidik LLDikti XVI] 01:11:20
+Iya, itu kepala bagian itu, kan? Dia bukan? Dia tidak terikat dengan jabatan Strukturnya. Si pegawai gitu, kan? Enggak, kan? Ini kan di Custom. Jadi jabatannya Itu jabatan kepala Bagian di sini. Itu cuma melekat di konfigurasi. Cutinya saja, kan?
+
+
+[dion kobi] 01:11:36
+Iya.
+
+
+[Sidik LLDikti XVI] 01:11:37
+Kan Sama kayak Pe Py Bmc, kan? Nah, ini kan kalau dari istilah Pak Rahim tadi kan memang digantinya sebagai Atasan langsung gitu, kan? Nah, berarti kalau ini atasan langsung.
+
+
+[dion kobi] 01:11:39
+Iya.
+
+
+[Sidik LLDikti XVI] 01:11:52
+Gimana itu, Pak Rahim? Ya, kalau misalnya dia atasan langsungnya, itu langsung ke pakem gitu. Itu ada kemungkinan, Pak, kan?
+
+
+[Abd Rahim Har] 01:11:58
+Betul, jadi jadi begini. Makanya ini ada dua hal sebenarnya. Ya.
+
+
+[Sidik LLDikti XVI] 01:11:59
+Yang Jft, misalnya.
+
+
+[Abd Rahim Har] 01:12:04
+Kan? Terkait approval yang pertama, kan? Ada atasan langsung Yang kedua ada Pbmc untuk kasusnya. Kita di ledigti untuk atasan langsung itu. Ada dua kemungkinan.
+
+
+[Abd Rahim Har] 01:12:19
+Bisa saja dia Kepala Bagian Umum.
+
+
+[Abd Rahim Har] 01:12:23
+Bisa saja langsung. Kepala lldikti.
+
+
+[Abd Rahim Har] 01:12:26
+Iya.
+
+
+[Abd Rahim Har] 01:12:28
+Jadi nanti kalau misalnya. Bahkan di beberapa kasus, ada.
+
+
+[Abd Rahim Har] 01:12:33
+Apa namanya? Ada ajuan yang Karena atasan langsungnya, harusnya Pak Kepala Lembaga Kar. Akhirnya nanti Pak Kepala jadi dua. Begitu bisa, Pak Bob.
+
+
+[Abd Rahim Har] 01:12:50
+Kalau misalnya dosen mengajukan.
+
+
+[Abd Rahim Har] 01:12:53
+Nah, cuti berarti dua.
+
+
+[Abd Rahim Har] 01:12:57
+Pak Kalem sebagai atasan langsung sekaligus. Py. Bmc.
+
+
+[Abd Rahim Har] 01:13:02
+Kan? Berarti begitu. Jadi, untuk beberapa kasus, berarti ada Pak Kepala Lembaga. Dia berposisi sebagai atasan langsung sekaligus.
+
+
+[Abd Rahim Har] 01:13:12
+Pejabat yang berwenang memberikan cuti, jadi harusnya memang di di atasan langsung dan Pbmc.
+
+
+[Abd Rahim Har] 01:13:22
+Dia memang melekat juga di situ jabatannya. Jadi, kalau di atasan langsung, siapa pejabat yang menjadi atasan langsungnya? Dan siapa pejabat yang Pbbmc nya?
+
+
+[Abd Rahim Har] 01:13:35
+Tapi kalau tadi, ini kan langsung dipatok. Kepala Bagian Kepala Bagian begitu. Kalau saya.
+
+
+[dion kobi] 01:13:41
+Iya, iya, iya.
+
+
+[Abd Rahim Har] 01:13:42
+Jangan dipatok Kepala, pergi. Di situ istilahnya diganti. Menjadi atasan langsung.
+
+
+[dion kobi] 01:13:47
+Oke, oke.
+
+
+[Abd Rahim Har] 01:13:47
+Tapi nanti ketika di approve.
+
+
+[Abd Rahim Har] 01:13:51
+Misalnya, Pak Kepala Bagian yang Approv menjadi approval nya, maka ikut juga jabatannya. Pak Kepala, apa Kepala bagian sebagai atasan langsung.
+
+
+[Abd Rahim Har] 01:14:01
+Gitu.
+
+
+[dion kobi] 01:14:03
+Berarti untuk yang Kepala bagian itu, dia bisa saja atasan langsungnya. Ya.
+
+
+[Abd Rahim Har] 01:14:09
+Iya, di di kasusnya, di kita, kan ada dua kemungkinan untuk atasan langsung. Apakah Kepala Bagian apakah atau dia kepala lldikti.
+
+
+[Sidik LLDikti XVI] 01:14:22
+Case. Begini, Pak Misal, kalau langsung Kepala Ledity, dia sebagai apa? Sebagai atasan langsung. Nah, itu flow nya. Gimana? Pak, Jadi kan, Pak? Kalem itu jadi verifikator sekaligus Py Bnc. Nah, itu. Apakah Apakah diringkas langsung? Jadi dia mengusulkan cuti.
+
+
+[Abd Rahim Har] 01:14:24
+Iya.
+
+
+[Abd Rahim Har] 01:14:30
+Iya.
+
+
+[Abd Rahim Har] 01:14:36
+Betul.
+
+
+[Sidik LLDikti XVI] 01:14:40
+Verifikator dan penyetujuannya. Itu cuma satu step. Atau memang harus tetap dipisah, Pak. Jadi, di Verifikator Pekalem itu, dia sebagai Verifikator. Dia menye. Dia menyetujui dulu. Terus. Dia menyetujui lagi sebagai Pbnc Atau bisa diringkas langsung sekaligus.
+
+
+[Abd Rahim Har] 01:14:45
+Kalau.
+
+
+[Abd Rahim Har] 01:14:52
+Harusnya harusnya flow nya jangan dihilangkan. Harusnya flow nya. Jangan dihilangkan supaya nanti. Karena kalau misalnya ada kasus seperti itu dibedakan flow nya, misalnya. Jadi satu Agak merepotkan kalau saya. Jadi, kalau saya tetap De, Tetap saja, Pak, Sidik di apa namanya Flow nya jadi dua step.
+
+
+[Abd Rahim Har] 01:15:10
+Ia harus melalui verifikator atau atasan langsung. Kemudian baru masuk ke Pbmc.
+
+
+[Abd Rahim Har] 01:15:18
+Iya.
+
+
+[Sidik LLDikti XVI] 01:15:18
+Berarti memang dari Pak Kepala. Karena dia juga sebagai approval, dia hitungannya dua kali menyetujui Gitu, Pak. Ya.
+
+
+[Abd Rahim Har] 01:15:27
+Ya, dua kali menyetujui. Betul itu, kan? Supaya kelihatan flow nya bahwa harus ada dulu. Harus ada step atasan langsung Verifikasi atasan langsung Baru ada lagi dia sebagai verifikasi dia sebagai.
+
+
+[Abd Rahim Har] 01:15:42
+Pbmc.
+
+
+[Abd Rahim Har] 01:15:45
+Kecuali kalau kita kan sepakat kemarin, bisa bisa tambah verifikator kan? Misalnya, kemarin, kalau misalnya ada melalui tim kerja, berarti. Nah, ini kan sudah sesuai. Ya, bisa saja, misalnya. Ada tambahan verifikator, tapi itu tidak.
+
+
+[Sidik LLDikti XVI] 01:15:45
+Oke.
+
+
+[Sidik LLDikti XVI] 01:15:52
+Iya, Mbak.
+
+
+[Abd Rahim Har] 01:16:00
+Tidak dimunculkan nanti di file Pdf. Nya Jadi yang muncul di Pdf nanti, kan? Cuma.
+
+
+[Abd Rahim Har] 01:16:09
+Atasan langsung dengan Pbmc. Begitu ya.
+
+
+[dion kobi] 01:16:12
+Iya, iya.
+
+
+[Sidik LLDikti XVI] 01:16:15
+Nah, coba coba buka yang formulir cuti yang Pdf tadi.
+
+
+[Sidik LLDikti XVI] 01:16:21
+Nah, ini.
+
+
+[Sidik LLDikti XVI] 01:16:23
+Berarti yang pertimbangan.
+
+
+[Abd Rahim Har] 01:16:23
+Nah, sekarang pertanyaan pertanyaannya kalau misalnya verifikator ada ditambah satu. Misalnya verifikator ditambah satu. Apakah nanti akan muncul di formulir ini? Verifikator itu.
+
+
+[dion kobi] 01:16:36
+Akan muncul sih.
+
+
+[Abd Rahim Har] 01:16:36
+Atau cuma.
+
+
+[Abd Rahim Har] 01:16:40
+Akan muncul.
+
+
+[dion kobi] 01:16:41
+Iya, iya. Muncul muncul.
+
+
+[Sidik LLDikti XVI] 01:16:42
+Berarti kalau disuruh Bca, ya?
+
+
+[Abd Rahim Har] 01:16:44
+Oh, jadi siapapun yang memverifikasi atau Meng Approve akan muncul semua di sini, Ya.
+
+
+[Sidik LLDikti XVI] 01:16:49
+Bisa jadi sih.
+
+
+[dion kobi] 01:16:49
+Iya.
+
+
+[Abd Rahim Har] 01:16:51
+Oke, enggak masalah sih. Sebenarnya.
+
+
+[Abd Rahim Har] 01:16:53
+Oke, kalau begitu.
+
+
+[Sidik LLDikti XVI] 01:16:55
+Berarti verifikatornya Itu munculnya. Tulisannya. Di sebelah mana? Dia di Pdf nya.
+
+
+[dion kobi] 01:17:02
+Di verifikatornya akan muncul di sini, Pak.
+
+
+[Sidik LLDikti XVI] 01:17:06
+Berurutan gitu, ya.
+
+
+[dion kobi] 01:17:06
+Di.
+
+
+[dion kobi] 01:17:07
+Berurutan dari urutan, Misalnya dari verifikator. Kalau ini kan flow nya. Verifikator Dulu Kepala Bagian terus Pbmc. Cuma karena di sini enggak ada verifikator. Jadi langsung ke Kepala Bagian.
+
+
+[Abd Rahim Har] 01:17:14
+Iya.
+
+
+[Abd Rahim Har] 01:17:23
+Berarti kalau jabatan, kan? Atau pejabat, kan? Dia kan sesuai jabatannya nanti, kan? Kalau perannya dia sebagai verifikator, kemudian berarti peran cuma tiga. Sebenarnya.
+
+
+[dion kobi] 01:17:24
+Jambatan.
+
+
+[Abd Rahim Har] 01:17:34
+Peran. Ada verifikator. Baik, satu atau dua atau tiga verifikator. Kemudian atasan langsung, kemudian Pbmc. Kalau pejabat dia nanti mengikut ke jabatannya. Kalau dia ketua tim, maka bisa saja dia tanya di situ sebagai Ketua Tim.
+
+
+[Sidik LLDikti XVI] 01:17:51
+Kolom pejabat itu tetap perlu.
+
+
+[Sidik LLDikti XVI] 01:17:55
+Pak Rahim atau.
+
+
+[Sidik LLDikti XVI] 01:17:57
+Yang di sebelah kolom Perannya. Itu.
+
+
+[Abd Rahim Har] 01:18:01
+Kalau saya bukan pejabat, harusnya Jabatan.
+
+
+[Abd Rahim Har] 01:18:04
+Jabatan di situ bisa jadi jabatan. Bisa saja Pak. Sidik jadi jabatan. Apakah dia sebagai ketua tim atau jabatannya, dia sebagai. Apakah dia sebagai pelaksana atau dia sebagai fungsional atau Jf. Jft.
+
+
+[dion kobi] 01:18:05
+Batas.
+
+
+[dion kobi] 01:18:07
+Dapat.
+
+
+[dion kobi] 01:18:15
+Kak.
+
+
+[Sidik LLDikti XVI] 01:18:18
+Baiknya itu jabatannya. Di situ. Jabatan apa, Pak? Apakah jabatan strukturalnya atau jabatan? Apa gitu, Pak? Di situ.
+
+
+[Abd Rahim Har] 01:18:18
+Bisa saja itu, kan.
+
+
+[Abd Rahim Har] 01:18:27
+Nah, kalau dia pejabat struktural, maka jabatan yang dimasukkan adalah jabatan strukturalnya. Tapi kalau dia staf yang dimasukkan, harusnya jabatannya Sesuai dengan jabatannya. Apakah dia pelaksana Ataukah dia fungsional?
+
+
+[Abd Rahim Har] 01:18:39
+Gitu.
+
+
+[Sidik LLDikti XVI] 01:18:40
+Oke, jabatan terakhirnya, Pak. Ya.
+
+
+[Abd Rahim Har] 01:18:42
+Jabatan trennya. Tapi kalau dia struktural, harusnya dia diperannya atau jabatannya nanti di situ sebagai sebagaimana dia di struktural. Jadi Kalau dia atasan langsung. Misalnya Kepala Bagian. Harusnya dia jabatannya. Kepala Bagian.
+
+
+[Abd Rahim Har] 01:19:00
+Kalau Pbmc? Kalau dia dalam hal ini, kita kan berarti Kepala lembaga Kepala Eldikti toh.
+
+
+[Sidik LLDikti XVI] 01:19:08
+Uh, uh.
+
+
+[Abd Rahim Har] 01:19:08
+Begitu.
+
+
+[Sidik LLDikti XVI] 01:19:11
+Untuk namanya, Tidak perlu dicantumkan, Pak. Ya, nama pejabatnya.
+
+
+[Abd Rahim Har] 01:19:16
+Nama nama pejabatnya Ndak perlu cuma peran saja. Kalau saya kan nanti di.
+
+
+[Abd Rahim Har] 01:19:24
+Bentar, bentar.
+
+
+[Abd Rahim Har] 01:19:25
+Harusnya dicantumkan Kalau di formulir yang manual kan dicantumkan.
+
+
+[Abd Rahim Har] 01:19:30
+Bisa ndak ditambahkan. Dion.
+
+
+[dion kobi] 01:19:33
+Bisa sih, Mbak? Ditambahkan.
+
+
+[Abd Rahim Har] 01:19:35
+Jadi, nanti nama.
+
+
+[Sidik LLDikti XVI] 01:19:36
+Atau ini aja, Pak? Gimana kalau misalnya perannya? Itu yang jadi jabatannya. Jadi kalau peran itu kan? Dia cuma terbagi Pegawai Kepala Bagian dengan kepala gitu, Pak, kan? Misalnya, jadinya.
+
+
+[Sidik LLDikti XVI] 01:19:51
+Jabatannya itu.
+
+
+[Abd Rahim Har] 01:19:51
+Ada kalau kalau peran dia, Pak Sidik. Kalau peran cuma ada tiga di di ajuan cuti itu cuma ada tiga.
+
+
+[Abd Rahim Har] 01:19:59
+Di, kita cuma verifikator atasan langsung dengan Pbbmc. Perannya.
+
+
+[Abd Rahim Har] 01:20:06
+Jadi verif Apakah dia sebagai verifikator.
+
+
+[Abd Rahim Har] 01:20:10
+Atau di atasan langsung atau Pbmc. Nah, jadi mungkin bisa ditambahkan nama nama di sebelum peran. Tapi jabatannya harus kita Tetap masukkan. Jadi, bukan pejabat yang akhirnya kita masukkan. Tetapi jabatan.
+
+
+[Abd Rahim Har] 01:20:23
+Gitu.
+
+
+[dion kobi] 01:20:24
+Klubuatan, Jadwal dan.
+
+
+[Sidik LLDikti XVI] 01:20:27
+Putih, lima. Pusing. Saya.
+
+
+[Abd Rahim Har] 01:20:27
+Jadi, Ti, tinggal tambah satu lagi. Berarti Dian, Ya, Tambah kolom. Nama berarti ya.
+
+
+[dion kobi] 01:20:30
+Iya.
+
+
+[dion kobi] 01:20:32
+Nama Frat dengan berarti yang pejabat ini diganti dengan jabatan.
+
+
+[Abd Rahim Har] 01:20:36
+Jabatan betul.
+
+
+[dion kobi] 01:20:37
+Iya, iya.
+
+
+[Sidik LLDikti XVI] 01:20:40
+Oke, terus saya coba balik lagi di laman cuti tadi.
+
+
+[Abd Rahim Har] 01:20:45
+Gimana.
+
+
+[dion kobi] 01:20:47
+Di cuti, cuti.
+
+
+[Sidik LLDikti XVI] 01:20:50
+Di. Nah, di sini itu disusun Chain Upprofil itu. Kalau misalnya enggak ada verifikator. Baiknya. Fix dihilangin saja. Coba coba dihilangin Verifikatornya.
+
+
+[dion kobi] 01:20:50
+Terus. Ini.
+
+
+[dion kobi] 01:21:00
+Ini. Ya, ini. Ya.
+
+
+[Sidik LLDikti XVI] 01:21:01
+Nah, itu kan ada tulisan tanpa verificator itu. Itu enggak informasi yang tidak perlu Sebenarnya.
+
+
+[Sidik LLDikti XVI] 01:21:06
+Karena verifikator itu kan sifatnya opsional, jadi tidak perlu. Ada keterangan tambahan Itu nanti dihilangin aja. Jadinya yang diganti di sini, kan? Tinggal label label kepala. Bagiannya, kan.
+
+
+[dion kobi] 01:21:17
+Iya, iya.
+
+
+[Sidik LLDikti XVI] 01:21:17
+Untungnya kan Jabatan Cuti disini, kan? Terpisah dari jabatan si pegawainya jadi amanlah, Tinggal Ganti label aja jadi. Atasan langsung.
+
+
+[dion kobi] 01:21:26
+Saya langsung minta langsung.
+
+
+[Sidik LLDikti XVI] 01:21:28
+Jadi, kalau dia enggak ada verifikator, langsung saja tulisnya. Atasan langsung ke Pbmc gitu.
+
+
+[Sidik LLDikti XVI] 01:21:36
+Soalnya tadi kepikirannya kan? Kayak kalau misalnya stepnya diringkas. Kalau atasnya langsung dengan Pbmc, itu kan bisa jadi cuma satu. Tapi dari Pak Rahim, kan? Bilangnya tetap dua step. Meskipun.
+
+
+[Sidik LLDikti XVI] 01:21:51
+Pybmc dan atasan langsungnya. Itu orang yang sama gitu. Jadi, itu diringkas saja. Jadi, dua.
+
+
+[dion kobi] 01:21:58
+Jadi, dua meter itu.
+
+
+[Sidik LLDikti XVI] 01:22:00
+Terus coba kebawah.
+
+
+[Sidik LLDikti XVI] 01:22:07
+Nah, terus ini yang kolom kolom. Alasan ini, meskipun dia wajib, Ya, tapi di ini aja dibikin opsional deh.
+
+
+[dion kobi] 01:22:14
+Opsional, Oke, oke.
+
+
+[Sidik LLDikti XVI] 01:22:15
+Nanti. Sebagian besar kolom alasan itu dibikin opsional. Kecuali yang memang memang.
+
+
+[Sidik LLDikti XVI] 01:22:22
+Yang krusial itu kayak penghapusan data. Nah, itu, itu wajib tuh. Harus ada alasannya. Tapi kalau untuk yang penyesuaian data Itu nulis alasan itu. Kalaupun tetap diwajibkan, itu khawatirnya hanya perubahan yang sepele. Itu cuma ditulis.
+
+
+[Sidik LLDikti XVI] 01:22:37
+Penyesuaian gitu itu kan Kayak kayak tidak etis aja gitu. Jadi, mending dibikin opsional saja. Karena memang ada beberapa perubahan Yang mungkin karena kekeliruan sedikit dan nggak.
+
+
+[Sidik LLDikti XVI] 01:22:47
+Perlu ada alasan utuh gitu. Tapi kalau memang yang Action Action krusial yang dampaknya.
+
+
+[Sidik LLDikti XVI] 01:22:54
+Berat kayak penghapusan. Nah, itu baru wajib tuh. Kalau alasan.
+
+
+[Sidik LLDikti XVI] 01:23:00
+Terus di bagian.
+
+
+[dion kobi] 01:23:00
+Yep.
+
+
+[Sidik LLDikti XVI] 01:23:04
+Mana yang kuota? Cuti tadi? Kuota cuti.
+
+
+[dion kobi] 01:23:07
+What did you think?
+
+
+[dion kobi] 01:23:10
+Okay.
+
+
+[dion kobi] 01:23:20
+Thank you very much.
+
+
+[dion kobi] 01:23:24
+Jimmy?
+
+
+[Sidik LLDikti XVI] 01:23:27
+Kuota cuti Coba satu pegawai yang sudah ada cutinya deh. Tadi. Siapa atas nama siapa tadi yang sudah di set? Jadi, delapan belas hari.
+
+
+[dion kobi] 01:23:35
+Okay.
+
+
+[Sidik LLDikti XVI] 01:23:44
+Pak, Akup kalau nggak salah ya. Coba cek itu.
+
+
+[dion kobi] 01:23:50
+I need to know the packet I bought.
+
+
+[dion kobi] 01:23:53
+Got it.
+
+
+[Sidik LLDikti XVI] 01:23:55
+Empat hari pemakaian dua, sisa delapan belas. Dia pakai empat hari di.
+
+
+[Sidik LLDikti XVI] 01:24:02
+Coba ke bawah.
+
+
+[dion kobi] 01:24:03
+Okay.
+
+
+[Sidik LLDikti XVI] 01:24:05
+Mulai di tahun sekarang, Ya.
+
+
+[Sidik LLDikti XVI] 01:24:08
+Oke.
+
+
+[dion kobi] 01:24:08
+Yeah, it sounds kind of…
+
+
+[Sidik LLDikti XVI] 01:24:10
+Yang coba di bagian perubahan tadi. Di atas.
+
+
+[dion kobi] 01:24:10
+Can't wait.
+
+
+[dion kobi] 01:24:15
+Ah, sorry.
+
+
+[Sidik LLDikti XVI] 01:24:15
+Perbaiki data pemakaian.
+
+
+[Sidik LLDikti XVI] 01:24:18
+Nah, ini. Ini. Coba balik lagi ke menu atas.
+
+
+[dion kobi] 01:24:18
+Yeah.
+
+
+[dion kobi] 01:24:23
+And…
+
+
+[Sidik LLDikti XVI] 01:24:23
+Nah, ini kan ada cuti di luar simpeg dengan catat pemakaian tahunan, kan?
+
+
+[dion kobi] 01:24:28
+Iya.
+
+
+[Sidik LLDikti XVI] 01:24:32
+Cuti di luar simpeg. Ini kan diinput manual, kan?
+
+
+[dion kobi] 01:24:36
+Di input, manual, manual.
+
+
+[Sidik LLDikti XVI] 01:24:38
+Itu di diinput manual. Nanti kuotanya, kan otomatis. Dia bakal menghitung, kan Pemakaiannya. Berapa.
+
+
+[dion kobi] 01:24:44
+Iya.
+
+
+[Sidik LLDikti XVI] 01:24:46
+Nah, kalau perbaiki data pemakaian itu, jadi gimana tuh? Jadi kan, Misalnya, dia sudah input cuti di luar simpeg. Terus Perbaiki data pemakaian, kan? Angkanya bisa diotak Atik lagi, kan? Berarti ya.
+
+
+[dion kobi] 01:24:52
+No.
+
+
+[dion kobi] 01:25:01
+Kalau yang perbaiki data pemakaian ini, perbaiki yang dari catat pemakaian tahunan sebelumnya yang sudah dibuat. Pak, yang ini.
+
+
+[dion kobi] 01:25:10
+Kan? Ini dia, pemakaian dua ribu empat, kan? Dua, Nah, jadi yang tercatat di sini juga dua. Jadi, kalau misalnya, Ini diubah yang di tahunan yang di catat pemakaian tahunan Itu akan terubah.
+
+
+[Sidik LLDikti XVI] 01:25:21
+Oke, terus yang dicuti di di luar simpeg berarti enggak pengaruh atau gimana?
+
+
+[dion kobi] 01:25:27
+Yang kalau yang di luar simpeng ini nggak nggak pengaruh dia. Ini yang di tahun tahun sebelumnya yang mungkin mau ditambahkan.
+
+
+[Sidik LLDikti XVI] 01:25:38
+Jadi, misal di dua ribu. Dua puluh lima.
+
+
+[Sidik LLDikti XVI] 01:25:42
+Cutinya di luar Simpeg itu ada. Dia klaim enam, kan? Terus catat pemakaian tahunannya itu. Di tahun itu. Dia kecacatannya Enam juga. Nah, itu. Jadi, berapa pemakaian cutinya?
+
+
+[dion kobi] 01:25:46
+Iya.
+
+
+[dion kobi] 01:25:58
+Tetap tetap kenal.
+
+
+[dion kobi] 01:26:01
+Kan? Kalau yang cuti di luar tahunan itu, dia nggak nggak terhitung di ini.
+
+
+[dion kobi] 01:26:07
+Di.
+
+
+[Sidik LLDikti XVI] 01:26:08
+Coba.
+
+
+[Sidik LLDikti XVI] 01:26:10
+Catat pemakaian tahunan, kan? Pertama, itu ditambah gitu, kan? Dua ribu, dua puluh empat. Berapa? Dua ribu, Dua puluh lima, Berapa, Dua, enam, berapa? Nah, pas pencatatan pertama itu, misalnya pemakai Catat pemakaian tahunannya. Itu diinput enam, misalnya, di dua ribu. Dua puluh lima.
+
+
+[dion kobi] 01:26:13
+Iya, iya.
+
+
+[Sidik LLDikti XVI] 01:26:25
+Kan.
+
+
+[dion kobi] 01:26:25
+Oke, oke.
+
+
+[Sidik LLDikti XVI] 01:26:28
+Terus dia mau input dari Admin Kepegawaian. Mau input? Bukti dukungnya gitu. Misalnya, yang di luar simpack.
+
+
+[Sidik LLDikti XVI] 01:26:36
+Enam Hari juga gitu. Nah, itu fakta. Pemakaian tahun. Dua ribu, Dua puluh limanya. Jadi, berapa? Enam, apa, dua belas.
+
+
+[dion kobi] 01:26:45
+Enam enam.
+
+
+[Sidik LLDikti XVI] 01:26:47
+Tetap enam.
+
+
+[dion kobi] 01:26:49
+Tetap enam, Mbak.
+
+
+[Sidik LLDikti XVI] 01:26:54
+Tetap enam. Nah, kalau misalnya pas pencatatan awal, dia Inputnya enam gitu, kan? Karena itu kan pemakaian. Tapi kita enggak tahu pemakaiannya? Itu dasarnya apa gitu? Makanya diinputnya lewat cuti di luar simpack nya. Jadi, dia pertama inputnya. Fakta pemakaian dua ribu, dua puluh lima, enam.
+
+
+[Sidik LLDikti XVI] 01:27:10
+Terus yang di cuti di luar simpeg itu. Dia Inputnya empat. Berarti Berapa yang dipakai.
+
+
+[dion kobi] 01:27:18
+Dan mungkin, Pak.
+
+
+[dion kobi] 01:27:19
+Di luar, ke sini. Mungkin.
+
+
+[dion kobi] 01:27:24
+Boleh ulang, Mbak?
+
+
+[Sidik LLDikti XVI] 01:27:26
+Cewek cowok ke atas. Cowok ke atas.
+
+
+[dion kobi] 01:27:28
+Siap.
+
+
+[dion kobi] 01:27:30
+Ya.
+
+
+[Sidik LLDikti XVI] 01:27:31
+Nah, dia ca. Dia admin simpeg itu. Dia input pemakaian tahunannya di dua ribu. Dua puluh lima. Itu sudah enam. Yang gue pakai, kan?
+
+
+[dion kobi] 01:27:41
+Enam, ya.
+
+
+[Sidik LLDikti XVI] 01:27:42
+Oke, terus Dia menginput cuti di luar simpeg di tahun dua ribu. Dua puluh lima juga, Misalnya.
+
+
+[Sidik LLDikti XVI] 01:27:51
+Dia nginputnya Empat.
+
+
+[Sidik LLDikti XVI] 01:27:53
+Nah, berarti cuti yang kepakai di dua ribu. Dua puluh lima. Berapa.
+
+
+[dion kobi] 01:27:58
+Sepuluh.
+
+
+[Sidik LLDikti XVI] 01:27:59
+Sepuluh.
+
+
+[dion kobi] 01:28:01
+Kan? Enam yang disinfect. Empat yang.
+
+
+[Sidik LLDikti XVI] 01:28:07
+Catat pemakai tahunannya sudah diinput. Enam terus dicatat lagi. Di luar Simpeg empat berarti sepuluh.
+
+
+[dion kobi] 01:28:08
+Dari luar.
+
+
+[Sidik LLDikti XVI] 01:28:21
+Hayo berapa?
+
+
+[Abd Rahim Har] 01:28:29
+Harusnya sepuluh dong. Harusnya sepuluh.
+
+
+[dion kobi] 01:28:30
+Kalau yang di cuti di luar simpeg ini di jenis cutinya, Dia masih di tahunan.
+
+
+[Abd Rahim Har] 01:28:38
+Misalnya tahunan.
+
+
+[dion kobi] 01:28:38
+Mbak.
+
+
+[Sidik LLDikti XVI] 01:28:40
+Jadi kan kalau catat pemakaian tahunan itu kan cuma diinput angkanya saja. Nah, Case, Kalau misalnya ada cuti yang memang Dicatatnya di luar simpt, Tapi yang lampau gitu.
+
+
+[dion kobi] 01:28:45
+Iya.
+
+
+[Sidik LLDikti XVI] 01:28:51
+Buat karena di sini, kan? Di pencatatan luar. Simpeg itu, kan? Mau di upload dokumennya? Alasannya apa? Dan lain lain Gitu kan? Buat yang lampau. Lah.
+
+
+[Sidik LLDikti XVI] 01:29:03
+Bingung kan.
+
+
+[dion kobi] 01:29:05
+Dada ini.
+
+
+[Abd Rahim Har] 01:29:06
+Jadi, jadi ada kemungkinan ada kemungkinan begini. Dion, saya paham apa yang ditanyakan Pak Sidik. Ada kemungkinan begini.
+
+
+[Sidik LLDikti XVI] 01:29:06
+Nah, itu juga. Saya bingung tadi.
+
+
+[Abd Rahim Har] 01:29:15
+Coba ke atas tadi. Ke atas, Ke atas sebagian. Nah, ini kan ada catat pemakaian tahunan, kan?
+
+
+[dion kobi] 01:29:18
+Iya, iya.
+
+
+[Abd Rahim Har] 01:29:22
+Jadi, misalnya, ada cuti yang sudah terpakai di dua ribu. Dua puluh empat.
+
+
+[Abd Rahim Har] 01:29:28
+Ya, tapi dokumennya atau cuti di luar tidak ada, Tapi kita tahu kita ada catatan bahwa yang bersangkutan pernah cuti sekian hari.
+
+
+[Abd Rahim Har] 01:29:39
+Sementara Di kesempatan lain, ada juga cuti di luar spek yang ada dokumennya di tahun yang sama.
+
+
+[Abd Rahim Har] 01:29:45
+Di tahun yang sama.
+
+
+[Abd Rahim Har] 01:29:47
+Berarti kan ada dua kali. Kita menginput satu mencatat pemakaian tahunan. Satu menginput cuti di luar simpack.
+
+
+[Abd Rahim Har] 01:29:56
+Ya, logikanya harusnya.
+
+
+[Abd Rahim Har] 01:29:59
+Ditotal, dong.
+
+
+[Abd Rahim Har] 01:30:01
+Karena kalau tidak, berarti ada salah satu yang tidak terekam.
+
+
+[Abd Rahim Har] 01:30:04
+Kan.
+
+
+[Abd Rahim Har] 01:30:06
+Nah, kalau tadi pertanyaannya, Pak Sidik kalau ada pemakaian tahunan, Dua ribu, dua puluh lima, sekian. Terus ada cuti di luar simpeg.
+
+
+[Abd Rahim Har] 01:30:13
+Ditambah sekian. Nah, tidak mungkin cuma yang pemakaian tahunan saja yang terekam harusnya cuti di luar sampe juga masuk. Begitu logikanya seperti itu.
+
+
+[Abd Rahim Har] 01:30:23
+Gimana, Diam.
+
+
+[Sidik LLDikti XVI] 01:30:27
+Coba.
+
+
+[Sidik LLDikti XVI] 01:30:31
+Soalnya, kelihatannya kayak bertabrakan jadinya. Fiturnya.
+
+
+[Abd Rahim Har] 01:30:42
+Enggak tahu kalau mau.
+
+
+[Abd Rahim Har] 01:30:46
+Enggak ada di luar, Cuti di luar simpeg. Misalnya, semua.
+
+
+[Abd Rahim Har] 01:30:53
+Jeda asumsikan untuk ajuan yang yang ke depan. Ini tidak ada lagi di luar simpage. Semua harus melalui Sin Fac, Misalnya, ya, misalnya. Nah, adapun untuk.
+
+
+[Abd Rahim Har] 01:31:05
+Penentuan N, Dua dan N Satu, Kita berdasarkan dokumen yang ada, Misalnya, ada pengajuan atau ada formulir yang sudah disetujui Di tahun dua ribu, Dua puluh empat, dengan dua ribu empat. Maka itu yang dasarnya Kita mengisi, kan ceritanya? Kita mau mengisi dulu. Ini.
+
+
+[Abd Rahim Har] 01:31:20
+Riwayatnya.
+
+
+[dion kobi] 01:31:22
+Iya, iya.
+
+
+[Abd Rahim Har] 01:31:22
+Kan? Kita memilih riwayatnya. Nah, yang kedua, selain Kalau dia, misalnya formulir, mungkin ada catatan catatan lain dari aplikasi sebelumnya. Itu yang kita input ke N Dua dan N Satu termasuk juga N berjalannya. Ini.
+
+
+[Abd Rahim Har] 01:31:36
+Nah, itu yang jadi untuk ke depan. Nah, makanya tadi saya juga. Kalau terkait cuti di luar simpeg ini apa Ya, karena nanti jangan sampai.
+
+
+[Abd Rahim Har] 01:31:45
+Jangan sampai ini tidak terekap begitu.
+
+
+[Abd Rahim Har] 01:31:49
+Tidak terekap. Bisa saja ini tetap digunakan. Tapi ini hanya untuk pengakuan.
+
+
+[Abd Rahim Har] 01:31:55
+Cuti yang sudah pernah diajukan begitu. Karena kita kan ke depan komit, kan? Mau pakai aplikasi ini untuk pengajuan cuti. Berarti kalau untuk ke depan. Untuk cuti di luar simpeg Ndak lagi diberlakukan. Ini cuti di luar simpeg. Hanya untuk mengakui.
+
+
+[dion kobi] 01:32:03
+Iya.
+
+
+[Abd Rahim Har] 01:32:11
+Atau menginput data atau ajuan cuti yang sudah lampau atau yang sudah terbit.
+
+
+[dion kobi] 01:32:17
+Driver ya.
+
+
+[Abd Rahim Har] 01:32:17
+Kira Kira begitu.
+
+
+[dion kobi] 01:32:19
+Tadi itu tetap akan dihitung. Yang dari cuti luar si Impact dan yang sudah dicatat. Pemakaian pemakaian tahunan.
+
+
+[Sidik LLDikti XVI] 01:32:30
+Gini, gini, gini, gini. Dibikin satu aja untuk catat pemakaian tahunan itu. Fiturnya tetap ada, tapi di disable dulu. Buat Inputnya gitu, jadi, jadi jangan diinput. Nanti dia ngitungnya. Satu pintu aja lewat cuti di luar simpack gitu. Jadi kalaupun dia di dua ribu, dua puluh empat.
+
+
+[Sidik LLDikti XVI] 01:32:48
+Ada mau klaim cuti, kan? Dua ribu dua puluh empat. Artinya kita ada dokumennya. Semua Pak Rahim, Ya.
+
+
+[Sidik LLDikti XVI] 01:32:56
+Nah, jadi history nya. Kita bisa tambahkan langsung di sini. Jadi dia ngitungnya cuma lewat cuti di luar simpeg aja gitu.
+
+
+[Abd Rahim Har] 01:32:56
+Harusnya harusnya ada semua. Iya.
+
+
+[dion kobi] 01:33:05
+Oke, kalau seperti itu bisa sih, Mbak, berarti dihitung berdasarkan cuti yang sudah pernah diambil.
+
+
+[Abd Rahim Har] 01:33:05
+Iya.
+
+
+[Sidik LLDikti XVI] 01:33:08
+Iya.
+
+
+[Sidik LLDikti XVI] 01:33:13
+Siap.
+
+
+[dion kobi] 01:33:14
+Tapi datanya tetap tetap ditampilkan di sini, ya?
+
+
+[Sidik LLDikti XVI] 01:33:16
+Iya betul. Jadi yang di atas pemakaian tahunan itu, dia tidak perlu diinput angkanya. Kalau masalah untuk submit, angkanya tetap Ada, tapi kayak di disable saja dulu. Gitu kan?
+
+
+[dion kobi] 01:33:29
+Bisa bisa.
+
+
+[Sidik LLDikti XVI] 01:33:30
+Heeh. Cuman dia ibaratnya fitur catat pemakaian tahunan itu sebatas buat tracking aja karena dia perhitungannya, kan? Tinggal diambil dari Cuti di luar simpack. Kalau gitu kan Sederhana ya.
+
+
+[dion kobi] 01:33:41
+Iya, iya.
+
+
+[Sidik LLDikti XVI] 01:33:42
+Soalnya, kalau dua, duanya input dua, duanya. Ini kan ibaratnya pakai sumber data yang bakal nyimpen ke data yang sama. Makanya tadi kan saya tanya kalian bingung. Saya juga bingung Gitu kan? Yang dihitungnya. Jadi gimana.
+
+
+[Sidik LLDikti XVI] 01:33:56
+Tapi kalau dicatatnya, semua lewat cuti di luar simpeg itu, kan?
+
+
+[Sidik LLDikti XVI] 01:34:02
+Karena pengusulan cutinya lewat aplikasi, kan? Harusnya sudah enggak ada lagi yang di luar simpeg gitu, kan? Berarti cuti di luar simpeg itu yang manual. Itu inputnya. Buat yang belakang belakang. Pengakuan yang sebelum sebelumnya. Nah, itu kan perhitungan. Perhitungannya. Tinggal hitung aja dari sini gitu. Jadi catat pemakaian tahunan. Nggak ada inputan lagi.
+
+
+[Sidik LLDikti XVI] 01:34:18
+Soal berapa cuti yang sudah diklaim.
+
+
+[Sidik LLDikti XVI] 01:34:21
+Bahkan sudah ada fitur cuti di luar simpack Jadinya kita tinggal pakai aja yang cuti di luar simpack gitu. Catat Pemakaian tahunannya sebagai kontrol aja.
+
+
+[Abd Rahim Har] 01:34:28
+Iya.
+
+
+[dion kobi] 01:34:29
+Ini langsung data aslinya yang diinputkan. Yang.
+
+
+[Sidik LLDikti XVI] 01:34:31
+Iya.
+
+
+[dion kobi] 01:34:33
+Ya.
+
+
+[Sidik LLDikti XVI] 01:34:33
+Kalau pertemuan terakhir kan? Belum ada nih yang buat inputan manual, kan?
+
+
+[dion kobi] 01:34:38
+Iya, iya.
+
+
+[Sidik LLDikti XVI] 01:34:39
+Kemarin, kan? Cuma ada di bagian Pengakuan Cutinya saja berapa hari? Nah, karena kaliannya sudah bikin cuti di luar simpack Buat penginputan cuti manual. Berarti kan? Yang perhitungan sebelumnya itu kan jadi gugur karena ini kan lebih lebih akuntabel nih, lebih bisa dipertanggungjawabkan, bisa di upload.
+
+
+[dion kobi] 01:34:44
+Iya.
+
+
+[Sidik LLDikti XVI] 01:34:57
+Dokumennya juga, kan? Kalau sedangkan kalau pemak, apa? Pencatatan angka doang, kan? Kita enggak tahu tuh itu benar atau enggak Gitu kan Enggak ada dasarnya. Kan.
+
+
+[dion kobi] 01:35:05
+Betul betul.
+
+
+[Sidik LLDikti XVI] 01:35:06
+Jadi mending dihitungnya dari cuti di luar. Simpage aja. Kalau pakai begitu. Sudah sudah clear Semua gitu. Jadi nggak ada Yang dibingungin lagi, kan? Karena satu pintu, semua dihitungnya. Kalau yang N, Dua N, dua N, satu. Itu kan dihitungnya dari di luar simpage, semua hitungannya.
+
+
+[Sidik LLDikti XVI] 01:35:25
+Oke.
+
+
+[dion kobi] 01:35:26
+Oke, siap, Kak. Siap, Kak.
+
+
+[Sidik LLDikti XVI] 01:35:27
+Sip.
+
+
+[Sidik LLDikti XVI] 01:35:29
+Saya rasa sudah cukup sih. Itu sudah. Apa ini riwayat persetujuan eksternalnya? Apa nih?
+
+
+[dion kobi] 01:35:35
+Ini yang verifikasi Itu Siapa.
+
+
+[Sidik LLDikti XVI] 01:35:40
+Yang sebelum sebelumnya. Bagus lah. Yang lebih.
+
+
+[Abd Rahim Har] 01:35:40
+Iya.
+
+
+[Abd Rahim Har] 01:35:43
+Iya, jadi diverifikasi dulu ya.
+
+
+[dion kobi] 01:35:44
+Iya, siap.
+
+
+[dion kobi] 01:35:46
+Yang verifikasi itu siapa?
+
+
+[Abd Rahim Har] 01:35:46
+Oke, oke.
+
+
+[Abd Rahim Har] 01:35:48
+Oke, oke, oke.
+
+
+[Sidik LLDikti XVI] 01:35:49
+Aman kalau gitu, Ini di luar ekspektasi sih.
+
+
+[Abd Rahim Har] 01:35:50
+Ini.
+
+
+[Abd Rahim Har] 01:35:52
+Ya, ini ini untuk sumber approval nya. Approval nya Nanti berarti pilihannya dari daftar pegawai, Ya.
+
+
+[dion kobi] 01:35:59
+Iya.
+
+
+[Abd Rahim Har] 01:36:01
+Oke, oke, sip.
+
+
+[Sidik LLDikti XVI] 01:36:03
+Oke.
+
+
+[Sidik LLDikti XVI] 01:36:05
+Tinggal. Ini berarti masalahnya. Notifikasi. Wa aja ya. Kalau e mail aman, kan?
+
+
+[dion kobi] 01:36:10
+Di E Mail.
+
+
+[dion kobi] 01:36:12
+Nggak bisa.
+
+
+[Sidik LLDikti XVI] 01:36:16
+Email gimana? Ap? Mau pakai mail server yang bawaan? Atau memang tetap dari mau tak kasih akun Google nya?
+
+
+[dion kobi] 01:36:19
+Ini yang.
+
+
+[Grantly Antonio Edeard Sorongan] 01:36:27
+Kalau saya.
+
+
+[dion kobi] 01:36:27
+Kalau sekarang e Mail masih pakai melted.
+
+
+[Sidik LLDikti XVI] 01:36:31
+Oh, Melbit. Tapi, Tapi aman kan? Kalau di testing.
+
+
+[dion kobi] 01:36:31
+Amin, ambil.
+
+
+[dion kobi] 01:36:34
+Sudah pernah ada Cash.
+
+
+[Sidik LLDikti XVI] 01:36:37
+Oke, oke, aman kalau gitu.
+
+
+[Sidik LLDikti XVI] 01:36:39
+Kan tinggal. Ibaratnya tinggal pindah bus aja, kan.
+
+
+[dion kobi] 01:36:43
+Iya, kak.
+
+
+[Sidik LLDikti XVI] 01:36:45
+Oke.
+
+
+[Sidik LLDikti XVI] 01:36:47
+Kayaknya sudah semua itu ada. Iya.
+
+
+[dion kobi] 01:36:50
+Pagi, makan terakhir.
+
+
+[Grantly Antonio Edeard Sorongan] 01:36:50
+Izin terakhir. Mau konfirmasi? Hanya mau konfirmasi sih.
+
+
+[Sidik LLDikti XVI] 01:36:52
+Ya, silakan.
+
+
+[Grantly Antonio Edeard Sorongan] 01:36:58
+Yang di bagian data pegawai. Mau lebih dari pegawai.
+
+
+[Sidik LLDikti XVI] 01:36:58
+Silahkan.
+
+
+[Grantly Antonio Edeard Sorongan] 01:37:04
+Yang bagian Sk. Jadi, kan saat ini Sk itu ada empat.
+
+
+[Grantly Antonio Edeard Sorongan] 01:37:10
+Ada Kgb, pangkat, jabatan dan kebangkatan. Nah.
+
+
+[Grantly Antonio Edeard Sorongan] 01:37:16
+Kayaknya kayaknya kalau cuma ini butuh informasi dari Bapak, mungkin.
+
+
+[Grantly Antonio Edeard Sorongan] 01:37:23
+Mungkin Sk pengangkatan. Dan juga Sk. Pangkat.
+
+
+[Grantly Antonio Edeard Sorongan] 01:37:28
+Itu bisa digabungkan jadi satu Ndak.
+
+
+[Grantly Antonio Edeard Sorongan] 01:37:30
+Bisa dijaburkan jadi satu karena.
+
+
+[Grantly Antonio Edeard Sorongan] 01:37:33
+Pengangkatan itu.
+
+
+[Grantly Antonio Edeard Sorongan] 01:37:37
+Jenisnya. Itu adalah Cpns, Pns, dan Pppk. Nah, sedangkan pangkat itu.
+
+
+[Grantly Antonio Edeard Sorongan] 01:37:44
+Golongan dari tiga hal. Itu dari Pns, Ppk, dan juga Cpns. Nah, mungkin bisa disatukan atau tetap seperti ini.
+
+
+[Sidik LLDikti XVI] 01:37:54
+Tetap bisa sih.
+
+
+[Grantly Antonio Edeard Sorongan] 01:37:56
+Oh, tetap bisa.
+
+
+[Sidik LLDikti XVI] 01:37:57
+Dia kan? Kalau Sk pengangkatan itu kan dihitungnya. Tetap riwayat terakhir. Pak Rahim, kan?
+
+
+[Abd Rahim Har] 01:38:04
+Betul ini. Kalau ini, ini juga jangan. Kalau saya jangan dibatasi empat ini. Apa maksudnya nih? Nol dari empat. Ini Maksudnya apa nih?
+
+
+[Sidik LLDikti XVI] 01:38:15
+Sk Pentingnya itu, Pak. Jadi.
+
+
+[Abd Rahim Har] 01:38:17
+S. Kepentingnya.
+
+
+[Grantly Antonio Edeard Sorongan] 01:38:18
+Yang untuk itu, Dokumen wajib.
+
+
+[Abd Rahim Har] 01:38:22
+Dokumen wajib. Jadi, maksud saya, begini kalau Sk pangkat kan ada pangkat terakhir. Sk. Jabatan juga ada jabatan terakhir Sk. Kgb juga Ada Kgb terakhir.
+
+
+[Abd Rahim Har] 01:38:31
+Nah, kalau begitu kan? Berarti yang dihitung yang empat Ini berarti Sk. S, E tiga diantaranya, kan? Sk terakhir. Berarti. Kecuali Sk. Pengangkatan pertama.
+
+
+[Grantly Antonio Edeard Sorongan] 01:38:41
+Iya, iya, iya.
+
+
+[Abd Rahim Har] 01:38:42
+Iya kan.
+
+
+[Sidik LLDikti XVI] 01:38:44
+Ini kayaknya lebih ke kelengkapan Dokumen saja sih, Pak. Jadi, kelengkapan dokumen dasar. Jadi, yang penting sudah sempat keinput. Riwayatnya harusnya.
+
+
+[Sidik LLDikti XVI] 01:38:53
+Hijau gitu kan ya.
+
+
+[Grantly Antonio Edeard Sorongan] 01:38:55
+Iya, jadi itu hanya yang bagian diperbaiki. Dan yang itu, itu hanya wajibnya.
+
+
+[Sidik LLDikti XVI] 01:38:56
+Uh, huh, Karena.
+
+
+[Abd Rahim Har] 01:39:02
+Oke, oke.
+
+
+[Grantly Antonio Edeard Sorongan] 01:39:03
+Yang Pns. Dia wajib main Discover.
+
+
+[Sidik LLDikti XVI] 01:39:11
+Soalnya, kalau misalnya dia ada. Ada penambahan Sk baru juga. Dari sistem pun agak susah. Mau di tracking sih? Itu, Pak. Yang paling mentek di tracking itu pegawainya. Itu sudah sudah upload. Dokumen dasarnya belum gitu.
+
+
+[Abd Rahim Har] 01:39:25
+Ya, oke, oke.
+
+
+[Sidik LLDikti XVI] 01:39:26
+Soalnya kan? Itu juga yang yang kita butuhkan, Pak.
+
+
+[Abd Rahim Har] 01:39:30
+Iya, iya.
+
+
+[Sidik LLDikti XVI] 01:39:33
+Sk Wajib ini berarti kalau.
+
+
+[Sidik LLDikti XVI] 01:39:38
+Cpns, Pns.
+
+
+[Sidik LLDikti XVI] 01:39:41
+Oke, kalau misalnya dari Cpns, dia berubah status jadi Pns gimana tuh?
+
+
+[Grantly Antonio Edeard Sorongan] 01:39:46
+Itu tinggal dirubah di pegawai. Nanti.
+
+
+[Grantly Antonio Edeard Sorongan] 01:39:51
+Kita upload atau kita buat Sk baru di pengangkatan.
+
+
+[Grantly Antonio Edeard Sorongan] 01:39:56
+Dari Cpns ke Pns.
+
+
+[Sidik LLDikti XVI] 01:40:00
+Dia ubah status Sama upload, Sk pengangkatan atau tinggal upload. Sk pengangkatan. Dia otomatis. Ganti. Status gitu.
+
+
+[Grantly Antonio Edeard Sorongan] 01:40:08
+Dia rubah.
+
+
+[Grantly Antonio Edeard Sorongan] 01:40:10
+Statusnya juga sih.
+
+
+[Abd Rahim Har] 01:40:10
+Dua belas.
+
+
+[Sidik LLDikti XVI] 01:40:12
+Oke, oke.
+
+
+[Grantly Antonio Edeard Sorongan] 01:40:12
+Dengan.
+
+
+[Grantly Antonio Edeard Sorongan] 01:40:14
+Pimpinan. Dokumen.
+
+
+[Sidik LLDikti XVI] 01:40:19
+Coba sk pengangkatan itu. Coba lihat di Upload Sk. Pengangkatan itu apa saja gitu. Kategorinya.
+
+
+[Grantly Antonio Edeard Sorongan] 01:40:28
+Di. Di. Coba Dia di Peng Sk. Pengangkatan.
+
+
+[Sidik LLDikti XVI] 01:40:33
+Pemberangkatan.
+
+
+[Sidik LLDikti XVI] 01:40:36
+Pakai jenis pengangkatan.
+
+
+[Grantly Antonio Edeard Sorongan] 01:40:36
+Nah, di sini ada jenisnya. Nah, jenisnya cuma tiga. Ini Pns. Pns.
+
+
+[Sidik LLDikti XVI] 01:40:42
+Oke, gini aja. Ditambahin. Validasi tadi di awal itu, kan? Tadi di menu awal itu kan ada validasi buat sk Pengangkatan di ini aja dicocokin. Kalau misalnya dianya Sk. Pengangkatan status Pns nya sebagai Pns.
+
+
+[Sidik LLDikti XVI] 01:40:58
+Tapi dokumennya itu. Tidak ada yang berkaitan dengan jenis pengangkatan Pns. Itu pasti merah gitu. Jadi kalaupun dia sudah berubah, Status nih dari Ce. Dia ada Skcpns, kan? Sebelumnya, statusnya masih Cpns. Terus. Dia sudah naik saja di Pns, Misalnya.
+
+
+[Sidik LLDikti XVI] 01:41:12
+Kan? Itu otomatis, kan? Pasti dokumen status. Dokumennya harusnya jadi merah. Jadi, dia nyocokin satu. Si pegawainya itu. Apa dengan Sk itu sudah di upload atau belum? Kalau misalnya belum kan? Otomatis jadi merah belum lengkap gitu, kan?
+
+
+[Grantly Antonio Edeard Sorongan] 01:41:22
+Seperti itu.
+
+
+[Sidik LLDikti XVI] 01:41:26
+Paham, kan.
+
+
+[Grantly Antonio Edeard Sorongan] 01:41:27
+Yeah, yeah, yeah.
+
+
+[Sidik LLDikti XVI] 01:41:29
+Jadi, Ti tinggal direlasikan saja. Dia ngecek jenis dokumennya yang untuk pegawai tersebut yang jenis pengangkatan Pns sudah ada atau Belum, Kalau belum ada, berarti harus di upload gitu.
+
+
+[Grantly Antonio Edeard Sorongan] 01:41:31
+Industrial Revolution.
+
+
+[Grantly Antonio Edeard Sorongan] 01:41:33
+I think it's the home management.
+
+
+[Grantly Antonio Edeard Sorongan] 01:41:35
+Multiple beverages.
+
+
+[Grantly Antonio Edeard Sorongan] 01:41:42
+Okay, okay.
+
+
+[Sidik LLDikti XVI] 01:41:44
+Jadinya kan lebih spesifik gitu juga. Karena kan C, Pns, Pns itu, kan? Pasti ada peralihan. Nah, takutnya.
+
+
+[Sidik LLDikti XVI] 01:41:51
+Dia ini sudah sempat upload Berkasnya Pns. Tapi pas tahun depannya dia terangkat jadi Pns nya.
+
+
+[Grantly Antonio Edeard Sorongan] 01:41:55
+Thank you.
+
+
+[Sidik LLDikti XVI] 01:41:58
+Dia enggak enggak perbarui berkas, kan? Karena memang dokumennya. Itu masih hijau. Padahal dia tuh tetap harus wajib buat upload Sk Pns nya gitu harus diperbaharui. Nah, ini kan untungnya, di jenis pengangkatan, kan? Sudah ada kategorinya, jadi tinggal dicocokkan saja. Si pegawai ini statusnya Pns.
+
+
+[Grantly Antonio Edeard Sorongan] 01:42:03
+Looks like when I put this stuff in here.
+
+
+[Sidik LLDikti XVI] 01:42:14
+Dia ada berkas yang berkaitan dengan jenis pengangkatan Pns. Atau enggak, kalau enggak, berarti tidak valid gitu.
+
+
+[Sidik LLDikti XVI] 01:42:20
+Kan.
+
+
+[Grantly Antonio Edeard Sorongan] 01:42:20
+Oh.
+
+
+[Abd Rahim Har] 01:42:20
+Yang ber yang ber yang punya wewenang untuk merubah status Japanese menjadi Pens. Siapa.
+
+
+[Grantly Antonio Edeard Sorongan] 01:42:27
+Ada dua. Before da da dua, ada super admin, dan admin kepagawa yang tapi.
+
+
+[Grantly Antonio Edeard Sorongan] 01:42:33
+Ah, untuk pimpin naan, itu liye sari achtur untuk muliki axes di role-based axes a todi ribek.
+
+
+[Abd Rahim Har] 01:42:42
+Oke.
+
+
+[Grantly Antonio Edeard Sorongan] 01:42:42
+Ya, pre-default na, hanya admin pagyawa ya, dan, sipat min.
+
+
+[Abd Rahim Har] 01:42:47
+Terus yang yang Meng upload dokumennya.
+
+
+[Abd Rahim Har] 01:42:51
+Menginput data ini. Bapak, Apakah admin atau pegawai.
+
+
+[Grantly Antonio Edeard Sorongan] 01:42:51
+Summer.
+
+
+[Grantly Antonio Edeard Sorongan] 01:42:53
+Thomas, what's up?
+
+
+[Grantly Antonio Edeard Sorongan] 01:42:55
+Super… wadua, super admin, dan admin tobagawa yan.
+
+
+[Abd Rahim Har] 01:42:58
+Berarti bukan pegawai yang bersangkutan. Ya, yang.
+
+
+[Grantly Antonio Edeard Sorongan] 01:43:01
+You can, you can.
+
+
+[Abd Rahim Har] 01:43:02
+Oke, oke.
+
+
+[Sidik LLDikti XVI] 01:43:07
+Oke, aman Kalau gitu.
+
+
+[Sidik LLDikti XVI] 01:43:10
+Lihat, Pak Hidayat. Mungkin ada Tadi.
+
+
+[LLDIKTI XVI - Hidayat] 01:43:14
+Ada sedikit saran. Bisa lihat kembali formulir cuti? Ya.
+
+
+[Sidik LLDikti XVI] 01:43:14
+Gitu.
+
+
+[LLDIKTI XVI - Hidayat] 01:43:35
+Oke, mungkin cuma sedikit merapikan format. Coba ke atas yang di Cop Surat itu. Mungkin yang tempat itu mungkin bisa. Ada space sedikit. Biar tidak melekat dengan tabel. Kemudian.
+
+
+[LLDIKTI XVI - Hidayat] 01:43:51
+Untuk yang.
+
+
+[LLDIKTI XVI - Hidayat] 01:43:53
+Menambahkan.
+
+
+[LLDIKTI XVI - Hidayat] 01:43:57
+Verifikator Apbmc untuk setiap pegawai. Itu dilakukan satu, satu, Ya.
+
+
+[Abd Rahim Har] 01:44:07
+Harus dilakukan satu, satu pas fair.
+
+
+[LLDIKTI XVI - Hidayat] 01:44:07
+Di.
+
+
+[LLDIKTI XVI - Hidayat] 01:44:09
+Tidak, Pak, di aplikasi bisa dilihat kembali.
+
+
+[LLDIKTI XVI - Hidayat] 01:44:14
+Pas Edit Pebmc. Ya, ini kalau set Py Bmc itu gimana?
+
+
+[Abd Rahim Har] 01:44:32
+Maksudnya setting approval.
+
+
+[LLDIKTI XVI - Hidayat] 01:44:34
+Iya, ditambahkan Pbmc. Tim Verifikator ini satu satu, ya? Jadi, klik user.
+
+
+[Abd Rahim Har] 01:44:38
+Iya.
+
+
+[LLDIKTI XVI - Hidayat] 01:44:42
+Kemudian ditambah, ya.
+
+
+[Abd Rahim Har] 01:44:44
+Harusnya satu satu, dong. Karena setiap orang kan berbeda. Ininya berbeda. Perlakuannya.
+
+
+[LLDIKTI XVI - Hidayat] 01:44:47
+Iya, tapi kan ada. Ya, tapi kalau saran saya sih, di data pegawai itu bisa ada template. Jadi kan tim Ada tim kerja, kan? Nah, dibandingkan tim kerja itu, kan? Misalnya enam orang. Nah, enam orang ini bisa punya alur verifikator yang sama.
+
+
+[Abd Rahim Har] 01:44:59
+Iya.
+
+
+[LLDIKTI XVI - Hidayat] 01:45:08
+Dibandingkan harus satu satu orang. Jadi bisa di multiple, Ya, biar bisa mempermudah admin kepegawaian. Jadi, ada template terus di Set. Siapa saja, misalnya Tim Belmawa. Ya, di set siapa saja tim verifikatornya Ada Ketua Tim.
+
+
+[Abd Rahim Har] 01:45:12
+Iya.
+
+
+[Abd Rahim Har] 01:45:15
+Iya.
+
+
+[Abd Rahim Har] 01:45:19
+Iya.
+
+
+[LLDIKTI XVI - Hidayat] 01:45:28
+Kemudian ada kepala bagian. Kemudian ada Pbmc. Nah, kemudian di bagian pegawai itu bisa dipilih. Misalnya, enam orang tadi bisa Dicek saja. Diceklis, Tek, tek, tek, Tek Kemudian Design saja. Template nya. Jadi, dengan Ui begitu mempermudah tim kepegawaian dibandingkan, harus buka satu, satu.
+
+
+[Abd Rahim Har] 01:45:48
+Iya.
+
+
+[LLDIKTI XVI - Hidayat] 01:45:48
+Dibanding kalau, misalnya ada empat puluh pegawai. Jadi ada empat puluh kali. Nah, dibanding kalau, misalnya cuma ada lima tim, Jadi, cuma lima kali. Mereka aset saja.
+
+
+[LLDIKTI XVI - Hidayat] 01:46:00
+Jadi, seperti itu.
+
+
+[LLDIKTI XVI - Hidayat] 01:46:02
+Tapi ini saran saja sih.
+
+
+[Sidik LLDikti XVI] 01:46:02
+Kalau sekarang kan dia terpegawai. Jadi ini ada menu set approval nya. Itu dibalik gitu. Gimana kalau misalnya dari yang di set itu. Langsung dari siapa yang membawahi siapa gitu?
+
+
+[LLDIKTI XVI - Hidayat] 01:46:05
+Kalau.
+
+
+[LLDIKTI XVI - Hidayat] 01:46:07
+Ini.
+
+
+[LLDIKTI XVI - Hidayat] 01:46:08
+Dari itu, langsung dari siapa yang membuat.
+
+
+[Sidik LLDikti XVI] 01:46:18
+Dari atasan. Siapa atau verifikator siapa? Siapa saja yang mau di set.
+
+
+[Abd Rahim Har] 01:46:24
+Kalau begitu, dia dia. Kita harus setting tim. Kalau begitu, harus setting tim.
+
+
+[Abd Rahim Har] 01:46:29
+Kayaknya.
+
+
+[Sidik LLDikti XVI] 01:46:32
+Kalau tim kayaknya mau tambah kompleks lagi, Pak, Makanya diakalinya cuma itu saja. Kalau ini kan? Sekarang coba ke atas Dia ini, kan? Sekarang mekanismenya. Itu dia. Cari. Cari pegawainya. Siapa terus dicide satu per satu gitu, kan?
+
+
+[Sidik LLDikti XVI] 01:46:48
+Nah, itu posisinya. Mau dibalik, Pak. Jadi, menu ini tetap ada. Tapi ditambah satu menu yang di set di atas. Itu langsung pegawainya. Siapa mau di setnya? Sebagai apa? Untuk pegawai mana saja yang tinggal dicentang gitu, Pak.
+
+
+[Abd Rahim Har] 01:46:48
+Iya.
+
+
+[Abd Rahim Har] 01:47:01
+Oh, oke, oke, oke, Sip. Karena kan yang yang berpotensi untuk me? Ada verifikator, kan? Cuma di tim kerja kalau di bagian umum, kan?
+
+
+[Abd Rahim Har] 01:47:12
+Tidak.
+
+
+[Sidik LLDikti XVI] 01:47:13
+Iya, kalau bagian umum Tidak, tapi kan bagian umum juga Pegawainya banyak, Pak.
+
+
+[Abd Rahim Har] 01:47:13
+Kan.
+
+
+[Abd Rahim Har] 01:47:15
+Iya.
+
+
+[Sidik LLDikti XVI] 01:47:19
+Tetap satu, satu juga.
+
+
+[Abd Rahim Har] 01:47:20
+Iya.
+
+
+[Abd Rahim Har] 01:47:21
+Bentar, bu, Ya.
+
+
+[Abd Rahim Har] 01:47:23
+Kecuali kalau di bagian umum juga butuh verifikasi. Misalnya, ada koordinator di setiap urusan. Bisa saja, jadi nanti dia tinggal. Jadi, misalnya. Jadi, kalau ada tujuh urusan, berarti tujuh. Tinggal tujuh kali. Apa namanya setting.
+
+
+[Sidik LLDikti XVI] 01:47:30
+Bisa jadi.
+
+
+[Abd Rahim Har] 01:47:40
+Kecuali untuk dosen, Ya, Dosen, kan? Dosen Dpk kan Bisa saja nanti kita mau tetapkan? Kalau misalnya mau tetap butuh verifikator? Bisa saja, misalnya.
+
+
+[Sidik LLDikti XVI] 01:47:50
+Biasanya itu.
+
+
+[Abd Rahim Har] 01:47:50
+Apakah dari apakah langsung Pakab sebagai verifikator atau nanti melalui kepegawaian.
+
+
+[Sidik LLDikti XVI] 01:47:58
+Untuk yang.
+
+
+[Sidik LLDikti XVI] 01:48:01
+Akses pegawai ini sama juga kayak akses dosen. Enggak Dosen juga. Itu kan hanya pegawai juga, kan? Jadi, harusnya enggak ada perbedaannya. Deal nya.
+
+
+[Abd Rahim Har] 01:48:07
+Iya, iya.
+
+
+[Abd Rahim Har] 01:48:09
+Harusnya harusnya sama.
+
+
+[dion kobi] 01:48:12
+Mbak.
+
+
+[Sidik LLDikti XVI] 01:48:13
+Sama kan.
+
+
+[Sidik LLDikti XVI] 01:48:15
+Jadi sama saja aksesnya kayak pegawai mereka.
+
+
+[Sidik LLDikti XVI] 01:48:19
+Oke, amanlah Kalau gitu.
+
+
+[dion kobi] 01:48:21
+Kalau untuk yang di mau satu kali approval.
+
+
+[dion kobi] 01:48:30
+Yang di di sini ada. Jadi, nanti.
+
+
+[dion kobi] 01:48:37
+Kita bisa pilih Saya pegawai yang aku ba surah Ini dia sebagai tablet. Nah, jadi untuk alur yang di.
+
+
+[dion kobi] 01:48:47
+Alur yang ada sama Pegawai ini bisa diterapkan ke unit kerjanya. Jadi.
+
+
+[Sidik LLDikti XVI] 01:48:53
+Oke.
+
+
+[dion kobi] 01:48:55
+Jadi, bisa diterapkan di unit pekerja yang kita pilih untuk susunan approval nya.
+
+
+[Sidik LLDikti XVI] 01:49:02
+Kayak diduplik kayak gitu ya.
+
+
+[dion kobi] 01:49:04
+Iya.
+
+
+[Sidik LLDikti XVI] 01:49:06
+Jadi, di Side satu nanti diterapkan lagi ke yang bagian lain yang sama gitu.
+
+
+[dion kobi] 01:49:06
+Mbak.
+
+
+[dion kobi] 01:49:10
+Iya, cuma untuk verifikasi untuk alurnya. Mengikuti template yang ada di pegawai yang akup bersuraini yang sudah di setting di awal.
+
+
+[Sidik LLDikti XVI] 01:49:21
+Hm, oke, oke, oke.
+
+
+[dion kobi] 01:49:22
+Dia diterapkan ke unit kerja.
+
+
+[Sidik LLDikti XVI] 01:49:25
+Oke, sip.
+
+
+[Sidik LLDikti XVI] 01:49:31
+Oke, kayaknya itu saja. Masukannya gimana, Dion? Apa lumayan banyak atau gimana?
+
+
+[dion kobi] 01:49:40
+Lumayan, Lumayan banyak, ya?
+
+
+[Sidik LLDikti XVI] 01:49:42
+Iya.
+
+
+[Sidik LLDikti XVI] 01:49:43
+Jadi enggak apa? Apa sekalian berjalan karena kan buat Next Project juga, kan? Saya masih nyiapin nih dokumennya. Jadi sukanya, Pak, kalau yang ini sudah Clear juga, kita bisa langsung Next gitu.
+
+
+[dion kobi] 01:49:50
+Yeah.
+
+
+[dion kobi] 01:49:55
+Yep.
+
+
+[dion kobi] 01:50:01
+I don't know if…
+
+
+[Sidik LLDikti XVI] 01:50:07
+Oke, Dion, terima kasih. Waktunya sama. Teman. Teman Kalian teman teman sekalian juga buat Pak Rahim juga. Terima kasih atas Masukannya buat tanah magang ini. Dia juga jadi bahan pembelajaran. Ya.
+
+
+[dion kobi] 01:50:18
+Thank you again.
+
+
+[dion kobi] 01:50:21
+Cool.
+
+
+[Sidik LLDikti XVI] 01:50:21
+Jadi, sebelum berakhir, baiknya kita foto bersama dulu. Dia hanya buat dokumentasi.
+
+
+[dion kobi] 01:50:23
+Yep.
+
+
+[dion kobi] 01:50:30
+Yeah, what?
+
+
+[Sidik LLDikti XVI] 01:50:31
+Buka.
+
+
+[dion kobi] 01:50:32
+Fantastic.
+
+
+[Sidik LLDikti XVI] 01:50:35
+Silahkan. Siapa yang screenshot yang foto ini?
+
+
+[dion kobi] 01:50:39
+Uh, nanti dari siya.
+
+
+[Sidik LLDikti XVI] 01:50:40
+Oke, saya serahkan ke Dion aja. Ya, Sekalian nutup.
+
+
+[dion kobi] 01:50:44
+Okay, got it.
+
+
+[dion kobi] 01:50:46
+Okay, so to do a…
+
+
+[dion kobi] 01:50:49
+Okay.
+
+
+[dion kobi] 01:50:52
+Okay, sir.
+
+
+[Sidik LLDikti XVI] 01:50:54
+Oke, siap, Terima kasih. Ini untuk follow up nya. Kira kira bisa kapan? Ya.
+
+
+[dion kobi] 01:50:56
+Okay.
+
+
+[dion kobi] 01:50:58
+Welcome.
+
+
+[dion kobi] 01:51:00
+I didn't have a branch.
+
+
+[Sidik LLDikti XVI] 01:51:02
+Estimasinya.
+
+
+[dion kobi] 01:51:04
+Oh, look, estimacy.
+
+
+[dion kobi] 01:51:11
+You know.
+
+
+[dion kobi] 01:51:14
+You can do…
+
+
+[dion kobi] 01:51:16
+Jumat Dapan bersama.
+
+
+[Sidik LLDikti XVI] 01:51:18
+Jumat depan. Ya.
+
+
+[Abd Rahim Har] 01:51:18
+Jumat depan. Ya.
+
+
+[dion kobi] 01:51:20
+Yeah.
+
+
+[Abd Rahim Har] 01:51:20
+Oke, saya kalau bisa kita launch di Oktober lebih bagus.
+
+
+[dion kobi] 01:51:27
+Yeah, yeah, yeah, okay.
+
+
+[Abd Rahim Har] 01:51:28
+Supaya kita kan masih ada. Kalau kita launch di Oktober, kan? Kita ada satu. Masih ada periode Satu triwulan, kan? Untuk kita pakai.
+
+
+[Sidik LLDikti XVI] 01:51:28
+Iya, bisa jadi.
+
+
+[Sidik LLDikti XVI] 01:51:35
+Baiklah.
+
+
+[Abd Rahim Har] 01:51:37
+Triwulan Satu triwulan untuk kita klaim. Kita bisa gunakan kalau kita bisa launch di Oktober. Mudah mudahan bisa jadi kalau Misalnya, kita pekan depan masih ada pertemuan untuk evaluasi. Saya yakin kita bisa.
+
+
+[Abd Rahim Har] 01:51:51
+Di Oktober lah. Satu Oktober. Kita bisa launch.
+
+
+[Abd Rahim Har] 01:51:55
+Untuk aplikasi ini.
+
+
+[Abd Rahim Har] 01:51:57
+Mudah, mudahan bisa ya?
+
+
+[Sidik LLDikti XVI] 01:51:59
+Iya, kalau Jumat depan Tanggal sebelas ya.
+
+
+[dion kobi] 01:52:05
+Have a nice year. Bye.
+
+
+[Sidik LLDikti XVI] 01:52:05
+Nan.
+
+
+[Sidik LLDikti XVI] 01:52:07
+Nanti ini aja sekalian dicicil aja. Ini dokumen panduannya gitu sambil berjalan. Karena yang lain kan? Sudah fix, Ya, Tinggal Beberapa bagian saja yang di diperbaiki.
+
+
+[Sidik LLDikti XVI] 01:52:19
+Jadi, buat fungsi info segala macam itu di disusun aja. Panduannya.
+
+
+[dion kobi] 01:52:20
+Yeah, yeah.
+
+
+[dion kobi] 01:52:22
+8.
+
+
+[Sidik LLDikti XVI] 01:52:24
+Nanti. Baguslah kalau misalnya Jumat depan. Karena masih butuh waktu juga buat persiapan yang satu lagi nih. Lebih kompleks dari simpeg.
+
+
+[Sidik LLDikti XVI] 01:52:33
+Yang sakit itu, Pak.
+
+
+[dion kobi] 01:52:33
+Thank you.
+
+
+[Sidik LLDikti XVI] 01:52:35
+Iya, makanya butuh persiapan lebih.
+
+
+[dion kobi] 01:52:37
+Okay.
+
+
+[Sidik LLDikti XVI] 01:52:39
+Tapi kemarin sudah coba di lebih disederhanakan. Jadi nanti, kalaupun di tanggal sebelas, itu sudah Oke, semua, ada waktu kurang Lebih dua minggu, Pak Rahim, ya? Jadi kita testing dulu sebelum betul? Betul launching gitu.
+
+
+[dion kobi] 01:52:40
+I think the matter.
+
+
+[dion kobi] 01:52:42
+Okay.
+
+
+[dion kobi] 01:52:43
+getting that…
+
+
+[dion kobi] 01:52:48
+Ah, okay.
+
+
+[Abd Rahim Har] 01:52:53
+Iya.
+
+
+[Abd Rahim Har] 01:52:54
+Iya, iya.
+
+
+[Sidik LLDikti XVI] 01:52:57
+Oke, terima kasih. Saya kembalikan ke Dion. Silakan.
+
+
+[Sidik LLDikti XVI] 01:53:01
+Ditutup.
+
+
+[dion kobi] 01:53:03
+Okay, karna, uh, top meeting is, uh, barakir, dori, uh, karna kita mulai dengan dua, dari kita tutup dengan dua.
+
+
+[dion kobi] 01:53:12
+Margit taburo, dengan ko pereka yang kita masih.
+
+
+[dion kobi] 01:53:16
+Dominica.
+
