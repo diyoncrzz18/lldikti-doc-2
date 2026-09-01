@@ -153,7 +153,7 @@ Jalur ini tidak boleh dipakai untuk mempercepat pengajuan baru yang belum memper
 
 ## K-CUT-06 — Penyelarasan evaluasi LLDIKTI 31 Agustus dan klarifikasi 1 September 2026
 
-> **Status:** Disetujui melalui [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md) dan klarifikasi pembatalan 1 September 2026. Ketentuan ini melengkapi K-CUT-01, K-CUT-04, dan K-CUT-05 tanpa menghapus jejak keputusan sebelumnya.
+> **Status:** Disetujui melalui [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md) serta klarifikasi pembatalan dan alasan konfigurasi 1 September 2026. Ketentuan ini melengkapi K-CUT-01, K-CUT-04, dan K-CUT-05 tanpa menghapus jejak keputusan sebelumnya.
 
 ### Keputusan
 
@@ -165,10 +165,12 @@ Jalur ini tidak boleh dipakai untuk mempercepat pengajuan baru yang belum memper
 6. `Ditangguhkan` ketika pengajuan masih aktif tetap mempertahankan reservasi seperti K-CUT-01. Namun, bila cuti yang sudah final `Disetujui` ditetapkan `Ditangguhkan` oleh Admin Kepegawaian dengan alasan wajib, sistem membuat koreksi/replay ledger atomik untuk membalik pemakaian final yang terdampak. Kedua keadaan tersebut tidak boleh disamakan.
 7. Cuti di Luar SIMPEG adalah fakta historis/transisi yang menjadi sumber pemakaian tahunan N-2, N-1, dan tahun berjalan sebelum go-live, serta fakta pemulihan untuk cuti yang telah disetujui secara manual ketika SIMPEG downtime setelah go-live. Halaman ringkasan **Catat Pemakaian Tahunan** tidak menerima input angka langsung; ia menampilkan agregat dari fakta pemakaian dan entri manual yang telah tercatat.
 8. Saat SIMPEG downtime, proses manual harus selesai dan disetujui di luar sistem. Setelah layanan pulih, Admin Kepegawaian mencatat keputusan tersebut sebagai fakta final melalui Cuti di Luar SIMPEG; sistem tidak membuat approval aktif baru, dan jalur ini tidak boleh dipakai rutin ketika SIMPEG tersedia.
+9. Pada konfigurasi approval, alasan perubahan chain satu pegawai dan alasan backfill bersifat opsional. Alasan penerapan chain ke unit dan perubahan PYBMC Global tetap wajib karena memengaruhi banyak chain. Seluruh aksi tetap teraudit meskipun alasan opsional dikosongkan.
 
 ### Konsekuensi verifikasi
 
 - Uji PostgreSQL harus mencakup pasangan Atasan Langsung/PYBMC dengan aktor sama, tanpa melewati salah satu peran.
+- Uji konfigurasi harus menerima alasan kosong untuk perubahan chain satu pegawai dan backfill, tetapi menolak alasan kosong untuk penerapan chain ke unit serta PYBMC Global; audit aktor dan perubahan tetap harus lengkap.
 - Uji pembatalan harus mencakup permohonan setelah Verifikator bertindak, penahanan approval, keputusan setuju/tolak oleh Admin Kepegawaian, pelepasan atau pemertahanan reservasi, audit, serta kelanjutan dari tahap sebelumnya bila ditolak.
 - Uji UI harus membuktikan bahwa ringkasan pemakaian tidak dapat diubah langsung dan koreksi hanya berasal dari fakta sumber yang beralasan serta teraudit.
 - Uji pemulihan downtime harus membuktikan bahwa fakta final dicatat tepat satu kali setelah layanan pulih, menolak duplikasi/overlap, dan tidak membuat approval aktif atau reservasi baru.

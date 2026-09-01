@@ -47,7 +47,7 @@ Tim membahas kemampuan Pegawai untuk membatalkan atau merevisi pengajuan. Klarif
 
 ### Kebijakan dan Konfigurasi Cuti
 
-Pertemuan membedakan penangguhan saat pengajuan masih aktif dari penangguhan administratif setelah cuti final disetujui. Penangguhan final harus membalik pemakaian melalui ledger secara atomik tanpa menghapus histori. Untuk EWS kenaikan pangkat, dasar perhitungan tetap TMT/SK pangkat terakhir ditambah empat tahun.
+Pertemuan membedakan penangguhan saat pengajuan masih aktif dari penangguhan administratif setelah cuti final disetujui. Penangguhan final harus membalik pemakaian melalui ledger secara atomik tanpa menghapus histori. Pada konfigurasi chain, alasan perubahan satu pegawai dan alasan backfill bersifat opsional, sedangkan alasan penerapan ke unit dan PYBMC Global tetap wajib karena berdampak massal atau luas. Untuk EWS kenaikan pangkat, dasar perhitungan tetap TMT/SK pangkat terakhir ditambah empat tahun.
 
 ### Tinjauan EWS dan Notifikasi
 

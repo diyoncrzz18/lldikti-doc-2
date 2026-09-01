@@ -53,7 +53,7 @@ Legend: ✅ selesai pada source · ⚠️ sebagian · ❌ belum selesai. Status 
 
 | Area | Pekerjaan lanjutan | Status |
 |---|---|---|
-| Konfigurasi chain | UI/kontrak bisnis `0..n Verifikator → Atasan Langsung → PYBMC`; tidak menampilkan placeholder bila kelompok Verifikator kosong; nama teknis legacy tidak dimigrasikan tanpa keputusan schema | Belum Dimulai |
+| Konfigurasi chain | UI/kontrak bisnis `0..n Verifikator → Atasan Langsung → PYBMC`; tidak menampilkan placeholder bila kelompok Verifikator kosong; alasan perubahan satu pegawai/backfill opsional dan alasan template unit/PYBMC Global wajib; nama teknis legacy tidak dimigrasikan tanpa keputusan schema | Belum Dimulai |
 | Approver sama | Atasan Langsung dan PYBMC yang menunjuk orang sama tetap dua tahap/tindakan; perbarui writer, snapshot, UI, test, dan audit | Belum Dimulai |
 | Pengajuan Pegawai | Revisi langsung sebelum tindakan approval; permohonan pembatalan beralasan untuk pengajuan belum final, penahanan approval, keputusan Admin Kepegawaian, reservasi atomik, notifikasi, dan audit tanpa hard delete | Belum Dimulai |
 | Penangguhan final | Admin Kepegawaian menangguhkan cuti final `Disetujui` dengan alasan, histori, dan replay ledger idempoten | Belum Dimulai |

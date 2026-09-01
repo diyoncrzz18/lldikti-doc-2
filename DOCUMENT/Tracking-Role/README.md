@@ -1,7 +1,7 @@
 # Tracking Role — SIMPEG Fase 1
 
 Folder ini menampung tracking kesesuaian implementasi untuk **kelima role** SIMPEG terhadap PRD
-v1.13, User Stories, dan Panduan Kode. Satu file per role, masing-masing berisi: apa yang **sudah
+v1.14, User Stories, dan Panduan Kode. Satu file per role, masing-masing berisi: apa yang **sudah
 sesuai** (✅) dan apa yang **belum sesuai** (⚠️/❌) beserta bukti `file:line` dan rujukan task
 tracker.
 

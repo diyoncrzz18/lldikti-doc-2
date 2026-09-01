@@ -113,7 +113,7 @@ Login sebagai Super Admin:
 
 1. Buka **Cuti → Konfigurasi Approval Cuti** atau `/cuti/konfigurasi-approval`.
 2. Pada **PYBMC Global**, pilih employee milik `demo-klabat-pimpinan`.
-3. Isi alasan perubahan, misalnya `Konfigurasi approval untuk demo LLDIKTI`.
+3. Isi **Alasan PYBMC Global** yang wajib, misalnya `Konfigurasi approval untuk demo LLDIKTI`.
 4. Klik **Simpan PYBMC Global**.
 5. Pada **Chain Approval Pegawai**, cari employee `demo-klabat-pegawai`.
 6. Pastikan Atasan Langsung adalah employee milik `demo-klabat-kabag`.
@@ -124,9 +124,11 @@ Login sebagai Super Admin:
 8. Jangan tampilkan label “tanpa verifikator” bila fixture tidak memakai Verifikator.
 9. Untuk skenario regression, bila Atasan Langsung dan PYBMC adalah orang yang sama, pastikan preview tetap memperlihatkan dua tindakan; jangan gunakan skenario ini untuk happy path dasar.
 10. Isi tanggal efektif yang tidak lebih baru dari tanggal demo.
-11. Isi alasan perubahan.
+11. Biarkan **Alasan Perubahan Chain Pegawai** kosong untuk membuktikan bahwa field ini opsional, lalu ulangi dengan alasan terisi untuk memastikan keduanya tetap menghasilkan audit.
 12. Klik **Simpan Chain Pegawai**.
 13. Muat kembali pegawai tersebut dan periksa ulang urutannya.
+
+Pada pengujian konfigurasi tambahan, **Alasan Backfill** boleh kosong. **Alasan Penerapan Chain ke Unit** tetap wajib karena dapat menimpa konfigurasi banyak pegawai.
 
 Approval chain disalin menjadi snapshot saat pengajuan dibuat. Memperbaiki konfigurasi setelah pengajuan dibuat tidak menjamin pengajuan lama ikut berubah. Jika snapshot lama salah, perbaiki konfigurasi lalu buat pengajuan baru.
 

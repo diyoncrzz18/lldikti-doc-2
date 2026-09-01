@@ -2,10 +2,10 @@
 
 | Field | Detail |
 |---|---|
-| **Tanggal keputusan dokumentasi** | 31 Agustus 2026; klarifikasi pembatalan 1 September 2026 |
+| **Tanggal keputusan dokumentasi** | 31 Agustus 2026; klarifikasi pembatalan dan alasan konfigurasi 1 September 2026 |
 | **Status** | **Disetujui** — melengkapi dan menggantikan keputusan terdahulu pada area yang disebutkan di dokumen ini |
-| **Dasar** | Notulen *Evaluasi Projek SIMPEG bersama Mahasiswa Magang Univ Klabat*, klarifikasi stakeholder 31 Agustus 2026, serta jawaban tertulis LLDIKTI 1 September 2026 mengenai permohonan pembatalan cuti |
-| **Dokumen produk terkait** | [PRD SIMPEG Fase 1 Core v1.13](PRD-DLL/PRD-SIMPEG-Fase1-Core.md) dan [User Stories SIMPEG Fase 1 v1.13](PRD-DLL/User-Stories-SIMPEG-Fase1.md) |
+| **Dasar** | Notulen *Evaluasi Projek SIMPEG bersama Mahasiswa Magang Univ Klabat*, klarifikasi stakeholder 31 Agustus 2026, jawaban tertulis LLDIKTI 1 September 2026 mengenai permohonan pembatalan cuti, serta keputusan pengguna 1 September 2026 mengenai kewajiban alasan konfigurasi chain |
+| **Dokumen produk terkait** | [PRD SIMPEG Fase 1 Core v1.14](PRD-DLL/PRD-SIMPEG-Fase1-Core.md) dan [User Stories SIMPEG Fase 1 v1.14](PRD-DLL/User-Stories-SIMPEG-Fase1.md) |
 | **Dokumen keputusan terdahulu** | [Keputusan Evaluasi Meeting LLDIKTI 15 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md) dan [Keputusan Cuti Saldo Tahap 0](Keputusan-Cuti-Saldo-Tahap-0.md) |
 
 > Dokumen ini menjaga keputusan 15–25 Agustus sebagai riwayat. Hanya butir yang secara eksplisit disebut **digantikan** di bawah yang tidak lagi menjadi kontrak aktif. Nama teknis yang sudah ada, seperti role, route, atau field `kepala_bagian`, **tidak** otomatis berubah hanya karena label bisnis diubah; perubahan schema atau RBAC memerlukan keputusan tersendiri.
@@ -17,6 +17,7 @@
 3. UI dan dokumen bisnis cuti wajib memakai label **Atasan Langsung**, bukan **Kepala Bagian**. Bila tidak ada Verifikator, chain dimulai langsung pada Atasan Langsung tanpa menampilkan label atau placeholder “tanpa verifikator”.
 4. Bila Atasan Langsung dan PYBMC menunjuk orang yang sama, snapshot tetap menyimpan **dua tahap berbeda** dan orang tersebut tetap menyelesaikan dua tindakan terpisah sesuai peran yang sedang aktif. Aturan umum untuk mencegah/menolak duplikasi approver tetap berlaku bagi kombinasi tahap lain.
 5. Ketentuan lama yang menyatakan chain `Verifikator → Kepala Bagian → PYBMC`, atau meminta sistem melewati pasangan Atasan Langsung/PYBMC yang orangnya sama, digantikan oleh keputusan ini pada surface bisnis dan acceptance criteria baru.
+6. Pada konfigurasi chain, **Alasan Perubahan Chain Pegawai** dan **Alasan Backfill** bersifat opsional. **Alasan Penerapan Chain ke Unit** dan **Alasan PYBMC Global** tetap wajib karena berdampak massal atau luas. Audit tetap mencatat aktor, nilai sebelum/sesudah, dan metadata aksi meskipun alasan opsional tidak diisi.
 
 ## K-MTG-10.2 — Pembatalan, revisi, dan penangguhan cuti
 
@@ -73,6 +74,6 @@
 
 ## Dampak dokumentasi dan delivery
 
-- PRD dan User Stories v1.13 menjadi kontrak produk yang telah diselaraskan.
+- PRD dan User Stories v1.14 menjadi kontrak produk yang telah diselaraskan.
 - Backlog, tracker sprint/role, panduan pengguna, runbook, serta skenario UAT wajib menambahkan pekerjaan dan pengujian baru; evidence lama tidak boleh diklaim sebagai bukti penerimaan keputusan ini.
 - Implementasi baru hanya dapat dinyatakan selesai setelah test PostgreSQL, audit, authorization/data scope, browser smoke, dan UAT yang relevan tersedia.

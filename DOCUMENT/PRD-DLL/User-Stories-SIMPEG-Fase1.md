@@ -3,14 +3,14 @@
 
 | Field | Detail |
 |-------|--------|
-| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.13 dan Keputusan Lifecycle/Status Pegawai 25 Agustus 2026 |
+| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.14 dan Keputusan Lifecycle/Status Pegawai 25 Agustus 2026 |
 | **Tanggal dokumen awal** | 21 Agustus 2026 |
 | **Pembaruan dokumen terakhir** | 1 September 2026 |
 | **Basis verifikasi implementasi terakhir** | Branch `development` @ `ff0e9e1` (setelah PR #182 masuk, 14 Agustus 2026); pembaruan 25 Agustus–1 September menyelaraskan kontrak produk dan belum menjadi bukti verifikasi implementasi baru |
 | **Total User Stories** | 57 — 53 baseline ditambah US-1.6, US-4.13, US-6.5, dan US-8.6; estimasi total perlu direbaseline |
 | **Total Epics** | 9 |
 
-> **Catatan sinkronisasi PRD 1.13:** Keycloak digunakan hanya untuk SSO/login. Role dan permission dikelola di database SIMPEG. Approval cuti memakai tepat satu chain runtime per pegawai; unit hanya menjadi target penyalinan template sesuai K-US-01. Status keputusan resmi adalah `Disetujui`, `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`; cuti tahunan tidak boleh lintas tahun; EWS menambahkan Satyalancana; notifikasi harus channel-configurable; dan laporan mendukung export nominatif Excel custom. Klarifikasi 1 September menambahkan permohonan pembatalan tersendiri yang diputus Admin Kepegawaian.
+> **Catatan sinkronisasi PRD 1.14:** Keycloak digunakan hanya untuk SSO/login. Role dan permission dikelola di database SIMPEG. Approval cuti memakai tepat satu chain runtime per pegawai; unit hanya menjadi target penyalinan template sesuai K-US-01. Status keputusan resmi adalah `Disetujui`, `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`; cuti tahunan tidak boleh lintas tahun; EWS menambahkan Satyalancana; notifikasi harus channel-configurable; dan laporan mendukung export nominatif Excel custom. Klarifikasi 1 September menambahkan permohonan pembatalan tersendiri yang diputus Admin Kepegawaian serta pemetaan alasan opsional/wajib pada konfigurasi chain.
 >
 > **Keputusan import Fase 1 (kanonis, disetujui pengguna 22 Juli 2026):** import massal hanya mengaktifkan template Data Utama. Import membuat record pegawai beserta field snapshot awal, tidak membuat riwayat kepangkatan/jabatan/KGB, dan tidak memanggil kalkulasi TMT. Riwayat resmi diinput per pegawai melalui CRUD append-only. Tanggal pensiun hasil import dipertahankan apa adanya. Kalkulasi TMT dipicu saat riwayat/sumber resmi disimpan, bukan saat import selesai. Template lanjutan multi-jenis tidak termasuk ruang lingkup saat ini.
 >
@@ -2196,6 +2196,7 @@ Seluruh Open Question OQ-MTG-01 sampai OQ-MTG-07 dari evaluasi 15/18 Agustus 202
 - [ ] AC-NTL-3: Atasan Langsung dikonfigurasi per pegawai dan dapat berupa Kepala Bagian, Kepala Lembaga, atau pegawai yang sah menurut struktur LLDIKTI. Konfigurasi per pegawai tetap satu-satunya chain runtime; penyalinan ke anggota unit hanya membuat template/copy, bukan precedence resolver runtime.
 - [ ] AC-NTL-4: Jika Atasan Langsung dan PYBMC adalah pegawai yang sama, sistem menyimpan dua snapshot langkah dengan peran berbeda dan pejabat tersebut wajib melakukan dua tindakan terpisah. Konfigurasi/engine hanya melewati duplikasi lain yang tidak bermakna.
 - [ ] AC-NTL-5: Bukti selesai mencakup feature test chain tanpa verifikator, dengan satu/banyak verifikator, template unit, serta kasus satu pejabat Atasan Langsung sekaligus PYBMC; timeline dan audit harus membuktikan dua tindakan pada kasus terakhir.
+- [ ] AC-NTL-6: `Alasan Perubahan Chain Pegawai` dan `Alasan Backfill` dapat dikosongkan. `Alasan Penerapan Chain ke Unit` dan `Alasan PYBMC Global` tetap wajib. Semua aksi tetap menghasilkan audit yang memuat aktor, waktu, target, dan perubahan nilai; alasan dicatat bila diberikan.
 
 ### US-4.6 dan US-4.7 · Penangguhan pasca-persetujuan dan formulir cuti
 
@@ -2227,5 +2228,5 @@ Seluruh Open Question OQ-MTG-01 sampai OQ-MTG-07 dari evaluasi 15/18 Agustus 202
 ### Ketetapan yang tidak berubah
 
 - Audit log tetap immutable. Usulan retensi/pengurangan record berkala dalam rapat belum menjadi keputusan produk dan tidak dapat mengubah US-7.1/US-7.2.
-- Keterangan tetap wajib untuk keputusan cuti `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`. Usulan alasan opsional hanya dapat dipertimbangkan untuk penyesuaian data ringan setelah ada keputusan produk tersendiri; ia tidak mengubah kontrak cuti maupun lifecycle.
+- Keterangan tetap wajib untuk keputusan cuti `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`, permohonan pembatalan, koreksi/pembatalan fakta cuti, serta lifecycle pegawai. Alasan opsional hanya berlaku pada perubahan chain satu pegawai dan backfill; perubahan massal melalui template unit atau PYBMC Global tetap wajib beralasan.
 - Konfigurasi channel notifikasi tetap global. Preferensi channel per pegawai dibahas sebagai kemungkinan, tetapi tidak menjadi acceptance criterion Fase 1 dari rapat ini.

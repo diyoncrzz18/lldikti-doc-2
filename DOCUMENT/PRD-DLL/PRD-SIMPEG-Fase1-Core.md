@@ -3,7 +3,7 @@
 
 | Field | Detail |
 |-------|--------|
-| **Versi Dokumen** | 1.13 |
+| **Versi Dokumen** | 1.14 |
 | **Tanggal** | 1 September 2026 |
 | **Domain** | Disiapkan LLDIKTI saat tahap deployment |
 | **Fase** | 1 — Core / Fondasi |
@@ -2265,7 +2265,8 @@ Fitur dalam addendum ini belum boleh dinyatakan selesai hanya karena tercatat di
 5. **Formulir cuti resmi.** Selain QR verification yang telah berlaku, formulir memuat tabel approval dengan Nama, Jabatan, dan Peran. Peran adalah Verifikator, Atasan Langsung, atau PYBMC; jabatan mengikuti jabatan aktual terakhir pihak yang bertindak. Tata letak memberi jarak yang cukup antara kop surat dan tabel.
 6. **Kelengkapan SK dan perubahan CPNS menjadi PNS.** Kategori dokumen wajib PNS dan CPNS tetap sama, tetapi SK Pengangkatan harus cocok dengan jenis pegawai aktif. Setelah status CPNS berubah menjadi PNS, kelengkapan wajib menjadi Tidak Lengkap sampai SK Pengangkatan PNS tersedia; perubahan status maupun unggah dokumen dilakukan oleh Super Admin/Admin Kepegawaian yang berwenang, bukan pegawai sendiri.
 7. **Reporting statistik.** Fase 1 menambahkan halaman reporting statistik berbentuk chart untuk membaca jumlah pegawai berdasarkan kategori referensi yang relevan. Halaman ini melengkapi, bukan menggantikan, dashboard dan export nominatif custom.
-8. **Batas keputusan rapat.** Usulan retensi/pengurangan audit log berkala tidak ditetapkan sebagai perubahan produk; audit log tetap immutable. Usulan alasan opsional untuk penyesuaian data ringan juga tidak menghapus kewajiban alasan pada `Perubahan`, `Ditangguhkan`, `Tidak Disetujui`, mutasi status pegawai, atau aksi kritis lain yang telah ditetapkan.
+8. **Alasan konfigurasi chain.** `Alasan Perubahan Chain Pegawai` dan `Alasan Backfill` bersifat opsional. `Alasan Penerapan Chain ke Unit` dan `Alasan PYBMC Global` tetap wajib karena berdampak massal atau luas. Pengosongan alasan opsional tidak mengurangi audit: aktor, waktu, target, serta nilai sebelum/sesudah tetap dicatat.
+9. **Batas keputusan rapat.** Usulan retensi/pengurangan audit log berkala tidak ditetapkan sebagai perubahan produk; audit log tetap immutable. Keringanan alasan hanya berlaku pada dua field konfigurasi chain yang disebutkan di atas dan tidak mengubah kewajiban alasan pada `Perubahan`, `Ditangguhkan`, `Tidak Disetujui`, pembatalan/koreksi fakta cuti, mutasi status pegawai, atau aksi kritis lain yang telah ditetapkan.
 
 ### Changelog v1.12
 
@@ -2280,3 +2281,9 @@ Fitur dalam addendum ini belum boleh dinyatakan selesai hanya karena tercatat di
 - Menetapkan permohonan pembatalan cuti sebagai record tersendiri dengan alasan wajib dan keputusan Admin Kepegawaian.
 - Menahan approval utama selama permohonan pembatalan diproses serta menetapkan dampak keputusan terhadap reservasi dan kelanjutan chain.
 - Membatasi revisi langsung sebelum tindakan approval; perubahan setelahnya dilakukan melalui pembatalan dan pengajuan baru.
+
+### Changelog v1.14
+
+- Menjadikan alasan perubahan chain satu pegawai dan alasan backfill opsional tanpa mengurangi audit.
+- Mempertahankan alasan wajib untuk penerapan chain ke unit dan PYBMC Global karena dampaknya massal atau luas.
+- Menegaskan bahwa keringanan tersebut tidak berlaku untuk keputusan, pembatalan, koreksi fakta, lifecycle pegawai, atau aksi kritis lain.
