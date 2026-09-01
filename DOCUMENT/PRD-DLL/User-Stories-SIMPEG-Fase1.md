@@ -3,14 +3,14 @@
 
 | Field | Detail |
 |-------|--------|
-| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.12 dan Keputusan Lifecycle/Status Pegawai 25 Agustus 2026 |
+| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.13 dan Keputusan Lifecycle/Status Pegawai 25 Agustus 2026 |
 | **Tanggal dokumen awal** | 21 Agustus 2026 |
-| **Pembaruan dokumen terakhir** | 31 Agustus 2026 |
-| **Basis verifikasi implementasi terakhir** | Branch `development` @ `ff0e9e1` (setelah PR #182 masuk, 14 Agustus 2026); pembaruan 25–31 Agustus menyelaraskan kontrak produk dan belum menjadi bukti verifikasi implementasi baru |
+| **Pembaruan dokumen terakhir** | 1 September 2026 |
+| **Basis verifikasi implementasi terakhir** | Branch `development` @ `ff0e9e1` (setelah PR #182 masuk, 14 Agustus 2026); pembaruan 25 Agustus–1 September menyelaraskan kontrak produk dan belum menjadi bukti verifikasi implementasi baru |
 | **Total User Stories** | 57 — 53 baseline ditambah US-1.6, US-4.13, US-6.5, dan US-8.6; estimasi total perlu direbaseline |
 | **Total Epics** | 9 |
 
-> **Catatan sinkronisasi PRD 1.12:** Keycloak digunakan hanya untuk SSO/login. Role dan permission dikelola di database SIMPEG. Approval cuti memakai tepat satu chain runtime per pegawai; unit hanya menjadi target penyalinan template sesuai K-US-01. Status keputusan resmi adalah `Disetujui`, `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`; cuti tahunan tidak boleh lintas tahun; EWS menambahkan Satyalancana; notifikasi harus channel-configurable; dan laporan mendukung export nominatif Excel custom.
+> **Catatan sinkronisasi PRD 1.13:** Keycloak digunakan hanya untuk SSO/login. Role dan permission dikelola di database SIMPEG. Approval cuti memakai tepat satu chain runtime per pegawai; unit hanya menjadi target penyalinan template sesuai K-US-01. Status keputusan resmi adalah `Disetujui`, `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`; cuti tahunan tidak boleh lintas tahun; EWS menambahkan Satyalancana; notifikasi harus channel-configurable; dan laporan mendukung export nominatif Excel custom. Klarifikasi 1 September menambahkan permohonan pembatalan tersendiri yang diputus Admin Kepegawaian.
 >
 > **Keputusan import Fase 1 (kanonis, disetujui pengguna 22 Juli 2026):** import massal hanya mengaktifkan template Data Utama. Import membuat record pegawai beserta field snapshot awal, tidak membuat riwayat kepangkatan/jabatan/KGB, dan tidak memanggil kalkulasi TMT. Riwayat resmi diinput per pegawai melalui CRUD append-only. Tanggal pensiun hasil import dipertahankan apa adanya. Kalkulasi TMT dipicu saat riwayat/sumber resmi disimpan, bukan saat import selesai. Template lanjutan multi-jenis tidak termasuk ruang lingkup saat ini.
 >
@@ -22,7 +22,7 @@
 
 > **Penyempurnaan lifecycle (25 Agustus 2026):** [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md) adalah kontrak aktif. Kelompok `Aktif` dan `Aktif/khusus` sama-sama aktif; Tugas Belajar tetap aktif. Alasan administratif wajib terpisah dari `status_note`; tanggal efektif masa depan dijadwalkan; reaktivasi dapat dilakukan Super Admin atau Admin Kepegawaian dengan role efektif ber-permission `employees.restore`; linked Employee efektif Nonaktif diblokir global dari route bisnis; mutasi wajib lock/re-check/idempoten, audit fail-closed, dan notifikasi after-commit.
 
-> **Keputusan evaluasi SIMPEG bersama LLDIKTI (31 Agustus 2026):** chain cuti memakai nol atau lebih Verifikator → Atasan Langsung → PYBMC; label Kepala Bagian pada surface cuti diganti menjadi Atasan Langsung. Cuti manual/historis menjadi satu-satunya sumber pemakaian tahunan sebelum go-live dan sarana pemulihan pencatatan setelah downtime, formulir cuti memuat Nama/Jabatan/Peran approval, kelengkapan SK Pengangkatan harus cocok dengan status PNS/CPNS aktif, dan Fase 1 menambah reporting statistik berbentuk chart. Kriteria pengganti berstatus `[ ]` pada addendum akhir dokumen dan belum boleh dianggap selesai hanya karena kriteria lama bertanda `[x]`.
+> **Keputusan evaluasi SIMPEG bersama LLDIKTI (31 Agustus–1 September 2026):** chain cuti memakai nol atau lebih Verifikator → Atasan Langsung → PYBMC; label Kepala Bagian pada surface cuti diganti menjadi Atasan Langsung. Cuti manual/historis menjadi satu-satunya sumber pemakaian tahunan sebelum go-live dan sarana pemulihan pencatatan setelah downtime. Permohonan pembatalan diajukan Pegawai sebagai record tersendiri dan diputus Admin Kepegawaian. Formulir cuti memuat Nama/Jabatan/Peran approval, kelengkapan SK Pengangkatan harus cocok dengan status PNS/CPNS aktif, dan Fase 1 menambah reporting statistik berbentuk chart. Kriteria pengganti berstatus `[ ]` pada addendum akhir dokumen dan belum boleh dianggap selesai hanya karena kriteria lama bertanda `[x]`.
 
 ---
 
@@ -2177,15 +2177,17 @@ Seluruh Open Question OQ-MTG-01 sampai OQ-MTG-07 dari evaluasi 15/18 Agustus 202
 
 ---
 
-## Addendum Hasil Evaluasi SIMPEG Bersama LLDIKTI — 31 Agustus 2026
+## Addendum Hasil Evaluasi SIMPEG Bersama LLDIKTI — 31 Agustus dan 1 September 2026
 
-> **Status:** **Belum Selesai.** Addendum ini bersumber dari notulen evaluasi SIMPEG bersama LLDIKTI yang diterima 31 Agustus 2026 dan dicatat pada [Keputusan Evaluasi 31 Agustus 2026](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md). Ketentuan berikut menggantikan acceptance criteria lama yang bertentangan; tanda `[x]` lama tetap merupakan bukti implementasi historis, bukan bukti penutupan kontrak pengganti.
+> **Status:** **Belum Selesai.** Addendum ini bersumber dari notulen evaluasi SIMPEG bersama LLDIKTI yang diterima 31 Agustus 2026 dan klarifikasi pembatalan 1 September 2026, lalu dicatat pada [Keputusan Evaluasi SIMPEG Bersama LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md). Ketentuan berikut menggantikan acceptance criteria lama yang bertentangan; tanda `[x]` lama tetap merupakan bukti implementasi historis, bukan bukti penutupan kontrak pengganti.
 
 ### US-4.1 dan US-4.2 · Pengajuan, pembatalan, dan revisi cuti
 
 - [ ] AC-NTL-1: Setelah submit, pengajuan menunggu Verifikator pertama bila konfigurasi memiliki Verifikator; bila tidak ada, pengajuan langsung menunggu Atasan Langsung. Label status, notifikasi, dan timeline memakai istilah peran yang sama.
-- [ ] AC-NTL-2: Pegawai dapat membatalkan atau merevisi pengajuan hanya sebelum ada tindakan approval pada chain. Aksi tersebut menyimpan audit dan tidak menghapus jejak pengajuan.
-- [ ] AC-NTL-3: Pengajuan baru tidak dapat dibuat apabila masih ada pengajuan aktif yang belum selesai atau belum ditangguhkan, sehingga tidak terjadi duplikasi pengajuan periode yang sama.
+- [ ] AC-NTL-2: Selama pengajuan belum final, hanya pemohon yang dapat membuat satu permohonan pembatalan aktif sebagai record tersendiri dengan alasan wajib. Pengiriman permohonan menahan approval utama dan mempertahankan reservasi saldo.
+- [ ] AC-NTL-3: Admin Kepegawaian yang berwenang menerima notifikasi dan menyetujui atau menolak pembatalan. Persetujuan membatalkan pengajuan dan melepas reservasi secara atomik; penolakan melanjutkan approval dari tahap sebelumnya. Kedua hasil memberi notifikasi kepada Pegawai dan tercatat pada audit tanpa menghapus request, snapshot, timeline, atau histori.
+- [ ] AC-NTL-4: Revisi langsung hanya dapat dilakukan sebelum tindakan approval. Setelah ada tindakan, Pegawai meminta pembatalan dan membuat pengajuan baru dari awal bila pembatalan disetujui; approval lama tidak dipakai untuk data baru.
+- [ ] AC-NTL-5: Pengajuan baru tetap ditolak selama pengajuan utama atau permohonan pembatalannya masih aktif. Permohonan pembatalan tidak memiliki kewajiban dokumen PDF tersendiri.
 
 ### US-4.4, US-4.5, US-4.10, dan US-4.11 · Atasan Langsung dan konfigurasi chain
 

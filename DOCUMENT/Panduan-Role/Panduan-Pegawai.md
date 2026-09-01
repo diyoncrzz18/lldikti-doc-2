@@ -36,10 +36,17 @@
 7. Periksa saldo aktual, saldo yang masih dapat diajukan, dan tahapan persetujuan.
 8. Kirim pengajuan.
 9. Buka detail untuk memastikan status dan tahap aktif.
-10. Sebelum terdapat tindakan approval, gunakan aksi resmi pada detail bila perlu membatalkan atau merevisi pengajuan; jangan membuat pengajuan aktif baru yang bertabrakan.
+10. Sebelum terdapat tindakan approval, gunakan aksi revisi resmi pada detail bila data pengajuan perlu diubah.
+11. Untuk membatalkan pengajuan yang belum final, buka detail, buat permohonan pembatalan, dan isi alasan wajib. Jangan membuat pengajuan aktif baru selama permohonan tersebut belum diputus.
 
 Setelah dikirim, saldo belum dipotong final tetapi dapat dialokasikan agar tidak dipakai ganda.
 Saldo dipotong hanya setelah keputusan final `Disetujui`.
+
+Saat permohonan pembatalan menunggu keputusan, approval utama ditahan dan reservasi saldo tetap ada.
+Admin Kepegawaian akan menyetujui atau menolak permohonan tersebut. Jika disetujui, usulan menjadi
+batal dan Pegawai dapat membuat pengajuan baru; jika ditolak, approval dilanjutkan dari tahap sebelumnya.
+Setelah ada tindakan approval, perubahan data hanya dilakukan melalui pembatalan yang disetujui lalu
+pengajuan baru yang memulai rangkaian dari awal.
 
 ## 4. Menangani Keputusan
 
@@ -65,7 +72,8 @@ Saldo dipotong hanya setelah keputusan final `Disetujui`.
 |---|---|
 | Form tidak dapat dibuka | Periksa mapping pegawai aktif, role, dan permission pengajuan |
 | Chain belum tersedia | Hubungi Admin/Super Admin untuk memeriksa Atasan Langsung, Verifikator, dan PYBMC |
-| Tidak dapat membatalkan/merevisi | Pastikan belum ada tindakan approval; setelah tindakan terjadi, ikuti status dan arahan resmi pada detail pengajuan |
+| Tidak dapat merevisi langsung | Revisi langsung hanya tersedia sebelum tindakan approval; setelahnya, ajukan pembatalan beralasan lalu buat pengajuan baru bila disetujui |
+| Permohonan pembatalan masih diproses | Tunggu keputusan Admin Kepegawaian; approval utama ditahan dan pengajuan baru tidak dapat dibuat sampai keputusan tercatat |
 | Hari kerja salah | Periksa tanggal, weekend, hari libur, dan larangan lintas tahun |
 | Saldo tidak cukup | Periksa pemakaian final, alokasi pengajuan aktif, dan tahun saldo |
 | Tidak dapat kirim ulang | Pastikan status `Perubahan` dan gunakan tombol resubmit pada detail pengajuan |

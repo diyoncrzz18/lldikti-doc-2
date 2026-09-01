@@ -55,7 +55,7 @@ Legend: ✅ selesai pada source · ⚠️ sebagian · ❌ belum selesai. Status 
 |---|---|---|
 | Konfigurasi chain | UI/kontrak bisnis `0..n Verifikator → Atasan Langsung → PYBMC`; tidak menampilkan placeholder bila kelompok Verifikator kosong; nama teknis legacy tidak dimigrasikan tanpa keputusan schema | Belum Dimulai |
 | Approver sama | Atasan Langsung dan PYBMC yang menunjuk orang sama tetap dua tahap/tindakan; perbarui writer, snapshot, UI, test, dan audit | Belum Dimulai |
-| Pengajuan Pegawai | Pembatalan/revisi resmi sebelum tindakan approval, tanpa hard delete, dengan reservasi dan audit atomik | Belum Dimulai |
+| Pengajuan Pegawai | Revisi langsung sebelum tindakan approval; permohonan pembatalan beralasan untuk pengajuan belum final, penahanan approval, keputusan Admin Kepegawaian, reservasi atomik, notifikasi, dan audit tanpa hard delete | Belum Dimulai |
 | Penangguhan final | Admin Kepegawaian menangguhkan cuti final `Disetujui` dengan alasan, histori, dan replay ledger idempoten | Belum Dimulai |
 | Pemakaian historis/downtime | Cuti di Luar SIMPEG sebagai sumber fakta transisi dan pemulihan setelah downtime; ringkasan Catat Pemakaian Tahunan read-only; uji anti-duplikasi/overlap dan PostgreSQL | Belum Dimulai |
 | Formulir cuti | Nama, Jabatan, Peran tiap tahap approval dan tata letak kop/tabel yang diperbarui, dengan QR/privasi tetap terjaga | Belum Dimulai |

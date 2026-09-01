@@ -4,6 +4,8 @@
 
 > Ringkasan ini bersifat interpretatif. Jika terdapat perbedaan redaksi, keputusan produk dan PRD kanonis menjadi acuan. Istilah dan kesimpulan di bawah telah diselaraskan kembali terhadap transkrip lengkap dan klarifikasi stakeholder.
 
+> **Klarifikasi 1 September 2026:** pembatalan setelah Verifikator bertindak diajukan Pegawai sebagai permohonan tersendiri dengan alasan dan diputus oleh Admin Kepegawaian. Selama menunggu keputusan, approval utama ditahan.
+
 ## Rekap cepat
 
 Pertemuan difokuskan untuk menunjukkan kemajuan dan fungsionalitas SIMPEG pada lima role: Super Admin, Admin Kepegawaian, Kepala Bagian, Pimpinan, dan Pegawai. Dion mempresentasikan manajemen pegawai, import data, dokumen, cuti, approval chain, notifikasi, EWS, dashboard, dan laporan. Evaluasi menghasilkan perubahan utama pada terminologi **Atasan Langsung**, lifecycle cuti, sumber pemakaian historis, isi formulir cuti, validasi SK Pengangkatan PNS/CPNS, dan Reporting Statistik. Demo juga menemukan kegagalan integrasi WhatsApp `422` yang harus ditangani sebagai masalah provider, bukan perubahan aturan domain.
@@ -15,7 +17,7 @@ Pertemuan difokuskan untuk menunjukkan kemajuan dan fungsionalitas SIMPEG pada l
 - Ubah seluruh label bisnis approval cuti dari **Kepala Bagian** menjadi **Atasan Langsung**, tanpa otomatis mengganti nama role, route, atau field teknis lama.
 - Pertahankan urutan `0..n Verifikator → Atasan Langsung → PYBMC`; jika Atasan Langsung dan PYBMC adalah orang yang sama, pejabat tersebut tetap melakukan dua tindakan terpisah.
 - Perbarui formulir/PDF agar setiap pihak approval menampilkan **Nama**, **Jabatan**, dan **Peran**, serta rapikan jarak antara kop surat dan tabel.
-- Konfirmasikan kepada LLDIKTI batas pembatalan/revisi setelah Verifikator bertindak. Sampai ada keputusan, batas aman yang tercatat adalah sebelum tindakan approval pertama.
+- Implementasikan permohonan pembatalan tersendiri: Pegawai mengisi alasan, approval utama ditahan, dan Admin Kepegawaian menyetujui atau menolak. Penolakan melanjutkan flow lama; persetujuan membatalkan usulan tanpa menghapus histori.
 - Jangan menghapus cuti final `Disetujui`. Admin Kepegawaian menggunakan status `Ditangguhkan` dengan alasan wajib, histori/audit tetap terjaga, dan saldo dikoreksi melalui ledger.
 - Jadikan **Cuti di Luar SIMPEG** sebagai satu sumber fakta untuk data historis/transisi dan pemulihan setelah downtime; halaman **Catat Pemakaian Tahunan** hanya menampilkan agregat read-only.
 - Pertahankan flow SIMPEG sebagai jalur operasional normal. Ketika layanan downtime, proses manual harus selesai di luar sistem dan baru dicatat sebagai fakta final setelah SIMPEG pulih.
@@ -41,7 +43,7 @@ Tim membahas konfigurasi channel notifikasi global dan manajemen akses. **Hanya 
 
 ### Diskusi Proses Pengajuan Cuti
 
-Tim membahas kemampuan Pegawai untuk membatalkan atau merevisi pengajuan. Batas setelah Verifikator bertindak tetapi sebelum Atasan Langsung masih menunggu konfirmasi LLDIKTI. Cuti final `Disetujui` tidak dihapus; Admin Kepegawaian dapat menetapkannya `Ditangguhkan` dengan alasan, histori, audit, dan koreksi ledger. Setelah tidak ada pengajuan aktif, Pegawai dapat mengajukan kembali melalui alur normal.
+Tim membahas kemampuan Pegawai untuk membatalkan atau merevisi pengajuan. Klarifikasi 1 September menetapkan bahwa pengajuan yang belum final dapat dimintakan pembatalan melalui record tersendiri dengan alasan wajib. Approval ditahan selama Admin Kepegawaian memeriksa; persetujuan membatalkan usulan, sedangkan penolakan melanjutkan flow dari tahap sebelumnya. Revisi langsung hanya tersedia sebelum tindakan approval; setelahnya, Pegawai membatalkan lalu membuat pengajuan baru. Cuti final `Disetujui` tetap tidak dihapus dan memakai mekanisme administratif `Ditangguhkan`.
 
 ### Kebijakan dan Konfigurasi Cuti
 

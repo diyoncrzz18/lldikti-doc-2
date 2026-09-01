@@ -577,7 +577,7 @@ Status retest:
 
 | Slice | Fokus | Ketergantungan | Evidence selesai | Status |
 |---|---|---|---|---|
-| 15.1 | Penyelarasan cuti: Atasan Langsung, tahap ganda aktor sama, pembatalan/revisi, penangguhan final, dan formulir | Konfigurasi chain, approval engine, ledger, dokumen QR | Feature/unit test PostgreSQL, audit, browser smoke, review, UAT | Belum Direncanakan |
+| 15.1 | Penyelarasan cuti: Atasan Langsung, tahap ganda aktor sama, permohonan pembatalan tersendiri yang menahan approval dan diputus Admin Kepegawaian, revisi, penangguhan final, dan formulir | Konfigurasi chain, approval engine, notifikasi, ledger reservasi setuju/tolak, dokumen QR | Feature/unit test PostgreSQL, audit, browser smoke, review, UAT | Belum Direncanakan |
 | 15.2 | Pemakaian historis cuti sebagai sumber fakta tunggal dan ringkasan read-only | Ledger/replay, permission Admin Kepegawaian, dokumen privat | Test anti duplikasi/overlap, audit before/after, smoke UI | Belum Direncanakan |
 | 15.3 | Matriks SK PNS/CPNS dan transisi CPNS→PNS | Profil pegawai, matriks dokumen, upload privat | Authorization, kelengkapan, audit, browser smoke | Belum Direncanakan |
 | 15.4 | Reporting Statistik Kepegawaian | Query agregasi, policy/data scope, chart UI | Test query/scope, responsive smoke, performance note, UAT | Belum Direncanakan |

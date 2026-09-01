@@ -92,15 +92,16 @@ Setiap sesi menggunakan urutan berikut:
 |---|---|---|---|---|
 | UAT-CUT-31-01 | Cuti | Buat chain dengan nol, satu, dan lebih dari satu Verifikator | Urutan runtime selalu `0..n Verifikator → Atasan Langsung → PYBMC`; jika nol Verifikator, Atasan Langsung menjadi tahap pertama tanpa placeholder kosong | Screenshot chain/snapshot, test PostgreSQL, audit submit |
 | UAT-CUT-31-02 | Cuti | Tetapkan Atasan Langsung dan PYBMC ke employee yang sama | Dua tahap, dua tindakan, dua event audit, dan dua entri timeline tetap terjadi | Rekaman langkah, audit masked, hasil test regression |
-| UAT-CUT-31-03 | Cuti | Pegawai membatalkan atau merevisi sebelum tindakan approval | Hanya pemohon yang dapat bertindak; request/snapshot tidak dihapus, reservasi diperbarui atomik, audit tercatat | Request/response atau screenshot, ledger, audit |
+| UAT-CUT-31-03 | Cuti | Setelah Verifikator bertindak, Pegawai mengirim permohonan pembatalan; uji keputusan setuju dan tolak oleh Admin Kepegawaian | Alasan wajib; approval ditahan selama proses; setuju membatalkan dan melepas reservasi; tolak melanjutkan tahap lama; histori, audit, dan notifikasi tetap lengkap | Request/response atau screenshot, status tahap, ledger before/after, audit, notifikasi |
 | UAT-CUT-31-04 | Cuti | Admin Kepegawaian menangguhkan cuti yang telah final `Disetujui` | Alasan wajib; histori tetap ada; koreksi/replay ledger satu kali; Pegawai dapat mengajukan lagi setelah tidak ada pengajuan aktif | Ledger before/after, audit, detail request |
 | UAT-CUT-31-05 | Saldo historis | Catat Cuti di Luar SIMPEG lalu buka ringkasan pemakaian | Fakta historis menjadi sumber pemakaian; ringkasan Catat Pemakaian Tahunan read-only; tidak ada hitung ganda | UI smoke, ledger, test anti duplikasi/overlap |
 | UAT-CUT-31-06 | Dokumen cuti | Finalkan cuti dan buka PDF/QR | PDF memuat Nama, Jabatan aktual/terkini, dan Peran setiap tahap; QR serta otorisasi dokumen tetap benar | PDF tersanitasi, verifikasi QR, authorization test |
 | UAT-CUT-31-07 | Pemulihan downtime | Setelah layanan pulih, catat cuti yang telah diproses dan disetujui manual saat downtime | Fakta final tercatat satu kali; saldo/rollover sinkron; tidak ada approval aktif atau reservasi baru; duplikasi/overlap ditolak | UI smoke, ledger before/after, audit, test PostgreSQL |
+| UAT-CUT-31-08 | Cuti | Coba revisi sebelum dan setelah tindakan approval | Sebelum tindakan, revisi resmi tersedia; setelah tindakan, perubahan pengajuan lama ditolak dan Pegawai harus menyelesaikan pembatalan lalu membuat pengajuan baru dari awal | Screenshot/action denial, request baru, snapshot chain, audit |
 | UAT-EMP-31-01 | Dokumen pegawai | Uji PNS, CPNS, lalu transisi CPNS→PNS | PNS memerlukan SK Pengangkatan PNS; CPNS memerlukan SK Pengangkatan CPNS; transisi menandai belum lengkap sampai SK PNS tersedia | Screenshot status kelengkapan, upload/audit, RBAC denial |
 | UAT-REP-31-01 | Reporting | Buka Reporting Statistik dengan data/role berbeda | Halaman terpisah dari dashboard/export; chart golongan, jenis jabatan, jabatan, unit, dan jenis kepegawaian mengikuti scope dan empty state | Screenshot desktop/tablet/mobile, test scope/query, console bersih |
 
-Catatan Open Question harus dicatat pada sesi UAT, bukan diasumsikan oleh tester: batas pembatalan setelah Verifikator bertindak masih menunggu keputusan LLDIKTI.
+Klarifikasi pembatalan 1 September 2026 sudah menjadi expected result tetap pada sesi UAT.
 
 ## 7. Template Notulen dan Hasil Skenario
 

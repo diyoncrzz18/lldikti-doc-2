@@ -122,13 +122,13 @@ Prioritas P2 & dokumen:
 
 ---
 
-## Addendum Regression dan UAT — Evaluasi LLDIKTI 31 Agustus 2026
+## Addendum Regression dan UAT — Evaluasi LLDIKTI 31 Agustus–1 September 2026
 
-> Addendum ini membuka regression/UAT baru; evidence sebelum 31 Agustus tidak boleh dipakai untuk menyatakan perubahan berikut lulus.
+> Addendum ini membuka regression/UAT baru; evidence sebelum klarifikasi pembatalan 1 September tidak boleh dipakai untuk menyatakan perubahan berikut lulus.
 
 - [ ] Chain dengan nol, satu, dan banyak Verifikator; label tahap pertama tanpa placeholder kosong.
 - [ ] Atasan Langsung dan PYBMC dengan aktor sama tetap menerima dua tindakan, dua audit event, dan dua timeline entry.
-- [ ] Pembatalan/revisi Pegawai sebelum tindakan approval: authorization, pelepasan reservasi atomik, audit, dan larangan hard delete.
+- [ ] Permohonan pembatalan setelah Verifikator: alasan wajib, approval ditahan, keputusan setuju/tolak Admin Kepegawaian, dampak reservasi atomik, notifikasi, audit, dan larangan hard delete; revisi langsung tetap dibatasi sebelum tindakan approval.
 - [ ] Penangguhan administratif atas cuti final `Disetujui`: alasan wajib, histori tidak hilang, ledger replay satu kali, dan Pegawai dapat mengajukan lagi saat tidak ada pengajuan aktif.
 - [ ] Cuti di Luar SIMPEG sebagai fakta historis: ringkasan pemakaian read-only, koreksi beralasan, anti duplikasi/overlap, dan privasi berkas opsional.
 - [ ] PDF/formulir Nama–Jabatan–Peran, QR, otorisasi dokumen, dan tata letak kop/tabel.

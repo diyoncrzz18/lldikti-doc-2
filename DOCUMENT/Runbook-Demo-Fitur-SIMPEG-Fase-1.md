@@ -624,13 +624,26 @@ Pindah ke Pegawai:
 
 Hasil: saldo tidak dipotong final, reservasi tetap mengikuti pengajuan aktif, Pegawai diberi tahu, dan catatan tercatat.
 
-### 13.3 Penangguhan administratif atas cuti final
+### 13.3 Permohonan pembatalan setelah verifikasi
+
+Gunakan fixture pengajuan yang sudah disetujui Verifikator tetapi masih menunggu Atasan Langsung:
+
+1. Sebagai Pegawai, buka detail dan kirim permohonan pembatalan dengan alasan wajib.
+2. Tunjukkan bahwa approval utama ditahan, reservasi saldo tetap ada, dan permohonan kedua tidak dapat dibuat.
+3. Sebagai Admin Kepegawaian, buka notifikasi pembatalan dan periksa alasan serta pengajuan asal.
+4. Pada fixture pertama, setujui pembatalan. Pastikan usulan menjadi batal, reservasi dilepas, histori tetap ada, dan Pegawai menerima hasil.
+5. Pada fixture kedua, tolak pembatalan. Pastikan approval kembali menunggu Atasan Langsung, tindakan Verifikator tetap tercatat, reservasi tetap ada, dan Pegawai menerima hasil.
+6. Buktikan bahwa perubahan data setelah Verifikator bertindak tidak dilakukan pada pengajuan lama; setelah pembatalan disetujui, pengajuan baru memulai chain dari awal.
+
+Permohonan pembatalan adalah record/form tersendiri dan tidak memerlukan PDF pembatalan.
+
+### 13.4 Penangguhan administratif atas cuti final
 
 Gunakan fixture cuti tahunan yang sudah final `Disetujui`. Pindah ke **Admin Kepegawaian**, pilih aksi `Ditangguhkan`, lalu isi alasan, misalnya `Pelaksanaan cuti ditunda karena kebutuhan layanan unit.` Tunjukkan bahwa request tidak dihapus, histori/snapshot tetap ada, audit tercatat, dan sistem melakukan koreksi/replay ledger sehingga pemakaian final yang terdampak tidak tersisa keliru. Pegawai hanya dapat mengajukan lagi setelah tidak ada pengajuan aktif.
 
-> Jangan menggunakan fixture happy path utama untuk skenario ini. Pembatalan/revisi Pegawai hanya didemokan sebelum tindakan approval; setelah ada tindakan, gunakan cabang status resmi pada pengajuan tersebut.
+> Jangan menggunakan fixture happy path utama untuk skenario ini. Cuti final `Disetujui` memakai penangguhan administratif, bukan permohonan pembatalan Pegawai.
 
-### 13.4 Tidak Disetujui
+### 13.5 Tidak Disetujui
 
 1. Pilih **Tidak Disetujui**.
 2. Isi alasan: `Periode tersebut bertepatan dengan kebutuhan layanan unit.`
@@ -1037,7 +1050,7 @@ Periksa username, `keycloak_username`, role internal, employee mapping, dan sess
 - [ ] PDF dan token verifikasi dapat dibuka.
 - [ ] PDF menampilkan Nama, Jabatan, dan Peran tiap tahap approval.
 - [ ] Ringkasan Catat Pemakaian Tahunan hanya dibaca; fakta historis dicatat melalui Cuti di Luar SIMPEG.
-- [ ] Skenario Atasan Langsung/PYBMC dengan aktor sama, pembatalan/revisi, serta penangguhan final memiliki fixture dan evidence terpisah.
+- [ ] Skenario Atasan Langsung/PYBMC dengan aktor sama, permohonan pembatalan setuju/tolak, revisi sebelum/sesudah tindakan, serta penangguhan final memiliki fixture dan evidence terpisah.
 - [ ] Reporting Statistik hanya didemokan bila implementasi, data scope, dan browser smoke tersedia.
 - [ ] Notifikasi In-App muncul.
 - [ ] Queue worker berjalan jika email didemokan.

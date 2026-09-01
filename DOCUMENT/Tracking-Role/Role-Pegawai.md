@@ -6,10 +6,10 @@
 | Tanggal analisis | 10 Agustus 2026 — rekonsiliasi dari audit implementasi 27 Juli |
 | Basis verifikasi | Branch `development` @ `1fd99cb` setelah PR #177 |
 | Dokumen asal (dikonsolidasi ke file ini) | `Halaman-dan-Hak-Akses-Role-Pegawai.md` — dokumen target produk 22 Juli (bukan audit); daftar halaman targetnya menjadi kerangka penilaian di bawah |
-| Acuan produk | PRD v1.12 §4.2 (Pegawai & Verifikator Cuti), §9, §13.2–13.5; US-2.5, US-4.1–4.3, US-4.7, US-5.3, US-6.1/6.2/6.4, US-8.2 |
+| Acuan produk | PRD v1.13 §4.2 (Pegawai & Verifikator Cuti), §9, §13.2–13.5; US-2.5, US-4.1–4.3, US-4.7, US-5.3, US-6.1/6.2/6.4, US-8.2 |
 | Status keseluruhan | ⚠️ **Sebagian besar terbangun** — 11 halaman target hampir semua ada dan self-scoped; gap utama: 1 bug data (widget notifikasi) dan 2 halaman tanpa tautan navigasi |
 
-> **Addendum 31 Agustus 2026:** Pegawai membutuhkan aksi resmi pembatalan/revisi sebelum tindakan approval, terminologi Atasan Langsung pada detail chain, serta perilaku pengajuan ulang setelah penangguhan administratif. Semua kriteria tersebut memerlukan test dan QA baru.
+> **Addendum 31 Agustus–1 September 2026:** Pegawai membutuhkan revisi langsung sebelum tindakan approval dan permohonan pembatalan tersendiri untuk pengajuan yang belum final. Permohonan beralasan tersebut menahan approval sampai Admin Kepegawaian menyetujui atau menolak. Terminologi Atasan Langsung dan perilaku pengajuan ulang tetap memerlukan test serta QA baru.
 
 ## Catatan struktural
 

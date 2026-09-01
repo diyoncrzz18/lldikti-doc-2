@@ -3,8 +3,8 @@
 
 | Field | Detail |
 |-------|--------|
-| **Versi Dokumen** | 1.12 |
-| **Tanggal** | 31 Agustus 2026 |
+| **Versi Dokumen** | 1.13 |
+| **Tanggal** | 1 September 2026 |
 | **Domain** | Disiapkan LLDIKTI saat tahap deployment |
 | **Fase** | 1 — Core / Fondasi |
 | **Target Go-Live** | 20 Agustus 2026 |
@@ -37,6 +37,7 @@ PRD ini menjadi **sumber kebenaran utama** untuk Fase 1. Keputusan meeting tekni
 20. Keputusan pengguna 21 Agustus 2026 dengan konfirmasi lanjutan 24 Agustus 2026: dokumen wajib/SK dikonfigurasi melalui matriks per jenis pegawai, bukan hardcode empat SK. PNS dan CPNS memakai matriks yang sama: SK Pengangkatan, SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru. Admin Kepegawaian yang berwenang dapat mengustom matriks PPPK tanpa daftar bawaan; PPPK berstatus Tidak Dinilai sampai sedikitnya satu kategori diaktifkan. Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only, tetapi berkas SK dapat diganti secara terpisah dengan audit. Arsip dokumen terpusat digunakan read-only untuk pencarian lintas pegawai; seluruh kontrol dokumen dilakukan dari detail/profil pegawai. Kontrak lengkap dicatat pada [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md#k-mtg-08--dokumen-wajib-berkas-sk-dan-arsip-dokumen-terpusat).
 21. Keputusan pengguna 21 Agustus 2026, disempurnakan 25 Agustus 2026: lifecycle pegawai menggunakan `ref_status_pegawai`, bukan `deleted_at` atau Laravel `SoftDeletes`; tidak ada hard delete Employee, Data Backup, atau dataset Data Nonaktif. Predicate aktif berasal dari `ref_status_pegawai.kelompok`: `Aktif` dan `Aktif/khusus` sama-sama aktif, termasuk Tugas Belajar. Perubahan status wajib memiliki status tujuan, tanggal efektif, alasan administratif, histori append-only, snapshot konsisten, dan audit fail-closed. Tanggal masa depan disimpan sebagai transisi terjadwal dan baru mengubah snapshot/akses ketika berlaku. Reaktivasi tersedia bagi Super Admin atau Admin Kepegawaian bila role efektif memiliki `employees.restore`. Akun yang terhubung ke Employee efektif Nonaktif diblokir dari seluruh route bisnis tanpa bypass role. Notifikasi diterbitkan setelah commit. Kontrak lengkap dicatat pada [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
 22. Keputusan hasil evaluasi SIMPEG bersama LLDIKTI yang dicatat pada notulen evaluasi: terminologi Kepala Bagian pada permukaan cuti diganti menjadi Atasan Langsung; fakta cuti manual/historis menjadi satu-satunya sumber pemakaian tahunan sebelum go-live dan sarana pemulihan pencatatan setelah downtime; formulir cuti memuat nama, jabatan, dan peran approval; kelengkapan SK Pengangkatan harus cocok dengan jenis pegawai aktif; serta tersedia reporting statistik berbentuk chart. Ketentuan rinci dan perubahan terhadap kontrak lama dicatat pada Addendum 26.
+23. Klarifikasi LLDIKTI 1 September 2026 menetapkan permohonan pembatalan cuti sebagai record tersendiri yang diajukan Pegawai dengan alasan, menahan approval utama, dan diputus oleh Admin Kepegawaian. Pembatalan yang disetujui melepas reservasi; penolakan melanjutkan approval dari tahap sebelumnya.
 
 ---
 
@@ -857,7 +858,8 @@ Ketua Tim Kerja tidak memerlukan role baru. Jika perlu mengetahui atau memverifi
 3. Keputusan final ditampilkan dengan label resmi: Disetujui / Perubahan / Ditangguhkan / Tidak Disetujui.
 4. Timeline approval: siapa yang sudah bertindak, peran dalam chain, rekomendasi/keputusan, waktu, dan keterangan.
 5. Filter berdasarkan status dan tahun.
-6. Pegawai dapat membatalkan atau merevisi pengajuan selama belum ada tindakan approval pada chain. Perubahan setelah ada tindakan mengikuti status resmi dan audit trail; pengajuan yang sudah disetujui final tidak dihapus.
+6. Revisi langsung hanya tersedia sebelum ada tindakan approval pada chain. Setelah ada tindakan, Pegawai tidak mengubah data pengajuan lama; Pegawai mengajukan pembatalan dan membuat pengajuan baru dari awal apabila pembatalan disetujui.
+7. Selama pengajuan belum final, Pegawai dapat mengirim permohonan pembatalan tersendiri dengan alasan wajib. Approval utama ditahan dan reservasi dipertahankan sampai Admin Kepegawaian memutus. Persetujuan pembatalan membatalkan pengajuan serta melepas reservasi secara atomik; penolakan melanjutkan approval dari tahap sebelumnya. Seluruh jejak dan keputusan dipertahankan serta diaudit.
 
 #### US-CUT-06: Lihat Saldo Cuti
 
@@ -2192,7 +2194,7 @@ Untuk transparansi, berikut fitur yang direncanakan di fase berikutnya:
 
 ## 23. Addendum Keputusan Evaluasi Meeting LLDIKTI — 15, 18, dan 21 Agustus 2026 (PRD v1.5)
 
-> **Status:** Riwayat keputusan 15/18/20 Agustus. [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md) menjadi penetapan untuk revisi tersebut; kontrak aktif yang berbeda kini mengikuti [Addendum 31 Agustus](#26-addendum-hasil-evaluasi-simpeg-bersama-lldikti--31-agustus-2026) dan [Keputusan Evaluasi 31 Agustus](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md). Ketentuan lama dipertahankan sebagai jejak historis **Superseded**.
+> **Status:** Riwayat keputusan 15/18/20 Agustus. [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md) menjadi penetapan untuk revisi tersebut; kontrak aktif yang berbeda kini mengikuti [Addendum 31 Agustus–1 September](#26-addendum-hasil-evaluasi-simpeg-bersama-lldikti--31-agustus-dan-1-september-2026) dan [Keputusan Evaluasi 31 Agustus–1 September](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md). Ketentuan lama dipertahankan sebagai jejak historis **Superseded**.
 
 1. **Superseded oleh Addendum 31 Agustus:** chain aktif memakai **0..n Verifikator → Atasan Langsung → PYBMC**. Ketentuan di bawah dipertahankan untuk menelusuri keputusan 15 Agustus, tetapi tidak lagi menjadi label ataupun urutan bisnis aktif.
 2. Saldo awal/historis tidak lagi diinput sebagai sisa saldo. Admin memasukkan **jumlah cuti yang telah dipakai/diklaim per tahun** dan sistem menghitung sisa, rollover maksimal 6 hari, serta hak tahun berjalan secara berjenjang. Direct balance override tidak tersedia. Hak 24 hari hanya berlaku bila pemakaian N-2 dan N-1 sama dengan nol; selain itu batas totalnya 18 hari.
@@ -2210,7 +2212,7 @@ Fitur dalam addendum ini belum boleh dinyatakan selesai hanya karena tercatat di
 
 ## 24. Addendum Snapshot Persetujuan Cuti Manual — 20 Agustus 2026
 
-> **Status:** **Disetujui** melalui keputusan langsung pengguna pada 20 Agustus 2026. Addendum ini menggantikan kewajiban dokumen pada Addendum 15 Agustus/K-MTG-01.4, K-CUT-05, serta US-4.13 yang lama. Cakupan bisnis dan label yang berbeda kini mengikuti [Addendum 31 Agustus](#26-addendum-hasil-evaluasi-simpeg-bersama-lldikti--31-agustus-2026); jejak keputusan 20 Agustus tetap dipertahankan.
+> **Status:** **Disetujui** melalui keputusan langsung pengguna pada 20 Agustus 2026. Addendum ini menggantikan kewajiban dokumen pada Addendum 15 Agustus/K-MTG-01.4, K-CUT-05, serta US-4.13 yang lama. Cakupan bisnis dan label yang berbeda kini mengikuti [Addendum 31 Agustus–1 September](#26-addendum-hasil-evaluasi-simpeg-bersama-lldikti--31-agustus-dan-1-september-2026); jejak keputusan 20 Agustus tetap dipertahankan.
 
 1. Cuti manual adalah fakta cuti yang telah disetujui di luar SIMPEG untuk data historis, sebelum go-live, atau hasil proses manual ketika layanan SIMPEG downtime. Setelah layanan pulih, Admin Kepegawaian mencatat keputusan tersebut sebagai fakta final. Entri ini tidak membuat `leave_requests`, approval aktif, reservasi, notifikasi approval, maupun bukti approval ulang SIMPEG.
 2. Nomor dokumen persetujuan dan dokumen pendukung opsional. Bila file tersedia, server memvalidasinya ketat dan menyimpannya privat; audit tidak mencatat path privat.
@@ -2252,13 +2254,13 @@ Fitur dalam addendum ini belum boleh dinyatakan selesai hanya karena tercatat di
 
 ---
 
-## 26. Addendum Hasil Evaluasi SIMPEG Bersama LLDIKTI — 31 Agustus 2026
+## 26. Addendum Hasil Evaluasi SIMPEG Bersama LLDIKTI — 31 Agustus dan 1 September 2026
 
-> **Status:** **Disetujui.** Addendum ini bersumber dari notulen evaluasi SIMPEG bersama pihak LLDIKTI dan dicatat pada [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md). Ia menjadi kontrak aktif untuk pokok yang secara eksplisit diputuskan di bawah. Ketentuan lama yang bertentangan hanya berlaku sebagai jejak historis. Implementasi tetap memerlukan test PostgreSQL, audit, dan QA sesuai User Stories yang diperbarui.
+> **Status:** **Disetujui.** Addendum ini bersumber dari notulen evaluasi SIMPEG bersama pihak LLDIKTI serta klarifikasi tertulis 1 September 2026, dan dicatat pada [Keputusan Evaluasi SIMPEG Bersama LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md). Ia menjadi kontrak aktif untuk pokok yang secara eksplisit diputuskan di bawah. Ketentuan lama yang bertentangan hanya berlaku sebagai jejak historis. Implementasi tetap memerlukan test PostgreSQL, audit, dan QA sesuai User Stories yang diperbarui.
 
 1. **Terminologi dan urutan approval cuti.** Label produk dan formulir `Kepala Bagian` diganti menjadi `Atasan Langsung`. Rantai runtime yang baru atau diperbarui berurutan `0..n Verifikator → Atasan Langsung → PYBMC`. Atasan Langsung dikonfigurasi per pegawai dan dapat berupa Kepala Bagian, Kepala Lembaga, atau pejabat lain yang sah; ia bukan role baru ataupun jabatan struktural yang dipatok. Bila Verifikator tidak ada, UI dan formulir tidak menampilkan keterangan “tanpa verifikator”.
 2. **Atasan Langsung sekaligus PYBMC.** Bila satu pegawai menjalankan kedua peran tersebut, snapshot tetap memuat dua langkah dan pejabat yang sama melakukan tindakan pada setiap langkah. Aturan lama untuk skip approver duplikat tidak berlaku bagi pasangan peran Atasan Langsung–PYBMC ini; aturan itu tetap berlaku bagi duplikasi lain yang tidak bermakna.
-3. **Pembatalan dan penjadwalan ulang cuti.** Pegawai dapat membatalkan atau merevisi pengajuan sebelum ada tindakan approval pada chain. Pengajuan yang sudah disetujui final tidak boleh dihapus. Untuk pembatalan atau penjadwalan ulang setelahnya, Admin Kepegawaian menandai pengajuan `Ditangguhkan` dengan keterangan wajib; rekam jejak, timeline, dan audit dipertahankan, pemakaian saldo dikoreksi melalui ledger append-only dan rekalkulasi, lalu pegawai dapat mengajukan ulang setelah tidak ada pengajuan aktif.
+3. **Pembatalan dan penjadwalan ulang cuti.** Selama pengajuan belum final, Pegawai dapat mengirim permohonan pembatalan tersendiri dengan alasan wajib. Pengiriman permohonan menahan approval utama dan mempertahankan reservasi. Admin Kepegawaian menerima notifikasi lalu menyetujui atau menolak pembatalan: persetujuan membatalkan pengajuan serta melepas reservasi secara atomik, sedangkan penolakan melanjutkan approval dari tahap sebelumnya. Revisi langsung hanya tersedia sebelum tindakan approval; setelah ada tindakan, Pegawai meminta pembatalan dan membuat pengajuan baru dari awal bila pembatalan disetujui. Pengajuan final `Disetujui` tidak memakai flow ini dan hanya dapat ditetapkan `Ditangguhkan` secara administratif. Seluruh record, snapshot, timeline, keputusan, dan audit dipertahankan tanpa hard delete; tidak ada kewajiban PDF pembatalan.
 4. **Satu sumber pemakaian cuti historis dan pemulihan downtime.** Cuti di Luar SIMPEG/cuti manual menjadi sumber fakta pemakaian tahunan N-2, N-1, dan tahun berjalan untuk data sebelum go-live, riwayat yang telah disetujui di luar aplikasi, atau cuti yang telah diproses dan disetujui secara manual saat layanan downtime. Catat Pemakaian Tahunan tidak lagi menerima input angka langsung dan hanya menjadi ringkasan hasil fakta tersebut. Dokumen pendukung cuti manual tetap opsional seperti Addendum 20 Agustus; bila tersedia, dokumen disimpan privat dan divalidasi ketat. Setelah SIMPEG pulih, Admin Kepegawaian mencatat fakta final tanpa membuat approval aktif baru; jalur manual tidak boleh digunakan ketika SIMPEG tersedia.
 5. **Formulir cuti resmi.** Selain QR verification yang telah berlaku, formulir memuat tabel approval dengan Nama, Jabatan, dan Peran. Peran adalah Verifikator, Atasan Langsung, atau PYBMC; jabatan mengikuti jabatan aktual terakhir pihak yang bertindak. Tata letak memberi jarak yang cukup antara kop surat dan tabel.
 6. **Kelengkapan SK dan perubahan CPNS menjadi PNS.** Kategori dokumen wajib PNS dan CPNS tetap sama, tetapi SK Pengangkatan harus cocok dengan jenis pegawai aktif. Setelah status CPNS berubah menjadi PNS, kelengkapan wajib menjadi Tidak Lengkap sampai SK Pengangkatan PNS tersedia; perubahan status maupun unggah dokumen dilakukan oleh Super Admin/Admin Kepegawaian yang berwenang, bukan pegawai sendiri.
@@ -2272,3 +2274,9 @@ Fitur dalam addendum ini belum boleh dinyatakan selesai hanya karena tercatat di
 - Menetapkan Cuti di Luar SIMPEG sebagai sumber tunggal pemakaian historis/pemulihan downtime dan menonaktifkan input angka manual terpisah.
 - Menetapkan pembatalan/penjadwalan ulang tanpa menghapus riwayat serta koreksi saldo melalui ledger.
 - Menetapkan isi formulir approval, validasi SK Pengangkatan CPNS/PNS, dan reporting statistik berbasis chart.
+
+### Changelog v1.13
+
+- Menetapkan permohonan pembatalan cuti sebagai record tersendiri dengan alasan wajib dan keputusan Admin Kepegawaian.
+- Menahan approval utama selama permohonan pembatalan diproses serta menetapkan dampak keputusan terhadap reservasi dan kelanjutan chain.
+- Membatasi revisi langsung sebelum tindakan approval; perubahan setelahnya dilakukan melalui pembatalan dan pengajuan baru.

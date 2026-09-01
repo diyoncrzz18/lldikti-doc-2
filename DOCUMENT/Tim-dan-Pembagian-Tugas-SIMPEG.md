@@ -409,7 +409,7 @@ Sebuah user story dianggap "Done" jika:
 
 | Area | Cakupan baru | Peran yang dibutuhkan | Gate sebelum mulai |
 |---|---|---|---|
-| Cuti core | Atasan Langsung, chain dua tindakan untuk aktor sama, pembatalan/revisi, penangguhan final, ledger, formulir | Backend domain, UI, QA, reviewer | Detail Open Question pembatalan dikonfirmasi; issue/owner ditetapkan |
+| Cuti core | Atasan Langsung, chain dua tindakan untuk aktor sama, permohonan pembatalan yang diputus Admin Kepegawaian, revisi, penangguhan final, ledger, formulir | Backend domain, UI, QA, reviewer | Issue/owner ditetapkan; keputusan pembatalan 1 September sudah dikunci |
 | Cuti historis/downtime | Satu sumber fakta, ringkasan read-only, pemulihan setelah downtime, koreksi/audit/privasi | Backend domain, UI Admin, QA | Skenario pemulihan downtime dan issue/owner ditetapkan |
 | Dokumen pegawai | SK Pengangkatan PNS/CPNS dan evaluasi CPNS→PNS | Backend pegawai, UI, QA | Matriks aktif dan contoh data uji tersedia |
 | Reporting statistik | Halaman chart/agregasi terpisah | Backend query, UI chart, QA, reviewer | Nomor issue, owner, Story Point, dan data scope disetujui |
