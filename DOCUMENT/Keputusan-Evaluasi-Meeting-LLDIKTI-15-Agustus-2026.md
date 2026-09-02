@@ -30,12 +30,16 @@
 
 ## K-MTG-03 — Switch role berbasis permission
 
+> **Superseded pada 2 September 2026 untuk aktor dan matriks target.** Ketentuan aktif berada pada [Keputusan RBAC Configurable dan Switch Role](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-02--switch-role-sebagai-business-invariant). Isi di bawah dipertahankan sebagai keputusan 15 Agustus dan tidak boleh dipakai untuk menolak Admin Kepegawaian yang memiliki `users.switch_role`.
+
 1. Pada Fase 1, switch role hanya tersedia bagi **Super Admin** yang juga memiliki permission khusus, untuk kebutuhan demo, pengujian, dan dukungan di development maupun production.
 2. Switch role adalah simulasi **role**, bukan impersonasi identitas/pegawai lain. Identitas aktor, kepemilikan data, dan jejak audit tidak berubah.
 3. `temporary_role` disimpan secara persisten sehingga tetap berlaku setelah logout/login sampai aktor melakukan revert. Permission efektif selalu diturunkan secara dinamis dari role tujuan; `temporary_permission` tidak boleh menjadi snapshot permanen atau sumber kebenaran otorisasi. Perubahan permission role tujuan berlaku pada request berikutnya.
 4. Matriks Fase 1 bersifat eksplisit: Super Admin dapat beralih ke Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai. Switch ke Super Admin, role yang sama, atau role di luar allowlist ditolak fail-closed. Perubahan, penggunaan, dan revert wajib diaudit serta seluruh endpoint tetap memeriksa permission efektif di backend.
 
 ## K-MTG-04 — Hari libur dan dokumen pegawai
+
+> **Sebagian superseded pada 2 September 2026.** Penyebutan Super Admin/Admin Kepegawaian sebagai pembaca arsip pada butir 3 di bawah adalah konfigurasi awal historis. Kontrak aktif menggunakan `dokumen_sk.read` yang dapat dikonfigurasi, selalu dibatasi scope data dan masking; permission mutasi dokumen tetap terpisah. Lihat [K-RBAC-01](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-01--rbac-permission-driven-dan-configurable).
 
 1. Hari Libur dikelola pada menu/halaman tersendiri, tidak lagi sebagai tab Data Master. Halaman menampilkan kalender di bagian atas dan tabel hari libur di bawahnya.
 2. Dari profil pegawai, Admin Kepegawaian dapat langsung mengunggah dokumen tambahan melalui pemilihan jenis dokumen. Tampilan memisahkan dokumen wajib/SK pada tabel atas dari dokumen tambahan, seperti KTP, KK, dan ijazah, pada tabel bawah.
@@ -64,7 +68,7 @@
 
 1. **OQ-MTG-01 — Decided:** permission efektif switch role diturunkan secara dinamis dari role tujuan; snapshot `temporary_permission` tidak menjadi sumber otorisasi.
 2. **OQ-MTG-02 — Decided:** direct balance override tidak tersedia. Koreksi selalu memperbaiki sumber pemakaian/entri manual dan menghitung ulang.
-3. **OQ-MTG-03 — Decided:** hanya Super Admin ber-permission khusus yang dapat switch ke Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai.
+3. **OQ-MTG-03 — Superseded pada 2 September 2026:** keputusan 18 Agustus yang membatasi Switch Role pada Super Admin digantikan. Kontrak aktif: Super Admin atau Admin Kepegawaian dengan `users.switch_role` dapat memulai simulasi sesuai matrix target; Pimpinan, Kepala Bagian, dan Pegawai tetap ditolak meskipun permission salah ter-assign. Lihat [K-RBAC-02](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-02--switch-role-sebagai-business-invariant).
 4. **OQ-MTG-04 — Superseded pada 20 Agustus 2026:** keputusan 18 Agustus mewajibkan dokumen pendukung. Ketentuan pengganti pada K-MTG-07A menjadikannya opsional, dengan chain snapshot historis wajib.
 5. **OQ-MTG-05 — Decided:** bucket tertua yang masih sah dikonsumsi lebih dahulu; expiry terjadi pada akhir tahun penggunaan; koreksi backdated memicu rekalkulasi kronologis. PNS dan PPPK memakai mesin 12/18/24 yang sama; PPPK memerlukan masa perjanjian di atas 2 tahun untuk maksimum 18 dan di atas 3 tahun untuk maksimum 24.
 6. **OQ-MTG-06 — Decided:** WhatsApp Business wajib siap dalam target akhir Agustus. Detail provider dan artefak layanan diteruskan sebagai dependency implementasi #214/#215, bukan pertanyaan produk terbuka.
@@ -83,6 +87,8 @@
 7. Koreksi membuat fakta dan snapshot pengganti; pembatalan atau perubahan current configuration tidak mengubah snapshot lama. Mutasi dibatasi pada role Admin Kepegawaian secara eksklusif dengan permission `cuti.manual.manage`, serta tetap diaudit dan menjaga privasi dokumen/identitas.
 
 ## K-MTG-08 — Dokumen wajib, berkas SK, dan arsip dokumen terpusat
+
+> **Sebagian superseded pada 2 September 2026.** Penyebutan role pembaca arsip pada butir 4 di bawah adalah default konfigurasi saat keputusan ini dicatat, bukan allowlist permanen. Akses baca pusat mengikuti permission `dokumen_sk.read`, scope, dan masking; hak mutasi dokumen berdiri sendiri. Lihat [K-RBAC-01](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-01--rbac-permission-driven-dan-configurable).
 
 | Field | Detail |
 |---|---|
@@ -103,6 +109,7 @@
 - [PRD SIMPEG Fase 1](PRD-DLL/PRD-SIMPEG-Fase1-Core.md), [User Stories](PRD-DLL/User-Stories-SIMPEG-Fase1.md), [Issues](PRD-DLL/Issues-SIMPEG-Fase1.md), dan [Keputusan Cuti Saldo Tahap 0](Keputusan-Cuti-Saldo-Tahap-0.md) telah diselaraskan untuk K-MTG-07A. Dokumen PRD, User Stories, Issues, serta tracker peran dan sprint yang terdampak juga telah diperbarui untuk K-MTG-08. [Panduan Penulisan Kode](PRD-DLL/Panduan-Penulisan-Kode-SIMPEG.md) tetap menjadi acuan arsitektur, keamanan, dan QA tanpa mengubah keputusan produk ini.
 - Pencatatan keputusan tidak menjadi bukti penyelesaian fitur. Status implementasi setiap butir tetap ditentukan oleh bukti code review, test, dan QA yang sesuai.
 - Keputusan setelah 25 Agustus yang mengubah terminologi dan alur cuti, sumber pemakaian historis, formulir, matriks SK, dan reporting dicatat terpisah pada [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md). Dokumen tersebut menggantikan butir lama hanya pada area yang dinyatakan eksplisit.
+- Keputusan 2 September 2026 yang menjadikan permission matrix RBAC sebagai sumber kebenaran assignment serta memperbarui actor/matrix Switch Role dicatat pada [Keputusan RBAC Configurable dan Switch Role](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md). K-MTG-03 dan OQ-MTG-03 hanya berlaku sebagai riwayat pada area yang digantikan.
 
 ## K-MTG-09 — Lifecycle dan status pegawai
 

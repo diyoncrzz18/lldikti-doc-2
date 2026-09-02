@@ -25,6 +25,7 @@
 | Monitoring dan Rekap Cuti | Gunakan filter, buka detail, periksa alur, saldo, dan status | Akses monitoring; Admin tidak otomatis menjadi approver |
 | EWS dan Follow-up | Buka EWS aktif, periksa alert, tindak lanjuti berdasarkan dokumen resmi | Memperbarui lifecycle alert dan dapat menghasilkan notifikasi/audit |
 | Laporan dan Export | Pilih filter/kolom aman, periksa preview, lalu unduh | Menghasilkan data untuk kebutuhan administrasi; data sensitif tetap dibatasi |
+| Switch Role | Bila memiliki `users.switch_role`, pilih Pimpinan/Kepala Bagian/Pegawai untuk simulasi lalu lakukan revert | Mengubah role/permission efektif saja; identitas, `employee_id`, ownership, dan data scope tetap milik Anda |
 | Audit Log | Filter dan buka detail aktivitas | Membuktikan actor, waktu, aksi, dan perubahan; record bersifat immutable |
 
 ## 3. Alur Data Pegawai dan Riwayat
@@ -78,12 +79,13 @@ disetujui di luar sistem. Jangan memakai Cuti di Luar SIMPEG sebagai jalur rutin
 
 ## 6. Batas Akses dan Larangan
 
-- Tidak mengelola role/permission sistem atau konfigurasi khusus Super Admin.
+- Tidak mengelola role/permission matrix kecuali mendapat otorisasi administratif yang eksplisit; keputusan permission/anti-lockout untuk mutasi matrix belum ditetapkan stakeholder.
 - Tidak otomatis menjadi approver cuti hanya karena berperan sebagai Admin.
 - Tidak melakukan keputusan final jika tidak menjadi approver aktif pada snapshot.
 - Tidak mengedit histori lama atau menghapus pegawai permanen.
 - Tidak memakai Data Backup/Data Nonaktif atau menganggap reaktivasi sebagai restore record terhapus.
 - Tidak mencoba reaktivasi tanpa `employees.restore`, sekalipun role asal memiliki privilege lebih tinggi saat switch role aktif.
+- Tidak melakukan Switch Role tanpa `users.switch_role`, ke Super Admin/role sama/lebih tinggi, atau berulang ketika `temporary_role` masih aktif.
 - Tidak mengubah saldo langsung tanpa sumber, alasan, dokumen, dan audit.
 - Tidak mengekspos NIK, No. KK, token, atau credential pada export/evidence.
 - Tidak mengaktifkan provider WhatsApp.

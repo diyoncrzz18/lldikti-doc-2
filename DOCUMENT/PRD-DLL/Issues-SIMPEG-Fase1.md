@@ -3,7 +3,7 @@
 
 > Dokumen ini berisi daftar issues yang siap dipindahkan ke GitHub Issues / Notion Board.
 > Setiap issue diturunkan dari User Stories dan dipecah menjadi task teknis yang actionable.
-> Sinkron dengan PRD-SIMPEG-Fase1-Core.md v1.11: Keycloak hanya untuk SSO, RBAC internal aplikasi, approval cuti memakai tepat satu chain runtime per pegawai dengan penyalinan template ke anggota unit, status cuti memakai label resmi, PostgreSQL development via container, production diarahkan ke Podman, notifikasi channel-configurable, laporan mendukung export nominatif Excel custom, dan lifecycle Employee sepenuhnya berbasis status menurut [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
+> Sinkron dengan PRD-SIMPEG-Fase1-Core.md v1.13: Keycloak hanya untuk SSO, permission matrix RBAC internal menjadi sumber kebenaran assignment permission, approval cuti memakai tepat satu chain runtime per pegawai dengan penyalinan template ke anggota unit, status cuti memakai label resmi, PostgreSQL development via container, production diarahkan ke Podman, notifikasi channel-configurable, laporan mendukung export nominatif Excel custom melalui `employees.export`, dan lifecycle Employee sepenuhnya berbasis status menurut [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
 >
 > **Catatan status:** checkbox pada dokumen ini adalah dekomposisi scope/import-ready, bukan tracker implementasi terkini. Gunakan `User-Stories-SIMPEG-Fase1.md` untuk status acceptance criteria dan tracker sprint untuk status source/QA.
 >
@@ -160,8 +160,8 @@ Implementasi logout yang menghapus session Laravel dan juga memicu single logout
 | **Dependensi** | Issue #2 |
 
 **Deskripsi:**
-Halaman admin untuk memetakan akun Keycloak ke pegawai dan menetapkan role/permission internal SIMPEG.
-Role dasar dari SSO tidak menjadi sumber otorisasi fitur; Super Admin menetapkan role internal SIMPEG melalui modul ini. User SSO baru setelah bootstrap dapat tercatat dengan role kosong sampai role ditetapkan di SIMPEG.
+Halaman administrasi untuk memetakan akun Keycloak ke pegawai dan mengelola role/permission internal SIMPEG.
+Role dasar dari SSO tidak menjadi sumber otorisasi fitur; permission matrix database menjadi sumber kebenaran assignment. Konfigurasi awal role hanya default seeder dan tidak mengunci permission pada role tertentu. User SSO baru setelah bootstrap dapat tercatat dengan role kosong sampai role ditetapkan di SIMPEG.
 
 **Tasks:**
 - [ ] Buat migration tabel `employees` (jika belum):
@@ -179,8 +179,10 @@ Role dasar dari SSO tidak menjadi sumber otorisasi fitur; Super Admin menetapkan
 - [ ] Buat view `admin/user-mapping/index.blade.php`:
   - Tabel: Nama, NIP, Email, Keycloak ID, Role, Status (Terhubung/Belum)
   - Tombol "Edit" per baris → modal/form edit
-- [ ] Buat middleware `RoleMiddleware` — cek role user untuk akses halaman
+- [ ] Buat middleware/resolver otorisasi — cek permission efektif untuk akses fitur; cek role hanya bila business invariant terdokumentasi secara eksplisit
 - [ ] Pastikan middleware membaca role/permission dari database SIMPEG, bukan dari data otorisasi Keycloak
+- [ ] Pastikan assignment/pencabutan pada `role_permissions` dibaca dinamis oleh middleware, FormRequest, policy, Action, dan service; jangan membuat allowlist role-permission yang menolak permission valid tanpa business invariant eksplisit
+- [ ] Uji permission configurable pada role non-default, pencabutan permission, dan penolakan actor tanpa permission
 - [ ] User yang sudah login tetapi role SIMPEG kosong / tidak valid harus ditolak dari dashboard/fitur normal dengan `403 Access Forbidden` dan pesan hubungi admin
 - [ ] Validasi: satu keycloak_id hanya bisa di-mapping ke satu pegawai
 - [ ] Audit log: catat perubahan mapping dan role
@@ -386,7 +388,7 @@ CRUD untuk tabel reference hari libur nasional dan cuti bersama.
 - [ ] Buat views: daftar, form tambah/edit
 - [ ] Seed data hari libur 2026 (minimal: Idul Fitri, Idul Adha, Kemerdekaan, Natal, Tahun Baru, dll)
 - [ ] Audit log untuk semua operasi
-- [ ] Akses: Super Admin saja
+- [ ] Akses: permission konfigurasi hari libur yang ditetapkan melalui matrix, disertai scope/policy dan audit; Super Admin hanya konfigurasi seeder awal
 
 ---
 
@@ -896,7 +898,7 @@ Implementasi penambahan riwayat kepangkatan, jabatan, dan KGB. Data bersifat app
 | **Dependensi** | Issue #26 |
 
 **Tasks:**
-- [ ] Halaman konfigurasi approval chain cuti (Super Admin only)
+- [ ] Halaman konfigurasi approval chain cuti untuk pengguna dengan permission efektif `cuti.configure` dan scope/policy yang berlaku; konfigurasi awal dapat memberi permission ini kepada Super Admin, tetapi tidak menjadi allowlist role permanen
 - [ ] Konfigurasi satu chain runtime per pegawai: Kepala Bagian, Ketua Tim Kerja, satu atau lebih verifikator, Kabag/Kepegawaian, Pimpinan/PYBMC
 - [ ] Ketua Tim Kerja dapat dipilih sebagai verifikator tanpa role baru
 - [ ] Terapkan konfigurasi pegawai sebagai template ke seluruh anggota unit kerja tanpa menambah lapisan resolusi runtime per unit
@@ -1240,6 +1242,7 @@ Implementasi penambahan riwayat kepangkatan, jabatan, dan KGB. Data bersifat app
 | **Dependensi** | Issue #16 |
 
 **Tasks Excel (Grantly):**
+- [ ] Gate export pegawai memakai permission granular `employees.export`; `employees.read` tidak cukup untuk mengunduh raw export
 - [ ] Buat `EmployeeExport` class (Maatwebsite/Excel)
 - [ ] Kolom: No, NIP, Nama, Golongan, Jabatan, Unit Kerja, Jenis, Status
 - [ ] Mengikuti filter aktif
@@ -1345,8 +1348,8 @@ Implementasi penambahan riwayat kepangkatan, jabatan, dan KGB. Data bersifat app
 - [ ] Validasi: tidak bisa hapus item yang sedang dipakai
 - [ ] Soft delete jika sudah dipakai (per keputusan 26 Juli 2026: nonaktif via `is_active`)
 - [ ] Audit log
-- [ ] Akses: Super Admin
-- [ ] Mutasi Program Studi memakai dual gate backend `role:super_admin` dan permission `reference_tables.manage`
+- [ ] Akses: pengguna dengan permission `reference_tables.manage` dan policy/data scope yang berlaku; Super Admin adalah konfigurasi awal, bukan allowlist permanen
+- [ ] Mutasi Program Studi memakai permission `reference_tables.manage`, policy/data scope, dan audit; tidak menggunakan dual gate `role:super_admin` tanpa business invariant eksplisit
 - [ ] Nama Program Studi unik setelah normalisasi; rename menyinkronkan snapshot; item terpakai hanya dapat dinonaktifkan
 
 ---
@@ -1371,7 +1374,7 @@ Implementasi penambahan riwayat kepangkatan, jabatan, dan KGB. Data bersifat app
   - CREATE → tampilkan new_values
   - DELETE → tampilkan old_values
 - [ ] Tombol "Lihat Record" → navigasi ke record
-- [ ] Akses: Super Admin, Admin Kepegawaian
+- [ ] Akses: `audit_logs.read` sesuai data scope/masking; Super Admin/Admin Kepegawaian hanya konfigurasi awal, bukan role gate permanen
 
 ---
 
@@ -1522,7 +1525,7 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 ### Auth/RBAC
 
 - [ ] **US-1.4 — Mapping SSO:** map email Keycloak sebagai identifier utama; inisialisasi role internal Pegawai dari role default SSO hanya pada mapping pertama yang emailnya sudah cocok; map nomor telepon bila custom attribute LLDIKTI telah dikonfirmasi; tetap gunakan role/permission internal untuk keputusan akses setiap request.
-- [ ] **US-1.6 — Switch role:** batasi aktor ke Super Admin ber-permission khusus; simpan `temporary_role` sampai revert; turunkan permission efektif secara dinamis dari target; izinkan target Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai; serta uji unauthorized, matriks fail-closed, audit, dan ownership pada development maupun production-like configuration.
+- [ ] **US-1.6 — Switch role:** hanya Super Admin atau Admin Kepegawaian dengan `users.switch_role` dapat memulai. Super Admin dapat menargetkan Admin Kepegawaian/Pimpinan/Kepala Bagian/Pegawai; Admin Kepegawaian hanya Pimpinan/Kepala Bagian/Pegawai. Tolak target sama/lebih tinggi/Super Admin/di luar matrix/chained switch; simpan `temporary_role` sampai revert; turunkan permission efektif dinamis dari target; dan uji denial Pimpinan/Kepala Bagian/Pegawai meski permission salah ter-assign, audit, serta ownership pada development maupun production-like configuration.
 
 ### Cuti
 
@@ -1546,7 +1549,7 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 
 ## Addendum Backlog — Evaluasi SIMPEG Bersama LLDIKTI, 31 Agustus 2026
 
-> Sumber: [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md), [PRD v1.12](PRD-SIMPEG-Fase1-Core.md), dan [User Stories v1.12](User-Stories-SIMPEG-Fase1.md). Butir ini menimpa task lama yang bertentangan, tetapi tidak mengubah klaim historis issue/PR yang sudah ditutup. Seluruh item di bawah berstatus **belum diimplementasikan** sampai dibuktikan dengan test, QA, dan audit evidence baru.
+> Sumber: [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md), [PRD v1.13](PRD-SIMPEG-Fase1-Core.md), dan [User Stories v1.13](User-Stories-SIMPEG-Fase1.md). Butir ini menimpa task lama yang bertentangan, tetapi tidak mengubah klaim historis issue/PR yang sudah ditutup. Seluruh item di bawah berstatus **belum diimplementasikan** sampai dibuktikan dengan test, QA, dan audit evidence baru.
 
 ### Cuti — chain, pengajuan, dan keputusan
 
@@ -1581,3 +1584,37 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 - [ ] **Issue #52:** tambahkan skenario lengkap untuk 0, 1, dan banyak Verifikator; Atasan Langsung/PYBMC orang yang sama; pembatalan/revisi; penangguhan final dan ledger; agregat historis read-only; pemulihan fakta cuti setelah downtime; PDF Nama/Jabatan/Peran; matriks CPNS→PNS; serta Reporting Statistik.
 - [ ] Kriteria baru wajib memiliki test guest/unauthorized, role/data scope, valid/invalid request, audit immutable, PostgreSQL, dan browser smoke sebelum ditandai selesai.
 - [ ] Jangan menambahkan retensi audit 90 hari, preferensi channel notifikasi per pengguna, atau perubahan status produk WhatsApp dari temuan `422`; ketiganya bukan keputusan implementasi pada evaluasi ini.
+
+---
+
+## Addendum Backlog — RBAC Configurable dan Switch Role, 2 September 2026
+
+> Sumber: [Keputusan RBAC Configurable dan Switch Role](../Keputusan-RBAC-dan-Switch-Role-2-September-2026.md), PRD v1.13, dan User Stories v1.13. Addendum ini tidak mengubah klaim issue/PR historis yang telah selesai; seluruh task berikut memerlukan evidence implementasi baru.
+
+### Issue #4 — Permission matrix RBAC
+
+- [ ] Jadikan pivot permission matrix sebagai sumber kebenaran backend untuk assignment/pencabutan permission. Seeder hanya memasang default awal.
+- [ ] Hapus/ubah policy, middleware, FormRequest, Action, atau service yang mengunci permission configurable melalui allowlist role; coarse role gate harus memiliki business invariant eksplisit.
+- [ ] Uji grant/revoke terhadap role di luar default lama: Pimpinan + `dokumen_sk.read`, Kepala Bagian + `ews.configure`, Pimpinan + `cuti.configure`, serta denial setelah permission dicabut.
+- [ ] Pisahkan hak baca dokumen `dokumen_sk.read` dari permission mutasi dokumen; terapkan data scope dan masking pada keduanya.
+
+### Issue #42 — Export pegawai
+
+- [ ] Tambahkan dan gunakan `employees.export` sebagai gate export pegawai. `employees.read` tidak boleh mengizinkan raw export.
+- [ ] Uji role yang hanya memiliki baca versus role yang diberi export, termasuk filter, scope, masking, dan allowlist kolom aman.
+
+### Issue #28 dan #46 — Fitur configurable
+
+- [ ] Konfigurasi chain cuti memakai `cuti.configure`; Data Master/Program Studi memakai `reference_tables.manage`. Permission yang telah diberikan melalui matrix tidak boleh digagalkan oleh role gate legacy tanpa invariant produk yang eksplisit.
+- [ ] Perbarui UI/menu agar visibilitas mengikuti permission efektif, sementara backend tetap menjadi pengaman otoritatif.
+
+### US-1.6 — Switch Role
+
+- [ ] Terapkan business invariant actor asli: hanya Super Admin atau Admin Kepegawaian dengan `users.switch_role` dapat memulai.
+- [ ] Terapkan matrix target Super Admin dan Admin Kepegawaian, serta tolak role sama/lebih tinggi/Super Admin/target di luar matrix/chained switch.
+- [ ] Uji identitas, `employee_id`, ownership/data scope, persistence `temporary_role`, permission target yang dinamis, audit, revert, dan denial Pimpinan/Kepala Bagian/Pegawai walau permission ter-assign keliru.
+
+### UAT/regression
+
+- [ ] Issue #52 menambahkan skenario RBAC configurable dan Switch Role 2 September; evidence sebelum keputusan ini tidak dapat dipakai untuk menyatakan kontrak baru lulus.
+- [ ] Kewenangan mutasi matrix RBAC serta anti-lockout belum diberi kontrak permission/role stakeholder. Catat sebagai blocker keputusan, jangan mengarang allowlist administrasi matrix.

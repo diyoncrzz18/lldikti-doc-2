@@ -2,6 +2,8 @@
 
 > **Pembaruan kanonis 25 Agustus 2026:** literal `status_aktif` dan pengecualian nama status pada catatan audit lama adalah snapshot historis dan **Superseded**. Dashboard/laporan aktif harus memakai predicate `ref_status_pegawai.kelompok` melalui scope kanonis; `Aktif/khusus` termasuk aktif. Lihat [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
 
+> **Addendum RBAC 2 September 2026:** status source Sprint 6 tidak membuktikan kontrak akses baru. `employees.export` kini diperlukan untuk raw export, sedangkan `reference_tables.manage` tidak boleh dikunci ke `super_admin` hanya karena konfigurasi lama. Penyebutan role gate dalam arsip di bawah adalah fakta implementasi saat itu dan memerlukan follow-up pada backlog RBAC, bukan pengubahan bukti historis.
+
 | Field | Detail |
 |---|---|
 | Periode | 31 Juli – 9 Agustus 2026 |

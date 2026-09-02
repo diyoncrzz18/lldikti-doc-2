@@ -350,7 +350,7 @@ Jangan membuat Service untuk semua hal kecil. Jika logic hanya satu use case dan
 
 Authorization harus berlapis:
 
-1. route middleware untuk authentication/role/permission gate;
+1. route middleware untuk authentication dan permission efektif; role gate hanya untuk business invariant eksplisit;
 2. FormRequest `authorize()` untuk mutation boundary;
 3. Policy atau scoped service untuk data ownership;
 4. Action untuk orchestration dan pemanggilan policy/service.
@@ -358,7 +358,7 @@ Authorization harus berlapis:
 Contoh route gate:
 
 ```php
-Route::middleware(['web', 'keycloak.auth', 'role:super_admin,admin_kepegawaian'])
+Route::middleware(['web', 'keycloak.auth'])
     ->prefix('pegawai')
     ->name('pegawai.')
     ->group(function (): void {
@@ -369,6 +369,8 @@ Route::middleware(['web', 'keycloak.auth', 'role:super_admin,admin_kepegawaian']
 ```
 
 Jangan hanya menyembunyikan tombol di Blade. Jika user tidak boleh melakukan aksi, backend harus menolak request.
+
+Permission matrix database adalah sumber kebenaran assignment. Seeder menentukan default awal, bukan allowlist authorization. Jangan menambahkan policy seperti `CutiPermissionMatrixPolicy` yang menolak `cuti.configure`, `ews.configure`, `dokumen_sk.read`, `reference_tables.manage`, atau permission configurable lain hanya karena role pemohon tidak memiliki default lama. Setiap coarse role gate harus merujuk business invariant produk yang eksplisit dan diuji fail-closed.
 
 ## Blade Component Pattern
 
@@ -965,10 +967,18 @@ Berdasarkan [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-L
 Untuk switch role:
 
 - gate endpoint dengan permission khusus, FormRequest `authorize()`, dan scoped policy/service; jangan mengandalkan visibilitas menu;
+- `users.switch_role` tetap permission matrix, tetapi business invariant backend hanya mengizinkan role asli Super Admin atau Admin Kepegawaian memulai; Pimpinan, Kepala Bagian, dan Pegawai ditolak meskipun permission salah ter-assign;
+- matrix target: Super Admin → Admin Kepegawaian/Pimpinan/Kepala Bagian/Pegawai; Admin Kepegawaian → Pimpinan/Kepala Bagian/Pegawai. Tolak target sama/lebih tinggi/Super Admin, target di luar matrix, dan chained switch sebelum revert;
 - simulasikan role efektif saja, bukan identitas atau `employee_id` pegawai lain;
 - simpan `temporary_role` secara persisten sampai revert; permission efektif selalu diturunkan dinamis dari role tujuan dan tidak disimpan sebagai snapshot `temporary_permission`;
 - setiap switch, request yang memakai role sementara, dan revert wajib menyimpan audit actor, role asli, role sementara, waktu, serta konteks yang aman;
 - jalur role sementara tetap fail-closed saat permission/role asal/target tidak valid dan tidak boleh memberi akses ke data di luar scope aktor.
+
+Untuk export dan dokumen:
+
+- gunakan `employees.export` sebagai gate export pegawai; `employees.read` hanya memberi akses baca sesuai scope dan tidak otomatis mengizinkan raw export;
+- gunakan `dokumen_sk.read` untuk akses baca dokumen sesuai scope/masking. Permission mutasi dokumen harus terpisah; jangan mengunci arsip read-only pada role default tertentu;
+- test grant dan revoke permission pada role di luar default seeder, serta test authorization/data scope setelah role simulation aktif.
 
 ---
 

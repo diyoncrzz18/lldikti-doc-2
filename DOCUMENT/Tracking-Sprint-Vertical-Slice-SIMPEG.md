@@ -390,7 +390,7 @@ DoD Sprint 1:
 |-------|--------|
 | User stories | US-8.3, US-8.5 |
 | Durasi target | Hari 5-7 |
-| Goal | Kepala Bagian melihat bawahan dan Super Admin bisa mengelola reference tables, termasuk Program Studi |
+| Goal | Kepala Bagian melihat bawahan dan pengguna ber-permission `reference_tables.manage` dapat mengelola reference tables, termasuk Program Studi |
 
 | Stage | Owner | Yang Dihandle | Output | Status |
 |-------|-------|---------------|--------|--------|
@@ -408,7 +408,7 @@ DoD Sprint 1:
 - `ref_program_studi` menjadi reference table kelolaan US-8.5 kesembilan dan tersedia sebagai tab Program Studi pada `/data-master`.
 - Data pegawai serta riwayat pendidikan memakai relasi UUID nullable dengan snapshot teks sebagai kompatibilitas dan fallback.
 - Katalog awal dibentuk melalui backfill/deduplikasi snapshot legacy; import baru tetap snapshot-only dan tidak membuat master.
-- Mutasi memakai dual gate backend `role:super_admin` dan permission `reference_tables.manage`, disertai audit dan delete protection.
+- Mutasi memakai `reference_tables.manage` efektif, scope/policy backend, audit, dan delete protection. Konfigurasi Super Admin historis dipertahankan sebagai default seeder; dual gate `role:super_admin` tidak menjadi kontrak aktif tanpa business invariant eksplisit.
 - QA mencakup migrasi fresh/existing, normalisasi nama, active/inactive, preserve/clear, rename snapshot, akses negatif, fallback detail Pimpinan read-only, serta import tanpa side effect master.
 
 ### Slice 6.3 - Laporan & Export
@@ -583,3 +583,15 @@ Status retest:
 | 15.4 | Reporting Statistik Kepegawaian | Query agregasi, policy/data scope, chart UI | Test query/scope, responsive smoke, performance note, UAT | Belum Direncanakan |
 
 Owner dan estimasi tidak ditetapkan di sini karena belum ada perencanaan kapasitas yang disetujui.
+
+---
+
+## 16. Addendum Vertical Slice — RBAC Configurable dan Switch Role 2 September 2026
+
+| Slice | Cakupan | Backend/UI | Verifikasi wajib | Status |
+|---|---|---|---|---|
+| 16.1 | Permission matrix configurable | Resolver permission efektif, policy/middleware tanpa allowlist role, menu mengikuti permission | Grant/revoke lintas role, 403 setelah revoke, PostgreSQL, audit, scope/masking, browser smoke | Belum Direncanakan |
+| 16.2 | Dokumen dan export permission-driven | `dokumen_sk.read`, permission mutasi terpisah, `employees.export`, filter/allowlist | Pimpinan baca dokumen bila diberi permission, read tanpa export ditolak, masking dan file scope | Belum Direncanakan |
+| 16.3 | Switch Role invariant | Actor asli Super Admin/Admin Kepegawaian, matrix target, temporary role/revert | Semua izin/penolakan target, chained switch, identity/ownership, permission dinamis, audit, browser/UAT | Belum Direncanakan |
+
+Penetapan permission untuk **memutasi matrix RBAC** dan kebijakan anti-lockout belum diputuskan stakeholder. Slice tidak boleh mengarang allowlist baru untuk administrasi matrix.

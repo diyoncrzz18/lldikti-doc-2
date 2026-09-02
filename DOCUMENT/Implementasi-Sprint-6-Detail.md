@@ -2,6 +2,8 @@
 
 > **Status snapshot:** contoh query `status_aktif = 'Aktif'` dalam dokumen implementasi 4 Agustus ini berstatus **Superseded**. Implementasi baru wajib memakai predicate `ref_status_pegawai.kelompok` melalui `whereActiveStatus()`/`isActive()`; `Aktif` dan `Aktif/khusus` sama-sama aktif. Lihat [Keputusan Lifecycle dan Status Pegawai](Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
 
+> **Status RBAC snapshot:** route, middleware, dan role yang tercatat dalam implementasi 4 Agustus ini adalah bukti kondisi saat itu. Untuk kontrak aktif, evaluasi permission dilakukan secara dinamis dari permission matrix database; role hanya menjadi pembatas apabila business invariant menyatakannya secara eksplisit. Lihat [Keputusan RBAC Configurable dan Switch Role](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md).
+
 **Tanggal Implementasi:** 4 Agustus 2026  
 **Developer:** Claude Code (via Kiro)  
 **Basis Kode:** `development` @ `0b94960` (PR #147)  

@@ -4,7 +4,7 @@
 |---|---|
 | Role internal | `pimpinan` |
 | Status | **Draft — belum diterima Kepegawaian** |
-| Cakupan | Monitoring organisasi, keputusan akhir cuti, EWS, dan laporan read-only |
+| Cakupan | Default permission untuk monitoring organisasi, keputusan akhir cuti, EWS, dan laporan read-only; akses aktual mengikuti permission efektif serta scope |
 
 ## 1. Prasyarat
 
@@ -56,6 +56,7 @@ Formulir yang dihasilkan setelah keputusan final memuat Nama, Jabatan, dan Peran
 - Jangan membuat keputusan berdasarkan EWS saja; EWS adalah indikator untuk verifikasi administratif.
 - Jangan mengekspor data kontak pribadi atau identitas sensitif yang tidak diperlukan.
 - Jangan membagikan lampiran cuti kepada pihak di luar kewenangan.
+- Permission tambahan yang diberikan melalui matrix, seperti `dokumen_sk.read` atau `employees.export`, tetap tunduk pada scope/masking. Pimpinan tetap tidak boleh memulai Switch Role meskipun `users.switch_role` salah ter-assign.
 
 ## 5. Troubleshooting
 

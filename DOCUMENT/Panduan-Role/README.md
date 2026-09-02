@@ -34,7 +34,9 @@ pada exact release candidate, dan pihak Kepegawaian memberikan konfirmasi ekspli
 
 ## Aturan Umum Seluruh Role
 
-- Keycloak mengautentikasi identitas; role dan permission SIMPEG menentukan akses.
+- Keycloak mengautentikasi identitas; permission efektif dari matrix RBAC SIMPEG menentukan akses. Role dan tabel panduan hanya menyatakan default permission/konfigurasi awal, bukan hak fitur permanen.
+- Permission fitur dapat diassign atau dicabut melalui matrix. Contohnya `dokumen_sk.read`, `ews.configure`, `cuti.configure`, dan `employees.export` tetap tunduk pada backend, data scope, masking, serta business invariant eksplisit.
+- Switch Role adalah pengecualian: hanya Super Admin atau Admin Kepegawaian dengan `users.switch_role` yang dapat memulai; target harus lebih rendah sesuai matrix role asli. Pimpinan, Kepala Bagian, dan Pegawai tetap ditolak walaupun permission salah ter-assign.
 - Akun tanpa role internal yang valid tidak memperoleh akses SIMPEG.
 - Tombol yang tersembunyi bukan satu-satunya pengaman; backend tetap menolak aksi tanpa izin.
 - Jangan membagikan token, password, NIK, No. KK, atau dokumen pegawai kepada pihak yang tidak
@@ -57,3 +59,4 @@ pada exact release candidate, dan pihak Kepegawaian memberikan konfirmasi ekspli
 - [PRD SIMPEG Fase 1](../PRD-DLL/PRD-SIMPEG-Fase1-Core.md)
 - [User Stories SIMPEG Fase 1](../PRD-DLL/User-Stories-SIMPEG-Fase1.md)
 - [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md)
+- [Keputusan RBAC Configurable dan Switch Role](../Keputusan-RBAC-dan-Switch-Role-2-September-2026.md)

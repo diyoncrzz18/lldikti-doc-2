@@ -6,6 +6,8 @@
 | Status | **Draft — belum diterima Kepegawaian** |
 | Cakupan | Data pribadi read-only, pengajuan cuti, saldo, notifikasi, dan EWS pribadi |
 
+> Cakupan ini adalah konfigurasi awal. Permission tambahan dari matrix tetap diperiksa backend bersama ownership/data scope; pemberian permission tidak membuka akses ke data pegawai lain tanpa policy yang sah.
+
 ## 1. Prasyarat
 
 - Akun Keycloak sudah dipetakan ke satu pegawai aktif.
@@ -58,6 +60,7 @@ Saldo dipotong hanya setelah keputusan final `Disetujui`.
 - Tidak melihat atau memutus pengajuan pegawai lain kecuali memiliki penugasan approver yang sah.
 - Tidak mengirim ulang pengajuan tanpa menggunakan aksi resubmit resmi.
 - Tidak membagikan formulir, token verifikasi, atau lampiran kepada pihak yang tidak berwenang.
+- Tidak dapat memulai Switch Role, walaupun `users.switch_role` salah ter-assign pada matrix; ini adalah business invariant backend.
 
 ## 6. Troubleshooting
 

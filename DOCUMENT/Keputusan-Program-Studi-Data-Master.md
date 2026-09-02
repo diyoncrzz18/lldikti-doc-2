@@ -7,6 +7,8 @@
 | User story utama | US-8.5 · Kelola Reference Tables |
 | User story terdampak | US-2.1, US-2.2, US-2.4, US-2.5, US-3.1, US-3.4 |
 
+> **Pembaruan akses 2 September 2026:** penyebutan Super Admin dan `role:super_admin` pada keputusan 17 Agustus ini adalah konfigurasi awal historis dan **Superseded** hanya untuk kontrol otorisasinya. Kontrak aktif memakai permission matrix database: `reference_tables.manage` dapat dikonfigurasi untuk role yang berwenang, dengan scope, audit, dan policy backend. Aturan data referensi lain dalam dokumen ini tetap berlaku. Lihat [Keputusan RBAC Configurable dan Switch Role](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-01--rbac-permission-driven-dan-configurable).
+
 ## Latar Belakang
 
 Program Studi sebelumnya hanya disimpan sebagai snapshot teks pada
@@ -39,12 +41,14 @@ kompatibilitas data lama maupun file import yang sudah digunakan tim.
    menyinkronkan snapshot pegawai dan riwayat pendidikan yang terhubung. Pengosongan
    Program Studi pegawai harus dilakukan melalui intent eksplisit agar snapshot import
    yang belum direkonsiliasi tidak hilang tanpa sengaja.
-8. Referensi yang sedang dipakai tidak dapat dihapus; Super Admin dapat
-   menonaktifkannya. Referensi yang belum dipakai dapat dihapus permanen sesuai pola
-   lifecycle Data Master. Seluruh mutasi tetap tercatat pada audit log.
-9. Mutasi Program Studi hanya tersedia bagi role `super_admin` yang juga memiliki
-   permission `reference_tables.manage`. Role gate dan permission gate merupakan
-   pertahanan berlapis dan harus ditegakkan pada backend.
+8. Referensi yang sedang dipakai tidak dapat dihapus; pengguna yang memiliki
+   `reference_tables.manage` pada scope yang benar dapat menonaktifkannya. Referensi
+   yang belum dipakai dapat dihapus permanen sesuai pola lifecycle Data Master.
+   Seluruh mutasi tetap tercatat pada audit log. Super Admin adalah konfigurasi seed
+   awal, bukan allowlist permanen.
+9. Mutasi Program Studi menggunakan permission `reference_tables.manage` yang
+   dievaluasi dinamis dari permission matrix database. Tidak ada role gate tambahan
+   tanpa business invariant eksplisit; otorisasi wajib tetap ditegakkan pada backend.
 10. Import Data Utama tetap menerima `Prodi Pendidikan Terakhir` sebagai teks snapshot.
     Import tidak mencari, membuat, atau menghubungkan `ref_program_studi`; rekonsiliasi
     otomatis import membutuhkan keputusan produk terpisah.
@@ -56,8 +60,8 @@ kompatibilitas data lama maupun file import yang sudah digunakan tim.
 
 - Sumber katalog awal adalah snapshot Program Studi yang sudah tersimpan ketika migrasi
   dijalankan.
-- Setelah migrasi, penambahan dan pemeliharaan nama dilakukan oleh Super Admin melalui
-  Data Master.
+- Setelah migrasi, penambahan dan pemeliharaan nama dilakukan melalui Data Master oleh
+  pengguna yang secara efektif memiliki `reference_tables.manage` pada scope terkait.
 - Daftar resmi tambahan dari LLDIKTI dapat dimasukkan melalui Data Master; keputusan ini
   tidak mengizinkan pembuatan master secara otomatis dari file import baru.
 
@@ -65,7 +69,8 @@ kompatibilitas data lama maupun file import yang sudah digunakan tim.
 
 - migrasi fresh dan existing, termasuk deduplikasi nama berdasarkan spasi dan kapitalisasi;
 - create, update, aktif/nonaktif, delete protection, dan audit Data Master;
-- penolakan role/permission yang tidak berhak;
+- grant/revoke `reference_tables.manage`, termasuk role non-default, serta penolakan
+  pengguna tanpa permission atau di luar scope;
 - tambah/edit pegawai dan riwayat pendidikan, termasuk referensi nonaktif yang sedang dipakai;
 - sinkronisasi rename, fallback snapshot, dan pengosongan eksplisit;
 - import snapshot-only tanpa side effect pada master;

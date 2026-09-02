@@ -3,18 +3,18 @@
 
 | Field | Detail |
 |-------|--------|
-| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.12 dan Keputusan Lifecycle/Status Pegawai 25 Agustus 2026 |
+| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.13, Keputusan Lifecycle/Status Pegawai 25 Agustus 2026, dan Keputusan RBAC/Switch Role 2 September 2026 |
 | **Tanggal dokumen awal** | 21 Agustus 2026 |
-| **Pembaruan dokumen terakhir** | 31 Agustus 2026 |
+| **Pembaruan dokumen terakhir** | 2 September 2026 |
 | **Basis verifikasi implementasi terakhir** | Branch `development` @ `ff0e9e1` (setelah PR #182 masuk, 14 Agustus 2026); pembaruan 25–31 Agustus menyelaraskan kontrak produk dan belum menjadi bukti verifikasi implementasi baru |
 | **Total User Stories** | 57 — 53 baseline ditambah US-1.6, US-4.13, US-6.5, dan US-8.6; estimasi total perlu direbaseline |
 | **Total Epics** | 9 |
 
-> **Catatan sinkronisasi PRD 1.12:** Keycloak digunakan hanya untuk SSO/login. Role dan permission dikelola di database SIMPEG. Approval cuti memakai tepat satu chain runtime per pegawai; unit hanya menjadi target penyalinan template sesuai K-US-01. Status keputusan resmi adalah `Disetujui`, `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`; cuti tahunan tidak boleh lintas tahun; EWS menambahkan Satyalancana; notifikasi harus channel-configurable; dan laporan mendukung export nominatif Excel custom.
+> **Catatan sinkronisasi PRD 1.13:** Keycloak digunakan hanya untuk SSO/login. Permission matrix RBAC di database menjadi sumber kebenaran assignment permission; role dan seeder hanya menyatakan konfigurasi awal. Approval cuti memakai tepat satu chain runtime per pegawai; unit hanya menjadi target penyalinan template sesuai K-US-01. Status keputusan resmi adalah `Disetujui`, `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`; cuti tahunan tidak boleh lintas tahun; EWS menambahkan Satyalancana; notifikasi harus channel-configurable; dan laporan mendukung export nominatif Excel custom melalui permission `employees.export`.
 >
 > **Keputusan import Fase 1 (kanonis, disetujui pengguna 22 Juli 2026):** import massal hanya mengaktifkan template Data Utama. Import membuat record pegawai beserta field snapshot awal, tidak membuat riwayat kepangkatan/jabatan/KGB, dan tidak memanggil kalkulasi TMT. Riwayat resmi diinput per pegawai melalui CRUD append-only. Tanggal pensiun hasil import dipertahankan apa adanya. Kalkulasi TMT dipicu saat riwayat/sumber resmi disimpan, bukan saat import selesai. Template lanjutan multi-jenis tidak termasuk ruang lingkup saat ini.
 >
-> **Keputusan Program Studi (17 Agustus 2026):** Program Studi menjadi reference table kelolaan US-8.5 kesembilan yang dikelola Super Admin melalui Data Master. Form pegawai dan riwayat pendidikan memakai relasi UUID nullable, sementara snapshot lama tetap dipertahankan sebagai fallback dan kontrak import. Import tidak membuat atau menghubungkan master Program Studi. Lihat [Keputusan Program Studi sebagai Data Referensi](../Keputusan-Program-Studi-Data-Master.md).
+> **Keputusan Program Studi (17 Agustus 2026; akses diselaraskan 2 September 2026):** Program Studi menjadi reference table kesembilan pada US-8.5. Konfigurasi awal memberi `reference_tables.manage` kepada Super Admin, tetapi permission tersebut dapat dikelola melalui matrix RBAC. Form pegawai dan riwayat pendidikan memakai relasi UUID nullable, sementara snapshot lama tetap dipertahankan sebagai fallback dan kontrak import. Import tidak membuat atau menghubungkan master Program Studi. Lihat [Keputusan Program Studi sebagai Data Referensi](../Keputusan-Program-Studi-Data-Master.md).
 >
 > **Keputusan dokumen/SK (21 Agustus 2026; diperjelas pada evaluasi 31 Agustus 2026):** Dokumen wajib/SK mengikuti matriks yang dapat dikonfigurasi per jenis pegawai, bukan empat SK hardcode. PNS wajib memiliki **SK Pengangkatan PNS**, sedangkan CPNS wajib memiliki **SK Pengangkatan CPNS**, serta keduanya membutuhkan SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru. PPPK tidak memiliki daftar bawaan; Admin Kepegawaian yang berwenang dapat mengustom kategorinya melalui matriks, dan statusnya Tidak Dinilai selama belum ada kategori aktif. Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only, sedangkan berkas SK dapat diganti dengan audit. Arsip dokumen terpusat read-only; seluruh kontrol dokumen dilakukan dari detail/profil pegawai. Lihat [K-MTG-08](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md#k-mtg-08--dokumen-wajib-berkas-sk-dan-arsip-dokumen-terpusat).
 >
@@ -23,6 +23,8 @@
 > **Penyempurnaan lifecycle (25 Agustus 2026):** [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md) adalah kontrak aktif. Kelompok `Aktif` dan `Aktif/khusus` sama-sama aktif; Tugas Belajar tetap aktif. Alasan administratif wajib terpisah dari `status_note`; tanggal efektif masa depan dijadwalkan; reaktivasi dapat dilakukan Super Admin atau Admin Kepegawaian dengan role efektif ber-permission `employees.restore`; linked Employee efektif Nonaktif diblokir global dari route bisnis; mutasi wajib lock/re-check/idempoten, audit fail-closed, dan notifikasi after-commit.
 
 > **Keputusan evaluasi SIMPEG bersama LLDIKTI (31 Agustus 2026):** chain cuti memakai nol atau lebih Verifikator → Atasan Langsung → PYBMC; label Kepala Bagian pada surface cuti diganti menjadi Atasan Langsung. Cuti manual/historis menjadi satu-satunya sumber pemakaian tahunan sebelum go-live dan sarana pemulihan pencatatan setelah downtime, formulir cuti memuat Nama/Jabatan/Peran approval, kelengkapan SK Pengangkatan harus cocok dengan status PNS/CPNS aktif, dan Fase 1 menambah reporting statistik berbentuk chart. Kriteria pengganti berstatus `[ ]` pada addendum akhir dokumen dan belum boleh dianggap selesai hanya karena kriteria lama bertanda `[x]`.
+
+> **Keputusan RBAC dan Switch Role (2 September 2026):** permission efektif dari matrix database berlaku dinamis pada backend; tabel hak akses per role hanya default konfigurasi awal. Switch Role adalah pengecualian: hanya Super Admin atau Admin Kepegawaian dengan `users.switch_role` dapat memulai simulasi sesuai target yang lebih rendah dari role asli. Lihat [Keputusan RBAC Configurable dan Switch Role](../Keputusan-RBAC-dan-Switch-Role-2-September-2026.md).
 
 ---
 
@@ -252,7 +254,7 @@ Penyelarasan status dilakukan terhadap kode aktual branch `development` @ `4839a
 | US-4.12 | AC-1, AC-2 | Kalkulator hari kerja mengecualikan akhir pekan dan membaca tanggal libur dari `ref_hari_libur` sesuai rentang tahun |
 | US-5.1 | AC-1, AC-3 | Jadwal EWS membaca jam dari konfigurasi dengan proteksi overlap; kelayakan kenaikan pangkat dihitung dari masa kerja, hukuman disiplin aktif, dan flag kinerja |
 | US-6.2 | AC-5 | Klik notifikasi menandai dibaca lalu mengarahkan ke halaman terkait |
-| US-7.2 | AC-5, AC-6 | Urutan default terbaru di atas; akses digerbang role Super Admin/Admin Kepegawaian beserta izin baca audit |
+| US-7.2 | AC-5, AC-6 | Urutan default terbaru di atas; bukti role gate lama berstatus historis. Kontrak aktif memakai `audit_logs.read` dengan scope/masking |
 | US-7.3 | AC-2, AC-4 | Halaman detail menampilkan operator, waktu, IP, user agent, event, modul, dan ID record, serta tombol menuju record terkait |
 | US-8.1 | AC-1, AC-2, AC-3, AC-5, AC-6, AC-7, AC-8, AC-9 | Dashboard Admin memakai payload nyata kontrak K-3 dengan tata letak responsif |
 | US-8.3 | AC-3 | EWS bawahan dibatasi pada bawahan langsung dan disajikan berpaginasi |
@@ -437,15 +439,15 @@ Setiap story mengikuti format:
 | **Modul** | Autentikasi / Admin |
 | **Dependensi** | US-1.1, US-2.1 |
 
-> **Sebagai** Super Admin,
+> **Sebagai** pengelola akses yang berwenang,
 > **Saya ingin** memetakan akun Keycloak ke data pegawai di SIMPEG dan menetapkan role internal aplikasi,
 > **Sehingga** setiap user yang login mendapatkan hak akses yang sesuai.
 
 **Acceptance Criteria:**
 
 - [x] AC-1: Halaman "Kelola Akses User" menampilkan daftar pegawai beserta status mapping (Terhubung / Belum Terhubung).
-- [x] AC-2: Super Admin bisa mengisi Keycloak ID atau email Keycloak untuk setiap pegawai melalui jalur mapping manual. Jalur admin ini adalah jalur administratif yang terpisah dari auto-mapping callback berbasis email pada addendum K-MTG-02.
-- [x] AC-3: Super Admin bisa menetapkan satu role internal per pegawai: Super Admin, Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai.
+- [x] AC-2 — **Bukti historis; otorisasi active review diperlukan:** Super Admin pada implementasi lama dapat mengisi Keycloak ID atau email Keycloak untuk setiap pegawai melalui jalur mapping manual. Jalur ini terpisah dari auto-mapping callback berbasis email pada addendum K-MTG-02. Keputusan 2 September belum menetapkan permission/role untuk mengelola matrix RBAC maupun anti-lockout; implementasi baru tidak boleh mengubah gate administrasinya dengan allowlist role baru tanpa keputusan stakeholder.
+- [x] AC-3 — **Bukti historis; superseded untuk role gate:** implementasi lama mengizinkan Super Admin menetapkan satu role internal per pegawai. Assignment role/permission sekarang bersumber pada data RBAC database, tetapi otorisasi untuk memutasi matrix RBAC dan kebijakan anti-lockout tetap Open Question sampai stakeholder menetapkannya.
 - [x] AC-4: Perubahan role langsung berlaku pada login berikutnya.
 - [x] AC-5: Perubahan mapping dan role dicatat di audit log.
 - [x] AC-6: Validasi: satu akun Keycloak hanya bisa di-mapping ke satu pegawai.
@@ -1271,7 +1273,7 @@ Setiap story mengikuti format:
   - 🟢 Hijau: sisa > 90 hari.
 - [x] AC-4: Filter berdasarkan jenis event (Kenaikan Pangkat / KGB / Pensiun / Kontrak PPPK / Satyalancana) dan status tindak lanjut.
 - [x] AC-5: Klik nama pegawai membuka halaman detail pegawai.
-- [x] AC-6: Akses: Admin Kepegawaian, Super Admin, Pimpinan.
+- [x] AC-6: Akses memakai `ews.read` sesuai scope/masking. Admin Kepegawaian, Super Admin, dan Pimpinan adalah konfigurasi awal historis; permission dapat diassign/dicabut melalui matrix tanpa role gate legacy.
 - [x] AC-7: Admin dapat menandai alert sebagai ditangani/tidak perlu dengan catatan.
 
 ---
@@ -1502,7 +1504,7 @@ Setiap story mengikuti format:
 - [x] AC-3: Search berdasarkan nama user atau ID record.
 - [x] AC-4: Pagination (default 25 per halaman).
 - [x] AC-5: Urut default: terbaru di atas.
-- [x] AC-6: Akses: Super Admin dan Admin Kepegawaian saja.
+- [x] AC-6: Akses memakai `audit_logs.read` sesuai scope/masking. Super Admin dan Admin Kepegawaian adalah konfigurasi awal historis, bukan allowlist permanen.
 
 ---
 
@@ -1648,7 +1650,7 @@ Setiap story mengikuti format:
 | **Modul** | Konfigurasi |
 | **Dependensi** | — |
 
-> **Sebagai** Super Admin,
+> **Sebagai** pengguna yang memiliki permission `reference_tables.manage`,
 > **Saya ingin** mengelola tabel referensi (golongan, jabatan, unit kerja, dll),
 > **Sehingga** pilihan dropdown di seluruh aplikasi selalu up-to-date.
 
@@ -1661,7 +1663,7 @@ Setiap story mengikuti format:
 - [x] AC-5: Data reference table yang sudah di-seed saat instalasi tidak boleh hilang.
 - AC-6: Nama Program Studi unik setelah normalisasi spasi dan kapitalisasi; rename menyinkronkan snapshot pegawai dan riwayat pendidikan yang terhubung.
 - AC-7: Referensi Program Studi aktif tersedia untuk input baru; referensi nonaktif yang sedang dipakai tetap dapat dipertahankan; referensi terpakai tidak dapat dihapus.
-- AC-8: Mutasi Program Studi hanya dapat dilakukan oleh `super_admin` yang memiliki permission `reference_tables.manage`, dengan audit pada setiap perubahan.
+- AC-8: Mutasi Program Studi memerlukan `reference_tables.manage`, data scope yang relevan, dan audit pada setiap perubahan; permission dapat diassign melalui matrix RBAC dan tidak boleh dikunci ke role default tertentu tanpa business invariant eksplisit.
 
 ---
 
@@ -2007,20 +2009,21 @@ Sprint 1 tetap menjadi fondasi teknis sebelum vertical slice dimulai.
 - [ ] AC-MTG-3: Role internal yang tersimpan tetap menjadi dasar otorisasi setiap request. Role Keycloak selain default Pegawai tidak langsung memberi permission SIMPEG. *(Sumber: K-MTG-02.2 dan K-MTG-02.4.)*
 - [ ] AC-MTG-4: Readiness integrasi SSO membutuhkan daftar akun uji dari LLDIKTI yang memuat email lengkap dan expected role setiap akun; pengujian mapping belum dapat dinyatakan selesai sebelum data tersebut tersedia. *(Sumber keputusan: K-MTG-02.1; guardrail DoD turunan: pengujian mapping belum ditutup sebelum dependency tersedia.)*
 
-### US-1.6 · Switch Role Super Admin Berbasis Permission
+### US-1.6 · Switch Role Super Admin/Admin Kepegawaian Berbasis Permission
 
-> **Sebagai** Super Admin yang memiliki permission switch role,
+> **Sebagai** Super Admin atau Admin Kepegawaian yang memiliki `users.switch_role`,
 > **Saya ingin** mensimulasikan tampilan dan akses role yang lebih rendah tanpa login sebagai pegawai lain,
 > **Sehingga** demo, pengujian, dan dukungan dapat dilakukan tanpa pertukaran kredensial.
 
-- [ ] AC-1: Aksi hanya tersedia bagi Super Admin yang memiliki permission khusus switch role; backend menolak role lain dan Super Admin tanpa permission tersebut. *(Sumber: K-MTG-03.1 dan K-MTG-07.3.)*
+- [ ] AC-1: Aksi hanya tersedia bagi Super Admin atau Admin Kepegawaian dengan `users.switch_role`; backend menolak Pimpinan, Kepala Bagian, Pegawai, dan aktor tanpa permission tersebut. Penolakan tiga role terakhir tetap berlaku jika permission salah ter-assign pada matrix. *(Sumber aktif: K-RBAC-02.1–3.)*
 - [ ] AC-2: Switch hanya mengganti role efektif, bukan identitas, `employee_id`, atau scope kepemilikan data aktor. *(Sumber: K-MTG-03.2.)*
 - [ ] AC-3: Sistem menyimpan `temporary_role` secara persisten setelah logout/login hingga revert. Permission efektif diturunkan dinamis dari role tujuan pada setiap request; `temporary_permission` tidak menjadi snapshot permanen atau sumber kebenaran otorisasi. *(Sumber: K-MTG-03.3 dan K-MTG-07.1.)*
 - [ ] AC-4: Revert menghapus nilai temporary dan mengembalikan role/permission asli. *(Sumber: K-MTG-03.3.)*
-- [ ] AC-5: Matriks Fase 1 hanya mengizinkan Super Admin beralih ke Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai. Switch ke Super Admin, role yang sama, atau role di luar allowlist ditolak fail-closed. *(Sumber: K-MTG-03.4 dan K-MTG-07.3.)*
+- [ ] AC-5: Matrix target Fase 1 mengizinkan Super Admin beralih ke Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai; Admin Kepegawaian hanya beralih ke Pimpinan, Kepala Bagian, atau Pegawai. Switch ke role sama, role lebih tinggi, Super Admin, role di luar matrix, atau chained switch saat `temporary_role` masih aktif ditolak fail-closed. *(Sumber aktif: K-RBAC-02.6–7.)*
 - [ ] AC-6: Switch, penggunaan role sementara, dan revert tercatat pada audit log dengan aktor, role asal, role target, waktu, dan alasan bila disediakan. *(Sumber keputusan: K-MTG-03.4; guardrail engineering/DoD turunan: field audit aktor, role asal, role target, waktu, dan alasan bila disediakan.)*
-- [ ] AC-7: Switch role tersedia untuk kebutuhan yang diotorisasi pada environment development maupun production dan tidak bergantung pada bypass khusus environment. *(Sumber keputusan: K-MTG-03.1; guardrail engineering turunan: implementasi tidak bergantung pada bypass khusus environment.)*
-- [ ] AC-8: Seluruh endpoint mengevaluasi permission role tujuan yang terbaru di backend selama role sementara aktif; perubahan konfigurasi permission berlaku pada request berikutnya, sedangkan identitas asli dan data scope kepemilikan tetap berasal dari aktor asli. *(Sumber: K-MTG-03.2, K-MTG-03.4, dan K-MTG-07.1.)*
+- [ ] AC-7: Switch role tersedia untuk kebutuhan yang diotorisasi pada environment development maupun production dan tidak bergantung pada bypass khusus environment. *(Sumber aktif: K-RBAC-02.)*
+- [ ] AC-8: Seluruh endpoint mengevaluasi permission role tujuan yang terbaru di backend selama role sementara aktif; perubahan konfigurasi permission berlaku pada request berikutnya, sedangkan identitas asli dan data scope kepemilikan tetap berasal dari aktor asli. *(Sumber aktif: K-RBAC-01 dan K-RBAC-02.)*
+- [ ] AC-9: Bukti selesai mencakup matriks izin/penolakan seluruh role asli, target Super Admin versus Admin Kepegawaian, same/higher target, chained switch, persistence/revert, identity/ownership, audit, dan perubahan permission role target yang berlaku pada request berikutnya. *(Sumber aktif: K-RBAC-03.)*
 
 ### US-2.9 dan US-2.10 · Lifecycle/status pegawai kanonis
 
@@ -2169,7 +2172,7 @@ Seluruh Open Question OQ-MTG-01 sampai OQ-MTG-07 dari evaluasi 15/18 Agustus 202
 |---|---|---|
 | OQ-MTG-01 | Permission efektif diturunkan dinamis dari role tujuan; `temporary_permission` bukan snapshot otorisasi permanen | **Decided** |
 | OQ-MTG-02 | Tidak ada direct balance override; koreksi memperbaiki sumber data dan menghitung ulang | **Decided** |
-| OQ-MTG-03 | Super Admin ber-permission khusus dapat switch ke Admin Kepegawaian, Pimpinan, Kepala Bagian, atau Pegawai | **Decided** |
+| OQ-MTG-03 | **Superseded pada 2 September 2026:** Switch Role dapat dimulai oleh Super Admin atau Admin Kepegawaian dengan `users.switch_role`, sesuai matrix target masing-masing; Pimpinan, Kepala Bagian, dan Pegawai tetap ditolak | **Superseded → K-RBAC-02** |
 | OQ-MTG-04 | **Superseded:** keputusan 18 Agustus yang mewajibkan dokumen digantikan oleh addendum 20 Agustus: dokumen opsional, snapshot historis wajib, hari dihitung sistem, duplikasi/overlap ditolak, dan koreksi tanpa hard delete | **Superseded** |
 | OQ-MTG-05 | Konsumsi N-2 → N-1 → tahun berjalan, expiry akhir tahun penggunaan, dan rekalkulasi kronologis untuk koreksi backdated | **Decided** |
 | OQ-MTG-06 | WhatsApp Business wajib siap akhir Agustus; detail provider menjadi dependency implementasi #214/#215 | **Decided** |
@@ -2213,7 +2216,7 @@ Seluruh Open Question OQ-MTG-01 sampai OQ-MTG-07 dari evaluasi 15/18 Agustus 202
 
 - [ ] AC-NTL-1: Matriks dokumen PNS dan CPNS tetap memiliki empat kategori wajib yang sama, tetapi kategori SK Pengangkatan divalidasi terhadap jenis pegawai aktif: CPNS membutuhkan SK Pengangkatan CPNS dan PNS membutuhkan SK Pengangkatan PNS.
 - [ ] AC-NTL-2: Ketika status pegawai berubah dari CPNS ke PNS, sistem mengevaluasi ulang kelengkapan. Jika SK Pengangkatan PNS belum ada, status kelengkapan dokumen wajib menjadi Tidak Lengkap sampai berkas yang sesuai diunggah.
-- [ ] AC-NTL-3: Hanya Super Admin atau Admin Kepegawaian yang berwenang dapat mengubah status terkait dan mengunggah dokumen; pegawai tidak memperoleh self-service untuk mutasi tersebut.
+- [ ] AC-NTL-3: Mutasi status terkait dan unggah dokumen memerlukan permission efektif yang relevan dari matrix RBAC serta scoped policy; Pegawai tidak memperoleh self-service untuk mutasi tersebut.
 
 ### US-8.6 · Reporting Statistik Kepegawaian
 
@@ -2227,3 +2230,30 @@ Seluruh Open Question OQ-MTG-01 sampai OQ-MTG-07 dari evaluasi 15/18 Agustus 202
 - Audit log tetap immutable. Usulan retensi/pengurangan record berkala dalam rapat belum menjadi keputusan produk dan tidak dapat mengubah US-7.1/US-7.2.
 - Keterangan tetap wajib untuk keputusan cuti `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`. Usulan alasan opsional hanya dapat dipertimbangkan untuk penyesuaian data ringan setelah ada keputusan produk tersendiri; ia tidak mengubah kontrak cuti maupun lifecycle.
 - Konfigurasi channel notifikasi tetap global. Preferensi channel per pegawai dibahas sebagai kemungkinan, tetapi tidak menjadi acceptance criterion Fase 1 dari rapat ini.
+
+---
+
+## Addendum RBAC Configurable dan Switch Role — 2 September 2026
+
+> **Status:** **Belum Selesai.** Addendum ini mengikuti [Keputusan RBAC Configurable dan Switch Role](../Keputusan-RBAC-dan-Switch-Role-2-September-2026.md). Ia menggantikan kriteria lama yang menjadikan role default sebagai hard authorization contract, termasuk K-MTG-03/OQ-MTG-03 yang hanya memperbolehkan Super Admin memulai Switch Role.
+
+### US-1.4 · Permission matrix RBAC
+
+- [ ] AC-RBAC-1: Permission matrix database adalah sumber kebenaran assignment dan pencabutan permission. Seeder hanya menentukan default awal; perubahan matrix berlaku dinamis pada request berikutnya tanpa menjadikan claim Keycloak atau raw role sebagai bypass.
+- [ ] AC-RBAC-2: Middleware, FormRequest, policy, Action, dan service memakai permission efektif yang sama. Policy/middleware tidak boleh memuat allowlist role-permission yang membuat permission configurable tidak dapat dipakai role lain, kecuali business invariant produk yang eksplisit.
+- [ ] AC-RBAC-3: Bukti selesai mencakup assignment dan pencabutan permission terhadap role di luar default lama, termasuk Pimpinan + `dokumen_sk.read`, Kepala Bagian + `ews.configure`, Pimpinan + `cuti.configure`, serta penolakan actor yang tidak memiliki permission.
+- [ ] AC-RBAC-4: Hak baca dokumen memakai `dokumen_sk.read` dengan data scope/masking yang berlaku; hak mutasi dokumen tetap memakai permission terpisah. Tidak ada tabel atau route yang menyatakan arsip read-only secara permanen hanya untuk role default tertentu.
+- [ ] AC-RBAC-5: Export pegawai memerlukan `employees.export` dan tidak otomatis diberikan oleh `employees.read`. Test membuktikan role yang hanya membaca dapat melihat data scoped tetapi tidak mengunduh raw export, sedangkan role yang diberi permission export dapat mengunduh hasil yang tetap melalui filter, masking, dan allowlist kolom.
+
+### US-1.6 · Switch Role
+
+- [ ] AC-RBAC-6: Hanya role asli Super Admin atau Admin Kepegawaian dengan `users.switch_role` yang dapat memulai Switch Role. Pimpinan, Kepala Bagian, dan Pegawai ditolak fail-closed meskipun permission tersebut salah ter-assign.
+- [ ] AC-RBAC-7: Target mengikuti matrix role asli: Super Admin → Admin Kepegawaian/Pimpinan/Kepala Bagian/Pegawai; Admin Kepegawaian → Pimpinan/Kepala Bagian/Pegawai. Target sama, lebih tinggi, Super Admin, di luar matrix, atau chained switch saat `temporary_role` aktif ditolak.
+- [ ] AC-RBAC-8: Switch mempertahankan `user.id`, `employee_id`, ownership, dan data scope aktor asli. Hanya role/permission efektif berubah; `temporary_role` persisten hingga revert, `temporary_permission` bukan sumber otorisasi, dan audit menyimpan konteks aman dari switch/revert maupun mutasi penting.
+
+### Changelog v1.13 — 2 September 2026
+
+- Menetapkan RBAC permission-driven/configurable sebagai source of truth assignment permission.
+- Menetapkan Switch Role hanya untuk Super Admin dan Admin Kepegawaian dengan `users.switch_role`.
+- Menetapkan target Switch Role berdasarkan hierarki role yang lebih rendah.
+- Menyelaraskan akses dokumen/export/fitur administratif dengan permission RBAC.

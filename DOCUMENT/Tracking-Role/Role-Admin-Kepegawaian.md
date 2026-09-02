@@ -8,10 +8,12 @@
 | Tanggal analisis ulang | 10 Agustus 2026 |
 | Basis verifikasi | Branch `development` @ `1fd99cb` setelah PR #177 |
 | Dokumen asal (dikonsolidasi ke file ini) | `Analisis-Frontend-Backend-Role-Admin-Kepegawaian.md` — audit 21 Juli 2026 |
-| Acuan produk | PRD v1.12; bagian soft delete/restore superseded oleh keputusan lifecycle 25 Agustus 2026 |
+| Acuan produk | PRD v1.13; bagian soft delete/restore superseded oleh keputusan lifecycle 25 Agustus 2026 |
 | Status keseluruhan | ⚠️ **Belum sepenuhnya sesuai** — dari 4 gap utama audit lama, 1 sudah tuntas (set atasan); lifecycle nonaktif, laporan, dan audit-sensitif masih terbuka |
 
 > **Addendum 31 Agustus 2026:** Admin Kepegawaian memerlukan kerja baru untuk penangguhan cuti final dengan replay ledger, pengelolaan fakta cuti historis tanpa input angka langsung pada ringkasan, dan kelengkapan SK Pengangkatan yang membedakan PNS/CPNS. Status lama bukan bukti penerimaan kriteria ini.
+
+> **Addendum 2 September 2026:** Admin Kepegawaian dapat menjadi actor asli Switch Role hanya bila memiliki `users.switch_role`; targetnya terbatas pada Pimpinan, Kepala Bagian, atau Pegawai. Akses fitur lain tetap berasal dari permission matrix efektif, bukan nama role default.
 
 ## Ringkasan
 

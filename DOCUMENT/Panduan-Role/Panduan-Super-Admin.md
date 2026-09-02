@@ -4,7 +4,7 @@
 |---|---|
 | Role internal | `super_admin` |
 | Status | **Draft — belum diterima Kepegawaian** |
-| Cakupan | Administrasi sistem dan seluruh kemampuan operasional Admin Kepegawaian |
+| Cakupan | Default permission administrasi sistem dan kemampuan operasional Admin Kepegawaian; akses aktual mengikuti permission efektif dan scope |
 
 ## 1. Prasyarat
 
@@ -18,7 +18,8 @@
 | Fitur | Langkah ringkas | Dampak tindakan |
 |---|---|---|
 | Kelola Akses User | Buka **Kelola Akses User**, cari pegawai, isi identifier Keycloak, pilih role internal, lalu simpan | Mengubah kemampuan user di SIMPEG dan menghasilkan Audit Log |
-| Role & Permission | Buka **Role & Permission**, periksa role dan permission, ubah hanya berdasarkan keputusan yang disetujui | Dapat memperluas atau mencabut akses; salah konfigurasi dapat mengunci alur operasional |
+| Role & Permission | Buka **Role & Permission**, periksa default dan permission efektif, ubah hanya berdasarkan keputusan yang disetujui | Permission matrix mengatur grant/revoke; role bukan hard authorization contract dan salah konfigurasi dapat mengunci alur operasional |
+| Switch Role | Bila memiliki `users.switch_role`, pilih target lebih rendah yang diizinkan lalu revert setelah selesai | Menyimulasikan role efektif tanpa mengganti identitas, `employee_id`, ownership, atau scope aktor asli; seluruh aksi teraudit |
 | Data Master | Buka **Data Master**, pilih referensi, tambah/ubah/nonaktifkan sesuai dependency | Mengubah pilihan kanonis yang dipakai form, perhitungan, dan laporan |
 | Data Pegawai | Cari pegawai, tambah/ubah data utama, tambahkan riwayat, dan kelola status langsung atau terjadwal | Mutasi status mempertahankan Employee, membuat histori append-only/audit, serta memengaruhi akses dan EWS ketika efektif |
 | Import Pegawai | Unduh template, unggah CSV/Excel, petakan kolom, validasi, periksa preview, lalu jalankan import | Dapat membuat banyak pegawai; baris import diklasifikasikan imported/skipped/failed |
@@ -62,6 +63,8 @@ jangan memindahkan mapping secara manual melalui database.
 - Jangan menggunakan Data Backup/Data Nonaktif; seluruh lifecycle ada pada filter status Data Pegawai.
 - Reaktivasi tetap memerlukan permission efektif `employees.restore`. Role Super Admin tidak menjadi bypass.
 - Jangan mengandalkan raw role asal ketika switch role aktif; seluruh aksi mengikuti role/permission efektif.
+- Switch Role hanya dapat dimulai oleh Super Admin atau Admin Kepegawaian dengan `users.switch_role`; Pimpinan, Kepala Bagian, dan Pegawai tetap ditolak. Jangan memilih role sama/lebih tinggi/Super Admin atau melakukan chained switch sebelum revert.
+- Jangan menganggap default Super Admin sebagai alasan untuk menolak permission valid pada role lain; gunakan permission efektif dan business invariant yang terdokumentasi.
 - Jangan mengedit histori kepegawaian lama; tambahkan record baru berdasarkan dokumen resmi.
 - Jangan mengubah saldo cuti secara langsung; koreksi dilakukan melalui sumber pemakaian dan
   rekalkulasi yang diaudit.

@@ -1,5 +1,7 @@
 # Tracking Sprint 1 — Fondasi
 
+> **Addendum RBAC 2 September 2026:** status Sprint 1 adalah snapshot implementasi historis. Kontrak aktif menuntut permission matrix configurable sebagai sumber kebenaran, larangan allowlist role-permission, permission export/dokumen yang granular, dan invariant Switch Role baru. Tindak lanjut dilacak pada Addendum 2 September di `Issues-SIMPEG-Fase1.md` serta UAT K-01.
+
 | Field | Detail |
 |---|---|
 | Periode | 8 – 20 Juni 2026 |

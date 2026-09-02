@@ -2,6 +2,8 @@
 
 > **Pembaruan lintas-domain 25 Agustus 2026:** keputusan K-1 tentang lifecycle **reference table** tetap berlaku. Namun contoh enum/kolom Employee `status_aktif` di catatan K-2 adalah snapshot historis dan **Superseded**; status aktif Employee kini berasal dari `ref_status_pegawai.kelompok` melalui predicate kanonis. Lihat [Keputusan Lifecycle dan Status Pegawai](Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
 
+> **Pembaruan RBAC 2 September 2026:** contoh gate `role:super_admin` dan pembagian akses berbasis role dalam kickoff ini adalah snapshot implementasi Sprint 6. Kontrak aktif menjadikan permission matrix database sebagai sumber kebenaran; default role tidak menjadi allowlist permanen kecuali business invariant eksplisit. Lihat [Keputusan RBAC Configurable dan Switch Role](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md).
+
 | Field | Detail |
 |---|---|
 | Tanggal | 26 Juli 2026 |

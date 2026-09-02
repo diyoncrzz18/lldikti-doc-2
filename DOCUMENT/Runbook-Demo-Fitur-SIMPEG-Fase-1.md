@@ -254,10 +254,19 @@ Hasil yang dijelaskan:
 **Menu:** Administrasi Sistem → Role & Permission  
 **URL:** `/rbac`
 
-1. Tunjukkan matriks role dan permission.
-2. Jelaskan contoh permission Data Pegawai, Riwayat, EWS Aktif, Audit Log, Konfigurasi EWS, dan Perbaikan Data Pemakaian Cuti.
-3. Jelaskan bahwa dua role dapat melihat jenis halaman serupa tetapi memiliki aksi berbeda.
-4. Jangan mengubah permission role utama pada demo live.
+1. Tunjukkan matriks role dan permission, lalu jelaskan bahwa nilai yang terlihat adalah **Default permission / konfigurasi awal**, bukan hard authorization contract.
+2. Jelaskan bahwa permission efektif dari matrix database menjadi sumber keputusan backend; contoh `dokumen_sk.read`, `ews.configure`, `cuti.configure`, dan `reference_tables.manage` dapat diassign/dicabut dari role sesuai proses administrasi yang berwenang.
+3. Gunakan data uji untuk memperlihatkan grant lalu revoke satu permission pada role non-default. Periksa bahwa menu berubah sebagai UX dan backend juga mengizinkan/menolak pada request berikutnya.
+4. Tunjukkan bahwa `employees.read` tidak cukup untuk raw export; `employees.export` diperlukan dan hasil tetap dibatasi scope, masking, serta allowlist kolom.
+5. Jangan mengubah permission role utama pada demo live atau membuat konfigurasi yang dapat mengunci semua administrator.
+
+### 6.3 Switch Role
+
+1. Login sebagai Super Admin atau Admin Kepegawaian **yang memiliki** `users.switch_role`.
+2. Tunjukkan target sesuai matrix: Super Admin dapat memilih Admin Kepegawaian/Pimpinan/Kepala Bagian/Pegawai; Admin Kepegawaian hanya Pimpinan/Kepala Bagian/Pegawai.
+3. Pilih satu target, lalu buktikan bahwa `user.id`, `employee_id`, dan ownership data tetap milik aktor asli sementara role/permission efektif mengikuti target.
+4. Tunjukkan nilai `temporary_role` tetap aktif setelah refresh atau login ulang uji, lalu lakukan revert dan periksa audit switch/revert.
+5. Dengan data uji, buktikan Pimpinan, Kepala Bagian, dan Pegawai ditolak memulai Switch Role walaupun `users.switch_role` sengaja diassign; juga buktikan target sama/lebih tinggi/Super Admin dan chained switch ditolak.
 
 ---
 
@@ -834,7 +843,7 @@ Tunjukkan ringkasan organisasi, cuti menunggu keputusan, EWS, statistik, aktivit
 
 ### 17.1 Export Pegawai
 
-**Role:** Admin Kepegawaian, Super Admin, atau Pimpinan  
+**Akses:** Pengguna dengan permission efektif `employees.export` sesuai data scope; Admin Kepegawaian, Super Admin, atau Pimpinan adalah konfigurasi awal yang lazim
 **URL:** `/laporan/export-pegawai`
 
 1. Pilih kolom aman: Nama, NIP bila diizinkan, Jenis Pegawai, Golongan, Jabatan, Unit, dan Status.

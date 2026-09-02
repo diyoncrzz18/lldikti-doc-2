@@ -8,6 +8,8 @@
 | Status | **Draft — belum diterima Kepegawaian** |
 | Cakupan | Bawahan langsung/unit, tahap approval sebagai Atasan Langsung, EWS bawahan, dan notifikasi |
 
+> Cakupan di atas adalah konfigurasi awal. Permission tambahan yang diassign melalui matrix RBAC tetap hanya berlaku setelah backend menegakkan permission efektif, scope bawahan, dan aturan domain cuti.
+
 ## 1. Prasyarat
 
 - Akun sudah dipetakan ke pegawai aktif dengan role internal `kepala_bagian`.
@@ -48,6 +50,7 @@ dipotong final. Pemotongan saldo hanya terjadi setelah keputusan final `Disetuju
 - Bila Anda juga menjadi PYBMC untuk pengajuan yang sama, selesaikan tindakan Atasan Langsung terlebih dahulu. Sistem tetap menampilkan tindakan PYBMC berikutnya sebagai peran terpisah.
 - Tidak menggunakan EWS sebagai dasar keputusan otomatis.
 - Tidak mengunduh atau membagikan lampiran di luar kewenangan.
+- Tidak dapat memulai Switch Role, walaupun `users.switch_role` salah ter-assign pada matrix; ini adalah business invariant backend.
 
 ## 5. Troubleshooting
 

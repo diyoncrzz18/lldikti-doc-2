@@ -99,6 +99,11 @@ Setiap sesi menggunakan urutan berikut:
 | UAT-CUT-31-07 | Pemulihan downtime | Setelah layanan pulih, catat cuti yang telah diproses dan disetujui manual saat downtime | Fakta final tercatat satu kali; saldo/rollover sinkron; tidak ada approval aktif atau reservasi baru; duplikasi/overlap ditolak | UI smoke, ledger before/after, audit, test PostgreSQL |
 | UAT-EMP-31-01 | Dokumen pegawai | Uji PNS, CPNS, lalu transisi CPNS→PNS | PNS memerlukan SK Pengangkatan PNS; CPNS memerlukan SK Pengangkatan CPNS; transisi menandai belum lengkap sampai SK PNS tersedia | Screenshot status kelengkapan, upload/audit, RBAC denial |
 | UAT-REP-31-01 | Reporting | Buka Reporting Statistik dengan data/role berbeda | Halaman terpisah dari dashboard/export; chart golongan, jenis jabatan, jabatan, unit, dan jenis kepegawaian mengikuti scope dan empty state | Screenshot desktop/tablet/mobile, test scope/query, console bersih |
+| UAT-RBAC-02-01 | RBAC configurable | Assign lalu cabut `dokumen_sk.read`, `ews.configure`, dan `cuti.configure` pada role di luar default lama | Permission efektif berubah pada request berikutnya; UI mengikuti permission, backend mengizinkan/menolak sesuai matrix, data scope/masking tetap berlaku | Feature/integration test PostgreSQL, screenshot grant/revoke, audit masked |
+| UAT-RBAC-02-02 | Export pegawai | Bandingkan role dengan `employees.read` saja dan role yang juga diberi `employees.export` | Role baca dapat melihat data sesuai scope tetapi tidak dapat raw export; role export dapat mengunduh hasil dengan filter, masking, dan allowlist kolom tetap berlaku | Response denial, file hasil tersanitasi, authorization test |
+| UAT-SWR-02-01 | Switch Role Super Admin | Super Admin ber-permission `users.switch_role` berganti ke setiap target yang diizinkan lalu revert | Identitas/employee/ownership tetap, role/permission efektif target dipakai, `temporary_role` persisten sampai revert, audit lengkap | Test matrix, audit, browser smoke logout/login/revert |
+| UAT-SWR-02-02 | Switch Role Admin Kepegawaian | Admin Kepegawaian ber-permission mencoba Pimpinan/Kepala Bagian/Pegawai dan target yang dilarang | Tiga target rendah berhasil; Super Admin, role sama/lebih tinggi, dan target tidak valid ditolak | Test authorization, response denial, audit aman |
+| UAT-SWR-02-03 | Invariant Switch Role | Pimpinan, Kepala Bagian, dan Pegawai diberi `users.switch_role` pada data uji lalu mencoba memulai; uji chained switch | Ketiganya tetap ditolak fail-closed; switch kedua ditolak sampai revert, tanpa perubahan identitas/scope | Test backend, browser smoke, audit switch/revert |
 
 Catatan Open Question harus dicatat pada sesi UAT, bukan diasumsikan oleh tester: batas pembatalan setelah Verifikator bertindak masih menunggu keputusan LLDIKTI.
 
@@ -176,6 +181,7 @@ Setelah kelompok terkait berstatus `Diterima`:
 - [ ] retest memiliki evidence baru;
 - [ ] lima panduan role diselaraskan dengan fitur yang diterima;
 - [ ] seluruh skenario addendum evaluasi 31 Agustus yang masuk release candidate memiliki evidence retest;
+- [ ] seluruh skenario RBAC configurable dan Switch Role 2 September yang masuk release candidate memiliki evidence retest;
 - [ ] hasil UAT ditautkan pada checklist go/no-go.
 
 ## 12. Referensi
@@ -185,3 +191,4 @@ Setelah kelompok terkait berstatus `Diterima`:
 - [Tracking Sprint 7](../Tracking-Sprint-1-7/Sprint-7-Stabilization-Regression-UAT.md)
 - [Keputusan Evaluasi Meeting](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md)
 - [Keputusan Evaluasi 31 Agustus 2026](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md)
+- [Keputusan RBAC Configurable dan Switch Role 2 September 2026](../Keputusan-RBAC-dan-Switch-Role-2-September-2026.md)

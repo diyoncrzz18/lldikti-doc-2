@@ -5,10 +5,12 @@
 | **Tanggal keputusan dokumentasi** | 31 Agustus 2026 |
 | **Status** | **Disetujui** — melengkapi dan menggantikan keputusan terdahulu pada area yang disebutkan di dokumen ini |
 | **Dasar** | Notulen *Evaluasi Projek SIMPEG bersama Mahasiswa Magang Univ Klabat* serta klarifikasi langsung stakeholder pada 31 Agustus 2026 tentang bootstrap pengguna pertama dan pemulihan pencatatan cuti setelah downtime |
-| **Dokumen produk terkait** | [PRD SIMPEG Fase 1 Core v1.12](PRD-DLL/PRD-SIMPEG-Fase1-Core.md) dan [User Stories SIMPEG Fase 1 v1.12](PRD-DLL/User-Stories-SIMPEG-Fase1.md) |
+| **Dokumen produk terkait** | [PRD SIMPEG Fase 1 Core v1.13](PRD-DLL/PRD-SIMPEG-Fase1-Core.md) dan [User Stories SIMPEG Fase 1 v1.13](PRD-DLL/User-Stories-SIMPEG-Fase1.md); snapshot yang berlaku saat rapat 31 Agustus adalah v1.12 |
 | **Dokumen keputusan terdahulu** | [Keputusan Evaluasi Meeting LLDIKTI 15 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md) dan [Keputusan Cuti Saldo Tahap 0](Keputusan-Cuti-Saldo-Tahap-0.md) |
 
 > Dokumen ini menjaga keputusan 15–25 Agustus sebagai riwayat. Hanya butir yang secara eksplisit disebut **digantikan** di bawah yang tidak lagi menjadi kontrak aktif. Nama teknis yang sudah ada, seperti role, route, atau field `kepala_bagian`, **tidak** otomatis berubah hanya karena label bisnis diubah; perubahan schema atau RBAC memerlukan keputusan tersendiri.
+
+> **Pembaruan RBAC 2 September 2026:** role yang disebut pada dokumen ini menggambarkan konfigurasi/default pada saat keputusan 31 Agustus dicatat. Permission matrix database kini menjadi sumber kebenaran. Hak generic, termasuk pengelolaan fitur dan baca dokumen, dapat diassign atau dicabut dengan scope/policy; hanya business invariant eksplisit seperti Switch Role yang memakai pembatas role asli. Lihat [Keputusan RBAC Configurable dan Switch Role](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md).
 
 ## K-MTG-10.1 — Terminologi dan chain approval cuti
 
@@ -70,6 +72,6 @@
 
 ## Dampak dokumentasi dan delivery
 
-- PRD dan User Stories v1.12 sudah menjadi kontrak produk yang telah diselaraskan.
+- PRD dan User Stories aktif v1.13 telah menyelaraskan keputusan 31 Agustus serta addendum RBAC 2 September; v1.12 dipertahankan sebagai snapshot sejarah rapat.
 - Backlog, tracker sprint/role, panduan pengguna, runbook, serta skenario UAT wajib menambahkan pekerjaan dan pengujian baru; evidence lama tidak boleh diklaim sebagai bukti penerimaan keputusan ini.
 - Implementasi baru hanya dapat dinyatakan selesai setelah test PostgreSQL, audit, authorization/data scope, browser smoke, dan UAT yang relevan tersedia.

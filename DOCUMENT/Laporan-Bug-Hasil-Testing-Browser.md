@@ -2,6 +2,8 @@
 
 > **Status historis:** laporan ini merekam perilaku pada 8 Agustus 2026. Seluruh bukti/temuan soft delete, restore, `deleted_at`, Data Backup, atau Data Nonaktif berstatus **Superseded** oleh [Keputusan Lifecycle dan Status Pegawai 25 Agustus 2026](Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md). Bagian tersebut tidak boleh dipakai sebagai acceptance criteria atau bukti kelulusan lifecycle aktif.
 
+> **Catatan RBAC historis (2 September 2026):** penyebutan `role:super_admin`, “Super Admin only”, atau kombinasi role dan permission dalam laporan ini merekam hasil pengujian 8 Agustus, bukan kontrak otorisasi aktif. Permission matrix yang tersimpan di database kini menjadi sumber kebenaran; pengecualian role hanya boleh dipakai untuk business invariant yang dinyatakan eksplisit. Lihat [Keputusan RBAC Configurable dan Switch Role](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md).
+
 | Field | Detail |
 |-------|--------|
 | **Tanggal Testing** | 8 Agustus 2026 |

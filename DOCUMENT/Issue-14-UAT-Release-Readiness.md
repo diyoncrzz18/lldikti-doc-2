@@ -10,7 +10,7 @@
 | Evidence backend/environment | Jordan Sutarto |
 | Input panduan UI | Adithian Gunawan |
 | Release/merge gate | Adriel Walintukan |
-| Terakhir diperbarui | 24 Agustus 2026 |
+| Terakhir diperbarui | 2 September 2026 |
 
 ## 1. Tujuan
 
@@ -48,6 +48,7 @@ Aturan status paket:
 | 6 | Migration, aplikasi, queue, scheduler, dan alur utama terverifikasi | Dokumen baseline §5–§7 | Belum Lulus | Environment kandidat belum ditetapkan |
 | 7 | Prosedur dan bukti rollback tersedia | Dokumen recovery §7–§10 | Belum Lulus | Prosedur masih draft; drill belum dilaksanakan |
 | 8 | Checklist release lengkap dan keputusan go/no-go | Checklist go/no-go | Belum Lulus | Keputusan belum dibuat |
+| 9 | Kontrak RBAC configurable dan Switch Role 2 September tervalidasi | Register UAT §6 | Belum Lulus | Grant/revoke permission, permission dokumen/export, matrix Switch Role, dan denial invariant belum diuji pada kandidat |
 
 ## 4. Aturan Evidence
 
@@ -71,7 +72,7 @@ terbatas dan ringkasan hasil yang aman.
 
 Issue #14 hanya boleh ditutup ketika:
 
-- seluruh delapan acceptance criteria berstatus `Lulus`;
+- seluruh sembilan acceptance criteria berstatus `Lulus`;
 - setiap kelompok revisi memiliki keputusan Kepegawaian;
 - lima panduan role berstatus `Diterima`;
 - backup/restore dan rollback drill memiliki evidence;
@@ -86,6 +87,7 @@ ketiadaan dependency tidak boleh diubah menjadi klaim lulus.
 
 - [Keputusan Evaluasi Meeting LLDIKTI 15 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md)
 - [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md)
+- [Keputusan RBAC Configurable dan Switch Role 2 September 2026](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md)
 - [User Stories SIMPEG Fase 1 — K-MTG-06](PRD-DLL/User-Stories-SIMPEG-Fase1.md)
 - [Tracking Sprint 7](Tracking-Sprint-1-7/Sprint-7-Stabilization-Regression-UAT.md)
 - [Runbook Demo Fitur SIMPEG Fase 1](Runbook-Demo-Fitur-SIMPEG-Fase-1.md)
