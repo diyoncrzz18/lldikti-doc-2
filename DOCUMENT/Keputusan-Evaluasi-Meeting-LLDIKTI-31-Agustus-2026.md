@@ -2,10 +2,10 @@
 
 | Field | Detail |
 |---|---|
-| **Tanggal keputusan dokumentasi** | 31 Agustus 2026; klarifikasi pembatalan dan alasan konfigurasi 1 September 2026 |
+| **Tanggal keputusan dokumentasi** | 31 Agustus 2026; klarifikasi pembatalan dan alasan konfigurasi 1 September 2026; klarifikasi duplikasi lintas peran 2 September 2026 |
 | **Status** | **Disetujui** — melengkapi dan menggantikan keputusan terdahulu pada area yang disebutkan di dokumen ini |
-| **Dasar** | Notulen *Evaluasi Projek SIMPEG bersama Mahasiswa Magang Univ Klabat*, klarifikasi stakeholder 31 Agustus 2026, jawaban tertulis LLDIKTI 1 September 2026 mengenai permohonan pembatalan cuti, serta keputusan pengguna 1 September 2026 mengenai kewajiban alasan konfigurasi chain |
-| **Dokumen produk terkait** | [PRD SIMPEG Fase 1 Core v1.15](PRD-DLL/PRD-SIMPEG-Fase1-Core.md) dan [User Stories SIMPEG Fase 1 v1.15](PRD-DLL/User-Stories-SIMPEG-Fase1.md); snapshot yang berlaku saat rapat 31 Agustus adalah v1.12 |
+| **Dasar** | Notulen *Evaluasi Projek SIMPEG bersama Mahasiswa Magang Univ Klabat*, klarifikasi stakeholder 31 Agustus 2026, jawaban tertulis LLDIKTI 1 September 2026 mengenai permohonan pembatalan cuti, keputusan pengguna 1 September 2026 mengenai kewajiban alasan konfigurasi chain, serta keputusan pengguna 2 September 2026 mengenai duplikasi aktor lintas peran |
+| **Dokumen produk terkait** | [PRD SIMPEG Fase 1 Core v1.16](PRD-DLL/PRD-SIMPEG-Fase1-Core.md) dan [User Stories SIMPEG Fase 1 v1.16](PRD-DLL/User-Stories-SIMPEG-Fase1.md); snapshot yang berlaku saat rapat 31 Agustus adalah v1.12 |
 | **Dokumen keputusan terdahulu** | [Keputusan Evaluasi Meeting LLDIKTI 15 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md) dan [Keputusan Cuti Saldo Tahap 0](Keputusan-Cuti-Saldo-Tahap-0.md) |
 
 > Dokumen ini menjaga keputusan 15–25 Agustus sebagai riwayat. Hanya butir yang secara eksplisit disebut **digantikan** di bawah yang tidak lagi menjadi kontrak aktif. Nama teknis yang sudah ada, seperti role, route, atau field `kepala_bagian`, **tidak** otomatis berubah hanya karena label bisnis diubah; perubahan schema atau RBAC memerlukan keputusan tersendiri.
@@ -17,9 +17,10 @@
 1. Urutan kanonis approval cuti adalah **nol atau lebih Verifikator → Atasan Langsung → PYBMC**.
 2. **Atasan Langsung** adalah peran bisnis cuti yang ditetapkan secara eksplisit per pegawai. Ia tidak identik dengan nama jabatan struktural Kepala Bagian; pejabat dengan jabatan lain dapat menjadi Atasan Langsung bila ditetapkan pada konfigurasi pegawai tersebut.
 3. UI dan dokumen bisnis cuti wajib memakai label **Atasan Langsung**, bukan **Kepala Bagian**. Bila tidak ada Verifikator, chain dimulai langsung pada Atasan Langsung tanpa menampilkan label atau placeholder “tanpa verifikator”.
-4. Bila Atasan Langsung dan PYBMC menunjuk orang yang sama, snapshot tetap menyimpan **dua tahap berbeda** dan orang tersebut tetap menyelesaikan dua tindakan terpisah sesuai peran yang sedang aktif. Aturan umum untuk mencegah/menolak duplikasi approver tetap berlaku bagi kombinasi tahap lain.
-5. Ketentuan lama yang menyatakan chain `Verifikator → Kepala Bagian → PYBMC`, atau meminta sistem melewati pasangan Atasan Langsung/PYBMC yang orangnya sama, digantikan oleh keputusan ini pada surface bisnis dan acceptance criteria baru.
-6. Pada konfigurasi chain, **Alasan Perubahan Chain Pegawai** dan **Alasan Backfill** bersifat opsional. **Alasan Penerapan Chain ke Unit** dan **Alasan PYBMC Global** tetap wajib karena berdampak massal atau luas. Audit tetap mencatat aktor, nilai sebelum/sesudah, dan metadata aksi meskipun alasan opsional tidak diisi.
+4. Bila orang yang sama mengisi lebih dari satu **peran berbeda**, snapshot tetap menyimpan setiap tahap dan orang tersebut wajib melakukan satu tindakan terpisah untuk setiap peran yang sedang aktif. Aturan ini berlaku untuk kombinasi Verifikator–Atasan Langsung, Verifikator–PYBMC, Atasan Langsung–PYBMC, maupun satu orang yang mengisi ketiga peran.
+5. Orang yang sama tidak boleh diulang pada **peran yang sama** dalam satu chain, misalnya menjadi dua Verifikator. Konfigurasi seperti ini ditolak sebelum disimpan dengan pesan yang dapat ditindaklanjuti; sistem tidak membuat lalu melewati tahap tersebut saat runtime.
+6. Ketentuan lama yang menyatakan chain `Verifikator → Kepala Bagian → PYBMC`, atau meminta sistem melewati tahap hanya karena pegawainya sudah bertindak pada peran sebelumnya, digantikan oleh keputusan ini pada surface bisnis dan acceptance criteria baru.
+7. Pada konfigurasi chain, **Alasan Perubahan Chain Pegawai** dan **Alasan Backfill** bersifat opsional. **Alasan Penerapan Chain ke Unit** dan **Alasan PYBMC Global** tetap wajib karena berdampak massal atau luas. Audit tetap mencatat aktor, nilai sebelum/sesudah, dan metadata aksi meskipun alasan opsional tidak diisi.
 
 ## K-MTG-10.2 — Pembatalan, revisi, dan penangguhan cuti
 
@@ -69,6 +70,7 @@
 ## Klarifikasi yang telah ditutup
 
 - Batas pembatalan setelah Verifikator bertindak telah diputuskan pada 1 September 2026: Pegawai mengajukan permohonan pembatalan beralasan, approval utama ditahan, dan Admin Kepegawaian menyetujui atau menolak pembatalan tersebut.
+- Perlakuan pegawai yang sama pada beberapa peran telah diputuskan pada 2 September 2026: setiap peran tetap memerlukan tindakan tersendiri, sedangkan pengulangan pegawai pada peran yang sama ditolak saat konfigurasi.
 
 ## Batas implementasi yang tetap berlaku
 
@@ -76,6 +78,6 @@
 
 ## Dampak dokumentasi dan delivery
 
-- PRD dan User Stories aktif v1.15 telah menyelaraskan keputusan 31 Agustus–1 September serta addendum RBAC 2 September; v1.12 dipertahankan sebagai snapshot sejarah rapat.
+- PRD dan User Stories aktif v1.16 telah menyelaraskan keputusan 31 Agustus–2 September, termasuk addendum RBAC dan klarifikasi duplikasi lintas peran; v1.12 dipertahankan sebagai snapshot sejarah rapat.
 - Backlog, tracker sprint/role, panduan pengguna, runbook, serta skenario UAT wajib menambahkan pekerjaan dan pengujian baru; evidence lama tidak boleh diklaim sebagai bukti penerimaan keputusan ini.
 - Implementasi baru hanya dapat dinyatakan selesai setelah test PostgreSQL, audit, authorization/data scope, browser smoke, dan UAT yang relevan tersedia.

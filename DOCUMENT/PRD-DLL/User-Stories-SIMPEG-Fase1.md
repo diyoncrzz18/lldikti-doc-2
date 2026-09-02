@@ -3,14 +3,14 @@
 
 | Field | Detail |
 |-------|--------|
-| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.15, Keputusan Lifecycle/Status Pegawai 25 Agustus 2026, Keputusan Evaluasi 31 Agustus–1 September 2026, dan Keputusan RBAC/Switch Role 2 September 2026 |
+| **Berdasarkan** | PRD-SIMPEG-Fase1-Core.md v1.16, Keputusan Lifecycle/Status Pegawai 25 Agustus 2026, Keputusan Evaluasi 31 Agustus–2 September 2026, dan Keputusan RBAC/Switch Role 2 September 2026 |
 | **Tanggal dokumen awal** | 21 Agustus 2026 |
 | **Pembaruan dokumen terakhir** | 2 September 2026 |
 | **Basis verifikasi implementasi terakhir** | Branch `development` @ `ff0e9e1` (setelah PR #182 masuk, 14 Agustus 2026); pembaruan 25 Agustus–2 September menyelaraskan kontrak produk dan belum menjadi bukti verifikasi implementasi baru |
 | **Total User Stories** | 57 — 53 baseline ditambah US-1.6, US-4.13, US-6.5, dan US-8.6; estimasi total perlu direbaseline |
 | **Total Epics** | 9 |
 
-> **Catatan sinkronisasi PRD 1.15:** Keycloak digunakan hanya untuk SSO/login. Permission matrix RBAC di database menjadi sumber kebenaran assignment permission; role dan seeder hanya menyatakan konfigurasi awal. Approval cuti memakai tepat satu chain runtime per pegawai; unit hanya menjadi target penyalinan template sesuai K-US-01. Klarifikasi 1 September menetapkan permohonan pembatalan tersendiri yang diputus Admin Kepegawaian serta alasan konfigurasi chain opsional/wajib berbasis dampak. Status keputusan resmi adalah `Disetujui`, `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`; cuti tahunan tidak boleh lintas tahun; EWS menambahkan Satyalancana; notifikasi harus channel-configurable; dan laporan mendukung export nominatif Excel custom melalui `employees.export`.
+> **Catatan sinkronisasi PRD 1.16:** Keycloak digunakan hanya untuk SSO/login. Permission matrix RBAC di database menjadi sumber kebenaran assignment permission; role dan seeder hanya menyatakan konfigurasi awal. Approval cuti memakai tepat satu chain runtime per pegawai; unit hanya menjadi target penyalinan template sesuai K-US-01. Klarifikasi 1 September menetapkan permohonan pembatalan tersendiri yang diputus Admin Kepegawaian serta alasan konfigurasi chain opsional/wajib berbasis dampak. Keputusan 2 September menghapus auto-skip berdasarkan kesamaan pegawai lintas peran dan menolak pengulangan pegawai pada peran yang sama. Status keputusan resmi adalah `Disetujui`, `Perubahan`, `Ditangguhkan`, dan `Tidak Disetujui`; cuti tahunan tidak boleh lintas tahun; EWS menambahkan Satyalancana; notifikasi harus channel-configurable; dan laporan mendukung export nominatif Excel custom melalui `employees.export`.
 >
 > **Keputusan import Fase 1 (kanonis, disetujui pengguna 22 Juli 2026):** import massal hanya mengaktifkan template Data Utama. Import membuat record pegawai beserta field snapshot awal, tidak membuat riwayat kepangkatan/jabatan/KGB, dan tidak memanggil kalkulasi TMT. Riwayat resmi diinput per pegawai melalui CRUD append-only. Tanggal pensiun hasil import dipertahankan apa adanya. Kalkulasi TMT dipicu saat riwayat/sumber resmi disimpan, bukan saat import selesai. Template lanjutan multi-jenis tidak termasuk ruang lingkup saat ini.
 >
@@ -22,7 +22,7 @@
 
 > **Penyempurnaan lifecycle (25 Agustus 2026):** [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md) adalah kontrak aktif. Kelompok `Aktif` dan `Aktif/khusus` sama-sama aktif; Tugas Belajar tetap aktif. Alasan administratif wajib terpisah dari `status_note`; tanggal efektif masa depan dijadwalkan; reaktivasi dapat dilakukan Super Admin atau Admin Kepegawaian dengan role efektif ber-permission `employees.restore`; linked Employee efektif Nonaktif diblokir global dari route bisnis; mutasi wajib lock/re-check/idempoten, audit fail-closed, dan notifikasi after-commit.
 
-> **Keputusan evaluasi SIMPEG bersama LLDIKTI (31 Agustus–1 September 2026):** chain cuti memakai nol atau lebih Verifikator → Atasan Langsung → PYBMC; label Kepala Bagian pada surface cuti diganti menjadi Atasan Langsung. Cuti manual/historis menjadi satu-satunya sumber pemakaian tahunan sebelum go-live dan sarana pemulihan pencatatan setelah downtime. Permohonan pembatalan diajukan Pegawai sebagai record tersendiri dan diputus Admin Kepegawaian. Formulir cuti memuat Nama/Jabatan/Peran approval, kelengkapan SK Pengangkatan harus cocok dengan status PNS/CPNS aktif, dan Fase 1 menambah reporting statistik berbentuk chart. Kriteria pengganti berstatus `[ ]` pada addendum akhir dokumen dan belum boleh dianggap selesai hanya karena kriteria lama bertanda `[x]`.
+> **Keputusan evaluasi SIMPEG bersama LLDIKTI (31 Agustus–2 September 2026):** chain cuti memakai nol atau lebih Verifikator → Atasan Langsung → PYBMC; label Kepala Bagian pada surface cuti diganti menjadi Atasan Langsung. Orang yang sama pada peran berbeda tetap menjalankan setiap tahap, sedangkan pengulangan pegawai pada peran yang sama ditolak saat konfigurasi. Cuti manual/historis menjadi satu-satunya sumber pemakaian tahunan sebelum go-live dan sarana pemulihan pencatatan setelah downtime. Permohonan pembatalan diajukan Pegawai sebagai record tersendiri dan diputus Admin Kepegawaian. Formulir cuti memuat Nama/Jabatan/Peran approval, kelengkapan SK Pengangkatan harus cocok dengan status PNS/CPNS aktif, dan Fase 1 menambah reporting statistik berbentuk chart. Kriteria pengganti berstatus `[ ]` pada addendum akhir dokumen dan belum boleh dianggap selesai hanya karena kriteria lama bertanda `[x]`.
 
 > **Keputusan RBAC dan Switch Role (2 September 2026):** permission efektif dari matrix database berlaku dinamis pada backend; tabel hak akses per role hanya default konfigurasi awal. Switch Role adalah pengecualian: hanya Super Admin atau Admin Kepegawaian dengan `users.switch_role` dapat memulai simulasi sesuai target yang lebih rendah dari role asli. Lihat [Keputusan RBAC Configurable dan Switch Role](../Keputusan-RBAC-dan-Switch-Role-2-September-2026.md).
 
@@ -996,7 +996,7 @@ Setiap story mengikuti format:
 - [x] AC-6: Tidak ada tombol formal "Tolak"; keputusan negatif memakai label **"Tidak Disetujui"**.
 - [x] AC-7: Audit log mencatat aksi approval/penundaan.
 - [x] AC-8 — **Bukti historis; scope lama superseded untuk generalisasi step pertama:** ~~Kepala Bagian hanya melihat pengajuan dari pegawai yang di-assign kepadanya (bukan semua pegawai).~~ Tanda `[x]` hanya membuktikan scope lama Kepala Bagian dan tidak membuktikan perilaku verifikator dinamis dari K-MTG-01.
-- [x] AC-9 — **Bukti historis; superseded sebagian:** ~~Jika kepala bagian juga menjadi approver pada step berikutnya, sistem otomatis skip step duplikat agar orang yang sama tidak menyetujui dua kali.~~ Aturan skip tetap berlaku untuk duplikasi tidak bermakna, tetapi tidak berlaku saat Atasan Langsung dan PYBMC adalah orang yang sama; kontrak penggantinya berada pada AC `[ ]` addendum 31 Agustus.
+- [x] AC-9 — **Bukti historis; superseded penuh:** ~~Jika kepala bagian juga menjadi approver pada step berikutnya, sistem otomatis skip step duplikat agar orang yang sama tidak menyetujui dua kali.~~ Kontrak aktif tidak melakukan skip berdasarkan kesamaan pegawai lintas peran; setiap peran membutuhkan tindakan sendiri. Pengulangan pegawai pada peran yang sama ditolak saat konfigurasi. Kontrak penggantinya berada pada AC `[ ]` addendum 2 September.
 - [x] AC-10: Pengajuan berstatus "Perubahan" atau "Ditangguhkan" tetap terlihat di timeline sampai ada tindak lanjut sesuai keputusan.
 - [x] AC-11: Perubahan rekomendasi/keputusan dicatat di audit log beserta timestamp dan komentar.
 - [x] AC-12: Notifikasi terkirim ke step berikutnya atau pegawai sesuai status terbaru.
@@ -1026,7 +1026,7 @@ Setiap story mengikuti format:
 - [x] AC-3: Opsi aksi: "Disetujui", "Perubahan", "Ditangguhkan", atau "Tidak Disetujui"; semua selain "Disetujui" wajib keterangan.
 - [x] AC-4: Notifikasi terkirim sesuai aksi.
 - [x] AC-5: Audit log tercatat.
-- [x] AC-6: Chain mendukung lebih dari satu verifikator dan skip otomatis jika pegawai yang sama muncul berurutan.
+- [x] AC-6 — **Bukti historis; superseded sebagian:** Chain mendukung lebih dari satu Verifikator. ~~Pegawai yang sama muncul berurutan akan di-skip otomatis.~~ Kontrak aktif menolak pengulangan pegawai pada peran Verifikator dan tidak melakukan skip pegawai lintas peran.
 
 ---
 
@@ -1159,7 +1159,7 @@ Setiap story mengikuti format:
 - [x] AC-3: Perubahan konfigurasi tercatat di audit log.
 - [x] AC-4: Konfigurasi langsung berlaku untuk pengajuan cuti baru.
 - [x] AC-5: Ketua Tim Kerja dapat dipilih sebagai verifikator tanpa perlu role baru.
-- [x] AC-6 — **Bukti historis; superseded sebagian:** ~~Sistem melakukan skip otomatis jika approver pada dua step adalah orang yang sama.~~ Skip tetap berlaku untuk duplikasi tidak bermakna, tetapi bukan untuk pasangan peran Atasan Langsung–PYBMC yang sengaja ditetapkan pada pejabat yang sama.
+- [x] AC-6 — **Bukti historis; superseded penuh:** ~~Sistem melakukan skip otomatis jika approver pada dua step adalah orang yang sama.~~ Kontrak aktif mempertahankan setiap tahap lintas peran dan menolak pengulangan pegawai pada peran yang sama saat konfigurasi.
 
 ---
 
@@ -2077,7 +2077,7 @@ Rollover dari N-1 tetap dibatasi maksimal 6 hari dan batas tersebut **bukan pers
 
 - [ ] AC-MTG-1: **Superseded oleh evaluasi 31 Agustus.** Chain baru atau chain yang diperbarui memuat nol atau lebih Verifikator dinamis; bila ada, seluruhnya ditempatkan sebelum Atasan Langsung, lalu PYBMC menjadi final approver. *(Sumber aktif: K-MTG-10.1.)*
 - [ ] AC-MTG-2: Ketua Tim Kerja ditempatkan sebagai Verifikator bila ditunjuk; jika tidak ada Verifikator, chain langsung dimulai dari Atasan Langsung tanpa placeholder. *(Sumber aktif: K-MTG-10.1.)*
-- [ ] AC-MTG-3: Konfigurasi yang menempatkan Atasan Langsung sebelum salah satu Verifikator ditolak dengan pesan yang dapat ditindaklanjuti. Bila Atasan Langsung dan PYBMC orang yang sama, dua tahap/tindakan tetap wajib dipertahankan. *(Sumber aktif: K-MTG-10.1.)*
+- [ ] AC-MTG-3: Konfigurasi yang menempatkan Atasan Langsung sebelum salah satu Verifikator ditolak dengan pesan yang dapat ditindaklanjuti. Orang yang sama pada peran berbeda tetap menjalankan setiap tahap: Verifikator–Atasan Langsung dan Verifikator–PYBMC masing-masing dua tindakan, Atasan Langsung–PYBMC dua tindakan, dan ketiganya tiga tindakan. Pengulangan pegawai pada peran yang sama ditolak saat konfigurasi. *(Sumber aktif: K-MTG-10.1.)*
 
 ### US-4.13 · Input Cuti Manual oleh Admin Kepegawaian
 
@@ -2089,7 +2089,7 @@ Rollover dari N-1 tetap dibatasi maksimal 6 hari dan batas tersebut **bukan pers
 
 - [ ] AC-1: Mutation hanya dapat diakses secara eksklusif oleh role Admin Kepegawaian yang memiliki permission `cuti.manual.manage`; route, FormRequest, Action, dan service menolak role lain atau permission yang tidak sesuai sebelum side effect. *(Sumber: K-MTG-07A dan K-CUT-05.)*
 - [ ] AC-2: Form mencatat pegawai, jenis cuti, periode, alasan/keterangan, nomor dokumen opsional, dan dokumen pendukung opsional. Bila file ada, validasi ketat dan storage privat tetap wajib; jumlah hari kerja dihitung sistem dari periode dan kalender kerja, bukan diketik bebas. *(Sumber: K-MTG-07A dan K-CUT-05.)*
-- [ ] AC-3: Setiap entri baru menyimpan snapshot persetujuan 2–10 tahap: 0–8 `verifier`, tepat satu representasi internal `kepala_bagian` untuk **Atasan Langsung**, lalu tepat satu `pybmc` final. Hasil `verified`, `approved`, dan `final_approved` selalu diturunkan server; input client untuk urutan atau hasil tahap ditolak. Label bisnis/formulir menggunakan Atasan Langsung, dan pasangan Atasan Langsung/PYBMC yang orangnya sama tetap dua tahap. *(Sumber: K-MTG-07A, K-CUT-05, dan K-MTG-10.1.)*
+- [ ] AC-3: Setiap entri baru menyimpan snapshot persetujuan 2–10 tahap: 0–8 `verifier`, tepat satu representasi internal `kepala_bagian` untuk **Atasan Langsung**, lalu tepat satu `pybmc` final. Hasil `verified`, `approved`, dan `final_approved` selalu diturunkan server; input client untuk urutan atau hasil tahap ditolak. Label bisnis/formulir menggunakan Atasan Langsung, dan identitas yang sama pada peran berbeda tetap disimpan sebagai tahap terpisah. *(Sumber: K-MTG-07A, K-CUT-05, dan K-MTG-10.1.)*
 - [ ] AC-4: Approver dapat berupa pegawai internal atau pejabat external. UUID internal tidak ditampilkan sebagai input UX; histori menyimpan snapshot identitas internal, sedangkan external memiliki nama, jabatan, dan instansi tanpa akun atau record pegawai palsu. *(Sumber: K-MTG-07A dan K-CUT-05.)*
 - [ ] AC-5: Form dapat dimulai dengan chain kosong atau menyalin current chain pegawai. Salinan dapat diedit per bagian tanpa mengubah sumber, dan submit ditolak sampai struktur akhirnya valid. *(Sumber: K-MTG-07A dan K-CUT-05.)*
 - [ ] AC-6: Entri langsung dicatat sebagai fakta cuti yang sudah disetujui di luar SIMPEG untuk historis, sebelum go-live, atau hasil proses manual ketika layanan downtime; sistem tidak membuat usulan, approval aktif, reservasi, notifikasi approval, atau bukti approval ulang. Setelah layanan pulih, Admin Kepegawaian mencatat keputusan final tersebut dan pemakaian tahunan otomatis memperbarui saldo serta rollover. *(Sumber: K-MTG-07A, K-CUT-05, dan K-MTG-10.3.)*
@@ -2140,9 +2140,9 @@ Rollover dari N-1 tetap dibatasi maksimal 6 hari dan batas tersebut **bukan pers
 | US-2.9 / US-2.10 | Lifecycle Employee berbasis status, predicate aktif kanonis, scheduled transition, reaktivasi berbasis permission efektif, blokir akun global, audit fail-closed, dan notifikasi after-commit | **Belum Selesai** | Test PostgreSQL untuk role/permission, `Aktif/khusus`, filter tunggal, jadwal, lock/no-op/retry/concurrency, rollback audit, after-commit, blokir lintas role, dan QA browser |
 | US-2.4 / US-2.6 | Unggah dokumen dari profil, matriks SK wajib PNS/CPNS dengan SK Pengangkatan yang cocok, matriks PPPK yang dapat dikustom tanpa daftar bawaan, arsip pusat read-only, dan penggantian berkas SK tanpa mutasi record riwayat | **Belum Selesai** | Feature test matriks PNS/CPNS, reevaluasi CPNS→PNS menjadi Tidak Lengkap sampai SK Pengangkatan PNS tersedia, PPPK Tidak Dinilai tanpa kategori aktif dan dinilai setelah matriks diaktifkan, upload/penggantian berkas/authorization/audit, penolakan mutasi dari arsip pusat, serta smoke test browser profil pegawai |
 | US-4.3 | Saldo dihitung dari jumlah cuti yang dipakai, bukan input saldo sisa | **Belum Selesai** | Unit/feature test matriks N-2/N-1, perhitungan 12/18/24, dan audit rekonsiliasi |
-| US-4.5 | Chain memuat nol atau lebih Verifikator; bila ada, seluruhnya ditempatkan sebelum Atasan Langsung | **Belum Selesai** | Feature test chain tanpa Verifikator, satu/banyak Verifikator, Ketua Tim sebagai Verifikator, urutan seluruh Verifikator sebelum Atasan Langsung, pasangan Atasan/PYBMC dengan dua tindakan, dan regresi snapshot |
+| US-4.5 | Chain memuat nol atau lebih Verifikator; bila ada, seluruhnya ditempatkan sebelum Atasan Langsung | **Belum Selesai** | Feature test chain tanpa Verifikator, satu/banyak Verifikator, Ketua Tim sebagai Verifikator, urutan seluruh Verifikator sebelum Atasan Langsung, seluruh kombinasi pegawai lintas peran, penolakan duplikat dalam peran yang sama, dan regresi snapshot |
 | US-4.9 | Koreksi memakai data pemakaian/entri manual dan perhitungan ulang saldo | **Belum Selesai** | Feature test transaksi atomik, nilai sebelum/sesudah, audit, dan regresi rollover |
-| US-4.10 | Validasi konfigurasi nol atau lebih Verifikator → Atasan Langsung → PYBMC | **Belum Selesai** | Feature test konfigurasi valid/tidak valid, seluruh Verifikator sebelum Atasan Langsung, pengecualian pasangan Atasan/PYBMC yang tetap dua tindakan, dan audit konfigurasi |
+| US-4.10 | Validasi konfigurasi nol atau lebih Verifikator → Atasan Langsung → PYBMC | **Belum Selesai** | Feature test konfigurasi valid/tidak valid, seluruh Verifikator sebelum Atasan Langsung, satu tindakan per peran meskipun pegawainya sama, penolakan duplikat dalam peran yang sama, dan audit konfigurasi |
 | US-4.13 | Input cuti manual dengan snapshot persetujuan historis; ketentuan dokumen wajib sebelumnya **Superseded** | **Belum Selesai** | Feature test exact RBAC/permission, dokumen opsional dan private storage, snapshot 2–10/internal-external/copy-edit, tanpa approval ulang, PostgreSQL, penghitungan saldo/rollover, audit/privacy/performance, dan QA Chrome |
 | US-6.5 | Dokumen template WhatsApp serta integrasi berbasis template ID | **Belum Selesai** | Dokumen template disetujui LLDIKTI/Meta, test dispatcher/allowlist variabel, bukti adapter tetap nonaktif sebelum dependency tersedia, dan bukti uji layanan setelah kontrak final diterima |
 | US-8.4 | Hari Libur dipisahkan dari Data Master dengan kalender di atas tabel | **Belum Selesai** | Feature/regression test, smoke test browser, dan konfirmasi menu lama tidak lagi tersedia |
@@ -2180,9 +2180,9 @@ Seluruh Open Question OQ-MTG-01 sampai OQ-MTG-07 dari evaluasi 15/18 Agustus 202
 
 ---
 
-## Addendum Hasil Evaluasi SIMPEG Bersama LLDIKTI — 31 Agustus dan 1 September 2026
+## Addendum Hasil Evaluasi SIMPEG Bersama LLDIKTI — 31 Agustus sampai 2 September 2026
 
-> **Status:** **Belum Selesai.** Addendum ini bersumber dari notulen evaluasi SIMPEG bersama LLDIKTI yang diterima 31 Agustus 2026 dan klarifikasi pembatalan 1 September 2026, lalu dicatat pada [Keputusan Evaluasi SIMPEG Bersama LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md). Ketentuan berikut menggantikan acceptance criteria lama yang bertentangan; tanda `[x]` lama tetap merupakan bukti implementasi historis, bukan bukti penutupan kontrak pengganti.
+> **Status:** **Belum Selesai.** Addendum ini bersumber dari notulen evaluasi SIMPEG bersama LLDIKTI yang diterima 31 Agustus 2026, klarifikasi pembatalan 1 September 2026, dan keputusan pengguna 2 September 2026 mengenai duplikasi lintas peran, lalu dicatat pada [Keputusan Evaluasi SIMPEG Bersama LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md). Ketentuan berikut menggantikan acceptance criteria lama yang bertentangan; tanda `[x]` lama tetap merupakan bukti implementasi historis, bukan bukti penutupan kontrak pengganti.
 
 ### US-4.1 dan US-4.2 · Pengajuan, pembatalan, dan revisi cuti
 
@@ -2197,8 +2197,8 @@ Seluruh Open Question OQ-MTG-01 sampai OQ-MTG-07 dari evaluasi 15/18 Agustus 202
 - [ ] AC-NTL-1: Semua surface bisnis cuti—konfigurasi, daftar/timeline, notifikasi, dan formulir—menggunakan label **Atasan Langsung**, bukan Kepala Bagian. Mapping supervisor historis dapat tetap memakai nama field fisik lama; perubahan ini tidak mensyaratkan migrasi schema tanpa keputusan terpisah.
 - [ ] AC-NTL-2: Chain baru atau yang diperbarui berurutan `0..n Verifikator → Atasan Langsung → PYBMC`. Verifikator bersifat opsional; UI tidak menampilkan keterangan “tanpa verifikator” saat chain langsung dimulai dari Atasan Langsung.
 - [ ] AC-NTL-3: Atasan Langsung dikonfigurasi per pegawai dan dapat berupa Kepala Bagian, Kepala Lembaga, atau pegawai yang sah menurut struktur LLDIKTI. Konfigurasi per pegawai tetap satu-satunya chain runtime; penyalinan ke anggota unit hanya membuat template/copy, bukan precedence resolver runtime.
-- [ ] AC-NTL-4: Jika Atasan Langsung dan PYBMC adalah pegawai yang sama, sistem menyimpan dua snapshot langkah dengan peran berbeda dan pejabat tersebut wajib melakukan dua tindakan terpisah. Konfigurasi/engine hanya melewati duplikasi lain yang tidak bermakna.
-- [ ] AC-NTL-5: Bukti selesai mencakup feature test chain tanpa verifikator, dengan satu/banyak verifikator, template unit, serta kasus satu pejabat Atasan Langsung sekaligus PYBMC; timeline dan audit harus membuktikan dua tindakan pada kasus terakhir.
+- [ ] AC-NTL-4: Jika satu pegawai mengisi beberapa peran berbeda, sistem menyimpan satu snapshot langkah per peran dan mewajibkan satu tindakan untuk setiap peran. Ini mencakup Verifikator–Atasan Langsung, Verifikator–PYBMC, Atasan Langsung–PYBMC, dan ketiganya. Pengulangan pegawai pada peran yang sama ditolak saat konfigurasi; engine tidak melakukan skip otomatis berdasarkan kesamaan pegawai lintas peran.
+- [ ] AC-NTL-5: Bukti selesai mencakup feature test chain tanpa Verifikator, dengan satu/banyak Verifikator, template unit, seluruh kombinasi lintas peran melalui satu data provider, serta penolakan dua slot Verifikator dengan pegawai yang sama. Timeline dan audit membuktikan satu tindakan untuk setiap peran; browser cukup menguji satu skenario lintas peran yang representatif.
 - [ ] AC-NTL-6: `Alasan Perubahan Chain Pegawai` dan `Alasan Backfill` dapat dikosongkan. `Alasan Penerapan Chain ke Unit` dan `Alasan PYBMC Global` tetap wajib. Semua aksi tetap menghasilkan audit yang memuat aktor, waktu, target, dan perubahan nilai; alasan dicatat bila diberikan.
 
 ### US-4.6 dan US-4.7 · Penangguhan pasca-persetujuan dan formulir cuti
@@ -2260,3 +2260,8 @@ Seluruh Open Question OQ-MTG-01 sampai OQ-MTG-07 dari evaluasi 15/18 Agustus 202
 - Menetapkan Switch Role hanya untuk Super Admin dan Admin Kepegawaian dengan `users.switch_role`.
 - Menetapkan target Switch Role berdasarkan hierarki role yang lebih rendah.
 - Menyelaraskan akses dokumen/export/fitur administratif dengan permission RBAC.
+
+### Changelog v1.16 — 2 September 2026
+
+- Menetapkan satu tindakan untuk setiap peran approval meskipun pegawainya sama.
+- Menolak pengulangan pegawai pada peran yang sama dan menghapus auto-skip lintas peran.
