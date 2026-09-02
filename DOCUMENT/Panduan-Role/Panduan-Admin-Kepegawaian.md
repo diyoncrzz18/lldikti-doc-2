@@ -77,7 +77,19 @@ Tidak tersedia direct balance override. Koreksi memperbaiki sumber pemakaian dan
 saldo secara deterministik. Setelah downtime, catat hanya cuti yang proses manualnya sudah selesai dan
 disetujui di luar sistem. Jangan memakai Cuti di Luar SIMPEG sebagai jalur rutin ketika SIMPEG tersedia.
 
-## 6. Batas Akses dan Larangan
+## 6. Alur Menangani Permohonan Pembatalan Cuti
+
+1. Buka notifikasi permohonan pembatalan dan periksa pengajuan serta alasan Pegawai.
+2. Pastikan pengajuan belum final dan approval utamanya sedang ditahan.
+3. Pilih keputusan **Setujui Pembatalan** atau **Tolak Pembatalan** melalui aksi resmi.
+4. Jika disetujui, pastikan usulan menjadi batal, reservasi saldo dilepas, dan histori tetap tersedia.
+5. Jika ditolak, pastikan approval dilanjutkan dari tahap sebelumnya dan tindakan yang sudah ada tidak hilang.
+6. Periksa audit dan notifikasi hasil kepada Pegawai. Jangan menghapus pengajuan atau membuat dokumen PDF pembatalan yang tidak dipersyaratkan.
+
+Permohonan ini berbeda dari cuti final `Disetujui`. Cuti final tetap ditangani melalui aksi administratif
+`Ditangguhkan` dengan alasan wajib dan koreksi ledger.
+
+## 7. Batas Akses dan Larangan
 
 - Tidak mengelola role/permission matrix kecuali mendapat otorisasi administratif yang eksplisit; keputusan permission/anti-lockout untuk mutasi matrix belum ditetapkan stakeholder.
 - Tidak otomatis menjadi approver cuti hanya karena berperan sebagai Admin.
@@ -90,7 +102,7 @@ disetujui di luar sistem. Jangan memakai Cuti di Luar SIMPEG sebagai jalur rutin
 - Tidak mengekspos NIK, No. KK, token, atau credential pada export/evidence.
 - Tidak mengaktifkan provider WhatsApp.
 
-## 7. Troubleshooting
+## 8. Troubleshooting
 
 | Gejala | Pemeriksaan |
 |---|---|
@@ -101,7 +113,7 @@ disetujui di luar sistem. Jangan memakai Cuti di Luar SIMPEG sebagai jalur rutin
 | Tidak dapat membuka menu | Periksa role dan permission; jangan meminta bypass route |
 | Akun hanya melihat status Nonaktif | Status efektif Employee linked sudah tidak aktif; periksa histori/alasan dan lakukan reaktivasi resmi bila sah. Role tinggi tidak membypass blokir |
 
-## 8. Penerimaan Panduan
+## 9. Penerimaan Panduan
 
 | Field | Nilai |
 |---|---|

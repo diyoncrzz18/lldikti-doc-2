@@ -51,9 +51,10 @@ jangan memindahkan mapping secara manual melalui database.
 3. Ketua Tim, bila digunakan, dicatat sebagai verifikator.
 4. Bila kelompok Verifikator kosong, pastikan preview dimulai dari Atasan Langsung tanpa label placeholder.
 5. Bila Atasan Langsung dan PYBMC adalah orang yang sama, pastikan preview tetap memperlihatkan dua peran/tahap yang membutuhkan dua tindakan.
-6. Simpan dan periksa preview rantai.
-7. Buat pengajuan uji baru untuk membuktikan runtime.
-8. Jangan mengubah snapshot pengajuan yang sudah berjalan.
+6. Alasan perubahan chain satu pegawai dan alasan backfill boleh dikosongkan. Alasan penerapan chain ke unit dan alasan PYBMC Global wajib diisi karena berdampak pada banyak chain.
+7. Simpan dan periksa preview rantai serta event auditnya.
+8. Buat pengajuan uji baru untuk membuktikan runtime.
+9. Jangan mengubah snapshot pengajuan yang sudah berjalan.
 
 ## 5. Batas Akses dan Larangan
 

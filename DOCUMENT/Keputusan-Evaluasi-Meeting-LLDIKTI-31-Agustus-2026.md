@@ -2,10 +2,10 @@
 
 | Field | Detail |
 |---|---|
-| **Tanggal keputusan dokumentasi** | 31 Agustus 2026 |
+| **Tanggal keputusan dokumentasi** | 31 Agustus 2026; klarifikasi pembatalan dan alasan konfigurasi 1 September 2026 |
 | **Status** | **Disetujui** — melengkapi dan menggantikan keputusan terdahulu pada area yang disebutkan di dokumen ini |
-| **Dasar** | Notulen *Evaluasi Projek SIMPEG bersama Mahasiswa Magang Univ Klabat* serta klarifikasi langsung stakeholder pada 31 Agustus 2026 tentang bootstrap pengguna pertama dan pemulihan pencatatan cuti setelah downtime |
-| **Dokumen produk terkait** | [PRD SIMPEG Fase 1 Core v1.13](PRD-DLL/PRD-SIMPEG-Fase1-Core.md) dan [User Stories SIMPEG Fase 1 v1.13](PRD-DLL/User-Stories-SIMPEG-Fase1.md); snapshot yang berlaku saat rapat 31 Agustus adalah v1.12 |
+| **Dasar** | Notulen *Evaluasi Projek SIMPEG bersama Mahasiswa Magang Univ Klabat*, klarifikasi stakeholder 31 Agustus 2026, jawaban tertulis LLDIKTI 1 September 2026 mengenai permohonan pembatalan cuti, serta keputusan pengguna 1 September 2026 mengenai kewajiban alasan konfigurasi chain |
+| **Dokumen produk terkait** | [PRD SIMPEG Fase 1 Core v1.15](PRD-DLL/PRD-SIMPEG-Fase1-Core.md) dan [User Stories SIMPEG Fase 1 v1.15](PRD-DLL/User-Stories-SIMPEG-Fase1.md); snapshot yang berlaku saat rapat 31 Agustus adalah v1.12 |
 | **Dokumen keputusan terdahulu** | [Keputusan Evaluasi Meeting LLDIKTI 15 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md) dan [Keputusan Cuti Saldo Tahap 0](Keputusan-Cuti-Saldo-Tahap-0.md) |
 
 > Dokumen ini menjaga keputusan 15–25 Agustus sebagai riwayat. Hanya butir yang secara eksplisit disebut **digantikan** di bawah yang tidak lagi menjadi kontrak aktif. Nama teknis yang sudah ada, seperti role, route, atau field `kepala_bagian`, **tidak** otomatis berubah hanya karena label bisnis diubah; perubahan schema atau RBAC memerlukan keputusan tersendiri.
@@ -19,13 +19,17 @@
 3. UI dan dokumen bisnis cuti wajib memakai label **Atasan Langsung**, bukan **Kepala Bagian**. Bila tidak ada Verifikator, chain dimulai langsung pada Atasan Langsung tanpa menampilkan label atau placeholder “tanpa verifikator”.
 4. Bila Atasan Langsung dan PYBMC menunjuk orang yang sama, snapshot tetap menyimpan **dua tahap berbeda** dan orang tersebut tetap menyelesaikan dua tindakan terpisah sesuai peran yang sedang aktif. Aturan umum untuk mencegah/menolak duplikasi approver tetap berlaku bagi kombinasi tahap lain.
 5. Ketentuan lama yang menyatakan chain `Verifikator → Kepala Bagian → PYBMC`, atau meminta sistem melewati pasangan Atasan Langsung/PYBMC yang orangnya sama, digantikan oleh keputusan ini pada surface bisnis dan acceptance criteria baru.
+6. Pada konfigurasi chain, **Alasan Perubahan Chain Pegawai** dan **Alasan Backfill** bersifat opsional. **Alasan Penerapan Chain ke Unit** dan **Alasan PYBMC Global** tetap wajib karena berdampak massal atau luas. Audit tetap mencatat aktor, nilai sebelum/sesudah, dan metadata aksi meskipun alasan opsional tidak diisi.
 
 ## K-MTG-10.2 — Pembatalan, revisi, dan penangguhan cuti
 
-1. Pegawai dapat membatalkan atau merevisi pengajuan melalui aksi resmi sebelum terdapat tindakan approval pada pengajuan tersebut. Pengajuan aktif yang belum dibatalkan/revisi tetap mencegah pengajuan aktif baru yang bertabrakan.
-2. Cuti yang sudah berstatus final `Disetujui` tidak boleh dihapus. Admin Kepegawaian dapat menetapkannya menjadi `Ditangguhkan` dengan alasan wajib, menjaga histori dan audit, serta menjalankan koreksi/replay ledger secara atomik agar pemakaian final tidak tersisa keliru.
-3. Setelah tidak ada pengajuan aktif, Pegawai dapat mengajukan cuti baru melalui alur normal. Pengubahan status administrasi tidak boleh menghapus snapshot approval atau jejak keputusan sebelumnya.
-4. Keputusan ini membedakan `Ditangguhkan` ketika pengajuan masih dalam approval—reservasi tetap mengikuti status pengajuan aktif—dari penangguhan administratif atas cuti yang sudah final disetujui, yang membutuhkan koreksi pemakaian final melalui ledger.
+1. Selama pengajuan belum memperoleh keputusan final PYBMC, Pegawai dapat mengajukan **permohonan pembatalan tersendiri** dengan alasan wajib. Pegawai tidak membatalkan pengajuan utama secara langsung.
+2. Saat permohonan pembatalan dikirim, approval pengajuan utama ditahan dan reservasi saldo tetap dipertahankan. Hanya satu permohonan pembatalan aktif yang dapat diproses untuk pengajuan yang sama.
+3. Admin Kepegawaian yang berwenang menerima notifikasi dan memutus permohonan tersebut. Jika disetujui, pengajuan utama menjadi batal dan reservasi saldo dilepas secara atomik. Jika tidak disetujui, approval utama dilanjutkan dari tahap sebelumnya dengan tindakan approval yang sudah ada tetap tercatat.
+4. Permohonan, keputusan Admin, perubahan status, dan mutasi reservasi wajib tercatat pada audit serta tidak menghapus pengajuan, snapshot, timeline, atau histori. Pegawai menerima notifikasi hasil keputusan pembatalan.
+5. Revisi langsung hanya tersedia sebelum ada tindakan approval. Setelah Verifikator atau approver lain bertindak, perubahan data dilakukan dengan meminta pembatalan; setelah pembatalan disetujui, Pegawai membuat pengajuan baru yang memulai chain dari awal.
+6. Cuti yang sudah berstatus final `Disetujui` tidak boleh dihapus dan tidak memakai permohonan pembatalan Pegawai. Admin Kepegawaian dapat menetapkannya menjadi `Ditangguhkan` dengan alasan wajib, menjaga histori dan audit, serta menjalankan koreksi/replay ledger secara atomik agar pemakaian final tidak tersisa keliru.
+7. Permohonan pembatalan merupakan form/record tersendiri di SIMPEG dan tidak menambah kewajiban dokumen PDF pembatalan.
 
 ## K-MTG-10.3 — Sumber pemakaian cuti historis
 
@@ -62,9 +66,9 @@
 - Bootstrap Super Admin hanya berlaku bagi pengguna pertama ketika sistem belum memiliki user. Pengguna berikutnya mengikuti pemetaan email/data pegawai dan RBAC; mereka tidak otomatis menjadi Super Admin.
 - EWS kenaikan pangkat tetap dihitung dari TMT/SK pangkat terakhir ditambah empat tahun.
 
-## Open question yang tetap harus dikonfirmasi sebelum implementasi
+## Klarifikasi yang telah ditutup
 
-1. **Batas pembatalan/revisi:** notulen menekankan waktu sebelum persetujuan Atasan Langsung, sedangkan PRD merekam batas aman sebelum tindakan approval pertama. Perlu konfirmasi apakah Pegawai masih boleh membatalkan setelah Verifikator bertindak tetapi sebelum Atasan Langsung.
+- Batas pembatalan setelah Verifikator bertindak telah diputuskan pada 1 September 2026: Pegawai mengajukan permohonan pembatalan beralasan, approval utama ditahan, dan Admin Kepegawaian menyetujui atau menolak pembatalan tersebut.
 
 ## Batas implementasi yang tetap berlaku
 
@@ -72,6 +76,6 @@
 
 ## Dampak dokumentasi dan delivery
 
-- PRD dan User Stories aktif v1.13 telah menyelaraskan keputusan 31 Agustus serta addendum RBAC 2 September; v1.12 dipertahankan sebagai snapshot sejarah rapat.
+- PRD dan User Stories aktif v1.15 telah menyelaraskan keputusan 31 Agustus–1 September serta addendum RBAC 2 September; v1.12 dipertahankan sebagai snapshot sejarah rapat.
 - Backlog, tracker sprint/role, panduan pengguna, runbook, serta skenario UAT wajib menambahkan pekerjaan dan pengujian baru; evidence lama tidak boleh diklaim sebagai bukti penerimaan keputusan ini.
 - Implementasi baru hanya dapat dinyatakan selesai setelah test PostgreSQL, audit, authorization/data scope, browser smoke, dan UAT yang relevan tersedia.

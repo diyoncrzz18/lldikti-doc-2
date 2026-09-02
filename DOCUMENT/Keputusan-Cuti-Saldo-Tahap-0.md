@@ -27,7 +27,7 @@ Setiap pengajuan **Cuti Tahunan** yang masih aktif mencadangkan hak cuti sebesar
    - `perlu_perubahan`.
 4. Pada `perlu_perubahan`, reservasi tetap terikat pada request yang sama dan dihitung ulang atomik saat Pegawai mengirim ulang pengajuan dengan tanggal/jumlah hari baru.
 5. Saat keputusan final `disetujui`, reservasi dikonversi menjadi pemotongan saldo final yang sudah berlaku di ledger. Sistem tidak boleh melakukan pemotongan ganda.
-6. Saat `tidak_disetujui`, reservasi dilepas. Jika pada masa depan tersedia pembatalan pengajuan Fase 1 yang sah, pembatalan juga wajib melepas reservasi secara atomik.
+6. Saat `tidak_disetujui`, reservasi dilepas. Permohonan pembatalan Fase 1 yang disetujui Admin Kepegawaian juga wajib melepas reservasi secara atomik; permohonan yang ditolak mempertahankan reservasi dan melanjutkan approval dari tahap sebelumnya.
 7. `ditangguhkan` tidak melepas reservasi sampai ada keputusan atau tindak lanjut yang mengubah statusnya.
 8. Form Pegawai wajib membedakan dengan jelas: **Saldo tersedia aktual**, **Dialokasikan untuk pengajuan aktif**, **Masih dapat diajukan**, dan **Sudah terpakai setelah disetujui**.
 9. Setiap pembuatan, penyesuaian, konversi, dan pelepasan reservasi harus dapat diaudit; reservasi tidak boleh ditulis sebagai pemakaian cuti final.
@@ -151,22 +151,26 @@ Jalur ini tidak boleh dipakai untuk mempercepat pengajuan baru yang belum memper
 
 ---
 
-## K-CUT-06 — Penyelarasan evaluasi LLDIKTI 31 Agustus 2026
+## K-CUT-06 — Penyelarasan evaluasi LLDIKTI 31 Agustus dan klarifikasi 1 September 2026
 
-> **Status:** Disetujui melalui [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md). Ketentuan ini melengkapi K-CUT-01, K-CUT-04, dan K-CUT-05 tanpa menghapus jejak keputusan sebelumnya.
+> **Status:** Disetujui melalui [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md) serta klarifikasi pembatalan dan alasan konfigurasi 1 September 2026. Ketentuan ini melengkapi K-CUT-01, K-CUT-04, dan K-CUT-05 tanpa menghapus jejak keputusan sebelumnya.
 
 ### Keputusan
 
 1. Label bisnis snapshot dan konfigurasi approval cuti adalah `Verifikator → Atasan Langsung → PYBMC`. Nilai teknis legacy `kepala_bagian` pada data yang sudah ada tetap dapat dipertahankan sebagai representasi internal Atasan Langsung sampai ada keputusan migrasi schema tersendiri.
 2. Ketika Atasan Langsung dan PYBMC adalah orang yang sama, keduanya tetap merupakan dua tahap snapshot dan membutuhkan dua tindakan. Sistem tidak boleh melewati tahap kedua hanya karena `approver_employee_id` sama pada pasangan peran tersebut.
-3. Pegawai membatalkan atau merevisi pengajuan melalui aksi resmi sebelum ada tindakan approval. Pembatalan melepas reservasi secara atomik dan tercatat pada audit; ia tidak menghapus request, snapshot, maupun histori mutasi saldo.
-4. `Ditangguhkan` ketika pengajuan masih aktif tetap mempertahankan reservasi seperti K-CUT-01. Namun, bila cuti yang sudah final `Disetujui` ditetapkan `Ditangguhkan` oleh Admin Kepegawaian dengan alasan wajib, sistem membuat koreksi/replay ledger atomik untuk membalik pemakaian final yang terdampak. Kedua keadaan tersebut tidak boleh disamakan.
-5. Cuti di Luar SIMPEG adalah fakta historis/transisi yang menjadi sumber pemakaian tahunan N-2, N-1, dan tahun berjalan sebelum go-live, serta fakta pemulihan untuk cuti yang telah disetujui secara manual ketika SIMPEG downtime setelah go-live. Halaman ringkasan **Catat Pemakaian Tahunan** tidak menerima input angka langsung; ia menampilkan agregat dari fakta pemakaian dan entri manual yang telah tercatat.
-6. Saat SIMPEG downtime, proses manual harus selesai dan disetujui di luar sistem. Setelah layanan pulih, Admin Kepegawaian mencatat keputusan tersebut sebagai fakta final melalui Cuti di Luar SIMPEG; sistem tidak membuat approval aktif baru, dan jalur ini tidak boleh dipakai rutin ketika SIMPEG tersedia.
+3. Selama pengajuan belum final, Pegawai dapat mengirim satu permohonan pembatalan aktif sebagai record tersendiri dengan alasan wajib. Approval utama ditahan, reservasi saldo tetap dipertahankan, dan Admin Kepegawaian menerima notifikasi.
+4. Jika Admin Kepegawaian menyetujui pembatalan, pengajuan utama menjadi batal dan reservasi dilepas secara atomik. Jika ditolak, approval dilanjutkan dari tahap sebelumnya. Permohonan, keputusan, dan mutasi saldo diaudit tanpa menghapus request, snapshot, timeline, atau histori; Pegawai menerima notifikasi hasil keputusan.
+5. Revisi langsung hanya tersedia sebelum tindakan approval. Setelah ada tindakan, Pegawai meminta pembatalan dan, bila disetujui, membuat pengajuan baru yang memulai chain dari awal.
+6. `Ditangguhkan` ketika pengajuan masih aktif tetap mempertahankan reservasi seperti K-CUT-01. Namun, bila cuti yang sudah final `Disetujui` ditetapkan `Ditangguhkan` oleh Admin Kepegawaian dengan alasan wajib, sistem membuat koreksi/replay ledger atomik untuk membalik pemakaian final yang terdampak. Kedua keadaan tersebut tidak boleh disamakan.
+7. Cuti di Luar SIMPEG adalah fakta historis/transisi yang menjadi sumber pemakaian tahunan N-2, N-1, dan tahun berjalan sebelum go-live, serta fakta pemulihan untuk cuti yang telah disetujui secara manual ketika SIMPEG downtime setelah go-live. Halaman ringkasan **Catat Pemakaian Tahunan** tidak menerima input angka langsung; ia menampilkan agregat dari fakta pemakaian dan entri manual yang telah tercatat.
+8. Saat SIMPEG downtime, proses manual harus selesai dan disetujui di luar sistem. Setelah layanan pulih, Admin Kepegawaian mencatat keputusan tersebut sebagai fakta final melalui Cuti di Luar SIMPEG; sistem tidak membuat approval aktif baru, dan jalur ini tidak boleh dipakai rutin ketika SIMPEG tersedia.
+9. Pada konfigurasi approval, alasan perubahan chain satu pegawai dan alasan backfill bersifat opsional. Alasan penerapan chain ke unit dan perubahan PYBMC Global tetap wajib karena memengaruhi banyak chain. Seluruh aksi tetap teraudit meskipun alasan opsional dikosongkan.
 
 ### Konsekuensi verifikasi
 
 - Uji PostgreSQL harus mencakup pasangan Atasan Langsung/PYBMC dengan aktor sama, tanpa melewati salah satu peran.
-- Uji saldo harus membedakan pembatalan sebelum approval, penangguhan pengajuan aktif, dan penangguhan administratif setelah final `Disetujui`.
+- Uji konfigurasi harus menerima alasan kosong untuk perubahan chain satu pegawai dan backfill, tetapi menolak alasan kosong untuk penerapan chain ke unit serta PYBMC Global; audit aktor dan perubahan tetap harus lengkap.
+- Uji pembatalan harus mencakup permohonan setelah Verifikator bertindak, penahanan approval, keputusan setuju/tolak oleh Admin Kepegawaian, pelepasan atau pemertahanan reservasi, audit, serta kelanjutan dari tahap sebelumnya bila ditolak.
 - Uji UI harus membuktikan bahwa ringkasan pemakaian tidak dapat diubah langsung dan koreksi hanya berasal dari fakta sumber yang beralasan serta teraudit.
 - Uji pemulihan downtime harus membuktikan bahwa fakta final dicatat tepat satu kali setelah layanan pulih, menolak duplikasi/overlap, dan tidak membuat approval aktif atau reservasi baru.

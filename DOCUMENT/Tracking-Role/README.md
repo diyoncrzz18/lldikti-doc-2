@@ -1,7 +1,7 @@
 # Tracking Role — SIMPEG Fase 1
 
 Folder ini menampung tracking kesesuaian implementasi untuk **kelima role** SIMPEG terhadap PRD
-v1.13, User Stories, dan Panduan Kode. Satu file per role, masing-masing berisi: apa yang **sudah
+v1.15, User Stories, dan Panduan Kode. Satu file per role, masing-masing berisi: apa yang **sudah
 sesuai** (✅) dan apa yang **belum sesuai** (⚠️/❌) beserta bukti `file:line` dan rujukan task
 tracker.
 
@@ -10,7 +10,7 @@ temuan lama direkonsiliasi terakhir terhadap branch `development` @ `1fd99cb` pa
 2026. File role masih mempertahankan tabel audit Juli sebagai kronologi; bagian “Rekonsiliasi
 Temuan” pada tiap file menjadi status aktif bila ada pernyataan lama yang bertentangan.
 
-> **Addendum evaluasi 31 Agustus 2026:** status ikon di bawah adalah bukti implementasi sebelum keputusan terbaru. Kesesuaian baru untuk Atasan Langsung, dua tindakan saat Atasan/PYBMC orang yang sama, pengajuan/revisi, penangguhan final, cuti historis, matriks SK PNS/CPNS, dan Reporting Statistik belum boleh dianggap lulus tanpa evidence baru. Lihat [keputusan 31 Agustus](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md).
+> **Addendum evaluasi 31 Agustus–1 September 2026:** status ikon di bawah adalah bukti implementasi sebelum keputusan terbaru. Kesesuaian baru untuk Atasan Langsung, dua tindakan saat Atasan/PYBMC orang yang sama, permohonan pembatalan dan revisi, penangguhan final, cuti historis, matriks SK PNS/CPNS, dan Reporting Statistik belum boleh dianggap lulus tanpa evidence baru. Lihat [keputusan 31 Agustus–1 September](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md).
 
 > **Addendum RBAC 2 September 2026:** status role lama hanya menunjukkan konfigurasi default/evidence historis. Permission matrix database kini menjadi sumber kebenaran akses fitur. Kesesuaian baru harus membuktikan grant/revoke permission lintas role, scope/masking, `employees.export`, `dokumen_sk.read`, serta invariant Switch Role untuk Super Admin/Admin Kepegawaian. Lihat [keputusan RBAC](../Keputusan-RBAC-dan-Switch-Role-2-September-2026.md).
 

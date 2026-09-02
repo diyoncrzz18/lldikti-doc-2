@@ -47,6 +47,6 @@
 ## Dampak dokumentasi dan delivery
 
 - K-MTG-03 dan OQ-MTG-03 pada keputusan 15 Agustus menjadi riwayat **Superseded** pada area Switch Role.
-- PRD dan User Stories dinaikkan ke v1.13 dan menjadi kontrak aktif untuk permission-driven RBAC dan Switch Role.
+- PRD dan User Stories dinaikkan ke v1.15 dan menjadi kontrak aktif yang menggabungkan klarifikasi cuti 1 September dengan RBAC permission-driven dan Switch Role 2 September.
 - Issue, tracker, panduan, runbook, UAT, serta catatan QA lama harus menaut ke keputusan ini tanpa menulis ulang fakta historis implementasi.
 - Perubahan produk tidak membuktikan implementasi. Penutupan hanya dapat dilakukan setelah test authorization, data scope, audit, PostgreSQL, dan browser/UAT yang relevan tersedia.

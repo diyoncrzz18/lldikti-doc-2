@@ -3,7 +3,7 @@
 
 > Dokumen ini berisi daftar issues yang siap dipindahkan ke GitHub Issues / Notion Board.
 > Setiap issue diturunkan dari User Stories dan dipecah menjadi task teknis yang actionable.
-> Sinkron dengan PRD-SIMPEG-Fase1-Core.md v1.13: Keycloak hanya untuk SSO, permission matrix RBAC internal menjadi sumber kebenaran assignment permission, approval cuti memakai tepat satu chain runtime per pegawai dengan penyalinan template ke anggota unit, status cuti memakai label resmi, PostgreSQL development via container, production diarahkan ke Podman, notifikasi channel-configurable, laporan mendukung export nominatif Excel custom melalui `employees.export`, dan lifecycle Employee sepenuhnya berbasis status menurut [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
+> Sinkron dengan PRD-SIMPEG-Fase1-Core.md v1.15: Keycloak hanya untuk SSO, permission matrix RBAC internal menjadi sumber kebenaran assignment permission, approval cuti memakai tepat satu chain runtime per pegawai dengan penyalinan template ke anggota unit, status cuti memakai label resmi, PostgreSQL development via container, production diarahkan ke Podman, notifikasi channel-configurable, laporan mendukung export nominatif Excel custom melalui `employees.export`, dan lifecycle Employee sepenuhnya berbasis status menurut [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
 >
 > **Catatan status:** checkbox pada dokumen ini adalah dekomposisi scope/import-ready, bukan tracker implementasi terkini. Gunakan `User-Stories-SIMPEG-Fase1.md` untuk status acceptance criteria dan tracker sprint untuk status source/QA.
 >
@@ -1547,16 +1547,18 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 
 ---
 
-## Addendum Backlog — Evaluasi SIMPEG Bersama LLDIKTI, 31 Agustus 2026
+## Addendum Backlog — Evaluasi SIMPEG Bersama LLDIKTI, 31 Agustus–1 September 2026
 
-> Sumber: [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md), [PRD v1.13](PRD-SIMPEG-Fase1-Core.md), dan [User Stories v1.13](User-Stories-SIMPEG-Fase1.md). Butir ini menimpa task lama yang bertentangan, tetapi tidak mengubah klaim historis issue/PR yang sudah ditutup. Seluruh item di bawah berstatus **belum diimplementasikan** sampai dibuktikan dengan test, QA, dan audit evidence baru.
+> Sumber: [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus–1 September 2026](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md), [PRD v1.15](PRD-SIMPEG-Fase1-Core.md), dan [User Stories v1.15](User-Stories-SIMPEG-Fase1.md). Butir ini menimpa task lama yang bertentangan, tetapi tidak mengubah klaim historis issue/PR yang sudah ditutup. Seluruh item di bawah berstatus **belum diimplementasikan** sampai dibuktikan dengan test, QA, dan audit evidence baru.
 
 ### Cuti — chain, pengajuan, dan keputusan
 
 - [ ] **US-4.10 / Issue #28:** gunakan urutan runtime **0..n Verifikator → Atasan Langsung → PYBMC**. Ganti label bisnis/UX “Kepala Bagian” menjadi “Atasan Langsung”; field, route, atau enum legacy tidak dimigrasikan hanya karena penggantian label.
 - [ ] **US-4.10 / Issue #28:** bila tidak ada Verifikator, tampilkan Atasan Langsung sebagai tahap pertama tanpa label “tanpa verifikator”. Snapshot harus menyimpan urutan, nama, jabatan aktual/terkini, dan peran setiap tahap.
 - [ ] **US-4.10 / Issue #28 dan US-4.4 / Issue #31:** bila Atasan Langsung dan PYBMC adalah orang yang sama, pertahankan dua tahap dan wajibkan dua tindakan. Validasi duplikasi tidak boleh melewati pasangan peran ini; duplikasi pada kombinasi tahap lain tetap dicegah/ditolak.
-- [ ] **US-4.1 / Issue #30:** Pegawai dapat membatalkan atau merevisi pengajuan melalui aksi resmi sebelum tindakan approval. Aksi harus berotorisasi pada pemohon, atomik terhadap reservasi, teraudit, tidak menghapus request/snapshot, dan mencegah pengajuan aktif yang bertabrakan.
+- [ ] **US-4.10 / Issue #28:** jadikan alasan perubahan chain satu pegawai dan alasan backfill opsional; pertahankan alasan wajib untuk penerapan chain ke unit dan PYBMC Global. Audit aktor, target, waktu, serta nilai sebelum/sesudah tetap wajib pada keempat aksi.
+- [ ] **US-4.1 / Issue #30:** buat permohonan pembatalan tersendiri untuk pengajuan yang belum final. Pegawai wajib mengisi alasan; approval utama ditahan dan reservasi dipertahankan selama Admin Kepegawaian memutus. Persetujuan membatalkan usulan serta melepas reservasi secara atomik; penolakan melanjutkan approval dari tahap sebelumnya. Cegah permohonan ganda, pertahankan request/snapshot/timeline, audit seluruh keputusan, dan kirim notifikasi kepada Admin serta Pegawai.
+- [ ] **US-4.1 / Issue #30:** revisi langsung hanya tersedia sebelum tindakan approval. Setelah ada tindakan, perubahan dilakukan melalui pembatalan yang disetujui dan pengajuan baru yang memulai chain dari awal; jangan menambahkan PDF pembatalan tanpa keputusan baru.
 - [ ] **US-4.6 / Issue #31:** Admin Kepegawaian ber-permission yang tepat dapat menandai cuti final `Disetujui` menjadi `Ditangguhkan` dengan alasan wajib. Implementasi menyimpan riwayat, tidak hard-delete, dan melakukan koreksi/replay ledger idempoten sehingga pemakaian final tidak tersisa keliru.
 - [ ] **US-4.6 / Issue #31:** formulir/PDF cuti memuat Nama, Jabatan aktual/terkini, dan Peran (`Verifikator`, `Atasan Langsung`, `PYBMC`) untuk setiap approval; pertahankan QR, akses terproteksi, timeline, serta ruang visual antara kop dan tabel.
 
@@ -1581,7 +1583,7 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 
 ### Regression, UAT, dan batas yang dipertahankan
 
-- [ ] **Issue #52:** tambahkan skenario lengkap untuk 0, 1, dan banyak Verifikator; Atasan Langsung/PYBMC orang yang sama; pembatalan/revisi; penangguhan final dan ledger; agregat historis read-only; pemulihan fakta cuti setelah downtime; PDF Nama/Jabatan/Peran; matriks CPNS→PNS; serta Reporting Statistik.
+- [ ] **Issue #52:** tambahkan skenario lengkap untuk 0, 1, dan banyak Verifikator; Atasan Langsung/PYBMC orang yang sama; pembatalan setelah Verifikator dengan keputusan setuju/tolak Admin Kepegawaian; penahanan/kelanjutan approval dan reservasi; revisi sebelum versus sesudah tindakan; penangguhan final dan ledger; agregat historis read-only; pemulihan fakta cuti setelah downtime; PDF Nama/Jabatan/Peran; matriks CPNS→PNS; serta Reporting Statistik.
 - [ ] Kriteria baru wajib memiliki test guest/unauthorized, role/data scope, valid/invalid request, audit immutable, PostgreSQL, dan browser smoke sebelum ditandai selesai.
 - [ ] Jangan menambahkan retensi audit 90 hari, preferensi channel notifikasi per pengguna, atau perubahan status produk WhatsApp dari temuan `422`; ketiganya bukan keputusan implementasi pada evaluasi ini.
 
@@ -1589,7 +1591,7 @@ Full end-to-end testing seluruh sistem sebelum go-live.
 
 ## Addendum Backlog — RBAC Configurable dan Switch Role, 2 September 2026
 
-> Sumber: [Keputusan RBAC Configurable dan Switch Role](../Keputusan-RBAC-dan-Switch-Role-2-September-2026.md), PRD v1.13, dan User Stories v1.13. Addendum ini tidak mengubah klaim issue/PR historis yang telah selesai; seluruh task berikut memerlukan evidence implementasi baru.
+> Sumber: [Keputusan RBAC Configurable dan Switch Role](../Keputusan-RBAC-dan-Switch-Role-2-September-2026.md), PRD v1.15, dan User Stories v1.15. Addendum ini tidak mengubah klaim issue/PR historis yang telah selesai; seluruh task berikut memerlukan evidence implementasi baru.
 
 ### Issue #4 — Permission matrix RBAC
 
