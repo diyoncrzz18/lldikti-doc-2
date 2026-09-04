@@ -127,6 +127,18 @@ podman compose exec app php artisan schedule:list
 | Eksekusi uji | Selesai tanpa duplikasi/error critical | — | Belum | — |
 | Timezone | `Asia/Makassar` | — | Belum | — |
 
+#### 5.4.1 Retry rollover yang tertahan permohonan pembatalan
+
+Jika rollover melaporkan bahwa permohonan pembatalan masih menunggu keputusan, jangan menjalankan ulang proses selama hold masih aktif dan jangan mengubah database, reservasi, atau marker ledger secara manual. Selesaikan terlebih dahulu keputusan pembatalan oleh Admin Kepegawaian melalui alur resmi.
+
+Setelah keputusan tersebut terminal, operator dapat menjalankan ulang command rollover normal untuk **tahun sumber yang sama**. Contoh berikut menutup tahun 2026 ke 2027; ganti `2026` dengan tahun sumber proses yang tertahan:
+
+```bash
+podman compose exec app php artisan cuti:rollover 2026
+```
+
+Retry setelah hold selesai tidak dijalankan otomatis. Marker rollover yang sudah ada menjaga eksekusi ulang tetap idempoten sehingga efek saldo, ledger, dan notifikasi tidak diduplikasi. Catat environment, exact SHA, tahun sumber, waktu, serta ringkasan hasil tanpa memasukkan data pribadi ke evidence atau log operasional.
+
 ## 6. Smoke Alur Utama
 
 Gunakan data sintetis/staging. Jangan menjalankan mutasi uji pada produksi tanpa persetujuan.
