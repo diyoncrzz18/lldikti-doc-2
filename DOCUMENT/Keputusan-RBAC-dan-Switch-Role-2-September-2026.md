@@ -40,6 +40,19 @@
 2. Bukti Switch Role wajib menguji izin dan penolakan untuk seluruh kombinasi role asli/target, identitas dan ownership tetap, perubahan matrix target pada request berikutnya, persistence, revert, audit, serta larangan chained switch.
 3. Keputusan ini tidak mengubah invariant domain lain yang telah dinyatakan eksplisit, seperti ownership data, status Employee Nonaktif, urutan/snapshot approval cuti, atau syarat approver aktif.
 
+## K-RBAC-04 — Permohonan pembatalan cuti sebagai business invariant
+
+**Penyelarasan dokumentasi 4 September 2026:** key dan batas otorisasi berikut berasal dari spec implementasi pembatalan/revisi bertanggal 3 September 2026 yang telah disetujui pengguna. Ini mencatat keputusan engineering tersebut pada matriks kanonis, bukan mengklaim stakeholder menetapkan nama teknis permission saat rapat.
+
+| Operasi | Permission efektif | Batas domain | Default permission / konfigurasi awal |
+|---|---|---|---|
+| Membuka antrean dan alasan pembatalan, serta menyetujui atau menolak permohonan | `cuti.cancellation.manage` | Role **efektif** `admin_kepegawaian`; keputusan hanya untuk permohonan yang masih pending | Admin Kepegawaian saja; Super Admin tidak mendapatkannya otomatis |
+
+1. Ini merupakan pengecualian business invariant terhadap gate permission-only pada K-RBAC-01: hanya Admin Kepegawaian yang berwenang memutus permohonan pembatalan. Backend memeriksa role efektif **dan** permission efektif; role asli maupun nama role saja tidak memberi bypass.
+2. Permission tetap dikelola melalui matrix database dan dibaca terkini. Pencabutannya dari Admin Kepegawaian menutup akses pada request berikutnya; pemberiannya kepada role efektif lain tidak melewati invariant ini. Ketentuan ini bukan allowlist umum untuk permission cuti lainnya.
+3. `cuti.configure`, `cuti.read_all`, dan permission approval utama tidak menggantikan `cuti.cancellation.manage`. Monitoring pengajuan tidak otomatis memberi hak membaca alasan pembatalan privat atau memutusnya. Hak pemohon untuk mengajukan pembatalan dengan `cuti.create` dan membaca alasan miliknya tetap tunduk pada ownership/data scope.
+4. Verifikasi mencakup Admin berizin, Admin tanpa permission, role efektif lain walaupun diberi permission, simulasi role, serta pemeriksaan ulang pada Action. Alasan pembatalan hanya boleh terbaca oleh pemohon dan Admin Kepegawaian yang berwenang; audit dan notifikasi tetap mengikuti kontrak privasi pembatalan.
+
 ## Open Question yang perlu keputusan stakeholder
 
 - Keputusan ini menetapkan **permission matrix sebagai sumber kebenaran assignment**, tetapi belum menetapkan nama permission/aktor yang berwenang memutasi matrix RBAC itu sendiri maupun kebijakan anti-lockout terakhir. Sebelum implementasi mengubah gate administrasi matrix, stakeholder perlu mengesahkan kontrak tersebut. Sampai itu terjadi, dokumentasi tidak menganggap role tertentu otomatis memiliki hak mengubah matrix hanya berdasarkan nama role.

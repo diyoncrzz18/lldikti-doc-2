@@ -221,7 +221,7 @@ Diputuskan 7 Agustus 2026 oleh Lead Backend sebagai pemilik modul Cuti, karena p
 
 | Pokok | Keputusan | Alasan |
 |---|---|---|
-| `ditangguhkan_tugas_dinas` | Mengikuti warna Ditangguhkan, yaitu oranye | Keduanya sama-sama menahan pengajuan tanpa menjadi keputusan akhir, sehingga membedakan warnanya hanya menambah beban baca tanpa menyampaikan informasi baru |
+| `ditangguhkan_tugas_dinas` | Mengikuti warna Ditangguhkan, yaitu oranye | Warna mengelompokkan kategori penangguhan, bukan menyamakan lifecycle. `ditangguhkan` biasa menahan workflow; `ditangguhkan_tugas_dinas` menutup workflow tanpa menyetujui cuti. Batas pembatalannya mengikuti penegasan K-MTG-10.2 tanggal 4 September 2026 |
 | `dikembalikan_karena_rollover` | Warna netral, bukan salah satu dari lima warna keputusan | Status ini terbit dari proses rollover saldo, bukan dari keputusan approval, sehingga tidak boleh tampak seperti persetujuan maupun penolakan |
 | Cakupan ketetapan warna AC-2 | Berlaku untuk seluruh permukaan yang menampilkan status cuti, bukan hanya daftar pengajuan pegawai | Satu status yang tampil dengan warna berbeda antar halaman membuat pengguna salah membaca keputusan |
 
@@ -2187,8 +2187,8 @@ Seluruh Open Question OQ-MTG-01 sampai OQ-MTG-07 dari evaluasi 15/18 Agustus 202
 ### US-4.1 dan US-4.2 · Pengajuan, pembatalan, dan revisi cuti
 
 - [ ] AC-NTL-1: Setelah submit, pengajuan menunggu Verifikator pertama bila konfigurasi memiliki Verifikator; bila tidak ada, pengajuan langsung menunggu Atasan Langsung. Label status, notifikasi, dan timeline memakai istilah peran yang sama.
-- [ ] AC-NTL-2: Selama pengajuan belum final, hanya pemohon yang dapat membuat satu permohonan pembatalan aktif sebagai record tersendiri dengan alasan wajib. Pengiriman permohonan menahan approval utama dan mempertahankan reservasi saldo.
-- [ ] AC-NTL-3: Admin Kepegawaian yang berwenang menerima notifikasi dan menyetujui atau menolak pembatalan. Persetujuan membatalkan pengajuan dan melepas reservasi secara atomik; penolakan melanjutkan approval dari tahap sebelumnya. Kedua hasil memberi notifikasi kepada Pegawai dan tercatat pada audit tanpa menghapus request, snapshot, timeline, atau histori.
+- [ ] AC-NTL-2: Hanya pemohon dari pengajuan berstatus `menunggu_approval` atau `ditangguhkan` biasa yang dapat membuat satu permohonan pembatalan aktif sebagai record tersendiri dengan alasan wajib. Pengiriman permohonan menahan approval utama dan mempertahankan reservasi saldo. Status terminal, termasuk `ditangguhkan_tugas_dinas`, tidak menerima pembatalan; resubmit `dikembalikan_karena_rollover` tetap merupakan jalur tersendiri sesuai penegasan K-MTG-10.2.
+- [ ] AC-NTL-3: Admin Kepegawaian dengan role efektif `admin_kepegawaian` dan permission efektif `cuti.cancellation.manage` menerima notifikasi serta menyetujui atau menolak pembatalan sesuai [K-RBAC-04](../Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-04--permohonan-pembatalan-cuti-sebagai-business-invariant). Persetujuan membatalkan pengajuan dan melepas reservasi secara atomik; penolakan melanjutkan approval dari tahap sebelumnya. Kedua hasil memberi notifikasi kepada Pegawai dan tercatat pada audit tanpa menghapus request, snapshot, timeline, atau histori.
 - [ ] AC-NTL-4: Revisi langsung hanya dapat dilakukan sebelum tindakan approval. Setelah ada tindakan, Pegawai meminta pembatalan dan membuat pengajuan baru dari awal bila pembatalan disetujui; approval lama tidak dipakai untuk data baru.
 - [ ] AC-NTL-5: Pengajuan baru tetap ditolak selama pengajuan utama atau permohonan pembatalannya masih aktif. Permohonan pembatalan tidak memiliki kewajiban dokumen PDF tersendiri.
 

@@ -10,7 +10,7 @@
 
 > Dokumen ini menjaga keputusan 15–25 Agustus sebagai riwayat. Hanya butir yang secara eksplisit disebut **digantikan** di bawah yang tidak lagi menjadi kontrak aktif. Nama teknis yang sudah ada, seperti role, route, atau field `kepala_bagian`, **tidak** otomatis berubah hanya karena label bisnis diubah; perubahan schema atau RBAC memerlukan keputusan tersendiri.
 
-> **Pembaruan RBAC 2 September 2026:** role yang disebut pada dokumen ini menggambarkan konfigurasi/default pada saat keputusan 31 Agustus dicatat. Permission matrix database kini menjadi sumber kebenaran. Hak generic, termasuk pengelolaan fitur dan baca dokumen, dapat diassign atau dicabut dengan scope/policy; hanya business invariant eksplisit seperti Switch Role yang memakai pembatas role asli. Lihat [Keputusan RBAC Configurable dan Switch Role](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md).
+> **Pembaruan RBAC 2 September 2026:** role yang disebut pada dokumen ini menggambarkan konfigurasi/default pada saat keputusan 31 Agustus dicatat. Permission matrix database kini menjadi sumber kebenaran. Hak generic, termasuk pengelolaan fitur dan baca dokumen, dapat diassign atau dicabut dengan scope/policy. Pembatas role hanya berlaku untuk business invariant eksplisit: Switch Role memeriksa role asli, sedangkan keputusan pembatalan cuti memeriksa role efektif Admin Kepegawaian. Lihat [Keputusan RBAC Configurable dan Switch Role](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md).
 
 ## K-MTG-10.1 — Terminologi dan chain approval cuti
 
@@ -24,13 +24,21 @@
 
 ## K-MTG-10.2 — Pembatalan, revisi, dan penangguhan cuti
 
-1. Selama pengajuan belum memperoleh keputusan final PYBMC, Pegawai dapat mengajukan **permohonan pembatalan tersendiri** dengan alasan wajib. Pegawai tidak membatalkan pengajuan utama secara langsung.
+1. Selama workflow pengajuan masih aktif pada status `menunggu_approval` atau `ditangguhkan` biasa dan belum memperoleh keputusan final PYBMC, Pegawai dapat mengajukan **permohonan pembatalan tersendiri** dengan alasan wajib. Pegawai tidak membatalkan pengajuan utama secara langsung.
 2. Saat permohonan pembatalan dikirim, approval pengajuan utama ditahan dan reservasi saldo tetap dipertahankan. Hanya satu permohonan pembatalan aktif yang dapat diproses untuk pengajuan yang sama.
 3. Admin Kepegawaian yang berwenang menerima notifikasi dan memutus permohonan tersebut. Jika disetujui, pengajuan utama menjadi batal dan reservasi saldo dilepas secara atomik. Jika tidak disetujui, approval utama dilanjutkan dari tahap sebelumnya dengan tindakan approval yang sudah ada tetap tercatat.
 4. Permohonan, keputusan Admin, perubahan status, dan mutasi reservasi wajib tercatat pada audit serta tidak menghapus pengajuan, snapshot, timeline, atau histori. Pegawai menerima notifikasi hasil keputusan pembatalan.
 5. Revisi langsung hanya tersedia sebelum ada tindakan approval. Setelah Verifikator atau approver lain bertindak, perubahan data dilakukan dengan meminta pembatalan; setelah pembatalan disetujui, Pegawai membuat pengajuan baru yang memulai chain dari awal.
 6. Cuti yang sudah berstatus final `Disetujui` tidak boleh dihapus dan tidak memakai permohonan pembatalan Pegawai. Admin Kepegawaian dapat menetapkannya menjadi `Ditangguhkan` dengan alasan wajib, menjaga histori dan audit, serta menjalankan koreksi/replay ledger secara atomik agar pemakaian final tidak tersisa keliru.
 7. Permohonan pembatalan merupakan form/record tersendiri di SIMPEG dan tidak menambah kewajiban dokumen PDF pembatalan.
+
+### Penegasan kontrak implementasi — 4 September 2026
+
+Penegasan ini menyelaraskan dokumen kanonis dengan spec implementasi pembatalan/revisi bertanggal 3 September 2026 yang telah disetujui pengguna. Ini bukan keputusan baru dari rapat LLDIKTI.
+
+- `ditangguhkan` biasa menahan workflow dan tetap dapat dimintakan pembatalan. Sebaliknya, `ditangguhkan_tugas_dinas` **menutup workflow pengajuan**, melepas reservasi, dan melindungi hak sesuai aturan tugas dinas yang berlaku. Status tersebut bukan persetujuan cuti, tetapi juga bukan workflow aktif yang dapat dilanjutkan atau dibatalkan melalui permohonan Pegawai. Penggunaan hak berikutnya melalui pengajuan baru; aturan perhitungan dan rollover tidak diubah oleh penegasan ini.
+- `disetujui`, `tidak_disetujui`, `dibatalkan`, dan `ditangguhkan_tugas_dinas` tidak menerima permohonan pembatalan. `dikembalikan_karena_rollover` tetap memakai jalur resubmit rollover tersendiri, bukan perluasan flow pembatalan. Penangguhan administratif atas cuti yang sudah final Disetujui pada butir 6 tetap merupakan flow terpisah.
+- Permission teknis `cuti.cancellation.manage` yang telah disetujui bersama spec dicatat pada [K-RBAC-04 — Permohonan pembatalan cuti](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-04--permohonan-pembatalan-cuti-sebagai-business-invariant). Role efektif Admin Kepegawaian dan permission efektif tersebut wajib dipenuhi bersamaan; permission konfigurasi atau monitoring cuti tidak menggantikannya.
 
 ## K-MTG-10.3 — Sumber pemakaian cuti historis
 
