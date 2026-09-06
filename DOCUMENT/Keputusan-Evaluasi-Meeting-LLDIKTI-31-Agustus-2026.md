@@ -40,6 +40,10 @@ Penegasan ini menyelaraskan dokumen kanonis dengan spec implementasi pembatalan/
 - `disetujui`, `tidak_disetujui`, `dibatalkan`, dan `ditangguhkan_tugas_dinas` tidak menerima permohonan pembatalan. `dikembalikan_karena_rollover` tetap memakai jalur resubmit rollover tersendiri, bukan perluasan flow pembatalan. Penangguhan administratif atas cuti yang sudah final Disetujui pada butir 6 tetap merupakan flow terpisah.
 - Permission teknis `cuti.cancellation.manage` yang telah disetujui bersama spec dicatat pada [K-RBAC-04 — Permohonan pembatalan cuti](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-04--permohonan-pembatalan-cuti-sebagai-business-invariant). Role efektif Admin Kepegawaian dan permission efektif tersebut wajib dipenuhi bersamaan; permission konfigurasi atau monitoring cuti tidak menggantikannya.
 
+### Cakupan awal penangguhan administratif — 6 September 2026
+
+Pada tahap awal, penangguhan administratif hanya mencakup pengajuan final `Disetujui` yang **belum mencapai tanggal mulai cuti menurut WITA**, dengan pembalikan pemakaian untuk seluruh periode pengajuan. Tepat pada tanggal mulai, cuti yang sedang berjalan atau sudah selesai, serta pembalikan sebagian hari belum dicakup. Penanganan lanjutan memerlukan aturan pemakaian parsial agar hari yang sudah digunakan tidak ikut dikembalikan sebagai saldo. Batas ini tidak mengubah alur permohonan pembatalan/revisi pengajuan yang belum final.
+
 ## K-MTG-10.3 — Sumber pemakaian cuti historis
 
 1. **Cuti di Luar SIMPEG** atau cuti manual adalah satu sumber fakta pemakaian tahunan historis/transisi untuk N-2, N-1, dan tahun berjalan sebelum go-live, serta untuk cuti yang telah diproses dan disetujui secara manual ketika layanan SIMPEG mengalami downtime setelah go-live.

@@ -2203,6 +2203,8 @@ Seluruh Open Question OQ-MTG-01 sampai OQ-MTG-07 dari evaluasi 15/18 Agustus 202
 
 ### US-4.6 dan US-4.7 · Penangguhan pasca-persetujuan dan formulir cuti
 
+> **Cakupan awal — 6 September 2026:** penangguhan administratif hanya sebelum tanggal mulai cuti menurut WITA, dengan pembalikan pemakaian seluruh periode. Tepat pada tanggal mulai, cuti yang sedang berjalan/sudah selesai, dan pembalikan sebagian hari belum dicakup; penanganan lanjutan memerlukan aturan pemakaian parsial. Lihat [rincian cakupan awal](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md#cakupan-awal-penangguhan-administratif--6-september-2026).
+
 - [ ] AC-NTL-1: Pengajuan yang telah Disetujui final tidak boleh dihapus. Admin Kepegawaian dapat menetapkannya `Ditangguhkan` untuk pembatalan atau penjadwalan ulang setelah persetujuan, dengan keterangan wajib, timeline/audit lengkap, dan tanpa menghilangkan keputusan sebelumnya.
 - [ ] AC-NTL-2: Penangguhan pasca-persetujuan mengoreksi pemakaian saldo hanya melalui ledger append-only dan rekalkulasi atomik yang idempoten; saldo tidak boleh dibalik dua kali akibat retry atau double submit. Pegawai baru dapat mengajukan kembali setelah pengajuan terdahulu tidak lagi aktif.
 - [ ] AC-NTL-3: Formulir cuti resmi menampilkan tabel approval berisi **Nama**, **Jabatan**, dan **Peran**. Peran adalah Verifikator, Atasan Langsung, atau PYBMC; jabatan mengikuti jabatan aktual terakhir pihak yang bertindak. Tata letak memberi jarak yang cukup antara kop surat dan tabel.

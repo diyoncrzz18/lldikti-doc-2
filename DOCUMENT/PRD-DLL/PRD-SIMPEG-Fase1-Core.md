@@ -2272,6 +2272,10 @@ Fitur dalam addendum ini belum boleh dinyatakan selesai hanya karena tercatat di
 8. **Alasan konfigurasi chain.** `Alasan Perubahan Chain Pegawai` dan `Alasan Backfill` bersifat opsional. `Alasan Penerapan Chain ke Unit` dan `Alasan PYBMC Global` tetap wajib karena berdampak massal atau luas. Pengosongan alasan opsional tidak mengurangi audit: aktor, waktu, target, serta nilai sebelum/sesudah tetap dicatat.
 9. **Batas keputusan rapat.** Usulan retensi/pengurangan audit log berkala tidak ditetapkan sebagai perubahan produk; audit log tetap immutable. Keringanan alasan hanya berlaku pada dua field konfigurasi chain yang disebutkan di atas dan tidak mengubah kewajiban alasan pada `Perubahan`, `Ditangguhkan`, `Tidak Disetujui`, pembatalan/koreksi fakta cuti, mutasi status pegawai, atau aksi kritis lain yang telah ditetapkan.
 
+### Cakupan awal penangguhan administratif — 6 September 2026
+
+Penangguhan administratif pasca-persetujuan pada tahap awal hanya berlaku **sebelum tanggal mulai cuti menurut WITA**, dengan pembalikan pemakaian seluruh periode pengajuan. Penangguhan tepat pada tanggal mulai, saat cuti berjalan atau selesai, serta pembalikan sebagian hari belum dicakup; penanganan lanjutan memerlukan aturan pemakaian parsial agar hari yang sudah digunakan tidak ikut dikembalikan. Alur pembatalan/revisi sebelum keputusan final tetap terpisah. Lihat [rincian cakupan awal](../Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md#cakupan-awal-penangguhan-administratif--6-september-2026).
+
 ### Changelog v1.12
 
 - Mengganti terminologi approval cuti dari Kepala Bagian menjadi Atasan Langsung dan mengunci urutan Verifikator → Atasan Langsung → PYBMC.
