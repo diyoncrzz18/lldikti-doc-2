@@ -2399,10 +2399,13 @@ PATEN tidak menjadi checkbox dan tidak dicabut melalui matrix. Tidak menghapus l
 | Audit | `audit_logs.read` |
 | EWS | `ews.read`, `ews.configure` |
 | Cuti administratif | `cuti.read_all`, `cuti.configure`, `cuti.manual.manage`, `cuti.cancellation.manage`, `cuti.kepala_lembaga_documents.manage` |
+| Penangguhan cuti final | `cuti.administrative_postponement.manage`; default hanya Admin Kepegawaian, configurable dengan canonical scope; sebelum tanggal mulai WITA, reversal seluruh periode secara atomik dan privacy alasan tetap wajib |
 | Saldo cross-employee | `cuti.balance.read` existing; self dipisahkan menjadi PATEN tanpa key baru |
 | Dukungan user | `users.switch_role` |
 
 Ini capability delegated/admin, bukan izin melampaui canonical scope atau mutability domain. Riwayat immutable/append-only tetap menolak update/delete substantif walaupun permission diberikan. Dokumen tetap privat sesuai scope/kategori/masking. Kategori hanya PATEN atau RBAC; tidak ada kategori UI ketiga.
+
+Untuk penangguhan final, `audit_logs.read` tidak menjadi bypass alasan privat. Alasan hanya dibaca pemohon atau pengelola dengan permission penangguhan dan scope yang sah; payload baca audit mengikuti batas ini tanpa mengubah snapshot audit immutable. QR publik tetap hanya status/waktu penangguhan. Penjelasan key dan provenance keputusan implementasi ada pada [penyelarasan kontrak penangguhan final](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md#72-keputusan-pembatalan).
 
 Default `employees.export`: **Super Admin ON, Admin Kepegawaian ON, Pimpinan OFF, Kepala Bagian OFF, Pegawai OFF**. Checkbox export tersedia untuk semua role. Grant pada role OFF membuka capability tanpa code change dan tanpa perluasan scope; revoke pada Super Admin menutup export. Key RBAC lain mengikuti default sah terdahulu tanpa menetapkan default baru. Nama target yang disahkan belum menjadi klaim bahwa key ada di database deployment; inventaris/transisi mengikuti §9 keputusan 7 September.
 

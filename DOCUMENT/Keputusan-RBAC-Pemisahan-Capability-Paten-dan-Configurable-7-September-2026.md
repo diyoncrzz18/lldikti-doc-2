@@ -61,6 +61,7 @@ Semua key di bawah adalah **⚙️ RBAC**, tersedia untuk konfigurasi seluruh ro
 | Audit | `audit_logs.read` | Baca berizin, scope/privacy; audit immutable | Tidak menetapkan default baru |
 | EWS | `ews.read`, `ews.configure` | Scope alert, parameter domain, lifecycle dan audit | Tidak menetapkan default baru |
 | Cuti administratif | `cuti.read_all`, `cuti.configure`, `cuti.manual.manage`, `cuti.cancellation.manage`, `cuti.kepala_lembaga_documents.manage` | Monitoring/konfigurasi/fakta manual/keputusan pembatalan/dokumen administratif, dengan state dan scope domain | Tidak menetapkan default baru |
+| Penangguhan cuti final | `cuti.administrative_postponement.manage` | Penangguhan seluruh periode sebelum tanggal mulai WITA; permission efektif, canonical scope, alasan wajib, reversal atomik, histori/audit dan privacy tetap berlaku | Default hanya Admin Kepegawaian; configurable untuk seluruh role, termasuk Super Admin yang tidak memperoleh izin otomatis |
 | Saldo administratif | `cuti.balance.read` dalam konteks cross-employee | Key existing dipertahankan untuk baca saldo administratif; self dipisahkan menjadi PATEN | Tidak menetapkan default baru |
 | Dukungan user | `users.switch_role` | Permission dan target lebih rendah pada hierarki; tanpa impersonasi | Tidak menetapkan default baru |
 
@@ -101,6 +102,8 @@ Pencabutan permission RBAC tidak boleh mematikan capability PATEN yang identity/
 Approval utama ditahan dan reservation dipertahankan saat pembatalan pending. Persetujuan membatalkan parent serta melepas reservation secara atomik; penolakan melanjutkan active step yang sama tanpa mengulang tindakan terdahulu. Alasan privat hanya dapat dibaca pemohon serta actor yang berizin dan lulus scope/state yang relevan; grant bukan akses bebas ke seluruh alasan. Permission monitoring/configuration tidak menggantikan permission pembatalan.
 
 Penangguhan administratif atas cuti final tetap flow terpisah. Batas [6 September](Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md#cakupan-awal-penangguhan-administratif--6-september-2026) sebelum tanggal mulai WITA dan pembalikan seluruh periode tidak diubah.
+
+**Penyelarasan kontrak implementasi 8 September 2026:** key `cuti.administrative_postponement.manage` dan default hanya Admin Kepegawaian mengikuti rancangan penangguhan final yang disetujui pengguna pada 6 September, bukan klaim bahwa nama teknis permission disebutkan stakeholder saat rapat. Grant/revoke melalui matrix tidak melewati canonical employee scope; permission monitoring, pembatalan pra-final, maupun role Super Admin bukan pengganti izin khusus ini. Alasan administratif hanya terlihat bagi pemohon atau pengelola berizin yang lulus scope, termasuk ketika membaca Audit Log. Permission `audit_logs.read` tetap diperlukan untuk membuka audit, tetapi tidak otomatis membuka alasan privat; snapshot audit tetap disimpan utuh dan immutable. QR publik hanya menampilkan status/waktu penangguhan, tanpa alasan administratif. Penangguhan setelah tanggal mulai atau pemakaian parsial tetap di luar cakupan awal.
 
 ## 8. Switch Role melalui RBAC dan hierarki
 
