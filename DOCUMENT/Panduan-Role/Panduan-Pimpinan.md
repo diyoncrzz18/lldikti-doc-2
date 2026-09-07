@@ -1,5 +1,7 @@
 # Panduan Penggunaan — Pimpinan
 
+> **Kontrak target 7 September 2026:** [Keputusan PATEN dan RBAC](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) menggantikan batas authorization lama pada panduan ini. Capability personal/assignment/domain adalah **🔒 PATEN**; capability delegated/admin adalah **⚙️ RBAC**. Role contoh menggambarkan konfigurasi awal, bukan allowlist permanen. Perubahan ini belum membuktikan implementasi atau UAT lulus.
+
 | Field | Nilai |
 |---|---|
 | Role internal | `pimpinan` |
@@ -17,10 +19,10 @@
 | Fitur | Langkah ringkas | Dampak tindakan |
 |---|---|---|
 | Dashboard Pimpinan | Buka `/pimpinan/dashboard` dan periksa ringkasan organisasi | Menampilkan agregat organisasi tanpa memberi hak mutasi data pegawai |
-| Data Pegawai | Gunakan daftar/filter dan buka detail pegawai | Akses read-only sesuai scope dan masking; tidak mengubah data utama/histori |
+| Data Pegawai | Gunakan daftar/filter dan buka detail pegawai | Skenario baca mengikuti scope dan masking; mutasi memerlukan permission RBAC terkait dan invariant domain |
 | Persetujuan Cuti | Buka `/pimpinan/cuti`, cari pengajuan aktif, baca detail, lalu pilih keputusan | Keputusan final dapat memotong saldo, menghasilkan dokumen, notifikasi, dan audit |
 | EWS | Buka EWS organisasi dan filter alert | Memantau kondisi organisasi; EWS bukan keputusan otomatis |
-| Laporan | Buka laporan nominatif/kepangkatan, gunakan filter, periksa preview, dan unduh | Menghasilkan salinan data fixed-format sesuai batas akses |
+| Laporan | Buka laporan sesuai permission; unduh nominatif hanya bila `employees.export` diberikan, dan riwayat sesuai `employee_histories.export` | `employees.export` default OFF; grant tetap mengikuti scope global kanonis, masking/privacy, dan allowlist kolom |
 | Reporting Statistik Kepegawaian | Buka halaman reporting dan pilih filter yang diizinkan | Menampilkan chart/agregat sesuai scope; bukan jalur mutasi atau export detail |
 | Notifikasi | Buka inbox, pilih notifikasi, lalu tandai dibaca | Mengubah status baca milik user dan mengarahkan ke record terkait |
 
@@ -50,13 +52,14 @@ Formulir yang dihasilkan setelah keputusan final memuat Nama, Jabatan, dan Peran
 
 ## 4. Batas Akses dan Larangan
 
-- Detail pegawai bersifat read-only; jangan mencari jalur mutasi di luar menu resmi.
+- Akses baca administratif memerlukan permission dan scope. Mutasi hanya bila permission RBAC terkait diberikan dan domain mengizinkan; jangan mencari jalur bypass di luar aksi resmi.
 - Keputusan hanya boleh dilakukan ketika user menjadi approver aktif.
 - Jangan menggunakan istilah `Ditolak`; label resminya `Tidak Disetujui`.
 - Jangan membuat keputusan berdasarkan EWS saja; EWS adalah indikator untuk verifikasi administratif.
 - Jangan mengekspor data kontak pribadi atau identitas sensitif yang tidak diperlukan.
 - Jangan membagikan lampiran cuti kepada pihak di luar kewenangan.
-- Permission tambahan yang diberikan melalui matrix, seperti `dokumen_sk.read` atau `employees.export`, tetap tunduk pada scope/masking. Pimpinan tetap tidak boleh memulai Switch Role meskipun `users.switch_role` salah ter-assign.
+- Permission tambahan seperti `dokumen_sk.read` atau `employees.export` tetap tunduk pada scope/masking; grant/revoke harus efektif. Pimpinan dengan `users.switch_role` dapat memilih Kepala Bagian/Pegawai, tanpa same/higher/unknown/chained switch atau perubahan identitas/ownership/scope asli.
+- Approval final assigned pada active step dan proof otomatis adalah PATEN/domain. Profil/riwayat/keluarga/notifikasi/cuti/saldo sendiri serta baca Hari Libur tetap PATEN sesuai lifecycle/domain, bukan checkbox role.
 
 ## 5. Troubleshooting
 

@@ -1,5 +1,7 @@
 # Ringkasan Rapat untuk Evaluasi Projek SIMPEG bersama Mahasiswa Magang Univ Klabat
 
+> **Catatan editorial — supersession authorization 7 September 2026:** [Keputusan PATEN dan RBAC](Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) mengganti hanya klausul authorization yang bertentangan: self/ownership dan approval assigned/proof otomatis menjadi PATEN; capability administratif tetap RBAC, tanpa universal Super Admin bypass; export configurable seluruh role (default ON Super Admin/Admin Kepegawaian, OFF tiga role lain); manual/pembatalan cuti tidak lagi Admin Kepegawaian-only; Switch Role memakai permission + target lebih rendah pada hierarki seluruh role. Pernyataan/hasil uji lama tentang batas tersebut adalah **riwayat Superseded**, bukan AC atau bukti lulus kontrak target. Fakta rekaman, hasil command, domain non-authorization, dan status implementasi bertanggal di bawah dipertahankan. Scope, privacy, workflow, audit, serta kontrak lifecycle reaktivasi tetap berlaku. Kewenangan mengelola matrix/anti-lockout/bootstrap recovery belum diputuskan; catatan ini tidak mengesahkan perubahan gate Kelola Akses User.
+
 > Senin, 31 Agustus 2026 · 10.26–12.21 WITA (1 jam 55 menit)
 
 > Ringkasan ini bersifat interpretatif. Jika terdapat perbedaan redaksi, keputusan produk dan PRD kanonis menjadi acuan. Istilah dan kesimpulan di bawah telah diselaraskan kembali terhadap transkrip lengkap dan klarifikasi stakeholder.

@@ -84,7 +84,7 @@ Setiap sesi menggunakan urutan berikut:
 9. minta keputusan penerimaan per kelompok;
 10. sepakati jadwal retest jika diperlukan.
 
-## 6. Skenario Wajib Addendum Evaluasi 31 Agustus 2026
+## 6. Skenario Wajib Addendum Evaluasi dan PATEN/RBAC 7 September 2026
 
 > Skenario berikut belum dijalankan. Skenario hanya dapat masuk sesi UAT setelah implementasi, review, automated test relevan, dan preflight environment telah lulus. Evidence sebelum addendum tidak dapat dipakai kembali tanpa retest terhadap exact SHA kandidat.
 
@@ -105,9 +105,24 @@ Setiap sesi menggunakan urutan berikut:
 | UAT-RBAC-02-02 | Export pegawai | Bandingkan role dengan `employees.read` saja dan role yang juga diberi `employees.export` | Role baca dapat melihat data sesuai scope tetapi tidak dapat raw export; role export dapat mengunduh hasil dengan filter, masking, dan allowlist kolom tetap berlaku | Response denial, file hasil tersanitasi, authorization test |
 | UAT-SWR-02-01 | Switch Role Super Admin | Super Admin ber-permission `users.switch_role` berganti ke setiap target yang diizinkan lalu revert | Identitas/employee/ownership tetap, role/permission efektif target dipakai, `temporary_role` persisten sampai revert, audit lengkap | Test matrix, audit, browser smoke logout/login/revert |
 | UAT-SWR-02-02 | Switch Role Admin Kepegawaian | Admin Kepegawaian ber-permission mencoba Pimpinan/Kepala Bagian/Pegawai dan target yang dilarang | Tiga target rendah berhasil; Super Admin, role sama/lebih tinggi, dan target tidak valid ditolak | Test authorization, response denial, audit aman |
-| UAT-SWR-02-03 | Invariant Switch Role | Pimpinan, Kepala Bagian, dan Pegawai diberi `users.switch_role` pada data uji lalu mencoba memulai; uji chained switch | Ketiganya tetap ditolak fail-closed; switch kedua ditolak sampai revert, tanpa perubahan identitas/scope | Test backend, browser smoke, audit switch/revert |
+| UAT-SWR-02-03 | Hierarki Switch Role seluruh role | Grant/revoke `users.switch_role` pada Pimpinan, Kepala Bagian, dan Pegawai; uji semua target serta chained switch | Pimpinan boleh ke Kepala Bagian/Pegawai dan Kepala Bagian ke Pegawai saat ON; revoke menolak. Pegawai tanpa target rendah. Same/higher/unknown/chained ditolak; identitas/employee binding/ownership/scope asli tetap | Test backend seluruh hierarki, browser smoke, audit switch/revert |
 
-Klarifikasi pembatalan 1 September 2026 sudah menjadi expected result tetap pada sesi UAT.
+Klarifikasi workflow pembatalan 1 September tetap berlaku. Batas aktor Admin Kepegawaian-only serta allowlist Switch Role pada expected result lama **Superseded** oleh [Keputusan PATEN dan RBAC 7 September 2026](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md). Role Admin pada skenario manual/pembatalan adalah fixture default, bukan authority permanen. Seluruh skenario tambahan berikut **belum dijalankan**, bukan klaim penerimaan implementasi.
+
+| ID | Skenario regression target | Expected result | Evidence minimum |
+|---|---|---|---|
+| UAT-PATEN-07-01 | Cabut/tidak berikan checkbox legacy self pada seluruh role linked Employee valid | Profil, riwayat, keluarga, notifikasi read/mark-read, cuti read-own, saldo sendiri dan baca Hari Libur tetap tersedia; foreign ownership ditolak; dokumen/EWS tetap RBAC | Feature test, negative ownership/lifecycle, browser smoke |
+| UAT-PATEN-07-02 | Submit sendiri tanpa `cuti.create`; variasikan status, jenis/masa kerja, saldo, chain, tanggal, overlap | PATEN mengikuti eligibility/domain; tanpa employee linked/aktif atau domain invalid ditolak, role saja tidak membuktikan eligibility | PostgreSQL regression, state/reservasi sebelum-sesudah |
+| UAT-PATEN-07-03 | Approval assigned tanpa `cuti.approve`; user tidak assigned diberi permission legacy; final approval tanpa `cuti.proof.generate` | Hanya actor active step pada workflow valid boleh bertindak; non-assigned ditolak; proof otomatis domain tetap terbentuk | Snapshot, audit, PDF aman, regression |
+| UAT-RBAC-07-01 | Grant/revoke permission RBAC pada Super Admin dan role non-default | Effective access berubah pada request berikutnya; tidak ada universal Super Admin bypass atau default seeder permanen | Test ON/OFF, audit masked |
+| UAT-EXPORT-07-01 | Periksa default `employees.export`, grant pada Pimpinan/Kepala Bagian/Pegawai, lalu revoke Super Admin | Default SA/Admin ON, tiga role lain OFF; grant memberikan export sesuai scope global/bawahan/self; revoke SA menolak; `employees.read` saja tidak cukup | Matrix before/after, denial dan output tersanitasi |
+| UAT-EXPORT-07-02 | Export dengan foreign employee IDs, filter, dan kolom sensitif | Scope tidak meluas; privacy/masking/column allowlist tetap berlaku pada Excel/PDF | Test scope/privacy dan artefak aman |
+| UAT-DOC-07-01 | Grant/revoke `dokumen_sk.read/create/update/delete` pada role non-default | Permission efektif dengan employee scope, private-file/category authorization dan masking; tidak ada raw role allowlist generik; mutability domain tetap dijaga | Private-file denial, test mutation/audit |
+| UAT-CUT-MAN-07-01 | Grant/revoke `cuti.manual.manage` pada role selain default | ON mengizinkan capability sesuai scope; OFF menolak; sumber fakta, replay/ledger satu kali, overlap/validasi/audit tetap enforced | PostgreSQL regression, ledger/audit masked |
+| UAT-CUT-CAN-07-01 | Grant/revoke `cuti.cancellation.manage` pada role selain default, termasuk SA | ON mengizinkan sesuai scope; OFF menolak; pending cancellation, parent state, valid transition, locking/reservasi/audit/notifikasi tetap enforced | Request/state/ledger, concurrency dan notification test |
+| UAT-RBAC-07-02 | Bedakan self dari cross-employee history/family/leave/balance | Self PATEN; cross-employee memerlukan permission terkait + scope, termasuk `cuti.balance.read`; histori resmi tetap append-only walau update/delete ON | Negative scope, tampered ID, immutable history regression |
+
+Traceability: skenario ini membuktikan AC-RBAC-PATEN-01–06, AC-RBAC-CONFIG-01–04, AC-EXPORT-01–07, AC-DOC-01–03, AC-CUTI-MANUAL-01–03, AC-CUTI-CANCEL-01–03, dan AC-SWITCH-01–05 pada addendum. Pengelola matrix, anti-lockout, dan bootstrap recovery belum diputuskan; UAT grant/revoke hanya menggunakan fixture/operator uji yang sudah diotorisasi.
 
 ## 7. Template Notulen dan Hasil Skenario
 
@@ -183,7 +198,7 @@ Setelah kelompok terkait berstatus `Diterima`:
 - [ ] retest memiliki evidence baru;
 - [ ] lima panduan role diselaraskan dengan fitur yang diterima;
 - [ ] seluruh skenario addendum evaluasi 31 Agustus yang masuk release candidate memiliki evidence retest;
-- [ ] seluruh skenario RBAC configurable dan Switch Role 2 September yang masuk release candidate memiliki evidence retest;
+- [ ] seluruh skenario PATEN/RBAC dan Switch Role target 7 September yang masuk release candidate memiliki evidence retest pada exact SHA, bukan mengandalkan bukti kontrak lama;
 - [ ] hasil UAT ditautkan pada checklist go/no-go.
 
 ## 12. Referensi

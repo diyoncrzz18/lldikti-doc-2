@@ -10,7 +10,7 @@
 | Evidence backend/environment | Jordan Sutarto |
 | Input panduan UI | Adithian Gunawan |
 | Release/merge gate | Adriel Walintukan |
-| Terakhir diperbarui | 2 September 2026 |
+| Terakhir diperbarui | 7 September 2026 |
 
 ## 1. Tujuan
 
@@ -48,7 +48,7 @@ Aturan status paket:
 | 6 | Migration, aplikasi, queue, scheduler, dan alur utama terverifikasi | Dokumen baseline §5–§7 | Belum Lulus | Environment kandidat belum ditetapkan |
 | 7 | Prosedur dan bukti rollback tersedia | Dokumen recovery §7–§10 | Belum Lulus | Prosedur masih draft; drill belum dilaksanakan |
 | 8 | Checklist release lengkap dan keputusan go/no-go | Checklist go/no-go | Belum Lulus | Keputusan belum dibuat |
-| 9 | Kontrak RBAC configurable dan Switch Role 2 September tervalidasi | Register UAT §6 | Belum Lulus | Grant/revoke permission, permission dokumen/export, matrix Switch Role, dan denial invariant belum diuji pada kandidat |
+| 9 | Kontrak PATEN/RBAC 7 September dan Switch Role seluruh hierarki tervalidasi | Register UAT §6 | Belum Lulus | Self tanpa checkbox, approval assigned/proof otomatis, SA revoke, export seluruh role/scoped IDs, dokumen privat, manual/pembatalan delegated, serta hierarchy Switch Role belum diuji pada kandidat |
 
 ## 4. Aturan Evidence
 
@@ -84,6 +84,8 @@ Apabila dependency eksternal belum tersedia, status tetap `Executing` atau `Perl
 ketiadaan dependency tidak boleh diubah menjadi klaim lulus.
 
 ## 6. Sumber Kanonis
+
+- [Keputusan PATEN dan RBAC 7 September 2026](Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) — authority terbaru hanya untuk klausul authorization yang diganti; pembaruan paket tidak membuktikan implementasi/UAT.
 
 - [Keputusan Evaluasi Meeting LLDIKTI 15 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md)
 - [Keputusan Evaluasi SIMPEG Bersama LLDIKTI 31 Agustus 2026](Keputusan-Evaluasi-Meeting-LLDIKTI-31-Agustus-2026.md)

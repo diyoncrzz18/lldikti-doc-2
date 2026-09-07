@@ -1,5 +1,7 @@
 # Panduan Penggunaan — Super Admin
 
+> **Kontrak target 7 September 2026:** [Keputusan PATEN dan RBAC](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) menggantikan batas authorization lama pada panduan ini. Capability personal/assignment/domain adalah **🔒 PATEN**; capability delegated/admin adalah **⚙️ RBAC**. Role contoh menggambarkan konfigurasi awal, bukan allowlist permanen. Perubahan ini belum membuktikan implementasi atau UAT lulus.
+
 | Field | Nilai |
 |---|---|
 | Role internal | `super_admin` |
@@ -64,7 +66,10 @@ jangan memindahkan mapping secara manual melalui database.
 - Jangan menggunakan Data Backup/Data Nonaktif; seluruh lifecycle ada pada filter status Data Pegawai.
 - Reaktivasi tetap memerlukan permission efektif `employees.restore`. Role Super Admin tidak menjadi bypass.
 - Jangan mengandalkan raw role asal ketika switch role aktif; seluruh aksi mengikuti role/permission efektif.
-- Switch Role hanya dapat dimulai oleh Super Admin atau Admin Kepegawaian dengan `users.switch_role`; Pimpinan, Kepala Bagian, dan Pegawai tetap ditolak. Jangan memilih role sama/lebih tinggi/Super Admin atau melakukan chained switch sebelum revert.
+- Switch Role memerlukan `users.switch_role` dan target lebih rendah pada hierarki seluruh role. Pimpinan dapat memilih Kepala Bagian/Pegawai, Kepala Bagian dapat memilih Pegawai, sedangkan Pegawai tidak memiliki target lebih rendah. Jangan memilih role sama/lebih tinggi/Super Admin/unknown atau melakukan chained switch sebelum revert.
+- Super Admin tidak memiliki universal permission bypass. `employees.export` default ON tetapi revoke wajib menolak export pada request berikutnya; hal yang sama berlaku pada permission RBAC lain.
+- Profil/riwayat/keluarga/notifikasi/cuti/saldo sendiri, baca Hari Libur, approval assigned, dan proof otomatis adalah PATEN sesuai identity, ownership, lifecycle, serta domain; pencabutan checkbox legacy tidak menghapus capability tersebut.
+- Pengelolaan cuti manual/pembatalan membutuhkan `cuti.manual.manage`/`cuti.cancellation.manage` dan scope/domain; nama Super Admin tidak memberi hak otomatis.
 - Jangan menganggap default Super Admin sebagai alasan untuk menolak permission valid pada role lain; gunakan permission efektif dan business invariant yang terdokumentasi.
 - Jangan mengedit histori kepegawaian lama; tambahkan record baru berdasarkan dokumen resmi.
 - Jangan mengubah saldo cuti secara langsung; koreksi dilakukan melalui sumber pemakaian dan

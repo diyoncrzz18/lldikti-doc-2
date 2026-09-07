@@ -8,12 +8,14 @@
 | Pengesahan dokumentasi | Pengguna mengonfirmasi pada 15 Agustus 2026 bahwa dokumentasi harus mengikuti hasil meeting |
 | Kedudukan | Ketentuan di dokumen lain yang berbeda pada area yang dicakup di bawah **digantikan** oleh keputusan ini |
 
+> **Penyelarasan 7 September 2026:** [Keputusan PATEN dan RBAC](Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) menjadi otoritas terbaru untuk klasifikasi authorization. K-MTG-01.4 dan K-MTG-07A.7 superseded hanya pada eksklusivitas Admin Kepegawaian: `cuti.manual.manage` kini RBAC delegated. K-MTG-03/OQ-MTG-03 mempertahankan riwayat Switch Role, tetapi aktor aktif ditentukan `users.switch_role` + target lebih rendah pada hierarki seluruh role. K-MTG-04/08 menyebut operator default, bukan allowlist mutasi dokumen/matrix; K-MTG-09.4 memakai RBAC `employees.restore` sesuai scope. Self/assignment approval/lifecycle adalah PATEN. Tidak ada bypass Super Admin. Formula, snapshot, immutability, dan keputusan produk non-authorization tidak berubah.
+
 ## K-MTG-01 — Chain approval cuti dan saldo tahunan
 
 1. Untuk pengajuan cuti biasa, urutan chain adalah **satu atau lebih verifikator dinamis → Kepala Bagian → PYBMC**. Ketua Tim Kerja, bila dibutuhkan, ditempatkan sebagai verifikator; bukan setelah Kepala Bagian. Jika tidak ada verifikator, chain dimulai dari Kepala Bagian lalu diteruskan ke PYBMC.
 2. Kuota dasar cuti tahunan adalah **12 hari kerja setiap tahun**. Rollover dari N-1 maksimal **6 hari**. Total tahun berjalan dapat menjadi **24 hari** hanya bila pegawai tidak memakai cuti tahunan pada N-2 dan N-1; bila ada pemakaian satu hari atau lebih pada salah satu dari dua tahun itu, total maksimum tahun berjalan adalah **18 hari**.
 3. Pendaftaran data awal dan rekonsiliasi historis memakai **jumlah cuti yang telah dipakai/diklaim per tahun**, bukan saldo/sisa cuti. Sistem menghitung sisa, rollover, dan total hak secara berjenjang dari penggunaan tersebut. Admin tidak menjadikan saldo sisa sebagai sumber hitung utama.
-4. Admin Kepegawaian memerlukan form **input cuti manual** untuk cuti yang telah diproses di luar SIMPEG, termasuk cuti historis, cuti pada tahun berjalan sebelum go-live, dan cuti ketika sistem tidak tersedia. Hanya Admin Kepegawaian yang dapat menginputnya; catatan langsung diakui sebagai cuti yang telah disetujui di luar SIMPEG tanpa menjalankan usulan atau approval ulang; dan pemakaian tersebut wajib ikut menghitung saldo serta rollover. **Jejak historis superseded:** ketentuan 15 Agustus yang mewajibkan dokumen pendukung digantikan oleh K-MTG-07A pada 20 Agustus 2026.
+4. Form **input cuti manual** merekam cuti yang telah diproses di luar SIMPEG, termasuk cuti historis, cuti pada tahun berjalan sebelum go-live, dan cuti ketika sistem tidak tersedia. Pengelola dengan `cuti.manual.manage` sesuai scope dapat menginputnya; catatan langsung diakui sebagai cuti yang telah disetujui di luar SIMPEG tanpa menjalankan usulan atau approval ulang; dan pemakaian tersebut wajib ikut menghitung saldo serta rollover. **Jejak historis Superseded:** kewajiban dokumen 15 Agustus digantikan K-MTG-07A pada 20 Agustus; eksklusivitas Admin Kepegawaian digantikan RBAC delegated pada 7 September.
 5. Koreksi administratif dilakukan melalui koreksi data pemakaian/entri cuti manual dan perhitungan ulang sistem. Audit wajib merekam aktor, alasan, dokumen, nilai sebelum/sesudah, dan waktu perubahan.
 6. **Direct balance override tidak tersedia**, termasuk sebagai jalur break-glass Fase 1. Jika saldo tidak sesuai, Admin Kepegawaian memperbaiki sumber pemakaian atau entri cuti manual, lalu sistem menghitung ulang secara atomik.
 7. Input cuti manual hanya merekam cuti yang telah terjadi/disetujui di luar SIMPEG. Jumlah hari kerja dihitung sistem; duplikasi dan periode yang overlap dengan cuti aktif pegawai yang sama ditolak; koreksi mempertahankan riwayat lama melalui pembatalan/versi pengganti, bukan hard delete.
@@ -30,7 +32,7 @@
 
 ## K-MTG-03 — Switch role berbasis permission
 
-> **Superseded pada 2 September 2026 untuk aktor dan matriks target.** Ketentuan aktif berada pada [Keputusan RBAC Configurable dan Switch Role](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-02--switch-role-sebagai-business-invariant). Isi di bawah dipertahankan sebagai keputusan 15 Agustus dan tidak boleh dipakai untuk menolak Admin Kepegawaian yang memiliki `users.switch_role`.
+> **Riwayat Superseded pada 2 dan 7 September 2026 untuk aktor dan matriks target.** Isi berikut adalah keputusan 15 Agustus. Kontrak aktif kini `users.switch_role` + target lebih rendah pada hierarki Super Admin → Admin Kepegawaian → Pimpinan → Kepala Bagian → Pegawai. Pimpinan/Kepala Bagian berizin dapat beralih ke role di bawahnya; Pegawai tidak punya target lebih rendah. Tidak ada same/higher/unknown/chained switch. Identitas, employee binding, ownership, dan scope asli tetap; persistence/revert/audit tidak berubah. Lihat [keputusan 7 September](Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md).
 
 1. Pada Fase 1, switch role hanya tersedia bagi **Super Admin** yang juga memiliki permission khusus, untuk kebutuhan demo, pengujian, dan dukungan di development maupun production.
 2. Switch role adalah simulasi **role**, bukan impersonasi identitas/pegawai lain. Identitas aktor, kepemilikan data, dan jejak audit tidak berubah.
@@ -39,7 +41,7 @@
 
 ## K-MTG-04 — Hari libur dan dokumen pegawai
 
-> **Sebagian superseded pada 2 September 2026.** Penyebutan Super Admin/Admin Kepegawaian sebagai pembaca arsip pada butir 3 di bawah adalah konfigurasi awal historis. Kontrak aktif menggunakan `dokumen_sk.read` yang dapat dikonfigurasi, selalu dibatasi scope data dan masking; permission mutasi dokumen tetap terpisah. Lihat [K-RBAC-01](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-01--rbac-permission-driven-dan-configurable).
+> **Sebagian superseded pada 2 September 2026.** Penyebutan Super Admin/Admin Kepegawaian sebagai pembaca arsip pada butir 3 di bawah adalah konfigurasi awal historis. Kontrak aktif menggunakan `dokumen_sk.read` yang dapat dikonfigurasi, selalu dibatasi scope data dan masking; permission mutasi dokumen tetap terpisah. Lihat [K-RBAC-01](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-01--permission-matrix-sebagai-sumber-kebenaran).
 
 1. Hari Libur dikelola pada menu/halaman tersendiri, tidak lagi sebagai tab Data Master. Halaman menampilkan kalender di bagian atas dan tabel hari libur di bawahnya.
 2. Dari profil pegawai, Admin Kepegawaian dapat langsung mengunggah dokumen tambahan melalui pemilihan jenis dokumen. Tampilan memisahkan dokumen wajib/SK pada tabel atas dari dokumen tambahan, seperti KTP, KK, dan ijazah, pada tabel bawah.
@@ -68,7 +70,7 @@
 
 1. **OQ-MTG-01 — Decided:** permission efektif switch role diturunkan secara dinamis dari role tujuan; snapshot `temporary_permission` tidak menjadi sumber otorisasi.
 2. **OQ-MTG-02 — Decided:** direct balance override tidak tersedia. Koreksi selalu memperbaiki sumber pemakaian/entri manual dan menghitung ulang.
-3. **OQ-MTG-03 — Superseded pada 2 September 2026:** keputusan 18 Agustus yang membatasi Switch Role pada Super Admin digantikan. Kontrak aktif: Super Admin atau Admin Kepegawaian dengan `users.switch_role` dapat memulai simulasi sesuai matrix target; Pimpinan, Kepala Bagian, dan Pegawai tetap ditolak meskipun permission salah ter-assign. Lihat [K-RBAC-02](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-02--switch-role-sebagai-business-invariant).
+3. **OQ-MTG-03 — Riwayat Superseded pada 2 dan 7 September 2026:** keputusan 18 Agustus membatasi aktor pada Super Admin, kemudian 2 September memperluasnya ke Admin Kepegawaian. Kontrak aktif 7 September adalah RBAC `users.switch_role` + target lebih rendah pada hierarki seluruh role, tanpa allowlist aktor dua role tersebut. Lihat [keputusan 7 September](Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md).
 4. **OQ-MTG-04 — Superseded pada 20 Agustus 2026:** keputusan 18 Agustus mewajibkan dokumen pendukung. Ketentuan pengganti pada K-MTG-07A menjadikannya opsional, dengan chain snapshot historis wajib.
 5. **OQ-MTG-05 — Decided:** bucket tertua yang masih sah dikonsumsi lebih dahulu; expiry terjadi pada akhir tahun penggunaan; koreksi backdated memicu rekalkulasi kronologis. PNS dan PPPK memakai mesin 12/18/24 yang sama; PPPK memerlukan masa perjanjian di atas 2 tahun untuk maksimum 18 dan di atas 3 tahun untuk maksimum 24.
 6. **OQ-MTG-06 — Decided:** WhatsApp Business wajib siap dalam target akhir Agustus. Detail provider dan artefak layanan diteruskan sebagai dependency implementasi #214/#215, bukan pertanyaan produk terbuka.
@@ -84,11 +86,11 @@
 4. Form dapat dimulai dengan chain kosong atau menyalin current chain pegawai. Hasil salinan dapat diedit bagian per bagian tanpa mengubah konfigurasi sumber; UUID internal tetap hidden/system dan bukan input UX.
 5. Approver dapat berasal dari pegawai internal atau pejabat eksternal. Snapshot historis menyimpan identitas yang diperlukan; pejabat eksternal tidak dibuatkan akun atau record pegawai palsu.
 6. Cuti manual tetap hanya mencatat fakta yang sudah disetujui di luar SIMPEG. SIMPEG tidak membuat pengajuan, approval aktif, reservasi, notifikasi approval, atau bukti approval ulang.
-7. Koreksi membuat fakta dan snapshot pengganti; pembatalan atau perubahan current configuration tidak mengubah snapshot lama. Mutasi dibatasi pada role Admin Kepegawaian secara eksklusif dengan permission `cuti.manual.manage`, serta tetap diaudit dan menjaga privasi dokumen/identitas.
+7. Koreksi membuat fakta dan snapshot pengganti; pembatalan atau perubahan current configuration tidak mengubah snapshot lama. Mutasi memakai RBAC `cuti.manual.manage` yang dapat didelegasikan, kemudian scope, domain validation, audit, privasi dokumen/identitas, dan replay. Batas eksklusif Admin Kepegawaian pada keputusan 20 Agustus **Superseded 7 September 2026**.
 
 ## K-MTG-08 — Dokumen wajib, berkas SK, dan arsip dokumen terpusat
 
-> **Sebagian superseded pada 2 September 2026.** Penyebutan role pembaca arsip pada butir 4 di bawah adalah default konfigurasi saat keputusan ini dicatat, bukan allowlist permanen. Akses baca pusat mengikuti permission `dokumen_sk.read`, scope, dan masking; hak mutasi dokumen berdiri sendiri. Lihat [K-RBAC-01](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-01--rbac-permission-driven-dan-configurable).
+> **Sebagian superseded pada 2 September 2026.** Penyebutan role pembaca arsip pada butir 4 di bawah adalah default konfigurasi saat keputusan ini dicatat, bukan allowlist permanen. Akses baca pusat mengikuti permission `dokumen_sk.read`, scope, dan masking; hak mutasi dokumen berdiri sendiri. Lihat [K-RBAC-01](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-01--permission-matrix-sebagai-sumber-kebenaran).
 
 | Field | Detail |
 |---|---|
@@ -122,7 +124,7 @@
 1. Employee tidak memakai soft delete/hard delete, Data Backup, atau Data Nonaktif. Semua status berada pada Data Pegawai dan dicari melalui filter.
 2. Predicate aktif berasal dari `ref_status_pegawai.kelompok`; `Aktif` dan `Aktif/khusus` sama-sama aktif, termasuk Tugas Belajar.
 3. Alasan administratif perubahan status wajib dan terpisah dari `status_note` opsional. Pesan akun default penonaktifan telah ditetapkan pada dokumen kanonis.
-4. Reaktivasi tersedia bagi Super Admin atau Admin Kepegawaian dengan role efektif ber-permission `employees.restore`; raw role tidak boleh menjadi bypass.
+4. Reaktivasi memakai RBAC `employees.restore` sesuai scope dan validasi lifecycle dengan label **Aktifkan kembali Pegawai Nonaktif**. K-STATUS-04 tetap mensyaratkan aktor efektif Super Admin/Admin Kepegawaian; role saja tidak cukup dan raw role tidak menjadi bypass. Batas lifecycle tersebut tidak dicabut keputusan 7 September.
 5. Linked Employee efektif Nonaktif memblokir route bisnis untuk seluruh role. Allowlist hanya halaman status akun, logout, dan auth teknis yang diperlukan.
 6. Tanggal efektif masa depan diperbolehkan dan diterapkan otomatis saat jatuh tempo tanpa mengubah keadaan/akses sebelum waktunya.
 7. Mutasi wajib lock/re-check/idempoten/concurrency-safe; snapshot, histori, dan audit kritis satu transaksi fail-closed; notifikasi hanya setelah commit.

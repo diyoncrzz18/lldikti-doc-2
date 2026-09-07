@@ -11,6 +11,8 @@
 
 ---
 
+> **Penyelarasan 7 September 2026:** [Keputusan PATEN dan RBAC](Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) menggantikan eksklusivitas Admin Kepegawaian pada K-CUT-05 butir 1/9 dan batas aktor keputusan pembatalan K-CUT-01/K-CUT-06. `cuti.manual.manage` dan `cuti.cancellation.manage` adalah RBAC delegated; nama operator lama adalah default historis. Pengajuan/read-own/self-balance serta approval pada active assignment adalah PATEN. `cuti.balance.read` tetap RBAC untuk saldo cross-employee, bukan syarat saldo sendiri. Aturan state, kalender, reservasi, saldo final, replay, snapshot, privacy, dan audit tidak berubah.
+
 ## K-CUT-01 — Pengajuan aktif mencadangkan hak cuti tahunan tanpa memotong saldo final
 
 ### Keputusan
@@ -27,7 +29,7 @@ Setiap pengajuan **Cuti Tahunan** yang masih aktif mencadangkan hak cuti sebesar
    - `perlu_perubahan`.
 4. Pada `perlu_perubahan`, reservasi tetap terikat pada request yang sama dan dihitung ulang atomik saat Pegawai mengirim ulang pengajuan dengan tanggal/jumlah hari baru.
 5. Saat keputusan final `disetujui`, reservasi dikonversi menjadi pemotongan saldo final yang sudah berlaku di ledger. Sistem tidak boleh melakukan pemotongan ganda.
-6. Saat `tidak_disetujui`, reservasi dilepas. Permohonan pembatalan Fase 1 yang disetujui Admin Kepegawaian juga wajib melepas reservasi secara atomik; permohonan yang ditolak mempertahankan reservasi dan melanjutkan approval dari tahap sebelumnya.
+6. Saat `tidak_disetujui`, reservasi dilepas. Permohonan pembatalan Fase 1 yang disetujui pengelola ber-permission `cuti.cancellation.manage` sesuai scope juga wajib melepas reservasi secara atomik; permohonan yang ditolak mempertahankan reservasi dan melanjutkan approval dari tahap sebelumnya.
 7. `ditangguhkan` tidak melepas reservasi sampai ada keputusan atau tindak lanjut yang mengubah statusnya.
 8. Form Pegawai wajib membedakan dengan jelas: **Saldo tersedia aktual**, **Dialokasikan untuk pengajuan aktif**, **Masih dapat diajukan**, dan **Sudah terpakai setelah disetujui**.
 9. Setiap pembuatan, penyesuaian, konversi, dan pelepasan reservasi harus dapat diaudit; reservasi tidak boleh ditulis sebagai pemakaian cuti final.
@@ -135,7 +137,7 @@ Penggunaan yang telah diklaim dapat direkonsiliasi dan divalidasi secara berjenj
 
 ### Keputusan
 
-1. Admin Kepegawaian secara eksklusif dapat mencatat cuti yang telah disetujui dan dijalankan di luar SIMPEG: cuti historis, cuti pada tahun berjalan sebelum go-live, atau cuti saat layanan tidak tersedia.
+1. Pengelola dengan permission efektif `cuti.manual.manage` sesuai scope dapat mencatat cuti yang telah disetujui dan dijalankan di luar SIMPEG: cuti historis, cuti pada tahun berjalan sebelum go-live, atau cuti saat layanan tidak tersedia. Eksklusivitas Admin Kepegawaian **Superseded 7 September 2026**; default historis tidak membatasi delegasi.
 2. Dokumen pendukung dan nomor dokumen persetujuan bersifat opsional. Bila dokumen diberikan, file wajib tervalidasi ketat dan disimpan privat. **Ketentuan dokumen wajib 15 Agustus telah superseded oleh revisi 20 Agustus 2026.**
 3. Entri baru wajib menyimpan snapshot persetujuan historis total 2–10 tahap: 0–8 `verifier`, tepat satu `kepala_bagian`, kemudian tepat satu `pybmc` final. Hasil `verified`, `approved`, atau `final_approved` diturunkan sistem dari jenis tahap dan tidak diinput Admin.
 4. Approver dapat berupa pegawai internal atau pejabat eksternal. UUID internal tetap hidden/system, bukan input UX; pejabat eksternal wajib memiliki identitas snapshot yang memadai tanpa dibuatkan akun atau pegawai palsu.
@@ -143,7 +145,7 @@ Penggunaan yang telah diklaim dapat direkonsiliasi dan divalidasi secara berjenj
 6. Entri tersebut langsung menjadi fakta cuti yang telah disetujui di luar SIMPEG; sistem tidak membuat usulan, approval aktif, reservasi, notifikasi approval, atau bukti approval ulang.
 7. Untuk cuti tahunan, entri manual membentuk pemakaian final yang diaudit dan ikut menghitung saldo serta rollover. Ia bukan reservasi aktif K-CUT-01. Jumlah hari kerja dihitung sistem dari periode dan kalender kerja; duplikasi serta overlap dengan cuti aktif pegawai yang sama ditolak.
 8. Koreksi entry wajib atomik, menyimpan alasan serta nilai sebelum/sesudah, dan menghitung ulang saldo terkait dengan fakta dan snapshot pengganti. Pembatalan atau perubahan current configuration tidak mengubah snapshot lama; record lama tidak di-hard-delete.
-9. Mutasi hanya tersedia bagi role Admin Kepegawaian secara eksklusif dengan permission `cuti.manual.manage`; audit tidak memuat path dokumen privat dan surface baca tetap menjaga privasi serta query bounded.
+9. Mutasi memakai RBAC `cuti.manual.manage`, kemudian scope, validasi domain, audit, serta balance replay. Grant/revoke pada role non-default wajib efektif tanpa code change. Audit tidak memuat path dokumen privat dan surface baca tetap menjaga privasi serta query bounded.
 
 ### Batas
 
@@ -159,8 +161,8 @@ Jalur ini tidak boleh dipakai untuk mempercepat pengajuan baru yang belum memper
 
 1. Label bisnis snapshot dan konfigurasi approval cuti adalah `Verifikator → Atasan Langsung → PYBMC`. Nilai teknis legacy `kepala_bagian` pada data yang sudah ada tetap dapat dipertahankan sebagai representasi internal Atasan Langsung sampai ada keputusan migrasi schema tersendiri.
 2. Ketika Atasan Langsung dan PYBMC adalah orang yang sama, keduanya tetap merupakan dua tahap snapshot dan membutuhkan dua tindakan. Sistem tidak boleh melewati tahap kedua hanya karena `approver_employee_id` sama pada pasangan peran tersebut.
-3. Selama pengajuan belum final, Pegawai dapat mengirim satu permohonan pembatalan aktif sebagai record tersendiri dengan alasan wajib. Approval utama ditahan, reservasi saldo tetap dipertahankan, dan Admin Kepegawaian menerima notifikasi.
-4. Jika Admin Kepegawaian menyetujui pembatalan, pengajuan utama menjadi batal dan reservasi dilepas secara atomik. Jika ditolak, approval dilanjutkan dari tahap sebelumnya. Permohonan, keputusan, dan mutasi saldo diaudit tanpa menghapus request, snapshot, timeline, atau histori; Pegawai menerima notifikasi hasil keputusan.
+3. Selama pengajuan belum final, Pegawai dapat mengirim satu permohonan pembatalan aktif sebagai record tersendiri dengan alasan wajib. Hak pemohon bersumber dari PATEN ownership/domain. Approval utama ditahan, reservasi saldo tetap dipertahankan, dan pengelola dengan `cuti.cancellation.manage` sesuai scope menerima notifikasi.
+4. Jika pengelola berizin menyetujui pembatalan, pengajuan utama menjadi batal dan reservasi dilepas secara atomik. Jika ditolak, approval dilanjutkan dari tahap sebelumnya. Permission tidak menggantikan validasi pending cancellation, parent state, transisi, locking/concurrency, reservasi, audit, dan notifikasi. Permohonan, keputusan, dan mutasi saldo diaudit tanpa menghapus request, snapshot, timeline, atau histori; Pegawai menerima notifikasi hasil keputusan.
 5. Revisi langsung hanya tersedia sebelum tindakan approval. Setelah ada tindakan, Pegawai meminta pembatalan dan, bila disetujui, membuat pengajuan baru yang memulai chain dari awal.
 6. `Ditangguhkan` ketika pengajuan masih aktif tetap mempertahankan reservasi seperti K-CUT-01. Namun, bila cuti yang sudah final `Disetujui` ditetapkan `Ditangguhkan` oleh Admin Kepegawaian dengan alasan wajib, sistem membuat koreksi/replay ledger atomik untuk membalik pemakaian final yang terdampak. Kedua keadaan tersebut tidak boleh disamakan.
 7. Cuti di Luar SIMPEG adalah fakta historis/transisi yang menjadi sumber pemakaian tahunan N-2, N-1, dan tahun berjalan sebelum go-live, serta fakta pemulihan untuk cuti yang telah disetujui secara manual ketika SIMPEG downtime setelah go-live. Halaman ringkasan **Catat Pemakaian Tahunan** tidak menerima input angka langsung; ia menampilkan agregat dari fakta pemakaian dan entri manual yang telah tercatat.
@@ -171,6 +173,7 @@ Jalur ini tidak boleh dipakai untuk mempercepat pengajuan baru yang belum memper
 
 - Uji PostgreSQL harus mencakup pasangan Atasan Langsung/PYBMC dengan aktor sama, tanpa melewati salah satu peran.
 - Uji konfigurasi harus menerima alasan kosong untuk perubahan chain satu pegawai dan backfill, tetapi menolak alasan kosong untuk penerapan chain ke unit serta PYBMC Global; audit aktor dan perubahan tetap harus lengkap.
-- Uji pembatalan harus mencakup permohonan setelah Verifikator bertindak, penahanan approval, keputusan setuju/tolak oleh Admin Kepegawaian, pelepasan atau pemertahanan reservasi, audit, serta kelanjutan dari tahap sebelumnya bila ditolak.
+- Uji pembatalan harus mencakup grant/revoke `cuti.cancellation.manage` pada role default/non-default, permohonan setelah Verifikator bertindak, penahanan approval, keputusan setuju/tolak sesuai scope, pelepasan atau pemertahanan reservasi, audit, serta kelanjutan dari tahap sebelumnya bila ditolak.
+- Uji cuti manual harus mencakup grant/revoke `cuti.manual.manage` pada role default/non-default tanpa melewati scope, fakta final, validasi, audit, dan replay; self cuti/saldo tetap PATEN ketika permission self lama tidak ada di matrix.
 - Uji UI harus membuktikan bahwa ringkasan pemakaian tidak dapat diubah langsung dan koreksi hanya berasal dari fakta sumber yang beralasan serta teraudit.
 - Uji pemulihan downtime harus membuktikan bahwa fakta final dicatat tepat satu kali setelah layanan pulih, menolak duplikasi/overlap, dan tidak membuat approval aktif atau reservasi baru.

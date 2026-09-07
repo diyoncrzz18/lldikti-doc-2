@@ -127,6 +127,7 @@ Urutan restore:
 | RST-08 | Audit Log | Record tersedia dan immutable | — | Belum | — |
 | RST-09 | Aplikasi | Login dan halaman utama berfungsi | — | Belum | — |
 | RST-10 | Queue/scheduler | Berfungsi tanpa duplikasi/error schema | — | Belum | — |
+| RST-11 | Authorization setelah pemulihan | Konfigurasi grant/revoke RBAC hasil backup tetap berlaku, termasuk revoke Super Admin; PATEN tidak kembali tergantung checkbox legacy; scope/ownership/lifecycle tetap fail-closed sesuai [keputusan 7 September](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) | — | Belum | — |
 
 ## 7. Trigger Rollback
 
@@ -179,7 +180,7 @@ Rencana final wajib disesuaikan dengan perubahan release dan disetujui sebelum d
 - [ ] keputusan infrastruktur pada §2 selesai;
 - [ ] backup database dan storage berhasil dengan checksum;
 - [ ] restore pada environment uji berhasil;
-- [ ] seluruh validasi RST-01 sampai RST-10 lulus;
+- [ ] seluruh validasi RST-01 sampai RST-11 lulus;
 - [ ] rollback drill berhasil;
 - [ ] actual RTO/RPO dicatat dan diterima;
 - [ ] prosedur final direview LLDIKTI/Release Owner;

@@ -1,5 +1,7 @@
 # Panduan Penggunaan — Pegawai
 
+> **Kontrak target 7 September 2026:** [Keputusan PATEN dan RBAC](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) menggantikan batas authorization lama pada panduan ini. Capability personal/assignment/domain adalah **🔒 PATEN**; capability delegated/admin adalah **⚙️ RBAC**. Role contoh menggambarkan konfigurasi awal, bukan allowlist permanen. Perubahan ini belum membuktikan implementasi atau UAT lulus.
+
 | Field | Nilai |
 |---|---|
 | Role internal | `pegawai` |
@@ -45,7 +47,7 @@ Setelah dikirim, saldo belum dipotong final tetapi dapat dialokasikan agar tidak
 Saldo dipotong hanya setelah keputusan final `Disetujui`.
 
 Saat permohonan pembatalan menunggu keputusan, approval utama ditahan dan reservasi saldo tetap ada.
-Admin Kepegawaian akan menyetujui atau menolak permohonan tersebut. Jika disetujui, usulan menjadi
+Pengelola dengan `cuti.cancellation.manage` sesuai scope akan menyetujui atau menolak permohonan tersebut. Jika disetujui, usulan menjadi
 batal dan Pegawai dapat membuat pengajuan baru; jika ditolak, approval dilanjutkan pada tahap aktif yang
 sama seperti sebelum permohonan pembatalan, tanpa mengulang tahap yang sudah selesai.
 Setelah ada tindakan approval, perubahan data hanya dilakukan melalui pembatalan yang disetujui lalu
@@ -56,7 +58,7 @@ pengajuan baru yang memulai rangkaian dari awal.
 | Status | Tindakan Pegawai |
 |---|---|
 | `Disetujui` | Periksa detail, saldo, notifikasi, dan unduh formulir bila tersedia |
-| `Menunggu Keputusan Pembatalan` | Tunggu keputusan Admin Kepegawaian; approval ditahan dan reservasi saldo tetap ada |
+| `Menunggu Keputusan Pembatalan` | Tunggu keputusan pengelola berizin `cuti.cancellation.manage` sesuai scope; approval ditahan dan reservasi saldo tetap ada |
 | `Dibatalkan` | Pengajuan selesai tanpa menghapus histori; buat pengajuan baru bila masih memerlukan cuti |
 | `Ditangguhkan` | Baca alasan dan tindak lanjuti sesuai arahan; untuk membatalkan pengajuan yang belum final, gunakan permohonan pembatalan |
 | `Tidak Disetujui` | Baca alasan; pengajuan selesai dan alokasi saldo dilepas |
@@ -68,21 +70,23 @@ yang belum final.
 ## 5. Batas Akses dan Larangan
 
 - Hanya melihat data, dokumen, cuti, notifikasi, saldo, dan EWS milik sendiri.
-- Tidak mengedit data utama atau histori kepegawaian pada Fase 1.
+- Akses profil/riwayat/keluarga sendiri adalah PATEN read-only. Mutasi administratif memerlukan permission RBAC yang relevan dan scope/domain; histori resmi tetap append-only.
 - Tidak mengubah saldo cuti.
 - Tidak melihat atau memutus pengajuan pegawai lain kecuali memiliki penugasan approver yang sah.
 - Tidak mengirim ulang pengajuan tanpa menggunakan aksi resubmit resmi.
 - Tidak membagikan formulir, token verifikasi, atau lampiran kepada pihak yang tidak berwenang.
-- Tidak dapat memulai Switch Role, walaupun `users.switch_role` salah ter-assign pada matrix; ini adalah business invariant backend.
+- `users.switch_role` tetap configurable, tetapi Pegawai tidak memiliki target lebih rendah pada hierarki; permission ON tidak menciptakan target baru.
+- `employees.export` default OFF. Jika diberikan, export hanya dataset diri sendiri sesuai filter, masking/privacy, dan allowlist kolom; ID pegawai lain tetap ditolak.
+- Profil, riwayat, keluarga, notifikasi, cuti, dan saldo sendiri tetap tersedia tanpa checkbox legacy selama ownership/lifecycle/domain terpenuhi. EWS pribadi tetap memerlukan `ews.read`; dokumen/SK tetap memakai permission RBAC dan otorisasi berkas privat.
 
 ## 6. Troubleshooting
 
 | Gejala | Pemeriksaan |
 |---|---|
-| Form tidak dapat dibuka | Periksa mapping pegawai aktif, role, dan permission pengajuan |
+| Form tidak dapat dibuka | Periksa employee binding, lifecycle aktif, jenis/masa kerja, eligibility, saldo, tanggal/overlap, dan chain; submit sendiri PATEN, bukan checkbox pengajuan |
 | Chain belum tersedia | Hubungi Admin/Super Admin untuk memeriksa Atasan Langsung, Verifikator, dan PYBMC |
 | Tidak dapat merevisi langsung | Revisi langsung hanya tersedia sebelum tindakan approval; setelahnya, ajukan pembatalan beralasan lalu buat pengajuan baru bila disetujui |
-| Permohonan pembatalan masih diproses | Tunggu keputusan Admin Kepegawaian; approval utama ditahan. Pengajuan baru hanya dapat dibuat setelah pengajuan sebelumnya selesai atau pembatalannya disetujui |
+| Permohonan pembatalan masih diproses | Tunggu keputusan pengelola berizin `cuti.cancellation.manage` sesuai scope; approval utama ditahan. Pengajuan baru hanya dapat dibuat setelah pengajuan sebelumnya selesai atau pembatalannya disetujui |
 | Hari kerja salah | Periksa tanggal, weekend, hari libur, dan larangan lintas tahun |
 | Saldo tidak cukup | Periksa pemakaian final, alokasi pengajuan aktif, dan tahun saldo |
 | Tidak dapat mengajukan kembali setelah rollover | Pastikan status `Dikembalikan karena rollover` dan gunakan **Perbaiki dan Ajukan Kembali** pada detail; jalur ini terpisah dari revisi sebelum tindakan approval |

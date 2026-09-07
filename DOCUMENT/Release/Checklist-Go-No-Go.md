@@ -64,7 +64,8 @@ Aturan:
 
 ## 5. Security dan Data Protection
 
-- [ ] authorization backend diuji untuk guest dan role tanpa izin;
+- [ ] authorization backend diuji untuk guest, PATEN ownership/lifecycle/domain, dan RBAC tanpa effective permission termasuk Super Admin;
+- [ ] regression [PATEN/RBAC 7 September](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) dan [UAT §6](../UAT/Rencana-dan-Register-UAT-SIMPEG.md#6-skenario-wajib-addendum-evaluasi-dan-patenrbac-7-september-2026) lulus: self tanpa checkbox, approval assigned/proof otomatis, export seluruh role/default/scoped IDs, dokumen privat, manual/pembatalan grant-revoke non-default, dan hierarchy Switch Role;
 - [ ] data scope per role diuji;
 - [ ] NIK/No. KK tidak tampil mentah pada audit/export/evidence yang tidak berwenang;
 - [ ] token, secret, credential, dan raw Keycloak payload tidak tercatat;

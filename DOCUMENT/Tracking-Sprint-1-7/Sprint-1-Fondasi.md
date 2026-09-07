@@ -1,5 +1,7 @@
 # Tracking Sprint 1 — Fondasi
 
+> **Authorization target — 7 September 2026:** [PATEN dan RBAC](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) menggantikan **hanya klausul authorization** lama yang menyamaratakan self sebagai permission checkbox, universal Super Admin bypass, actor allowlist Switch Role, manual/cancellation Admin-only, dan role guard/default export yang bertentangan. Klausul tersebut **Superseded**; tanggal, checklist, assignment dan evidence implementasi historis di bawah tetap merupakan snapshot saat dicatat. Domain/lifecycle, scope, privacy, state, ledger, append-only dan audit tetap berlaku. Target aktif serta kebutuhan evidence baru ada pada bagian akhir dokumen ini.
+
 > **Addendum RBAC 2 September 2026:** status Sprint 1 adalah snapshot implementasi historis. Kontrak aktif menuntut permission matrix configurable sebagai sumber kebenaran, larangan allowlist role-permission, permission export/dokumen yang granular, dan invariant Switch Role baru. Tindak lanjut dilacak pada Addendum 2 September di `Issues-SIMPEG-Fase1.md` serta UAT K-01.
 
 | Field | Detail |
@@ -54,3 +56,19 @@ Legend: ✅ selesai pada source · ⚠️ sebagian (ada gap requirement/kualitas
 | 22 Juli 2026 | Baseline audit (HEAD `9a27caa`): #4/#6/#7/#8/#11/#12 ✅, sisanya ⚠️. |
 | 23–26 Juli 2026 | #4 diperkuat PR #126 + QA lulus penuh. `logOrFail()` (audit strict) tersedia sejak PR #124 — #5 tetap ⚠️ karena adopsi masih sempit dan masking NIK/No. KK belum ada. Verifikasi 26 Juli mengonfirmasi #3, #9, #10 belum berubah. |
 | 7 Agustus 2026 | #10 ditutup PR #166 (`9be633d`): halaman web Hari Libur memakai `ref_hari_libur` dengan audit resmi dan query sisi server. Evidence test otomatis, regresi PostgreSQL 17, dan smoke test browser tersedia sehingga status naik menjadi ✅. Ringkasan sprint menjadi 7 ✅ · 5 ⚠️ · 0 ❌. |
+
+
+## Target delivery authorization — 7 September 2026
+
+Sumber aktif: [keputusan PATEN dan RBAC](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) dan [User Stories v1.17](../PRD-DLL/User-Stories-SIMPEG-Fase1.md). **Status: target belum dibuktikan; bukan perubahan status checklist historis.**
+
+Auth/matrix, self notifications, hari libur dan Switch Role; AC-RBAC-PATEN, AC-RBAC-CONFIG, AC-SWITCH.
+
+- Matrix hanya **🔒 PATEN** dan **⚙️ RBAC**. PATEN ditentukan identity/ownership/assignment/lifecycle/domain; RBAC memakai effective permission matrix lalu canonical scope/privacy/domain. Super Admin tidak mempunyai universal bypass.
+- Scope canonical: SA/Admin/Pimpinan global sesuai sensitivitas; Kepala Bagian bawahan langsung; Pegawai self. Filter/ID tidak membypass scope. Dokumen/SK termasuk milik sendiri tetap RBAC dan private-file authorization.
+- Export default SA/Admin ON, Pimpinan/Kepala Bagian/Pegawai OFF; semua role dapat grant tanpa perubahan kode. Target Switch Role mengikuti hierarki asli SA → Admin → Pimpinan → Kepala Bagian → Pegawai, hanya ke role lebih rendah, persisten sampai revert.
+- Manual/cancellation role-only lama **Superseded** oleh `cuti.manual.manage`/`cuti.cancellation.manage` + scope/domain. Ledger, replay, reservation hold/release/continue, state, lock/concurrency, audit/notifikasi tetap. Reaktivasi K-STATUS-04 tetap effective SA/Admin + `employees.restore`; invariant lifecycle tidak menjadi kategori matrix ketiga.
+- Migrasi caller self dan katalog mengikuti §9 keputusan, menjaga grants/pivot existing; tidak otomatis reseed/delete atau mengklaim seluruh key target telah ada.
+- Regression perlu grant/revoke lintas role termasuk SA OFF, scope/foreign ID, PATEN tanpa checkbox, lifecycle/ownership/eligibility, dokumen privat, append-only, manual/cancel state/concurrency dan seluruh switch/revert. PostgreSQL untuk DB-sensitive serta browser matrix/menu/direct URL/console; catat SHA/environment/expected/actual/audit tersanitasi.
+
+**Koordinasi SSO:** Issue GitHub aktif [#6](https://github.com/LLDIKTI16/simpeg/issues/6) tetap core SSO (mapping/reuse/non-overwrite role/binding/concurrency/audit/claim-UAT), mengecualikan Switch Role aktif [#7](https://github.com/LLDIKTI16/simpeg/issues/7). PR [#21](https://github.com/LLDIKTI16/simpeg/pull/21) OPEN `d323ca03` saat verifikasi 7 September, bukan bukti 31 AC baru selesai. Nomor #6/#7 backlog historis notifikasi bukan nomor aktif tersebut. Regression lintas modul memerlukan koordinasi terpisah, bukan pemindahan seluruh redesign ke owner SSO; nomor issue/owner/jadwal baru belum ditetapkan. Kewenangan mutasi matrix, anti-lockout dan bootstrap recovery tetap Open Product Decision.

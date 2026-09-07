@@ -1,11 +1,15 @@
 # Runbook Demo Fitur SIMPEG Fase 1
 
 **Jenis dokumen:** Panduan Operasional Demo  
-**Versi:** 1.1<br>
-**Tanggal:** 31 Agustus 2026<br>
+**Versi:** 1.2<br>
+**Tanggal:** 7 September 2026<br>
 **Target pembaca:** Presenter, tim pengembang, QA, dan pendamping demo LLDIKTI Wilayah XVI  
-**Status:** Draft pembaruan — gunakan hanya setelah checklist preflight, implementasi, dan evidence addendum 31 Agustus dinyatakan lulus<br>
+**Status:** Draft pembaruan — gunakan hanya setelah checklist preflight, implementasi, dan evidence addendum 31 Agustus serta PATEN/RBAC 7 September dinyatakan lulus<br>
 **Kedudukan dokumen:** Panduan ini menjelaskan urutan dan cara mendemonstrasikan fitur. Dokumen ini tidak menggantikan PRD, Panduan Penulisan Kode, User Stories, atau keputusan produk yang telah disetujui.
+
+> **Kontrak target authorization:** [Keputusan PATEN dan RBAC 7 September 2026](Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) berlaku pada langkah akses di bawah. Perubahan dokumen bukan bukti implementasi/UAT. `Runbook-Demo-Fitur-SIMPEG-Fase-1.docx` dipertahankan sebagai arsip 31 Agustus; kontrak authorization yang bertentangan berstatus **Superseded**, bukan panduan target. Gunakan Markdown ini untuk persiapan demo target.
+
+Role pada cerita/demo adalah konfigurasi fixture awal, bukan allowlist capability. Self profile/history/family, notifikasi sendiri, baca Hari Libur, submit/read-own/self-balance cuti, approval assigned dan proof otomatis adalah **🔒 PATEN** sesuai identity/ownership/lifecycle/domain. Capability delegated/admin adalah **⚙️ RBAC**, termasuk dokumen, EWS, audit, export, manual cuti, dan keputusan pembatalan. Super Admin tidak memiliki bypass: grant/revoke harus efektif. Dataset tetap sesuai canonical scope (role global sesuai kontrak global, Kepala Bagian bawahan sah, Pegawai self), dengan masking/privacy dan invariant domain tetap wajib.
 
 ---
 
@@ -130,7 +134,7 @@ Login sebagai Super Admin:
 
 Pada pengujian konfigurasi tambahan, **Alasan Backfill** boleh kosong. **Alasan Penerapan Chain ke Unit** tetap wajib karena dapat menimpa konfigurasi banyak pegawai.
 
-Approval chain disalin menjadi snapshot saat pengajuan dibuat. Memperbaiki konfigurasi tidak mengubah snapshot pengajuan lama. Jika snapshot pengajuan yang belum final salah, perbaiki konfigurasi, ajukan pembatalan dengan alasan, dan tunggu persetujuan Admin Kepegawaian sebelum membuat pengajuan baru.
+Approval chain disalin menjadi snapshot saat pengajuan dibuat. Memperbaiki konfigurasi tidak mengubah snapshot pengajuan lama. Jika snapshot pengajuan yang belum final salah, perbaiki konfigurasi, ajukan pembatalan dengan alasan, dan tunggu keputusan pengelola berizin `cuti.cancellation.manage` sesuai scope sebelum membuat pengajuan baru.
 
 ### 3.4 Saldo cuti
 
@@ -256,19 +260,20 @@ Hasil yang dijelaskan:
 **Menu:** Administrasi Sistem → Role & Permission  
 **URL:** `/rbac`
 
-1. Tunjukkan matriks role dan permission, lalu jelaskan bahwa nilai yang terlihat adalah **Default permission / konfigurasi awal**, bukan hard authorization contract.
+1. Tunjukkan matriks capability **RBAC**. Nilai seeder adalah **Default permission / konfigurasi awal**; nilai tersimpan saat demo adalah effective configuration. Capability **PATEN** tidak menjadi checkbox target.
 2. Jelaskan bahwa permission efektif dari matrix database menjadi sumber keputusan backend; contoh `dokumen_sk.read`, `ews.configure`, `cuti.configure`, dan `reference_tables.manage` dapat diassign/dicabut dari role sesuai proses administrasi yang berwenang.
-3. Gunakan data uji untuk memperlihatkan grant lalu revoke satu permission pada role non-default. Periksa bahwa menu berubah sebagai UX dan backend juga mengizinkan/menolak pada request berikutnya.
+3. Gunakan data uji untuk memperlihatkan grant lalu revoke pada role non-default dan Super Admin. Periksa bahwa menu berubah sebagai UX dan backend juga mengizinkan/menolak pada request berikutnya; tidak ada universal Super Admin bypass.
 4. Tunjukkan bahwa `employees.read` tidak cukup untuk raw export; `employees.export` diperlukan dan hasil tetap dibatasi scope, masking, serta allowlist kolom.
-5. Jangan mengubah permission role utama pada demo live atau membuat konfigurasi yang dapat mengunci semua administrator.
+5. Uji PATEN setelah checkbox legacy tidak diberikan: profil/riwayat/keluarga/notifikasi/cuti/saldo sendiri tetap tersedia selama ownership/lifecycle/domain valid; ID milik orang lain ditolak. Approval hanya ketika actor diassign pada active step dan bukti final dibuat otomatis tanpa checkbox proof.
+6. Jangan mengubah permission role utama pada demo live. Kewenangan pengelola matrix, anti-lockout, dan bootstrap recovery tetap **OPEN PRODUCT DECISION**, sehingga skenario perubahan matrix memerlukan fixture/operator uji yang sudah diotorisasi.
 
 ### 6.3 Switch Role
 
-1. Login sebagai Super Admin atau Admin Kepegawaian **yang memiliki** `users.switch_role`.
-2. Tunjukkan target sesuai matrix: Super Admin dapat memilih Admin Kepegawaian/Pimpinan/Kepala Bagian/Pegawai; Admin Kepegawaian hanya Pimpinan/Kepala Bagian/Pegawai.
+1. Gunakan fixture seluruh role dengan grant/revoke `users.switch_role` yang diketahui.
+2. Tunjukkan target lebih rendah: Super Admin → Admin Kepegawaian/Pimpinan/Kepala Bagian/Pegawai; Admin Kepegawaian → Pimpinan/Kepala Bagian/Pegawai; Pimpinan → Kepala Bagian/Pegawai; Kepala Bagian → Pegawai; Pegawai tidak memiliki target lebih rendah.
 3. Pilih satu target, lalu buktikan bahwa `user.id`, `employee_id`, dan ownership data tetap milik aktor asli sementara role/permission efektif mengikuti target.
 4. Tunjukkan nilai `temporary_role` tetap aktif setelah refresh atau login ulang uji, lalu lakukan revert dan periksa audit switch/revert.
-5. Dengan data uji, buktikan Pimpinan, Kepala Bagian, dan Pegawai ditolak memulai Switch Role walaupun `users.switch_role` sengaja diassign; juga buktikan target sama/lebih tinggi/Super Admin dan chained switch ditolak.
+5. Buktikan grant pada Pimpinan/Kepala Bagian mengizinkan target rendah, revoke menolak, dan Pegawai tetap tanpa target. Target sama/lebih tinggi/Super Admin/unknown serta chained switch ditolak. Identitas, employee binding, ownership, dan scope asli tetap dipertahankan.
 
 ---
 
@@ -288,6 +293,8 @@ Hasil yang dijelaskan:
 Jika ingin menambah data, gunakan nama `[DEMO] Jabatan Uji LLDIKTI`, simpan, buktikan di tabel, lalu bersihkan sesuai prosedur staging setelah demo.
 
 ### 7.2 Hari Libur
+
+Baca kalender adalah PATEN bagi user terautentikasi dengan lifecycle valid. Tambah/ubah/hapus memerlukan `hari_libur.create/update/delete`; jangan memakai `hari_libur.read` sebagai checkbox target.
 
 **Menu:** Administrasi Sistem → Hari Libur  
 **URL:** `/hari-libur`
@@ -442,6 +449,8 @@ Hasil yang dijelaskan:
 ---
 
 ## 11. Demo Administrasi Pemakaian Cuti
+
+Capability memakai `cuti.manual.manage` sesuai scope, bukan Admin Kepegawaian-only. Uji grant/revoke pada role lain dengan fixture sah; ledger/replay, sumber fakta, overlap, alasan, dan audit tetap berlaku. Baca saldo cross-employee memakai `cuti.balance.read`, sedangkan saldo sendiri PATEN.
 
 - **Role:** Admin Kepegawaian
 - **Menu:** Cuti → Administrasi Pemakaian Cuti
@@ -617,7 +626,7 @@ Keputusan approver aktif adalah **Disetujui**, **Ditangguhkan**, dan **Tidak Dis
 3. Pilih **Simpan Perubahan Pengajuan**.
 4. Pastikan sistem menghitung ulang hari kerja dan alokasi saldo, sementara snapshot rangkaian dan tahap aktif tetap sama.
 
-Uji juga setelah satu approver bertindak: form revisi langsung tidak tersedia dan pengiriman dari form lama ditolak. Perubahan berikutnya dilakukan melalui permohonan pembatalan beralasan; bila disetujui Admin Kepegawaian, Pegawai membuat pengajuan baru dari awal. Aksi **Perbaiki dan Ajukan Kembali** hanya dipakai untuk pengajuan yang dikembalikan karena rollover, bukan keputusan **Perubahan**.
+Uji juga setelah satu approver bertindak: form revisi langsung tidak tersedia dan pengiriman dari form lama ditolak. Perubahan berikutnya dilakukan melalui permohonan pembatalan beralasan; bila disetujui pengelola berizin `cuti.cancellation.manage` sesuai scope, Pegawai membuat pengajuan baru dari awal. Aksi **Perbaiki dan Ajukan Kembali** hanya dipakai untuk pengajuan yang dikembalikan karena rollover, bukan keputusan **Perubahan**.
 
 ### 13.2 Ditangguhkan saat pengajuan masih aktif
 
@@ -633,7 +642,7 @@ Gunakan fixture pengajuan yang sudah disetujui Verifikator tetapi masih menunggu
 
 1. Sebagai Pegawai, buka detail dan kirim permohonan pembatalan dengan alasan wajib.
 2. Tunjukkan bahwa approval utama ditahan, reservasi saldo tetap ada, dan permohonan kedua tidak dapat dibuat.
-3. Sebagai Admin Kepegawaian, buka notifikasi pembatalan dan periksa alasan serta pengajuan asal.
+3. Sebagai pengelola dengan `cuti.cancellation.manage` sesuai scope, buka notifikasi pembatalan dan periksa alasan serta pengajuan asal. Ulangi grant/revoke pada role selain default Admin Kepegawaian; permission harus efektif tanpa role allowlist tambahan.
 4. Pada fixture pertama, setujui pembatalan. Pastikan usulan menjadi batal, reservasi dilepas, histori tetap ada, dan Pegawai menerima hasil.
 5. Pada fixture kedua, tolak pembatalan. Pastikan approval kembali menunggu Atasan Langsung pada tahap aktif yang sama, tanpa mengulang tindakan Verifikator yang sudah tercatat; reservasi tetap ada dan Pegawai menerima hasil.
 6. Buktikan bahwa perubahan data setelah Verifikator bertindak tidak dilakukan pada pengajuan lama; setelah pembatalan disetujui, pengajuan baru memulai chain dari awal.
@@ -850,7 +859,7 @@ Tunjukkan ringkasan organisasi, cuti menunggu keputusan, EWS, statistik, aktivit
 
 ### 17.1 Export Pegawai
 
-**Akses:** Pengguna dengan permission efektif `employees.export` sesuai data scope; Admin Kepegawaian, Super Admin, atau Pimpinan adalah konfigurasi awal yang lazim
+**Akses:** `employees.export` configurable pada seluruh role. Default ON Super Admin/Admin Kepegawaian, OFF Pimpinan/Kepala Bagian/Pegawai; OFF bukan larangan permanen. Dataset tetap sesuai scope, filter, masking/privacy, dan column allowlist.
 **URL:** `/laporan/export-pegawai`
 
 1. Pilih kolom aman: Nama, NIP bila diizinkan, Jenis Pegawai, Golongan, Jabatan, Unit, dan Status.
@@ -862,6 +871,8 @@ Tunjukkan ringkasan organisasi, cuti menunggu keputusan, EWS, statistik, aktivit
 7. Klik **Export PDF** untuk format baku.
 
 Excel dapat dikustomisasi; PDF tetap fixed-format. Jangan menjanjikan custom PDF bebas.
+
+Uji default OFF lalu grant pada Pimpinan (scope global kanonis), Kepala Bagian (hanya bawahan), dan Pegawai (self). Explicit foreign employee IDs/filter tidak boleh melampaui scope. Cabut `employees.export` dari Super Admin pada fixture aman dan pastikan ditolak; `employees.read` saja tidak memberi export.
 
 ### 17.2 Laporan Cuti
 
@@ -878,7 +889,7 @@ Excel dapat dikustomisasi; PDF tetap fixed-format. Jangan menjanjikan custom PDF
 **Nominatif:** `/pimpinan/laporan/nominatif`  
 **Kepangkatan:** `/pimpinan/laporan/kepangkatan`
 
-Pada nominatif, gunakan filter, periksa preview, lalu unduh PDF/Excel tanpa informasi kontak pribadi. Pada laporan kepangkatan, cari riwayat yang telah ditambahkan dan cocokkan hasil export.
+Pada nominatif, beri `employees.export` terlebih dahulu karena default Pimpinan OFF, lalu gunakan filter dan unduh sesuai scope/masking. Pada laporan kepangkatan, periksa `employee_histories.export`, cari riwayat yang telah ditambahkan, dan cocokkan hasil export.
 
 ### 17.4 Batas Reporting Statistik
 
@@ -888,7 +899,7 @@ Reporting Statistik Kepegawaian bukan export. Jangan mendemonstrasikan chart seb
 
 ## 18. Demo Audit Log
 
-**Role:** Super Admin atau Admin Kepegawaian dengan permission audit  
+**Akses:** Pengguna dengan `audit_logs.read`, sesuai canonical scope dan privacy; role contoh Super Admin/Admin Kepegawaian bukan allowlist permanen<br>
 **URL:** `/dashboard/audit`
 
 Lakukan setelah mutasi data, import, cuti, keputusan, saldo, atau EWS.
@@ -1008,7 +1019,7 @@ Periksa riwayat pemakaian N-2/N-1/tahun berjalan, entri manual, pengajuan lain y
 
 ### 21.6 Tombol keputusan tidak muncul
 
-User mungkin bukan approver aktif, employee mapping salah, tahap belum sampai, pengajuan sudah selesai, atau role/permission tidak sesuai.
+User mungkin bukan approver assigned pada active step, employee binding/lifecycle invalid, tahap belum sampai, atau workflow ditahan/sudah selesai. Approval adalah PATEN assignment/state, bukan checkbox `cuti.approve`.
 
 ### 21.7 PDF belum tersedia
 
@@ -1037,6 +1048,8 @@ Periksa username, `keycloak_username`, role internal, employee mapping, dan sess
 ---
 
 ## 22. Checklist Preflight
+
+- [ ] Regression target PATEN/RBAC 7 September sudah lulus pada exact SHA kandidat: self tanpa checkbox, Super Admin revoke, export seluruh role/scoped IDs, dokumen privat, manual/pembatalan delegated, serta Switch Role seluruh hierarki.
 
 - [ ] Lima akun demo dapat login.
 - [ ] Pimpinan masuk ke `/pimpinan/dashboard`, bukan Super Admin.

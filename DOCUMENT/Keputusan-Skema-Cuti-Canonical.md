@@ -13,6 +13,8 @@
 
 ## K-SCHEMA-01 — Nama tabel runtime menjadi canonical
 
+> **Penegasan authorization 7 September 2026:** [Keputusan PATEN dan RBAC](Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) tidak mengubah nama fisik di bawah. Approval pada active assignment dan pembuatan bukti otomatis saat final approval adalah PATEN/domain, bukan checkbox `cuti.approve`/`cuti.proof.generate`. Regenerasi administratif artifact legacy, bila diperlukan, harus dibedakan dari pembuatan otomatis; dokumen ini tidak menetapkan permission baru atau mengizinkan migrasi/penghapusan permission langsung.
+
 ### Keputusan
 
 Nama tabel yang sudah digunakan oleh migration, model, relasi, dan test runtime SIMPEG ditetapkan sebagai **nama tabel fisik canonical** untuk Fase 1:

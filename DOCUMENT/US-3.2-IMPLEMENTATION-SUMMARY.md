@@ -1,4 +1,6 @@
 # US-3.2 Implementation Summary
+
+> **Catatan editorial — supersession authorization 7 September 2026:** [Keputusan PATEN dan RBAC](Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) mengganti hanya klausul authorization yang bertentangan: self/ownership dan approval assigned/proof otomatis menjadi PATEN; capability administratif tetap RBAC, tanpa universal Super Admin bypass; export configurable seluruh role (default ON Super Admin/Admin Kepegawaian, OFF tiga role lain); manual/pembatalan cuti tidak lagi Admin Kepegawaian-only; Switch Role memakai permission + target lebih rendah pada hierarki seluruh role. Pernyataan/hasil uji lama tentang batas tersebut adalah **riwayat Superseded**, bukan AC atau bukti lulus kontrak target. Fakta rekaman, hasil command, domain non-authorization, dan status implementasi bertanggal di bawah dipertahankan. Scope, privacy, workflow, audit, serta kontrak lifecycle reaktivasi tetap berlaku. Kewenangan mengelola matrix/anti-lockout/bootstrap recovery belum diputuskan; catatan ini tidak mengesahkan perubahan gate Kelola Akses User.
 ## Column Mapping UI (AC-4,5)
 ## Tanggal: 7 Agustus 2026
 

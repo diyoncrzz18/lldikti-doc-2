@@ -7,9 +7,11 @@
 | User story utama | US-8.5 · Kelola Reference Tables |
 | User story terdampak | US-2.1, US-2.2, US-2.4, US-2.5, US-3.1, US-3.4 |
 
-> **Pembaruan akses 2 September 2026:** penyebutan Super Admin dan `role:super_admin` pada keputusan 17 Agustus ini adalah konfigurasi awal historis dan **Superseded** hanya untuk kontrol otorisasinya. Kontrak aktif memakai permission matrix database: `reference_tables.manage` dapat dikonfigurasi untuk role yang berwenang, dengan scope, audit, dan policy backend. Aturan data referensi lain dalam dokumen ini tetap berlaku. Lihat [Keputusan RBAC Configurable dan Switch Role](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-01--rbac-permission-driven-dan-configurable).
+> **Pembaruan akses 2 September 2026:** penyebutan Super Admin dan `role:super_admin` pada keputusan 17 Agustus ini adalah konfigurasi awal historis dan **Superseded** hanya untuk kontrol otorisasinya. Kontrak aktif memakai permission matrix database: `reference_tables.manage` dapat dikonfigurasi untuk role yang berwenang, dengan scope, audit, dan policy backend. Aturan data referensi lain dalam dokumen ini tetap berlaku. Lihat [Keputusan RBAC Configurable dan Switch Role](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-01--permission-matrix-sebagai-sumber-kebenaran).
 
 ## Latar Belakang
+
+> **Penegasan 7 September 2026:** `reference_tables.manage` tetap RBAC menurut [Keputusan PATEN dan RBAC](Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md). Grant/revoke berlaku juga pada Super Admin tanpa bypass. Pembacaan Program Studi di profil/riwayat sendiri mengikuti PATEN ownership, sedangkan akses administratif/cross-employee tetap memakai permission dan canonical scope yang relevan. Tidak ada perubahan normalisasi, relasi, snapshot, atau kontrak import dari keputusan ini.
 
 Program Studi sebelumnya hanya disimpan sebagai snapshot teks pada
 `employees.prodi_pendidikan_terakhir` dan `education_histories.jurusan`. Keputusan baru

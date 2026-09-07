@@ -1,5 +1,7 @@
 # Panduan Penggunaan SIMPEG per Role
 
+> **Kontrak target 7 September 2026:** [Keputusan PATEN dan RBAC](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) menggantikan batas authorization lama pada panduan ini. Capability personal/assignment/domain adalah **🔒 PATEN**; capability delegated/admin adalah **⚙️ RBAC**. Role contoh menggambarkan konfigurasi awal, bukan allowlist permanen. Perubahan ini belum membuktikan implementasi atau UAT lulus.
+
 | Field | Nilai |
 |---|---|
 | Terkait | Issue [LLDIKTI16/simpeg#14](https://github.com/LLDIKTI16/simpeg/issues/14) |
@@ -34,9 +36,15 @@ pada exact release candidate, dan pihak Kepegawaian memberikan konfirmasi ekspli
 
 ## Aturan Umum Seluruh Role
 
-- Keycloak mengautentikasi identitas; permission efektif dari matrix RBAC SIMPEG menentukan akses. Role dan tabel panduan hanya menyatakan default permission/konfigurasi awal, bukan hak fitur permanen.
+- Keycloak mengautentikasi identitas. PATEN mengikuti identity/employee binding, ownership, assignment, lifecycle, dan domain; RBAC mengikuti effective role → permission matrix terkini. Super Admin tidak memiliki universal bypass dan revoke permission RBAC harus menutup aksesnya.
 - Permission fitur dapat diassign atau dicabut melalui matrix. Contohnya `dokumen_sk.read`, `ews.configure`, `cuti.configure`, dan `employees.export` tetap tunduk pada backend, data scope, masking, serta business invariant eksplisit.
-- Switch Role adalah pengecualian: hanya Super Admin atau Admin Kepegawaian dengan `users.switch_role` yang dapat memulai; target harus lebih rendah sesuai matrix role asli. Pimpinan, Kepala Bagian, dan Pegawai tetap ditolak walaupun permission salah ter-assign.
+- Switch Role memerlukan `users.switch_role` dan target lebih rendah pada hierarki Super Admin → Admin Kepegawaian → Pimpinan → Kepala Bagian → Pegawai. Pegawai tidak mempunyai target lebih rendah. Same/higher/unknown/chained switch ditolak; identitas, employee binding, ownership, dan scope aktor asli tetap.
+- Profil/riwayat/keluarga sendiri, inbox/mark-read sendiri, baca Hari Libur, submit/read-own/saldo cuti sendiri adalah PATEN selama lifecycle/domain valid. Approval berasal dari active step/assignment; proof otomatis adalah PATEN sistem. Keduanya tidak dipengaruhi checkbox legacy.
+- Akses cross-employee memerlukan RBAC (`employees.read`, `employee_histories.read`, `employee_families.read`, `cuti.read_all`, atau `cuti.balance.read`) sesuai capability. Permission tidak memperluas scope: role global mengikuti scope global kanonis, Kepala Bagian hanya bawahan sah, dan Pegawai self.
+- `employees.export` tersedia untuk seluruh role: default ON Super Admin/Admin Kepegawaian, OFF Pimpinan/Kepala Bagian/Pegawai. Grant/revoke harus efektif; filter, explicit IDs, masking/privacy, dan column allowlist tetap tunduk scope.
+- `cuti.manual.manage` dan `cuti.cancellation.manage` dapat didelegasikan melalui matrix; tidak ada invariant Admin Kepegawaian-only. Ledger/replay, workflow, locking, reservasi, audit, serta notifikasi tetap wajib.
+- Seluruh `dokumen_sk.read/create/update/delete` tetap RBAC dengan scope dan private-file authorization; ownership saja tidak memberi hak mutasi dokumen. `ews.read/configure`, `audit_logs.read`, dan mutasi Hari Libur juga tetap RBAC.
+- Kewenangan pengelola matrix, anti-lockout, dan bootstrap recovery adalah **OPEN PRODUCT DECISION**; daftar menu demo bukan pemberian hak baru.
 - Akun tanpa role internal yang valid tidak memperoleh akses SIMPEG.
 - Tombol yang tersembunyi bukan satu-satunya pengaman; backend tetap menolak aksi tanpa izin.
 - Jangan membagikan token, password, NIK, No. KK, atau dokumen pegawai kepada pihak yang tidak

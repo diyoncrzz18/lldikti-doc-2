@@ -81,7 +81,7 @@ routes/api/v1/{domain}.php
 require __DIR__.'/api/v1/{domain}.php';
 ```
 
-3. Pastikan route baru tetap memakai middleware role/permission yang sesuai.
+3. Pastikan route baru memakai authorization backend sesuai capability: permission efektif untuk RBAC atau ownership/assignment untuk PATEN, disertai scope dan invariant domain.
 
 Contoh domain:
 
@@ -205,7 +205,7 @@ class StoreEmployeeFamilyRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return in_array($this->user()?->role, ['super_admin', 'admin_kepegawaian'], true);
+        return $this->user()?->hasPermission('employee_families.create') ?? false;
     }
 
     public function rules(): array
@@ -222,6 +222,8 @@ class StoreEmployeeFamilyRequest extends FormRequest
     }
 }
 ```
+
+Contoh tersebut hanya memeriksa capability RBAC. Policy/Action tetap memeriksa scope employee tujuan dan aturan domain sebelum menyimpan; permission bukan izin menulis data semua pegawai.
 
 Jangan validasi manual di controller jika FormRequest bisa dipakai.
 
@@ -348,9 +350,13 @@ Jangan membuat Service untuk semua hal kecil. Jika logic hanya satu use case dan
 
 ## Authorization dan RBAC
 
-Authorization harus berlapis:
+Authorization mengikuti [Keputusan PATEN dan RBAC 7 September 2026](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md). Pola berikut adalah kontrak target dan memerlukan regression pada implementasi; pembaruan panduan bukan bukti kode sudah mengikutinya.
 
-1. route middleware untuk authentication dan permission efektif; role gate hanya untuk business invariant eksplisit;
+Hanya ada dua kategori: **🔒 PATEN** dan **⚙️ RBAC**. PATEN berasal dari identity/employee binding, ownership, assignment workflow, lifecycle, dan aturan domain; tidak menjadi checkbox matrix. RBAC adalah capability delegated/admin yang dapat diberikan/dicabut. Domain invariant tetap diperiksa setelah RBAC, bukan kategori UI ketiga.
+
+Authorization untuk RBAC harus berlapis:
+
+1. route middleware untuk authentication dan permission efektif dari database pada setiap request;
 2. FormRequest `authorize()` untuk mutation boundary;
 3. Policy atau scoped service untuk data ownership;
 4. Action untuk orchestration dan pemanggilan policy/service.
@@ -370,7 +376,32 @@ Route::middleware(['web', 'keycloak.auth'])
 
 Jangan hanya menyembunyikan tombol di Blade. Jika user tidak boleh melakukan aksi, backend harus menolak request.
 
-Permission matrix database adalah sumber kebenaran assignment. Seeder menentukan default awal, bukan allowlist authorization. Jangan menambahkan policy seperti `CutiPermissionMatrixPolicy` yang menolak `cuti.configure`, `ews.configure`, `dokumen_sk.read`, `reference_tables.manage`, atau permission configurable lain hanya karena role pemohon tidak memiliki default lama. Setiap coarse role gate harus merujuk business invariant produk yang eksplisit dan diuji fail-closed.
+Permission matrix database adalah sumber kebenaran assignment **RBAC**. Seeder/migration menentukan default awal, bukan allowlist authorization. Jangan menambahkan policy seperti `CutiPermissionMatrixPolicy` yang menolak permission configurable hanya karena role pemohon tidak memiliki default lama. Super Admin juga tunduk pada grant/revoke: dilarang memakai `hasPermission(...) || role === 'super_admin'` atau bypass setara. Siapa yang dapat mengelola matrix, anti-lockout, dan bootstrap recovery tetap **OPEN PRODUCT DECISION**; jangan mengarang gate baru.
+
+### Permission vs Data Scope
+
+```text
+RBAC permission -> canonical scope -> ownership -> privacy/masking -> domain -> response/mutation
+PATEN -> identity/employee binding -> ownership/assignment -> lifecycle/domain -> response/mutation
+```
+
+Scope pegawai untuk Super Admin/Admin Kepegawaian/Pimpinan mengikuti kontrak global dengan batas field sensitivity; Kepala Bagian hanya bawahan yang sah, Pegawai hanya self. Switch Role mempertahankan identitas, employee binding, ownership, dan scope aktor asli. Filter atau explicit foreign employee ID tidak boleh memperluas scope. Permission `employee_histories.update/delete` tidak mengalahkan append-only riwayat resmi.
+
+### Self dan assignment PATEN
+
+- Profil sendiri, riwayat sendiri, dan keluarga sendiri mengikuti employee binding/ownership. `employees.read`, `employee_histories.read`, dan `employee_families.read` hanya menjadi gate RBAC untuk cross-employee/admin.
+- Inbox dan mark-read notifikasi sendiri mengikuti ownership; `notifications.read/update` tidak menjadi checkbox target. Lihat Hari Libur adalah PATEN sesuai authenticated lifecycle, sedangkan `hari_libur.create/update/delete` tetap RBAC.
+- Submit cuti sendiri, baca cuti sendiri, dan saldo sendiri adalah PATEN. Periksa employee aktif/linked, jenis pegawai, masa kerja, eligibility, saldo bila berlaku, chain readiness, tanggal/durasi, overlap, dan aturan cuti kanonis. Role saja tidak membuktikan eligibility.
+- `cuti.balance.read` tetap dipakai untuk RBAC akses saldo cross-employee; self balance tidak bergantung key tersebut. Jangan membuat permission baru untuk self.
+- Approval adalah PATEN dari actor yang diassign pada active step dan workflow state. `cuti.approve` tidak menjadi delegated authority untuk pengajuan yang tidak ditugaskan. Bukti otomatis final approval adalah aksi sistem/domain PATEN; jangan mengikatnya pada checkbox `cuti.proof.generate`.
+
+Key existing `employees.read_self`, `notifications.read/update`, `hari_libur.read`, `cuti.create`, `cuti.read_own`, `cuti.approve`, dan `cuti.proof.generate` dicatat sebagai legacy yang dipensiunkan dari matrix target setelah migration/regression. `cuti.balance.read` dipisahkan konteksnya tanpa menghapus fungsi cross-employee. Jangan menghapus row permission langsung; inventarisasi caller, pindahkan gate, uji ownership/lifecycle/domain, kemudian lakukan migrasi terkontrol sesuai addendum. Manual regenerate artefak, bila memang ada kebutuhannya, adalah capability administratif terpisah dan bukan otomatis memakai kontrak proof sistem.
+
+### Capability administratif yang didelegasikan
+
+- `dokumen_sk.read/create/update/delete`, `audit_logs.read`, `ews.read/configure`, `reference_tables.manage`, dan `sk_requirements.manage` mengikuti effective permission, scope, private-file authorization, privacy, dan domain; tidak memakai allowlist role generik tambahan.
+- `cuti.manual.manage` dan `cuti.cancellation.manage` dapat diberikan kepada role lain melalui matrix. Cuti manual tetap menjaga sumber fakta, replay/ledger, validasi, dan audit. Pembatalan tetap memeriksa pending request, parent state, transisi, reservasi, lock/re-check, audit, serta notifikasi.
+- `employees.export` dapat dikonfigurasi pada seluruh role. Default awal ON untuk Super Admin/Admin Kepegawaian dan OFF untuk Pimpinan/Kepala Bagian/Pegawai. Setelah grant, export tetap melalui scope, filter, masking, dan column allowlist. `employees.read` tidak menggantikannya.
 
 ## Blade Component Pattern
 
@@ -811,7 +842,7 @@ Blade tidak boleh menjadi sumber security rule.
 Jika Blade memanggil API:
 
 - endpoint harus benar-benar ada;
-- middleware backend harus enforce permission;
+- authorization backend harus enforce permission efektif untuk RBAC atau ownership/assignment untuk PATEN, beserta scope dan invariant domain;
 - error response harus ditangani;
 - jangan biarkan tombol hanya pura-pura berhasil di JavaScript tanpa request backend.
 
@@ -834,8 +865,8 @@ Setiap fitur backend non-trivial harus punya test.
 Minimal test untuk CRUD/mutation:
 
 - guest ditolak;
-- role tidak berwenang ditolak;
-- permission dicabut ditolak;
+- capability RBAC tanpa effective permission ditolak, termasuk revoke dari Super Admin;
+- PATEN tetap tersedia tanpa checkbox legacy selama ownership, assignment, lifecycle, dan domain valid;
 - valid request berhasil;
 - invalid request gagal validasi;
 - audit log tertulis jika mutation penting;
@@ -967,8 +998,8 @@ Berdasarkan [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-L
 Untuk switch role:
 
 - gate endpoint dengan permission khusus, FormRequest `authorize()`, dan scoped policy/service; jangan mengandalkan visibilitas menu;
-- `users.switch_role` tetap permission matrix, tetapi business invariant backend hanya mengizinkan role asli Super Admin atau Admin Kepegawaian memulai; Pimpinan, Kepala Bagian, dan Pegawai ditolak meskipun permission salah ter-assign;
-- matrix target: Super Admin → Admin Kepegawaian/Pimpinan/Kepala Bagian/Pegawai; Admin Kepegawaian → Pimpinan/Kepala Bagian/Pegawai. Tolak target sama/lebih tinggi/Super Admin, target di luar matrix, dan chained switch sebelum revert;
+- `users.switch_role` adalah RBAC; seluruh role dapat dikonfigurasi, lalu backend memeriksa target lebih rendah pada hierarki Super Admin → Admin Kepegawaian → Pimpinan → Kepala Bagian → Pegawai;
+- matrix target: Super Admin → semua role di bawahnya; Admin Kepegawaian → Pimpinan/Kepala Bagian/Pegawai; Pimpinan → Kepala Bagian/Pegawai; Kepala Bagian → Pegawai; Pegawai tidak memiliki target lebih rendah. Tolak target sama/lebih tinggi/Super Admin, target tidak valid, dan chained switch sebelum revert;
 - simulasikan role efektif saja, bukan identitas atau `employee_id` pegawai lain;
 - simpan `temporary_role` secara persisten sampai revert; permission efektif selalu diturunkan dinamis dari role tujuan dan tidak disimpan sebagai snapshot `temporary_permission`;
 - setiap switch, request yang memakai role sementara, dan revert wajib menyimpan audit actor, role asli, role sementara, waktu, serta konteks yang aman;

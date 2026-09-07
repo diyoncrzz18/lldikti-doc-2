@@ -1,5 +1,7 @@
 # Panduan Penggunaan — Admin Kepegawaian
 
+> **Kontrak target 7 September 2026:** [Keputusan PATEN dan RBAC](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) menggantikan batas authorization lama pada panduan ini. Capability personal/assignment/domain adalah **🔒 PATEN**; capability delegated/admin adalah **⚙️ RBAC**. Role contoh menggambarkan konfigurasi awal, bukan allowlist permanen. Perubahan ini belum membuktikan implementasi atau UAT lulus.
+
 | Field | Nilai |
 |---|---|
 | Role internal | `admin_kepegawaian` |
@@ -38,7 +40,7 @@
 6. Jangan mengedit record histori lama untuk mengganti keadaan terkini.
 7. Periksa Audit Log setelah mutasi penting.
 
-Untuk PNS, periksa SK Pengangkatan PNS; untuk CPNS, periksa SK Pengangkatan CPNS. Saat status berubah dari CPNS menjadi PNS, evaluasi kembali kelengkapan matriks PNS dan unggah SK Pengangkatan PNS bila belum tersedia. Pegawai tidak mengunggah dokumen sendiri pada Fase 1.
+Untuk PNS, periksa SK Pengangkatan PNS; untuk CPNS, periksa SK Pengangkatan CPNS. Saat status berubah dari CPNS menjadi PNS, evaluasi kembali kelengkapan matriks PNS dan unggah SK Pengangkatan PNS bila belum tersedia. Unggah dokumen adalah RBAC `dokumen_sk.create` sesuai scope/private-file authorization; ownership self tidak otomatis memberi hak unggah.
 
 Penonaktifan mempertahankan record Employee. Tidak ada hard delete, Data Backup, atau Data Nonaktif.
 Semua status ditemukan melalui filter Data Pegawai. Kelompok `Aktif` dan `Aktif/khusus`, termasuk
@@ -65,6 +67,8 @@ dokumen setelah pegawai tersedia.
 
 ## 5. Alur Administrasi Pemakaian Cuti
 
+Alur ini memerlukan `cuti.manual.manage` dan scope yang sah; permission dapat diberikan kepada role selain konfigurasi awal Admin Kepegawaian. Baca saldo lintas pegawai memakai `cuti.balance.read`; saldo sendiri adalah PATEN.
+
 1. Buka `/cuti/administrasi-saldo` dan cari pegawai.
 2. Periksa saldo aktual, pemakaian, alokasi, dan ledger.
 3. Gunakan entri **Cuti di Luar SIMPEG** untuk fakta historis/transisi yang sudah disetujui atau cuti yang diproses manual ketika layanan downtime; halaman **Catat Pemakaian Tahunan** hanya dibaca sebagai agregat dan bukan tempat memasukkan angka langsung.
@@ -79,6 +83,8 @@ disetujui di luar sistem. Jangan memakai Cuti di Luar SIMPEG sebagai jalur rutin
 
 ## 6. Alur Menangani Permohonan Pembatalan Cuti
 
+Pengelola memerlukan effective permission `cuti.cancellation.manage`, bukan allowlist Admin Kepegawaian. Grant/revoke pada role lain harus efektif dengan scope, request pending, parent state, lock/re-check, reservasi, audit, dan notifikasi tetap dijaga.
+
 1. Buka notifikasi permohonan pembatalan dan periksa pengajuan serta alasan wajib yang diisi Pegawai.
 2. Pastikan pengajuan belum final dan approval utamanya sedang ditahan.
 3. Pilih keputusan **Setujui Pembatalan** atau **Tolak Pembatalan** melalui aksi resmi.
@@ -90,6 +96,9 @@ Permohonan ini hanya untuk pengajuan yang belum final. Penangguhan administratif
 `Disetujui` merupakan tindak lanjut Issue #36 dan belum tersedia dalam implementasi saat ini.
 
 ## 7. Batas Akses dan Larangan
+
+- Profil/riwayat/keluarga/notifikasi/cuti/saldo sendiri dan baca Hari Libur adalah PATEN sesuai ownership/lifecycle/domain. Approval hanya dari assignment active step, proof otomatis dari domain final approval.
+- `employees.export` default ON tetapi revoke menutup capability; dataset, filter, masking/privacy, dan column allowlist tetap dibatasi scope.
 
 - Tidak mengelola role/permission matrix kecuali mendapat otorisasi administratif yang eksplisit; keputusan permission/anti-lockout untuk mutasi matrix belum ditetapkan stakeholder.
 - Tidak otomatis menjadi approver cuti hanya karena berperan sebagai Admin.

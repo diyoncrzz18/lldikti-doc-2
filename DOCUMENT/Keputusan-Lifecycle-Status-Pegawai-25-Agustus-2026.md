@@ -8,6 +8,8 @@
 | Kedudukan | Menggantikan ketentuan terdahulu yang berbeda mengenai soft delete/restore Employee, tanggal efektif masa depan, reaktivasi Super Admin-only, transaksi notifikasi, dan akses akun pegawai Nonaktif |
 | Klarifikasi | 26 Agustus 2026 — membedakan requirement produk yang normatif dari rekomendasi arsitektur dan keputusan UX/detail notifikasi yang belum dikunci |
 
+> **Penegasan 7 September 2026:** [Keputusan PATEN dan RBAC](Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) mempertahankan reaktivasi sebagai RBAC `employees.restore` dengan label **Aktifkan kembali Pegawai Nonaktif**, bukan restore soft-delete. Setelah permission lolos, domain lifecycle K-STATUS-04 tetap memerlukan aktor efektif Super Admin/Admin Kepegawaian; keputusan terbaru tidak mencabut batas ini secara eksplisit. Ini tetap kategori RBAC, bukan kategori UI ketiga. Lifecycle/kelayakan akses membatasi seluruh capability; permission tidak mengubah scope, membypass akun Nonaktif, atau menghapus kewajiban transaksi/histori/audit. Super Admin tanpa permission tetap ditolak.
+
 ## K-STATUS-00 — Kedudukan requirement dan pedoman implementasi
 
 Tabel ini mencegah keputusan produk dibaca lebih sempit atau lebih luas daripada yang
@@ -18,7 +20,7 @@ bukan kontrak produk yang mengunci bentuk teknis atau kata-kata tertentu.
 | No. | Keputusan | Kedudukan | Penjelasan kanonis |
 |---:|---|---|---|
 | 1 | Tanggal efektif masa depan diperbolehkan | **Eksplisit** | Diatur oleh K-STATUS-06 sebagai transisi terjadwal. |
-| 2 | Reaktivasi dapat dilakukan Super Admin dan Admin Kepegawaian | **Eksplisit** | Keduanya harus memiliki role efektif dan permission efektif `employees.restore` yang sah. |
+| 2 | Reaktivasi dapat dilakukan Super Admin dan Admin Kepegawaian | **Eksplisit** | Keduanya harus memiliki role efektif dan permission efektif `employees.restore` yang sah; capability RBAC kemudian mengikuti domain lifecycle. |
 | 3 | Semua role yang linked ke Employee efektif Nonaktif diblokir | **Eksplisit** | Tidak ada bypass berdasarkan role; allowlist hanya sesuai K-STATUS-05. |
 | 4 | Status/relasi yang invalid atau hilang diproses fail-closed | **Eksplisit** untuk fail-closed; **UX tambahan** untuk teks bantuan | Guard wajib menolak akses. Teks seperti “Silakan hubungi administrator SIMPEG” boleh dipakai agar pengguna tidak menerima error teknis, tetapi bukan wording produk yang dikunci. |
 | 5 | `ref_status_pegawai.kelompok` menjadi single source of truth | **Eksplisit** | Tidak ada fallback domain ke `status_aktif`, nama, atau kode status legacy. |
@@ -61,8 +63,8 @@ Nilai `status_note` tidak boleh dipakai sebagai pengganti alasan administratif. 
 
 ## K-STATUS-04 — Otorisasi berbasis role efektif dan permission
 
-1. Penonaktifan mengikuti permission perubahan status yang berlaku pada matriks RBAC.
-2. Pengaktifan kembali dapat dilakukan oleh **Super Admin** atau **Admin Kepegawaian** bila role efektif aktor memiliki permission `employees.restore`.
+1. Penonaktifan memakai RBAC `employees.deactivate`, kemudian canonical scope dan validasi transisi lifecycle.
+2. **Aktifkan kembali Pegawai Nonaktif** memakai RBAC `employees.restore` yang efektif pada matrix, lalu batas lifecycle: aktor ber-role efektif **Super Admin** atau **Admin Kepegawaian**. Reaktivasi adalah perubahan status baru, bukan restore record terhapus. Permission tidak memberi bypass lifecycle; role saja juga tidak cukup tanpa permission.
 3. Semua gate, `FormRequest::authorize()`, policy, Action, dan service membaca role efektif serta permission efektif yang sama. Raw role asal seperti `$user->role` tidak boleh digabung dengan pemeriksaan role/permission efektif dengan cara yang membuka bypass.
 4. Switch role tidak mengubah identitas aktor. Audit mutasi status menyimpan konteks role asli dan role efektif yang digunakan.
 
@@ -95,7 +97,7 @@ Nilai `status_note` tidak boleh dipakai sebagai pengganti alasan administratif. 
 Implementasi belum dapat dinyatakan selesai tanpa bukti untuk:
 
 1. status kelompok `Aktif` dan `Aktif/khusus`, termasuk Tugas Belajar;
-2. penonaktifan dan pengaktifan kembali oleh kombinasi role/permission yang sah serta penolakan tanpa permission;
+2. grant/revoke penonaktifan dan reaktivasi termasuk Super Admin; penolakan tanpa permission, di luar scope, atau tidak memenuhi batas aktor reaktivasi K-STATUS-04;
 3. role efektif ketika switch role aktif, termasuk pencegahan bypass raw role;
 4. blokir route bisnis untuk seluruh role yang linked Employee-nya efektif Nonaktif;
 5. pengecualian terbatas untuk halaman status akun, logout, dan route auth teknis;

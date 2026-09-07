@@ -3,8 +3,8 @@
 
 | Field | Detail |
 |-------|--------|
-| **Versi Dokumen** | 1.16 |
-| **Tanggal** | 2 September 2026 |
+| **Versi Dokumen** | 1.17 |
+| **Tanggal** | 7 September 2026 |
 | **Domain** | Disiapkan LLDIKTI saat tahap deployment |
 | **Fase** | 1 — Core / Fondasi |
 | **Target Go-Live** | 20 Agustus 2026 |
@@ -37,9 +37,10 @@ PRD ini menjadi **sumber kebenaran utama** untuk Fase 1. Keputusan meeting tekni
 20. Keputusan pengguna 21 Agustus 2026 dengan konfirmasi lanjutan 24 Agustus 2026: dokumen wajib/SK dikonfigurasi melalui matriks per jenis pegawai, bukan hardcode empat SK. PNS dan CPNS memakai matriks yang sama: SK Pengangkatan, SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru. Admin Kepegawaian yang berwenang dapat mengustom matriks PPPK tanpa daftar bawaan; PPPK berstatus Tidak Dinilai sampai sedikitnya satu kategori diaktifkan. Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only, tetapi berkas SK dapat diganti secara terpisah dengan audit. Arsip dokumen terpusat digunakan read-only untuk pencarian lintas pegawai; seluruh kontrol dokumen dilakukan dari detail/profil pegawai. Kontrak lengkap dicatat pada [Keputusan Evaluasi Meeting LLDIKTI](../Keputusan-Evaluasi-Meeting-LLDIKTI-15-Agustus-2026.md#k-mtg-08--dokumen-wajib-berkas-sk-dan-arsip-dokumen-terpusat).
 21. Keputusan pengguna 21 Agustus 2026, disempurnakan 25 Agustus 2026: lifecycle pegawai menggunakan `ref_status_pegawai`, bukan `deleted_at` atau Laravel `SoftDeletes`; tidak ada hard delete Employee, Data Backup, atau dataset Data Nonaktif. Predicate aktif berasal dari `ref_status_pegawai.kelompok`: `Aktif` dan `Aktif/khusus` sama-sama aktif, termasuk Tugas Belajar. Perubahan status wajib memiliki status tujuan, tanggal efektif, alasan administratif, histori append-only, snapshot konsisten, dan audit fail-closed. Tanggal masa depan disimpan sebagai transisi terjadwal dan baru mengubah snapshot/akses ketika berlaku. Reaktivasi tersedia bagi Super Admin atau Admin Kepegawaian bila role efektif memiliki `employees.restore`. Akun yang terhubung ke Employee efektif Nonaktif diblokir dari seluruh route bisnis tanpa bypass role. Notifikasi diterbitkan setelah commit. Kontrak lengkap dicatat pada [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md).
 22. Keputusan hasil evaluasi SIMPEG bersama LLDIKTI yang dicatat pada notulen evaluasi: terminologi Kepala Bagian pada permukaan cuti diganti menjadi Atasan Langsung; fakta cuti manual/historis menjadi satu-satunya sumber pemakaian tahunan sebelum go-live dan sarana pemulihan pencatatan setelah downtime; formulir cuti memuat nama, jabatan, dan peran approval; kelengkapan SK Pengangkatan harus cocok dengan jenis pegawai aktif; serta tersedia reporting statistik berbentuk chart. Ketentuan rinci dan perubahan terhadap kontrak lama dicatat pada Addendum 26.
-23. Klarifikasi LLDIKTI 1 September 2026 menetapkan permohonan pembatalan cuti sebagai record tersendiri yang diajukan Pegawai dengan alasan, menahan approval utama, dan diputus oleh Admin Kepegawaian. Pembatalan yang disetujui melepas reservasi; penolakan melanjutkan approval dari tahap sebelumnya.
-24. Keputusan produk 2 September 2026 menetapkan permission matrix RBAC di database sebagai sumber kebenaran assignment permission. Role hanya menentukan konfigurasi awal dan tidak boleh menjadi allowlist fitur yang permanen. Switch Role tetap menjadi pengecualian: hanya Super Admin atau Admin Kepegawaian yang memiliki `users.switch_role` dapat memulainya, dengan matrix target yang lebih rendah dari role asli. Ketentuan rinci dicatat pada Addendum 27 dan [Keputusan RBAC Configurable dan Switch Role](../Keputusan-RBAC-dan-Switch-Role-2-September-2026.md).
+23. Klarifikasi LLDIKTI 1 September 2026 menetapkan permohonan pembatalan cuti sebagai record tersendiri yang diajukan Pegawai dengan alasan dan menahan approval utama. Batas aktor Admin Kepegawaian pada keputusan tersebut **Superseded 7 September 2026**: pengelola dengan `cuti.cancellation.manage` sesuai scope/state memutusnya. Pembatalan yang disetujui melepas reservasi; penolakan melanjutkan approval dari tahap sebelumnya.
+24. Keputusan produk 2 September 2026 menetapkan permission matrix RBAC sebagai sumber assignment; pembatas aktor Switch Role dua role pada keputusan tersebut **Superseded 7 September 2026**. Kontrak aktif memakai `users.switch_role` + target lebih rendah pada hierarki seluruh role, dengan identitas dan scope asli tetap. Riwayat berada pada Addendum 27, target pada Addendum 28.
 25. Keputusan pengguna 2 September 2026 menetapkan bahwa pegawai yang sama pada peran berbeda tetap menjalankan setiap tahap approval. Pengulangan pegawai pada peran yang sama ditolak saat konfigurasi; engine tidak melakukan auto-skip hanya karena pegawai tersebut sudah bertindak pada peran sebelumnya.
+26. [Keputusan 7 September 2026](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) memisahkan hanya **PATEN** dan **RBAC**. Self/ownership, assignment approval, dan aksi sistem/domain tidak bergantung checkbox. Capability delegated/admin memakai permission efektif database tanpa bypass Super Admin, kemudian scope/domain. Cuti manual/pembatalan dapat didelegasikan; export pegawai configurable untuk seluruh role dengan default ON hanya Super Admin/Admin Kepegawaian. Reaktivasi tetap RBAC `employees.restore` melalui lifecycle resmi.
 
 ---
 
@@ -68,6 +69,7 @@ PRD ini menjadi **sumber kebenaran utama** untuk Fase 1. Keputusan meeting tekni
 21. [Fase Selanjutnya (Out of Scope)](#21-fase-selanjutnya-out-of-scope)
 22. [Regulasi yang Direferensi](#22-regulasi-yang-direferensi)
 23. [Glosarium](#23-glosarium)
+24. [Addendum PATEN dan RBAC 7 September 2026](#28-addendum-pemisahan-capability-paten-dan-rbac--7-september-2026)
 
 ---
 
@@ -177,7 +179,7 @@ Pengelolaan data kepegawaian di LLDIKTI Wilayah XVI masih dilakukan secara manua
 
 ### 4.1 Hierarki Role
 
-> **Kontrak RBAC configurable (2 September 2026):** hierarki berikut menjelaskan role internal dan konfigurasi awal, bukan hard authorization contract. Permission matrix RBAC di database menjadi sumber kebenaran assignment dan pencabutan permission; backend selalu membaca role efektif serta permission efektif terkini. Permission yang telah diberikan tidak boleh ditolak hanya karena role tidak memiliki default lama, kecuali terdapat business invariant yang dinyatakan eksplisit.
+> **Kontrak PATEN dan RBAC (7 September 2026):** hierarchy berikut menetapkan urutan role dan target Switch Role yang lebih rendah. Capability hanya diklasifikasikan **PATEN** atau **RBAC**. PATEN berasal dari identity/ownership, assignment, lifecycle, atau domain; RBAC dari role efektif → permission matrix database pada setiap request. Tidak ada universal bypass Super Admin atau role allowlist generik. Sesudah RBAC lolos, canonical scope, ownership, privacy/masking, workflow state, assignment, lifecycle, serta domain invariant tetap berlaku.
 
 ```
 Super Admin
@@ -195,15 +197,15 @@ Super Admin
 - Setelah bootstrap pertama, user SSO baru yang berhasil teridentifikasi tetapi belum ditetapkan role oleh admin SIMPEG tetap boleh memiliki session login, tetapi tidak boleh mengakses dashboard/fitur normal.
 - User dengan role kosong, belum diset, atau role tidak valid harus menerima HTTP `403 Access Forbidden` dengan pesan: *"Akun Anda belum memiliki role SIMPEG. Hubungi Admin."*
 - Fase 1 menggunakan satu role utama per pegawai agar implementasi awal sederhana.
-- Permission matrix internal menjadi sumber kebenaran assignment dan pencabutan akses fitur tanpa mengubah Keycloak. Seeder hanya memasang default awal yang dapat diubah.
-- Semua keputusan akses membaca role efektif dan permission efektif dari SIMPEG. Raw role asal tidak boleh menjadi bypass ketika switch role aktif.
+- Permission matrix internal menjadi sumber assignment dan pencabutan capability RBAC tanpa mengubah Keycloak. Seeder/migration hanya memasang default configuration; grant/revoke termasuk pada Super Admin harus efektif. Capability PATEN tidak menjadi checkbox matrix target dan tidak hilang karena pencabutan permission role.
+- Akses RBAC membaca role efektif dan permission efektif dari SIMPEG, lalu scope/domain; akses PATEN mengecek identitas/ownership/assignment/lifecycle/domain tanpa permission fiktif. Raw role asal tidak menjadi bypass ketika switch role aktif.
 - User yang terhubung ke Employee dengan status efektif Nonaktif ditolak dari seluruh route bisnis tanpa pengecualian role. Aksesnya terbatas pada halaman status akun, logout, dan route autentikasi teknis yang diperlukan.
 
 ### 4.2 Definisi Role & Default Permission
 
-> **Catatan RBAC vs approval:** Role aplikasi tetap sederhana untuk Fase 1. Kewenangan sebagai verifikator/approver cuti tidak harus menjadi role baru; sistem approval cuti dapat menunjuk pegawai tertentu pada chain, misalnya Ketua Tim Kerja, selama pegawai tersebut aktif dan memiliki akun SIMPEG.
+> **Catatan PATEN approval:** authority bertindak adalah actor yang diassign pada active approval step + workflow state yang sah, bukan checkbox `cuti.approve` atau nama role. Sistem dapat menunjuk pegawai aktif berakun pada chain, misalnya Ketua Tim Kerja; tidak memerlukan role baru dan tidak memberi akses ke request yang tidak diassign.
 
-> **Label tabel di bawah: Default permission / konfigurasi awal.** Tabel menjelaskan kegunaan normal role saat seeding, bukan pembatasan permanen. Contohnya, Pimpinan dapat membaca dokumen bila memiliki `dokumen_sk.read`; Kepala Bagian dapat memiliki `ews.configure`; dan Pimpinan dapat memiliki `cuti.configure` bila permission tersebut diassign melalui matrix. Ownership, data scope, validasi domain, serta business invariant eksplisit tetap berlaku.
+> **Label tabel di bawah: Default permission / konfigurasi awal untuk RBAC; konteks penggunaan untuk PATEN.** Tabel menjelaskan kegunaan normal role, bukan pembatasan permanen atau checkbox self. Contohnya, Pimpinan dapat membaca dokumen bila memiliki `dokumen_sk.read`; Kepala Bagian dapat memiliki `ews.configure`; dan Pimpinan dapat memiliki `cuti.configure` bila permission tersebut diassign melalui matrix. Ownership, data scope, validasi domain, serta business invariant eksplisit yang tidak dicabut tetap berlaku.
 
 #### Super Admin
 
@@ -211,7 +213,7 @@ Super Admin
 |-----------|--------|
 | Konfigurasi Sistem | Kelola reference tables, konfigurasi EWS, hari libur nasional, channel notifikasi, dan chain approval cuti |
 | User Management | Assign role ke user, mapping user Keycloak ↔ pegawai |
-| Semua Fitur Admin | Semua yang bisa dilakukan Admin Kepegawaian |
+| Konfigurasi awal | Default kemampuan administratif mengikuti seeding; effective permission tetap dapat dicabut, tanpa universal bypass Super Admin |
 | Status Pegawai | Mengubah status pegawai melalui `ref_status_pegawai`; pengaktifan kembali memerlukan permission efektif `employees.restore`; tidak ada bypass karena role Super Admin |
 | Audit Log | Akses penuh ke seluruh audit log |
 
@@ -236,13 +238,13 @@ Super Admin
 | Dashboard | Akses dashboard dengan data semua pegawai |
 | Cuti | Pejabat final/PYBMC untuk pegawai internal sesuai konfigurasi chain |
 | Data Pegawai | Read-only semua data pegawai |
-| Laporan | Generate dan export laporan |
+| Laporan | Membaca laporan sesuai capability/scope; `employees.export` default OFF dan dapat diaktifkan melalui RBAC |
 
 #### Kepala Bagian
 
 | Hak Akses | Detail |
 |-----------|--------|
-| Cuti | Approver Stage 1 — Mengetahui (hanya bawahan langsung) |
+| Cuti | PATEN tindakan pada active step yang memang diassign; bukan kewenangan otomatis dari role Kepala Bagian |
 | Data Pegawai | Read-only data bawahan langsung |
 | Notifikasi | Terima notifikasi pengajuan cuti dari bawahan |
 
@@ -280,6 +282,24 @@ Pengguna yang memiliki permission efektif `employees.update` dan lulus scope/pol
 - Pegawai yang sama tidak boleh diulang pada peran yang sama dalam satu chain, misalnya pada dua slot Verifikator. Writer konfigurasi menolak bentuk ini sebelum penyimpanan; engine runtime tidak melewati tahap yang valid hanya karena pegawainya sudah bertindak pada peran berbeda.
 - Untuk cuti Kepala Lembaga sendiri, approval internal SIMPEG tidak berlaku sebagai keputusan final. Fase 1 cukup menyediakan pencatatan oleh Admin Kepegawaian dengan upload dokumen eksternal yang sudah disetujui oleh jalur kementerian/pejabat di atasnya.
 
+### 4.4 Permission vs Data Scope
+
+RBAC memberi capability, bukan akses tanpa batas: **effective permission → canonical scope → ownership yang relevan → privacy/masking → domain → response/mutation**. `employees.read` tidak memberi export; `employees.export` tidak memperluas dataset.
+
+| Aktor | Canonical employee scope |
+|---|---|
+| Super Admin / Admin Kepegawaian / Pimpinan | Global sesuai kontrak domain dan sensitivitas field; capability RBAC tetap membutuhkan permission |
+| Kepala Bagian | Bawahan langsung dalam mapping/penugasan efektif yang sah |
+| Pegawai | Diri sendiri |
+
+ID Employee eksplisit, filter, dan route binding harus diiriskan dengan scope pada backend. Switch Role mempertahankan identitas, `employee_id`, ownership, dan scope aktor asli; perubahan permission efektif bukan impersonasi. PATEN approval menggunakan assignment aktif untuk request terkait tanpa memberi scope global.
+
+### 4.5 Capability PATEN dan matrix RBAC target
+
+PATEN mencakup profil sendiri, riwayat/keluarga sendiri, inbox dan mark-read sendiri, kalender hari libur, ajukan/read-own/self-balance cuti menurut eligibility, approval yang ditugaskan, serta generate bukti otomatis sebagai aksi final approval. Tidak menambah self-edit atau hak dokumen/SK tanpa RBAC. Akun/lifecycle tidak valid tetap ditolak.
+
+Matrix hanya memuat capability delegated/admin pada Addendum 28 dan [matrix keputusan 7 September](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md#4-matrix-rbac-target). Hanya dua kategori PATEN/RBAC; scope/domain bukan kategori UI ketiga. Key legacy PATEN harus melalui rencana deprecation dan regression, bukan dihapus langsung dari database.
+
 ---
 
 ## 5. Arsitektur Teknis
@@ -291,7 +311,7 @@ Pengguna yang memiliki permission efektif `employees.update` dan lulus scope/pol
 | **Backend** | Laravel 12 (PHP) | Framework utama, business logic, API |
 | **Database** | PostgreSQL 17 | Database relasional utama |
 | **Autentikasi** | Keycloak SSO | Hanya untuk login / SSO |
-| **Otorisasi** | RBAC internal aplikasi | Role dan permission disimpan di database SIMPEG |
+| **Otorisasi** | PATEN dan RBAC internal | PATEN dari identity/ownership/assignment/domain; RBAC dari effective permission database lalu scope/domain |
 | **File Storage** | Laravel Local Storage | `storage/app/public` untuk dokumen dan foto |
 | **Email** | SMTP / email operasional LLDIKTI | Laravel Mail + Queue untuk notifikasi email |
 | **Queue** | Laravel Queue (database driver) | Untuk email dan scheduler EWS |
@@ -345,7 +365,7 @@ Pengguna yang memiliki permission efektif `employees.update` dan lulus scope/pol
 
 ### 6.1 Deskripsi
 
-Autentikasi menggunakan Keycloak SSO yang disediakan LLDIKTI XVI. Tidak ada form login manual di SIMPEG — semua autentikasi di-redirect ke Keycloak. Setelah user berhasil login, SIMPEG melakukan mapping ke data pegawai lokal dan menggunakan RBAC internal untuk menentukan hak akses.
+Autentikasi menggunakan Keycloak SSO yang disediakan LLDIKTI XVI. Tidak ada form login manual di SIMPEG — semua autentikasi di-redirect ke Keycloak. Setelah user berhasil login, SIMPEG melakukan mapping ke data pegawai lokal; authorization membedakan PATEN berdasarkan identity/ownership/assignment/domain dan RBAC delegated berdasarkan effective permission, kemudian scope/lifecycle yang berlaku.
 
 Pihak LLDIKTI akan membagikan trait/fungsi Keycloak yang sudah digunakan di lingkungan mereka. Tim pengembang juga akan menerima akun SSO testing, Client ID, Client Secret, dan URL Keycloak untuk kebutuhan integrasi.
 
@@ -432,7 +452,7 @@ Redirect ke dashboard sesuai role
 
 ### 7.1 Deskripsi
 
-Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di Fase 1, hanya Admin Kepegawaian yang bisa melakukan input dan edit data. Pegawai hanya bisa melihat data sendiri.
+Modul ini menyimpan dan mengelola data kepegawaian secara terpusat. Input/edit administratif memakai RBAC `employees.create`/`employees.update` sesuai scope; Admin Kepegawaian adalah operator default. Profil sendiri merupakan PATEN berdasarkan binding dan lifecycle, bukan checkbox `employees.read_self`. `employees.read` dipakai untuk akses administratif/cross-employee dan tidak memperluas scope.
 
 ### 7.2 User Stories
 
@@ -485,6 +505,7 @@ Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di F
 2. Tampilkan semua data: pribadi, kontak, keluarga, kepangkatan, jabatan, KGB, disiplin, dokumen.
 3. Data bersifat read-only (tidak bisa edit di Fase 1).
 4. Tampilkan informasi saldo cuti.
+5. Self profile, riwayat, dan keluarga sendiri tetap tersedia berdasarkan ownership/lifecycle meskipun key self lama tidak diberikan matrix. `employee_histories.read` dan `employee_families.read` hanya mensyaratkan RBAC untuk akses cross-employee; dokumen/SK tetap memakai `dokumen_sk.read` beserta private-file authorization/masking.
 
 #### US-PEG-05: Ubah Status Pegawai
 
@@ -515,6 +536,7 @@ Modul ini menyimpan dan mengelola seluruh data kepegawaian secara terpusat. Di F
 4. Pengaktifan kembali adalah perubahan status baru ke referensi berkelompok `Aktif` atau `Aktif/khusus`, bukan pemulihan data terhapus, dan mengikuti kontrak transaksi, histori, audit, jadwal, serta notifikasi pada US-PEG-05.
 5. Setelah transisi aktif berlaku, blokir akun dicabut berdasarkan predicate status efektif, bukan berdasarkan penghapusan/restorasi session atau record Employee.
 6. Intent notifikasi reaktivasi diterbitkan setelah commit sesuai kontrak lifecycle. Identifier event, judul, teks, penerima, dan kebijakan channel default khusus reaktivasi belum dikunci sebagai kontrak produk dan memerlukan keputusan produk tersendiri bila akan distandardkan.
+7. `employees.restore` tetap kategori RBAC dengan label **Aktifkan kembali Pegawai Nonaktif**. Setelah permission lolos, batas aktor efektif Super Admin/Admin Kepegawaian dan domain lifecycle pada butir 2 tetap berlaku; keputusan 7 September tidak mencabutnya. Super Admin tanpa permission ditolak, dan tidak ada restore soft-delete.
 
 ### 7.3 Struktur Data Pegawai
 
@@ -682,9 +704,13 @@ Saat jenis pegawai berubah, sistem mengevaluasi ulang matriks aktif untuk jenis 
 
 Arsip dokumen terpusat adalah permukaan **read-only** untuk pengguna yang memiliki `dokumen_sk.read`, lolos data scope, dan berwenang melihat dokumen tersebut. Konfigurasi awal dapat memberi permission ini kepada Super Admin/Admin Kepegawaian, tetapi role lain—misalnya Pimpinan—dapat memilikinya melalui matrix. Arsip tersebut tidak menyediakan unggah, penggantian, penghapusan, atau perubahan metadata. Semua kontrol dokumen dan SK dilakukan dari halaman detail/profil pegawai melalui permission mutasi yang terpisah.
 
+`dokumen_sk.read`, `dokumen_sk.create`, `dokumen_sk.update`, dan `dokumen_sk.delete` seluruhnya RBAC yang dapat diberikan/dicabut tanpa role allowlist generik. Backend tetap mengecek canonical employee scope, private-file authorization, kategori, masking/privacy, dan mutability domain. Akses PATEN ke profil sendiri tidak otomatis memberikan hak membaca/mengubah berkas.
+
 ##### Berkas SK pada riwayat append-only
 
 Record substantif riwayat kepangkatan, jabatan, dan KGB tetap append-only: field bisnis riwayat, status `is_latest`, dan dasar kalkulasi tidak dapat diedit atau dihapus. Berkas `file_sk` pada record tersebut boleh diganti dari detail/profil pegawai tanpa memutasi data substantif riwayat. Setiap penggantian tetap mematuhi validasi upload dan menghasilkan audit perubahan berkas.
+
+Pemberian RBAC `employee_histories.update/delete` atau `discipline_records.delete` tidak mengalahkan domain immutable/append-only. Self-read riwayat adalah PATEN; mutasi/export administratif tetap memerlukan permission, scope, dan operasi yang memang diizinkan domain.
 
 ### 7.4 Aturan Upload File
 
@@ -801,6 +827,7 @@ Ketua Tim Kerja tidak memerlukan role baru. Jika perlu mengetahui atau memverifi
 6. Upload lampiran opsional (misal: surat dokter untuk cuti sakit).
 7. Setelah submit, status pengajuan = "Menunggu [step pertama sesuai chain]"; step pertama adalah Verifikator pertama bila ada, atau Atasan Langsung bila tidak ada Verifikator.
 8. Notifikasi terkirim ke pihak pertama dalam approval chain.
+9. Submit adalah PATEN/domain: user linked Employee aktif, jenis pegawai, masa kerja, eligibility, saldo jika berlaku, chain readiness, tanggal/durasi, overlap, dan aturan cuti tetap diperiksa. Checkbox legacy `cuti.create` tidak menjadi authority target; semua role tidak otomatis eligible.
 
 #### US-CUT-02: Verifikasi / Mengetahui oleh Step Approval
 
@@ -817,6 +844,7 @@ Ketua Tim Kerja tidak memerlukan role baru. Jika perlu mengetahui atau memverifi
 6. `Disetujui` tidak wajib mengisi keterangan.
 7. Jika pegawai yang sama mengisi peran berbeda, setiap step tetap memerlukan tindakan tersendiri. Jika pegawai yang sama diulang pada peran yang sama, konfigurasi ditolak sebelum chain dipakai.
 8. Semua tindakan dan keterangan tampil di timeline dan tercatat di audit log.
+9. Tindakan approval adalah PATEN berdasarkan actor pada active approval assignment dan state yang sah. `cuti.approve`/key stage legacy tidak membuka request yang tidak diassign dan tidak boleh mematikan hak assignment yang sah melalui matrix.
 
 #### US-CUT-03: Verifikasi Kepegawaian
 
@@ -851,6 +879,7 @@ Ketua Tim Kerja tidak memerlukan role baru. Jika perlu mengetahui atau memverifi
    - Notifikasi terkirim ke pegawai beserta alasan/keterangan.
 5. Keputusan final dan identitas pejabat final tampil pada halaman verifikasi QR.
 6. Jika pengajuan yang sudah disetujui final perlu dibatalkan atau dijadwal ulang, Admin Kepegawaian menandainya `Ditangguhkan` dengan keterangan wajib. Sistem tidak menghapus pengajuan; pemotongan saldo cuti tahunan dikoreksi melalui ledger append-only dan perhitungan ulang yang diaudit, lalu pegawai dapat mengajukan ulang setelah tidak ada pengajuan aktif.
+7. Generate formulir/bukti otomatis pada final approval yang sah adalah PATEN aksi sistem/domain, tidak memerlukan checkbox `cuti.proof.generate`. Regenerasi artifact legacy secara manual, bila dibutuhkan, adalah capability administratif terpisah yang kontraknya harus ditetapkan; tidak diasumsikan tersedia.
 
 #### US-CUT-05: Lihat Status Pengajuan Cuti
 
@@ -865,7 +894,8 @@ Ketua Tim Kerja tidak memerlukan role baru. Jika perlu mengetahui atau memverifi
 4. Timeline approval: siapa yang sudah bertindak, peran dalam chain, rekomendasi/keputusan, waktu, dan keterangan.
 5. Filter berdasarkan status dan tahun.
 6. Revisi langsung hanya tersedia sebelum ada tindakan approval pada chain. Setelah ada tindakan, Pegawai tidak mengubah data pengajuan lama; Pegawai mengajukan pembatalan dan membuat pengajuan baru dari awal apabila pembatalan disetujui.
-7. Selama pengajuan belum final, Pegawai dapat mengirim permohonan pembatalan tersendiri dengan alasan wajib. Approval utama ditahan dan reservasi dipertahankan sampai Admin Kepegawaian memutus. Persetujuan pembatalan membatalkan pengajuan serta melepas reservasi secara atomik; penolakan melanjutkan approval dari tahap sebelumnya. Seluruh jejak dan keputusan dipertahankan serta diaudit.
+7. Selama pengajuan belum final, Pegawai dapat mengirim permohonan pembatalan tersendiri dengan alasan wajib berdasarkan PATEN ownership/state. Approval utama ditahan dan reservasi dipertahankan sampai pengelola ber-permission efektif `cuti.cancellation.manage` sesuai scope memutus. Tidak ada allowlist permanen Admin Kepegawaian. Persetujuan pembatalan membatalkan pengajuan serta melepas reservasi secara atomik; penolakan melanjutkan approval dari tahap sebelumnya. Seluruh jejak dan keputusan dipertahankan serta diaudit.
+8. Membaca pengajuan sendiri (`cuti.read_own` legacy) adalah PATEN ownership; monitoring cross-employee memakai RBAC `cuti.read_all` kemudian scope. Grant monitoring tidak memberikan approval authority atau akses keputusan/alasan pembatalan.
 
 #### US-CUT-06: Lihat Saldo Cuti
 
@@ -877,6 +907,7 @@ Ketua Tim Kerja tidak memerlukan role baru. Jika perlu mengetahui atau memverifi
 1. Tampilkan saldo cuti tahunan: jatah dasar 12 hari, carry-over N-1, hak tambahan jika memenuhi aturan N-2/N-1, total tersedia, terpakai, dan sisa.
 2. Tampilkan riwayat penggunaan cuti tahun berjalan dan dua tahun sebelumnya yang memengaruhi carry-over.
 3. Sesuai Addendum 15/18 Agustus 2026, Admin mendaftarkan atau memperbaiki data pemakaian/entri manual N-2, N-1, dan tahun berjalan dengan alasan, dokumen, versi, dan audit; sistem menghitung ulang saldo serta rollover.
+4. Self balance adalah PATEN berdasarkan ownership dan kalkulasi domain. Key existing `cuti.balance.read` dipertahankan sebagai RBAC untuk saldo administratif/cross-employee; tidak dibuat key baru dan self route tidak bergantung checkbox tersebut.
 
 ### 9.4 Aturan Bisnis Cuti
 
@@ -894,6 +925,7 @@ Ketua Tim Kerja tidak memerlukan role baru. Jika perlu mengetahui atau memverifi
 #### Sumber Pemakaian Tahunan Historis
 
 - Fakta cuti yang telah disetujui di luar SIMPEG untuk data historis, sebelum go-live, atau ketika layanan SIMPEG downtime dicatat melalui fitur Cuti di Luar SIMPEG/cuti manual beserta informasi pendukung yang tersedia.
+- Capability pencatatan/koreksi manual menggunakan RBAC `cuti.manual.manage` yang dapat didelegasikan, kemudian scope, validasi fakta, ledger/replay, dan audit. Default Admin Kepegawaian bukan eksklusivitas permanen.
 - Fakta tersebut menjadi **satu-satunya sumber input** pemakaian tahunan N-2, N-1, dan tahun berjalan. Sistem menjumlahkan fakta yang relevan untuk menghitung saldo, carry-over, dan hak tahun berjalan.
 - Permukaan Catat Pemakaian Tahunan hanya menampilkan ringkasan hasil perhitungan dan riwayatnya. Input angka pemakaian langsung dinonaktifkan agar tidak ada sumber kedua atau perhitungan ganda.
 - Setelah SIMPEG digunakan sebagai jalur operasional, pengajuan baru wajib memakai flow SIMPEG. Jika layanan downtime, proses manual diselesaikan di luar sistem dan dicatat sebagai fakta final melalui Cuti di Luar SIMPEG setelah layanan pulih; jalur ini tidak boleh menjadi alternatif ketika SIMPEG tersedia.
@@ -1122,6 +1154,7 @@ Notifikasi dipicu oleh events di modul lain (cuti, EWS, import, audit penting, d
 3. Klik "Lihat Semua" menuju halaman daftar notifikasi lengkap.
 4. Notifikasi bisa ditandai "sudah dibaca" (individu atau semua).
 5. Klik notifikasi mengarahkan ke halaman terkait (misal: detail cuti).
+6. Inbox dan mark-read milik user adalah PATEN ownership; role matrix tidak boleh mematikannya. Key legacy `notifications.read/update` dipensiunkan dari matrix target setelah regression. Read/update notifikasi user lain tetap ditolak.
 
 #### US-NOT-02: Terima Notifikasi Email
 
@@ -1325,7 +1358,7 @@ Fase 1 menyediakan export laporan dasar ke format PDF dan Excel. Selain export f
 | **Isi** | Daftar semua pegawai aktif: NIP, Nama, Golongan, Jabatan, Unit Kerja, Jenis Pegawai |
 | **Filter** | Per unit kerja, per golongan, per jenis pegawai |
 | **Sorting** | Nama, NIP, Golongan |
-| **Akses** | Pengguna ber-permission `employees.export` sesuai data scope; Admin Kepegawaian/Pimpinan adalah konfigurasi awal yang lazim |
+| **Akses** | `employees.export` RBAC seluruh role; default ON Super Admin/Admin Kepegawaian, OFF Pimpinan/Kepala Bagian/Pegawai; canonical scope tetap berlaku |
 
 #### L1b: Daftar Nominatif Custom Excel (Fase 1)
 
@@ -1334,7 +1367,7 @@ Fase 1 menyediakan export laporan dasar ke format PDF dan Excel. Selain export f
 | **Format** | Excel (.xlsx) saja |
 | **Isi** | Kolom dipilih pengguna dari daftar kolom yang diizinkan, misalnya NIP, nama, status, jabatan, unit, golongan, pendidikan, tanggal pensiun |
 | **Filter** | Filter baris berdasarkan field yang didukung, misalnya status = Tugas Belajar, unit kerja, jenis pegawai, golongan, jabatan |
-| **Akses** | Pengguna ber-permission `employees.export` sesuai data scope; Admin Kepegawaian/Pimpinan adalah konfigurasi awal yang lazim |
+| **Akses** | `employees.export` RBAC seluruh role; default ON Super Admin/Admin Kepegawaian, OFF Pimpinan/Kepala Bagian/Pegawai; canonical scope tetap berlaku |
 | **Batasan** | PDF custom tidak masuk Fase 1 karena kompleksitas layout |
 
 #### L2: Rekap Cuti (Fase 1)
@@ -1379,6 +1412,8 @@ Fase 1 menyediakan export laporan dasar ke format PDF dan Excel. Selain export f
 3. PDF memiliki header: nama instansi, judul laporan, tanggal cetak.
 4. Excel berisi data mentah yang bisa diolah lebih lanjut.
 5. File ter-download otomatis ke browser.
+6. Semua role dapat menerima/mencabut `employees.export` dari matrix; default OFF bukan larangan permanen. `employees.read` saja tidak cukup. Pencabutan export dari Super Admin menolak export.
+7. Setelah permission lolos, export mengikuti scope global yang sah bagi Super Admin/Admin Kepegawaian/Pimpinan, bawahan langsung bagi Kepala Bagian, dan self bagi Pegawai. Filter atau daftar Employee ID asing tidak boleh melampaui scope; masking/privacy dan column allowlist tetap wajib untuk Excel/PDF.
 
 #### US-LAP-01B: Export Nominatif Custom ke Excel
 
@@ -1392,6 +1427,7 @@ Fase 1 menyediakan export laporan dasar ke format PDF dan Excel. Selain export f
 3. Output hanya Excel `.xlsx`.
 4. Export mengikuti urutan kolom yang dipilih pengguna.
 5. Sistem menolak kolom sensitif yang tidak diizinkan untuk laporan.
+6. Permission, default seluruh role, foreign-ID/filter denial, scope, masking, dan column allowlist mengikuti US-LAP-01; tidak ada role bypass untuk export custom.
 
 #### US-LAP-02: Export Rekap Cuti
 
@@ -1646,7 +1682,7 @@ Keycloak tidak menyimpan role dan permission aplikasi. Setelah login SSO berhasi
 | `role_permissions` | `role_id`, `permission_id` | Pivot permission yang dimiliki role |
 | `employee_roles` / `employees.role_id` | `employee_id`, `role_id` | Fase awal dapat memakai satu role utama per pegawai; pivot disiapkan bila perlu ekspansi |
 
-**Aturan:** Keycloak hanya menghasilkan identitas login. Hak akses fitur, redirect dashboard, akses menu, dan otorisasi route harus mengacu ke RBAC internal SIMPEG. Pivot `role_permissions` adalah sumber kebenaran assignment; seeder hanya memberi konfigurasi awal dan perubahan matrix berlaku pada request berikutnya.
+**Aturan:** Keycloak menghasilkan identitas login; authorization internal SIMPEG membedakan PATEN dan RBAC. Pivot `role_permissions` adalah sumber assignment hanya untuk capability RBAC; seeder/migration memberi konfigurasi awal dan perubahan matrix berlaku pada request berikutnya, termasuk Super Admin. Self/assignment/domain PATEN tidak menjadi checkbox. Key legacy tidak dihapus langsung tanpa rencana transisi dan regression.
 
 Permission seperti `employees.read`, `employees.export`, `dokumen_sk.read`, `ews.configure`, `cuti.configure`, `reference_tables.manage`, dan permission domain lain dapat diassign atau dicabut dari role melalui matrix. Route tidak boleh menambahkan allowlist role yang membuat permission tersebut tidak dapat dipakai oleh role lain, kecuali business invariant eksplisit. Permission dan pivot role harus tersedia melalui jalur migrasi yang idempoten agar database existing mendapat kontrak otorisasi yang sama dengan instalasi baru.
 
@@ -1845,6 +1881,8 @@ Aturan lifecycle dan kompatibilitas:
 
 > Diinput manual oleh Admin/Super Admin setiap awal tahun berdasarkan SKB Menteri.
 
+Read kalender `hari_libur.read` adalah PATEN bagi authenticated user sesuai lifecycle. Mutasi `hari_libur.create/update/delete` adalah RBAC configurable, kemudian validasi/domain/audit; nama operator di atas merupakan default penggunaan, bukan allowlist permanen.
+
 ### 16.14 ref_bup (Batas Usia Pensiun) — DEPRECATED per K-4
 
 > **DEPRECATED per K-4 (27 Juli 2026).** Tabel ini tidak dipakai perhitungan BUP mana pun dan tidak dibuatkan CRUD. Sumber BUP resmi Fase 1 adalah `ref_jabatan.default_bup` (prioritas pertama) dengan fallback `ref_jenis_jabatan.maks_usia_pensiun`. Alasan: PRD memposisikan reference ini sebagai opsi kondisional ("bila", "atau"), bukan kewajiban; kewajiban PRD — BUP tidak di-hardcode dan dapat diubah Admin tanpa ubah kode — sudah dipenuhi jalur yang berjalan. Kolom `jenis_jabatan` di sini berupa teks tanpa foreign key sehingga duplikat semantik dengan `ref_jenis_jabatan.nama`; menyambungkannya akan membuat jalur ketiga yang berebut sumber kebenaran tanpa aturan presedensi. Tabel, model, dan seeder tetap dipertahankan pada Fase 1; penghapusan dijadwalkan ke Fase 2. Daftar BUP di bawah tetap dipertahankan sebagai acuan nilai domain, bukan sebagai spesifikasi tabel yang harus dikelola.
@@ -1889,12 +1927,14 @@ Meskipun Fase 1 menggunakan Laravel Blade (server-side rendering), semua logika 
 | **Method** | GET (list/show), POST (create), PUT (update), DELETE hanya untuk resource yang secara eksplisit mengizinkan penghapusan; Employee menggunakan perubahan status melalui update |
 | **Response** | JSON untuk API, Blade view untuk web |
 | **Authentication** | Middleware auth via Keycloak session |
-| **Authorization** | Middleware RBAC internal: role dan permission dari database SIMPEG |
+| **Authorization** | PATEN berdasarkan identity/ownership/assignment/lifecycle/domain; RBAC berdasarkan effective permission database lalu canonical scope/privacy/domain |
 | **Pagination** | `?page=1&per_page=25` |
 | **Search** | `?search=keyword` |
 | **Filter** | `?filter[field]=value` |
 
 ### 17.2 Route Map
+
+> Route map adalah gambaran surface; kolom role lama menjelaskan konteks/default, bukan gate permanen. Self profile/history/family/leave/balance, inbox/mark-read, kalender, dan active approval assignment mengikuti PATEN. Cross-employee/admin mengikuti RBAC + canonical scope/domain. Tidak ada bypass Super Admin. Contract target rinci berada pada Addendum 28; default `employees.export` ON hanya Super Admin/Admin Kepegawaian, tetap configurable seluruh role.
 
 #### Auth Routes
 
@@ -2046,7 +2086,7 @@ Meskipun Fase 1 menggunakan Laravel Blade (server-side rendering), semua logika 
 | Aspek | Implementasi |
 |-------|-------------|
 | Autentikasi | Keycloak SSO (OAuth 2.0 / OpenID Connect) |
-| Otorisasi | Permission efektif dari matrix RBAC internal di database SIMPEG, dijalankan melalui middleware Laravel; role gate hanya untuk business invariant eksplisit |
+| Otorisasi | PATEN mengecek identity/ownership/assignment/lifecycle/domain; RBAC membaca effective permission database lalu scope/privacy/domain. Tidak ada generic Super Admin bypass; batas lifecycle eksplisit yang tidak dicabut tetap berlaku |
 | Session | Laravel session dengan encryption |
 | CSRF | Laravel CSRF token protection |
 
@@ -2204,7 +2244,7 @@ Untuk transparansi, berikut fitur yang direncanakan di fase berikutnya:
 2. Saldo awal/historis tidak lagi diinput sebagai sisa saldo. Admin memasukkan **jumlah cuti yang telah dipakai/diklaim per tahun** dan sistem menghitung sisa, rollover maksimal 6 hari, serta hak tahun berjalan secara berjenjang. Direct balance override tidak tersedia. Hak 24 hari hanya berlaku bila pemakaian N-2 dan N-1 sama dengan nol; selain itu batas totalnya 18 hari.
 3. **Superseded oleh Addendum 20 dan 31 Agustus 2026:** ketentuan 15 Agustus mewajibkan dokumen pendukung untuk jalur input cuti manual. Kontrak aktifnya digantikan pada bagian berikut dan Addendum 31 Agustus; fakta cuti manual tetap untuk cuti historis, sebelum go-live, atau pemulihan setelah downtime serta menjadi bagian kalkulasi saldo dan rollover.
 4. Email Keycloak menjadi atribut mapping utama; role default Pegawai dari SSO menginisialisasi role internal Pegawai pada mapping pertama; nomor telepon dapat dipetakan dari custom attribute yang dikonfirmasi LLDIKTI. Setelah inisialisasi, SIMPEG tetap mengevaluasi role internal dan permission pada setiap akses.
-5. **Superseded oleh Addendum 27:** keputusan 15 Agustus yang membatasi Switch Role pada Super Admin dipertahankan sebagai riwayat. Kontrak aktif mengizinkan Super Admin atau Admin Kepegawaian dengan `users.switch_role` untuk mensimulasikan target yang lebih rendah sesuai matrix; Pimpinan, Kepala Bagian, dan Pegawai tetap ditolak sebagai business invariant backend.
+5. **Riwayat Superseded oleh Addendum 27 lalu 28:** keputusan 15 Agustus membatasi Switch Role pada Super Admin, lalu 2 September memperluasnya ke Admin Kepegawaian. Kontrak aktif 7 September memakai RBAC `users.switch_role` + target lebih rendah pada hierarki seluruh role; Pimpinan/Kepala Bagian berizin dapat menarget role di bawahnya. Pegawai tidak memiliki target lebih rendah. Identitas/scope asli tetap dan chained switch ditolak.
 6. Hari Libur berada pada menu tersendiri dengan kalender di atas tabel, bukan pada Data Master. Profil pegawai menyediakan unggah dokumen tambahan dan memisahkannya secara visual dari dokumen wajib/SK; menu dokumen lintas pegawai tetap dipertahankan.
 7. Tim menyediakan dokumen template WhatsApp beserta variabelnya untuk pengajuan Meta/Qontak oleh LLDIKTI. WhatsApp Business wajib siap paling lambat akhir Agustus 2026; integrasi diuji setelah template ID, kontrak provider, credential, nomor uji, dan sandbox diterima. Teks bebas tidak menjadi kontrak integrasi.
 8. Target penyelesaian direvisi menjadi akhir Agustus 2026. Revisi yang siap harus segera divalidasi melalui Zoom tanpa menunggu hari Jumat. Perubahan image container atau versi PostgreSQL dari LLDIKTI harus didahului bukti backup/restore dan verifikasi aplikasi.
@@ -2223,7 +2263,7 @@ Fitur dalam addendum ini belum boleh dinyatakan selesai hanya karena tercatat di
 3. Setiap fakta manual baru memiliki snapshot 2–10 tahap: 0–8 `verifier`, tepat satu representasi internal `kepala_bagian` untuk Atasan Langsung, lalu tepat satu `pybmc` sebagai tahap terakhir. Jenis lain ditolak; server menurunkan hasil `verified`, `approved`, dan `final_approved`, sehingga client tidak mengirim urutan atau hasil tahap. Surface bisnis menggunakan label Atasan Langsung.
 4. Approver dapat internal atau external. UUID pegawai internal adalah detail hidden/system, bukan input UX. Snapshot identitas internal menjaga histori meski data pegawai berubah; eksternal menggunakan nama, jabatan, dan instansi tanpa akun atau record pegawai palsu.
 5. Form dapat mulai kosong atau menyalin current chain pegawai lalu mengedit setiap bagian hasil salinan. Salinan tidak mengubah konfigurasi sumber; snapshot historis tidak berubah oleh perubahan konfigurasi, koreksi, atau pembatalan. Koreksi membuat fakta dan snapshot pengganti, sedangkan pembatalan mempertahankan snapshot lama.
-6. Mutasi dibatasi untuk role Admin Kepegawaian secara eksklusif dengan permission `cuti.manual.manage`, ditegakkan pada route, FormRequest, Action, dan service. Audit mencatat aktor, alasan, nilai fakta, keberadaan dokumen, serta snapshot tanpa data privat yang tidak perlu.
+6. **Batas aktor eksklusif Admin Kepegawaian Superseded 7 September 2026:** mutasi memakai RBAC `cuti.manual.manage` yang dapat didelegasikan, ditegakkan pada route, FormRequest, Action, dan service, kemudian canonical scope/domain dan replay. Audit mencatat aktor, alasan, nilai fakta, keberadaan dokumen, serta snapshot tanpa data privat yang tidak perlu.
 7. Preview, lookup, dan histori menjaga privacy serta performance: field minimum, query dan hasil bounded, pagination server-side, eager loading bounded, dan tanpa query Blade atau payload besar ke Alpine. Implementasi DB-sensitive dibuktikan pada PostgreSQL; browser smoke Chrome membuktikan form kosong/copy-edit, dokumen opsional, aksesibilitas, viewport, serta tanpa console error atau polling besar.
 
 ---
@@ -2264,10 +2304,10 @@ Fitur dalam addendum ini belum boleh dinyatakan selesai hanya karena tercatat di
 
 1. **Terminologi dan urutan approval cuti.** Label produk dan formulir `Kepala Bagian` diganti menjadi `Atasan Langsung`. Rantai runtime yang baru atau diperbarui berurutan `0..n Verifikator → Atasan Langsung → PYBMC`. Atasan Langsung dikonfigurasi per pegawai dan dapat berupa Kepala Bagian, Kepala Lembaga, atau pejabat lain yang sah; ia bukan role baru ataupun jabatan struktural yang dipatok. Bila Verifikator tidak ada, UI dan formulir tidak menampilkan keterangan “tanpa verifikator”.
 2. **Satu orang pada beberapa peran approval.** Bila satu pegawai menjalankan dua atau tiga peran berbeda, snapshot tetap memuat setiap langkah dan pegawai tersebut melakukan satu tindakan untuk setiap peran: Verifikator–Atasan Langsung, Verifikator–PYBMC, Atasan Langsung–PYBMC, atau ketiganya. Pengulangan pegawai pada peran yang sama ditolak oleh konfigurasi. Engine tidak melakukan skip otomatis hanya karena pegawai pada tahap berikutnya sama dengan pegawai yang sudah bertindak pada peran lain.
-3. **Pembatalan dan penjadwalan ulang cuti.** Pemohon dari pengajuan yang masih aktif pada status `menunggu_approval` atau `ditangguhkan` biasa dapat mengirim permohonan pembatalan tersendiri dengan alasan wajib. Pengiriman permohonan menahan approval utama dan mempertahankan reservasi. Admin dengan role efektif `admin_kepegawaian` dan permission efektif `cuti.cancellation.manage` menerima notifikasi lalu menyetujui atau menolak pembatalan: persetujuan membatalkan pengajuan serta melepas reservasi secara atomik, sedangkan penolakan melanjutkan approval dari tahap sebelumnya. Batas otorisasi tersebut adalah business invariant pada [K-RBAC-04](../Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-04--permohonan-pembatalan-cuti-sebagai-business-invariant), bukan hak otomatis Super Admin. Revisi langsung hanya tersedia sebelum tindakan approval; setelah ada tindakan, Pegawai meminta pembatalan dan membuat pengajuan baru dari awal bila pembatalan disetujui. Status `ditangguhkan_tugas_dinas` sudah menutup workflow dan tidak menerima pembatalan; resubmit rollover tetap jalur tersendiri sesuai penegasan K-MTG-10.2. Pengajuan final `Disetujui` tidak memakai flow ini dan hanya dapat ditetapkan `Ditangguhkan` secara administratif. Seluruh record, snapshot, timeline, keputusan, dan audit dipertahankan tanpa hard delete; tidak ada kewajiban PDF pembatalan.
+3. **Pembatalan dan penjadwalan ulang cuti.** Pemohon dari pengajuan yang masih aktif pada status `menunggu_approval` atau `ditangguhkan` biasa dapat mengirim permohonan pembatalan tersendiri dengan alasan wajib berdasarkan PATEN ownership/state. Pengiriman permohonan menahan approval utama dan mempertahankan reservasi. Pengelola dengan permission efektif `cuti.cancellation.manage` sesuai canonical scope menerima notifikasi lalu menyetujui atau menolak pembatalan: persetujuan membatalkan pengajuan serta melepas reservasi secara atomik, sedangkan penolakan melanjutkan approval dari tahap sebelumnya. Batas role efektif Admin Kepegawaian pada [K-RBAC-04](../Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-04--permohonan-pembatalan-cuti-sebagai-business-invariant) **Superseded 7 September 2026**; permission dapat didelegasikan tanpa bypass Super Admin. Pending cancellation, parent state, transisi, locking/concurrency, reservation, audit, dan notifikasi tetap wajib. Revisi langsung hanya tersedia sebelum tindakan approval; setelah ada tindakan, Pegawai meminta pembatalan dan membuat pengajuan baru dari awal bila pembatalan disetujui. Status `ditangguhkan_tugas_dinas` sudah menutup workflow dan tidak menerima pembatalan; resubmit rollover tetap jalur tersendiri sesuai penegasan K-MTG-10.2. Pengajuan final `Disetujui` tidak memakai flow ini dan hanya dapat ditetapkan `Ditangguhkan` secara administratif. Seluruh record, snapshot, timeline, keputusan, dan audit dipertahankan tanpa hard delete; tidak ada kewajiban PDF pembatalan.
 4. **Satu sumber pemakaian cuti historis dan pemulihan downtime.** Cuti di Luar SIMPEG/cuti manual menjadi sumber fakta pemakaian tahunan N-2, N-1, dan tahun berjalan untuk data sebelum go-live, riwayat yang telah disetujui di luar aplikasi, atau cuti yang telah diproses dan disetujui secara manual saat layanan downtime. Catat Pemakaian Tahunan tidak lagi menerima input angka langsung dan hanya menjadi ringkasan hasil fakta tersebut. Dokumen pendukung cuti manual tetap opsional seperti Addendum 20 Agustus; bila tersedia, dokumen disimpan privat dan divalidasi ketat. Setelah SIMPEG pulih, Admin Kepegawaian mencatat fakta final tanpa membuat approval aktif baru; jalur manual tidak boleh digunakan ketika SIMPEG tersedia.
 5. **Formulir cuti resmi.** Selain QR verification yang telah berlaku, formulir memuat tabel approval dengan Nama, Jabatan, dan Peran. Peran adalah Verifikator, Atasan Langsung, atau PYBMC; jabatan mengikuti jabatan aktual terakhir pihak yang bertindak. Tata letak memberi jarak yang cukup antara kop surat dan tabel.
-6. **Kelengkapan SK dan perubahan CPNS menjadi PNS.** Kategori dokumen wajib PNS dan CPNS tetap sama, tetapi SK Pengangkatan harus cocok dengan jenis pegawai aktif. Setelah status CPNS berubah menjadi PNS, kelengkapan wajib menjadi Tidak Lengkap sampai SK Pengangkatan PNS tersedia; perubahan status maupun unggah dokumen dilakukan oleh Super Admin/Admin Kepegawaian yang berwenang, bukan pegawai sendiri.
+6. **Kelengkapan SK dan perubahan CPNS menjadi PNS.** Kategori dokumen wajib PNS dan CPNS tetap sama, tetapi SK Pengangkatan harus cocok dengan jenis pegawai aktif. Setelah status CPNS berubah menjadi PNS, kelengkapan wajib menjadi Tidak Lengkap sampai SK Pengangkatan PNS tersedia. Mutasi administratif status, matriks, dan berkas memerlukan RBAC masing-masing serta scope/domain; nama role operator lama bukan allowlist generik. PATEN profil sendiri tidak memberikan hak unggah dokumen.
 7. **Reporting statistik.** Fase 1 menambahkan halaman reporting statistik berbentuk chart untuk membaca jumlah pegawai berdasarkan kategori referensi yang relevan. Halaman ini melengkapi, bukan menggantikan, dashboard dan export nominatif custom.
 8. **Alasan konfigurasi chain.** `Alasan Perubahan Chain Pegawai` dan `Alasan Backfill` bersifat opsional. `Alasan Penerapan Chain ke Unit` dan `Alasan PYBMC Global` tetap wajib karena berdampak massal atau luas. Pengosongan alasan opsional tidak mengurangi audit: aktor, waktu, target, serta nilai sebelum/sesudah tetap dicatat.
 9. **Batas keputusan rapat.** Usulan retensi/pengurangan audit log berkala tidak ditetapkan sebagai perubahan produk; audit log tetap immutable. Keringanan alasan hanya berlaku pada dua field konfigurasi chain yang disebutkan di atas dan tidak mengubah kewajiban alasan pada `Perubahan`, `Ditangguhkan`, `Tidak Disetujui`, pembatalan/koreksi fakta cuti, mutasi status pegawai, atau aksi kritis lain yang telah ditetapkan.
@@ -2300,7 +2340,7 @@ Penangguhan administratif pasca-persetujuan pada tahap awal hanya berlaku **sebe
 
 ## 27. Addendum RBAC Configurable dan Switch Role — 2 September 2026
 
-> **Status:** **Disetujui dan kanonis.** Addendum ini mengikuti [Keputusan RBAC Configurable dan Switch Role](../Keputusan-RBAC-dan-Switch-Role-2-September-2026.md). Ia menggantikan K-MTG-03/OQ-MTG-03 dan semua kontrak lama yang membatasi permission fitur berdasarkan nama role, kecuali business invariant yang dinyatakan eksplisit.
+> **Status:** **Riwayat keputusan 2 September; sebagian Superseded 7 September 2026.** Addendum ini mengikuti [Keputusan RBAC 2 September](../Keputusan-RBAC-dan-Switch-Role-2-September-2026.md). Butir 1–2 digantikan hanya pada penyamarataan PATEN/self sebagai permission matrix; butir 4–5 digantikan pada pembatas aktor/kelengkapan target Switch Role; changelog v1.15 adalah histori. Butir 3 dan 6 tetap berlaku dengan default export baru, serta butir 7 tetap OPEN PRODUCT DECISION. Kontrak aktif adalah Addendum 28 dan [keputusan 7 September](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md); isi lama berikut bukan instruksi mempertahankan role gate atau checkbox self.
 
 1. **Permission-driven RBAC.** Matrix `role_permissions` di database menjadi sumber kebenaran assignment dan pencabutan permission. Seeder hanya memuat default awal. Middleware, FormRequest, policy, Action, dan service mengevaluasi permission efektif terkini; menu/UI hanya mencerminkan keputusan backend dan bukan kontrol keamanan satu-satunya.
 2. **Permission configurable.** Permission fitur—termasuk `employees.read`, `employees.create`, `employees.update`, `employees.import`, `employees.restore`, `employee_histories.*`, `dokumen_sk.read`, `ews.read`, `ews.configure`, `cuti.*`, `audit_logs.read`, `notifications.*`, `reference_tables.manage`, dan `sk_requirements.manage`—dapat diassign maupun dicabut melalui matrix. Tabel per-role di PRD/panduan hanya menggambarkan default permission, bukan hard authorization contract.
@@ -2321,3 +2361,68 @@ Penangguhan administratif pasca-persetujuan pada tahap awal hanya berlaku **sebe
 
 - Menetapkan bahwa pegawai yang sama pada peran berbeda tetap menjalankan satu tindakan untuk setiap peran, termasuk kombinasi Verifikator, Atasan Langsung, dan PYBMC.
 - Menolak pengulangan pegawai pada peran yang sama saat konfigurasi serta menghapus auto-skip runtime yang hanya didasarkan pada kesamaan pegawai lintas peran.
+
+---
+
+## 28. Addendum Pemisahan Capability PATEN dan RBAC — 7 September 2026
+
+> **Status: Disetujui, PRD v1.17.** Sumber: [Keputusan PATEN dan RBAC 7 September](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md). Hierarki keputusan: addendum/stakeholder terbaru yang disetujui → PRD Core → User Stories/AC → Issues → panduan kode → tracker/evidence historis. Perubahan dokumentasi ini bukan bukti implementasi, migration, atau UAT sudah selesai.
+
+### 28.1 Matrix PATEN
+
+| Capability | Key legacy/konteks terkait | Authority target |
+|---|---|---|
+| Profil sendiri | `employees.read_self` | Binding Employee dan lifecycle valid |
+| Riwayat/keluarga sendiri | Self pada `employee_histories.read`, `employee_families.read` | Ownership; key tetap RBAC untuk cross-employee |
+| Inbox/mark-read sendiri | `notifications.read`, `notifications.update` | Ownership user; tidak membuka inbox pihak lain |
+| Lihat hari libur | `hari_libur.read` | Kalender global authenticated sesuai lifecycle |
+| Ajukan/revisi/permohonan pembatalan sendiri | `cuti.create` | Binding, ownership, employee eligibility, workflow/state, saldo/durasi/overlap/chain readiness |
+| Lihat cuti sendiri | `cuti.read_own` | Ownership Employee pengajuan |
+| Saldo sendiri | Self pada `cuti.balance.read` | Ownership dan kalkulasi domain |
+| Approval yang ditugaskan | `cuti.approve` dan key stage legacy | Actor active assignment + workflow state |
+| Bukti otomatis | `cuti.proof.generate` otomatis | Aksi domain final approval yang sah |
+
+PATEN tidak menjadi checkbox dan tidak dicabut melalui matrix. Tidak menghapus lifecycle, menambah self-edit atau akses berkas, maupun menjadikan semua pegawai eligible cuti. Bukti otomatis berbeda dari manual regenerate artifact yang memerlukan kontrak tersendiri bila dibutuhkan.
+
+### 28.2 Matrix RBAC
+
+| Kelompok | Permission target |
+|---|---|
+| Pegawai administratif | `employees.read`, `employees.create`, `employees.update`, `employees.import`, `employees.deactivate`, `employees.export` |
+| Aktifkan kembali Pegawai Nonaktif | `employees.restore`; tetap mengikuti batas aktor/lifecycle K-STATUS-04, bukan restore soft-delete |
+| Riwayat | `employee_histories.read`, `employee_histories.create`, `employee_histories.update`, `employee_histories.delete`, `employee_histories.export` |
+| Keluarga | `employee_families.read`, `employee_families.create`, `employee_families.update`, `employee_families.delete` |
+| Disiplin | `discipline_records.read`, `discipline_records.create`, `discipline_records.delete` |
+| Dokumen/SK | `dokumen_sk.read`, `dokumen_sk.create`, `dokumen_sk.update`, `dokumen_sk.delete` |
+| Referensi | `reference_tables.manage`, `sk_requirements.manage` |
+| Hari libur | `hari_libur.create`, `hari_libur.update`, `hari_libur.delete` |
+| Audit | `audit_logs.read` |
+| EWS | `ews.read`, `ews.configure` |
+| Cuti administratif | `cuti.read_all`, `cuti.configure`, `cuti.manual.manage`, `cuti.cancellation.manage`, `cuti.kepala_lembaga_documents.manage` |
+| Saldo cross-employee | `cuti.balance.read` existing; self dipisahkan menjadi PATEN tanpa key baru |
+| Dukungan user | `users.switch_role` |
+
+Ini capability delegated/admin, bukan izin melampaui canonical scope atau mutability domain. Riwayat immutable/append-only tetap menolak update/delete substantif walaupun permission diberikan. Dokumen tetap privat sesuai scope/kategori/masking. Kategori hanya PATEN atau RBAC; tidak ada kategori UI ketiga.
+
+Default `employees.export`: **Super Admin ON, Admin Kepegawaian ON, Pimpinan OFF, Kepala Bagian OFF, Pegawai OFF**. Checkbox export tersedia untuk semua role. Grant pada role OFF membuka capability tanpa code change dan tanpa perluasan scope; revoke pada Super Admin menutup export. Key RBAC lain mengikuti default sah terdahulu tanpa menetapkan default baru. Nama target yang disahkan belum menjadi klaim bahwa key ada di database deployment; inventaris/transisi mengikuti §9 keputusan 7 September.
+
+### 28.3 Delegasi, simulasi, dan transisi
+
+- `cuti.manual.manage` dan `cuti.cancellation.manage` dapat diberikan/dicabut melalui matrix kepada role yang diperlukan. Eksklusivitas Admin Kepegawaian pada Addendum 24 dan K-RBAC-04 digantikan. Domain fakta, scope, state, locking/concurrency, reservasi, audit, notifikasi, dan ledger/replay tetap berlaku.
+- Switch Role memerlukan `users.switch_role` dan target lebih rendah dari role asli. Super Admin → Admin Kepegawaian/Pimpinan/Kepala Bagian/Pegawai; Admin Kepegawaian → Pimpinan/Kepala Bagian/Pegawai; Pimpinan → Kepala Bagian/Pegawai; Kepala Bagian → Pegawai; Pegawai tidak punya target lebih rendah. Same/higher/unknown/chained switch ditolak. Identitas, employee binding, ownership, scope asli, persistence/revert, dan audit tetap.
+- Super Admin memperoleh default bootstrap/seeding, bukan permission universal. Semua request RBAC memakai role efektif → matrix database; permission OFF tetap ditolak. PATEN sah tetap tersedia tanpa key self.
+- Permission legacy PATEN dipensiunkan dari matrix setelah inventaris caller, pemisahan self/cross-employee, migration plan, regression, dan sinkronisasi UI. Jangan DELETE permission/pivot atau reseed assignment langsung. `cuti.balance.read` tetap RBAC untuk cross-employee; manual regenerate tidak dicampur dengan proof otomatis.
+- **OPEN PRODUCT DECISION:** aktor/nama permission pengelola matrix RBAC, anti-lockout, dan bootstrap recovery belum ditetapkan. Tidak ada bypass/recovery baru yang diasumsikan.
+
+### 28.4 Acceptance dan regression
+
+[AC keputusan 7 September](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md#10-acceptance-criteria-dan-regression) dipetakan pada User Stories dan Issues: AC-RBAC-PATEN-01–06, AC-RBAC-CONFIG-01–04, AC-EXPORT-01–07, AC-DOC-01–03, AC-CUTI-MANUAL-01–03, AC-CUTI-CANCEL-01–03, dan AC-SWITCH-01–05.
+
+Regression wajib membuktikan PATEN self tetap tersedia tanpa key matrix selama lifecycle/domain sah; foreign ownership ditolak; approval hanya active assignment; proof otomatis tidak bergantung checkbox; Super Admin ON/allowed dan OFF/denied; export seluruh role/default/grant/revoke/foreign IDs/scope/masking; dokumen privat; manual/cancellation grant ke role non-default tanpa melewati validasi/state/locking/audit/replay; hierarchy Switch Role seluruh role dengan identitas/scope asli. Test DB-sensitive memakai PostgreSQL; browser memeriksa matrix, scope, direct URL denial, dan console. Scope SSO Issue #6 tetap core SSO; regression lintas modul membutuhkan koordinasi terpisah, bukan perluasan otomatis issue tersebut.
+
+### Changelog v1.17 — 7 September 2026
+
+- Memisahkan capability PATEN dari matrix RBAC delegated/admin serta mendokumentasikan transisi key legacy.
+- Mengunci permission dinamis tanpa bypass Super Admin dan export semua role dengan default serta canonical scope eksplisit.
+- Mengganti eksklusivitas manual/pembatalan dan allowlist aktor Switch Role dengan permission serta lower-role hierarchy.
+- Mempertahankan lifecycle, ownership, state cuti, audit, privacy, append-only, dan bukti historis yang tidak digantikan.

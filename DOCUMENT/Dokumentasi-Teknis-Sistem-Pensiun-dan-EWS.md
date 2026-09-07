@@ -1,5 +1,7 @@
 # Dokumentasi Teknis Sistem Pensiun & EWS SIMPEG
 
+> **Catatan editorial — supersession authorization 7 September 2026:** [Keputusan PATEN dan RBAC](Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) mengganti hanya klausul authorization yang bertentangan: self/ownership dan approval assigned/proof otomatis menjadi PATEN; capability administratif tetap RBAC, tanpa universal Super Admin bypass; export configurable seluruh role (default ON Super Admin/Admin Kepegawaian, OFF tiga role lain); manual/pembatalan cuti tidak lagi Admin Kepegawaian-only; Switch Role memakai permission + target lebih rendah pada hierarki seluruh role. Pernyataan/hasil uji lama tentang batas tersebut adalah **riwayat Superseded**, bukan AC atau bukti lulus kontrak target. Fakta rekaman, hasil command, domain non-authorization, dan status implementasi bertanggal di bawah dipertahankan. Scope, privacy, workflow, audit, serta kontrak lifecycle reaktivasi tetap berlaku. Kewenangan mengelola matrix/anti-lockout/bootstrap recovery belum diputuskan; catatan ini tidak mengesahkan perubahan gate Kelola Akses User.
+
 **Version:** 1.1
 **Last Updated:** 25 Agustus 2026
 **Author:** Development Team
@@ -10,21 +12,21 @@
 
 ## Table of Contents
 
-1. [System Overview](#system-overview)
-2. [Architecture & Component Map](#architecture--component-map)
-3. [Pension Calculation Deep Dive](#pension-calculation-deep-dive)
-4. [Early Warning System (EWS) Deep Dive](#early-warning-system-ews-deep-dive)
-5. [Notification System](#notification-system)
-6. [Admin Followup Workflow](#admin-followup-workflow)
-7. [Configuration & Setup](#configuration--setup)
-8. [Database Schema](#database-schema)
-9. [API Reference](#api-reference)
-10. [Integration Points](#integration-points)
-11. [Testing & Quality](#testing--quality)
-12. [Common Scenarios & Examples](#common-scenarios--examples)
-13. [Known Issues & Limitations](#known-issues--limitations)
-14. [Troubleshooting Guide](#troubleshooting-guide)
-15. [Appendices](#appendices)
+1. [System Overview](#1-system-overview)
+2. [Architecture & Component Map](#2-architecture--component-map)
+3. [Pension Calculation Deep Dive](#3-pension-calculation-deep-dive)
+4. [Early Warning System (EWS) Deep Dive](#4-early-warning-system-ews-deep-dive)
+5. [Notification System](#5-notification-system)
+6. [Admin Followup Workflow](#6-admin-followup-workflow)
+7. [Configuration & Setup](#7-configuration--setup)
+8. [Database Schema](#8-database-schema)
+9. [API Reference](#9-api-reference)
+10. [Integration Points](#10-integration-points)
+11. [Testing & Quality](#11-testing--quality)
+12. [Common Scenarios & Examples](#12-common-scenarios--examples)
+13. [Known Issues & Limitations](#13-known-issues--limitations)
+14. [Troubleshooting Guide](#14-troubleshooting-guide)
+15. [Appendices](#15-appendices)
 
 ---
 

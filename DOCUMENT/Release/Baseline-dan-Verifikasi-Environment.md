@@ -74,6 +74,8 @@ Jika salah satu gate belum terpenuhi, kandidat belum boleh dijadikan baseline.
 
 ## 5. Verifikasi Teknis
 
+Kontrak authorization kandidat mengikuti [Keputusan PATEN dan RBAC 7 September 2026](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md). Verifikasi tidak boleh memakai ulang expected denial role-only atau self permission lama. Gate regression lengkap mengacu [Register UAT §6](../UAT/Rencana-dan-Register-UAT-SIMPEG.md#6-skenario-wajib-addendum-evaluasi-dan-patenrbac-7-september-2026); seluruh hasil tetap Belum sampai diuji pada exact SHA kandidat.
+
 Perintah berikut dijalankan dari root repository SIMPEG pada environment kandidat. Sesuaikan wrapper
 container dengan deployment resmi tanpa menyalin credential ke output.
 
@@ -129,7 +131,7 @@ podman compose exec app php artisan schedule:list
 
 #### 5.4.1 Retry rollover yang tertahan permohonan pembatalan
 
-Jika rollover melaporkan bahwa permohonan pembatalan masih menunggu keputusan, jangan menjalankan ulang proses selama hold masih aktif dan jangan mengubah database, reservasi, atau marker ledger secara manual. Selesaikan terlebih dahulu keputusan pembatalan oleh Admin Kepegawaian melalui alur resmi.
+Jika rollover melaporkan bahwa permohonan pembatalan masih menunggu keputusan, jangan menjalankan ulang proses selama hold masih aktif dan jangan mengubah database, reservasi, atau marker ledger secara manual. Selesaikan terlebih dahulu keputusan pembatalan oleh pengelola berizin `cuti.cancellation.manage` sesuai scope melalui alur resmi.
 
 Setelah keputusan tersebut terminal, operator dapat menjalankan ulang command rollover normal untuk **tahun sumber yang sama**. Contoh berikut menutup tahun 2026 ke 2027; ganti `2026` dengan tahun sumber proses yang tertahan:
 

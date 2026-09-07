@@ -10,7 +10,7 @@
 
 > Dokumen ini menjaga keputusan 15–25 Agustus sebagai riwayat. Hanya butir yang secara eksplisit disebut **digantikan** di bawah yang tidak lagi menjadi kontrak aktif. Nama teknis yang sudah ada, seperti role, route, atau field `kepala_bagian`, **tidak** otomatis berubah hanya karena label bisnis diubah; perubahan schema atau RBAC memerlukan keputusan tersendiri.
 
-> **Pembaruan RBAC 2 September 2026:** role yang disebut pada dokumen ini menggambarkan konfigurasi/default pada saat keputusan 31 Agustus dicatat. Permission matrix database kini menjadi sumber kebenaran. Hak generic, termasuk pengelolaan fitur dan baca dokumen, dapat diassign atau dicabut dengan scope/policy. Pembatas role hanya berlaku untuk business invariant eksplisit: Switch Role memeriksa role asli, sedangkan keputusan pembatalan cuti memeriksa role efektif Admin Kepegawaian. Lihat [Keputusan RBAC Configurable dan Switch Role](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md).
+> **Pembaruan 7 September 2026:** [Keputusan PATEN dan RBAC](Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) menggantikan batas role aktor pembatalan pada penegasan 4 September, eksklusivitas cuti manual, serta role gate generik dokumen. Capability delegated/admin memakai effective permission matrix, tanpa bypass Super Admin; self dan assignment approval adalah PATEN. Switch Role memakai RBAC + target lebih rendah pada hierarki seluruh role, dengan identitas, ownership, dan scope asli tetap. Penyebutan Admin Kepegawaian sebagai operator di bawah menjelaskan default historis, bukan role allowlist. State cuti, formula, snapshot, privacy, audit, dan batas penangguhan 6 September tidak berubah.
 
 ## K-MTG-10.1 — Terminologi dan chain approval cuti
 
@@ -26,7 +26,7 @@
 
 1. Selama workflow pengajuan masih aktif pada status `menunggu_approval` atau `ditangguhkan` biasa dan belum memperoleh keputusan final PYBMC, Pegawai dapat mengajukan **permohonan pembatalan tersendiri** dengan alasan wajib. Pegawai tidak membatalkan pengajuan utama secara langsung.
 2. Saat permohonan pembatalan dikirim, approval pengajuan utama ditahan dan reservasi saldo tetap dipertahankan. Hanya satu permohonan pembatalan aktif yang dapat diproses untuk pengajuan yang sama.
-3. Admin Kepegawaian yang berwenang menerima notifikasi dan memutus permohonan tersebut. Jika disetujui, pengajuan utama menjadi batal dan reservasi saldo dilepas secara atomik. Jika tidak disetujui, approval utama dilanjutkan dari tahap sebelumnya dengan tindakan approval yang sudah ada tetap tercatat.
+3. Pengelola dengan permission efektif `cuti.cancellation.manage` sesuai canonical scope menerima notifikasi dan memutus permohonan tersebut, tanpa allowlist role Admin Kepegawaian. Jika disetujui, pengajuan utama menjadi batal dan reservasi saldo dilepas secara atomik. Jika tidak disetujui, approval utama dilanjutkan dari tahap sebelumnya dengan tindakan approval yang sudah ada tetap tercatat.
 4. Permohonan, keputusan Admin, perubahan status, dan mutasi reservasi wajib tercatat pada audit serta tidak menghapus pengajuan, snapshot, timeline, atau histori. Pegawai menerima notifikasi hasil keputusan pembatalan.
 5. Revisi langsung hanya tersedia sebelum ada tindakan approval. Setelah Verifikator atau approver lain bertindak, perubahan data dilakukan dengan meminta pembatalan; setelah pembatalan disetujui, Pegawai membuat pengajuan baru yang memulai chain dari awal.
 6. Cuti yang sudah berstatus final `Disetujui` tidak boleh dihapus dan tidak memakai permohonan pembatalan Pegawai. Admin Kepegawaian dapat menetapkannya menjadi `Ditangguhkan` dengan alasan wajib, menjaga histori dan audit, serta menjalankan koreksi/replay ledger secara atomik agar pemakaian final tidak tersisa keliru.
@@ -38,7 +38,7 @@ Penegasan ini menyelaraskan dokumen kanonis dengan spec implementasi pembatalan/
 
 - `ditangguhkan` biasa menahan workflow dan tetap dapat dimintakan pembatalan. Sebaliknya, `ditangguhkan_tugas_dinas` **menutup workflow pengajuan**, melepas reservasi, dan melindungi hak sesuai aturan tugas dinas yang berlaku. Status tersebut bukan persetujuan cuti, tetapi juga bukan workflow aktif yang dapat dilanjutkan atau dibatalkan melalui permohonan Pegawai. Penggunaan hak berikutnya melalui pengajuan baru; aturan perhitungan dan rollover tidak diubah oleh penegasan ini.
 - `disetujui`, `tidak_disetujui`, `dibatalkan`, dan `ditangguhkan_tugas_dinas` tidak menerima permohonan pembatalan. `dikembalikan_karena_rollover` tetap memakai jalur resubmit rollover tersendiri, bukan perluasan flow pembatalan. Penangguhan administratif atas cuti yang sudah final Disetujui pada butir 6 tetap merupakan flow terpisah.
-- Permission teknis `cuti.cancellation.manage` yang telah disetujui bersama spec dicatat pada [K-RBAC-04 — Permohonan pembatalan cuti](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-04--permohonan-pembatalan-cuti-sebagai-business-invariant). Role efektif Admin Kepegawaian dan permission efektif tersebut wajib dipenuhi bersamaan; permission konfigurasi atau monitoring cuti tidak menggantikannya.
+- **Superseded 7 September 2026 hanya untuk batas aktor:** penegasan 4 September sebelumnya mewajibkan role efektif Admin Kepegawaian + `cuti.cancellation.manage` pada [K-RBAC-04](Keputusan-RBAC-dan-Switch-Role-2-September-2026.md#k-rbac-04--permohonan-pembatalan-cuti-sebagai-business-invariant). Kontrak aktif menggunakan permission efektif tersebut tanpa allowlist role, kemudian scope, pending cancellation, parent state, transisi, locking/concurrency, reservasi, audit, dan notifikasi. Permission konfigurasi atau monitoring tetap tidak menggantikannya.
 
 ### Cakupan awal penangguhan administratif — 6 September 2026
 
@@ -48,7 +48,7 @@ Pada tahap awal, penangguhan administratif hanya mencakup pengajuan final `Diset
 
 1. **Cuti di Luar SIMPEG** atau cuti manual adalah satu sumber fakta pemakaian tahunan historis/transisi untuk N-2, N-1, dan tahun berjalan sebelum go-live, serta untuk cuti yang telah diproses dan disetujui secara manual ketika layanan SIMPEG mengalami downtime setelah go-live.
 2. Halaman **Catat Pemakaian Tahunan** hanya menampilkan agregat hasil sumber fakta tersebut. Input angka pemakaian langsung pada halaman ringkasan dinonaktifkan agar saldo dan rollover tidak terhitung ganda.
-3. Cuti operasional baru diproses melalui pengajuan cuti SIMPEG normal. Ketika layanan downtime, proses manual harus diselesaikan dan disetujui di luar sistem; setelah SIMPEG pulih, Admin Kepegawaian mencatatnya sebagai fakta final melalui Cuti di Luar SIMPEG. Entri manual tidak boleh dipakai sebagai jalan pintas ketika SIMPEG tersedia atau untuk pengajuan yang belum memperoleh persetujuan di luar SIMPEG.
+3. Cuti operasional baru diproses melalui pengajuan cuti SIMPEG normal (PATEN berdasarkan eligibility pegawai). Ketika layanan downtime, proses manual harus diselesaikan dan disetujui di luar sistem; setelah SIMPEG pulih, pengelola dengan `cuti.manual.manage` sesuai scope mencatatnya sebagai fakta final melalui Cuti di Luar SIMPEG. Capability ini RBAC yang dapat didelegasikan, bukan eksklusif Admin Kepegawaian. Entri manual tidak boleh dipakai sebagai jalan pintas ketika SIMPEG tersedia atau untuk pengajuan yang belum memperoleh persetujuan di luar SIMPEG.
 4. Nomor dokumen dan dokumen pendukung cuti manual tetap opsional. Bila diberikan, berkas wajib divalidasi dan disimpan privat; perubahan atau koreksi tetap beralasan, teraudit, dan tidak melakukan hard delete.
 
 ## K-MTG-10.4 — Formulir dan dokumen cuti
@@ -61,7 +61,7 @@ Pada tahap awal, penangguhan administratif hanya mencakup pengajuan final `Diset
 
 1. PNS wajib memiliki **SK Pengangkatan PNS**; CPNS wajib memiliki **SK Pengangkatan CPNS**. Kewajiban SK Pangkat terbaru, SK Jabatan terbaru, dan SK KGB terbaru tetap mengikuti matriks dokumen aktif yang telah disetujui.
 2. Saat jenis pegawai berubah dari CPNS menjadi PNS, sistem mengevaluasi ulang kelengkapan terhadap matriks PNS. Status kelengkapan menjadi belum lengkap sampai SK Pengangkatan PNS tersedia.
-3. Pengelolaan matriks dan berkas tetap dibatasi untuk Super Admin/Admin Kepegawaian sesuai permission; Fase 1 tidak menambahkan self-service dokumen oleh Pegawai.
+3. Pengelolaan matriks memakai `sk_requirements.manage` dan berkas memakai `dokumen_sk.read/create/update/delete` sesuai aksi, semuanya RBAC yang dapat didelegasikan. Scope, private-file authorization, masking/kategori, dan append-only substansi riwayat tetap berlaku. Tidak ada hak mutasi dokumen PATEN hanya karena file milik sendiri; role Pegawai yang menerima permission RBAC tetap tunduk pada scope miliknya. Batas aktor Super Admin/Admin Kepegawaian pada keputusan sebelumnya **Superseded 7 September 2026**.
 4. Butir K-MTG-08.5–08.6 pada keputusan 21/24 Agustus yang menyatakan kewajiban PNS dan CPNS sama persis digantikan oleh ketentuan ini.
 
 ## K-MTG-10.6 — Reporting Statistik Kepegawaian

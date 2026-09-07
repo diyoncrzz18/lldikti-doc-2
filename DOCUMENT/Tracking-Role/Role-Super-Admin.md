@@ -1,5 +1,7 @@
 # Tracking Role: Super Admin
 
+> **Authorization target — 7 September 2026:** [PATEN dan RBAC](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) menggantikan **hanya klausul authorization** lama yang menyamaratakan self sebagai permission checkbox, universal Super Admin bypass, actor allowlist Switch Role, manual/cancellation Admin-only, dan role guard/default export yang bertentangan. Klausul tersebut **Superseded**; tanggal, checklist, assignment dan evidence implementasi historis di bawah tetap merupakan snapshot saat dicatat. Domain/lifecycle, scope, privacy, state, ledger, append-only dan audit tetap berlaku. Target aktif serta kebutuhan evidence baru ada pada bagian akhir dokumen ini.
+
 > **Pembaruan kanonis 25 Agustus 2026:** penyebutan soft delete/restore, `onlyTrashed()`, dan Data Backup di bawah dipertahankan hanya sebagai snapshot implementasi lama dan berstatus **Superseded**. Lifecycle aktif mengikuti [Keputusan Lifecycle dan Status Pegawai](../Keputusan-Lifecycle-Status-Pegawai-25-Agustus-2026.md); Super Admin tetap memerlukan effective permission `employees.restore` untuk reaktivasi dan tidak membypass blokir linked Employee Nonaktif.
 
 | Field | Nilai |
@@ -94,3 +96,19 @@ UI channel dan kebijakan event notifikasi **selesai implementasi lokal dan menun
 | ❌ Data Master statis | ⚠️ Sebagian besar ditutup PR #134 dan PR #147; channel notifikasi selesai implementasi lokal 29 Juli dan menunggu commit/PR. Sisa tab lanjutan dan CRUD `ref_jabatan`. Keputusan `ref_bup` sudah ditutup per K-4 |
 | ❌ Hari Libur web, Pengaturan Sistem, Dashboard, RBAC, preview laporan, modal custom, PDF L1/L3 | ❌ Semua masih berlaku (lihat tabel di atas) |
 | ⚠️ AuditService menelan kegagalan | ⚠️ Parsial — `logOrFail()` lahir tapi belum menyebar |
+
+
+## Target delivery authorization — 7 September 2026
+
+Sumber aktif: [keputusan PATEN dan RBAC](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) dan [User Stories v1.17](../PRD-DLL/User-Stories-SIMPEG-Fase1.md). **Status: target belum dibuktikan; bukan perubahan status checklist historis.**
+
+Scope canonical role ini: **global sesuai sensitivitas**. `employees.export` default **ON**; grant/revoke matrix tetap efektif dan seluruh output mengikuti scope/filter/privacy. `users.switch_role` configurable; bila ON target: **Admin Kepegawaian/Pimpinan/Kepala Bagian/Pegawai**; same/higher/invalid/chained ditolak. Permission tidak mengganti identitas/employee ownership dengan user lain. PATEN self/assignment yang sah tidak membutuhkan checkbox; manual dan cancellation memakai permission + scope/domain, bukan allowlist role permanen.
+
+- Matrix hanya **🔒 PATEN** dan **⚙️ RBAC**. PATEN ditentukan identity/ownership/assignment/lifecycle/domain; RBAC memakai effective permission matrix lalu canonical scope/privacy/domain. Super Admin tidak mempunyai universal bypass.
+- Scope canonical: SA/Admin/Pimpinan global sesuai sensitivitas; Kepala Bagian bawahan langsung; Pegawai self. Filter/ID tidak membypass scope. Dokumen/SK termasuk milik sendiri tetap RBAC dan private-file authorization.
+- Export default SA/Admin ON, Pimpinan/Kepala Bagian/Pegawai OFF; semua role dapat grant tanpa perubahan kode. Target Switch Role mengikuti hierarki asli SA → Admin → Pimpinan → Kepala Bagian → Pegawai, hanya ke role lebih rendah, persisten sampai revert.
+- Manual/cancellation role-only lama **Superseded** oleh `cuti.manual.manage`/`cuti.cancellation.manage` + scope/domain. Ledger, replay, reservation hold/release/continue, state, lock/concurrency, audit/notifikasi tetap. Reaktivasi K-STATUS-04 tetap effective SA/Admin + `employees.restore`; invariant lifecycle tidak menjadi kategori matrix ketiga.
+- Migrasi caller self dan katalog mengikuti §9 keputusan, menjaga grants/pivot existing; tidak otomatis reseed/delete atau mengklaim seluruh key target telah ada.
+- Regression perlu grant/revoke lintas role termasuk SA OFF, scope/foreign ID, PATEN tanpa checkbox, lifecycle/ownership/eligibility, dokumen privat, append-only, manual/cancel state/concurrency dan seluruh switch/revert. PostgreSQL untuk DB-sensitive serta browser matrix/menu/direct URL/console; catat SHA/environment/expected/actual/audit tersanitasi.
+
+**Koordinasi SSO:** Issue GitHub aktif [#6](https://github.com/LLDIKTI16/simpeg/issues/6) tetap core SSO (mapping/reuse/non-overwrite role/binding/concurrency/audit/claim-UAT), mengecualikan Switch Role aktif [#7](https://github.com/LLDIKTI16/simpeg/issues/7). PR [#21](https://github.com/LLDIKTI16/simpeg/pull/21) OPEN `d323ca03` saat verifikasi 7 September, bukan bukti 31 AC baru selesai. Nomor #6/#7 backlog historis notifikasi bukan nomor aktif tersebut. Regression lintas modul memerlukan koordinasi terpisah, bukan pemindahan seluruh redesign ke owner SSO; nomor issue/owner/jadwal baru belum ditetapkan. Kewenangan mutasi matrix, anti-lockout dan bootstrap recovery tetap Open Product Decision.

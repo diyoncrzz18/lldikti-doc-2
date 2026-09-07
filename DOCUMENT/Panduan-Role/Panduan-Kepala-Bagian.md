@@ -1,5 +1,7 @@
 # Panduan Penggunaan — Atasan Langsung
 
+> **Kontrak target 7 September 2026:** [Keputusan PATEN dan RBAC](../Keputusan-RBAC-Pemisahan-Capability-Paten-dan-Configurable-7-September-2026.md) menggantikan batas authorization lama pada panduan ini. Capability personal/assignment/domain adalah **🔒 PATEN**; capability delegated/admin adalah **⚙️ RBAC**. Role contoh menggambarkan konfigurasi awal, bukan allowlist permanen. Perubahan ini belum membuktikan implementasi atau UAT lulus.
+
 > File dan role internal tetap bernama `kepala_bagian` sebagai fakta teknis yang sudah ada. Pada alur cuti, istilah bisnis yang digunakan adalah **Atasan Langsung** dan penugasan ini tidak terbatas pada pemegang jabatan struktural Kepala Bagian.
 
 | Field | Nilai |
@@ -42,15 +44,17 @@ dipotong final. Pemotongan saldo hanya terjadi setelah keputusan final `Disetuju
 
 ## 4. Batas Akses dan Larangan
 
-- Hanya melihat bawahan yang berada dalam scope mapping aktif.
-- Tidak mengubah data utama atau histori pegawai.
+- Akses lintas pegawai hanya mencakup bawahan dalam scope mapping aktif; akses data pribadi sendiri tetap mengikuti capability PATEN.
+- Mutasi data utama/riwayat membutuhkan permission RBAC yang relevan, tetap hanya pada scope sah, dan tidak mengalahkan append-only histori resmi.
 - Tidak memutus pengajuan ketika bukan approver aktif.
 - Tidak menganggap tahap Atasan Langsung selalu tahap pertama; Verifikator dapat berada sebelumnya.
 - Tidak memberikan keputusan final bila masih ada PYBMC setelah tahap Atasan Langsung.
 - Bila Anda juga menjadi PYBMC untuk pengajuan yang sama, selesaikan tindakan Atasan Langsung terlebih dahulu. Sistem tetap menampilkan tindakan PYBMC berikutnya sebagai peran terpisah.
 - Tidak menggunakan EWS sebagai dasar keputusan otomatis.
 - Tidak mengunduh atau membagikan lampiran di luar kewenangan.
-- Tidak dapat memulai Switch Role, walaupun `users.switch_role` salah ter-assign pada matrix; ini adalah business invariant backend.
+- Bila `users.switch_role` diberikan, dapat memilih Pegawai sebagai target lebih rendah; same/higher/unknown/chained switch ditolak tanpa mengubah identitas, employee binding, ownership, atau scope asli.
+- `employees.export` default OFF; bila diberikan, hanya bawahan sah sesuai filter, masking/privacy, dan allowlist kolom. Explicit ID di luar scope tetap ditolak.
+- Approval assigned pada active step adalah PATEN, bukan `cuti.approve` generik. Profil/riwayat/keluarga/notifikasi/cuti/saldo sendiri dan baca Hari Libur tetap PATEN sesuai lifecycle/domain.
 
 ## 5. Troubleshooting
 
