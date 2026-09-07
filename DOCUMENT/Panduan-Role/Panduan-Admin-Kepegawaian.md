@@ -71,7 +71,7 @@ dokumen setelah pegawai tersedia.
 4. Untuk koreksi, pilih fakta sumber yang benar dan isi alasan wajib.
 5. Nomor dokumen dan dokumen pendukung bersifat opsional; bila diberikan, unggah file tervalidasi pada storage privat.
 6. Simpan, lalu periksa hasil replay/rekalkulasi dan audit.
-7. Untuk cuti yang sudah final `Disetujui` tetapi harus dibatalkan secara administratif, gunakan aksi `Ditangguhkan`, isi alasan wajib, dan periksa koreksi ledger serta histori.
+7. Penangguhan administratif atas cuti final `Disetujui` belum tersedia dalam implementasi saat ini; jangan memakai permohonan pembatalan Pegawai untuk cuti yang sudah final.
 
 Tidak tersedia direct balance override. Koreksi memperbaiki sumber pemakaian dan menghitung ulang
 saldo secara deterministik. Setelah downtime, catat hanya cuti yang proses manualnya sudah selesai dan
@@ -79,15 +79,15 @@ disetujui di luar sistem. Jangan memakai Cuti di Luar SIMPEG sebagai jalur rutin
 
 ## 6. Alur Menangani Permohonan Pembatalan Cuti
 
-1. Buka notifikasi permohonan pembatalan dan periksa pengajuan serta alasan Pegawai.
+1. Buka notifikasi permohonan pembatalan dan periksa pengajuan serta alasan wajib yang diisi Pegawai.
 2. Pastikan pengajuan belum final dan approval utamanya sedang ditahan.
 3. Pilih keputusan **Setujui Pembatalan** atau **Tolak Pembatalan** melalui aksi resmi.
-4. Jika disetujui, pastikan usulan menjadi batal, reservasi saldo dilepas, dan histori tetap tersedia.
-5. Jika ditolak, pastikan approval dilanjutkan dari tahap sebelumnya dan tindakan yang sudah ada tidak hilang.
+4. Jika disetujui, pastikan usulan menjadi batal, reservasi saldo dilepas, dan histori tetap tersedia. Pegawai dapat membuat pengajuan baru yang memulai rangkaian dari awal.
+5. Jika ditolak, pastikan approval dilanjutkan pada tahap aktif yang sama seperti sebelum permohonan pembatalan, tanpa mengulang atau menghapus tindakan yang sudah selesai.
 6. Periksa audit dan notifikasi hasil kepada Pegawai. Jangan menghapus pengajuan atau membuat dokumen PDF pembatalan yang tidak dipersyaratkan.
 
-Permohonan ini berbeda dari cuti final `Disetujui`. Cuti final tetap ditangani melalui aksi administratif
-`Ditangguhkan` dengan alasan wajib dan koreksi ledger.
+Permohonan ini hanya untuk pengajuan yang belum final. Penangguhan administratif cuti final
+`Disetujui` merupakan tindak lanjut Issue #36 dan belum tersedia dalam implementasi saat ini.
 
 ## 7. Batas Akses dan Larangan
 

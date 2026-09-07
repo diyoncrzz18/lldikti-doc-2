@@ -38,7 +38,7 @@
 7. Periksa saldo aktual, saldo yang masih dapat diajukan, dan tahapan persetujuan.
 8. Kirim pengajuan.
 9. Buka detail untuk memastikan status dan tahap aktif.
-10. Sebelum terdapat tindakan approval, gunakan aksi revisi resmi pada detail bila data pengajuan perlu diubah.
+10. Selama pengajuan masih `Menunggu Keputusan` dan belum ada tindakan approval pertama, ubah data pada detail lalu pilih **Simpan Perubahan Pengajuan**.
 11. Untuk membatalkan pengajuan yang belum final, buka detail, buat permohonan pembatalan, dan isi alasan wajib. Jangan membuat pengajuan aktif baru selama permohonan tersebut belum diputus.
 
 Setelah dikirim, saldo belum dipotong final tetapi dapat dialokasikan agar tidak dipakai ganda.
@@ -46,7 +46,8 @@ Saldo dipotong hanya setelah keputusan final `Disetujui`.
 
 Saat permohonan pembatalan menunggu keputusan, approval utama ditahan dan reservasi saldo tetap ada.
 Admin Kepegawaian akan menyetujui atau menolak permohonan tersebut. Jika disetujui, usulan menjadi
-batal dan Pegawai dapat membuat pengajuan baru; jika ditolak, approval dilanjutkan dari tahap sebelumnya.
+batal dan Pegawai dapat membuat pengajuan baru; jika ditolak, approval dilanjutkan pada tahap aktif yang
+sama seperti sebelum permohonan pembatalan, tanpa mengulang tahap yang sudah selesai.
 Setelah ada tindakan approval, perubahan data hanya dilakukan melalui pembatalan yang disetujui lalu
 pengajuan baru yang memulai rangkaian dari awal.
 
@@ -55,9 +56,14 @@ pengajuan baru yang memulai rangkaian dari awal.
 | Status | Tindakan Pegawai |
 |---|---|
 | `Disetujui` | Periksa detail, saldo, notifikasi, dan unduh formulir bila tersedia |
-| `Perubahan` | Baca alasan, perbaiki tanggal/alasan/kontak/lampiran, lalu kirim ulang melalui aksi resmi |
-| `Ditangguhkan` | Baca alasan dan tindak lanjuti sesuai arahan. Bila penangguhan dilakukan atas cuti yang sebelumnya final disetujui, pengajuan baru hanya dapat dibuat setelah tidak ada pengajuan aktif |
+| `Menunggu Keputusan Pembatalan` | Tunggu keputusan Admin Kepegawaian; approval ditahan dan reservasi saldo tetap ada |
+| `Dibatalkan` | Pengajuan selesai tanpa menghapus histori; buat pengajuan baru bila masih memerlukan cuti |
+| `Ditangguhkan` | Baca alasan dan tindak lanjuti sesuai arahan; untuk membatalkan pengajuan yang belum final, gunakan permohonan pembatalan |
 | `Tidak Disetujui` | Baca alasan; pengajuan selesai dan alokasi saldo dilepas |
+
+Keputusan **Perubahan** oleh approver tidak lagi tersedia. Penangguhan administratif atas cuti final
+`Disetujui` belum tersedia dalam implementasi saat ini dan berada di luar alur pembatalan pengajuan
+yang belum final.
 
 ## 5. Batas Akses dan Larangan
 
@@ -76,10 +82,10 @@ pengajuan baru yang memulai rangkaian dari awal.
 | Form tidak dapat dibuka | Periksa mapping pegawai aktif, role, dan permission pengajuan |
 | Chain belum tersedia | Hubungi Admin/Super Admin untuk memeriksa Atasan Langsung, Verifikator, dan PYBMC |
 | Tidak dapat merevisi langsung | Revisi langsung hanya tersedia sebelum tindakan approval; setelahnya, ajukan pembatalan beralasan lalu buat pengajuan baru bila disetujui |
-| Permohonan pembatalan masih diproses | Tunggu keputusan Admin Kepegawaian; approval utama ditahan dan pengajuan baru tidak dapat dibuat sampai keputusan tercatat |
+| Permohonan pembatalan masih diproses | Tunggu keputusan Admin Kepegawaian; approval utama ditahan. Pengajuan baru hanya dapat dibuat setelah pengajuan sebelumnya selesai atau pembatalannya disetujui |
 | Hari kerja salah | Periksa tanggal, weekend, hari libur, dan larangan lintas tahun |
 | Saldo tidak cukup | Periksa pemakaian final, alokasi pengajuan aktif, dan tahun saldo |
-| Tidak dapat kirim ulang | Pastikan status `Perubahan` dan gunakan tombol resubmit pada detail pengajuan |
+| Tidak dapat mengajukan kembali setelah rollover | Pastikan status `Dikembalikan karena rollover` dan gunakan **Perbaiki dan Ajukan Kembali** pada detail; jalur ini terpisah dari revisi sebelum tindakan approval |
 | Notifikasi tidak membuka record | Pastikan record milik sendiri dan sesi masih aktif |
 
 ## 7. Penerimaan Panduan

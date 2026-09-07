@@ -130,7 +130,7 @@ Login sebagai Super Admin:
 
 Pada pengujian konfigurasi tambahan, **Alasan Backfill** boleh kosong. **Alasan Penerapan Chain ke Unit** tetap wajib karena dapat menimpa konfigurasi banyak pegawai.
 
-Approval chain disalin menjadi snapshot saat pengajuan dibuat. Memperbaiki konfigurasi setelah pengajuan dibuat tidak menjamin pengajuan lama ikut berubah. Jika snapshot lama salah, perbaiki konfigurasi lalu buat pengajuan baru.
+Approval chain disalin menjadi snapshot saat pengajuan dibuat. Memperbaiki konfigurasi tidak mengubah snapshot pengajuan lama. Jika snapshot pengajuan yang belum final salah, perbaiki konfigurasi, ajukan pembatalan dengan alasan, dan tunggu persetujuan Admin Kepegawaian sebelum membuat pengajuan baru.
 
 ### 3.4 Saldo cuti
 
@@ -608,24 +608,16 @@ Jika PDF memiliki QR/token, buka `/cuti/verifikasi/{token}` di incognito. Tunjuk
 
 Gunakan pengajuan tambahan. Jangan mengubah pengajuan utama yang sudah final.
 
-Label keputusan resmi harus tepat: **Disetujui**, **Perubahan**, **Ditangguhkan**, dan **Tidak Disetujui**. Jangan menggunakan istilah `Ditolak`.
+Keputusan approver aktif adalah **Disetujui**, **Ditangguhkan**, dan **Tidak Disetujui**; tidak ada lagi tombol atau flow **Perubahan** oleh approver. Jangan menggunakan istilah `Ditolak` untuk keputusan approval pengajuan utama; **Tolak Pembatalan** tetap merupakan keputusan atas permohonan pembatalan yang terpisah.
 
-### 13.1 Perubahan
+### 13.1 Revisi langsung sebelum tindakan approval pertama
 
-1. Approver aktif membuka detail.
-2. Pilih **Perubahan**.
-3. Isi alasan wajib: `Tanggal cuti perlu disesuaikan dengan jadwal layanan unit.`
-4. Simpan.
+1. Gunakan pengajuan berstatus **Menunggu Keputusan** yang belum memiliki tindakan approval.
+2. Sebagai Pegawai pemilik pengajuan, buka detail dan ubah tanggal/alasan/kontak/lampiran melalui form revisi.
+3. Pilih **Simpan Perubahan Pengajuan**.
+4. Pastikan sistem menghitung ulang hari kerja dan alokasi saldo, sementara snapshot rangkaian dan tahap aktif tetap sama.
 
-Hasil: status Perubahan, saldo tidak dipotong, Pegawai menerima notifikasi.
-
-Pindah ke Pegawai:
-
-1. Buka detail.
-2. Gunakan **Kirim Ulang Perubahan** atau **Perbaiki dan Ajukan Kembali**.
-3. Ubah tanggal/alasan/kontak/lampiran.
-4. Klik **Kirim Ulang Pengajuan**.
-5. Sistem menghitung ulang hari kerja dan saldo.
+Uji juga setelah satu approver bertindak: form revisi langsung tidak tersedia dan pengiriman dari form lama ditolak. Perubahan berikutnya dilakukan melalui permohonan pembatalan beralasan; bila disetujui Admin Kepegawaian, Pegawai membuat pengajuan baru dari awal. Aksi **Perbaiki dan Ajukan Kembali** hanya dipakai untuk pengajuan yang dikembalikan karena rollover, bukan keputusan **Perubahan**.
 
 ### 13.2 Ditangguhkan saat pengajuan masih aktif
 
@@ -643,16 +635,16 @@ Gunakan fixture pengajuan yang sudah disetujui Verifikator tetapi masih menunggu
 2. Tunjukkan bahwa approval utama ditahan, reservasi saldo tetap ada, dan permohonan kedua tidak dapat dibuat.
 3. Sebagai Admin Kepegawaian, buka notifikasi pembatalan dan periksa alasan serta pengajuan asal.
 4. Pada fixture pertama, setujui pembatalan. Pastikan usulan menjadi batal, reservasi dilepas, histori tetap ada, dan Pegawai menerima hasil.
-5. Pada fixture kedua, tolak pembatalan. Pastikan approval kembali menunggu Atasan Langsung, tindakan Verifikator tetap tercatat, reservasi tetap ada, dan Pegawai menerima hasil.
+5. Pada fixture kedua, tolak pembatalan. Pastikan approval kembali menunggu Atasan Langsung pada tahap aktif yang sama, tanpa mengulang tindakan Verifikator yang sudah tercatat; reservasi tetap ada dan Pegawai menerima hasil.
 6. Buktikan bahwa perubahan data setelah Verifikator bertindak tidak dilakukan pada pengajuan lama; setelah pembatalan disetujui, pengajuan baru memulai chain dari awal.
 
 Permohonan pembatalan adalah record/form tersendiri dan tidak memerlukan PDF pembatalan.
 
-### 13.4 Penangguhan administratif atas cuti final
+### 13.4 Penangguhan administratif atas cuti final — belum tersedia
 
-Gunakan fixture cuti tahunan yang sudah final `Disetujui`. Pindah ke **Admin Kepegawaian**, pilih aksi `Ditangguhkan`, lalu isi alasan, misalnya `Pelaksanaan cuti ditunda karena kebutuhan layanan unit.` Tunjukkan bahwa request tidak dihapus, histori/snapshot tetap ada, audit tercatat, dan sistem melakukan koreksi/replay ledger sehingga pemakaian final yang terdampak tidak tersisa keliru. Pegawai hanya dapat mengajukan lagi setelah tidak ada pengajuan aktif.
+Fitur ini berada pada tindak lanjut Issue #36 dan belum tersedia dalam implementasi saat ini. Jangan mendemokan atau menyatakan aksi penangguhan administratif cuti final beserta koreksi ledger sudah tersedia.
 
-> Jangan menggunakan fixture happy path utama untuk skenario ini. Cuti final `Disetujui` memakai penangguhan administratif, bukan permohonan pembatalan Pegawai.
+> Batas alur yang sudah berlaku: cuti final `Disetujui` tidak dapat memakai permohonan pembatalan Pegawai.
 
 ### 13.5 Tidak Disetujui
 
@@ -1061,7 +1053,7 @@ Periksa username, `keycloak_username`, role internal, employee mapping, dan sess
 - [ ] PDF dan token verifikasi dapat dibuka.
 - [ ] PDF menampilkan Nama, Jabatan, dan Peran tiap tahap approval.
 - [ ] Ringkasan Catat Pemakaian Tahunan hanya dibaca; fakta historis dicatat melalui Cuti di Luar SIMPEG.
-- [ ] Skenario Atasan Langsung/PYBMC dengan aktor sama, permohonan pembatalan setuju/tolak, revisi sebelum/sesudah tindakan, serta penangguhan final memiliki fixture dan evidence terpisah.
+- [ ] Skenario Atasan Langsung/PYBMC dengan aktor sama, permohonan pembatalan setuju/tolak, dan revisi sebelum/sesudah tindakan memiliki fixture dan evidence terpisah; penangguhan administratif cuti final belum diuji karena menunggu Issue #36.
 - [ ] Reporting Statistik hanya didemokan bila implementasi, data scope, dan browser smoke tersedia.
 - [ ] Notifikasi In-App muncul.
 - [ ] Queue worker berjalan jika email didemokan.
